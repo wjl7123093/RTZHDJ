@@ -1,0 +1,203 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+
+    // 编译SDK版本
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    // Build Tools版本
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    // 解决Android SDK升级至API23，导致原生SDK删除org.apache.http.*类的问题
+    useLibrary 'org.apache.http.legacy'
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        // 包名
+        applicationId "com.mytv.rtzhdj"
+        // 最低支持 sdk 版本
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        // 目标 sdk 版本
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        // app 版本
+        versionCode rootProject.ext.android["versionCode"]
+        // app 版本号
+        versionName rootProject.ext.android["versionName"]
+
+        // 开启 RenderScript [Android平台上用于运行计算密集任务的框架]
+        renderscriptTargetApi rootProject.ext.android["renderscriptTargetApi"]
+        renderscriptSupportModeEnabled rootProject.ext.android["renderscriptSupportModeEnabled"]
+
+        // 单元测试
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // JAVA 8 [通过Jack支持Java8，从而使用Lambda等特性]
+        jackOptions {
+            enabled true
+        }
+
+        // alibaba ARouter 配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+    }
+
+    // 移除lint检查的error，可以避免由于编译条件太过严格而编译不过的问题
+    lintOptions {
+        // InvalidPackage: Package not included in Android
+        disable 'InvalidPackage'
+        // Expected resource of type color [ResourceType] 资源类型错误
+        disable "ResourceType"
+        // 忽略因MissingTranslation导致Build Failed错误 "app_name" is not translated in "zh" (Chinese)
+        disable 'MissingTranslation'
+
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+    // 多渠道打包
+    productFlavors {
+        // 默认渠道
+        Frames {
+            manifestPlaceholders = [Channel: "Frames"]
+//            signingConfig signingConfigs.release
+        }
+    }
+
+    buildTypes {
+        debug {
+            //这两个变量是自定义的,自己也可以自定义字段,他会默认配置到BuildConfig中,app中可以根据这些字段执行一些操作
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+
+            zipAlignEnabled true
+            minifyEnabled false
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+
+            // 是否支持 zip
+            zipAlignEnabled true
+            // 是否支持调试
+            debuggable false
+            // 是否支持 jni 调试
+            jniDebuggable false
+            // 是否进行混淆
+            minifyEnabled false
+            // 移除无用资源 如发生 Resources$NotFoundException: Resource ID #0x4 错误可关闭此功能
+            shrinkResources true
+            // 混淆文件位置，其中 proguard-android.txt 为默认的混淆配置，proguard-rules.pro 为模块额外的混淆配置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // 签名
+//            signingConfig signingConfigs.release
+
+            // 批量打包
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith(".apk")) {
+                        // 输出名称为：渠道名_版本号.apk
+                        def fileName = "App_${variant.productFlavors[0].name}_v${defaultConfig.versionName}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
+    }
+
+    greendao {
+        schemaVersion 1 // 数据库版本号
+        daoPackage 'com.fred_w.demo.mvpframedemo.app.greendao.build'
+        // 设置 DaoMaster, DaoSession, Dao包名
+        targetGenDir 'scr/main/java'
+        //targetGenDirTest 设置生成单元测试目录
+        //generateTests 设置自动生成单元测试用例
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
+
+repositories {
+    flatDir {   // 为了加载 libs 里面的 .aar 库
+        dirs 'libs'
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    // 本地库依赖，包含 app/libs 目录下的所有 jar 文件。
+    // 因此当 module 想引用某个 jar 时，只需将 jar 拷贝到 <moduleName>/libs
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'jsr305'
+    })
+    //support
+    compile(rootProject.ext.dependencies["cardview-v7"]) {
+        exclude module: 'support-annotations'
+    }
+    // Tools
+    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
+        exclude module: 'support-annotations'
+        exclude module: 'butterknife-annotations'
+    }
+    provided rootProject.ext.dependencies["javax.annotation"]
+    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+    compile rootProject.ext.dependencies["multidex"]
+    // DB
+    compile rootProject.ext.dependencies["greendao"]
+    compile rootProject.ext.dependencies["sqlcipher"]
+    // Views
+//        compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    // Test
+    testCompile rootProject.ext.dependencies["junit"]
+    debugCompile rootProject.ext.dependencies["canary-debug"]
+    releaseCompile rootProject.ext.dependencies["canary-release"]
+    testCompile rootProject.ext.dependencies["canary-release"]
+
+    compile rootProject.ext.dependencies["eventbus"]//eventbus
+    compile rootProject.ext.dependencies["arouter"]// alibaba arouter 路由框架
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+    // 引入框架通用模块(使用Rxjava2)
+    //    compile 'android.frame:MVPFrames:1.4.2'
+    compile 'me.jessyan:arms:2.2.3'
+
+    // MD UI
+    compile 'net.qiujuer.genius:ui:2.0.1'
+    compile 'net.qiujuer.genius:res:2.0.1'
+    compile 'net.qiujuer.genius:graphics:2.0.1'
+    compile 'net.qiujuer.genius:kit-cmd:2.0.1'
+    compile 'net.qiujuer.genius:kit-reflect:2.0.1'
+    compile 'net.qiujuer.genius:kit-handler:2.0.1'
+
+    // 底部导航栏
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.1'
+    // webview
+    compile 'com.tencent.sonic:sdk:2.0.0'
+    // RoundImageView
+    compile 'org.raphets:roundimageview:1.2.0'  // 要求 minSdk 19
+    // xutils3
+    compile 'org.xutils:xutils:3.3.36'
+    // RefreshLayout
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'//没有使用特殊Header，可以不加这行
+}
