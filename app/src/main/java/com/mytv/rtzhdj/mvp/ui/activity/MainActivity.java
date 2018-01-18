@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.di.component.DaggerMainComponent;
 import com.mytv.rtzhdj.di.module.MainModule;
 import com.mytv.rtzhdj.mvp.contract.MainContract;
@@ -18,7 +20,16 @@ import com.mytv.rtzhdj.R;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
-
+/**
+ * 主界面
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-18
+ * @update
+ */
+@Route(path = ARoutePath.PATH_MAIN)
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
 
