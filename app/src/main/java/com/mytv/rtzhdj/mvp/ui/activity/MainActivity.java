@@ -56,8 +56,12 @@ import static com.mytv.rtzhdj.app.EventBusTags.ACTIVITY_FRAGMENT_REPLACE;
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View,
         BottomNavigationBar.OnTabSelectedListener {
 
+    // 方案1
     @BindView(R.id.main_frame)
     FrameLayout mFrameMain;
+    // 方案2
+//    @BindView(R.id.content)
+//    ViewPager viewPager;
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar mBottomNavigationBar;
 
@@ -71,10 +75,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private List<Integer> mNavIds;
     private int mReplace = 0;
 
+
     @Override
     public void onTabSelected(int position) {
         mReplace = position;
+
+        // 方案1
         FragmentUtils.hideAllShowFragment(mFragments.get(mReplace));
+
+        // 方案2
+//        viewPager.setCurrentItem(position);
     }
 
     @Override
@@ -86,12 +96,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     public void onTabReselected(int position) {
 
     }
-
-    /*@Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        ((ViewPager) findViewById(R.id.vp_content)).setCurrentItem(TabFragment.from(item.getItemId()).ordinal());
-        return true;
-    }*/
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -140,6 +144,25 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
         //状态栏透明和间距处理
         StatusBarUtil.immersive(this, 0xff000000, 0.1f);
+
+
+        // ===================方案2 activity_test.xml -> ViewPager做容器=========================
+        /*viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public int getCount() {
+                return mFragments.size();
+            }
+            @Override
+            public Fragment getItem(int position) {
+                return mFragments.get(position);
+            }
+        });
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                mBottomNavigationBar.selectTab(position, false);
+            }
+        });*/
 
     }
 
@@ -195,6 +218,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             mFragments.add(joinFragment);
             mFragments.add(mineFragment);
         }
+
+        // ===================方案1 activity_main.xml -> FrameLayout做容器=========================
         FragmentUtils.addFragments(getSupportFragmentManager(), mFragments, R.id.main_frame, 0);
     }
 
