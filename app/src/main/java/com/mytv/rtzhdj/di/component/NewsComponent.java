@@ -8,10 +8,13 @@ import com.jess.arms.di.component.AppComponent;
 
 import com.mytv.rtzhdj.di.module.NewsModule;
 
+import com.mytv.rtzhdj.mvp.ui.activity.NewsActivity;
 import com.mytv.rtzhdj.mvp.ui.fragment.NewsFragment;
 
 @ActivityScope
 @Component(modules = NewsModule.class, dependencies = AppComponent.class)
 public interface NewsComponent {
+    void inject(NewsActivity activity);
+
     void inject(NewsFragment fragment);
 }

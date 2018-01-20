@@ -27,14 +27,32 @@
             android:name="com.fred_w.demo.codercommunity.app.GlobalConfiguration"
             android:value="ConfigModule" />
 
-        <activity android:name="com.mytv.rtzhdj.mvp.ui.activity.MainActivity">
+        <activity android:name=".mvp.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".mvp.ui.activity.StartActivity" />
+        <activity android:name=".mvp.ui.activity.LoginActivity" />
+        <activity android:name=".mvp.ui.activity.RegisterActivity" />
+        <activity android:name=".mvp.ui.activity.SettingsActivity" />
+        <activity android:name=".mvp.ui.activity.NewsActivity" />
+        <activity android:name=".mvp.ui.activity.NewsEducationActivity" />
+        <activity android:name=".mvp.ui.activity.NewsPovertyActivity" />
+        <activity android:name=".mvp.ui.activity.NewsDetailActivity" />
+        <activity android:name=".mvp.ui.activity.NewsLiveActivity" />
+        <activity android:name=".mvp.ui.activity.TopicActivity" />
+        <activity android:name=".mvp.ui.activity.TopicDetailActivity" />
+        <activity android:name=".mvp.ui.activity.SearchActivity" />
+        <activity android:name=".mvp.ui.activity.StudyRecordActivity" />
+        <activity android:name=".mvp.ui.activity.StudyCoursewareActivity" />
+        <activity android:name=".mvp.ui.activity.NewsSimpleActivity" />
+        <activity android:name=".mvp.ui.activity.EffectEvaluationActivity" />
+        <activity android:name=".mvp.ui.activity.CompulsoryCourseActivity" />
+        <activity android:name=".mvp.ui.activity.ElectiveCourseActivity" />
+        <activity android:name=".mvp.ui.activity.CourseDetailActivity"></activity>
     </application>
 
 </manifest>
