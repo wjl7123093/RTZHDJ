@@ -52,7 +52,12 @@
         <activity android:name=".mvp.ui.activity.EffectEvaluationActivity" />
         <activity android:name=".mvp.ui.activity.CompulsoryCourseActivity" />
         <activity android:name=".mvp.ui.activity.ElectiveCourseActivity" />
-        <activity android:name=".mvp.ui.activity.CourseDetailActivity"></activity>
+        <activity android:name=".mvp.ui.activity.CourseDetailActivity" />
+        <activity android:name=".mvp.ui.activity.MyTaskActivity" />
+        <activity android:name=".mvp.ui.activity.DoubleReportingActivity" />
+        <activity android:name=".mvp.ui.activity.MyReportingActivity" />
+        <activity android:name=".mvp.ui.activity.OrganizationalActivity" />
+        <activity android:name=".mvp.ui.activity.VolunteerServiceActivity"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,8 @@ package com.mytv.rtzhdj.app;
  *                        StudyRecord/StudyCourseware
  *                        NewsSimple/EffectEvaluation
  *                        CompulsoryCourse/ElectiveCourse/CourseDetail 页面path
+ *         2018-1-21 新增 MyTask/DoubleReporting/MyReporting
+ *                        Organizational/
  */
 public interface ARoutePath {
 
@@ -56,6 +58,16 @@ public interface ARoutePath {
     String PATH_ELECTIVE_COURSE = "/rtdzdj/elective_course";
     // CourseDetail
     String PATH_COURSE_DETAIL = "/rtdzdj/course_detail";
+    // MyTask
+    String PATH_MY_TASK = "/rtdzdj/my_task";
+    // DoubleReporting
+    String PATH_DOUBLE_REPORTING = "/rtdzdj/double_reporting";
+    // MyReporting
+    String PATH_MY_REPORTING = "/rtdzdj/my_reporting";
+    // Organizational
+    String PATH_ORGANIZATIONAL = "/rtdzdj/organizational";
+    // VolunteerService
+    String PATH_VOLUNTEER_SERVICE = "/rtdzdj/volunteer_service";
 
 
 }
