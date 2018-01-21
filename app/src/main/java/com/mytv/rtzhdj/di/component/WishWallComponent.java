@@ -1,0 +1,17 @@
+package com.mytv.rtzhdj.di.component;
+
+import com.jess.arms.di.scope.ActivityScope;
+
+import dagger.Component;
+
+import com.jess.arms.di.component.AppComponent;
+
+import com.mytv.rtzhdj.di.module.WishWallModule;
+
+import com.mytv.rtzhdj.mvp.ui.activity.WishWallActivity;
+
+@ActivityScope
+@Component(modules = WishWallModule.class, dependencies = AppComponent.class)
+public interface WishWallComponent {
+    void inject(WishWallActivity activity);
+}

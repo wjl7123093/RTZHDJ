@@ -14,7 +14,10 @@ package com.mytv.rtzhdj.app;
  *                        NewsSimple/EffectEvaluation
  *                        CompulsoryCourse/ElectiveCourse/CourseDetail 页面path
  *         2018-1-21 新增 MyTask/DoubleReporting/MyReporting
- *                        Organizational/
+ *                        Organizational/VolunteerService
+ *                        ReportCommunity/SurroundingCommunity
+ *                        WishWall/Donate/MyDonation
+ *                        QuestionOnline/VoteOnline/EventDetails/SignIn 页面path
  */
 public interface ARoutePath {
 
@@ -68,6 +71,24 @@ public interface ARoutePath {
     String PATH_ORGANIZATIONAL = "/rtdzdj/organizational";
     // VolunteerService
     String PATH_VOLUNTEER_SERVICE = "/rtdzdj/volunteer_service";
+    // ReportCommunity
+    String PATH_REPORT_COMMUNITY = "/rtdzdj/report_community";
+    // SurroundingCommunity
+    String PATH_SURROUNDING_COMMUNITY = "/rtdzdj/surrounding_community";
+    // WishWall
+    String PATH_WISH_WALL = "/rtdzdj/wish_wall";
+    // Donate
+    String PATH_DONATE = "/rtdzdj/donate";
+    // MyDonation
+    String PATH_MY_DONATION = "/rtdzdj/my_donation";
+    // QuestionOnline
+    String PATH_QUESTION_ONLINE = "/rtdzdj/question_online";
+    // VoteOnline
+    String PATH_VOTE_ONLINE = "/rtdzdj/vote_online";
+    // EventDetails
+    String PATH_EVENT_DETAILS = "/rtdzdj/event_details";
+    // SignIn
+    String PATH_SIGN_IN = "/rtdzdj/sign_in";
 
 
 }
