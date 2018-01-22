@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_list_image.xml vlayout 图文项（列表布局）
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-22
+ * @update
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:padding="@dimen/len_10">
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="@dimen/len_100"
+        android:layout_height="@dimen/len_60"
+        android:scaleType="centerCrop"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/len_6"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"/>
+    <TextView
+        android:id="@+id/tv_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"/>
+    <TextView
+        android:id="@+id/tv_comment_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/iv_image"/>
+    <TextView
+        android:id="@+id/tv_star_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/tv_comment_num"
+        android:layout_marginRight="@dimen/len_4" />
+
+</RelativeLayout>

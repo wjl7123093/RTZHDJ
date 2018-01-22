@@ -204,4 +204,12 @@ dependencies {
     compile ('com.alibaba.android:vlayout:1.2.8@aar') {
         transitive = true
     }
+    // banner
+    compile 'com.youth.banner:banner:1.4.10'
+    // BaseRecyclerViewAdapterHelper
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    // 文字轮播
+    compile 'com.sunfusheng:marqueeview:1.3.1'
+
+
 }

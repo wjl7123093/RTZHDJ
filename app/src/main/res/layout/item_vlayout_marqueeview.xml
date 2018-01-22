@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_marqueeview.xml vlayout 跑马灯（通栏布局）
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-22
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="@dimen/len_80"
+        android:layout_height="@dimen/len_40"
+        android:gravity="center"
+        android:background="@color/red_900"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/white"
+        android:text="通知"/>
+
+    <com.sunfusheng.marqueeview.MarqueeView
+        android:id="@+id/marqueeView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/len_6"
+        android:layout_marginRight="@dimen/len_6"
+        app:mvAnimDuration="1000"
+        app:mvDirection="bottom_to_top"
+        app:mvInterval="3000"
+        app:mvSingleLine="true"
+        app:mvTextColor="@color/primary_text"
+        app:mvTextSize="@dimen/len_16" />
+
+</LinearLayout>

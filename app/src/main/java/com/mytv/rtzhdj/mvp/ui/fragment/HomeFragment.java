@@ -18,9 +18,19 @@ import com.mytv.rtzhdj.mvp.presenter.HomePresenter;
 
 import com.mytv.rtzhdj.R;
 
+import java.util.List;
+
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
-
+/**
+ * HomeFragment 首页 Fragment
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-19
+ * @update
+ */
 public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View {
 
 
@@ -94,4 +104,38 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     }
 
+    @Override
+    public void setBanner(List<Object> arrayList) {
+
+    }
+
+    @Override
+    public void setOnclick(int position) {
+
+    }
+
+    @Override
+    public void setMarqueeClick(int position) {
+
+    }
+
+    @Override
+    public void setGridClick(int position) {
+
+    }
+
+    @Override
+    public void setNewsListClick(int position, String url) {
+
+    }
+
+    @Override
+    public void setImageClick() {
+
+    }
+
+    @Override
+    public void setOnePlusNClick() {
+
+    }
 }

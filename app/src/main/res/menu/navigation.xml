@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/tab_home" />
+
+    <item
+        android:id="@+id/navigation_news"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/tab_news" />
+
+    <item
+        android:id="@+id/navigation_study"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/tab_study"/>
+
+    <item
+        android:id="@+id/navigation_join"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/tab_join"/>
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/tab_mine"/>
+
+</menu>

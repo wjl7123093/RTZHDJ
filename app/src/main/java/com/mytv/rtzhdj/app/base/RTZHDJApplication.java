@@ -5,6 +5,7 @@ import android.content.Context;
 import com.jess.arms.base.BaseApplication;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.utils.CrashHandler;
+import com.mytv.rtzhdj.app.utils.datetime.DynamicTimeFormat;
 import com.mytv.rtzhdj.app.utils.sonic.SonicRuntimeImpl;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
@@ -13,7 +14,9 @@ import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.sonic.sdk.SonicConfig;
 import com.tencent.sonic.sdk.SonicEngine;
 
@@ -26,7 +29,7 @@ import org.xutils.x;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-19
- * @update
+ * @update 2018-1-22 修改了 SmartRefreshLayout 的 Header 和 Footer 样式（贝塞尔 -> 经典）
  */
 public class RTZHDJApplication extends BaseApplication {
 
@@ -37,16 +40,16 @@ public class RTZHDJApplication extends BaseApplication {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
                 layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);//全局设置主题颜色
-                //默认是 贝塞尔雷达Header
-                return new BezierRadarHeader(context);
+                //默认是 贝塞尔雷达Header, 指定为 经典Header
+                return new ClassicsHeader(context).setTimeFormat(new DynamicTimeFormat("更新于%s"));//.setTimeFormat(new DynamicTimeFormat(""));
             }
         });
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreater(new DefaultRefreshFooterCreater() {
             @Override
             public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
-                //默认是 BallPulseFooter
-                return new BallPulseFooter(context);
+                //默认是 BallPulseFooter, 指定为 经典Footer
+                return new ClassicsFooter(context).setDrawableSize(20);
             }
         });
     }
