@@ -46,7 +46,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        
     }
 
     /**

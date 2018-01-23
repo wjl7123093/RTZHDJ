@@ -7,7 +7,7 @@ package com.mytv.rtzhdj.app;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-22
- * @update
+ * @update 2018-1-23    新增 typeImage, typeHeader 类型
  */
 public class Constant {
 
@@ -23,6 +23,9 @@ public class Constant {
         int typeSticky = 8;         //指示器
         int typeFooter = 9;         //底部
         int typeGvSecond = 10;      //九宫格
+        int typeImage = 11;         //图片
+        int typeHeader = 12;        //头部
+        int typeOnePlusN = 13;      //一拖N
     }
 
 }

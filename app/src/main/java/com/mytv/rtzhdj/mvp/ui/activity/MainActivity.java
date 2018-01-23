@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -72,30 +73,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private MineFragment mineFragment;
 
     private List<Fragment> mFragments;
-    private List<Integer> mNavIds;
     private int mReplace = 0;
-
-
-    @Override
-    public void onTabSelected(int position) {
-        mReplace = position;
-
-        // 方案1
-        FragmentUtils.hideAllShowFragment(mFragments.get(mReplace));
-
-        // 方案2
-//        viewPager.setCurrentItem(position);
-    }
-
-    @Override
-    public void onTabUnselected(int position) {
-
-    }
-
-    @Override
-    public void onTabReselected(int position) {
-
-    }
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -192,6 +170,47 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void killMyself() {
         finish();
+    }
+
+    @Override
+    public void onTabSelected(int position) {
+        mReplace = position;
+
+        // 方案1
+        FragmentUtils.hideAllShowFragment(mFragments.get(mReplace));
+
+        // 方案2
+//        viewPager.setCurrentItem(position);
+    }
+
+    @Override
+    public void onTabUnselected(int position) {
+
+    }
+
+    @Override
+    public void onTabReselected(int position) {
+
+    }
+
+    /**
+     * 说明：
+     * 1、onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState)
+     *    该方法只针对 API 21(Android 5.0) 以上才有 PersistableBundle 参数
+     * 2、如果使用上述方法，在 API 21(Android 5.0) 以下机型会报如下错误：
+     *    java.lang.ClassNotFoundException: Didn't find class "android.os.PersistableBundle" on path: DexPathList
+     *    原因就是因为 低版本(<21) 没有 PersistableBundle 这个 class
+     * 3、综合以上两点，从 兼容性 方面考虑，故只调用包含一个参数的方法，即
+     *    onSaveInstanceState(Bundle outState)
+     *
+     * @param outState
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //保存当前Activity显示的Fragment索引
+        outState.putInt(ACTIVITY_FRAGMENT_REPLACE, mReplace);
     }
 
     private void setDefaultFragment(Bundle savedInstanceState) {

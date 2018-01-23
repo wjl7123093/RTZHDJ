@@ -2,13 +2,17 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.di.component.DaggerStartComponent;
 import com.mytv.rtzhdj.di.module.StartModule;
@@ -50,7 +54,11 @@ public class StartActivity extends BaseActivity<StartPresenter> implements Start
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        new Handler().postDelayed(() -> {
 
+            ARouter.getInstance().build(ARoutePath.PATH_MAIN).navigation();
+            StartActivity.this.finish();
+        }, 1000);
     }
 
 
