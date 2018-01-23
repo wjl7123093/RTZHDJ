@@ -59,7 +59,16 @@
         <activity android:name=".mvp.ui.activity.DoubleReportingActivity" />
         <activity android:name=".mvp.ui.activity.MyReportingActivity" />
         <activity android:name=".mvp.ui.activity.OrganizationalActivity" />
-        <activity android:name=".mvp.ui.activity.VolunteerServiceActivity"></activity>
+        <activity android:name=".mvp.ui.activity.VolunteerServiceActivity" />
+        <activity android:name=".mvp.ui.activity.ReportCommunityActivity" />
+        <activity android:name=".mvp.ui.activity.SurroundingCommunityActivity" />
+        <activity android:name=".mvp.ui.activity.WishWallActivity" />
+        <activity android:name=".mvp.ui.activity.DonateActivity" />
+        <activity android:name=".mvp.ui.activity.MyDonationActivity" />
+        <activity android:name=".mvp.ui.activity.QuestionOnlineActivity" />
+        <activity android:name=".mvp.ui.activity.VoteOnlineActivity" />
+        <activity android:name=".mvp.ui.activity.EventDetailsActivity" />
+        <activity android:name=".mvp.ui.activity.SignInActivity"></activity>
     </application>
 
 </manifest>

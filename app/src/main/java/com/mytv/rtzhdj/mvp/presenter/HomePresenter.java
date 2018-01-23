@@ -2,6 +2,7 @@ package com.mytv.rtzhdj.mvp.presenter;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.media.Image;
@@ -17,7 +18,9 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
@@ -34,6 +37,7 @@ import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.mvp.contract.HomeContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.squareup.picasso.Picasso;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -273,7 +277,16 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 super.onBindViewHolder(holder, position);
                 ImageView imageView = holder.getView(R.id.iv_image);
 //                com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(imageView, url);
-                mRootView.showImage(imageView, url);
+//                mRootView.showImage(imageView, url);
+
+//                mImageLoader.loadImage(getContext(),
+//                        ImageConfigImpl
+//                                .builder()
+//                                .url(url)
+//                                .imageView(imageView)
+//                                .build());
+//                Glide.with(activity).load(url).into(imageView);
+                Picasso.with(activity).load(url).into(imageView);
 
                 imageView.setOnClickListener(view -> {
                     mRootView.setOnclick();
@@ -395,5 +408,10 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         mBanner.setDelayTime(3000);
         //banner设置方法全部调用完毕时最后调用
         mBanner.start();
+    }
+
+    private Context getContext() {
+        return mAppManager.getTopActivity() == null ?
+                mApplication : mAppManager.getTopActivity();
     }
 }
