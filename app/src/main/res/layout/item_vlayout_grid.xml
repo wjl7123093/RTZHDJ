@@ -6,24 +6,28 @@
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-22
- * @update
+ * @update 2018-1-23 调整了UI细节
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/white"
+    android:padding="@dimen/len_6">
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="@dimen/len_44"
-        android:layout_height="@dimen/len_44"
+        android:layout_width="@dimen/len_40"
+        android:layout_height="@dimen/len_40"
         android:scaleType="centerCrop"/>
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_14"
-        android:layout_marginTop="@dimen/len_8"/>
+        android:textColor="@color/secondary_text"
+        android:layout_marginTop="@dimen/len_2"/>
 
 </LinearLayout>

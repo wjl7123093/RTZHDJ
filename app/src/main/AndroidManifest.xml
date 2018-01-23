@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
+        android:name="com.mytv.rtzhdj.app.base.RTZHDJApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
@@ -24,7 +25,7 @@
 
         <!-- arms配置 -->
         <meta-data
-            android:name="com.fred_w.demo.codercommunity.app.GlobalConfiguration"
+            android:name="com.mytv.rtzhdj.app.GlobalConfiguration"
             android:value="ConfigModule" />
 
         <activity android:name=".mvp.ui.activity.MainActivity">
@@ -35,6 +36,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".mvp.ui.activity.StartActivity" />
+        <!--<activity android:name=".mvp.ui.activity.MainActivity" />-->
         <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity android:name=".mvp.ui.activity.RegisterActivity" />
         <activity android:name=".mvp.ui.activity.SettingsActivity" />

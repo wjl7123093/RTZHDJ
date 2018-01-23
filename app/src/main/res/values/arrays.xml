@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--///////////////////////////////////////首页/////////////////////////////////////-->
+
+
+    <!--首页底部导航栏的标题，未选中时-->
+    <integer-array name="main_tab_un_select">
+        <item name="tab_home">@mipmap/ic_launcher</item>
+        <item name="tab_find">@mipmap/ic_launcher</item>
+        <item name="tab_data">@mipmap/ic_launcher</item>
+        <item name="tab_me">@mipmap/ic_launcher</item>
+    </integer-array>
+
+    <!--首页底部导航栏的标题，选中时-->
+    <integer-array name="main_tab_select">
+        <item name="tab_home">@mipmap/ic_launcher</item>
+        <item name="tab_find">@mipmap/ic_launcher</item>
+        <item name="tab_data">@mipmap/ic_launcher</item>
+        <item name="tab_me">@mipmap/ic_launcher</item>
+    </integer-array>
+
+    <!--首页底部导航栏文字-->
+    <string-array name="main_title">
+        <item>首页</item>
+        <item>数据</item>
+        <item>工具</item>
+        <item>更多</item>
+    </string-array>
+
+
+    <!--首页精选跑马灯文字-->
+    <string-array name="main_marquee_title">
+        <item>1.坚持读书，写作，源于内心的动力</item>
+        <item>2.展翅翱翔，青春我们一路前行</item>
+        <item>3.欢迎订阅喜马拉雅听书</item>
+    </string-array>
+
+    <!--轮播图图片-->
+    <integer-array name="banner_image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+
+    <!--///////////////////////////////////////发现/////////////////////////////////////-->
+
+
+    <!--发现页图片-->
+    <integer-array name="find_gv_image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+    <!--发现页图片对应的位子-->
+    <string-array name="find_gv_title">
+        <item>干货集中营</item>
+        <item>播放器</item>
+        <item>超文本</item>
+        <item>时光笔记</item>
+        <item>7日天气</item>
+        <item>绘画板</item>
+        <item>知乎专栏</item>
+        <item>微信精选</item>
+    </string-array>
+
+
+    <string-array name="find_list1_title">
+        <item>阅读器</item>
+        <item>音乐</item>
+        <item>视频</item>
+        <item>美图</item>
+        <item>唐诗</item>
+        <item>宋词</item>
+        <item>元曲</item>
+        <item>番茄</item>
+    </string-array>
+    <integer-array name="find_list1_image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+
+
+
+    <string-array name="find_list3_title">
+        <item>豆瓣电影</item>
+        <item>豆瓣音乐</item>
+        <item>豆瓣读书</item>
+    </string-array>
+    <integer-array name="find_list3_image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+
+
+
+    <string-array name="find_list4_title">
+        <item>时光日志</item>
+        <item>稀土掘金</item>
+        <item>快读头条</item>
+    </string-array>
+    <integer-array name="find_list4_image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+
+
+    <!--发现页图片-->
+    <integer-array name="find_pro_pic">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+
+    <!--发现页图片对应的位子-->
+    <string-array name="find_pro_title">
+        <item>干货集中营</item>
+        <item>播放器</item>
+        <item>超文本</item>
+        <item>时光笔记</item>
+        <item>7日天气</item>
+        <item>绘画板</item>
+        <item>快读</item>
+        <item>时光聆听</item>
+        <item>急转弯</item>
+        <item>猜谜语</item>
+        <item>翻译</item>
+        <item>缴费</item>
+    </string-array>
+
+
+    <!--///////////////////////////////////////数据/////////////////////////////////////-->
+
+
+    <!--数据页图片-->
+    <integer-array name="data_pro_pic">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+
+    <!--数据页图片对应的位子-->
+    <string-array name="data_pro_title">
+        <item>快递</item>
+        <item>天气</item>
+        <item>记事</item>
+        <item>工商</item>
+        <item>画廊</item>
+        <item>Wt新闻</item>
+        <item>IM聊天</item>
+        <item>归属地</item>
+        <item>空气质量</item>
+        <item>今日油价</item>
+        <item>翻译</item>
+        <item>缴费</item>
+    </string-array>
+
+
+    <!--数据页小工具图片-->
+    <integer-array name="data_tool_pro_pic">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+
+    <!--数据页小工具图片对应的位子-->
+    <string-array name="data_tool_pro_title">
+        <item>笔记本</item>
+        <item>腾讯X5</item>
+        <item>360工具</item>
+        <item>听听</item>
+        <item>播放器</item>
+        <item>唐诗</item>
+        <item>宋词</item>
+        <item>历史</item>
+        <item>法律</item>
+        <item>猜谜语</item>
+        <item>aidl测试</item>
+        <item>绘画板</item>
+    </string-array>
+
+    <!--数据页横向滑动图片-->
+    <integer-array name="data_narrow_Image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+
+
+    <!--数据页图片对应的位子-->
+    <string-array name="select_follow">
+        <item>快递</item>
+        <item>天气</item>
+        <item>记事</item>
+        <item>工商</item>
+        <item>画廊</item>
+        <item>身份</item>
+        <item>人脸</item>
+        <item>归属地</item>
+        <item>空气</item>
+        <item>今日</item>
+        <item>翻译</item>
+        <item>缴费</item>
+        <item>快递</item>
+        <item>天气</item>
+        <item>记事</item>
+        <item>工商</item>
+        <item>画廊</item>
+        <item>身份</item>
+        <item>人脸</item>
+        <item>归属地</item>
+        <item>空气</item>
+        <item>今日</item>
+        <item>翻译</item>
+        <item>缴费</item>
+        <item>快递</item>
+        <item>天气</item>
+        <item>记事</item>
+        <item>工商</item>
+        <item>画廊</item>
+        <item>身份</item>
+        <item>人脸</item>
+        <item>归属地</item>
+        <item>空气</item>
+        <item>今日</item>
+        <item>翻译</item>
+        <item>缴费</item>
+    </string-array>
+
+    <!--天气页面-->
+    <string-array name="indicator_strings">
+        <item name="indicator_string_1">优</item>
+        <item name="indicator_string_2">良</item>
+        <item name="indicator_string_3">轻度污染</item>
+        <item name="indicator_string_4">中度污染</item>
+        <item name="indicator_string_5">重度污染</item>
+        <item name="indicator_string_5">严重污染</item>
+    </string-array>
+
+    <!--天气页面指示器颜色-->
+    <integer-array name="indicator_colors">
+        <item name="indicator_color_1">@color/colorPrimary</item>
+        <item name="indicator_color_2">@color/colorPrimary</item>
+        <item name="indicator_color_3">@color/colorPrimary</item>
+        <item name="indicator_color_4">@color/colorPrimary</item>
+        <item name="indicator_color_5">@color/colorPrimary</item>
+        <item name="indicator_color_6">@color/colorPrimary</item>
+    </integer-array>
+
+
+    <string-array name="sub_rank_tabs">
+        <item>周榜</item>
+        <item>月榜</item>
+        <item>总榜</item>
+    </string-array>
+
+    <string-array name="sub_tabs">
+        <item>新书</item>
+        <item>热门</item>
+        <item>口碑</item>
+        <item>完结</item>
+    </string-array>
+
+
+    <!--im底部导航栏的标题，未选中时-->
+    <integer-array name="im_tab_un_select">
+        <item name="tab_home">@mipmap/ic_launcher</item>
+        <item name="tab_find">@mipmap/ic_launcher</item>
+        <item name="tab_data">@mipmap/ic_launcher</item>
+    </integer-array>
+
+    <!--im底部导航栏的标题，选中时-->
+    <integer-array name="im_tab_select">
+        <item name="tab_home">@mipmap/ic_launcher</item>
+        <item name="tab_find">@mipmap/ic_launcher</item>
+        <item name="tab_data">@mipmap/ic_launcher</item>
+    </integer-array>
+
+    <!--im底部导航栏文字-->
+    <string-array name="im_title">
+        <item>会话</item>
+        <item>通讯录</item>
+        <item>设置</item>
+    </string-array>
+
+</resources>

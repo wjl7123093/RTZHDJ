@@ -11,7 +11,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:padding="@dimen/len_10">
+    android:padding="@dimen/len_10"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/iv_image"
@@ -20,7 +21,8 @@
         android:scaleType="centerCrop"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/len_6"/>
+        android:layout_marginLeft="@dimen/len_6"
+        android:background="@mipmap/ic_launcher"/>
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -30,7 +32,8 @@
         android:textSize="@dimen/font_14"
         android:textColor="@color/primary_text"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:text="文章标题。。。。。。。。"/>
     <TextView
         android:id="@+id/tv_datetime"
         android:layout_width="wrap_content"
@@ -38,7 +41,8 @@
         android:textSize="@dimen/font_14"
         android:textColor="@color/secondary_text"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:text="2018-1-20"/>
     <TextView
         android:id="@+id/tv_comment_num"
         android:layout_width="wrap_content"
@@ -46,7 +50,8 @@
         android:textSize="@dimen/font_14"
         android:textColor="@color/primary_text"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/iv_image"/>
+        android:layout_toLeftOf="@id/iv_image"
+        android:text="111"/>
     <TextView
         android:id="@+id/tv_star_num"
         android:layout_width="wrap_content"
@@ -55,6 +60,7 @@
         android:textColor="@color/primary_text"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/tv_comment_num"
-        android:layout_marginRight="@dimen/len_4" />
+        android:layout_marginRight="@dimen/len_4"
+        android:text="222"/>
 
 </RelativeLayout>

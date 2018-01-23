@@ -12,14 +12,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:layout_marginTop="@dimen/len_12"
+    android:layout_marginBottom="@dimen/len_12">
 
     <TextView
-        android:layout_width="@dimen/len_80"
+        android:layout_width="@dimen/len_72"
         android:layout_height="@dimen/len_40"
         android:gravity="center"
-        android:background="@color/red_900"
-        android:textSize="@dimen/font_16"
+        android:background="@color/red_800"
+        android:textSize="@dimen/font_14"
         android:textColor="@color/white"
         android:text="通知"/>
 
@@ -33,7 +36,7 @@
         app:mvDirection="bottom_to_top"
         app:mvInterval="3000"
         app:mvSingleLine="true"
-        app:mvTextColor="@color/primary_text"
-        app:mvTextSize="@dimen/len_16" />
+        app:mvTextColor="@color/secondary_text"
+        app:mvTextSize="@dimen/font_14" />
 
 </LinearLayout>
