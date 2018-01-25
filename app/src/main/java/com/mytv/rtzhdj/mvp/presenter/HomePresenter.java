@@ -49,7 +49,15 @@ import net.qiujuer.genius.ui.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 首页 P层
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-19
+ * @update 2018-1-25    解决 “RecyclerView自动滚动” 的BUG（详见 https://www.cnblogs.com/xgjblog/p/8260061.html）
+ */
 @ActivityScope
 public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContract.View>
         implements HomeContract.Presenter {
@@ -90,13 +98,14 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         //初始化
         //创建VirtualLayoutManager对象
         VirtualLayoutManager layoutManager = new VirtualLayoutManager(activity);
-        layoutManager.setRecycleChildrenOnDetach(true);
+//        layoutManager.setRecycleChildrenOnDetach(true);
         recyclerView.setLayoutManager(layoutManager);
 
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
         recyclerView.setRecycledViewPool(viewPool);
-//        viewPool.setMaxRecycledViews(0, 20);
+        viewPool.setMaxRecycledViews(0, 20);
+
 
         //设置适配器
         DelegateAdapter delegateAdapter = new DelegateAdapter(layoutManager, true);
@@ -186,7 +195,6 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     @Override
     public BaseDelegateAdapter initMarqueeView() {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-//        linearLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_marqueeview,
                 1, Constant.viewType.typeMarquee) {
             @Override
@@ -212,7 +220,6 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     @Override
     public BaseDelegateAdapter initTitle(String title) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-//        linearLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_title,
                 1, Constant.viewType.typeTitle) {
             @Override
@@ -233,7 +240,6 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     @Override
     public BaseDelegateAdapter initList() {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-//        linearLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 1));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_image,
                 10, Constant.viewType.typeList) {
@@ -249,7 +255,6 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     @Override
     public BaseDelegateAdapter initMoreData(String moreStr) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-//        linearLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_moredata,
                 1, Constant.viewType.typeFooter) {
             @Override
@@ -269,7 +274,6 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     @Override
     public BaseDelegateAdapter initImage(String url) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-//        linearLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_image2,
                 1, Constant.viewType.typeImage) {
             @Override
@@ -285,8 +289,9 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 //                                .url(url)
 //                                .imageView(imageView)
 //                                .build());
-//                Glide.with(activity).load(url).into(imageView);
-                Picasso.with(activity).load(url).into(imageView);
+
+//                Picasso.with(activity).load(url).into(imageView);
+                com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(activity, imageView, url);
 
                 imageView.setOnClickListener(view -> {
                     mRootView.setOnclick();
@@ -299,7 +304,6 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     @Override
     public BaseDelegateAdapter initHeader(String title, String desc) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-//        linearLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_header,
                 1, Constant.viewType.typeTitle) {
             @Override
@@ -320,9 +324,9 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
         arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-//        linearLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
+//        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_oneplusn1,
-                1, Constant.viewType.typeOnePlusN) {
+                1, Constant.viewType.typePlus) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -339,6 +343,17 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 TextView tvTitle2 = includeBanner2.findViewById(R.id.tv_title);
                 TextView tvStartNum2 = includeBanner2.findViewById(R.id.tv_star_num);
                 Banner banner2 = includeBanner2.findViewById(R.id.banner);
+
+                /**
+                 * 以下四句代码是为了解决 “RecyclerView自动滚动” 的BUG
+                 *
+                 * 如果没有 以下四句（让 banner1 和 banner2 所在视图获取焦点），
+                 * 则在 recyclerview 滑动到 banner1，banner2 的视图时，recyclerview 会自动不停的往下滚动
+                 */
+                includeBanner1.setFocusableInTouchMode(true);
+                includeBanner1.requestFocus();
+                includeBanner2.setFocusableInTouchMode(true);
+                includeBanner2.requestFocus();
 
                 initBannerParams(banner1, arrayList);
                 initBannerParams(banner2, arrayList);
@@ -393,7 +408,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
      */
     private void initBannerParams(Banner mBanner, List<Object> arrayList) {
         //设置banner样式
-        mBanner.setBannerStyle(BannerConfig.CENTER);
+        mBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         //设置图片加载器
         mBanner.setImageLoader(new BannerImageLoader());
         //设置图片集合
@@ -408,6 +423,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         mBanner.setDelayTime(3000);
         //banner设置方法全部调用完毕时最后调用
         mBanner.start();
+
     }
 
     private Context getContext() {
