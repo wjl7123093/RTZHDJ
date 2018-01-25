@@ -106,7 +106,6 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         recyclerView.setRecycledViewPool(viewPool);
         viewPool.setMaxRecycledViews(0, 20);
 
-
         //设置适配器
         DelegateAdapter delegateAdapter = new DelegateAdapter(layoutManager, true);
         recyclerView.setAdapter(delegateAdapter);
@@ -144,6 +143,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 mBanner.setDelayTime(5000);
                 //设置指示器位置（当banner模式中有指示器时）
                 mBanner.setIndicatorGravity(BannerConfig.CENTER);
+
                 //banner设置方法全部调用完毕时最后调用
                 mBanner.start();
 
@@ -313,7 +313,6 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 TextView tvDesc = holder.getView(R.id.tv_desc);
                 tvTitle.setText(title);
                 tvDesc.setText(desc);
-
             }
         };
     }

@@ -78,7 +78,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
         mAdapters = new LinkedList<>();
         mPresenter.setActivity((MainActivity)getActivity());
         initRecyclerView();
@@ -172,7 +171,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void showImage(ImageView iv, String url) {
-        ImageLoader.getInstance().showImage(iv, url);
+        ImageLoader.getInstance().showImage(getContext(), iv, url);
     }
 
     private void initRecyclerView() {
@@ -214,17 +213,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
         footerAdapter = mPresenter.initMoreData("更多公益活动");
         mAdapters.add(footerAdapter);
-
-
-//        //初始化折叠式指示器控件
-//        //initSticky();
-//        //mAdapters.add(stickyAdapter);
-//
-//        //初始化list控件
-//        titleAdapter = mPresenter.initTitle("优质新闻");
-//        mAdapters.add(titleAdapter);
-////        linearAdapter = mPresenter.initList5();
-////        mAdapters.add(linearAdapter);
 
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);
