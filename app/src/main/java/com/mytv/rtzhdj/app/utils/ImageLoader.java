@@ -1,8 +1,10 @@
 package com.mytv.rtzhdj.app.utils;
 
+import android.content.Context;
 import android.widget.ImageView;
 
 import com.mytv.rtzhdj.R;
+import com.squareup.picasso.Picasso;
 
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
@@ -14,7 +16,7 @@ import org.xutils.x;
  * @version v1.0.0
  *
  * @crdate 2018-1-19
- * @update
+ * @update 2018-1-25 新增 Passico 加载图片方法
  */
 public class ImageLoader {
 
@@ -67,6 +69,15 @@ public class ImageLoader {
      */
     public void showImage(ImageView v, String imgUrl) {
         x.image().bind(v, imgUrl, initImageOptions());
+    }
+
+    /**
+     * 显示图片
+     * @param v
+     * @param imgUrl
+     */
+    public void showImage(Context context, ImageView v, String imgUrl) {
+        Picasso.with(context).load(imgUrl).into(v);
     }
 
 }

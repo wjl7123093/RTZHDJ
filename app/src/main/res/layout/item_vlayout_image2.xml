@@ -10,7 +10,7 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/len_80"
+    android:layout_height="@dimen/len_100"
     android:layout_marginBottom="@dimen/len_12">
 
     <ImageView

@@ -25,7 +25,6 @@ public class Constant {
         int typeGvSecond = 10;      //九宫格
         int typeImage = 11;         //图片
         int typeHeader = 12;        //头部
-        int typeOnePlusN = 13;      //一拖N
     }
 
 }

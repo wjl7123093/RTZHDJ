@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         setDefaultFragment(savedInstanceState);
 
         //状态栏透明和间距处理
-        StatusBarUtil.immersive(this, 0xff000000, 0.1f);
+//        StatusBarUtil.immersive(this, 0xff000000, 0.1f);
 
 
         // ===================方案2 activity_test.xml -> ViewPager做容器=========================

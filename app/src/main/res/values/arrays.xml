@@ -61,14 +61,14 @@
     </integer-array>
     <!--发现页图片对应的位子-->
     <string-array name="find_gv_title">
-        <item>干货集中营</item>
-        <item>播放器</item>
-        <item>超文本</item>
-        <item>时光笔记</item>
-        <item>7日天气</item>
-        <item>绘画板</item>
-        <item>知乎专栏</item>
-        <item>微信精选</item>
+        <item>时政新闻</item>
+        <item>党员教育</item>
+        <item>党风廉政</item>
+        <item>脱贫攻坚</item>
+        <item>党建直播</item>
+        <item>党建地图</item>
+        <item>北斗应急</item>
+        <item>党建大数据</item>
     </string-array>
 
 

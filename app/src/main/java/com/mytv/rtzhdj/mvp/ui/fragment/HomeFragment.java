@@ -211,8 +211,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         //初始化 1PlusN
         BaseDelegateAdapter oneplusnAdapter = mPresenter.initOnePlusN();
         mAdapters.add(oneplusnAdapter);
-//
-//
+
+        footerAdapter = mPresenter.initMoreData("更多公益活动");
+        mAdapters.add(footerAdapter);
+
+
 //        //初始化折叠式指示器控件
 //        //initSticky();
 //        //mAdapters.add(stickyAdapter);
