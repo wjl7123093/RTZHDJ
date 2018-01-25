@@ -196,7 +196,7 @@ dependencies {
     // RoundImageView
     compile 'org.raphets:roundimageview:1.2.0'  // 要求 minSdk 19
     // xutils3
-    compile 'org.xutils:xutils:3.3.36'
+//    compile 'org.xutils:xutils:3.3.36'
     // RefreshLayout
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'//没有使用特殊Header，可以不加这行

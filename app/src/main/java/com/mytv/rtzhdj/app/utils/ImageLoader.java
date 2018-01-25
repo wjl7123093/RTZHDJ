@@ -6,8 +6,8 @@ import android.widget.ImageView;
 import com.mytv.rtzhdj.R;
 import com.squareup.picasso.Picasso;
 
-import org.xutils.image.ImageOptions;
-import org.xutils.x;
+//import org.xutils.image.ImageOptions;
+//import org.xutils.x;
 
 /**
  * ImageLoader 图片加载类(内置 xutils3)
@@ -39,7 +39,7 @@ public class ImageLoader {
      * 初始化 imageOptions
      * @return
      */
-    private ImageOptions initImageOptions() {
+    /*private ImageOptions initImageOptions() {
         //通过ImageOptions.Builder().set方法设置图片的属性
         ImageOptions imageOptions= new ImageOptions.Builder()
                 //ImageOptions.Builder()的一些其他属性：
@@ -60,19 +60,19 @@ public class ImageLoader {
                 .build();
 
         return imageOptions;
-    }
+    }*/
 
     /**
      * 显示图片
      * @param v
      * @param imgUrl
      */
-    public void showImage(ImageView v, String imgUrl) {
+    /*public void showImage(ImageView v, String imgUrl) {
         x.image().bind(v, imgUrl, initImageOptions());
-    }
+    }*/
 
     /**
-     * 显示图片
+     * 显示图片（Passico）
      * @param v
      * @param imgUrl
      */
