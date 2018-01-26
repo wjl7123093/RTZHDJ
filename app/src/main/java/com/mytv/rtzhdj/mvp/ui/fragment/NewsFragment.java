@@ -1,16 +1,26 @@
 package com.mytv.rtzhdj.mvp.ui.fragment;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.di.component.DaggerNewsComponent;
 import com.mytv.rtzhdj.di.module.NewsModule;
 import com.mytv.rtzhdj.mvp.contract.NewsContract;
@@ -18,11 +28,42 @@ import com.mytv.rtzhdj.mvp.presenter.NewsPresenter;
 
 import com.mytv.rtzhdj.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import me.weyye.library.colortrackview.ColorTrackTabLayout;
+
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
-
+/**
+ * NewsFragment 党建新闻 Fragment
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-19
+ * @update
+ */
 public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsContract.View {
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView mTvToolbarTitle;
+    @BindView(R.id.toolbar_back)
+    RelativeLayout mBtnToolbarBack;
+    @BindView(R.id.toolbar_menu)
+    RelativeLayout mBtnToolbarMenu;
+    @BindView(R.id.iv_menu)
+    ImageView mIvMenu;
+
+    @BindView(R.id.tab_channel)
+    ColorTrackTabLayout mTab;
+    @BindView(R.id.vp_content)
+    ViewPager mViewPager;
+
+    String[] titles;
 
     public static NewsFragment newInstance() {
         NewsFragment fragment = new NewsFragment();
@@ -46,7 +87,16 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mBtnToolbarBack.setVisibility(View.GONE);
+        mTvToolbarTitle.setText("党建新闻");
+        mIvMenu.setImageResource(R.mipmap.ic_launcher);
+        mBtnToolbarMenu.setOnClickListener(view -> {
+            // 跳转到搜索页面
+            ARouter.getInstance().build(ARoutePath.PATH_SEARCH).navigation();
+        });
 
+        titles = new String[]{"推荐", "党建快讯", "基层动态", "干部任免", "身边典型", "老党员之声", "他山之石"};
+        initTab();
     }
 
     /**
@@ -92,6 +142,32 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     @Override
     public void killMyself() {
 
+    }
+
+    private void initTab() {
+        final List<Fragment> fragments = new ArrayList<>();
+        for (int i = 0; i < titles.length; i++) {
+            fragments.add(JoinFragment.newInstance());
+        }
+
+
+        mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return titles.length;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titles[position];
+            }
+        });
+        mTab.setupWithViewPager(mViewPager);
     }
 
 }

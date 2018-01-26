@@ -20,7 +20,15 @@ import com.mytv.rtzhdj.R;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
-
+/**
+ * MineFragment 我的 Fragment
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-19
+ * @update
+ */
 public class MineFragment extends BaseFragment<MinePresenter> implements MineContract.View {
 
 
