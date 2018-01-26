@@ -20,7 +20,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.sonic.sdk.SonicConfig;
 import com.tencent.sonic.sdk.SonicEngine;
 
-import org.xutils.x;
+//import org.xutils.x;
 
 /**
  * 全局 Application
@@ -68,8 +68,8 @@ public class RTZHDJApplication extends BaseApplication {
         catchHandler.init(getApplicationContext());
 
         // 初始化 xutils3
-        x.Ext.init(this);
-        x.Ext.setDebug(false); //输出debug日志，开启会影响性能
+//        x.Ext.init(this);
+//        x.Ext.setDebug(false); //输出debug日志，开启会影响性能
 
     }
 
