@@ -6,77 +6,91 @@
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-22
- * @update
+ * @update 2018-1-26    新增 顶层聚焦占位控件 View，在 banner 轮播时不停聚焦该控件，以防止 RecyclerView 下滚
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/len_10"
+    android:orientation="vertical"
     android:background="@color/white">
 
-    <LinearLayout
-        android:layout_width="120dp"
-        android:layout_height="210dp"
-        android:orientation="vertical"
-        android:background="@color/red_800"
-        android:gravity="center_horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
-            android:textColor="@color/white"
-            android:text="我的正能量值"
-            android:layout_marginTop="@dimen/font_16"/>
-        <!-- 正能量值 -->
-        <TextView
-            android:id="@+id/tv_power_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_20"
-            android:textColor="@color/yellow_600"
-            android:text="10"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/font_16"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
-            android:textColor="@color/white"
-            android:text="发表评论"
-            android:layout_marginTop="@dimen/font_16"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
-            android:textColor="@color/white"
-            android:text="参与活动"
-            android:layout_marginTop="@dimen/font_10"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
-            android:textColor="@color/white"
-            android:text="可增加正能量值"
-            android:layout_marginTop="@dimen/font_10"/>
-    </LinearLayout>
+    <!-- 占位，获取焦点，防止 recyclerview 自动滚动 -->
+    <View
+        android:id="@+id/view_focus"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"></View>
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="210dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/len_10">
-        <include layout="@layout/item_vlayout_banner2"
-            android:id="@+id/include_banner1"></include>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/len_10"
+        android:background="@color/white">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/len_10"></View>
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="210dp"
+            android:orientation="vertical"
+            android:background="@color/red_800"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_14"
+                android:textColor="@color/white"
+                android:text="我的正能量值"
+                android:layout_marginTop="@dimen/font_16"/>
+            <!-- 正能量值 -->
+            <TextView
+                android:id="@+id/tv_power_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_20"
+                android:textColor="@color/yellow_600"
+                android:text="10"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/font_16"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_14"
+                android:textColor="@color/white"
+                android:text="发表评论"
+                android:layout_marginTop="@dimen/font_16"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_14"
+                android:textColor="@color/white"
+                android:text="参与活动"
+                android:layout_marginTop="@dimen/font_10"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_14"
+                android:textColor="@color/white"
+                android:text="可增加正能量值"
+                android:layout_marginTop="@dimen/font_10"/>
+        </LinearLayout>
 
-        <include layout="@layout/item_vlayout_banner2"
-            android:id="@+id/include_banner2"></include>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="210dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/len_10">
+            <include layout="@layout/item_vlayout_banner2"
+                android:id="@+id/include_banner1"></include>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_10"></View>
+
+            <include layout="@layout/item_vlayout_banner2"
+                android:id="@+id/include_banner2"></include>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
