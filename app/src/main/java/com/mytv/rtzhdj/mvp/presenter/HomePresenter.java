@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ import java.util.List;
  *
  * @crdate 2018-1-19
  * @update 2018-1-25    解决 “RecyclerView自动滚动” 的BUG（详见 https://www.cnblogs.com/xgjblog/p/8260061.html）
+ *         2018-1-26    彻底解决 “RecyclerView自动滚动” 的BUG（在 1-25 基础上，新增顶层聚焦控件）
  */
 @ActivityScope
 public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContract.View>
@@ -329,6 +331,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
+                View viewFocus = holder.getView(R.id.view_focus);   // 顶层聚焦控件，防止 recyclerview 下滚
                 TextView tvPowerNum = holder.getView(R.id.tv_power_num);
                 View includeBanner1 = holder.getView(R.id.include_banner1);
                 View includeBanner2 = holder.getView(R.id.include_banner2);
@@ -344,7 +347,8 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 Banner banner2 = includeBanner2.findViewById(R.id.banner);
 
                 /**
-                 * 以下四句代码是为了解决 “RecyclerView自动滚动” 的BUG
+                 * 解决 “RecyclerView自动滚动” 的BUG
+                 * Step 1:
                  *
                  * 如果没有 以下四句（让 banner1 和 banner2 所在视图获取焦点），
                  * 则在 recyclerview 滑动到 banner1，banner2 的视图时，recyclerview 会自动不停的往下滚动
@@ -365,6 +369,15 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
                     @Override
                     public void onPageSelected(int position) {
+                        /**
+                         * 解决 “RecyclerView自动滚动” 的BUG
+                         * Step 2:
+                         *
+                         * 在 banner 滚动时，不停的聚焦该控件顶层控件焦点，以防止 recyclerview 自动下滚
+                         */
+                        viewFocus.setFocusableInTouchMode(true);
+                        viewFocus.requestFocus();
+
                         if (0 == position)
                             tvTitle1.setText("Banner111   哈哈哈");
                         else
@@ -384,6 +397,15 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
                     @Override
                     public void onPageSelected(int position) {
+                        /**
+                         * 解决 “RecyclerView自动滚动” 的BUG
+                         * Step 2:
+                         *
+                         * 在 banner 滚动时，不停的聚焦该控件顶层控件焦点，以防止 recyclerview 自动下滚
+                         */
+                        viewFocus.setFocusableInTouchMode(true);
+                        viewFocus.requestFocus();
+
                         if (0 == position)
                             tvTitle2.setText("Banner222   哈哈哈");
                         else
