@@ -9,7 +9,7 @@ import com.jess.arms.utils.ArmsUtils;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.loader.ImageLoader;
 
-import org.xutils.x;
+//import org.xutils.x;
 
 /**
  * BannerImageLoader banner 图片加载类
