@@ -3,12 +3,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NEWS"/>
+        android:text="NEWS"/>-->
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <me.weyye.library.colortrackview.ColorTrackTabLayout
+            android:id="@+id/tab_channel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/tab_selected_color"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/tab_selected_color"
+            app:tabTextAppearance="@style/TextAppearanceHome"
+            app:tabTextColor="#ff222222"
+            />
+
+        <ImageView
+            android:id="@+id/iv_operation"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="5dp"
+            android:scaleType="center"
+            android:src="@mipmap/ic_launcher"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

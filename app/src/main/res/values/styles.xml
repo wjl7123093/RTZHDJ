@@ -40,4 +40,9 @@
 
     <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- TabLayout TabStyle -->
+    <style name="TextAppearanceHome" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>
