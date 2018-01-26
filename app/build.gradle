@@ -166,21 +166,20 @@ dependencies {
     compile rootProject.ext.dependencies["greendao"]
     compile rootProject.ext.dependencies["sqlcipher"]
     // Views
-//        compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //        compile 'com.android.support.constraint:constraint-layout:1.0.2'
     // Test
     testCompile rootProject.ext.dependencies["junit"]
     debugCompile rootProject.ext.dependencies["canary-debug"]
     releaseCompile rootProject.ext.dependencies["canary-release"]
     testCompile rootProject.ext.dependencies["canary-release"]
-
-    compile rootProject.ext.dependencies["eventbus"]//eventbus
-    compile rootProject.ext.dependencies["arouter"]// alibaba arouter 路由框架
+    compile rootProject.ext.dependencies["eventbus"]
+    //eventbus
+    compile rootProject.ext.dependencies["arouter"]
+    // alibaba arouter 路由框架
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
-
     // 引入框架通用模块(使用Rxjava2)
     //    compile 'android.frame:MVPFrames:1.4.2'
     compile 'me.jessyan:arms:2.2.3'
-
     // MD UI
     compile 'net.qiujuer.genius:ui:2.0.1'
     compile 'net.qiujuer.genius:res:2.0.1'
@@ -188,20 +187,21 @@ dependencies {
     compile 'net.qiujuer.genius:kit-cmd:2.0.1'
     compile 'net.qiujuer.genius:kit-reflect:2.0.1'
     compile 'net.qiujuer.genius:kit-handler:2.0.1'
-
     // 底部导航栏
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.1'
     // webview
     compile 'com.tencent.sonic:sdk:2.0.0'
     // RoundImageView
-    compile 'org.raphets:roundimageview:1.2.0'  // 要求 minSdk 19
+    compile 'org.raphets:roundimageview:1.2.0'
+    // 要求 minSdk 19
     // xutils3
-//    compile 'org.xutils:xutils:3.3.36'
+    //    compile 'org.xutils:xutils:3.3.36'
     // RefreshLayout
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'//没有使用特殊Header，可以不加这行
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
+    //没有使用特殊Header，可以不加这行
     // vlayout
-    compile ('com.alibaba.android:vlayout:1.2.8@aar') {
+    compile('com.alibaba.android:vlayout:1.2.8@aar') {
         transitive = true
     }
     // banner
@@ -212,6 +212,7 @@ dependencies {
     compile 'com.sunfusheng:marqueeview:1.3.1'
     // picasso
     compile rootProject.ext.dependencies["picasso"]
-
-
+    compile files('libs/universal-image-loader-1.9.3.jar')
+    // tablayout
+    compile 'me.weyye.ColorTrackTabLayout:library:1.0.1'
 }

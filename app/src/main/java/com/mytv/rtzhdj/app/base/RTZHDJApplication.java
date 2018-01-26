@@ -1,12 +1,18 @@
 package com.mytv.rtzhdj.app.base;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.jess.arms.base.BaseApplication;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.utils.CrashHandler;
 import com.mytv.rtzhdj.app.utils.datetime.DynamicTimeFormat;
 import com.mytv.rtzhdj.app.utils.sonic.SonicRuntimeImpl;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;
@@ -54,9 +60,14 @@ public class RTZHDJApplication extends BaseApplication {
         });
     }
 
+    private static Context mContext;
+    public static DisplayImageOptions mOptions;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = this;
+        initImageLoader(this);
 
         // init sonic engine if necessary, or maybe u can do this when application created
         if (!SonicEngine.isGetInstanceAllowed()) {
@@ -71,6 +82,36 @@ public class RTZHDJApplication extends BaseApplication {
 //        x.Ext.init(this);
 //        x.Ext.setDebug(false); //输出debug日志，开启会影响性能
 
+    }
+
+    public static Context getContext() {
+        return mContext;
+    }
+
+    /**
+     * 初始化ImageLoader(Universal-image-loader)
+     */
+    private void initImageLoader(Context context) {
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .diskCacheSize(200 * 1024 * 1024) // 200 Mb
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                //.writeDebugLogs() // Remove for release app
+                .build();
+        // Initialize ImageLoader with configuration.
+        ImageLoader.getInstance().init(config);
+
+
+        mOptions = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.mipmap.ic_launcher)   //加载过程中
+                .showImageForEmptyUri(R.mipmap.ic_launcher) //uri为空时
+                .showImageOnFail(R.mipmap.ic_launcher)      //加载失败时
+                .cacheOnDisk(true)
+                .cacheInMemory(true)                             //允许cache在内存和磁盘中
+                .bitmapConfig(Bitmap.Config.RGB_565)             //图片压缩质量参数
+                .build();
     }
 
 }
