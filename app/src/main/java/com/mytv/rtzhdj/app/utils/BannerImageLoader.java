@@ -1,12 +1,11 @@
 package com.mytv.rtzhdj.app.utils;
 
 import android.content.Context;
-import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
-import com.squareup.picasso.Picasso;
 import com.youth.banner.loader.ImageLoader;
 
 //import org.xutils.x;
@@ -18,7 +17,8 @@ import com.youth.banner.loader.ImageLoader;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-22
- * @update 2018-1-25    更换了 图片加载库(Picasso)
+ * @update 2018-1-25    更换为 图片加载库(Picasso)
+ *         2018-1-29    更换为 图片加载库(Glide)
  */
 public class BannerImageLoader extends ImageLoader {
     @Override
@@ -33,10 +33,12 @@ public class BannerImageLoader extends ImageLoader {
         Uri uri = Uri.parse((String) path);
         imageView.setImageURI(uri);*/
 
-//        com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(imageView, (String)path);
-
-        //Picasso 加载图片简单用法
-        Picasso.with(context).load((String)path).into(imageView);
+        ArmsUtils.obtainAppComponentFromContext(context).imageLoader().loadImage(context,
+                ImageConfigImpl
+                        .builder()
+                        .url((String) path)
+                        .imageView(imageView)
+                        .build());
 
     }
 
