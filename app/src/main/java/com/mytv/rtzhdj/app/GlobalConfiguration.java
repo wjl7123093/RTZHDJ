@@ -36,7 +36,7 @@ import timber.log.Timber;
  * @version 1.0.0
  *
  * @crdate 2017-1-18
- * @update
+ * @update 2018-1-29    删除相关参数，保证 Glide 正常加载图片
  */
 public class GlobalConfiguration implements ConfigModule {
 
@@ -45,8 +45,12 @@ public class GlobalConfiguration implements ConfigModule {
     @Override
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
         //使用builder可以为框架配置一些配置信息
-        builder.baseurl(Api.APP_DOMAIN)
-                .cacheFile(new File("cache"))
+        builder.baseurl(Api.APP_DOMAIN);
+
+        /**
+         * 配置以下参数后，会导致 Glide 无法加载图片
+         */
+                /*.cacheFile(new File("cache"))
                 .gsonConfiguration((context12, gsonBuilder) -> {//这里可以自己自定义配置Gson的参数
                     gsonBuilder
                             .serializeNulls()//支持序列化null的参数
@@ -59,7 +63,7 @@ public class GlobalConfiguration implements ConfigModule {
                     okhttpBuilder.writeTimeout(10, TimeUnit.SECONDS);
                 }).rxCacheConfiguration((context1, rxCacheBuilder) -> {//这里可以自己自定义配置RxCache的参数
                     rxCacheBuilder.useExpiredDataIfLoaderNotAvailable(true);
-                });
+                });*/
 
     }
 
