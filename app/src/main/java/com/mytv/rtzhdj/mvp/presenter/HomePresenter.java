@@ -4,24 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.media.Image;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
@@ -38,12 +31,10 @@ import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.mvp.contract.HomeContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
-import com.squareup.picasso.Picasso;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-import com.youth.banner.listener.OnBannerListener;
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -59,6 +50,7 @@ import java.util.List;
  * @crdate 2018-1-19
  * @update 2018-1-25    解决 “RecyclerView自动滚动” 的BUG（详见 https://www.cnblogs.com/xgjblog/p/8260061.html）
  *         2018-1-26    彻底解决 “RecyclerView自动滚动” 的BUG（在 1-25 基础上，新增顶层聚焦控件）
+ *         2018-1-29    删除了无关引用
  */
 @ActivityScope
 public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContract.View>
