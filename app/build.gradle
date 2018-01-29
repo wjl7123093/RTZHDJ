@@ -148,12 +148,16 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
-        exclude module: 'jsr305'
     })
     //support
     compile(rootProject.ext.dependencies["cardview-v7"]) {
         exclude module: 'support-annotations'
     }
+
+    // 引入框架通用模块(使用Rxjava2)
+    //    compile 'android.frame:MVPFrames:1.4.2'
+    compile 'me.jessyan:arms:2.2.3'
+
     // Tools
     annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
         exclude module: 'support-annotations'
@@ -177,9 +181,6 @@ dependencies {
     compile rootProject.ext.dependencies["arouter"]
     // alibaba arouter 路由框架
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
-    // 引入框架通用模块(使用Rxjava2)
-    //    compile 'android.frame:MVPFrames:1.4.2'
-    compile 'me.jessyan:arms:2.2.3'
     // MD UI
     compile 'net.qiujuer.genius:ui:2.0.1'
     compile 'net.qiujuer.genius:res:2.0.1'
@@ -194,8 +195,6 @@ dependencies {
     // RoundImageView
     compile 'org.raphets:roundimageview:1.2.0'
     // 要求 minSdk 19
-    // xutils3
-    //    compile 'org.xutils:xutils:3.3.36'
     // RefreshLayout
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
@@ -210,8 +209,6 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     // 文字轮播
     compile 'com.sunfusheng:marqueeview:1.3.1'
-    // picasso
-    compile rootProject.ext.dependencies["picasso"]
     compile files('libs/universal-image-loader-1.9.3.jar')
     // tablayout
     compile 'me.weyye.ColorTrackTabLayout:library:1.0.1'
