@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- * item_vlayout_list_event.xml vlayout 活动项（列表布局）
+ * item_vlayout_list_event.xml vlayout 列表布局(我要参与 - 志愿服务)
  *
  * @author Fred_W
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-22
- * @update
+ * @update 2018-1-31    修改了注释头
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
