@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_grid3.xml vlayout 网格布局(我要参与 - 调查问卷)
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-31
+ * @update
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/len_60"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10">
+
+    <!--<ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/len_40"
+        android:layout_height="@dimen/len_40"
+        android:scaleType="centerCrop"/>-->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_18"
+        android:textColor="@color/yellow_800"
+        android:text="在线问卷"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_12"
+        android:textColor="@color/secondary_text"
+        android:text="在线化，智能化的调查方法"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
