@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- * item_vlayout_grid3.xml vlayout 网格布局(我要参与 - 调查问卷)
+ * item_vlayout_grid4.xml vlayout 网格布局(我的 - 组织活动)
  *
  * @author Fred_W
  * @version v1.0.0(1)
  *
- * @crdate 2018-1-31
+ * @crdate 2018-2-1
  * @update
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

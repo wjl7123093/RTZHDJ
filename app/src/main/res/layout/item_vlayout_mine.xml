@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_mine.xml vlayout 通栏布局(我的 - 本月应交党费)
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-1
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/len_16"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:text="本月应交: "
+        android:gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/tv_study_scores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_18"
+        android:textColor="@color/primary_dark"
+        android:text="--.--"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/len_4"/>
+    <TextView
+        android:id="@+id/tv_is_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_dark"
+        android:text="未交"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/len_20"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></View>
+
+    <TextView
+        android:id="@+id/tv_query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sp_bg_mine_btn"
+        android:gravity="center_vertical"
+        android:text="查看"
+        android:textColor="@color/orange_500"
+        android:textSize="@dimen/font_14" />
+
+
+</LinearLayout>
