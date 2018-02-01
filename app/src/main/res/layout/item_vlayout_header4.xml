@@ -6,7 +6,7 @@
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-31
- * @update
+ * @update 2018-2-1     修改了 天天签到按钮背景图
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -75,7 +75,7 @@
         android:layout_height="@dimen/len_24"
         android:textSize="@dimen/font_14"
         android:textColor="@color/accent"
-        android:background="@color/trans"
+        android:background="@drawable/sp_bg_mine_btn_sign"
         android:text="天天签到"
         android:gravity="center"
         android:layout_alignBottom="@id/iv_header"
