@@ -1,4 +1,4 @@
-package com.mytv.rtzhdj.mvp.ui.widget;
+ï»¿package com.mytv.rtzhdj.mvp.ui.widget;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +9,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCallBack {
 
-	private onLoadMoreListener loadMoreListener;	//¼ÓÔØ¸ü¶à»Øµ÷
-	private boolean isLoadingMore;					//ÊÇ·ñ¼ÓÔØ¸ü¶à
+	private onLoadMoreListener loadMoreListener;	//åŠ è½½æ›´å¤šå›žè°ƒ
+	private boolean isLoadingMore;					//æ˜¯å¦åŠ è½½æ›´å¤š
 
 	public AutoLoadRecyclerView(Context context) {
 		this(context, null);
@@ -23,14 +23,14 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
 	public AutoLoadRecyclerView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		isLoadingMore = false;	//Ä¬ÈÏÎÞÐè¼ÓÔØ¸ü¶à
+		isLoadingMore = false;	//é»˜è®¤æ— éœ€åŠ è½½æ›´å¤š
 		setOnScrollListener(new AutoLoadScrollListener(null, true, true));
 	}
 
 	/**
-	 * ÅäÖÃÏÔÊ¾Í¼Æ¬£¬ÐèÒªÉèÖÃÕâ¼¸¸ö²ÎÊý£¬¿ìËÙ»¬¶¯Ê±£¬ÔÝÍ£Í¼Æ¬¼ÓÔØ
+	 * é…ç½®æ˜¾ç¤ºå›¾ç‰‡ï¼Œéœ€è¦è®¾ç½®è¿™å‡ ä¸ªå‚æ•°ï¼Œå¿«é€Ÿæ»‘åŠ¨æ—¶ï¼Œæš‚åœå›¾ç‰‡åŠ è½½
 	 *
-	 * @param imageLoader	ImageLoaderÊµÀý¶ÔÏó
+	 * @param imageLoader	ImageLoaderå®žä¾‹å¯¹è±¡
 	 * @param pauseOnScroll
 	 * @param pauseOnFling
 	 */
@@ -50,14 +50,14 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
 	}
 
 
-	//¼ÓÔØ¸ü¶àµÄ»Øµ÷½Ó¿Ú
+	//åŠ è½½æ›´å¤šçš„å›žè°ƒæŽ¥å£
 	public interface onLoadMoreListener {
 		void loadMore();
 	}
 
 
 	/**
-	 * »¬¶¯×Ô¶¯¼ÓÔØ¼àÌýÆ÷
+	 * æ»‘åŠ¨è‡ªåŠ¨åŠ è½½ç›‘å¬å™¨
 	 */
 	private class AutoLoadScrollListener extends OnScrollListener {
 
@@ -76,12 +76,12 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
 		public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 			super.onScrolled(recyclerView, dx, dy);
 
-			//ÓÉÓÚGridLayoutManagerÊÇLinearLayoutManager×ÓÀà£¬ËùÒÔÒ²ÊÊÓÃ
+			//ç”±äºŽGridLayoutManageræ˜¯LinearLayoutManagerå­ç±»ï¼Œæ‰€ä»¥ä¹Ÿé€‚ç”¨
 			if (getLayoutManager() instanceof LinearLayoutManager) {
 				int lastVisibleItem = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
 				int totalItemCount = AutoLoadRecyclerView.this.getAdapter().getItemCount();
 
-				//ÓÐ»Øµ÷½Ó¿Ú£¬ÇÒ²»ÊÇ¼ÓÔØ×´Ì¬£¬ÇÒ¼ÆËãºóÊ£ÏÂ2¸öitem£¬ÇÒ´¦ÓÚÏòÏÂ»¬¶¯£¬Ôò×Ô¶¯¼ÓÔØ
+				//æœ‰å›žè°ƒæŽ¥å£ï¼Œä¸”ä¸æ˜¯åŠ è½½çŠ¶æ€ï¼Œä¸”è®¡ç®—åŽå‰©ä¸‹2ä¸ªitemï¼Œä¸”å¤„äºŽå‘ä¸‹æ»‘åŠ¨ï¼Œåˆ™è‡ªåŠ¨åŠ è½½
 				if (loadMoreListener != null && !isLoadingMore && lastVisibleItem >= totalItemCount -
 						2 && dy > 0) {
 					loadMoreListener.loadMore();
