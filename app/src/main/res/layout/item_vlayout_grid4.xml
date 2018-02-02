@@ -9,8 +9,8 @@
  * @update
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="100dp"
+    android:layout_height="70dp"
     android:orientation="vertical"
     android:padding="@dimen/len_6"
     android:background="@drawable/sp_bg_grid4">
@@ -18,8 +18,8 @@
     <View
         android:id="@+id/view_divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/secondary_text"
+        android:layout_height="0.5dp"
+        android:background="@color/divider"
         android:layout_centerInParent="true"></View>
 
     <TextView
@@ -27,9 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/view_divider"
-        android:layout_marginBottom="@dimen/len_10"
+        android:layout_marginBottom="@dimen/len_6"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/font_14"
         android:textColor="@color/primary_dark"
         android:text="0次 >>"/>
 
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_divider"
-        android:layout_marginTop="@dimen/len_10"
+        android:layout_marginTop="@dimen/len_6"
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/font_14"
         android:textColor="@color/secondary_text"

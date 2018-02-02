@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_grid3.xml vlayout 网格布局(我的 - 功能菜单)
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-2
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical|left"
+    android:background="@color/white"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10"
+    android:paddingLeft="@dimen/len_4"
+    android:paddingRight="@dimen/len_4">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/len_24"
+        android:layout_height="@dimen/len_24"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"/>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:text="我的心愿"
+        android:layout_marginLeft="@dimen/len_2"/>
+
+</LinearLayout>

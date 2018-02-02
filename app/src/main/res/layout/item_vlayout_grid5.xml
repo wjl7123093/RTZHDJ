@@ -6,7 +6,7 @@
  * @version v1.0.0(1)
  *
  * @crdate 2018-2-1
- * @update
+ * @update 2018-2-2     修改了 控件id
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -23,8 +23,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_20"
         android:textColor="@color/secondary_text"
-        android:text="17"
-        android:textStyle="bold"/>
+        android:text="17"/>
 
     <TextView
         android:id="@+id/tv_title"
@@ -34,19 +33,19 @@
         android:textSize="@dimen/font_16"
         android:textColor="@color/secondary_text"
         android:text="累计积分"
-        android:layout_marginTop="@dimen/len_10"/>
+        android:layout_marginTop="@dimen/len_6"/>
 
     <TextView
         android:id="@+id/tv_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_12"
+        android:textSize="@dimen/font_10"
         android:textColor="@color/secondary_text"
         android:text="完成任务，获取正能量"
         android:layout_marginTop="@dimen/len_6"/>
 
     <ImageView
-        android:id="@+id/ic_desc"
+        android:id="@+id/iv_desc"
         android:layout_width="@dimen/len_16"
         android:layout_height="@dimen/len_16"
         android:src="@mipmap/ic_launcher"

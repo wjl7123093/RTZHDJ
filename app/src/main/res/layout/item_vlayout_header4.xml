@@ -7,6 +7,7 @@
  *
  * @crdate 2018-1-31
  * @update 2018-2-1     修改了 天天签到按钮背景图
+ *         2018-2-2     修改了UI(字体大小，间距)
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -60,14 +61,14 @@
         android:id="@+id/tv_party_branch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/font_14"
         android:textColor="@color/white"
         android:text="xxxxxx党支部"
         android:gravity="center"
         android:layout_below="@id/tv_name"
         android:layout_toRightOf="@id/iv_header"
         android:layout_marginLeft="@dimen/len_10"
-        android:layout_marginTop="@dimen/len_10"/>
+        android:layout_marginTop="@dimen/len_6"/>
     <!-- 天天签到 -->
     <TextView
         android:id="@+id/tv_sign"
