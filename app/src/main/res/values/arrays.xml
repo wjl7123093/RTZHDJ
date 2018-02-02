@@ -55,8 +55,6 @@
         <item>@mipmap/ic_launcher</item>
         <item>@mipmap/ic_launcher</item>
         <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
     </integer-array>
     <!--学习页图片对应的位子-->
     <string-array name="study_gv_title">
@@ -67,6 +65,57 @@
         <item>绵阳党史</item>
         <item>效果测评</item>
     </string-array>
+
+    <!--/////////////////////////////////////我要参与////////////////////////////////////-->
+
+    <!--参与页图片-->
+    <integer-array name="join_gv_image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+    <!--参与页图片对应的位子-->
+    <string-array name="join_gv_title">
+        <item>组织活动</item>
+        <item>志愿服务</item>
+        <item>报道社区</item>
+        <item>周边社区</item>
+    </string-array>
+
+
+    <!--参与页心愿墙区域-->
+    <integer-array name="join_plus_image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+    <string-array name="join_plus_title">
+        <item>心愿墙</item>
+        <item>我要捐赠</item>
+        <item>所有捐赠物品</item>
+    </string-array>
+    <string-array name="join_plus_desc">
+        <item>认领心愿，点亮梦想</item>
+        <item>奉献爱心，快乐你我</item>
+        <item>奉献爱心，造福人民</item>
+    </string-array>
+
+
+    <!--参与页我的心愿区域-->
+    <integer-array name="join_column_wish_image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+    <string-array name="join_column_wish_title">
+        <item>我的心愿</item>
+        <item>我认领的心愿</item>
+        <item>我的捐赠</item>
+        <item>我领取的物品</item>
+    </string-array>
+
 
     <!--///////////////////////////////////////发现/////////////////////////////////////-->
 
