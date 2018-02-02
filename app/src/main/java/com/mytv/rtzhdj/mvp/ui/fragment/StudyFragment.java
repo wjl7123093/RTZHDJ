@@ -38,7 +38,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-19
- * @update
+ * @update 2018-2-2     填充布局
  */
 public class StudyFragment extends BaseFragment<StudyPresenter> implements StudyContract.View {
 
@@ -177,27 +177,6 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         //初始化list
         listAdapter = mPresenter.initList(2);
         mAdapters.add(listAdapter);
-
-
-        /*
-        //初始化list3
-        BaseDelegateAdapter listAdapter = mPresenter.initList();
-        mAdapters.add(listAdapter);
-        //初始化脚部
-        BaseDelegateAdapter footerAdapter = mPresenter.initMoreData("更多要闻");
-        mAdapters.add(footerAdapter);
-
-        //初始化图片
-        BaseDelegateAdapter imageAdapter = mPresenter.initImage("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
-        mAdapters.add(imageAdapter);
-
-
-        //初始化 1PlusN
-        BaseDelegateAdapter oneplusnAdapter = mPresenter.initOnePlusN();
-        mAdapters.add(oneplusnAdapter);
-
-        footerAdapter = mPresenter.initMoreData("更多公益活动");
-        mAdapters.add(footerAdapter);*/
 
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);
