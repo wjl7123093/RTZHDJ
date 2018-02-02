@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_column_online.xml vlayout 通栏布局(我要参与 - 调查问卷)
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-31
+ * @update 2018-2-2     修改了UI（网格项 -> 通栏布局）
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/len_60"
+    android:orientation="horizontal"
+    android:background="@color/app_bg_grey"
+    android:layout_marginTop="@dimen/len_12"
+    android:layout_marginBottom="@dimen/len_12">
+    <!-- 在线问卷 -->
+    <RelativeLayout
+        android:id="@+id/rl_online_questionaire"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/len_16"
+        android:paddingRight="@dimen/len_16"
+        android:paddingTop="@dimen/len_10"
+        android:paddingBottom="@dimen/len_10">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/yellow_800"
+            android:text="在线问卷"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_10"
+            android:textColor="@color/secondary_text"
+            android:text="在线化，智能化的调查方法"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <!-- 在线投票 -->
+    <RelativeLayout
+        android:id="@+id/rl_online_vote"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/len_16"
+        android:paddingRight="@dimen/len_16"
+        android:paddingTop="@dimen/len_10"
+        android:paddingBottom="@dimen/len_10"
+        android:layout_marginLeft="@dimen/len_2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/pink_600"
+            android:text="在线投票"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_10"
+            android:textColor="@color/secondary_text"
+            android:text="珍惜民主权利，投好庄严一票"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>
+
