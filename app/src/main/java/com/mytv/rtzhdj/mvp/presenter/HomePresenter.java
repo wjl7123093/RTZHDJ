@@ -276,6 +276,8 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 mImageLoader.loadImage(getContext(),
                         ImageConfigImpl
                                 .builder()
+                                .errorPic(R.mipmap.ic_error)
+                                .placeholder(R.mipmap.ic_placeholder)
                                 .url(url)
                                 .imageView(holder.getView(R.id.iv_image))
                                 .build());

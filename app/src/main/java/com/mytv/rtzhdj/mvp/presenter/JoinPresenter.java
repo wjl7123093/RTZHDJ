@@ -35,8 +35,6 @@ import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 
-import net.qiujuer.genius.ui.widget.Button;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,6 +152,8 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 mImageLoader.loadImage(activity,
                         ImageConfigImpl
                                 .builder()
+                                .errorPic(R.mipmap.ic_error)
+                                .placeholder(R.mipmap.ic_placeholder)
                                 .url(url)
                                 .imageView(holder.getView(R.id.iv_event))
                                 .build());
@@ -182,6 +182,8 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 mImageLoader.loadImage(activity,
                         ImageConfigImpl
                                 .builder()
+                                .errorPic(R.mipmap.ic_error)
+                                .placeholder(R.mipmap.ic_placeholder)
                                 .url(url)
                                 .imageView(holder.getView(R.id.iv_image))
                                 .build());

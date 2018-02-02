@@ -47,7 +47,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
     @BindView(R.id.recyclerview)
-    AutoLoadRecyclerViewGlide mRecyclerView;
+    RecyclerView mRecyclerView;
 
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
