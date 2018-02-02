@@ -45,6 +45,29 @@
         <item>@mipmap/ic_launcher</item>
     </integer-array>
 
+    <!--/////////////////////////////////////我要学习////////////////////////////////////-->
+
+    <!--学习页图片-->
+    <integer-array name="study_gv_image">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+    <!--学习页图片对应的位子-->
+    <string-array name="study_gv_title">
+        <item>学习课件</item>
+        <item>党内法规</item>
+        <item>党建知识</item>
+        <item>党建研究</item>
+        <item>绵阳党史</item>
+        <item>效果测评</item>
+    </string-array>
+
     <!--///////////////////////////////////////发现/////////////////////////////////////-->
 
 
