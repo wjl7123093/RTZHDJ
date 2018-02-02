@@ -40,7 +40,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-19
- * @update
+ * @update 2018-2-2     填充布局
  */
 public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinContract.View {
 
