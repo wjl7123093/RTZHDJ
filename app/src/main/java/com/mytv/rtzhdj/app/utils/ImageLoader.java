@@ -17,6 +17,7 @@ import com.mytv.rtzhdj.R;
  * @crdate 2018-1-19
  * @update 2018-1-25 新增 图片加载库(Picasso)
  *         2018-1-29 改为 图片加载库(Glide)
+ *         2018-2-2  新增 图片加载等待图 和 错误图
  */
 public class ImageLoader {
 
