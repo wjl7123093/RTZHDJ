@@ -7,12 +7,14 @@
  *
  * @crdate 2018-1-22
  * @update 2018-1-31    修改了 padding 值(10 -> 16)
+ *         2018-2-2     修改了UI（增加背景色，模拟数据）
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/len_16">
+    android:padding="@dimen/len_16"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/tv_title"
@@ -21,7 +23,8 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:textSize="@dimen/font_16"
-        android:textColor="@color/primary_text"/>
+        android:textColor="@color/primary_text"
+        android:text="年关将至，习近平总书记这20句反“四风”硬话要牢记"/>
 
     <TextView
         android:id="@+id/tv_datetime"
@@ -29,6 +32,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_14"
         android:textColor="@color/secondary_text"
+        android:text="上次学习: 2018-01-26 08:49:01"
         android:layout_marginTop="10dp"/>
 
 </LinearLayout>
