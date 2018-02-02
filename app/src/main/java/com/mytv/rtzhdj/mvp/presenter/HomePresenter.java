@@ -52,6 +52,8 @@ import java.util.List;
  * @update 2018-1-25    解决 “RecyclerView自动滚动” 的BUG（详见 https://www.cnblogs.com/xgjblog/p/8260061.html）
  *         2018-1-26    彻底解决 “RecyclerView自动滚动” 的BUG（在 1-25 基础上，新增顶层聚焦控件）
  *         2018-1-29    删除了无关引用
+ *         2018-2-2     修改了 initHeader() 里的 recyclerview 的itemType，
+ *                      保证了不同itemView 使用不同的 itemType，解决了 [滑动卡顿] BUG。
  */
 @ActivityScope
 public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContract.View>
@@ -290,7 +292,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     public BaseDelegateAdapter initHeader(String title, String desc) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_header,
-                1, Constant.viewType.typeTitle) {
+                1, Constant.viewType.typeHeader) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
