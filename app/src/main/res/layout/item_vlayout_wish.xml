@@ -6,7 +6,7 @@
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-31
- * @update
+ * @update 2018-2-2     修改了 控件id
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -15,7 +15,7 @@
     android:background="@color/primary_dark">
 
     <TextView
-        android:id="@+id/tv_1"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_18"
@@ -25,7 +25,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"/>
     <TextView
-        android:id="@+id/tv_2"
+        android:id="@+id/tv_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_12"
@@ -37,7 +37,7 @@
         android:alpha="0.6"/>
 
     <ImageView
-        android:id="@+id/iv_1"
+        android:id="@+id/iv_icon"
         android:layout_width="@dimen/len_32"
         android:layout_height="@dimen/len_32"
         android:src="@mipmap/ic_launcher"
