@@ -15,6 +15,7 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
@@ -219,11 +220,9 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                TextView tvTitle = holder.getView(R.id.tv_title);
-                TextView tvMoredata = holder.getView(R.id.tv_moredata);
-                tvTitle.setText(title);
+                holder.setText(R.id.tv_title, title);
 
-                tvMoredata.setOnClickListener(view -> {
+                holder.getView(R.id.tv_moredata).setOnClickListener(view -> {
                     mRootView.setOnclick();
                 });
 
@@ -254,10 +253,9 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                Button btnMore = holder.getView(R.id.btn_moredata);
-                btnMore.setText(moreStr);
+                holder.setText(R.id.btn_moredata, moreStr);
 
-                btnMore.setOnClickListener(view -> {
+                holder.getView(R.id.btn_moredata).setOnClickListener(view -> {
                     mRootView.setOnclick();
                 });
 
@@ -273,21 +271,14 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                ImageView imageView = holder.getView(R.id.iv_image);
-//                com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(imageView, url);
-//                mRootView.showImage(imageView, url);
+                mImageLoader.loadImage(getContext(),
+                        ImageConfigImpl
+                                .builder()
+                                .url(url)
+                                .imageView(holder.getView(R.id.iv_image))
+                                .build());
 
-//                mImageLoader.loadImage(getContext(),
-//                        ImageConfigImpl
-//                                .builder()
-//                                .url(url)
-//                                .imageView(imageView)
-//                                .build());
-
-//                Picasso.with(activity).load(url).into(imageView);
-                com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(activity, imageView, url);
-
-                imageView.setOnClickListener(view -> {
+                holder.getView(R.id.iv_image).setOnClickListener(view -> {
                     mRootView.setOnclick();
                 });
 
@@ -303,10 +294,8 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                TextView tvTitle = holder.getView(R.id.tv_title);
-                TextView tvDesc = holder.getView(R.id.tv_desc);
-                tvTitle.setText(title);
-                tvDesc.setText(desc);
+                holder.setText(R.id.tv_title, title);
+                holder.setText(R.id.tv_desc, desc);
             }
         };
     }
