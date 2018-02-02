@@ -6,7 +6,7 @@
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-31
- * @update
+ * @update 2018-2-2     修改了UI（字体大小）
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_container"
@@ -30,7 +30,7 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_12"
+        android:textSize="@dimen/font_10"
         android:textColor="@color/secondary_text"
         android:text="我的心愿"
         android:layout_marginLeft="@dimen/len_2"/>
