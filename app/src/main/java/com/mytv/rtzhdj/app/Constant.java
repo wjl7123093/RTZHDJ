@@ -8,7 +8,7 @@ package com.mytv.rtzhdj.app;
  *
  * @crdate 2018-1-22
  * @update 2018-1-23    新增 typeImage, typeHeader 类型
- *         2018-2-2     新增 typeColumn 类型
+ *         2018-2-2     新增 typeColumn, typeSingle 类型
  */
 public class Constant {
 
@@ -28,6 +28,7 @@ public class Constant {
         int typeGvSecond = 10;      //九宫格
         int typeImage = 11;         //图片
         int typeHeader = 12;        //头部
+        int typeSingle = 13;        //通栏布局
     }
 
 }
