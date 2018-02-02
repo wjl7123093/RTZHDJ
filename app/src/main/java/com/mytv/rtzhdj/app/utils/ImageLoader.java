@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
+import com.mytv.rtzhdj.R;
 
 /**
  * ImageLoader 图片加载类(内置 xutils3)
@@ -44,6 +45,8 @@ public class ImageLoader {
         ArmsUtils.obtainAppComponentFromContext(context).imageLoader().loadImage(context,
                 ImageConfigImpl
                         .builder()
+                        .errorPic(R.mipmap.ic_error)
+                        .placeholder(R.mipmap.ic_placeholder)
                         .url(imgUrl)
                         .imageView(v)
                         .build());
