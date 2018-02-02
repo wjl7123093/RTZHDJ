@@ -3,10 +3,12 @@ package com.mytv.rtzhdj.mvp.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
@@ -17,6 +19,17 @@ import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.presenter.JoinPresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
+import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.mytv.rtzhdj.mvp.ui.widget.AutoLoadRecyclerView2;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -30,6 +43,14 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @update
  */
 public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinContract.View {
+
+    @BindView(R.id.refreshLayout)
+    RefreshLayout mRefreshLayout;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+
+    /** 存放各个模块的适配器*/
+    private List<DelegateAdapter.Adapter> mAdapters;
 
 
     public static JoinFragment newInstance() {
@@ -54,7 +75,10 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        
+        mAdapters = new LinkedList<>();
+        mPresenter.setActivity((MainActivity)getActivity());
+        initRecyclerView();
+        initRefreshLayout();
     }
 
     /**
@@ -102,4 +126,88 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 
     }
 
+    @Override
+    public void setOnGridClick(int position) {
+
+    }
+
+    @Override
+    public void setOnListClick(int arrayPos, int position) {
+
+    }
+
+    @Override
+    public void setOnFooterClick() {
+
+    }
+
+    @Override
+    public void setOnColumnClick(int arrayPos, int position) {
+
+    }
+
+    private void initRecyclerView() {
+        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+
+        //初始化头部
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader("点击立即报到");
+        mAdapters.add(headerAdapter);
+
+        //初始化九宫格
+        BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
+        mAdapters.add(menuAdapter);
+
+        //初始化 1PlusN
+        BaseDelegateAdapter oneplusnAdapter = mPresenter.initOnePlusN2();
+        mAdapters.add(oneplusnAdapter);
+
+        //初始化 格栏布局 - 我的心愿
+        BaseDelegateAdapter columnWishAdapter = mPresenter.initColumnWish();
+        mAdapters.add(columnWishAdapter);
+
+        //初始化 格栏布局 - 在线问卷
+        BaseDelegateAdapter columnOnlineAdapter = mPresenter.initColumnOnline();
+        mAdapters.add(columnOnlineAdapter);
+
+        //初始化标题 - 志愿服务
+        BaseDelegateAdapter titleAdapter = mPresenter.initTitle("志愿服务");
+        mAdapters.add(titleAdapter);
+        //初始化list
+        BaseDelegateAdapter listAdapter = mPresenter.initListVolunteer(
+                "http://pic117.nipic.com/file/20161213/24416158_165731241000_2.jpg",
+                0, 40, 639, 687, "志愿服务，从心开始", "2018-2-27");
+        mAdapters.add(listAdapter);
+
+        //初始化脚部
+        BaseDelegateAdapter footerAdapter = mPresenter.initFooter("更多志愿服务");
+        mAdapters.add(footerAdapter);
+
+        //初始化标题 - 社区动态
+        titleAdapter = mPresenter.initTitle("社区动态");
+        mAdapters.add(titleAdapter);
+        //初始化list
+        BaseDelegateAdapter listAdapter2 = mPresenter.initListCommunity(
+                "http://pic22.photophoto.cn/20120105/0020033017931766_b.jpg",
+                639, 687, "志愿服务，从心开始", "2018-02-02");
+        mAdapters.add(listAdapter2);
+
+        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);
+    }
+
+    private void initRefreshLayout() {
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+//        mRefreshLayout.setEnableLoadmore(false);
+        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
+    }
 }
