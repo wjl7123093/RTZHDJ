@@ -23,6 +23,7 @@ import com.mytv.rtzhdj.mvp.presenter.HomePresenter;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.mytv.rtzhdj.mvp.ui.widget.AutoLoadRecyclerViewGlide;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -50,7 +51,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
     @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    AutoLoadRecyclerViewGlide mRecyclerView;
 
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
