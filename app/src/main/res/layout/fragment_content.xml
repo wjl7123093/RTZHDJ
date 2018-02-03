@@ -6,9 +6,22 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="内容页（二级 Fragment）"/>
+        android:text="内容页（二级 Fragment）"/>-->
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:background="@color/app_bg_grey" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

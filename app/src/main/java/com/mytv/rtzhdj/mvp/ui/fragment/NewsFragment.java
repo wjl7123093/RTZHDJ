@@ -147,7 +147,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(ContentFragment.newInstance());
+            fragments.add(ContentFragment.newInstance(i));
         }
 
 
