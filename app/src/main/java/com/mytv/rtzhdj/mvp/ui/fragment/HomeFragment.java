@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
 import com.mytv.rtzhdj.di.component.DaggerHomeComponent;
 import com.mytv.rtzhdj.di.module.HomeModule;
@@ -135,7 +137,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         banner.setOnBannerListener(new OnBannerListener() {
                 @Override
                 public void OnBannerClick(int position) {
-                    ArmsUtils.snackbarText("banner点击了" + position);
+//                    ArmsUtils.snackbarText("banner点击了" + position);
+                    ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL).navigation();
                 }
             });
     }

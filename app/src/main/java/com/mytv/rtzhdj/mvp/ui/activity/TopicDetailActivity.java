@@ -1,8 +1,13 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
@@ -16,7 +21,14 @@ import com.mytv.rtzhdj.mvp.contract.TopicDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.TopicDetailPresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import me.weyye.library.colortrackview.ColorTrackTabLayout;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -32,6 +44,15 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 @Route(path = ARoutePath.PATH_TOPIC_DETAIL)
 public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> implements TopicDetailContract.View {
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+
+    @BindView(R.id.tab_channel)
+    ColorTrackTabLayout mTab;
+    @BindView(R.id.vp_content)
+    ViewPager mViewPager;
+
+    String[] titles;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -50,7 +71,11 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        titles = new String[]{"简介", "工作动态", "文件解读", "文件制度"};
+        initTab();
     }
 
 
@@ -81,5 +106,36 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
         finish();
     }
 
+    private void initTab() {
+        final List<Fragment> fragments = new ArrayList<>();
+        for (int i = 0; i < titles.length; i++) {
+            fragments.add(ContentFragment.newInstance(i));
+        }
 
+
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return titles.length;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titles[position];
+            }
+        });
+        mTab.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mToolbar.setTitle("xxxxxxxxxxx");
+        mToolbar.setTitleTextColor(Color.WHITE);
+    }
 }
