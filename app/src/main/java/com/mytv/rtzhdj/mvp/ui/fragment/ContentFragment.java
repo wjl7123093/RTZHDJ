@@ -90,36 +90,15 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
         imgUrls.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
         imgUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setHasFixedSize(true);
-        //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
-        RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-        mRecyclerView.setRecycledViewPool(viewPool);
-        viewPool.setMaxRecycledViews(0, 20);
-
+        mPresenter.setActivity(getActivity());
+        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initAdapter();
 
-        View headerView = getHeaderView(imgUrls, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                headerAndFooterAdapter.addHeaderView(getHeaderView(imgUrls, getRemoveHeaderListener()), 0);
-            }
-        });
+        View headerView = mPresenter.initHeaderView(imgUrls, (ViewGroup) mRecyclerView.getParent());
         if (0 == getArguments().getInt("position"))
             headerAndFooterAdapter.addHeaderView(headerView);
         else
             headerAndFooterAdapter.removeAllHeaderView();
-
-
-//        View footerView = getFooterView(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                headerAndFooterAdapter.addFooterView(getFooterView(getRemoveFooterListener()), 0);
-//            }
-//        });
-//        headerAndFooterAdapter.addFooterView(footerView, 0);
-
-        mRecyclerView.setAdapter(headerAndFooterAdapter);
 
         initRefreshLayout();
     }
@@ -169,6 +148,10 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
     }
 
+    @Override
+    public void onBannerClick(int position) {
+
+    }
 
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -186,79 +169,17 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
         });
     }
 
-    private View getHeaderView(List<?> imageUrls, View.OnClickListener listener) {
-        View view = getLayoutInflater().inflate(R.layout.item_vlayout_banner, (ViewGroup) mRecyclerView.getParent(), false);
-
-        // 绑定数据
-        Banner mBanner = view.findViewById(R.id.banner);
-        //设置banner样式
-        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-        //设置图片加载器
-        mBanner.setImageLoader(new BannerImageLoader());
-        //设置图片集合
-        mBanner.setImages(imageUrls);
-        //设置banner动画效果
-        mBanner.setBannerAnimation(Transformer.DepthPage);
-        //设置标题集合（当banner样式有显示title时）
-        //        mBanner.setBannerTitles(titles);
-        //设置自动轮播，默认为true
-        mBanner.isAutoPlay(true);
-        //设置轮播时间
-        mBanner.setDelayTime(5000);
-        //设置指示器位置（当banner模式中有指示器时）
-        mBanner.setIndicatorGravity(BannerConfig.CENTER);
-
-        //banner设置方法全部调用完毕时最后调用
-        mBanner.start();
-
-        view.setOnClickListener(listener);
-        return view;
-    }
-
-    private View getFooterView(View.OnClickListener listener) {
-        View view = getLayoutInflater().inflate(R.layout.item_vlayout_moredata, (ViewGroup) mRecyclerView.getParent(), false);
-
-        view.setOnClickListener(listener);
-        return view;
-    }
-
-    private View.OnClickListener getRemoveHeaderListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                headerAndFooterAdapter.removeHeaderView(v);
-            }
-        };
-    }
-
-
-    private View.OnClickListener getRemoveFooterListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                headerAndFooterAdapter.removeFooterView(v);
-            }
-        };
-    }
-
     private void initAdapter() {
         headerAndFooterAdapter = new HeaderAndFooterAdapter(getContext(), PAGE_SIZE);
         headerAndFooterAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(headerAndFooterAdapter);
-//        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
-//            @Override
-//            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                Toast.makeText(HeaderAndFooterUseActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
-//            }
-//        });
+
         headerAndFooterAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                adapter.setNewData(DataServer.getSampleData(PAGE_SIZE));
                 Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
             }
         });
 
     }
-
 }
