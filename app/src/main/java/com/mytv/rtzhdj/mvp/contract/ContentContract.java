@@ -1,9 +1,7 @@
 package com.mytv.rtzhdj.mvp.contract;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.jess.arms.mvp.IPresenter;
