@@ -1,4 +1,4 @@
-﻿package com.mytv.rtzhdj.mvp.ui.widget;
+package com.mytv.rtzhdj.mvp.ui.widget;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

@@ -1,4 +1,4 @@
-﻿package com.mytv.rtzhdj.mvp.ui.widget;
+package com.mytv.rtzhdj.mvp.ui.widget;
 
 
 public interface LoadFinishCallBack {
