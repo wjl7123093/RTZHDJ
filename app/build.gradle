@@ -96,7 +96,7 @@ android {
             // 是否进行混淆
             minifyEnabled false
             // 移除无用资源 如发生 Resources$NotFoundException: Resource ID #0x4 错误可关闭此功能
-            shrinkResources true
+//            shrinkResources true
             // 混淆文件位置，其中 proguard-android.txt 为默认的混淆配置，proguard-rules.pro 为模块额外的混淆配置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // 签名
@@ -118,7 +118,7 @@ android {
 
     greendao {
         schemaVersion 1 // 数据库版本号
-        daoPackage 'com.fred_w.demo.mvpframedemo.app.greendao.build'
+        daoPackage 'com.mytv.rtzhdj.app.data.greendao.build'
         // 设置 DaoMaster, DaoSession, Dao包名
         targetGenDir 'scr/main/java'
         //targetGenDirTest 设置生成单元测试目录
