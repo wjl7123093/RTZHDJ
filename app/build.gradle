@@ -103,7 +103,7 @@ android {
 //            signingConfig signingConfigs.release
 
             // 批量打包
-            applicationVariants.all { variant ->
+            /*applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith(".apk")) {
@@ -112,7 +112,7 @@ android {
                         output.outputFile = new File(outputFile.parent, fileName)
                     }
                 }
-            }
+            }*/
         }
     }
 

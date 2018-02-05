@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_rv_surrounding_community.xml recyclerview 周边社区列表项
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-5
+ * @update
+-->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    app:cardCornerRadius="@dimen/len_10"
+    app:cardElevation="@dimen/len_6">
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_40"
+        android:background="@drawable/sp_bg_surrounding_community_item_bottom"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="@dimen/len_10"
+        android:layout_gravity="bottom|left"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/white"
+        android:text="东街社区党委"/>
+
+    <TextView
+        android:layout_width="@dimen/len_40"
+        android:layout_height="@dimen/len_40"
+        android:text="进入\n社区"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/accent"
+        android:maxLines="2"
+        android:gravity="center"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="@dimen/len_60"
+        android:layout_marginRight="@dimen/len_10"
+        android:background="@drawable/sp_bg_surrounding_community_item_btn"/>
+
+</android.support.v7.widget.CardView>
+
