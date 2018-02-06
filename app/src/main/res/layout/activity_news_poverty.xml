@@ -1,8 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ * activity_news_poverty.xml 脱贫攻坚
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-6
+ * @update
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <me.weyye.library.colortrackview.ColorTrackTabLayout
+            android:id="@+id/tab_channel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/tab_selected_color"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/tab_selected_color"
+            app:tabTextAppearance="@style/TextAppearanceHome"
+            app:tabTextColor="#ff222222"
+            android:layout_marginRight="@dimen/len_40"/>
+
+        <ImageView
+            android:id="@+id/iv_operation"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="5dp"
+            android:scaleType="center"
+            android:src="@mipmap/ic_launcher"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
