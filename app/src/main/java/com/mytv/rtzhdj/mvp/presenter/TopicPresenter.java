@@ -1,6 +1,10 @@
 package com.mytv.rtzhdj.mvp.presenter;
 
+import android.app.Activity;
 import android.app.Application;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.widget.LinearLayout;
 
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -12,14 +16,18 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import javax.inject.Inject;
 
 import com.mytv.rtzhdj.mvp.contract.TopicContract;
+import com.mytv.rtzhdj.mvp.ui.activity.TopicActivity;
 
 
 @ActivityScope
-public class TopicPresenter extends BasePresenter<TopicContract.Model, TopicContract.View> {
+public class TopicPresenter extends BasePresenter<TopicContract.Model, TopicContract.View>
+    implements TopicContract.Presenter {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
+
+    private TopicActivity mActivity;
 
     @Inject
     public TopicPresenter(TopicContract.Model model, TopicContract.View rootView
@@ -41,4 +49,20 @@ public class TopicPresenter extends BasePresenter<TopicContract.Model, TopicCont
         this.mApplication = null;
     }
 
+    @Override
+    public void setActivity(TopicActivity activity) {
+        mActivity = activity;
+    }
+
+    @Override
+    public RecyclerView initRecyclerView(RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        recyclerView.setHasFixedSize(true);
+        //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
+        RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+        recyclerView.setRecycledViewPool(viewPool);
+        viewPool.setMaxRecycledViews(0, 20);
+
+        return recyclerView;
+    }
 }
