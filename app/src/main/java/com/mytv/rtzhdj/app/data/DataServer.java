@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data;
 
+import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class DataServer {
     private DataServer() {
     }
 
-    public static List<NewsEntity> getSampleData(int lenth) {
+    public static List<NewsEntity> getNewsData(int lenth) {
         List<NewsEntity> list = new ArrayList<>();
         for (int i = 0; i < lenth; i++) {
             NewsEntity newsEntity = new NewsEntity();
@@ -26,6 +27,18 @@ public class DataServer {
             newsEntity.setComment_num(i * 5);
             newsEntity.setImg_url("https://avatars1.githubusercontent.com/u/7698209?v=3&s=460");
             list.add(newsEntity);
+        }
+        return list;
+    }
+
+    public static List<CoursewareEntity> getCoursewareData(int lenth) {
+        List<CoursewareEntity> list = new ArrayList<>();
+        for (int i = 0; i < lenth; i++) {
+            CoursewareEntity coursewareEntity = new CoursewareEntity();
+            coursewareEntity.setTitle("学习中共中央十九大精神 " + i);
+            coursewareEntity.setDatetime("04/05/" + i);
+            coursewareEntity.setType(i / 3 + 1);
+            list.add(coursewareEntity);
         }
         return list;
     }
@@ -64,18 +77,6 @@ public class DataServer {
 //        list.add(new MySection(true, "Section 5", false));
 //        list.add(new MySection(new Video(HTTPS_AVATARS1_GITHUBUSERCONTENT_COM_LINK, CYM_CHAD)));
 //        list.add(new MySection(new Video(HTTPS_AVATARS1_GITHUBUSERCONTENT_COM_LINK, CYM_CHAD)));
-//        return list;
-//    }
-//
-//    public static List<String> getStrData() {
-//        List<String> list = new ArrayList<>();
-//        for (int i = 0; i < 20; i++) {
-//            String str = HTTPS_AVATARS1_GITHUBUSERCONTENT_COM_LINK;
-//            if (i % 2 == 0) {
-//                str = CYM_CHAD;
-//            }
-//            list.add(str);
-//        }
 //        return list;
 //    }
 //

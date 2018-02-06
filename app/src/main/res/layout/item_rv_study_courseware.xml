@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- * item_rv_study_record.xml recyclerview 学习记录列表项
+ * item_rv_study_record.xml recyclerview 学习课件列表项
  *
  * @author Fred_W
  * @version v1.0.0(1)
@@ -12,7 +12,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/len_16"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/tv_title"

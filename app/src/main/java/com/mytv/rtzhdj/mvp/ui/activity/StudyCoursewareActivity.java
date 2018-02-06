@@ -3,20 +3,36 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.DataServer;
 import com.mytv.rtzhdj.di.component.DaggerStudyCoursewareComponent;
 import com.mytv.rtzhdj.di.module.StudyCoursewareModule;
 import com.mytv.rtzhdj.mvp.contract.StudyCoursewareContract;
 import com.mytv.rtzhdj.mvp.presenter.StudyCoursewarePresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+
+import java.util.LinkedList;
+import java.util.List;
+
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -27,10 +43,27 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-20
- * @update
+ * @update 2018-2-6     填充布局
  */
 @Route(path = ARoutePath.PATH_STUDY_COURSEWARE)
 public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresenter> implements StudyCoursewareContract.View {
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView mTvToolbarTitle;
+    @BindView(R.id.toolbar_back)
+    RelativeLayout mBtnToolbarBack;
+    @BindView(R.id.toolbar_menu)
+    RelativeLayout mBtnToolbarMenu;
+
+    @BindView(R.id.refreshLayout)
+    RefreshLayout mRefreshLayout;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+
+    /** 存放各个模块的适配器*/
+    private List<DelegateAdapter.Adapter> mAdapters;
 
 
     @Override
@@ -50,7 +83,10 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        mAdapters = new LinkedList<>();
+        mPresenter.setActivity(StudyCoursewareActivity.this);
+        initRecyclerView();
+        initRefreshLayout();
     }
 
 
@@ -82,4 +118,58 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
     }
 
 
+    @Override
+    public void setOnGridClick(int position, String title) {
+        switch (position) {
+            case 0:
+                ARouter.getInstance().build(ARoutePath.PATH_COMPULSORY_COURSE).navigation();
+                break;
+            case 1:
+            case 2:
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+                        .withString("title", title).navigation();
+                break;
+
+        }
+    }
+
+    @Override
+    public void setOnListClick(int position) {
+
+    }
+
+    private void initRecyclerView() {
+        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+
+        //初始化九宫格
+        BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
+        mAdapters.add(menuAdapter);
+
+        //初始化标题 - 必修课
+        BaseDelegateAdapter titleAdapter = mPresenter.initTitle("最新课件");
+        mAdapters.add(titleAdapter);
+        //初始化list
+        BaseDelegateAdapter listAdapter = mPresenter.initList(DataServer.getCoursewareData(10));
+        mAdapters.add(listAdapter);
+
+        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);
+    }
+
+    private void initRefreshLayout() {
+//        mRefreshLayout.setEnableRefresh(false);
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+//        mRefreshLayout.setEnableLoadmore(false);
+        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
+    }
 }
