@@ -175,6 +175,20 @@
         <item>党员干部现代远程教育</item>
     </string-array>
 
+    <!--/////////////////////////////////////学习课件///////////////////////////////////-->
+
+    <!--学习课件页Grid-->
+    <integer-array name="courseware_gv_images">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+    <string-array name="courseware_gv_title">
+        <item>必修课</item>
+        <item>选修课</item>
+        <item>微党课</item>
+    </string-array>
+
 
     <!--///////////////////////////////////////发现/////////////////////////////////////-->
 

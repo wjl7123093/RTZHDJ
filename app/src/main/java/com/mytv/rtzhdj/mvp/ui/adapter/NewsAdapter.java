@@ -17,7 +17,7 @@ public class NewsAdapter extends BaseQuickAdapter<NewsEntity, BaseViewHolder> {
     private Context mContext;
 
     public NewsAdapter(Context context, int dataSize) {
-        super(R.layout.item_vlayout_list_image, DataServer.getSampleData(dataSize));
+        super(R.layout.item_vlayout_list_image, DataServer.getNewsData(dataSize));
         mContext = context;
     }
 

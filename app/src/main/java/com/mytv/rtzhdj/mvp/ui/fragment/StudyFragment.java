@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.di.component.DaggerStudyComponent;
 import com.mytv.rtzhdj.di.module.StudyModule;
 import com.mytv.rtzhdj.mvp.contract.StudyContract;
@@ -126,7 +128,21 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
 
     @Override
     public void setOnGridClick(int position) {
-
+        switch (position) {
+            case 0:
+                ARouter.getInstance().build(ARoutePath.PATH_STUDY_COURSEWARE).navigation();
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
     }
 
     @Override

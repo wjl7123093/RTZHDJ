@@ -121,6 +121,7 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
     @Override
     public void setOnGridClick(int position, String title) {
         ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+                .withString("from", "NewsEducationActivity")
                 .withString("title", title).navigation();
     }
 
@@ -140,7 +141,7 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
         BaseDelegateAdapter titleAdapter = mPresenter.initTitle("推荐");
         mAdapters.add(titleAdapter);
         //初始化list
-        BaseDelegateAdapter listAdapter = mPresenter.initList(DataServer.getSampleData(10));
+        BaseDelegateAdapter listAdapter = mPresenter.initList(DataServer.getNewsData(10));
         mAdapters.add(listAdapter);
 
         //设置适配器

@@ -127,6 +127,7 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
             case 1:
             case 2:
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+                        .withString("from", "StudyCoursewareActivity")
                         .withString("title", title).navigation();
                 break;
 

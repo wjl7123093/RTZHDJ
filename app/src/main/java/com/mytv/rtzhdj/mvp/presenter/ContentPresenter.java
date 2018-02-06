@@ -18,6 +18,7 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 import javax.inject.Inject;
 
+import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
@@ -70,7 +71,8 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         recyclerView.setHasFixedSize(true);
         //设置item间距，1dp
-        recyclerView.addItemDecoration(new DividerItemDecoration(mActivity, LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
+                LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 1)));
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
         recyclerView.setRecycledViewPool(viewPool);

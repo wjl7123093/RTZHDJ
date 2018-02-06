@@ -14,8 +14,11 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 import javax.inject.Inject;
 
+import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsCommonActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.NewsEducationActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.StudyCoursewareActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
 
 
@@ -55,15 +58,23 @@ public class NewsCommonPresenter extends BasePresenter<NewsCommonContract.Model,
     }
 
     @Override
-    public RecyclerView initRecyclerView(RecyclerView recyclerView) {
+    public RecyclerView initRecyclerView(RecyclerView recyclerView, String from) {
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         recyclerView.setHasFixedSize(true);
-        //设置item间距，1dp
-        recyclerView.addItemDecoration(new DividerItemDecoration(mActivity, LinearLayoutManager.VERTICAL));
+
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
         recyclerView.setRecycledViewPool(viewPool);
         viewPool.setMaxRecycledViews(0, 20);
+
+        //设置item间距
+        if (from.equals("NewsEducationActivity")) { // 1dp
+            recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
+                    LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 1)));
+        } else if (from.equals("StudyCoursewareActivity")) { // 10dp
+            recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
+                    LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 10)));
+        }
 
         return recyclerView;
     }

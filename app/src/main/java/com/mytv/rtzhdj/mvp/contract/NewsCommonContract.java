@@ -24,6 +24,6 @@ public interface NewsCommonContract {
     interface Presenter extends IPresenter {
         void setActivity(NewsCommonActivity activity);
         //初始化 RecyclerView
-        RecyclerView initRecyclerView(RecyclerView recyclerView);
+        RecyclerView initRecyclerView(RecyclerView recyclerView, String from);
     }
 }

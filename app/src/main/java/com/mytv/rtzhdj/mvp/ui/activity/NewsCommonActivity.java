@@ -63,6 +63,8 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     RecyclerView mRecyclerView;
 
     @Autowired
+    String from;
+    @Autowired
     String title;
 
     private NewsAdapter newsAdapter;
@@ -90,7 +92,7 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
         mBtnToolbarMenu.setVisibility(View.GONE);
 
         mPresenter.setActivity(NewsCommonActivity.this);
-        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
+        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView, from);
         initAdapter();
         initRefreshLayout();
     }

@@ -56,10 +56,12 @@
         <activity android:name=".mvp.ui.activity.TopicDetailActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivity" />
         <activity android:name=".mvp.ui.activity.StudyRecordActivity" />
-        <activity android:name=".mvp.ui.activity.StudyCoursewareActivity" />
+        <activity android:name=".mvp.ui.activity.StudyCoursewareActivity"
+            android:label="@string/title_study_courseware"/>
         <activity android:name=".mvp.ui.activity.NewsSimpleActivity" />
         <activity android:name=".mvp.ui.activity.EffectEvaluationActivity" />
-        <activity android:name=".mvp.ui.activity.CompulsoryCourseActivity" />
+        <activity android:name=".mvp.ui.activity.CompulsoryCourseActivity"
+            android:label="@string/title_compulsory_course"/>
         <activity android:name=".mvp.ui.activity.ElectiveCourseActivity" />
         <activity android:name=".mvp.ui.activity.CourseDetailActivity" />
         <activity android:name=".mvp.ui.activity.MyTaskActivity" />

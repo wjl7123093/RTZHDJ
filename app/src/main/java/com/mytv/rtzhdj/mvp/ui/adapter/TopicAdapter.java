@@ -23,7 +23,7 @@ public class TopicAdapter extends BaseQuickAdapter<NewsEntity, BaseViewHolder> {
     private Context mContext;
 
     public TopicAdapter(Context context, int dataSize) {
-        super(R.layout.item_rv_topic, DataServer.getSampleData(dataSize));
+        super(R.layout.item_rv_topic, DataServer.getNewsData(dataSize));
         mContext = context;
     }
 
