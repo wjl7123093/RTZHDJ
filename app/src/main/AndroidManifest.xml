@@ -40,13 +40,16 @@
         <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity android:name=".mvp.ui.activity.RegisterActivity" />
         <activity android:name=".mvp.ui.activity.SettingsActivity" />
-        <activity android:name=".mvp.ui.activity.NewsActivity" />
+        <activity
+            android:name=".mvp.ui.activity.NewsActivity"
+            android:label="@string/title_news" />
         <activity android:name=".mvp.ui.activity.NewsEducationActivity" />
         <activity android:name=".mvp.ui.activity.NewsPovertyActivity" />
         <activity android:name=".mvp.ui.activity.NewsDetailActivity" />
         <activity android:name=".mvp.ui.activity.NewsLiveActivity" />
-        <activity android:name=".mvp.ui.activity.TopicActivity"
-            android:label="@string/title_topic"/>
+        <activity
+            android:name=".mvp.ui.activity.TopicActivity"
+            android:label="@string/title_topic" />
         <activity android:name=".mvp.ui.activity.TopicDetailActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivity" />
         <activity android:name=".mvp.ui.activity.StudyRecordActivity" />
@@ -70,7 +73,8 @@
         <activity android:name=".mvp.ui.activity.VoteOnlineActivity" />
         <activity android:name=".mvp.ui.activity.EventDetailsActivity" />
         <activity android:name=".mvp.ui.activity.SignInActivity" />
-
+        <activity android:name=".mvp.ui.activity.NewsCleanActivity"
+            android:label="@string/title_news_clean"></activity>
     </application>
 
 </manifest>
