@@ -144,15 +144,10 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 //banner设置方法全部调用完毕时最后调用
                 mBanner.start();
 
-//                mBanner.setOnBannerListener(new OnBannerListener() {
-//                    @Override
-//                    public void OnBannerClick(int position) {
-//                        Toast.makeText(get, "banner点击了" + position, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-
-
                 mRootView.setBanner(mBanner);
+                holder.getView(R.id.tv_topic).setOnClickListener(view -> {
+                    mRootView.setOnTopicClick();
+                });
             }
         };
     }

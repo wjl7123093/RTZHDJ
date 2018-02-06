@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">政务管理系统</string>
+    <string name="title_topic">党建专题</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

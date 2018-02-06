@@ -43,7 +43,8 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-19
- * @update
+ * @update 2018-2-6     setTitle() 必须放在 onResume() 里，否则在app退入后台，
+ *                                 重新显示的时候，title的值为app名称的BUG。
  */
 public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsContract.View {
 
@@ -88,7 +89,6 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     @Override
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarBack.setVisibility(View.GONE);
-        mTvToolbarTitle.setText("党建新闻");
         mIvMenu.setImageResource(R.mipmap.ic_launcher);
         mBtnToolbarMenu.setOnClickListener(view -> {
             // 跳转到搜索页面
@@ -142,6 +142,12 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     @Override
     public void killMyself() {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTvToolbarTitle.setText("党建新闻");
     }
 
     private void initTab() {

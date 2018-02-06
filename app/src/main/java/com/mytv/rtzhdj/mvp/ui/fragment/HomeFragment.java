@@ -139,8 +139,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
                 public void OnBannerClick(int position) {
 //                    ArmsUtils.snackbarText("banner点击了" + position);
                     ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL).navigation();
+//                    ARouter.getInstance().build(ARoutePath.PATH_TOPIC).navigation();
                 }
             });
+    }
+
+    @Override
+    public void setOnTopicClick() {
+        ARouter.getInstance().build(ARoutePath.PATH_TOPIC).navigation();
     }
 
     @Override

@@ -20,6 +20,7 @@ public interface HomeContract {
     interface View extends IView {
         //设置轮播图
         void setBanner(Banner banner);
+        void setOnTopicClick();
         void setOnclick();
         void setMarqueeClick(int position);
         void setGridClick(int position);    // GridView Click
