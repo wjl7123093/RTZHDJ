@@ -162,6 +162,28 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     public void setGridClick(int position) {
         ArmsUtils.snackbarText("Grid点击了" + position);
+        switch (position) {
+            case 0: // 时政新闻
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS).navigation();
+                break;
+            case 1: // 党员教育
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_EDUCATION).navigation();
+                break;
+            case 2: // 党风廉政
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_CLEAN).navigation();
+                break;
+            case 3: // 脱贫攻坚
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_POVERTY).navigation();
+                break;
+            case 4: // 党建直播
+                break;
+            case 5: // 党建地图
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+        }
     }
 
     @Override

@@ -6,10 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -24,7 +22,6 @@ import com.mytv.rtzhdj.mvp.contract.TopicContract;
 import com.mytv.rtzhdj.mvp.presenter.TopicPresenter;
 
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.adapter.HeaderAndFooterAdapter;
 import com.mytv.rtzhdj.mvp.ui.adapter.TopicAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;

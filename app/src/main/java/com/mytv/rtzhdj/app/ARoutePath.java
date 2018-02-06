@@ -18,6 +18,7 @@ package com.mytv.rtzhdj.app;
  *                        ReportCommunity/SurroundingCommunity
  *                        WishWall/Donate/MyDonation
  *                        QuestionOnline/VoteOnline/EventDetails/SignIn 页面path
+ *         2018-2-6  新增 NewsClean 页面path
  */
 public interface ARoutePath {
 
@@ -35,12 +36,16 @@ public interface ARoutePath {
     String PATH_NEWS = "/rtdzdj/news";
     // NewsEducation
     String PATH_NEWS_EDUCATION = "/rtdzdj/news_education";
+    // NewsClean
+    String PATH_NEWS_CLEAN = "/rtdzdj/news_clean";
     // NewsPoverty
     String PATH_NEWS_POVERTY = "/rtdzdj/news_poverty";
     // NewsDetail
     String PATH_NEWS_DETAIL = "/rtdzdj/news_detail";
     // NewsLive
     String PATH_NEWS_LIVE = "/rtdzdj/news_live";
+    // NewsCommon
+    String PATH_NEWS_COMMON = "/rtdzdj/news_common";
     // Topic
     String PATH_TOPIC = "/rtdzdj/topic";
     // TopicDetail

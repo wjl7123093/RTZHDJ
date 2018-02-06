@@ -113,7 +113,7 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
                 holder.getView(R.id.ll_container).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mRootView.setOnGridClick(position);
+                        mRootView.setOnGridClick(position, proName[position]);
                     }
                 });
             }

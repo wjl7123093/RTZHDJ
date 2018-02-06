@@ -3,6 +3,7 @@ package com.mytv.rtzhdj.mvp.presenter;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,6 +21,7 @@ import javax.inject.Inject;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
+import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -67,6 +69,8 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     public RecyclerView initRecyclerView(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         recyclerView.setHasFixedSize(true);
+        //设置item间距，1dp
+        recyclerView.addItemDecoration(new DividerItemDecoration(mActivity, LinearLayoutManager.VERTICAL));
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
         recyclerView.setRecycledViewPool(viewPool);

@@ -3,6 +3,13 @@
     <string name="title_topic">党建专题</string>
     <string name="title_news">时政新闻</string>
     <string name="title_news_clean">党风廉政</string>
+    <string name="title_news_poverty">脱贫攻坚</string>
+    <string name="title_news_education">党员教育</string>
+    <string name="title_news_common">新闻</string>
+    <string name="title_education1">主题教育</string>
+    <string name="title_education2">工作动态</string>
+    <string name="title_education3">重点培训</string>
+    <string name="title_education4">党员干部现代远程教育</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

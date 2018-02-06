@@ -130,11 +130,9 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                TextView tvTitle = holder.getView(R.id.tv_title);
-                TextView tvMoredata = holder.getView(R.id.tv_moredata);
-                tvTitle.setText(title);
+                holder.setText(R.id.tv_title, title);
 
-                tvMoredata.setOnClickListener(view -> {
+                holder.getView(R.id.tv_moredata).setOnClickListener(view -> {
                     mRootView.setOnMoreClick(arrayPos);
                 });
 
@@ -165,19 +163,15 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                RoundImageView imageView = holder.getView(R.id.iv_header);
-                TextView tvName = holder.getView(R.id.tv_name);
-                TextView tvStudyRecord = holder.getView(R.id.tv_study_record);
-                TextView tvStudyScores = holder.getView(R.id.tv_study_scores);
+                holder.setText(R.id.tv_name, name);
+                holder.setText(R.id.tv_study_record, "未学: " + noStudy + "/已学: " + hasStudy);
+                holder.setText(R.id.tv_study_scores, "累积: " + scores);
 
-                tvName.setText(name);
-                tvStudyRecord.setText("未学: " + noStudy + "/已学: " + hasStudy);
-                tvStudyScores.setText("累积: " + scores);
                 mImageLoader.loadImage(activity,
                         ImageConfigImpl
                                 .builder()
                                 .url(url)
-                                .imageView(imageView)
+                                .imageView(holder.getView(R.id.iv_header))
                                 .build());
             }
         };

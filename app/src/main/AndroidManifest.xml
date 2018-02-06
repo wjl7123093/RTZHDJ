@@ -43,8 +43,11 @@
         <activity
             android:name=".mvp.ui.activity.NewsActivity"
             android:label="@string/title_news" />
-        <activity android:name=".mvp.ui.activity.NewsEducationActivity" />
-        <activity android:name=".mvp.ui.activity.NewsPovertyActivity" />
+        <activity android:name=".mvp.ui.activity.NewsEducationActivity"
+            android:label="@string/title_news_education"/>
+        <activity
+            android:name=".mvp.ui.activity.NewsPovertyActivity"
+            android:label="@string/title_news_poverty" />
         <activity android:name=".mvp.ui.activity.NewsDetailActivity" />
         <activity android:name=".mvp.ui.activity.NewsLiveActivity" />
         <activity
@@ -73,8 +76,11 @@
         <activity android:name=".mvp.ui.activity.VoteOnlineActivity" />
         <activity android:name=".mvp.ui.activity.EventDetailsActivity" />
         <activity android:name=".mvp.ui.activity.SignInActivity" />
-        <activity android:name=".mvp.ui.activity.NewsCleanActivity"
-            android:label="@string/title_news_clean"></activity>
+        <activity
+            android:name=".mvp.ui.activity.NewsCleanActivity"
+            android:label="@string/title_news_clean" />
+        <activity android:name=".mvp.ui.activity.NewsCommonActivity"
+            android:label="@string/title_news_common"></activity>
     </application>
 
 </manifest>

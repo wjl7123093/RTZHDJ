@@ -12,11 +12,11 @@ import com.mytv.rtzhdj.app.utils.ImageLoader;
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
-public class HeaderAndFooterAdapter extends BaseQuickAdapter<NewsEntity, BaseViewHolder> {
+public class NewsAdapter extends BaseQuickAdapter<NewsEntity, BaseViewHolder> {
 
     private Context mContext;
 
-    public HeaderAndFooterAdapter(Context context, int dataSize) {
+    public NewsAdapter(Context context, int dataSize) {
         super(R.layout.item_vlayout_list_image, DataServer.getSampleData(dataSize));
         mContext = context;
     }

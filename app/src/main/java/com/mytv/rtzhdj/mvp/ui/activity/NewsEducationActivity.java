@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -43,6 +47,15 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 @Route(path = ARoutePath.PATH_NEWS_EDUCATION)
 public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> implements NewsEducationContract.View {
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView mTvToolbarTitle;
+    @BindView(R.id.toolbar_back)
+    RelativeLayout mBtnToolbarBack;
+    @BindView(R.id.toolbar_menu)
+    RelativeLayout mBtnToolbarMenu;
 
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
@@ -106,8 +119,9 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
 
 
     @Override
-    public void setOnGridClick(int position) {
-
+    public void setOnGridClick(int position, String title) {
+        ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+                .withString("title", title).navigation();
     }
 
     @Override

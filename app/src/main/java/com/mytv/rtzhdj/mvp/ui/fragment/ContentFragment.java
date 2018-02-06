@@ -3,12 +3,10 @@ package com.mytv.rtzhdj.mvp.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -16,21 +14,16 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
-import com.mytv.rtzhdj.app.data.DataServer;
-import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.di.component.DaggerContentComponent;
 import com.mytv.rtzhdj.di.module.ContentModule;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
 import com.mytv.rtzhdj.mvp.presenter.ContentPresenter;
 
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.adapter.HeaderAndFooterAdapter;
+import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +48,7 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
-    private HeaderAndFooterAdapter headerAndFooterAdapter;
+    private NewsAdapter newsAdapter;
     private static final int PAGE_SIZE = 10;
 
 
@@ -95,9 +88,9 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
         View headerView = mPresenter.initHeaderView(imgUrls, (ViewGroup) mRecyclerView.getParent());
         if (0 == getArguments().getInt("position"))
-            headerAndFooterAdapter.addHeaderView(headerView);
+            newsAdapter.addHeaderView(headerView);
         else
-            headerAndFooterAdapter.removeAllHeaderView();
+            newsAdapter.removeAllHeaderView();
 
         initRefreshLayout();
     }
@@ -169,11 +162,11 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
     }
 
     private void initAdapter() {
-        headerAndFooterAdapter = new HeaderAndFooterAdapter(getContext(), PAGE_SIZE);
-        headerAndFooterAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(headerAndFooterAdapter);
+        newsAdapter = new NewsAdapter(getContext(), PAGE_SIZE);
+        newsAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(newsAdapter);
 
-        headerAndFooterAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();

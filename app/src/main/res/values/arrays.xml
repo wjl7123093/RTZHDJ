@@ -159,6 +159,22 @@
         <item>生活缴费</item>
     </string-array>
 
+    <!--/////////////////////////////////////党员教育///////////////////////////////////-->
+
+    <!--党员教育页Grid-->
+    <integer-array name="education_gv_images">
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_launcher</item>
+    </integer-array>
+    <string-array name="education_gv_title">
+        <item>主题教育</item>
+        <item>工作动态</item>
+        <item>重点培训</item>
+        <item>党员干部现代远程教育</item>
+    </string-array>
+
 
     <!--///////////////////////////////////////发现/////////////////////////////////////-->
 
