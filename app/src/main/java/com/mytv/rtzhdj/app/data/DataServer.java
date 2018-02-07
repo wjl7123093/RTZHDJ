@@ -2,6 +2,7 @@ package com.mytv.rtzhdj.app.data;
 
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
+import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,16 @@ public class DataServer {
     private DataServer() {
     }
 
+    /**
+     * 获取 新闻模拟数据
+     * @param lenth
+     * @return
+     */
     public static List<NewsEntity> getNewsData(int lenth) {
         List<NewsEntity> list = new ArrayList<>();
         for (int i = 0; i < lenth; i++) {
             NewsEntity newsEntity = new NewsEntity();
+            newsEntity.setId(i + 1);
             newsEntity.setTitle("Chad" + i);
             newsEntity.setDatetime("04/05/" + i);
             newsEntity.setStar_num(i * 2);
@@ -31,15 +38,44 @@ public class DataServer {
         return list;
     }
 
+    /**
+     * 获取 学习课件模拟数据
+     * @param lenth
+     * @return
+     */
     public static List<CoursewareEntity> getCoursewareData(int lenth) {
         List<CoursewareEntity> list = new ArrayList<>();
         for (int i = 0; i < lenth; i++) {
             CoursewareEntity coursewareEntity = new CoursewareEntity();
+            coursewareEntity.setId(i + 1);
             coursewareEntity.setTitle("学习中共中央十九大精神 " + i);
             coursewareEntity.setDatetime("04/05/" + i);
             coursewareEntity.setType(i / 3 + 1);
             coursewareEntity.setScores(i * 2);
             list.add(coursewareEntity);
+        }
+        return list;
+    }
+
+    /**
+     * 获取 志愿服务模拟数据
+     * @param lenth
+     * @return
+     */
+    public static List<VoluteerServiceEntity> getVolunteerServiceData(int lenth) {
+        List<VoluteerServiceEntity> list = new ArrayList<>();
+        for (int i = 0; i < lenth; i++) {
+            VoluteerServiceEntity voluteerServiceEntity = new VoluteerServiceEntity();
+            voluteerServiceEntity.setId(i + 1);
+            voluteerServiceEntity.setTitle("志愿服务，从心开始 " + i);
+            voluteerServiceEntity.setDeadtime("04/05/" + i);
+            voluteerServiceEntity.setUrl("http://pic117.nipic.com/file/20161213/24416158_165731241000_2.jpg");
+            voluteerServiceEntity.setStar_num(i * 3);
+            voluteerServiceEntity.setComment_num(i * 5);
+            voluteerServiceEntity.setJoin_num(i * 18);
+            voluteerServiceEntity.setTotal_num(i * 30);
+            voluteerServiceEntity.setStatus(i / 2);
+            list.add(voluteerServiceEntity);
         }
         return list;
     }

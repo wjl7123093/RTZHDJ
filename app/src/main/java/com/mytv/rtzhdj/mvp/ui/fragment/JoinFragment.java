@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.di.component.DaggerJoinComponent;
 import com.mytv.rtzhdj.di.module.JoinModule;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
@@ -128,7 +130,17 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 
     @Override
     public void setOnGridClick(int position) {
-
+        switch (position) {
+            case 0:
+                break;
+            case 1:
+                ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE).navigation();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
 
     @Override
