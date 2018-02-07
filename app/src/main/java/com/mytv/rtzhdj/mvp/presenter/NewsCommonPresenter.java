@@ -68,7 +68,7 @@ public class NewsCommonPresenter extends BasePresenter<NewsCommonContract.Model,
         viewPool.setMaxRecycledViews(0, 20);
 
         //设置item间距
-        if (from.equals("StudyCoursewareActivity")) { // 10dp
+        if (from.equals("StudyCoursewareActivity") || from.equals("StudyRecordActivity")) { // 10dp
             recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
                     LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 10)));
         } else { // 1dp

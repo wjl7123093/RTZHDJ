@@ -38,6 +38,7 @@ public class DataServer {
             coursewareEntity.setTitle("学习中共中央十九大精神 " + i);
             coursewareEntity.setDatetime("04/05/" + i);
             coursewareEntity.setType(i / 3 + 1);
+            coursewareEntity.setScores(i * 2);
             list.add(coursewareEntity);
         }
         return list;

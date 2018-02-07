@@ -22,6 +22,7 @@ import com.mytv.rtzhdj.mvp.presenter.StudyPresenter;
 
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.StudyCoursewareActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -155,13 +156,25 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     }
 
     @Override
-    public void setOnMoreClick(int arrayPos) {
-
+    public void setOnMoreClick(int arrayPos, String title) {
+        switch (arrayPos) {
+            case 0: // 必修课
+                ARouter.getInstance().build(ARoutePath.PATH_COMPULSORY_COURSE).navigation();
+                break;
+            case 1: // 选修课
+            case 2: // 微党课
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+                        .withString("from", "StudyCoursewareActivity")
+                        .withString("title", title).navigation();
+                break;
+        }
     }
 
     @Override
     public void setOnStudyRecordClick() {
-
+        ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+                .withString("from", "StudyRecordActivity")  // 该Activity并不存在，只用来区别 学习记录
+                .withString("title", this.getResources().getString(R.string.title_study_record)).navigation();
     }
 
     private void initRecyclerView() {

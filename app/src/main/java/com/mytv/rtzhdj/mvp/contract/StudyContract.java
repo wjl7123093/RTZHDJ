@@ -15,7 +15,7 @@ public interface StudyContract {
     interface View extends IView {
         void setOnGridClick(int position, String title);
         void setOnListClick(int arrayPos, int position);
-        void setOnMoreClick(int arrayPos);
+        void setOnMoreClick(int arrayPos, String title);
         void setOnStudyRecordClick();
     }
 

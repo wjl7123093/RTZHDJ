@@ -46,6 +46,7 @@
         android:layout_marginTop="@dimen/len_10">
         <!-- 学习记录 -->
         <RelativeLayout
+            android:id="@+id/rl_study_record"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">

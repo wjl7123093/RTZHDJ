@@ -133,7 +133,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 holder.setText(R.id.tv_title, title);
 
                 holder.getView(R.id.tv_moredata).setOnClickListener(view -> {
-                    mRootView.setOnMoreClick(arrayPos);
+                    mRootView.setOnMoreClick(arrayPos, title);
                 });
 
             }
@@ -173,6 +173,10 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                                 .url(url)
                                 .imageView(holder.getView(R.id.iv_header))
                                 .build());
+
+                holder.getView(R.id.rl_study_record).setOnClickListener(view -> {
+                    mRootView.setOnStudyRecordClick();
+                });
             }
         };
     }
