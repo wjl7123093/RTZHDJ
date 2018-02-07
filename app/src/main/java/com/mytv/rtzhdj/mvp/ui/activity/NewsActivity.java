@@ -84,7 +84,6 @@ public class NewsActivity extends BaseActivity<NewsPresenter> implements NewsCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mBtnToolbarBack.setOnClickListener(view -> this.finish());
         mIvMenu.setImageResource(R.mipmap.ic_launcher);
         mBtnToolbarMenu.setOnClickListener(view -> {
             // 跳转到搜索页面

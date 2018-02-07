@@ -127,18 +127,22 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     }
 
     @Override
-    public void setOnGridClick(int position) {
+    public void setOnGridClick(int position, String title) {
         switch (position) {
             case 0:
                 ARouter.getInstance().build(ARoutePath.PATH_STUDY_COURSEWARE).navigation();
                 break;
             case 1:
+            case 3:
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+                        .withString("from", "StudyFragment")
+                        .withString("title", title).navigation();
                 break;
             case 2:
-                break;
-            case 3:
+                ARouter.getInstance().build(ARoutePath.PATH_PARTY_KNOWLEDGE).navigation();
                 break;
             case 4:
+                ARouter.getInstance().build(ARoutePath.PATH_PARTY_HISTORY).navigation();
                 break;
             case 5:
                 break;

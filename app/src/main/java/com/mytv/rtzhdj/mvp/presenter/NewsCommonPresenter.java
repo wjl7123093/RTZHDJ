@@ -68,12 +68,12 @@ public class NewsCommonPresenter extends BasePresenter<NewsCommonContract.Model,
         viewPool.setMaxRecycledViews(0, 20);
 
         //设置item间距
-        if (from.equals("NewsEducationActivity")) { // 1dp
-            recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
-                    LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 1)));
-        } else if (from.equals("StudyCoursewareActivity")) { // 10dp
+        if (from.equals("StudyCoursewareActivity")) { // 10dp
             recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
                     LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 10)));
+        } else { // 1dp
+            recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
+                    LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 1)));
         }
 
         return recyclerView;

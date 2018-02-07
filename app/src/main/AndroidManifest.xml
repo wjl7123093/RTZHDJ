@@ -43,8 +43,9 @@
         <activity
             android:name=".mvp.ui.activity.NewsActivity"
             android:label="@string/title_news" />
-        <activity android:name=".mvp.ui.activity.NewsEducationActivity"
-            android:label="@string/title_news_education"/>
+        <activity
+            android:name=".mvp.ui.activity.NewsEducationActivity"
+            android:label="@string/title_news_education" />
         <activity
             android:name=".mvp.ui.activity.NewsPovertyActivity"
             android:label="@string/title_news_poverty" />
@@ -56,12 +57,14 @@
         <activity android:name=".mvp.ui.activity.TopicDetailActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivity" />
         <activity android:name=".mvp.ui.activity.StudyRecordActivity" />
-        <activity android:name=".mvp.ui.activity.StudyCoursewareActivity"
-            android:label="@string/title_study_courseware"/>
+        <activity
+            android:name=".mvp.ui.activity.StudyCoursewareActivity"
+            android:label="@string/title_study_courseware" />
         <activity android:name=".mvp.ui.activity.NewsSimpleActivity" />
         <activity android:name=".mvp.ui.activity.EffectEvaluationActivity" />
-        <activity android:name=".mvp.ui.activity.CompulsoryCourseActivity"
-            android:label="@string/title_compulsory_course"/>
+        <activity
+            android:name=".mvp.ui.activity.CompulsoryCourseActivity"
+            android:label="@string/title_compulsory_course" />
         <activity android:name=".mvp.ui.activity.ElectiveCourseActivity" />
         <activity android:name=".mvp.ui.activity.CourseDetailActivity" />
         <activity android:name=".mvp.ui.activity.MyTaskActivity" />
@@ -81,8 +84,14 @@
         <activity
             android:name=".mvp.ui.activity.NewsCleanActivity"
             android:label="@string/title_news_clean" />
-        <activity android:name=".mvp.ui.activity.NewsCommonActivity"
-            android:label="@string/title_news_common"></activity>
+        <activity
+            android:name=".mvp.ui.activity.NewsCommonActivity"
+            android:label="@string/title_news_common" />
+        <activity
+            android:name=".mvp.ui.activity.PartyKnowledgeActivity"
+            android:label="@string/title_party_knowledge" />
+        <activity android:name=".mvp.ui.activity.PartyHistoryActivity"
+            android:label="@string/title_party_history"></activity>
     </application>
 
 </manifest>

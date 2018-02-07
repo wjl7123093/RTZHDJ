@@ -19,6 +19,7 @@ package com.mytv.rtzhdj.app;
  *                        WishWall/Donate/MyDonation
  *                        QuestionOnline/VoteOnline/EventDetails/SignIn 页面path
  *         2018-2-6  新增 NewsClean 页面path
+ *         2018-2-7  新增 PartyKnowledge/PartyHistory 页面path
  */
 public interface ARoutePath {
 
@@ -94,6 +95,10 @@ public interface ARoutePath {
     String PATH_EVENT_DETAILS = "/rtdzdj/event_details";
     // SignIn
     String PATH_SIGN_IN = "/rtdzdj/sign_in";
+    // PartyKnowledge
+    String PATH_PARTY_KNOWLEDGE = "/rtdzdj/party_knowledge";
+    // PartyHistory
+    String PATH_PARTY_HISTORY = "/rtdzdj/party_history";
 
 
 }

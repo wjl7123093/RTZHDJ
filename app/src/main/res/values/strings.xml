@@ -12,6 +12,10 @@
     <string name="title_education4">党员干部现代远程教育</string>
     <string name="title_study_courseware">学习课件</string>
     <string name="title_compulsory_course">必修课</string>
+    <string name="title_party_knowledge">党建知识</string>
+    <string name="title_party_history">壤塘党史</string>
+    <string name="title_party_rules">党内法规</string>
+    <string name="title_party_research">党建研究</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>
