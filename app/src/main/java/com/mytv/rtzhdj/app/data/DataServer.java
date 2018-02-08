@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data;
 
+import com.mytv.rtzhdj.app.data.entity.CommunityEntity;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
@@ -76,6 +77,23 @@ public class DataServer {
             voluteerServiceEntity.setTotal_num(i * 30);
             voluteerServiceEntity.setStatus(i / 2);
             list.add(voluteerServiceEntity);
+        }
+        return list;
+    }
+
+    /**
+     * 获取 周边社区模拟数据
+     * @param lenth
+     * @return
+     */
+    public static List<CommunityEntity> getCommunityData(int lenth) {
+        List<CommunityEntity> list = new ArrayList<>();
+        for (int i = 0; i < lenth; i++) {
+            CommunityEntity communityEntity = new CommunityEntity();
+            communityEntity.setId(i + 1);
+            communityEntity.setTitle("学习中共中央十九大精神 " + i);
+            communityEntity.setUrl("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=658124491,198552142&fm=27&gp=0.jpg");
+            list.add(communityEntity);
         }
         return list;
     }

@@ -74,7 +74,8 @@
         <activity android:name=".mvp.ui.activity.VolunteerServiceActivity"
             android:label="@string/title_volunteer_service"/>
         <activity android:name=".mvp.ui.activity.ReportCommunityActivity" />
-        <activity android:name=".mvp.ui.activity.SurroundingCommunityActivity" />
+        <activity android:name=".mvp.ui.activity.SurroundingCommunityActivity"
+            android:label="@string/title_surrounding_community"/>
         <activity android:name=".mvp.ui.activity.WishWallActivity" />
         <activity android:name=".mvp.ui.activity.DonateActivity" />
         <activity android:name=".mvp.ui.activity.MyDonationActivity" />

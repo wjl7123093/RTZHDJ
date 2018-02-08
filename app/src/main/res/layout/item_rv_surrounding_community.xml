@@ -12,8 +12,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    app:cardCornerRadius="@dimen/len_10"
-    app:cardElevation="@dimen/len_6">
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    app:cardCornerRadius="@dimen/len_6"
+    app:cardElevation="@dimen/len_4"
+    app:cardUseCompatPadding="true">
 
     <ImageView
         android:id="@+id/iv_image"
@@ -26,7 +29,7 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_40"
-        android:background="@drawable/sp_bg_surrounding_community_item_bottom"
+        android:background="#66000000"
         android:gravity="center_vertical|left"
         android:paddingLeft="@dimen/len_10"
         android:layout_gravity="bottom|left"
@@ -34,6 +37,7 @@
         android:textColor="@color/white"
         android:text="东街社区党委"/>
 
+    <!--android:background="@drawable/sp_bg_surrounding_community_item_btn"-->
     <TextView
         android:layout_width="@dimen/len_40"
         android:layout_height="@dimen/len_40"

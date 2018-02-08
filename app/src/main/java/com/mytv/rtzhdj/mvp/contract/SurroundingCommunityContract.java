@@ -1,7 +1,11 @@
 package com.mytv.rtzhdj.mvp.contract;
 
+import android.support.v7.widget.RecyclerView;
+
+import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.mvp.ui.activity.SurroundingCommunityActivity;
 
 
 public interface SurroundingCommunityContract {
@@ -13,5 +17,12 @@ public interface SurroundingCommunityContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
+    }
+
+    //Presenter控制器
+    interface Presenter extends IPresenter {
+        void setActivity(SurroundingCommunityActivity activity);
+        //初始化 RecyclerView
+        RecyclerView initRecyclerView(RecyclerView recyclerView);
     }
 }
