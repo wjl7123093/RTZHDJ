@@ -276,14 +276,14 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 Glide.with(activity).load(images.get(1)).into(icon2);
                 Glide.with(activity).load(images.get(2)).into(icon3);
 
-                includeWish1.setOnClickListener(view -> {
-
+                includeWish1.setOnClickListener(view -> {   // 心愿墙
+                    mRootView.setOnColumnClick(0, 0);
                 });
-                includeWish2.setOnClickListener(view -> {
-
+                includeWish2.setOnClickListener(view -> {   // 我要捐赠
+                    mRootView.setOnColumnClick(0, 1);
                 });
-                includeWish3.setOnClickListener(view -> {
-
+                includeWish3.setOnClickListener(view -> {   // 所有捐赠物品
+                    mRootView.setOnColumnClick(0, 2);
                 });
             }
         };
@@ -313,7 +313,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 holder.setText(R.id.tv_name, proName[position]);
                 holder.setImageResource(R.id.iv_icon, images.get(position));
                 holder.getView(R.id.ll_container).setOnClickListener(view -> {
-
+                    mRootView.setOnColumnClick(1, position);
                 });
             }
         };
@@ -328,10 +328,10 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.getView(R.id.rl_online_questionaire).setOnClickListener(view -> {
-                    ARouter.getInstance().build(ARoutePath.PATH_QUESTION_ONLINE).navigation();
+                    mRootView.setOnColumnClick(2, 0);
                 });
                 holder.getView(R.id.rl_online_vote).setOnClickListener(view -> {
-                    ARouter.getInstance().build(ARoutePath.PATH_VOTE_ONLINE).navigation();
+                    mRootView.setOnColumnClick(2, 1);
                 });
 
             }

@@ -157,7 +157,44 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 
     @Override
     public void setOnColumnClick(int arrayPos, int position) {
-
+        switch (arrayPos) {
+            case 0: // 心愿墙区
+                switch (position) {
+                    case 0: // 心愿墙
+                        break;
+                    case 1: // 我要捐赠
+                        break;
+                    case 2: // 所有捐赠物品
+                        ARouter.getInstance().build(ARoutePath.PATH_MY_DONATION)
+                                .withString("type", "all").navigation();
+                        break;
+                }
+                break;
+            case 1: // 我的心愿区
+                switch (position) {
+                    case 0: // 我的心愿
+                        break;
+                    case 1: // 我认领的心愿
+                        break;
+                    case 2: // 我的捐赠
+                        ARouter.getInstance().build(ARoutePath.PATH_MY_DONATION)
+                                .withString("type", "mine").navigation();
+                        break;
+                    case 3: // 我领取的物品
+                        break;
+                }
+                break;
+            case 2: // 在线问卷区
+                switch (position) {
+                    case 0: // 在线问卷
+                        ARouter.getInstance().build(ARoutePath.PATH_QUESTION_ONLINE).navigation();
+                        break;
+                    case 1: // 在线投票
+                        ARouter.getInstance().build(ARoutePath.PATH_VOTE_ONLINE).navigation();
+                        break;
+                }
+                break;
+        }
     }
 
     private void initRecyclerView() {
