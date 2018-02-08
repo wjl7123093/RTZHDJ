@@ -25,9 +25,7 @@ import com.mytv.rtzhdj.mvp.contract.MyDonationContract;
 import com.mytv.rtzhdj.mvp.presenter.MyDonationPresenter;
 
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.MyReceiveFragment;
-import com.mytv.rtzhdj.mvp.ui.fragment.VolunteerServiceFragment;
 
 import java.util.ArrayList;
 import java.util.List;
