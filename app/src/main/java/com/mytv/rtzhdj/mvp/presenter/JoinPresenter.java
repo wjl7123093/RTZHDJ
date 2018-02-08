@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -30,6 +31,7 @@ import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
@@ -326,10 +328,10 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.getView(R.id.rl_online_questionaire).setOnClickListener(view -> {
-
+                    ARouter.getInstance().build(ARoutePath.PATH_QUESTION_ONLINE).navigation();
                 });
                 holder.getView(R.id.rl_online_vote).setOnClickListener(view -> {
-
+                    ARouter.getInstance().build(ARoutePath.PATH_VOTE_ONLINE).navigation();
                 });
 
             }

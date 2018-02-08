@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_rv_online.xml recyclerview 在线问卷/在线投票列表项
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-8
+ * @update
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/len_16"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/primary_text"
+        android:text="农民夜校教学内容需求调查"/>
+
+    <TextView
+        android:id="@+id/tv_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:text="活动时间: 2017-8-21至2017-10-31"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tv_title"
+        android:layout_marginTop="@dimen/len_10"/>
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:text="已结束"
+        android:background="@drawable/sp_bg_vlayout_footer"
+        android:padding="@dimen/len_4"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/tv_datetime"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_8"
+        android:textColor="@color/white"
+        android:text="HOT"
+        android:background="@drawable/sp_bg_hot"
+        android:layout_toRightOf="@id/tv_title"
+        android:layout_marginLeft="@dimen/len_2"/>
+
+</RelativeLayout>

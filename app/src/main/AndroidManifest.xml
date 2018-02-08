@@ -79,8 +79,10 @@
         <activity android:name=".mvp.ui.activity.WishWallActivity" />
         <activity android:name=".mvp.ui.activity.DonateActivity" />
         <activity android:name=".mvp.ui.activity.MyDonationActivity" />
-        <activity android:name=".mvp.ui.activity.QuestionOnlineActivity" />
-        <activity android:name=".mvp.ui.activity.VoteOnlineActivity" />
+        <activity android:name=".mvp.ui.activity.QuestionOnlineActivity"
+            android:label="@string/title_online_questionaire"/>
+        <activity android:name=".mvp.ui.activity.VoteOnlineActivity"
+            android:label="@string/title_online_vote"/>
         <activity android:name=".mvp.ui.activity.EventDetailsActivity" />
         <activity android:name=".mvp.ui.activity.SignInActivity" />
         <activity

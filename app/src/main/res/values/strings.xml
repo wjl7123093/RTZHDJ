@@ -19,6 +19,8 @@
     <string name="title_party_research">党建研究</string>
     <string name="title_volunteer_service">志愿服务</string>
     <string name="title_surrounding_community">周边社区</string>
+    <string name="title_online_questionaire">在线问卷</string>
+    <string name="title_online_vote">在线投票</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

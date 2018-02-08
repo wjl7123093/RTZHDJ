@@ -3,6 +3,7 @@ package com.mytv.rtzhdj.app.data;
 import com.mytv.rtzhdj.app.data.entity.CommunityEntity;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
+import com.mytv.rtzhdj.app.data.entity.QuestionaireEntitiy;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class DataServer {
             coursewareEntity.setId(i + 1);
             coursewareEntity.setTitle("学习中共中央十九大精神 " + i);
             coursewareEntity.setDatetime("04/05/" + i);
-            coursewareEntity.setType(i / 3 + 1);
+            coursewareEntity.setType(i % 3 + 1);
             coursewareEntity.setScores(i * 2);
             list.add(coursewareEntity);
         }
@@ -75,7 +76,7 @@ public class DataServer {
             voluteerServiceEntity.setComment_num(i * 5);
             voluteerServiceEntity.setJoin_num(i * 18);
             voluteerServiceEntity.setTotal_num(i * 30);
-            voluteerServiceEntity.setStatus(i / 2);
+            voluteerServiceEntity.setStatus(i % 2);
             list.add(voluteerServiceEntity);
         }
         return list;
@@ -94,6 +95,25 @@ public class DataServer {
             communityEntity.setTitle("学习中共中央十九大精神 " + i);
             communityEntity.setUrl("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=658124491,198552142&fm=27&gp=0.jpg");
             list.add(communityEntity);
+        }
+        return list;
+    }
+
+    /**
+     * 获取 在线问卷模拟数据
+     * @param lenth
+     * @return
+     */
+    public static List<QuestionaireEntitiy> getQuestionaireData(int lenth) {
+        List<QuestionaireEntitiy> list = new ArrayList<>();
+        for (int i = 0; i < lenth; i++) {
+            QuestionaireEntitiy questionaireEntitiy = new QuestionaireEntitiy();
+            questionaireEntitiy.setId(i + 1);
+            questionaireEntitiy.setTitle("村镇两委干部教育培训现状调查问卷 " + i);
+            questionaireEntitiy.setStart_time("2018-01-20");
+            questionaireEntitiy.setEnd_time("2018-02-03");
+            questionaireEntitiy.setStatus(i % 2);
+            list.add(questionaireEntitiy);
         }
         return list;
     }
