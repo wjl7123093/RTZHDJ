@@ -151,7 +151,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 
     @Override
     public void setOnFooterClick() {
-
+        ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE).navigation();
     }
 
     @Override
