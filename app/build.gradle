@@ -212,7 +212,5 @@ dependencies {
     compile files('libs/universal-image-loader-1.9.3.jar')
     // tablayout
     compile 'me.weyye.ColorTrackTabLayout:library:1.0.1'
-    // coordinatortablayout
-    compile 'cn.hugeterry.coordinatortablayout:coordinatortablayout:1.2.2'
 
 }
