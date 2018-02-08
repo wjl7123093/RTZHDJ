@@ -71,19 +71,24 @@
         <activity android:name=".mvp.ui.activity.DoubleReportingActivity" />
         <activity android:name=".mvp.ui.activity.MyReportingActivity" />
         <activity android:name=".mvp.ui.activity.OrganizationalActivity" />
-        <activity android:name=".mvp.ui.activity.VolunteerServiceActivity"
-            android:label="@string/title_volunteer_service"/>
+        <activity
+            android:name=".mvp.ui.activity.VolunteerServiceActivity"
+            android:label="@string/title_volunteer_service" />
         <activity android:name=".mvp.ui.activity.ReportCommunityActivity" />
-        <activity android:name=".mvp.ui.activity.SurroundingCommunityActivity"
-            android:label="@string/title_surrounding_community"/>
+        <activity
+            android:name=".mvp.ui.activity.SurroundingCommunityActivity"
+            android:label="@string/title_surrounding_community" />
         <activity android:name=".mvp.ui.activity.WishWallActivity" />
         <activity android:name=".mvp.ui.activity.DonateActivity" />
-        <activity android:name=".mvp.ui.activity.MyDonationActivity"
-            android:label="@string/title_my_donation"/>
-        <activity android:name=".mvp.ui.activity.QuestionOnlineActivity"
-            android:label="@string/title_online_questionaire"/>
-        <activity android:name=".mvp.ui.activity.VoteOnlineActivity"
-            android:label="@string/title_online_vote"/>
+        <activity
+            android:name=".mvp.ui.activity.MyDonationActivity"
+            android:label="@string/title_my_donation" />
+        <activity
+            android:name=".mvp.ui.activity.QuestionOnlineActivity"
+            android:label="@string/title_online_questionaire" />
+        <activity
+            android:name=".mvp.ui.activity.VoteOnlineActivity"
+            android:label="@string/title_online_vote" />
         <activity android:name=".mvp.ui.activity.EventDetailsActivity" />
         <activity android:name=".mvp.ui.activity.SignInActivity" />
         <activity
@@ -95,8 +100,10 @@
         <activity
             android:name=".mvp.ui.activity.PartyKnowledgeActivity"
             android:label="@string/title_party_knowledge" />
-        <activity android:name=".mvp.ui.activity.PartyHistoryActivity"
-            android:label="@string/title_party_history"></activity>
+        <activity
+            android:name=".mvp.ui.activity.PartyHistoryActivity"
+            android:label="@string/title_party_history" />
+        <activity android:name=".mvp.ui.activity.MyReceiveActivity"></activity>
     </application>
 
 </manifest>

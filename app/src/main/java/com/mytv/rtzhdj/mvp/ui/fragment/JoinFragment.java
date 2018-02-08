@@ -181,6 +181,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
                                 .withString("type", "mine").navigation();
                         break;
                     case 3: // 我领取的物品
+                        ARouter.getInstance().build(ARoutePath.PATH_MY_RECEIVE).navigation();
                         break;
                 }
                 break;

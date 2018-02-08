@@ -19,15 +19,14 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.di.component.DaggerMyDonationComponent;
-import com.mytv.rtzhdj.di.module.MyDonationModule;
-import com.mytv.rtzhdj.mvp.contract.MyDonationContract;
-import com.mytv.rtzhdj.mvp.presenter.MyDonationPresenter;
+import com.mytv.rtzhdj.di.component.DaggerMyReceiveComponent;
+import com.mytv.rtzhdj.di.module.MyReceiveModule;
+import com.mytv.rtzhdj.mvp.contract.MyReceiveContract;
+import com.mytv.rtzhdj.mvp.presenter.MyReceivePresenter;
 
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.MyReceiveFragment;
-import com.mytv.rtzhdj.mvp.ui.fragment.VolunteerServiceFragment;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,16 +37,16 @@ import me.weyye.library.colortrackview.ColorTrackTabLayout;
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * 我的捐赠/所有捐赠 界面
+ * 我领取的物品 界面
  *
  * @author Fred_W
  * @version v1.0.0(1)
  *
- * @crdate 2018-1-21
- * @update 2018-2-8     填充布局
+ * @crdate 2018-2-8
+ * @update
  */
-@Route(path = ARoutePath.PATH_MY_DONATION)
-public class MyDonationActivity extends BaseActivity<MyDonationPresenter> implements MyDonationContract.View {
+@Route(path = ARoutePath.PATH_MY_RECEIVE)
+public class MyReceiveActivity extends BaseActivity<MyReceivePresenter> implements MyReceiveContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -65,26 +64,22 @@ public class MyDonationActivity extends BaseActivity<MyDonationPresenter> implem
     @BindView(R.id.vp_content)
     ViewPager mViewPager;
 
-    @Autowired
-    String type;
-
     String[] titles;
 
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
-        DaggerMyDonationComponent //如找不到该类,请编译一下项目
+        DaggerMyReceiveComponent //如找不到该类,请编译一下项目
                 .builder()
                 .appComponent(appComponent)
-                .myDonationModule(new MyDonationModule(this))
+                .myReceiveModule(new MyReceiveModule(this))
                 .build()
                 .inject(this);
     }
 
     @Override
     public int initView(Bundle savedInstanceState) {
-        ARouter.getInstance().inject(this);
-        return R.layout.activity_my_donation; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_my_receive; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
     @Override
@@ -95,8 +90,9 @@ public class MyDonationActivity extends BaseActivity<MyDonationPresenter> implem
             ARouter.getInstance().build(ARoutePath.PATH_SEARCH).navigation();
         });
 
-        titles = new String[]{"全部", "已被领取", "未被领取"};
+        titles = new String[]{"全部", "已被领取", "审核中"};
         initTab();
+
     }
 
 
@@ -153,13 +149,5 @@ public class MyDonationActivity extends BaseActivity<MyDonationPresenter> implem
         mTab.setupWithViewPager(mViewPager);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (type.equals("all")) {
-            mTvToolbarTitle.setText(getResources().getString(R.string.title_all_donation));
-        } else {
-            mTvToolbarTitle.setText(getResources().getString(R.string.title_my_donation));
-        }
-    }
+
 }

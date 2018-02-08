@@ -23,6 +23,7 @@
     <string name="title_online_vote">在线投票</string>
     <string name="title_my_donation">我的捐赠</string>
     <string name="title_all_donation">所有捐赠</string>
+    <string name="title_my_receive">我领取的物品</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>
