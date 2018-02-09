@@ -112,7 +112,7 @@ public class MyReceiveWishActivity extends BaseActivity<MyReceiveWishPresenter> 
 
     private void initToolBar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getResources().getString(R.string.title_my_receive_wish));
+//        getSupportActionBar().setTitle(getResources().getString(R.string.title_my_receive_wish));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
