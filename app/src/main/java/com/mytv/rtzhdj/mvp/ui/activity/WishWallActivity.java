@@ -11,7 +11,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
@@ -54,9 +56,13 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
     @BindView(R.id.vp_content)
     ViewPager mViewPager;
 
+    @Autowired
+    String type;    // 类型（wall 心愿墙，mine 我的心愿）
+
     private int[] mImageArray, mColorArray;
     private ArrayList<Fragment> mFragments;
     private String[] titles;
+    private String mTitle;      // 标题栏标题
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -70,6 +76,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_wish_wall; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -111,7 +118,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
 
     private void initToolBar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("心愿墙");
+        getSupportActionBar().setTitle(mTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -145,6 +152,11 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
     @Override
     protected void onResume() {
         super.onResume();
+        if (type.equals("wall"))
+            mTitle = getResources().getString(R.string.title_wish_wall);
+        else
+            mTitle = getResources().getString(R.string.title_my_wish);
+
         initToolBar();
         initTab();
     }

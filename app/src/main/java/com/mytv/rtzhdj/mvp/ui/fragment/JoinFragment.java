@@ -161,7 +161,8 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
             case 0: // 心愿墙区
                 switch (position) {
                     case 0: // 心愿墙
-                        ARouter.getInstance().build(ARoutePath.PATH_WISH_WALL).navigation();
+                        ARouter.getInstance().build(ARoutePath.PATH_WISH_WALL)
+                                .withString("type", "wall").navigation();
                         break;
                     case 1: // 我要捐赠
                         break;
@@ -174,6 +175,8 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
             case 1: // 我的心愿区
                 switch (position) {
                     case 0: // 我的心愿
+                        ARouter.getInstance().build(ARoutePath.PATH_WISH_WALL)
+                                .withString("type", "mine").navigation();
                         break;
                     case 1: // 我认领的心愿
                         break;
