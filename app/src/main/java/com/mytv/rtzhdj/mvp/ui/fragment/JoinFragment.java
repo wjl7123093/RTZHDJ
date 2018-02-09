@@ -179,6 +179,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
                                 .withString("type", "mine").navigation();
                         break;
                     case 1: // 我认领的心愿
+                        ARouter.getInstance().build(ARoutePath.PATH_MY_RECEIVE_WISH).navigation();
                         break;
                     case 2: // 我的捐赠
                         ARouter.getInstance().build(ARoutePath.PATH_MY_DONATION)

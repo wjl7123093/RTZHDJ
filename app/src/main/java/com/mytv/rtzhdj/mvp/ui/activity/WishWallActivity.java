@@ -36,7 +36,7 @@ import butterknife.BindView;
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * 心愿墙／我的心愿／我认领的心愿界面
+ * 心愿墙／我的心愿 界面
  *
  * @author Fred_W
  * @version v1.0.0(1)

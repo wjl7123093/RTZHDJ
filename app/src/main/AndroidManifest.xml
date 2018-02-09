@@ -103,7 +103,8 @@
         <activity
             android:name=".mvp.ui.activity.PartyHistoryActivity"
             android:label="@string/title_party_history" />
-        <activity android:name=".mvp.ui.activity.MyReceiveActivity"></activity>
+        <activity android:name=".mvp.ui.activity.MyReceiveActivity" />
+        <activity android:name=".mvp.ui.activity.MyReceiveWishActivity"></activity>
     </application>
 
 </manifest>
