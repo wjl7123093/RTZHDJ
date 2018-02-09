@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -44,6 +46,8 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 @Route(path = ARoutePath.PATH_TOPIC_DETAIL)
 public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> implements TopicDetailContract.View {
 
+    @BindView(R.id.main_collapsing)
+    CollapsingToolbarLayout mCollapsingToolbar;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
@@ -71,11 +75,10 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         titles = new String[]{"简介", "工作动态", "文件解读", "文件制度"};
-        initTab();
+//        initTab();
+
+        mCollapsingToolbar.setTitleEnabled(false);
     }
 
 
@@ -106,6 +109,12 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
         finish();
     }
 
+    private void initToolBar() {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("专题详情");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
@@ -130,12 +139,13 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
             }
         });
         mTab.setupWithViewPager(mViewPager);
+//        mTab.setTabTextColors(Color.BLACK, Color.RED);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mToolbar.setTitle("xxxxxxxxxxx");
-        mToolbar.setTitleTextColor(Color.WHITE);
+        initToolBar();
+        initTab();
     }
 }
