@@ -76,7 +76,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
     @Override
     public void initData(Bundle savedInstanceState) {
         titles = new String[]{"心愿单", "未被认领", "已被认领"};
-        initTab();
+//        initTab();
 
         collapsingToolbar.setTitleEnabled(false);
     }
@@ -110,7 +110,6 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
     }
 
     private void initToolBar() {
-        toolbar.setTitleTextColor(Color.BLACK);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("心愿墙");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -140,12 +139,13 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
             }
         });
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.setTabTextColors(Color.BLACK, Color.RED);
+//        tabLayout.setTabTextColors(Color.BLACK, Color.RED);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         initToolBar();
+        initTab();
     }
 }
