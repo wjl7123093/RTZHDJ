@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.di.component.DaggerMineComponent;
 import com.mytv.rtzhdj.di.module.MineModule;
 import com.mytv.rtzhdj.mvp.contract.MineContract;
@@ -137,7 +139,27 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     @Override
     public void setOnGridClick(int arrayPos, int position) {
-
+        switch (arrayPos) {
+            case 1: // 我的支部
+                switch (position) {
+                    case 0:
+                        ARouter.getInstance().build(ARoutePath.PATH_PARTY_MEMBER).navigation();
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
+                break;
+            case 2: // 我的积分
+                break;
+            case 3: // 生活助手
+                break;
+        }
     }
 
     @Override

@@ -22,6 +22,7 @@ package com.mytv.rtzhdj.app;
  *         2018-2-7  新增 PartyKnowledge/PartyHistory 页面path
  *         2018-2-8  新增 MyReceive 页面path
  *         2018-2-9  新增 MyReceiveWish 页面path
+ *         2018-2-11 新增 PartyMember/MembershipCredentials/ConnectionTransfer 页面path
  */
 public interface ARoutePath {
 
@@ -105,6 +106,12 @@ public interface ARoutePath {
     String PATH_MY_RECEIVE = "/rtdzdj/my_receive";
     // MyReceiveWish
     String PATH_MY_RECEIVE_WISH = "/rtdzdj/my_receive_wish";
+    // PartyMember
+    String PATH_PARTY_MEMBER = "/rtdzdj/party_member";
+    // MembershipCredentials
+    String PATH_MEMBERSHIP_CREDENTIALS = "/rtdzdj/membership_credentials";
+    // ConnectionTransfer
+    String PATH_CONNECTION_TRANSFER = "/rtdzdj/connection_transfer";
 
 
 }

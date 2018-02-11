@@ -27,6 +27,10 @@
     <string name="title_wish_wall">心愿墙</string>
     <string name="title_my_wish">我的心愿</string>
     <string name="title_my_receive_wish">我认领的心愿</string>
+    <string name="title_party_member">党员风采</string>
+    <string name="title_membership_credentials">组织关系</string>
+    <string name="title_connection_transfer">关系转接</string>
+    <string name="title_notepad">记事本</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

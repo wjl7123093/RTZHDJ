@@ -3,6 +3,7 @@ package com.mytv.rtzhdj.app.data;
 import com.mytv.rtzhdj.app.data.entity.CommunityEntity;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionaireEntitiy;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 
@@ -114,6 +115,32 @@ public class DataServer {
             questionaireEntitiy.setEnd_time("2018-02-03");
             questionaireEntitiy.setStatus(i % 2);
             list.add(questionaireEntitiy);
+        }
+        return list;
+    }
+
+    /**
+     * 获取 党员信息模拟数据
+     * @param lenth
+     * @return
+     */
+    public static List<PartyMemberEntity> getPartyMemberData(int lenth) {
+        List<PartyMemberEntity> list = new ArrayList<>();
+        for (int i = 0; i < lenth; i++) {
+            PartyMemberEntity partyMemberEntity = new PartyMemberEntity();
+            partyMemberEntity.setId(i + 1);
+            partyMemberEntity.setName("はたけ·カカシ 影の分身" + i);
+            partyMemberEntity.setUrl("http://p.3761.com/pic/89371406508468.jpg");
+            partyMemberEntity.setDesc("火之国木叶隐村的精英上忍，原木叶暗部成员，四代目火影波风水门的弟子，木叶第七班队长，漩涡鸣人、宇智波佐助、春野樱的老师。");
+            partyMemberEntity.setParty_branch("xxxxxxxx支部");
+            partyMemberEntity.setMobile("189xxxx8888");
+            partyMemberEntity.setTelephone("0816-2222888");
+            partyMemberEntity.setEmergency_phone("158xxxx9999");
+            partyMemberEntity.setOther_connections("无");
+            partyMemberEntity.setAddress("四川省绵阳市涪城区xxxxxxxxxx");
+            partyMemberEntity.setQq("978543241");
+            partyMemberEntity.setEmail("xxxxxxxxx@163.com");
+            list.add(partyMemberEntity);
         }
         return list;
     }

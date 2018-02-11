@@ -103,10 +103,18 @@
         <activity
             android:name=".mvp.ui.activity.PartyHistoryActivity"
             android:label="@string/title_party_history" />
-        <activity android:name=".mvp.ui.activity.MyReceiveActivity"
-            android:label="@string/title_my_receive"/>
-        <activity android:name=".mvp.ui.activity.MyReceiveWishActivity"
-            android:label="@string/title_my_receive_wish"></activity>
+        <activity
+            android:name=".mvp.ui.activity.MyReceiveActivity"
+            android:label="@string/title_my_receive" />
+        <activity
+            android:name=".mvp.ui.activity.MyReceiveWishActivity"
+            android:label="@string/title_my_receive_wish" />
+        <activity android:name=".mvp.ui.activity.PartyMemberActivity"
+            android:label="@string/title_party_member"/>
+        <activity android:name=".mvp.ui.activity.MembershipCredentialsActivity"
+            android:label="@string/title_membership_credentials"/>
+        <activity android:name=".mvp.ui.activity.ConnectionTransferActivity"
+            android:label="@string/title_connection_transfer"></activity>
     </application>
 
 </manifest>
