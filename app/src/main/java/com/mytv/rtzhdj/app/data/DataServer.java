@@ -131,7 +131,7 @@ public class DataServer {
             partyMemberEntity.setId(i + 1);
             partyMemberEntity.setName("はたけ·カカシ 影の分身" + i);
             partyMemberEntity.setUrl("http://p.3761.com/pic/89371406508468.jpg");
-            partyMemberEntity.setDesc("火之国木叶隐村的精英上忍，原木叶暗部成员，四代目火影波风水门的弟子，木叶第七班队长，漩涡鸣人、宇智波佐助、春野樱的老师。");
+            partyMemberEntity.setDuty("党员");
             partyMemberEntity.setParty_branch("xxxxxxxx支部");
             partyMemberEntity.setMobile("189xxxx8888");
             partyMemberEntity.setTelephone("0816-2222888");

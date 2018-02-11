@@ -14,7 +14,7 @@ public class PartyMemberEntity {
     private int id;
     private String name;
     private String url;
-    private String desc;
+    private String duty;
     private String party_branch;
     private String mobile;
     private String telephone;
@@ -48,12 +48,12 @@ public class PartyMemberEntity {
         this.url = url;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDuty() {
+        return duty;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDuty(String duty) {
+        this.duty = duty;
     }
 
     public String getParty_branch() {

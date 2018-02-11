@@ -142,12 +142,13 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         switch (arrayPos) {
             case 1: // 我的支部
                 switch (position) {
-                    case 0:
+                    case 0: // 党员风采
                         ARouter.getInstance().build(ARoutePath.PATH_PARTY_MEMBER).navigation();
                         break;
-                    case 1:
+                    case 1: // 党支部工作手册
                         break;
-                    case 2:
+                    case 2: // 组织关系
+                        ARouter.getInstance().build(ARoutePath.PATH_MEMBERSHIP_CREDENTIALS).navigation();
                         break;
                     case 3:
                         break;
