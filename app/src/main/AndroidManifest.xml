@@ -39,8 +39,9 @@
         <!-- <activity android:name=".mvp.ui.activity.MainActivity" /> -->
         <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity android:name=".mvp.ui.activity.RegisterActivity" />
-        <activity android:name=".mvp.ui.activity.SettingsActivity"
-            android:label="@string/title_settings"/>
+        <activity
+            android:name=".mvp.ui.activity.SettingsActivity"
+            android:label="@string/title_settings" />
         <activity
             android:name=".mvp.ui.activity.NewsActivity"
             android:label="@string/title_news" />
@@ -110,12 +111,16 @@
         <activity
             android:name=".mvp.ui.activity.MyReceiveWishActivity"
             android:label="@string/title_my_receive_wish" />
-        <activity android:name=".mvp.ui.activity.PartyMemberActivity"
-            android:label="@string/title_party_member"/>
-        <activity android:name=".mvp.ui.activity.MembershipCredentialsActivity"
-            android:label="@string/title_membership_credentials"/>
-        <activity android:name=".mvp.ui.activity.ConnectionTransferActivity"
-            android:label="@string/title_connection_transfer"></activity>
+        <activity
+            android:name=".mvp.ui.activity.PartyMemberActivity"
+            android:label="@string/title_party_member" />
+        <activity
+            android:name=".mvp.ui.activity.MembershipCredentialsActivity"
+            android:label="@string/title_membership_credentials" />
+        <activity
+            android:name=".mvp.ui.activity.ConnectionTransferActivity"
+            android:label="@string/title_connection_transfer" />
+        <activity android:name=".mvp.ui.activity.CommentActivity"></activity>
     </application>
 
 </manifest>
