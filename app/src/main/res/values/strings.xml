@@ -31,6 +31,7 @@
     <string name="title_membership_credentials">组织关系</string>
     <string name="title_connection_transfer">关系转接</string>
     <string name="title_notepad">记事本</string>
+    <string name="title_settings">设置</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

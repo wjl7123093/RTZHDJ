@@ -39,7 +39,8 @@
         <!-- <activity android:name=".mvp.ui.activity.MainActivity" /> -->
         <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity android:name=".mvp.ui.activity.RegisterActivity" />
-        <activity android:name=".mvp.ui.activity.SettingsActivity" />
+        <activity android:name=".mvp.ui.activity.SettingsActivity"
+            android:label="@string/title_settings"/>
         <activity
             android:name=".mvp.ui.activity.NewsActivity"
             android:label="@string/title_news" />

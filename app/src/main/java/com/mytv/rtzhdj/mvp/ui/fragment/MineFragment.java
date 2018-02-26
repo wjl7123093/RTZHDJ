@@ -129,7 +129,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     @Override
     public void setOnSettingsClick() {
-
+        // 设置
+        ARouter.getInstance().build(ARoutePath.PATH_SETTINGS).navigation();
     }
 
     @Override
