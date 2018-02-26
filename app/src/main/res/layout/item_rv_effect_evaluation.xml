@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_rv_effect_evaluation.xml recyclerview 效果测评列表项
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-26
+ * @update
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/len_16"
+    android:background="@color/white">
+
+    <!-- 标题 -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自重者人恒重之"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/primary_text"/>
+    <!-- 分数 & 剩余 -->
+    <TextView
+        android:id="@+id/tv_scores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="分数: 暂无\t\t剩余: 3/3"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:layout_below="@id/tv_title"
+        android:layout_marginTop="@dimen/len_10"/>
+    <!-- 测评时间 -->
+    <TextView
+        android:id="@+id/tv_test_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测评时间: 2017-12-11至2017-12-31"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:layout_below="@id/tv_scores"
+        android:layout_marginTop="@dimen/len_10"/>
+    <!-- 最近测试时间 -->
+    <TextView
+        android:id="@+id/tv_last_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上次学习: 2018-01-02 15:33:56"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:layout_below="@id/tv_test_time"
+        android:layout_marginTop="@dimen/len_10"/>
+    <!-- 成绩排行 -->
+    <TextView
+        android:id="@+id/tv_grade_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sp_bg_courseware_type_yellow"
+        android:text="成绩排行"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/accent"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_title"
+        android:padding="@dimen/len_6"/>
+    <!-- 测评结束 -->
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sp_bg_vlayout_footer"
+        android:text="测评结束"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/secondary_text"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_grade_rank"
+        android:layout_marginTop="@dimen/len_6"
+        android:padding="@dimen/len_6"/>
+
+</RelativeLayout>

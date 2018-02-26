@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_rv_compulsory_course.xml recyclerview 必修课列表项
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-26
+ * @update
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/len_16"
+    android:background="@color/white">
+
+    <!-- 标题 -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自重者人恒重之"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/primary_text"/>
+    <!-- 学习状态 -->
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="未学习"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@id/tv_title"
+        android:layout_marginTop="@dimen/len_10"/>
+    <!-- 上次学习时间 -->
+    <TextView
+        android:id="@+id/tv_last_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上次学习: 2018-01-02 15:33:56"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:layout_below="@id/tv_status"
+        android:layout_marginTop="@dimen/len_10"/>
+    <!-- 立即学习 -->
+    <TextView
+        android:id="@+id/tv_study_now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sp_bg_vlayout_footer"
+        android:text="立即学习"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/secondary_text"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/len_6"/>
+
+</RelativeLayout>

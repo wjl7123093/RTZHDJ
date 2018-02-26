@@ -1,8 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<!--
+ * activity_compulsory_course.xml 必修课
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-20
+ * @update 2018-2-26     修改UI（填充布局）
+-->
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-</LinearLayout>
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapse_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <!--<ImageView
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/ic_launcher"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="78dp"
+                android:layout_marginBottom="@dimen/len_40"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/len_16"
+                app:layout_collapseMode="parallax">
+
+                <org.raphets.roundimageview.RoundImageView
+                    android:id="@+id/iv_header"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@mipmap/ic_logo"
+                    app:border_width="1dp"
+                    app:border_color="@color/divider"
+                    app:leftBottom_corner_radius="0dp"
+                    app:leftTop_corner_radius="30dp"
+                    app:rightBottom_corner_radius="30dp"
+                    app:rightTop_corner_radius="0dp"
+                    app:type="circle"
+                    android:layout_alignParentLeft="true"/>
+                <!-- 积分 -->
+                <TextView
+                    android:id="@+id/tv_scores"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_16"
+                    android:textColor="@color/white"
+                    android:text="本月获得积分: 2"
+                    android:gravity="center"
+                    android:layout_alignTop="@id/iv_header"
+                    android:layout_toRightOf="@id/iv_header"
+                    android:layout_marginLeft="@dimen/len_10"/>
+                <!-- 正能量值 -->
+                <TextView
+                    android:id="@+id/tv_power_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_14"
+                    android:textColor="@color/white"
+                    android:text="您的正能量值: 10"
+                    android:gravity="center"
+                    android:layout_toRightOf="@id/iv_header"
+                    android:layout_marginLeft="@dimen/len_10"
+                    android:layout_centerVertical="true"/>
+                <!-- 距离下一积分任务差 -->
+                <TextView
+                    android:id="@+id/tv_differ_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_14"
+                    android:textColor="@color/white"
+                    android:text="距下一积分分任务还差: 8 请继续加油!"
+                    android:gravity="center"
+                    android:layout_alignBottom="@id/iv_header"
+                    android:layout_toRightOf="@id/iv_header"
+                    android:layout_marginLeft="@dimen/len_10"/>
+
+                <!-- 查看任务 -->
+                <TextView
+                    android:id="@+id/tv_query_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="查看任务"
+                    android:textSize="@dimen/font_14"
+                    android:textColor="@color/white"
+                    android:background="@drawable/sp_bg_compulsory_course_btn_query_task"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/len_20"/>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:gravity="top"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:titleMarginTop="15dp"/>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                app:tabIndicatorColor="@color/white" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>

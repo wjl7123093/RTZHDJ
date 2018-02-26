@@ -42,6 +42,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  *
  * @crdate 2018-1-19
  * @update 2018-2-2     填充布局
+ *         2018-2-26    新增跳转接口(PATH_EFFECT_EVALUATION)
  */
 public class StudyFragment extends BaseFragment<StudyPresenter> implements StudyContract.View {
 
@@ -130,22 +131,23 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     @Override
     public void setOnGridClick(int position, String title) {
         switch (position) {
-            case 0:
+            case 0: // 学习课件
                 ARouter.getInstance().build(ARoutePath.PATH_STUDY_COURSEWARE).navigation();
                 break;
-            case 1:
-            case 3:
+            case 1: // 党内法规
+            case 3: // 党建研究
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
                         .withString("from", "StudyFragment")
                         .withString("title", title).navigation();
                 break;
-            case 2:
+            case 2: // 党建知识
                 ARouter.getInstance().build(ARoutePath.PATH_PARTY_KNOWLEDGE).navigation();
                 break;
-            case 4:
+            case 4: // 绵阳党史
                 ARouter.getInstance().build(ARoutePath.PATH_PARTY_HISTORY).navigation();
                 break;
-            case 5:
+            case 5: // 效果测评
+                ARouter.getInstance().build(ARoutePath.PATH_EFFECT_EVALUATION).navigation();
                 break;
         }
     }
