@@ -22,6 +22,7 @@ import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
 import com.mytv.rtzhdj.mvp.presenter.CompulsoryCoursePresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.fragment.CompulsoryCourseFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
 
 
@@ -117,7 +118,7 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(ContentFragment.newInstance(i));
+            fragments.add(CompulsoryCourseFragment.newInstance());
         }
 
 
