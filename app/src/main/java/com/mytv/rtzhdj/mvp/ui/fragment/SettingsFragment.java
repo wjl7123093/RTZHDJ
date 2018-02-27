@@ -189,7 +189,7 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
         DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
 
         //初始化头部1
-        BaseDelegateAdapter headerAdapter = mPresenter.initHeader1(
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader2(
                 "http://imgtu.5011.net/uploads/content/20170220/9520371487578487.jpg");
         mAdapters.add(headerAdapter);
 
