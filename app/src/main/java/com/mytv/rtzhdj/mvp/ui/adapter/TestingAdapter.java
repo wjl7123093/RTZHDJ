@@ -34,7 +34,7 @@ public class TestingAdapter extends BaseQuickAdapter<TestingEntity, BaseViewHold
         helper.setText(R.id.tv_scores, "分数:" + item.getScores() + "　　剩余:" +
                 item.getLast_num() + "/" + item.getTotal_num());
         helper.setText(R.id.tv_test_time, item.getStart_time() + "至" + item.getEnd_time());
-        helper.setText(R.id.tv_last_time, item.getLast_time() + "");
+        helper.setText(R.id.tv_last_time, "最近测试时间: " + item.getLast_time());
 
     }
 
