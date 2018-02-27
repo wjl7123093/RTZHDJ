@@ -8,6 +8,7 @@ package com.mytv.rtzhdj.app.data.entity;
  *
  * @crdate 2018-2-6
  * @update 2018-2-7     新增 scores 字段
+ *         2018-2-27    新增 status 字段
  */
 public class CoursewareEntity {
 
@@ -16,6 +17,7 @@ public class CoursewareEntity {
     private String datetime;    // 上次学习时间
     private int type;           // 课件类型（1 必修，2 选修，3 微党课）
     private int scores;         // 得分
+    private int status;         // 学习状态（0 未学习，1 已学习未完成，2 已完成）
 
     public int getId() {
         return id;
@@ -55,5 +57,13 @@ public class CoursewareEntity {
 
     public void setScores(int scores) {
         this.scores = scores;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

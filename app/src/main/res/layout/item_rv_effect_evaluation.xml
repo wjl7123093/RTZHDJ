@@ -19,7 +19,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="自重者人恒重之"
+        android:text="党的十九大精神学习测试（一）"
         android:textSize="@dimen/font_16"
         android:textColor="@color/primary_text"/>
     <!-- 分数 & 剩余 -->

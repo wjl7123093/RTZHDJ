@@ -1,10 +1,12 @@
 package com.mytv.rtzhdj.app.data;
 
+import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.app.data.entity.CommunityEntity;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionaireEntitiy;
+import com.mytv.rtzhdj.app.data.entity.TestingEntity;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 
 import java.util.ArrayList;
@@ -55,6 +57,7 @@ public class DataServer {
             coursewareEntity.setDatetime("04/05/" + i);
             coursewareEntity.setType(i % 3 + 1);
             coursewareEntity.setScores(i * 2);
+            coursewareEntity.setStatus(i % 3);
             list.add(coursewareEntity);
         }
         return list;
@@ -141,6 +144,48 @@ public class DataServer {
             partyMemberEntity.setQq("978543241");
             partyMemberEntity.setEmail("xxxxxxxxx@163.com");
             list.add(partyMemberEntity);
+        }
+        return list;
+    }
+
+    /**
+     * 获取 评论数据
+     * @param lenth
+     * @return
+     */
+    public static List<CommentEntity> getCommentData(int lenth) {
+        List<CommentEntity> list = new ArrayList<>();
+        for (int i = 0; i < lenth; i++) {
+            CommentEntity commentEntity = new CommentEntity();
+            commentEntity.setId(i + 1);
+            commentEntity.setName("はたけ·カカシ 影の分身" + i);
+            commentEntity.setImg_url("http://p.3761.com/pic/89371406508468.jpg");
+            commentEntity.setDatetime("2017-12-23 23:34:22");
+            commentEntity.setContent("坚决拥护中国共产党！");
+            commentEntity.setStar_num(i);
+            list.add(commentEntity);
+        }
+        return list;
+    }
+
+    /**
+     * 获取 效果测评数据
+     * @param lenth
+     * @return
+     */
+    public static List<TestingEntity> getTestingData(int lenth) {
+        List<TestingEntity> list = new ArrayList<>();
+        for (int i = 0; i < lenth; i++) {
+            TestingEntity testingEntity = new TestingEntity();
+            testingEntity.setId(i + 1);
+            testingEntity.setTitle("党的十九大精神学习测试（一）");
+            testingEntity.setScores(0);
+            testingEntity.setTotal_num(3);
+            testingEntity.setLast_num(2);
+            testingEntity.setStart_time("2017-12-11");
+            testingEntity.setEnd_time("2017-12-21");
+            testingEntity.setLast_time("暂无");
+            list.add(testingEntity);
         }
         return list;
     }

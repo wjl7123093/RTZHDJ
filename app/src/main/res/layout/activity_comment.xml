@@ -1,8 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ * activity_comment.xml 评论列表页
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-26
+ * @update 2018-2-27    修改UI(填充布局)
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:background="@color/app_bg_grey" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_40"
+        android:background="@color/divider"
+        android:text="说说你的看法"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/len_16"
+        android:gravity="center"/>
 
 </LinearLayout>

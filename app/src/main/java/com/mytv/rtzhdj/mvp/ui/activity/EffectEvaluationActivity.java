@@ -23,6 +23,7 @@ import com.mytv.rtzhdj.mvp.presenter.EffectEvaluationPresenter;
 
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
+import com.mytv.rtzhdj.mvp.ui.fragment.EffectEvaluationFragment;
 
 
 import java.util.ArrayList;
@@ -117,7 +118,7 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(ContentFragment.newInstance(i));
+            fragments.add(EffectEvaluationFragment.newInstance());
         }
 
 

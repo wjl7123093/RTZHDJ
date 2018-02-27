@@ -6,10 +6,77 @@
  * @version v1.0.0(1)
  *
  * @crdate 2018-2-26
- * @update
+ * @update 2018-2-27    修改UI(填充布局)
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/len_16">
 
-</LinearLayout>
+    <org.raphets.roundimageview.RoundImageView
+        android:id="@+id/iv_header"
+        android:layout_width="@dimen/len_48"
+        android:layout_height="@dimen/len_48"
+        android:src="@mipmap/ic_logo"
+        app:border_width="1dp"
+        app:border_color="@color/divider"
+        app:leftBottom_corner_radius="0dp"
+        app:leftTop_corner_radius="30dp"
+        app:rightBottom_corner_radius="30dp"
+        app:rightTop_corner_radius="0dp"
+        app:type="circle"
+        android:layout_alignParentLeft="true"/>
+
+    <!-- 名称 -->
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/secondary_text"
+        android:text="xxx"
+        android:gravity="center"
+        android:layout_alignTop="@id/iv_header"
+        android:layout_toRightOf="@id/iv_header"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_marginTop="@dimen/len_6"/>
+    <!-- 时间 -->
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:text="2018-02-26 17:05:32"
+        android:gravity="center"
+        android:layout_toRightOf="@id/iv_header"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_alignBottom="@id/iv_header"
+        android:layout_marginBottom="@dimen/len_4"/>
+    <!-- 内容 -->
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:text="深化改革，认真履行党和国家的使命"
+        android:gravity="center"
+        android:layout_below="@id/iv_header"
+        android:layout_alignLeft="@id/tv_name"
+        android:layout_marginTop="@dimen/len_6"/>
+    <!-- 点赞 -->
+    <TextView
+        android:id="@+id/tv_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:text="0"
+        android:gravity="center"
+        android:layout_alignTop="@id/iv_header"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
