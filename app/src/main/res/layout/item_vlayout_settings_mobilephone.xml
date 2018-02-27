@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_settings_mobilephone.xml vlayout 通栏布局(设置 - 绑定手机号)
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-27
+ * @update
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10"
+    android:background="@color/white"
+    android:layout_marginTop="@dimen/len_10"
+    android:layout_marginBottom="@dimen/len_10">
+
+    <!-- 绑定的手机号 -->
+    <TextView
+        android:id="@+id/tv_mobile_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="绑定的手机号  189****8888"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
+
+    <!-- 更换绑定的手机 -->
+    <TextView
+        android:id="@+id/tv_change_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更换绑定的手机"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/light_blue_500"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_bg_grey"
+        android:layout_below="@id/tv_mobile_phone"
+        android:layout_marginTop="@dimen/len_10"></View>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手机号是否公开"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/view_divider"
+        android:layout_marginTop="@dimen/len_10"/>
+
+    <!-- 开关 -->
+    <com.suke.widget.SwitchButton
+        android:id="@+id/switch_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/view_divider"
+        android:layout_marginTop="@dimen/len_2"
+        app:sb_button_color="#db99c7"
+        app:sb_shadow_color="#A36F95"
+        app:sb_background="#FFF"
+        app:sb_checkline_color="#a5dc88"
+        app:sb_checked_color="#A36F95"
+        app:sb_uncheckcircle_color="#A36F95"/>
+
+</RelativeLayout>

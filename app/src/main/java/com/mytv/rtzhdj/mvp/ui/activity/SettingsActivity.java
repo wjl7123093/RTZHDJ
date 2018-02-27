@@ -123,7 +123,7 @@ public class SettingsActivity extends BaseActivity<SettingsPresenter> implements
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(SettingsFragment.newInstance());
+            fragments.add(SettingsFragment.newInstance(i));
         }
 
 

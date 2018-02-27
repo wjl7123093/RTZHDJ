@@ -3,10 +3,12 @@ package com.mytv.rtzhdj.mvp.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
@@ -17,15 +19,36 @@ import com.mytv.rtzhdj.mvp.contract.SettingsContract;
 import com.mytv.rtzhdj.mvp.presenter.SettingsPresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.SettingsActivity;
+import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 
 public class SettingsFragment extends BaseFragment<SettingsPresenter> implements SettingsContract.View {
 
+    @BindView(R.id.refreshLayout)
+    RefreshLayout mRefreshLayout;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
 
-    public static SettingsFragment newInstance() {
+    /** 存放各个模块的适配器*/
+    private List<DelegateAdapter.Adapter> mAdapters;
+    private int mFlag;
+
+    public static SettingsFragment newInstance(int flag) {
         SettingsFragment fragment = new SettingsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("flag", flag);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -46,7 +69,13 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        mAdapters = new LinkedList<>();
+        mPresenter.setActivity((SettingsActivity) getActivity());
+        if (getArguments().getInt("flag") == 0)     // 基本信息
+            initRecyclerView1();
+        else    // 入党基本信息
+            initRecyclerView2();
+        initRefreshLayout();
     }
 
     /**
@@ -92,6 +121,125 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
     @Override
     public void killMyself() {
 
+    }
+
+    private void initRecyclerView1() {
+        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+
+        //初始化头部1
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader1(
+                "http://imgtu.5011.net/uploads/content/20170220/9520371487578487.jpg");
+        mAdapters.add(headerAdapter);
+
+        //初始化信息1
+        BaseDelegateAdapter infoAdapter = mPresenter.initInfo1("真实姓名:", "xxx");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("性别:", "男");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("民族:", "汉族");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("籍贯:", "四川成都");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("所属支部:", "xxxxxx第二党支部");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("职务:", "无");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("报道社区:", "xxxxxx第二党支部");
+        mAdapters.add(infoAdapter);
+
+        //初始化手机
+        BaseDelegateAdapter mobileAdapter = mPresenter.initMobilePhone("18945321681", false);
+        mAdapters.add(mobileAdapter);
+
+        //初始化信息2
+        BaseDelegateAdapter infoAdapter2 = mPresenter.initInfo2("修改密码:", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("QQ:", "", "你的QQ号");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("邮箱:", "", "你的邮箱");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("座机:", "", "你的座机号");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("紧急联系电话:", "", "你的紧急联系电话");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("通讯地址:", "", "你的通讯地址");
+        mAdapters.add(infoAdapter2);
+
+        //初始化其他联系方式
+        BaseDelegateAdapter infoAdapter3 = mPresenter.initOtherContacts("其他联系方式", "", "其他联系方式");
+        mAdapters.add(infoAdapter3);
+
+        //初始化信息2
+        infoAdapter2 = mPresenter.initInfo2("用户协议", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("技术支持", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("版本更新", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("意见反馈", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter = mPresenter.initInfo1("退出当前账户", "");
+        mAdapters.add(infoAdapter);
+
+        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);
+    }
+
+    private void initRecyclerView2() {
+        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+
+        //初始化头部1
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader1(
+                "http://imgtu.5011.net/uploads/content/20170220/9520371487578487.jpg");
+        mAdapters.add(headerAdapter);
+
+        //初始化信息1
+        BaseDelegateAdapter infoAdapter = mPresenter.initInfo1("个人身份:", "公有经济控制企业专业技术人员");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("学历:", "大学");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("学位:", "学士");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("出生日期:", "1990-03-23");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("身份证号:", "510723199009221988");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("一线情况:", "机关第一线");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("技术职务:", "为评定资格或未聘任");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("工作单位:", "绵阳市XXXXX局");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("单位属性:", "机关");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("入党时间:", "2009-01-03");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("转正时间:", "2010-01-03 00:00:00");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("增加时间:", "2016-01-15 00:00:00");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("党员增加:", "自本市(县、区、街道)内的其他乡(镇、街道)转入");
+        mAdapters.add(infoAdapter);
+
+        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);
+    }
+
+    private void initRefreshLayout() {
+        mRefreshLayout.setEnableRefresh(false);
+        /*mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000*//*,false*//*);//传入false表示刷新失败
+            }
+        });*/
+        mRefreshLayout.setEnableLoadmore(false);
+        /*mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000*//*,false*//*);//传入false表示加载失败
+            }
+        });*/
     }
 
 }

@@ -31,4 +31,15 @@ public class Constant {
         int typeSingle = 13;        //通栏布局
     }
 
+    // RecyclerView item 类型
+    // Settings 页面
+    public interface viewTypeSettings{
+        int typeHeader1 = 1;        //头像1
+        int typeHeader2 = 2;        //头像2
+        int typeInfo1 = 3;          //信息栏1
+        int typeInfo2 = 4;          //信息栏2
+        int typeInfo3 = 5;          //信息栏3
+        int typeMobile = 6;         //手机
+    }
+
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_settings_info3.xml vlayout 通栏布局(设置 - 信息栏3)
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-27
+ * @update
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16"
+    android:paddingTop="@dimen/len_10"
+    android:layout_marginBottom="@dimen/len_10"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:text="其他联系方式:"
+        android:gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:text="你的QQ号"
+        android:gravity="center"
+        android:layout_below="@id/tv_title"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/len_10"/>
+
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_bg_grey"
+        android:layout_below="@id/tv_content"
+        android:layout_marginTop="@dimen/len_10"></View>
+
+</RelativeLayout>
