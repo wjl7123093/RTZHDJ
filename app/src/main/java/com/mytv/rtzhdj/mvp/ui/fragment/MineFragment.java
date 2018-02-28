@@ -135,7 +135,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     @Override
     public void setOnSignClick() {
-
+        // 天天签到
+        ARouter.getInstance().build(ARoutePath.PATH_SIGN_IN).navigation();
     }
 
     @Override

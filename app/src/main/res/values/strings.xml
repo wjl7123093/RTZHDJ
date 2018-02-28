@@ -37,6 +37,7 @@
     <string name="title_webview">详情</string>
     <string name="title_feedback">意见反馈</string>
     <string name="title_binding_mobile">绑定手机</string>
+    <string name="title_signin">天天签到</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>
@@ -44,4 +45,16 @@
     <string name="tab_study">我要学习</string>
     <string name="tab_join">我要参与</string>
     <string name="tab_mine">我的</string>
+
+    <!-- signin -->
+    <string name="sign_rules_desc">\n
+        1.签到1次可获得 1 积分\n
+        2.连续签到2次可获得 2 积分\n
+        3.连续签到2次可获得 3 积分\n
+        4.连续签到2次可获得 4 积分\n
+        5.连续签到2次可获得 5 积分\n
+        6.连续签到2次可获得 6 积分\n
+        7.连续签到2次可获得 10 积分\n
+    </string>
+
 </resources>

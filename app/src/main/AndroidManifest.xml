@@ -92,7 +92,8 @@
             android:name=".mvp.ui.activity.VoteOnlineActivity"
             android:label="@string/title_online_vote" />
         <activity android:name=".mvp.ui.activity.EventDetailsActivity" />
-        <activity android:name=".mvp.ui.activity.SignInActivity" />
+        <activity android:name=".mvp.ui.activity.SignInActivity"
+            android:label="@string/title_signin"/>
         <activity
             android:name=".mvp.ui.activity.NewsCleanActivity"
             android:label="@string/title_news_clean" />
