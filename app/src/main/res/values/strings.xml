@@ -38,6 +38,7 @@
     <string name="title_feedback">意见反馈</string>
     <string name="title_binding_mobile">绑定手机</string>
     <string name="title_signin">天天签到</string>
+    <string name="title_grade_rank">成绩排行</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

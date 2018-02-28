@@ -24,7 +24,8 @@ package com.mytv.rtzhdj.app;
  *         2018-2-9  新增 MyReceiveWish 页面path
  *         2018-2-11 新增 PartyMember/MembershipCredentials/ConnectionTransfer 页面path
  *         2018-2-26 新增 Comment 页面path
- *         2018-2-28 新增 UpdatePwd/UpdateInfo/Webview/Feedback/BindingMobile 页面path
+ *         2018-2-28 新增 UpdatePwd/UpdateInfo/Webview/Feedback/BindingMobile
+ *                        GradeRank 页面path
  */
 public interface ARoutePath {
 
@@ -126,6 +127,7 @@ public interface ARoutePath {
     String PATH_FEEDBACK = "/rtdzdj/feedback";
     // BindingMobile  绑定手机
     String PATH_BINDING_MOBILE = "/rtdzdj/binding_mobile";
-
+    // GradeRank  成绩排行
+    String PATH_GRADE_RANK = "/rtdzdj/grade_rank";
 
 }
