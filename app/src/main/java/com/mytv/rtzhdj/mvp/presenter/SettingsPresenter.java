@@ -4,6 +4,7 @@ import android.app.Application;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
@@ -19,6 +20,7 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import javax.inject.Inject;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.mvp.contract.SettingsContract;
 import com.mytv.rtzhdj.mvp.ui.activity.SettingsActivity;
@@ -133,7 +135,7 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
     }
 
     @Override
-    public BaseDelegateAdapter initInfo2(String title, String content, String hint) {
+    public BaseDelegateAdapter initInfo2(String type, String title, String content, String hint) {
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         return new BaseDelegateAdapter(mActivity, singleLayoutHelper , R.layout.item_vlayout_settings_info2,
                 1, Constant.viewTypeSettings.typeInfo2) {
@@ -143,6 +145,19 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
                 holder.setText(R.id.tv_title, title);
                 holder.setText(R.id.tv_content, content);
                 ((TextView) holder.getView(R.id.tv_content)).setHint(hint);
+
+                holder.getView(R.id.rl_container).setOnClickListener(view -> {
+                    if (type.equals("pwd"))
+                        ARouter.getInstance().build(ARoutePath.PATH_UPDATE_PWD).navigation();
+                    else if (type.equals("info"))
+                        ARouter.getInstance().build(ARoutePath.PATH_UPDATE_INFO)
+                                .withString("hint", "请输入" + hint).navigation();
+                    else if (type.equals("webview"))
+                        ARouter.getInstance().build(ARoutePath.PATH_WEBVIEW)
+                                .withString("title", title).navigation();
+                    else if (type.equals("feedback"))
+                        ARouter.getInstance().build(ARoutePath.PATH_FEEDBACK).navigation();
+                });
             }
         };
     }
@@ -171,6 +186,11 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
                 holder.setText(R.id.tv_title, title);
                 holder.setText(R.id.tv_content, content);
                 ((TextView) holder.getView(R.id.tv_content)).setHint(hint);
+
+                holder.getView(R.id.rl_container).setOnClickListener(view -> {
+                    ARouter.getInstance().build(ARoutePath.PATH_UPDATE_INFO)
+                            .withString("hint", "请输入" + hint).navigation();
+                });
             }
         };
     }

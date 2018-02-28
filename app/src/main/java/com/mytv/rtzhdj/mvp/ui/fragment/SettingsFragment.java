@@ -152,17 +152,17 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
         mAdapters.add(mobileAdapter);
 
         //初始化信息2
-        BaseDelegateAdapter infoAdapter2 = mPresenter.initInfo2("修改密码:", "", "");
+        BaseDelegateAdapter infoAdapter2 = mPresenter.initInfo2("pwd", "修改密码:", "", "");
         mAdapters.add(infoAdapter2);
-        infoAdapter2 = mPresenter.initInfo2("QQ:", "", "你的QQ号");
+        infoAdapter2 = mPresenter.initInfo2("info", "QQ:", "", "你的QQ号");
         mAdapters.add(infoAdapter2);
-        infoAdapter2 = mPresenter.initInfo2("邮箱:", "", "你的邮箱");
+        infoAdapter2 = mPresenter.initInfo2("info", "邮箱:", "", "你的邮箱");
         mAdapters.add(infoAdapter2);
-        infoAdapter2 = mPresenter.initInfo2("座机:", "", "你的座机号");
+        infoAdapter2 = mPresenter.initInfo2("info", "座机:", "", "你的座机号");
         mAdapters.add(infoAdapter2);
-        infoAdapter2 = mPresenter.initInfo2("紧急联系电话:", "", "你的紧急联系电话");
+        infoAdapter2 = mPresenter.initInfo2("info", "紧急联系电话:", "", "你的紧急联系电话");
         mAdapters.add(infoAdapter2);
-        infoAdapter2 = mPresenter.initInfo2("通讯地址:", "", "你的通讯地址");
+        infoAdapter2 = mPresenter.initInfo2("info", "通讯地址:", "", "你的通讯地址");
         mAdapters.add(infoAdapter2);
 
         //初始化其他联系方式
@@ -170,13 +170,13 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
         mAdapters.add(infoAdapter3);
 
         //初始化信息2
-        infoAdapter2 = mPresenter.initInfo2("用户协议", "", "");
+        infoAdapter2 = mPresenter.initInfo2("webview", "用户协议", "", "");
         mAdapters.add(infoAdapter2);
-        infoAdapter2 = mPresenter.initInfo2("技术支持", "", "");
+        infoAdapter2 = mPresenter.initInfo2("webview", "技术支持", "", "");
         mAdapters.add(infoAdapter2);
-        infoAdapter2 = mPresenter.initInfo2("版本更新", "", "");
+        infoAdapter2 = mPresenter.initInfo2("webview", "版本更新", "", "");
         mAdapters.add(infoAdapter2);
-        infoAdapter2 = mPresenter.initInfo2("意见反馈", "", "");
+        infoAdapter2 = mPresenter.initInfo2("feedback", "意见反馈", "", "");
         mAdapters.add(infoAdapter2);
         infoAdapter = mPresenter.initInfo1("退出当前账户", "");
         mAdapters.add(infoAdapter);

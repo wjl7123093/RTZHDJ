@@ -120,7 +120,15 @@
         <activity
             android:name=".mvp.ui.activity.ConnectionTransferActivity"
             android:label="@string/title_connection_transfer" />
-        <activity android:name=".mvp.ui.activity.CommentActivity"></activity>
+        <activity android:name=".mvp.ui.activity.CommentActivity" />
+        <activity android:name=".mvp.ui.activity.UpdatePwdActivity"
+            android:label="@string/title_update_pwd"/>
+        <activity android:name=".mvp.ui.activity.UpdateInfoActivity"
+            android:label="@string/title_update_info"/>
+        <activity android:name=".mvp.ui.activity.WebviewActivity"
+            android:label="@string/title_webview"/>
+        <activity android:name=".mvp.ui.activity.FeedbackActivity"
+            android:label="@string/title_feedback"/>
     </application>
 
 </manifest>

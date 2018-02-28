@@ -28,7 +28,7 @@ public interface SettingsContract {
         BaseDelegateAdapter initHeader1(String url);
         BaseDelegateAdapter initHeader2(String url);
         BaseDelegateAdapter initInfo1(String title, String content);
-        BaseDelegateAdapter initInfo2(String title, String content, String hint);
+        BaseDelegateAdapter initInfo2(String type, String title, String content, String hint);
         BaseDelegateAdapter initMobilePhone(String mobile, boolean isOpen);
         BaseDelegateAdapter initOtherContacts(String title, String content, String hint);
 //        BaseDelegateAdapter initTitle(int arrayPos, String title, String btnDesc, int scores);

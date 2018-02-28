@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * activity_update_pwd.xml 更新密码
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-28
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    
+    <include layout="@layout/include_toolbar"></include>
+    
+    <net.qiujuer.genius.ui.widget.EditText
+        android:id="@+id/edt_old_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入原密码"
+        android:inputType="textPassword"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/primary_text"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:layout_marginTop="@dimen/len_16"
+        app:gHintTitle="slide"
+        app:gHintTitlePaddingBottom="2dp"
+        app:gHintTitlePaddingLeft="0dp"
+        app:gHintTitlePaddingTop="0dp"
+        app:gHintTitleTextSize="14sp"
+        app:gLineColor="@color/black_alpha_16"
+        app:gLineSize="2dp"/>
+
+    <net.qiujuer.genius.ui.widget.EditText
+        android:id="@+id/edt_new_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入新密码"
+        android:inputType="textPassword"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/primary_text"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:layout_marginTop="@dimen/len_16"/>
+
+    <net.qiujuer.genius.ui.widget.EditText
+        android:id="@+id/edt_new_pwd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请再次输入新密码"
+        android:inputType="textPassword"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/primary_text"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:layout_marginTop="@dimen/len_16"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请输入189****8888收到的短信验证码"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="@dimen/len_16"/>
+
+    <!-- 输入验证码 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16">
+
+        <net.qiujuer.genius.ui.widget.EditText
+            android:id="@+id/edt_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/primary_text"/>
+
+        <net.qiujuer.genius.ui.widget.Button
+            android:id="@+id/btn_get_code"
+            android:layout_width="120dp"
+            android:layout_height="@dimen/len_40"
+            android:text="获取验证码"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_14"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/len_4"/>
+
+    </RelativeLayout>
+
+    <net.qiujuer.genius.ui.widget.Button
+        android:id="@+id/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确定"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/white"
+        android:background="@color/grey_500"
+        android:layout_margin="@dimen/len_16"/>
+
+</LinearLayout>

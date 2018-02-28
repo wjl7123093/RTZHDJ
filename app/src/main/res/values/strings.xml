@@ -32,6 +32,10 @@
     <string name="title_connection_transfer">关系转接</string>
     <string name="title_notepad">记事本</string>
     <string name="title_settings">设置</string>
+    <string name="title_update_pwd">修改密码</string>
+    <string name="title_update_info">修改信息</string>
+    <string name="title_webview">详情</string>
+    <string name="title_feedback">意见反馈</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

@@ -115,6 +115,14 @@ public interface ARoutePath {
     String PATH_CONNECTION_TRANSFER = "/rtdzdj/connection_transfer";
     // Comment  评论列表
     String PATH_COMMENT = "/rtdzdj/comment";
+    // UpdatePwd  更新密码
+    String PATH_UPDATE_PWD = "/rtdzdj/update_pwd";
+    // UpdateInfo  更新信息
+    String PATH_UPDATE_INFO = "/rtdzdj/update_info";
+    // WEBVIEW  WAP加载页
+    String PATH_WEBVIEW = "/rtdzdj/webview";
+    // Feedback  意见反馈
+    String PATH_FEEDBACK = "/rtdzdj/feedback";
 
 
 }
