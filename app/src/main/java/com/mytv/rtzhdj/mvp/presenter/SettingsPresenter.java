@@ -171,6 +171,9 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_mobile_phone, "绑定的手机号  " + mobile.replace(mobile.substring(3, 7), "****"));
+                holder.getView(R.id.tv_change_phone).setOnClickListener(view -> {
+                    ARouter.getInstance().build(ARoutePath.PATH_BINDING_MOBILE).navigation();
+                });
             }
         };
     }
