@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.mytv.rtzhdj">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -14,14 +15,20 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <!-- > Manifest merger failed with multiple errors, see logs
+
+        AS的Gradle插件默认会启用Manifest Merger Tool，若Library项目中也定义了与主项目相同的属性
+        （例如默认生成的android:icon和android:theme），则此时会合并失败，并报上面的错误。 -->
+    <!--tools:replace="android:icon,android:theme,android:label"-->
     <application
-        android:name=".app.base.RTZHDJApplication"
+        android:name="com.mytv.rtzhdj.app.base.RTZHDJApplication"
+        tools:replace="android:theme,android:icon,android:label"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
-        android:label="@string/app_name"
+        android:label="@string/app_name_cn"
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/RTAppTheme.NoActionBar">
 
         <!-- arms配置 -->
         <meta-data

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">政务管理系统</string>
+    <string name="app_name_cn">政务管理系统</string>
     <string name="title_topic">党建专题</string>
     <string name="title_news">时政新闻</string>
     <string name="title_news_clean">党风廉政</string>

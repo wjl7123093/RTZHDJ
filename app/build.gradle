@@ -47,6 +47,9 @@ android {
             }
         }
 
+        // 2018-3-1 update
+        multiDexEnabled true
+
     }
 
     // 移除lint检查的error，可以避免由于编译条件太过严格而编译不过的问题
@@ -153,11 +156,9 @@ dependencies {
     compile(rootProject.ext.dependencies["cardview-v7"]) {
         exclude module: 'support-annotations'
     }
-
     // 引入框架通用模块(使用Rxjava2)
     //    compile 'android.frame:MVPFrames:1.4.2'
     compile 'me.jessyan:arms:2.2.3'
-
     // Tools
     annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
         exclude module: 'support-annotations'
@@ -214,6 +215,5 @@ dependencies {
     compile 'me.weyye.ColorTrackTabLayout:library:1.0.1'
     // switch-button
     compile 'com.github.zcweng:switch-button:0.0.3@aar'
-
-
+    compile project(':CalendarDemo')
 }
