@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * sp_bg_comment_bar_text.xml 评论条 - 评论区 背景
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-3-2
+ * @update
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+    <solid android:color="@color/divider"/>
+    <corners android:radius="@dimen/len_16"/>
+    <!-- 边线颜色 -->
+    <!--<stroke
+        android:width="1dp"
+        android:color="@color/accent"/>-->
+    <!--<padding
+        android:left="@dimen/len_8"
+        android:top="@dimen/len_4"
+        android:right="@dimen/len_8"
+        android:bottom="@dimen/len_4"
+        />-->
+
+</shape>

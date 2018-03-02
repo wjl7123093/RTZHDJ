@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -27,6 +28,7 @@ import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.mvp.contract.HomeContract;
@@ -236,7 +238,10 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-
+                holder.getView(R.id.rl_container).setOnClickListener(view -> {
+                    // 新闻详情页
+                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
+                });
 
             }
         };

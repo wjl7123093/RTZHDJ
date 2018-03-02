@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * include_comment_bar.xml 评论条
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-3-2
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/len_48"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/len_16"
+    android:paddingRight="@dimen/len_16">
+
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/len_32"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/sp_bg_comment_bar_text"
+        android:text="说说你的看法"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/font_16"/>
+
+    <TextView
+        android:id="@+id/tv_comment_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="33"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/secondary_text"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/len_10"/>
+
+    <TextView
+        android:id="@+id/tv_star_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="33"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/secondary_text"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/len_4"/>
+
+    <ImageView
+        android:id="@+id/iv_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginLeft="@dimen/len_4"/>
+
+</LinearLayout>

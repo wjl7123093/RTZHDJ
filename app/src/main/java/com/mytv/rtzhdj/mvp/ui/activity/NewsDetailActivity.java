@@ -3,6 +3,12 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
@@ -18,6 +24,10 @@ import com.mytv.rtzhdj.mvp.presenter.NewsDetailPresenter;
 import com.mytv.rtzhdj.R;
 
 
+import org.w3c.dom.Text;
+
+import butterknife.BindView;
+
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
@@ -27,10 +37,30 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-20
- * @update
+ * @update 2018-2-
  */
 @Route(path = ARoutePath.PATH_NEWS_DETAIL)
 public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implements NewsDetailContract.View {
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView mTvToolbarTitle;
+    @BindView(R.id.toolbar_back)
+    RelativeLayout mBtnToolbarBack;
+    @BindView(R.id.toolbar_menu)
+    RelativeLayout mBtnToolbarMenu;
+
+    @BindView(R.id.webView)
+    WebView mWebView;
+    @BindView(R.id.tv_comment)
+    TextView mTvComment;
+    @BindView(R.id.tv_comment_num)
+    TextView mTvCommentNum;
+    @BindView(R.id.tv_star_num)
+    TextView mTvStarNum;
+    @BindView(R.id.iv_share)
+    ImageView mIvShare;
 
 
     @Override
@@ -50,6 +80,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mBtnToolbarMenu.setVisibility(View.GONE);
 
     }
 

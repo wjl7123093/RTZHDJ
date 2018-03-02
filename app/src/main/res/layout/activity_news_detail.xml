@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ * activity_news_detail.xml 新闻详情（文章）
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-20
+ * @update 2018-3-2     修改UI（填充布局）
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></WebView>
+
+    <include layout="@layout/include_comment_bar"></include>
 
 </LinearLayout>
