@@ -165,6 +165,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
                                 .withString("type", "wall").navigation();
                         break;
                     case 1: // 我要捐赠
+                        ARouter.getInstance().build(ARoutePath.PATH_DONATE).navigation();
                         break;
                     case 2: // 所有捐赠物品
                         ARouter.getInstance().build(ARoutePath.PATH_MY_DONATION)

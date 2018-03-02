@@ -88,7 +88,8 @@
             android:name=".mvp.ui.activity.SurroundingCommunityActivity"
             android:label="@string/title_surrounding_community" />
         <activity android:name=".mvp.ui.activity.WishWallActivity" />
-        <activity android:name=".mvp.ui.activity.DonateActivity" />
+        <activity android:name=".mvp.ui.activity.DonateActivity"
+            android:label="@string/title_donate"/>
         <activity
             android:name=".mvp.ui.activity.MyDonationActivity"
             android:label="@string/title_my_donation" />

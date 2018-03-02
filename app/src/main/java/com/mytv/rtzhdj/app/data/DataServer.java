@@ -134,7 +134,7 @@ public class DataServer {
             PartyMemberEntity partyMemberEntity = new PartyMemberEntity();
             partyMemberEntity.setId(i + 1);
             partyMemberEntity.setName("はたけ·カカシ 影の分身" + i);
-            partyMemberEntity.setUrl("http://p.3761.com/pic/89371406508468.jpg");
+            partyMemberEntity.setUrl("http://www.qq745.com/uploads/allimg/150217/1-15021G55929-50.jpg");
             partyMemberEntity.setDuty("党员");
             partyMemberEntity.setParty_branch("xxxxxxxx支部");
             partyMemberEntity.setMobile("189xxxx8888");
