@@ -37,7 +37,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-20
- * @update 2018-2-
+ * @update 2018-3-2     填充UI布局
  */
 @Route(path = ARoutePath.PATH_NEWS_DETAIL)
 public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implements NewsDetailContract.View {
