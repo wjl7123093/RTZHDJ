@@ -17,7 +17,15 @@ import android.widget.LinearLayout;
 
 import com.mytv.rtzhdj.R;
 
-
+/**
+ * WebProgressBar 网页加载进度条
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-3-3
+ * @update
+ */
 public class WebProgressBar extends LinearLayout {
 
 	private Context mContext;
