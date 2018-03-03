@@ -58,7 +58,8 @@
         <activity
             android:name=".mvp.ui.activity.NewsPovertyActivity"
             android:label="@string/title_news_poverty" />
-        <activity android:name=".mvp.ui.activity.NewsDetailActivity" />
+        <activity android:name=".mvp.ui.activity.NewsDetailActivity"
+            android:label="@string/title_news_detail"/>
         <activity android:name=".mvp.ui.activity.NewsLiveActivity" />
         <activity
             android:name=".mvp.ui.activity.TopicActivity"

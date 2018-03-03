@@ -41,6 +41,10 @@
     <string name="title_binding_mobile">绑定手机</string>
     <string name="title_signin">天天签到</string>
     <string name="title_grade_rank">成绩排行</string>
+    <string name="title_news_detail">新闻详情</string>
+    <string name="title_news_video_detail">新闻视讯详情</string>
+    <string name="title_courses_detail">课程详情</string>
+    <string name="title_courses_video_detail">课程视讯详情</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>
