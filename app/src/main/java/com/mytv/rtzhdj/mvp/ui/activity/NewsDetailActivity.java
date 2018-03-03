@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,9 +26,7 @@ import com.mytv.rtzhdj.mvp.contract.NewsDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.NewsDetailPresenter;
 
 import com.mytv.rtzhdj.R;
-
-
-import org.w3c.dom.Text;
+import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
 
 import butterknife.BindView;
 
@@ -38,6 +40,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  *
  * @crdate 2018-1-20
  * @update 2018-3-2     填充UI布局
+ *         2018-3-3     初始化 webview
  */
 @Route(path = ARoutePath.PATH_NEWS_DETAIL)
 public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implements NewsDetailContract.View {
@@ -53,6 +56,8 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
 
     @BindView(R.id.webView)
     WebView mWebView;
+    @BindView(R.id.webProgressBar)
+    WebProgressBar mWebProgressBar;
     @BindView(R.id.tv_comment)
     TextView mTvComment;
     @BindView(R.id.tv_comment_num)
@@ -82,6 +87,9 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
 
+        mPresenter.setActivity(NewsDetailActivity.this);
+        mPresenter.initWebview(mWebView, mWebProgressBar);
+        mPresenter.getNewsDetail("http://www.tencent.com/");
     }
 
 
@@ -112,5 +120,13 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
         finish();
     }
 
+    @Override
+    public void loadWap(String url) {
+        mWebView.loadUrl(url);
+    }
 
+    @Override
+    public void setWebviewProgress(int progress) {
+        mWebProgressBar.setProgress(progress);
+    }
 }

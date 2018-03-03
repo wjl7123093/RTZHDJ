@@ -16,6 +16,12 @@
 
     <include layout="@layout/include_toolbar"></include>
 
+    <com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar
+        android:id="@+id/webProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar>
+
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
