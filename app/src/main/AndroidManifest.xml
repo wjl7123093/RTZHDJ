@@ -131,7 +131,8 @@
         <activity
             android:name=".mvp.ui.activity.ConnectionTransferActivity"
             android:label="@string/title_connection_transfer" />
-        <activity android:name=".mvp.ui.activity.CommentActivity" />
+        <activity android:name=".mvp.ui.activity.CommentActivity"
+            android:label="@string/title_comment"/>
         <activity
             android:name=".mvp.ui.activity.UpdatePwdActivity"
             android:label="@string/title_update_pwd" />

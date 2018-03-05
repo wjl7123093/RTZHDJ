@@ -68,7 +68,7 @@
         android:layout_marginTop="@dimen/len_6"/>
     <!-- 点赞 -->
     <TextView
-        android:id="@+id/tv_star"
+        android:id="@+id/tv_star_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@mipmap/ic_launcher"

@@ -28,6 +28,13 @@
         android:layout_height="0dp"
         android:layout_weight="1"></WebView>
 
-    <include layout="@layout/include_comment_bar"></include>
+    <!--<include layout="@layout/include_comment_bar"></include>-->
+
+    <com.mytv.rtzhdj.mvp.ui.widget.CommentBar
+        android:id="@+id/commentbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.mytv.rtzhdj.mvp.ui.widget.CommentBar>
 
 </LinearLayout>

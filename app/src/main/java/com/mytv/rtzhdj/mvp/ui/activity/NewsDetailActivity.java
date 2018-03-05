@@ -58,14 +58,14 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
     WebView mWebView;
     @BindView(R.id.webProgressBar)
     WebProgressBar mWebProgressBar;
-    @BindView(R.id.tv_comment)
+    /*@BindView(R.id.tv_comment)
     TextView mTvComment;
     @BindView(R.id.tv_comment_num)
     TextView mTvCommentNum;
     @BindView(R.id.tv_star_num)
     TextView mTvStarNum;
     @BindView(R.id.iv_share)
-    ImageView mIvShare;
+    ImageView mIvShare;*/
 
 
     @Override
