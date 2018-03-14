@@ -240,7 +240,8 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 super.onBindViewHolder(holder, position);
                 holder.getView(R.id.rl_container).setOnClickListener(view -> {
                     // 新闻详情页
-                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
+//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
+                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_VIDEO_DETAIL).navigation();
                 });
 
             }

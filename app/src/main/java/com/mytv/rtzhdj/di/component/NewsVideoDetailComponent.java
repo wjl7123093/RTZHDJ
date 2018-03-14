@@ -1,0 +1,17 @@
+package com.mytv.rtzhdj.di.component;
+
+import com.jess.arms.di.scope.ActivityScope;
+
+import dagger.Component;
+
+import com.jess.arms.di.component.AppComponent;
+
+import com.mytv.rtzhdj.di.module.NewsVideoDetailModule;
+
+import com.mytv.rtzhdj.mvp.ui.activity.NewsVideoDetailActivity;
+
+@ActivityScope
+@Component(modules = NewsVideoDetailModule.class, dependencies = AppComponent.class)
+public interface NewsVideoDetailComponent {
+    void inject(NewsVideoDetailActivity activity);
+}

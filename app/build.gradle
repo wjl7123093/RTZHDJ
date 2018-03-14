@@ -215,5 +215,9 @@ dependencies {
     compile 'me.weyye.ColorTrackTabLayout:library:1.0.1'
     // switch-button
     compile 'com.github.zcweng:switch-button:0.0.3@aar'
+    // Calendar
     compile project(':CalendarDemo')
+    // GSYVideoPlayer
+    compile 'com.shuyu:GSYVideoPlayer:4.1.0'
+
 }
