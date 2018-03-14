@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
@@ -58,6 +60,13 @@ public class NewsVideoDetailActivity extends BaseActivity<NewsVideoDetailPresent
 
     @BindView(R.id.activity_detail_player)
     RelativeLayout activityDetailPlayer;
+
+    @BindView(R.id.tv_title)
+    TextView mTvTitle;
+    @BindView(R.id.tv_desc)
+    TextView mTvDesc;
+    @BindView(R.id.webView)
+    WebView mWebView;
 
     private boolean isPlay;
     private boolean isPause;
