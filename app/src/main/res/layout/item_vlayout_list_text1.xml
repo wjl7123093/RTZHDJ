@@ -8,8 +8,10 @@
  * @crdate 2018-1-22
  * @update 2018-1-31    修改了 padding 值(10 -> 16)
  *         2018-2-2     修改了UI（增加背景色，模拟数据）
+ *         2018-3-14    新增了 父窗体id
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"

@@ -1,8 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ * activity_course_detail.xml 新闻详情（文章）
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-20
+ * @update 2018-3-14     修改UI（填充布局）
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_40"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/len_16"
+        android:paddingRight="@dimen/len_16"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/secondary_text"
+            android:text="亲，学习 "/>
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_bg_course_time"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/secondary_text"
+            android:text="00:54"
+            android:padding="@dimen/len_4"/>
+        <TextView
+            android:id="@+id/tv_scores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/secondary_text"
+            android:text=" 可获取2积分哦！"/>
+    </LinearLayout>
+
+    <com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar
+        android:id="@+id/webProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar>
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></WebView>
+
+    <!--<include layout="@layout/include_comment_bar"></include>-->
+
+    <net.qiujuer.genius.ui.widget.Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/white"
+        android:text="完成学习"/>
 
 </LinearLayout>

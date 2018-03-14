@@ -149,7 +149,9 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-
+                holder.getView(R.id.ll_container).setOnClickListener(view -> {
+                    mRootView.setOnListClick(arrayPos, position);
+                });
 
             }
         };
