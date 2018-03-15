@@ -156,7 +156,11 @@
         <activity
             android:name=".mvp.ui.activity.GradeRankActivity"
             android:label="@string/title_grade_rank" />
-        <activity android:name=".mvp.ui.activity.NewsVideoDetailActivity"
+        <activity
+            android:name=".mvp.ui.activity.NewsVideoDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".mvp.ui.activity.CourseVideoDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"></activity>
     </application>

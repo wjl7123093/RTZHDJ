@@ -31,7 +31,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
  * 必修课／选修课／微党课 课程学习界面
- * 包含 视频／图文 内容
+ * 包含 图文 内容
  *
  * @author Fred_W
  * @version v1.0.0(1)
