@@ -5,4 +5,205 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/include_toolbar"></include>
+
+    <!-- 手机号 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_16dp">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/primary_text"
+            android:gravity="left|center_vertical"/>
+
+        <EditText
+            android:id="@+id/edt_mobile_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="手机号"
+            android:background="@color/white"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/font_16"
+            android:gravity="left|center_vertical"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_bg_grey"></View>
+
+    <!-- 所属社区 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_16dp">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="所属社区"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/primary_text"
+            android:gravity="left|center_vertical"/>
+
+        <EditText
+            android:id="@+id/edt_community"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请选择社区"
+            android:background="@color/white"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/font_16"
+            android:gravity="left|center_vertical"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_bg_grey"></View>
+
+    <!-- 密码 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_16dp">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/primary_text"
+            android:gravity="left|center_vertical"/>
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="6-20位数字与字母组合"
+            android:background="@color/white"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/font_16"
+            android:gravity="left|center_vertical"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_bg_grey"></View>
+
+    <!-- 确认密码 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_16dp">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="确认密码"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/primary_text"
+            android:gravity="left|center_vertical"/>
+
+        <EditText
+            android:id="@+id/edt_password2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="6-20位数字与字母组合"
+            android:background="@color/white"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/font_16"
+            android:gravity="left|center_vertical"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_bg_grey"></View>
+
+    <!-- 验证码 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_16dp">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="验证码"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/primary_text"
+            android:gravity="left|center_vertical"/>
+
+        <EditText
+            android:id="@+id/edt_vertify_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="收到的验证码"
+            android:background="@color/white"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/font_16"
+            android:gravity="left|center_vertical"
+            android:inputType="number"/>
+
+        <Button
+            android:id="@+id/btn_get_code"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="获取验证码"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_16"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/len_6"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_bg_grey"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_16dp">
+
+        <CheckBox
+            android:id="@+id/chk_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/sl_bg_register_rdobtn"
+            android:text="我已阅读并同意"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/font_16" />
+
+        <TextView
+            android:id="@+id/tv_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《智慧党建用户注册协议》"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_16" />
+    </LinearLayout>
+
+    <net.qiujuer.genius.ui.widget.Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/white"
+        android:background="@color/grey_500"
+        android:layout_margin="@dimen/len_16"/>
+
 </LinearLayout>

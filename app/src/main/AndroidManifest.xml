@@ -47,7 +47,8 @@
         <activity android:name=".mvp.ui.activity.StartActivity" />
         <activity android:name=".mvp.ui.activity.MainActivity" />
         <!--<activity android:name=".mvp.ui.activity.LoginActivity" />-->
-        <activity android:name=".mvp.ui.activity.RegisterActivity" />
+        <activity android:name=".mvp.ui.activity.RegisterActivity"
+            android:label="@string/title_register"/>
         <activity
             android:name=".mvp.ui.activity.SettingsActivity"
             android:label="@string/title_settings" />
