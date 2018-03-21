@@ -41,7 +41,8 @@
             android:layout_weight="1"
             android:textSize="@dimen/font_16"
             android:textColor="@color/primary_text"
-            android:hint="请输入验证码"/>
+            android:hint="请输入验证码"
+            android:maxLength="4"/>
 
         <com.mytv.rtzhdj.mvp.ui.widget.CodeView
             android:id="@+id/codeview"
