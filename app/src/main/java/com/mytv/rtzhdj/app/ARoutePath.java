@@ -28,6 +28,7 @@ package com.mytv.rtzhdj.app;
  *                        GradeRank 页面path
  *         2018-3-5  新增 NewsVideoDetail 页面path
  *         2018-3-15 新增 CourseVideoDetail 页面path
+ *         2018-3-21 新增 FindPwd 页面path
  */
 public interface ARoutePath {
 
@@ -135,5 +136,7 @@ public interface ARoutePath {
     String PATH_NEWS_VIDEO_DETAIL = "/rtdzdj/news_video_detail";
     // CourseVideoDetail 视频课程
     String PATH_COURSE_VIDEO_DETAIL = "/rtdzdj/course_video_detail";
+    // FindPwd 找回密码
+    String PATH_FIND_PWD = "/rtdzdj/find_pwd";
 
 }

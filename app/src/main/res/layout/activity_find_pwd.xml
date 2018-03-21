@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * activity_find_pwd.xml 找回密码
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-3-21
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <net.qiujuer.genius.ui.widget.EditText
+        android:id="@+id/edt_acc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/primary_text"
+        android:hint="用户名/手机号"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:layout_marginTop="@dimen/space_20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16">
+
+        <net.qiujuer.genius.ui.widget.EditText
+            android:id="@+id/edt_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/primary_text"
+            android:hint="请输入验证码"/>
+
+        <com.mytv.rtzhdj.mvp.ui.widget.CodeView
+            android:id="@+id/codeview"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/space_20dp"/>
+
+    </LinearLayout>
+
+    <!-- 下一步 -->
+    <net.qiujuer.genius.ui.widget.Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下一步"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="@dimen/space_30dp"
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:layout_marginBottom="@dimen/space_20dp"/>
+
+</LinearLayout>

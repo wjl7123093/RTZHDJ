@@ -123,6 +123,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void goForgetPwdActivity() {
-//        ARouter.getInstance().build(ARoutePath.PATH_FORGET_PWD).navigation();
+        ARouter.getInstance().build(ARoutePath.PATH_FIND_PWD).navigation();
     }
 }
