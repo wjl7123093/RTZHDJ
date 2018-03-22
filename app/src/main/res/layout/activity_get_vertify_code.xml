@@ -41,7 +41,7 @@
             android:textSize="@dimen/font_16"
             android:textColor="@color/primary_text"/>
 
-        <net.qiujuer.genius.ui.widget.Button
+        <Button
             android:id="@+id/btn_get_code"
             android:layout_width="120dp"
             android:layout_height="@dimen/len_40"
