@@ -169,7 +169,11 @@
         <activity
             android:name=".mvp.ui.activity.FindPwdActivity"
             android:label="@string/title_find_pwd" />
-        <activity android:name=".mvp.ui.activity.GetVertifyCodeActivity"></activity>
+        <activity
+            android:name=".mvp.ui.activity.GetVertifyCodeActivity"
+            android:label="@string/title_get_vertify_code" />
+        <activity android:name=".mvp.ui.activity.SetPwdActivity"
+            android:label="@string/title_set_pwd"></activity>
     </application>
 
 </manifest>

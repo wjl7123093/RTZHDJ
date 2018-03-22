@@ -48,6 +48,8 @@
     <string name="title_comment">评论列表</string>
     <string name="title_register">注册</string>
     <string name="title_find_pwd">找回密码</string>
+    <string name="title_get_vertify_code">获取验证码</string>
+    <string name="title_set_pwd">设置密码</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

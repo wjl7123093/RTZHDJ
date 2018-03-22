@@ -29,6 +29,7 @@ package com.mytv.rtzhdj.app;
  *         2018-3-5  新增 NewsVideoDetail 页面path
  *         2018-3-15 新增 CourseVideoDetail 页面path
  *         2018-3-21 新增 FindPwd/GetVertifyCode 页面path
+ *         2018-3-22 新增 SetPwd 页面path
  */
 public interface ARoutePath {
 
@@ -140,5 +141,7 @@ public interface ARoutePath {
     String PATH_FIND_PWD = "/rtdzdj/find_pwd";
     // GetVertifyCode 获取验证码
     String PATH_GET_VERTIFY_CODE = "/rtdzdj/get_vertify_code";
+    // SetPWd 设置密码
+    String PATH_SET_PWD = "/rtdzdj/set_pwd";
 
 }
