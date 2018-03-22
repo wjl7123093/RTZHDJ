@@ -166,8 +166,10 @@
             android:name=".mvp.ui.activity.CourseVideoDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".mvp.ui.activity.FindPwdActivity"
-            android:label="@string/title_find_pwd"></activity>
+        <activity
+            android:name=".mvp.ui.activity.FindPwdActivity"
+            android:label="@string/title_find_pwd" />
+        <activity android:name=".mvp.ui.activity.GetVertifyCodeActivity"></activity>
     </application>
 
 </manifest>
