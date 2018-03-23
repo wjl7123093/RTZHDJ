@@ -40,14 +40,14 @@
             android:name="com.mytv.rtzhdj.app.GlobalConfiguration"
             android:value="ConfigModule" />
 
-        <activity android:name=".mvp.ui.activity.GuideActivity">
+        <activity android:name=".mvp.ui.activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.ui.activity.StartActivity" />
+        <!--<activity android:name=".mvp.ui.activity.StartActivity" />-->
         <activity android:name=".mvp.ui.activity.MainActivity" />
         <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity
@@ -178,7 +178,7 @@
         <activity
             android:name=".mvp.ui.activity.SetPwdActivity"
             android:label="@string/title_set_pwd" />
-        <!--<activity android:name=".mvp.ui.activity.GuideActivity"></activity>-->
+        <activity android:name=".mvp.ui.activity.GuideActivity"></activity>
     </application>
 
 </manifest>
