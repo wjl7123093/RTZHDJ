@@ -288,4 +288,19 @@ public class StatusBarUtil {
         }
         return result;
     }
+
+    /**
+     * 隐藏状态栏
+     * @param activity
+     */
+    public static void hideStarusBar(Activity activity) {
+        Window window = activity.getWindow();
+        //隐藏标题栏
+        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //隐藏状态栏
+        //定义全屏参数
+        int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        //设置当前窗体为全屏显示
+        window.setFlags(flag, flag);
+    }
 }

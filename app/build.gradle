@@ -206,6 +206,8 @@ dependencies {
     }
     // banner
     compile 'com.youth.banner:banner:1.4.10'
+    // guide-banner
+    compile 'cn.bingoogolapple:bga-banner:2.2.4@aar'
     // BaseRecyclerViewAdapterHelper
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     // 文字轮播

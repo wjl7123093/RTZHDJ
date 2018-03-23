@@ -45,4 +45,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <!-- Splash-Guide style -->
+    <style name="AppTheme.Splash">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
 </resources>
