@@ -21,8 +21,10 @@
         AS的Gradle插件默认会启用Manifest Merger Tool，若Library项目中也定义了与主项目相同的属性
         （例如默认生成的android:icon和android:theme），则此时会合并失败，并报上面的错误。
     -->
-    <!-- tools:replace="android:icon,android:theme,android:label"
-        android:theme="@style/RTAppTheme.NoActionBar" -->
+    <!--
+ tools:replace="android:icon,android:theme,android:label"
+        android:theme="@style/RTAppTheme.NoActionBar"
+    -->
     <application
         android:name=".app.base.RTZHDJApplication"
         android:allowBackup="true"
@@ -38,14 +40,14 @@
             android:name="com.mytv.rtzhdj.app.GlobalConfiguration"
             android:value="ConfigModule" />
 
-        <activity android:name=".mvp.ui.activity.StartActivity">
+        <activity android:name=".mvp.ui.activity.GuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <activity android:name=".mvp.ui.activity.StartActivity" /> -->
+        <activity android:name=".mvp.ui.activity.StartActivity" />
         <activity android:name=".mvp.ui.activity.MainActivity" />
         <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity
@@ -173,8 +175,10 @@
         <activity
             android:name=".mvp.ui.activity.GetVertifyCodeActivity"
             android:label="@string/title_get_vertify_code" />
-        <activity android:name=".mvp.ui.activity.SetPwdActivity"
-            android:label="@string/title_set_pwd"></activity>
+        <activity
+            android:name=".mvp.ui.activity.SetPwdActivity"
+            android:label="@string/title_set_pwd" />
+        <!--<activity android:name=".mvp.ui.activity.GuideActivity"></activity>-->
     </application>
 
 </manifest>
