@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -141,7 +142,10 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
         partyMemberAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showMessage("" + Integer.toString(position));
+//                showMessage("" + Integer.toString(position));
+
+                ARouter.getInstance().build(ARoutePath.PATH_SEND_MSG)
+                        .withString("id", "").withString("name", "").navigation();
             }
         });
 

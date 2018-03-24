@@ -47,7 +47,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".mvp.ui.activity.StartActivity" />-->
+        <!-- <activity android:name=".mvp.ui.activity.StartActivity" /> -->
         <activity android:name=".mvp.ui.activity.MainActivity" />
         <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity
@@ -178,7 +178,11 @@
         <activity
             android:name=".mvp.ui.activity.SetPwdActivity"
             android:label="@string/title_set_pwd" />
-        <activity android:name=".mvp.ui.activity.GuideActivity"></activity>
+        <activity android:name=".mvp.ui.activity.GuideActivity" />
+        <activity android:name=".mvp.ui.activity.SendMsgActivity"
+            android:label="@string/title_send_msg"/>
+        <activity android:name=".mvp.ui.activity.MyMsgActivity"
+            android:label="@string/title_my_msg"></activity>
     </application>
 
 </manifest>
