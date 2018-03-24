@@ -31,7 +31,7 @@ package com.mytv.rtzhdj.app;
  *         2018-3-21 新增 FindPwd/GetVertifyCode 页面path
  *         2018-3-22 新增 SetPwd 页面path
  *         2018-3-23 新增 Guide 页面path
- *         2018-3-24 新增 SendMsg/MyMsg 页面path
+ *         2018-3-24 新增 SendMsg/MyMsg/PartyMemberDetail 页面path
  */
 public interface ARoutePath {
 
@@ -151,5 +151,7 @@ public interface ARoutePath {
     String PATH_SEND_MSG = "/rtdzdj/send_msg";
     // MyMsg 我的私信
     String PATH_MY_MSG = "/rtdzdj/my_msg";
+    // PartyMemberDetail 党员详情
+    String PATH_PARTY_MEMBER_DETAIL = "/rtdzdj/party_member_detail";
 
 }

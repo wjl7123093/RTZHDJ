@@ -56,6 +56,7 @@ public class StartActivity extends BaseActivity<StartPresenter> implements Start
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        StatusBarUtil.hideStarusBar(StartActivity.this);
         return R.layout.activity_start; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 

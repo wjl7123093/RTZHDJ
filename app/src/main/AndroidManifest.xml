@@ -179,10 +179,14 @@
             android:name=".mvp.ui.activity.SetPwdActivity"
             android:label="@string/title_set_pwd" />
         <activity android:name=".mvp.ui.activity.GuideActivity" />
-        <activity android:name=".mvp.ui.activity.SendMsgActivity"
-            android:label="@string/title_send_msg"/>
-        <activity android:name=".mvp.ui.activity.MyMsgActivity"
-            android:label="@string/title_my_msg"></activity>
+        <activity
+            android:name=".mvp.ui.activity.SendMsgActivity"
+            android:label="@string/title_send_msg" />
+        <activity
+            android:name=".mvp.ui.activity.MyMsgActivity"
+            android:label="@string/title_my_msg" />
+        <activity android:name=".mvp.ui.activity.PartyMemberDetailActivity"
+            android:label="@string/title_party_member_detail"></activity>
     </application>
 
 </manifest>

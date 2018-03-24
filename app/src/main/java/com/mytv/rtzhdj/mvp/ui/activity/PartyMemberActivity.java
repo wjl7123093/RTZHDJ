@@ -151,10 +151,8 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                showMessage("" + Integer.toString(position));
 
-
-
-//                ARouter.getInstance().build(ARoutePath.PATH_SEND_MSG)
-//                        .withString("id", "").withString("name", "").navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_PARTY_MEMBER_DETAIL)
+                        .withString("id", "").navigation();
             }
         });
 

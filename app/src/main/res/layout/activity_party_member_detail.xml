@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_grey"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">x
+
+            <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/len_16">
+
+                <org.raphets.roundimageview.RoundImageView
+                    android:id="@+id/iv_header"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@mipmap/ic_logo"
+                    app:border_color="@color/divider"
+                    app:border_width="1dp"
+                    app:leftBottom_corner_radius="0dp"
+                    app:leftTop_corner_radius="30dp"
+                    app:rightBottom_corner_radius="30dp"
+                    app:rightTop_corner_radius="0dp"
+                    app:type="circle" />
+                <!-- 名称 -->
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/iv_header"
+                    android:layout_marginLeft="@dimen/len_10"
+                    android:layout_marginTop="@dimen/len_10"
+                    android:layout_toRightOf="@id/iv_header"
+                    android:gravity="center"
+                    android:text="张三"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/font_16" />
+                <!--  -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/iv_header"
+                    android:layout_marginBottom="@dimen/len_10"
+                    android:layout_marginLeft="@dimen/len_10"
+                    android:layout_toRightOf="@id/iv_header"
+                    android:gravity="center"
+                    android:text="无"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/font_16" />
+
+            </RelativeLayout>
+
+            <!-- 所属支部 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_10"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/len_16">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="所属支部"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/font_16" />
+
+                <TextView
+                    android:id="@+id/tv_party_branch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="left|center_vertical"
+                    android:text="xxxxxxx第二党支部"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/font_16" />
+
+            </LinearLayout>
+
+            <!-- 联系方式 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_10"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/len_16">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="联系方式"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/font_16" />
+
+                <TextView
+                    android:id="@+id/tv_contacts"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="left|center_vertical"
+                    android:text="手机: 15833336666\n\n座机: 无\n\n紧急联系方式: 无"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/font_16" />
+
+            </LinearLayout>
+
+            <!-- 其他联系方式 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/len_16">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="其他联系方式"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/font_16" />
+
+                <TextView
+                    android:id="@+id/tv_other_contacts"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="left|center_vertical"
+                    android:text="无"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/font_16" />
+
+            </LinearLayout>
+
+            <!-- 通讯地址 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_10"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/len_16">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="通讯地址"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/font_16" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="left|center_vertical"
+                    android:text="无"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/font_16" />
+
+            </LinearLayout>
+
+            <!-- QQ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_10"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/len_16">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="QQ"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/font_16" />
+
+                <TextView
+                    android:id="@+id/tv_qq"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="left|center_vertical"
+                    android:text="无"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/font_16" />
+
+            </LinearLayout>
+
+            <!-- 邮箱 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/len_10"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/len_16">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="邮箱"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/font_16" />
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="left|center_vertical"
+                    android:text="无"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/font_16" />
+
+            </LinearLayout>
+        </LinearLayout>
+        </ScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>
