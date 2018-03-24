@@ -55,6 +55,8 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
     RelativeLayout mBtnToolbarBack;
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
+    @BindView(R.id.toolbar_menu_tv)
+    TextView mTvMenu;
 
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
@@ -82,8 +84,13 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
 
     @Override
     public void initData(Bundle savedInstanceState) {
-//        mBtnToolbarMenu.setVisibility(View.GONE);
+        mBtnToolbarMenu.setVisibility(View.GONE);
+        mTvMenu.setVisibility(View.VISIBLE);
 
+        mTvMenu.setText("我的私信");
+        mTvMenu.setOnClickListener(view -> {
+            ARouter.getInstance().build(ARoutePath.PATH_MY_MSG).navigation();
+        });
         mPresenter.setActivity(PartyMemberActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initAdapter();
@@ -144,8 +151,10 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                showMessage("" + Integer.toString(position));
 
-                ARouter.getInstance().build(ARoutePath.PATH_SEND_MSG)
-                        .withString("id", "").withString("name", "").navigation();
+
+
+//                ARouter.getInstance().build(ARoutePath.PATH_SEND_MSG)
+//                        .withString("id", "").withString("name", "").navigation();
             }
         });
 

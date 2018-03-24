@@ -2,9 +2,11 @@ package com.mytv.rtzhdj.mvp.ui.adapter;
 
 import android.content.Context;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.DataServer;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
@@ -34,6 +36,11 @@ public class PartyMemberAdapter extends BaseQuickAdapter<PartyMemberEntity, Base
         helper.setText(R.id.tv_phone, item.getMobile());
 
         ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_header), item.getUrl());
+
+        helper.getView(R.id.tv_msg).setOnClickListener(view -> {
+            ARouter.getInstance().build(ARoutePath.PATH_SEND_MSG)
+                    .withString("id", "").withString("name", "").navigation();
+        });
     }
 
 
