@@ -208,11 +208,11 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                holder.getView(R.id.btn_my_report).setOnClickListener(view -> {
-
+                holder.getView(R.id.tv_report).setOnClickListener(view -> {
+                    ARouter.getInstance().build(ARoutePath.PATH_DOUBLE_REPORTING).navigation();
                 });
                 holder.getView(R.id.btn_my_report).setOnClickListener(view -> {
-
+                    ARouter.getInstance().build(ARoutePath.PATH_MY_REPORTING).navigation();
                 });
             }
         };

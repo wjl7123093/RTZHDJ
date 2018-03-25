@@ -7,19 +7,24 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.annotations.NonNull;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 import javax.inject.Inject;
 
 import com.mytv.rtzhdj.mvp.contract.DoubleReportingContract;
+import com.mytv.rtzhdj.mvp.ui.activity.DoubleReportingActivity;
 
 
 @ActivityScope
-public class DoubleReportingPresenter extends BasePresenter<DoubleReportingContract.Model, DoubleReportingContract.View> {
+public class DoubleReportingPresenter extends BasePresenter<DoubleReportingContract.Model, DoubleReportingContract.View>
+    implements DoubleReportingContract.Presenter {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
+
+    private DoubleReportingActivity mActivity;
 
     @Inject
     public DoubleReportingPresenter(DoubleReportingContract.Model model, DoubleReportingContract.View rootView
@@ -41,4 +46,13 @@ public class DoubleReportingPresenter extends BasePresenter<DoubleReportingContr
         this.mApplication = null;
     }
 
+    @Override
+    public void setActivity(DoubleReportingActivity activity) {
+        mActivity = activity;
+    }
+
+    @Override
+    public void callMethodOfDoDoubleReport(@NonNull String memberId, @NonNull String communityId) {
+
+    }
 }

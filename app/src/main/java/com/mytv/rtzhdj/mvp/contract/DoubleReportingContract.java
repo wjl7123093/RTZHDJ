@@ -1,7 +1,11 @@
 package com.mytv.rtzhdj.mvp.contract;
 
+import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.mvp.ui.activity.DoubleReportingActivity;
+
+import io.reactivex.annotations.NonNull;
 
 
 public interface DoubleReportingContract {
@@ -13,5 +17,13 @@ public interface DoubleReportingContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
+    }
+
+    //Presenter控制器
+    interface Presenter extends IPresenter {
+        void setActivity(DoubleReportingActivity activity);
+        // 调用 双报道接口
+        void callMethodOfDoDoubleReport(@NonNull String memberId,
+                                 @NonNull String communityId);
     }
 }

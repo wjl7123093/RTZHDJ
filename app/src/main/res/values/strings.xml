@@ -53,6 +53,8 @@
     <string name="title_send_msg">发送私信</string>
     <string name="title_my_msg">我的私信</string>
     <string name="title_party_member_detail">党员详情</string>
+    <string name="title_double_reporting">双报到</string>
+    <string name="title_my_reporting">我的报到</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

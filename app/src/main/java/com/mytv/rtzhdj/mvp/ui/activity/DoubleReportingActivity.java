@@ -3,6 +3,11 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
@@ -18,6 +23,10 @@ import com.mytv.rtzhdj.mvp.presenter.DoubleReportingPresenter;
 import com.mytv.rtzhdj.R;
 
 
+import net.qiujuer.genius.ui.widget.Button;
+
+import butterknife.BindView;
+
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
@@ -31,6 +40,22 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 @Route(path = ARoutePath.PATH_DOUBLE_REPORTING)
 public class DoubleReportingActivity extends BaseActivity<DoubleReportingPresenter> implements DoubleReportingContract.View {
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView mTvToolbarTitle;
+    @BindView(R.id.toolbar_back)
+    RelativeLayout mBtnToolbarBack;
+    @BindView(R.id.toolbar_menu)
+    RelativeLayout mBtnToolbarMenu;
+
+    @BindView(R.id.edt_community)
+    EditText mEdtCommunity;
+    @BindView(R.id.tv_choose_community)
+    TextView mTvChooseCommunity;
+    @BindView(R.id.btn_ok)
+    Button mBtnOk;
 
 
     @Override
@@ -50,6 +75,12 @@ public class DoubleReportingActivity extends BaseActivity<DoubleReportingPresent
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mBtnToolbarMenu.setVisibility(View.GONE);
+
+        mTvChooseCommunity.setOnClickListener(view -> {});
+        mBtnOk.setOnClickListener(view -> {
+            mPresenter.callMethodOfDoDoubleReport("member_id", "community_id");
+        });
 
     }
 

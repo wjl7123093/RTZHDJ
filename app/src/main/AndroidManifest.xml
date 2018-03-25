@@ -86,8 +86,10 @@
         <activity android:name=".mvp.ui.activity.ElectiveCourseActivity" />
         <activity android:name=".mvp.ui.activity.CourseDetailActivity" />
         <activity android:name=".mvp.ui.activity.MyTaskActivity" />
-        <activity android:name=".mvp.ui.activity.DoubleReportingActivity" />
-        <activity android:name=".mvp.ui.activity.MyReportingActivity" />
+        <activity android:name=".mvp.ui.activity.DoubleReportingActivity"
+            android:label="@string/title_double_reporting"/>
+        <activity android:name=".mvp.ui.activity.MyReportingActivity"
+            android:label="@string/title_my_reporting"/>
         <activity android:name=".mvp.ui.activity.OrganizationalActivity" />
         <activity
             android:name=".mvp.ui.activity.VolunteerServiceActivity"
