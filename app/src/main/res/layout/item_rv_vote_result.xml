@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_rv_vote_result.xml recyclerview 投票作品排名列表项
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-3-26
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tv_rank"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:text="第1名"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:text="《作品名称》xxxx"
+        android:maxLines="2"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/tv_votes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/primary_text"
+        android:text="票数: 40"
+        android:gravity="center"/>
+
+</LinearLayout>

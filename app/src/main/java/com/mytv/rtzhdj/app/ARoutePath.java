@@ -32,6 +32,7 @@ package com.mytv.rtzhdj.app;
  *         2018-3-22 新增 SetPwd 页面path
  *         2018-3-23 新增 Guide 页面path
  *         2018-3-24 新增 SendMsg/MyMsg/PartyMemberDetail 页面path
+ *         2018-3-26 新增 VoteDetail/VoteBrief/VoteResult/VoteEntryDetail 页面path
  */
 public interface ARoutePath {
 
@@ -153,5 +154,13 @@ public interface ARoutePath {
     String PATH_MY_MSG = "/rtdzdj/my_msg";
     // PartyMemberDetail 党员详情
     String PATH_PARTY_MEMBER_DETAIL = "/rtdzdj/party_member_detail";
+    // VoteDetail 投票详情
+    String PATH_VOTE_DETAIL = "/rtdzdj/vote_detail";
+    // VoteBrief 投票简介
+    String PATH_VOTE_BRIEF = "/rtdzdj/vote_brief";
+    // VoteResult 投票结果
+    String PATH_VOTE_RESULT = "/rtdzdj/vote_result";
+    // VoteEntryDetail 投票作品详情
+    String PATH_VOTE_ENTRY_DETAIL = "/rtdzdj/vote_entry_detail";
 
 }

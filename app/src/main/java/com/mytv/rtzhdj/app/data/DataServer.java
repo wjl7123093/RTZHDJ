@@ -9,6 +9,7 @@ import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionaireEntitiy;
 import com.mytv.rtzhdj.app.data.entity.TestingEntity;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
+import com.mytv.rtzhdj.app.data.entity.VoteEntrylEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -207,6 +208,28 @@ public class DataServer {
             rankEntity.setTime("2017-12-11 09:43");
             rankEntity.setRank(i + 1);
             list.add(rankEntity);
+        }
+        return list;
+    }
+
+    /**
+     * 获取 投票作品数据
+     * @param lenth
+     * @return
+     */
+    public static List<VoteEntrylEntity> getVoteEntryData(int lenth) {
+        List<VoteEntrylEntity> list = new ArrayList<>();
+        for (int i = 0; i < lenth; i++) {
+            VoteEntrylEntity voteEntrylEntity = new VoteEntrylEntity();
+            voteEntrylEntity.setId(i + 1);
+            voteEntrylEntity.setName("《无题》");
+            voteEntrylEntity.setAuthor("佚名");
+            voteEntrylEntity.setImg_url("http://p.3761.com/pic/89371406508468.jpg");
+            voteEntrylEntity.setContent("作品描述作品描述作品描述作品描述作品描述作品描述");
+            voteEntrylEntity.setDatetime("2017-12-11 09:43");
+            voteEntrylEntity.setVotes(40 - i);
+            voteEntrylEntity.setRank(i + 1);
+            list.add(voteEntrylEntity);
         }
         return list;
     }

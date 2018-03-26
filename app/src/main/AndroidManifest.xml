@@ -86,10 +86,12 @@
         <activity android:name=".mvp.ui.activity.ElectiveCourseActivity" />
         <activity android:name=".mvp.ui.activity.CourseDetailActivity" />
         <activity android:name=".mvp.ui.activity.MyTaskActivity" />
-        <activity android:name=".mvp.ui.activity.DoubleReportingActivity"
-            android:label="@string/title_double_reporting"/>
-        <activity android:name=".mvp.ui.activity.MyReportingActivity"
-            android:label="@string/title_my_reporting"/>
+        <activity
+            android:name=".mvp.ui.activity.DoubleReportingActivity"
+            android:label="@string/title_double_reporting" />
+        <activity
+            android:name=".mvp.ui.activity.MyReportingActivity"
+            android:label="@string/title_my_reporting" />
         <activity android:name=".mvp.ui.activity.OrganizationalActivity" />
         <activity
             android:name=".mvp.ui.activity.VolunteerServiceActivity"
@@ -187,8 +189,13 @@
         <activity
             android:name=".mvp.ui.activity.MyMsgActivity"
             android:label="@string/title_my_msg" />
-        <activity android:name=".mvp.ui.activity.PartyMemberDetailActivity"
-            android:label="@string/title_party_member_detail"></activity>
+        <activity
+            android:name=".mvp.ui.activity.PartyMemberDetailActivity"
+            android:label="@string/title_party_member_detail" />
+        <activity android:name=".mvp.ui.activity.VoteDetailActivity" />
+        <activity android:name=".mvp.ui.activity.VoteBriefActivity" />
+        <activity android:name=".mvp.ui.activity.VoteResultActivity" />
+        <activity android:name=".mvp.ui.activity.VoteEntryDetailActivity"></activity>
     </application>
 
 </manifest>
