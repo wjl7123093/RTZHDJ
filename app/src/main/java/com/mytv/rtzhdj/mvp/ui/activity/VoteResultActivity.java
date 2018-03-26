@@ -3,11 +3,14 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
@@ -19,6 +22,11 @@ import com.mytv.rtzhdj.mvp.contract.VoteResultContract;
 import com.mytv.rtzhdj.mvp.presenter.VoteResultPresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.adapter.VoteDetailAdapter;
+import com.mytv.rtzhdj.mvp.ui.adapter.VoteResultAdapter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 
 import butterknife.BindView;
@@ -46,6 +54,14 @@ public class VoteResultActivity extends BaseActivity<VoteResultPresenter> implem
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
 
+    @BindView(R.id.refreshLayout)
+    RefreshLayout mRefreshLayout;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+
+    private VoteResultAdapter mAdapter;
+    private static final int PAGE_SIZE = 10;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -64,7 +80,12 @@ public class VoteResultActivity extends BaseActivity<VoteResultPresenter> implem
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mBtnToolbarMenu.setVisibility(View.GONE);
 
+        mPresenter.setActivity(VoteResultActivity.this);
+        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
+        initAdapter();
+        initRefreshLayout();
     }
 
 
@@ -93,6 +114,37 @@ public class VoteResultActivity extends BaseActivity<VoteResultPresenter> implem
     @Override
     public void killMyself() {
         finish();
+    }
+
+    private void initRefreshLayout() {
+        mRefreshLayout.setEnableRefresh(false);
+        mRefreshLayout.setEnableLoadmore(false);
+        /*mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000*//*,false*//*);//传入false表示刷新失败
+            }
+        });
+        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000*//*,false*//*);//传入false表示加载失败
+            }
+        });*/
+    }
+
+    private void initAdapter() {
+        mAdapter = new VoteResultAdapter(VoteResultActivity.this, PAGE_SIZE);
+        mAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                showMessage("" + Integer.toString(position));
+            }
+        });
+
     }
 
 
