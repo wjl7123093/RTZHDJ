@@ -166,7 +166,8 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showMessage("" + Integer.toString(position));
+//                showMessage("" + Integer.toString(position));
+                ARouter.getInstance().build(ARoutePath.PATH_VOTE_ENTRY_DETAIL).navigation();
             }
         });
 

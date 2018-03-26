@@ -1,8 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ * activity_vote_entry_detail.xml 投票作品详情
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-3-26
+ * @update
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_image1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/white"
+                android:padding="@dimen/len_10"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="fitCenter"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/len_40"
+                android:orientation="horizontal"
+                android:background="@color/app_bg_grey"
+                android:layout_marginTop="@dimen/len_10"
+                android:layout_marginBottom="@dimen/len_10">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:textSize="@dimen/font_16"
+                    android:textColor="@color/primary_text"
+                    android:gravity="center"
+                    android:background="@color/white"
+                    android:text="《无题》 作者: 佚名"/>
+                <TextView
+                    android:id="@+id/tv_rank"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_16"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:background="@color/white"
+                    android:text="第2名"
+                    android:layout_marginLeft="@dimen/len_4"/>
+                <TextView
+                    android:id="@+id/tv_votes"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_16"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+                    android:background="@color/white"
+                    android:text="40票"
+                    android:layout_marginLeft="@dimen/len_4"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_image2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/len_10"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="fitCenter"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

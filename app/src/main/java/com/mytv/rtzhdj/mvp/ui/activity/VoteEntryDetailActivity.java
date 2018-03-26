@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -46,6 +48,17 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
 
+    @BindView(R.id.iv_image1)
+    ImageView mIvImage1;
+    @BindView(R.id.iv_image2)
+    ImageView mIvImage2;
+    @BindView(R.id.tv_title)
+    TextView mTvTitle;
+    @BindView(R.id.tv_rank)
+    TextView mTvRank;
+    @BindView(R.id.tv_votes)
+    TextView mTvVotes;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -64,6 +77,7 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mBtnToolbarMenu.setVisibility(View.GONE);
 
     }
 
