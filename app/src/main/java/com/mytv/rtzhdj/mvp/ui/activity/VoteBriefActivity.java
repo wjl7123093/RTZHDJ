@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.webkit.WebView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -46,6 +48,9 @@ public class VoteBriefActivity extends BaseActivity<VoteBriefPresenter> implemen
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
 
+    @BindView(R.id.webView)
+    WebView mWebView;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -64,6 +69,7 @@ public class VoteBriefActivity extends BaseActivity<VoteBriefPresenter> implemen
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mBtnToolbarMenu.setVisibility(View.GONE);
 
     }
 
