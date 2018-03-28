@@ -37,7 +37,8 @@
         android:orientation="horizontal"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:minHeight="@dimen/len_36">
+        android:minHeight="@dimen/len_36"
+        android:layout_marginTop="@dimen/len_10">
         <TextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
