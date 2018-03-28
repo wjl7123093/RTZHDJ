@@ -193,12 +193,17 @@
             android:name=".mvp.ui.activity.PartyMemberDetailActivity"
             android:label="@string/title_party_member_detail" />
         <activity android:name=".mvp.ui.activity.VoteDetailActivity" />
-        <activity android:name=".mvp.ui.activity.VoteBriefActivity"
-            android:label="@string/title_vote_brief"/>
-        <activity android:name=".mvp.ui.activity.VoteResultActivity"
-            android:label="@string/title_vote_result"/>
-        <activity android:name=".mvp.ui.activity.VoteEntryDetailActivity"
-            android:label="@string/title_vote_entry_detail"></activity>
+        <activity
+            android:name=".mvp.ui.activity.VoteBriefActivity"
+            android:label="@string/title_vote_brief" />
+        <activity
+            android:name=".mvp.ui.activity.VoteResultActivity"
+            android:label="@string/title_vote_result" />
+        <activity
+            android:name=".mvp.ui.activity.VoteEntryDetailActivity"
+            android:label="@string/title_vote_entry_detail" />
+        <activity android:name=".mvp.ui.activity.VolunteerServiceDetailActivity"
+            android:label="@string/title_volunteer_service_detail"></activity>
     </application>
 
 </manifest>

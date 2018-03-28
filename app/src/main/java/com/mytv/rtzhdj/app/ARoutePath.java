@@ -33,6 +33,7 @@ package com.mytv.rtzhdj.app;
  *         2018-3-23 新增 Guide 页面path
  *         2018-3-24 新增 SendMsg/MyMsg/PartyMemberDetail 页面path
  *         2018-3-26 新增 VoteDetail/VoteBrief/VoteResult/VoteEntryDetail 页面path
+ *         2018-3-28 新增 VolunteerServiceDetail 页面path
  */
 public interface ARoutePath {
 
@@ -162,5 +163,7 @@ public interface ARoutePath {
     String PATH_VOTE_RESULT = "/rtdzdj/vote_result";
     // VoteEntryDetail 投票作品详情
     String PATH_VOTE_ENTRY_DETAIL = "/rtdzdj/vote_entry_detail";
+    // VolunteerServiceDetail 志愿服务详情
+    String PATH_VOLUNTEER_SERVICE_DETAIL = "/rtdzdj/volunteer_service_detail";
 
 }

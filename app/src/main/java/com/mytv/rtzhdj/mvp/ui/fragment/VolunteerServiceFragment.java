@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.di.component.DaggerVolunteerServiceComponent;
 import com.mytv.rtzhdj.di.module.VolunteerServiceModule;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceContract;
@@ -140,7 +142,9 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
         voluteerServiceAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showMessage("" + Integer.toString(position));
+//                showMessage("" + Integer.toString(position));
+
+                ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL).navigation();
             }
         });
 
