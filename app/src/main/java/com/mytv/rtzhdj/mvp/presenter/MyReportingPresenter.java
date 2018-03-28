@@ -1,6 +1,8 @@
 package com.mytv.rtzhdj.mvp.presenter;
 
 import android.app.Application;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -11,7 +13,10 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 import javax.inject.Inject;
 
+import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.mvp.contract.MyReportingContract;
+import com.mytv.rtzhdj.mvp.ui.activity.MyReportingActivity;
+import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
 
 
 @ActivityScope
@@ -40,5 +45,4 @@ public class MyReportingPresenter extends BasePresenter<MyReportingContract.Mode
         this.mImageLoader = null;
         this.mApplication = null;
     }
-
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_rv_my_report.xml recyclerview 我的报到列表项
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-3-28
+ * @update
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/len_16">
+
+    <TextView
+        android:id="@+id/tv_party_branch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/primary_text"
+        android:text="XXXXXXXX第二党支部"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/len_24"
+        android:layout_height="@dimen/len_24"
+        android:layout_toRightOf="@id/tv_party_branch"
+        android:layout_marginLeft="@dimen/len_10"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_10"
+        android:text="个人所在机构"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/sp_bg_mine_btn"
+        android:layout_below="@id/tv_party_branch"
+        android:layout_marginTop="@dimen/len_10"/>
+
+</RelativeLayout>

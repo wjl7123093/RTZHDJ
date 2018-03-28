@@ -1,7 +1,11 @@
 package com.mytv.rtzhdj.mvp.contract;
 
+import android.support.v7.widget.RecyclerView;
+
+import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.mvp.ui.activity.MyReportingActivity;
 
 
 public interface MyReportingContract {
