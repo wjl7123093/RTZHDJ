@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * sp_bg_round_white.xml 我的任务圆形进度节点 背景（白）
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-3-29
+ * @update
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval" >
+    <solid android:color="@color/white" />
+    <!--<corners android:radius="5dp"/>-->
+
+</shape>
