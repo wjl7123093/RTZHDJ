@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  * activity_my_task.xml 我的任务页
  *
  * @author Fred_W
@@ -12,255 +11,282 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <include layout="@layout/include_toolbar"></include>
 
-    <RelativeLayout
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/len_16"
-        app:layout_collapseMode="parallax">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <org.raphets.roundimageview.RoundImageView
-            android:id="@+id/iv_header"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@mipmap/ic_logo"
-            app:border_width="1dp"
-            app:border_color="@color/divider"
-            app:leftBottom_corner_radius="0dp"
-            app:leftTop_corner_radius="30dp"
-            app:rightBottom_corner_radius="30dp"
-            app:rightTop_corner_radius="0dp"
-            app:type="circle"
-            android:layout_alignParentLeft="true"/>
-        <!-- 积分 -->
-        <TextView
-            android:id="@+id/tv_scores"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
-            android:textColor="@color/white"
-            android:text="本月获得积分: 2"
-            android:gravity="center"
-            android:layout_alignTop="@id/iv_header"
-            android:layout_toRightOf="@id/iv_header"
-            android:layout_marginLeft="@dimen/len_10"/>
-        <!-- 正能量值 -->
-        <TextView
-            android:id="@+id/tv_power_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
-            android:textColor="@color/white"
-            android:text="您的正能量值: 10"
-            android:gravity="center"
-            android:layout_toRightOf="@id/iv_header"
-            android:layout_marginLeft="@dimen/len_10"
-            android:layout_below="@id/tv_scores"
-            android:layout_marginTop="@dimen/len_16"/>
-        <!-- 距离下一积分任务差 -->
-        <TextView
-            android:id="@+id/tv_differ_from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
-            android:textColor="@color/white"
-            android:text="距下一积分分任务还差: 8 请继续加油!"
-            android:gravity="center"
-            android:layout_alignBottom="@id/iv_header"
-            android:layout_toRightOf="@id/iv_header"
-            android:layout_marginLeft="@dimen/len_10"/>
-
-        <FrameLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iv_header"
-            android:layout_marginTop="@dimen/len_10"
-            android:layout_marginLeft="@dimen/len_14"
-            android:layout_marginRight="@dimen/len_14">
+            android:layout_height="match_parent">
 
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/len_4"
-                android:background="@color/white"
-                android:layout_marginTop="@dimen/len_10"
-                android:layout_marginRight="@dimen/space_20dp"></View>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
-                <TextView
-                    android:layout_width="@dimen/len_24"
-                    android:layout_height="@dimen/len_24"
-                    android:background="@drawable/sp_bg_round_white"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/font_12"
-                    android:text="0"
-                    android:gravity="center"/>
+                <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:orientation="vertical"
+                    android:padding="@dimen/len_16"
+                    app:layout_collapseMode="parallax">
+
+                    <org.raphets.roundimageview.RoundImageView
+                        android:id="@+id/iv_header"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_alignParentLeft="true"
+                        android:src="@mipmap/ic_logo"
+                        app:border_color="@color/divider"
+                        app:border_width="1dp"
+                        app:leftBottom_corner_radius="0dp"
+                        app:leftTop_corner_radius="30dp"
+                        app:rightBottom_corner_radius="30dp"
+                        app:rightTop_corner_radius="0dp"
+                        app:type="circle" />
+                    <!-- 积分 -->
+                    <TextView
+                        android:id="@+id/tv_scores"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/iv_header"
+                        android:layout_marginLeft="@dimen/len_10"
+                        android:layout_toRightOf="@id/iv_header"
+                        android:gravity="center"
+                        android:text="本月获得积分: 2"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_16" />
+                    <!-- 正能量值 -->
+                    <TextView
+                        android:id="@+id/tv_power_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_scores"
+                        android:layout_marginLeft="@dimen/len_10"
+                        android:layout_marginTop="@dimen/len_16"
+                        android:layout_toRightOf="@id/iv_header"
+                        android:gravity="center"
+                        android:text="您的正能量值: 10"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_14" />
+                    <!-- 距离下一积分任务差 -->
+                    <TextView
+                        android:id="@+id/tv_differ_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/iv_header"
+                        android:layout_marginLeft="@dimen/len_10"
+                        android:layout_toRightOf="@id/iv_header"
+                        android:gravity="center"
+                        android:text="距下一积分分任务还差: 8 请继续加油!"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_14" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_header"
+                        android:layout_marginLeft="@dimen/len_14"
+                        android:layout_marginRight="@dimen/len_14"
+                        android:layout_marginTop="@dimen/len_10">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/len_4"
+                            android:layout_marginRight="@dimen/space_30dp"
+                            android:layout_marginTop="@dimen/len_10"
+                            android:background="@color/white"></View>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="@dimen/len_24"
+                                android:layout_height="@dimen/len_24"
+                                android:background="@drawable/sp_bg_round_white"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_12" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/len_6"
+                                android:gravity="center"
+                                android:text="开始"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/font_12" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="60dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="@dimen/len_24"
+                                android:layout_height="@dimen/len_24"
+                                android:background="@drawable/sp_bg_round_white"
+                                android:gravity="center"
+                                android:text="10"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_12" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/len_6"
+                                android:gravity="center"
+                                android:text="任务一"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/font_12" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="160dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="@dimen/len_24"
+                                android:layout_height="@dimen/len_24"
+                                android:background="@drawable/sp_bg_round_white"
+                                android:gravity="center"
+                                android:text="30"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_12" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/len_6"
+                                android:gravity="center"
+                                android:text="任务二"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/font_12" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="260dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="@dimen/len_24"
+                                android:layout_height="@dimen/len_24"
+                                android:background="@drawable/sp_bg_round_white"
+                                android:gravity="center"
+                                android:text="50"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_12" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/len_6"
+                                android:gravity="center"
+                                android:text="任务三"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/font_12" />
+
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                </RelativeLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/font_12"
-                    android:text="开始"
+                    android:layout_marginLeft="@dimen/len_16"
+                    android:layout_marginTop="@dimen/len_10"
                     android:gravity="center"
-                    android:layout_marginTop="@dimen/len_6"/>
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="任务1: 获得 10 正能量值\n任务2: 获得 30 正能量值\n任务3: 获得 50 正能量值"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/font_14" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="60dp">
-                <TextView
-                    android:layout_width="@dimen/len_24"
-                    android:layout_height="@dimen/len_24"
-                    android:background="@drawable/sp_bg_round_white"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/font_12"
-                    android:text="10"
-                    android:gravity="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/font_12"
-                    android:text="任务一"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/len_6"/>
+                    android:layout_marginTop="@dimen/len_10"
+                    android:background="@color/white"
+                    android:paddingLeft="@dimen/len_16"
+                    android:paddingRight="@dimen/len_16">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_1"
+                        android:layout_width="@dimen/len_40"
+                        android:layout_height="@dimen/len_32"
+                        android:background="@color/primary_dark"
+                        android:gravity="center"
+                        android:text="？"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/len_20"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="160dp">
+                    <TextView
+                        android:id="@+id/tv_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/len_32"
+                        android:layout_marginLeft="@dimen/len_2"
+                        android:layout_toRightOf="@id/tv_1"
+                        android:gravity="center"
+                        android:text="如何获取积分"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/len_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/len_32"
+                        android:layout_alignTop="@id/tv_2"
+                        android:layout_toRightOf="@id/tv_2"
+                        android:gravity="center"
+                        android:text="(每10积分自动兑换10正能量值)"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/len_12" />
+
+                </RelativeLayout>
+
                 <TextView
-                    android:layout_width="@dimen/len_24"
-                    android:layout_height="@dimen/len_24"
-                    android:background="@drawable/sp_bg_round_white"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/font_12"
-                    android:text="30"
-                    android:gravity="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_rules_desc"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/font_12"
-                    android:text="任务二"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/len_6"/>
+                    android:layout_marginLeft="@dimen/len_16"
+                    android:layout_marginRight="@dimen/len_16"
+                    android:layout_marginTop="@dimen/len_10"
+                    android:background="@drawable/sp_bg_sign_desc"
+                    android:lineSpacingMultiplier="1.5"
+                    android:paddingBottom="@dimen/len_6"
+                    android:paddingLeft="@dimen/len_10"
+                    android:paddingTop="@dimen/len_6"
+                    android:text="@string/my_task_rules_desc"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/font_14" />
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="280dp">
-                <TextView
-                    android:layout_width="@dimen/len_24"
-                    android:layout_height="@dimen/len_24"
-                    android:background="@drawable/sp_bg_round_white"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/font_12"
-                    android:text="50"
-                    android:gravity="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/font_12"
-                    android:text="任务三"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/len_6"/>
-
-            </LinearLayout>
-
-        </FrameLayout>
-
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/primary_text"
-        android:textSize="@dimen/font_14"
-        android:text="任务1: 获得 10 正能量值\n任务2: 获得 30 正能量值\n任务3: 获得 50 正能量值"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/len_10"
-        android:layout_marginLeft="@dimen/len_16"
-        android:lineSpacingMultiplier="1.5"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginTop="@dimen/len_10"
-        android:paddingLeft="@dimen/len_16"
-        android:paddingRight="@dimen/len_16">
-
-        <TextView
-            android:id="@+id/tv_1"
-            android:layout_width="@dimen/len_40"
-            android:layout_height="@dimen/len_32"
-            android:background="@color/primary_dark"
-            android:text="？"
-            android:textColor="@color/white"
-            android:textSize="@dimen/len_20"
-            android:textStyle="bold"
-            android:gravity="center"/>
-        <TextView
-            android:id="@+id/tv_2"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/len_32"
-            android:text="如何获取积分"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/len_16"
-            android:layout_toRightOf="@id/tv_1"
-            android:layout_marginLeft="@dimen/len_2"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/len_32"
-            android:text="(每10积分自动兑换10正能量值)"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/len_14"
-            android:layout_toRightOf="@id/tv_2"
-            android:layout_alignTop="@id/tv_2"
-            android:gravity="center"/>
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/tv_rules_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/sp_bg_sign_desc"
-        android:textSize="@dimen/font_14"
-        android:textColor="@color/primary_text"
-        android:text="@string/my_task_rules_desc"
-        android:layout_marginLeft="@dimen/len_16"
-        android:layout_marginRight="@dimen/len_16"
-        android:lineSpacingMultiplier="1.5"
-        android:paddingLeft="@dimen/len_10"
-        android:paddingTop="@dimen/len_6"
-        android:paddingBottom="@dimen/len_6"
-        android:layout_marginTop="@dimen/len_10"/>
+        </ScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

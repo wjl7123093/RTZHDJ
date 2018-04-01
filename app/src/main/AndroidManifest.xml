@@ -85,7 +85,8 @@
             android:label="@string/title_compulsory_course" />
         <activity android:name=".mvp.ui.activity.ElectiveCourseActivity" />
         <activity android:name=".mvp.ui.activity.CourseDetailActivity" />
-        <activity android:name=".mvp.ui.activity.MyTaskActivity" />
+        <activity android:name=".mvp.ui.activity.MyTaskActivity"
+            android:label="@string/title_my_task"/>
         <activity
             android:name=".mvp.ui.activity.DoubleReportingActivity"
             android:label="@string/title_double_reporting" />

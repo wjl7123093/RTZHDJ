@@ -3,6 +3,10 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
@@ -16,7 +20,12 @@ import com.mytv.rtzhdj.mvp.contract.MyTaskContract;
 import com.mytv.rtzhdj.mvp.presenter.MyTaskPresenter;
 
 import com.mytv.rtzhdj.R;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -32,6 +41,17 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 @Route(path = ARoutePath.PATH_MY_TASK)
 public class MyTaskActivity extends BaseActivity<MyTaskPresenter> implements MyTaskContract.View {
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView mTvToolbarTitle;
+    @BindView(R.id.toolbar_back)
+    RelativeLayout mBtnToolbarBack;
+    @BindView(R.id.toolbar_menu)
+    RelativeLayout mBtnToolbarMenu;
+
+    @BindView(R.id.refreshLayout)
+    RefreshLayout mRefreshLayout;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -50,6 +70,9 @@ public class MyTaskActivity extends BaseActivity<MyTaskPresenter> implements MyT
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mBtnToolbarMenu.setVisibility(View.GONE);
+
+        initRefreshLayout();
 
     }
 
@@ -79,6 +102,12 @@ public class MyTaskActivity extends BaseActivity<MyTaskPresenter> implements MyT
     @Override
     public void killMyself() {
         finish();
+    }
+
+
+    private void initRefreshLayout() {
+        mRefreshLayout.setEnableRefresh(false);
+        mRefreshLayout.setEnableLoadmore(false);
     }
 
 
