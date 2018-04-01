@@ -9,8 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
@@ -25,6 +27,8 @@ import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.EffectEvaluationFragment;
 
+
+import org.raphets.roundimageview.RoundImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +58,17 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
     @BindView(R.id.vp_content)
     ViewPager mViewPager;
 
+    @BindView(R.id.iv_header)
+    RoundImageView mIvHeader;
+    @BindView(R.id.tv_scores)
+    TextView mTvScores;
+    @BindView(R.id.tv_power_num)
+    TextView mTvPowerNum;
+    @BindView(R.id.tv_differ_from)
+    TextView mTvDifferFrom;
+    @BindView(R.id.tv_query_task)
+    TextView mTvQueryTask;
+
     private ArrayList<Fragment> mFragments;
     private String[] titles;
     private String mTitle;      // 标题栏标题
@@ -78,6 +93,9 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
     public void initData(Bundle savedInstanceState) {
         titles = new String[]{"全部", "未测评", "已结束"};
 
+        mTvQueryTask.setOnClickListener(view -> {
+            ARouter.getInstance().build(ARoutePath.PATH_MY_TASK).navigation();
+        });
         collapsingToolbar.setTitleEnabled(false);
     }
 

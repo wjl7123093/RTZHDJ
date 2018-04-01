@@ -25,6 +25,8 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 
+import org.raphets.roundimageview.RoundImageView;
+
 import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
@@ -49,6 +51,15 @@ public class MyTaskActivity extends BaseActivity<MyTaskPresenter> implements MyT
     RelativeLayout mBtnToolbarBack;
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
+
+    @BindView(R.id.iv_header)
+    RoundImageView mIvHeader;
+    @BindView(R.id.tv_scores)
+    TextView mTvScores;
+    @BindView(R.id.tv_power_num)
+    TextView mTvPowerNum;
+    @BindView(R.id.tv_differ_from)
+    TextView mTvDifferFrom;
 
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
