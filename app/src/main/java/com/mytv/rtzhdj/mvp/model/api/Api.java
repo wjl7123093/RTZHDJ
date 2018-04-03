@@ -12,6 +12,6 @@ package com.mytv.rtzhdj.mvp.model.api;
 public interface Api {
 
     String APP_DOMAIN = "https://www.baidu.com/";
-    int RequestSuccess = 0;
+    int RequestSuccess = 200;
 
 }
