@@ -3,6 +3,7 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -41,8 +42,8 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
 
     @BindView(R.id.banner_guide_background)
     BGABanner mBackgroundBanner;
-    @BindView(R.id.banner_guide_foreground)
-    BGABanner mForegroundBanner;
+//    @BindView(R.id.banner_guide_foreground)
+//    BGABanner mForegroundBanner;
 
 
     @Override
@@ -113,7 +114,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
          * 在 BGABanner 里已经帮开发者处理了防止重复点击事件
          * 在 BGABanner 里已经帮开发者处理了「跳过按钮」和「进入按钮」的显示与隐藏
          */
-        mForegroundBanner.setEnterSkipViewIdAndDelegate(R.id.btn_guide_enter, R.id.tv_guide_skip, new BGABanner.GuideDelegate() {
+        mBackgroundBanner.setEnterSkipViewIdAndDelegate(R.id.btn_guide_enter, R.id.tv_guide_skip, new BGABanner.GuideDelegate() {
             @Override
             public void onClickEnterOrSkip() {
                 ARouter.getInstance().build(ARoutePath.PATH_MAIN).navigation();
@@ -126,15 +127,19 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         // Bitmap 的宽高在 maxWidth maxHeight 和 minWidth minHeight 之间
         BGALocalImageSize localImageSize = new BGALocalImageSize(720, 1280, 320, 640);
         // 设置数据源
+//        mBackgroundBanner.setData(localImageSize, ImageView.ScaleType.CENTER_CROP,
+//                R.mipmap.uoko_guide_background_1,
+//                R.mipmap.uoko_guide_background_2,
+//                R.mipmap.uoko_guide_background_3);
         mBackgroundBanner.setData(localImageSize, ImageView.ScaleType.CENTER_CROP,
-                R.mipmap.uoko_guide_background_1,
-                R.mipmap.uoko_guide_background_2,
-                R.mipmap.uoko_guide_background_3);
+                R.mipmap.bg_guide_1,
+                R.mipmap.bg_guide_2,
+                R.mipmap.bg_guide_3);
 
-        mForegroundBanner.setData(localImageSize, ImageView.ScaleType.CENTER_CROP,
-                R.mipmap.uoko_guide_foreground_1,
-                R.mipmap.uoko_guide_foreground_2,
-                R.mipmap.uoko_guide_foreground_3);
+//        mForegroundBanner.setData(localImageSize, ImageView.ScaleType.CENTER_CROP,
+//                R.mipmap.uoko_guide_foreground_1,
+//                R.mipmap.uoko_guide_foreground_2,
+//                R.mipmap.uoko_guide_foreground_3);
     }
 
 

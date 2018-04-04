@@ -66,7 +66,7 @@ public class StartActivity extends BaseActivity<StartPresenter> implements Start
 
             ARouter.getInstance().build(ARoutePath.PATH_GUIDE).navigation();
             StartActivity.this.finish();
-        }, 3000);
+        }, 2000);
     }
 
 
