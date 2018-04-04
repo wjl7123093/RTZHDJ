@@ -11,9 +11,9 @@ package com.mytv.rtzhdj.app.data.entity;
  */
 public class UserRegisterEntity {
 
-    private int userId;
-    private String PublishmentSystemId;
-    private String Mobile;
+    private int userId;                     // 用户id
+    private String PublishmentSystemId;     // 党支部id
+    private String Mobile;                  // 手机
 
     public int getUserId() {
         return userId;

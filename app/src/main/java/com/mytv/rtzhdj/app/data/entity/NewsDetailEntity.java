@@ -11,10 +11,10 @@ package com.mytv.rtzhdj.app.data.entity;
  */
 public class NewsDetailEntity {
 
-    private int contentId;
-    private String title;
-    private int digs;
-    private int comments;
+    private int contentId;      // 内容id（跟在url末尾）
+    private String title;       // 文章标题
+    private int digs;           // 点赞数
+    private int comments;       // 评论数
 
     public int getContentId() {
         return contentId;

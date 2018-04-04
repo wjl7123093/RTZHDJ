@@ -11,8 +11,8 @@ package com.mytv.rtzhdj.app.data.entity;
  */
 public class UserCategoryEntity {
 
-    private int categoryId;
-    private String categoryName;
+    private int categoryId;         // 用户类型id
+    private String categoryName;    // 用户类型名称（党员/群众）
 
     public int getCategoryId() {
         return categoryId;

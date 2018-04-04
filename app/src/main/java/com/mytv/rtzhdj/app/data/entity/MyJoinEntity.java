@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class MyJoinEntity {
 
-    private List<VolunteerBlock> volunteerBlock;
-    private List<CommunityBlock> communityBlock;
+    private List<VolunteerBlock> volunteerBlock;    // 志愿服务
+    private List<CommunityBlock> communityBlock;    // 社区动态
 
     public List<VolunteerBlock> getVolunteerBlock() {
         return volunteerBlock;

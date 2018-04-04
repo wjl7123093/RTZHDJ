@@ -11,7 +11,7 @@ package com.mytv.rtzhdj.app.data.entity;
  */
 public class VerifyCodeEntity {
 
-    private String verificationCode;
+    private String verificationCode;    // 验证码
 
     public String getVerificationCode() {
         return verificationCode;

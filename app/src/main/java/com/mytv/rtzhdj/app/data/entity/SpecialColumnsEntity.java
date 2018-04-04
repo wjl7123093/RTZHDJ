@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class SpecialColumnsEntity {
 
-    private String imageUrl;
-    private String content;
-    private List<SpecialColumn> subObjs;
+    private String imageUrl;                // 专题背景图地址
+    private String content;                 // 内容
+    private List<SpecialColumn> subObjs;    // 专题二级栏目列表
 
     public String getImageUrl() {
         return imageUrl;
@@ -43,7 +43,7 @@ public class SpecialColumnsEntity {
 
     class SpecialColumn {
         private int nodeId;
-        private String title;
+        private String title;   // 栏目名称
 
         public int getNodeId() {
             return nodeId;

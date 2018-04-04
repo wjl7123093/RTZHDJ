@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class HomeEntity {
 
-    private List<SpecialBlock> specialBlock;
-    private List<NoticeBlock> noticeBlock;
-    private List<FocusNewsBlock> focusNewsBlock;
-    private List<AdBlock> adBlock;
-    private List<PublicSpiritedBlock> publicSpiritedBlock;
+    private List<SpecialBlock> specialBlock;                // 专题
+    private List<NoticeBlock> noticeBlock;                  // 通知
+    private List<FocusNewsBlock> focusNewsBlock;            // 要闻
+    private List<AdBlock> adBlock;                          // 广告
+    private List<PublicSpiritedBlock> publicSpiritedBlock;  // 推荐活动
     private int myPositiveValue;    // 正能量值
 
     public List<SpecialBlock> getSpecialBlock() {

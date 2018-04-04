@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class PartySubNewsEntity {
 
-    private List<ChannelNewsBlock> channelNewsBlock;
+    private List<ChannelNewsBlock> channelNewsBlock;    // 二级新闻列表
 
     public List<ChannelNewsBlock> getChannelNewsBlock() {
         return channelNewsBlock;
@@ -24,11 +24,11 @@ public class PartySubNewsEntity {
     }
 
     class ChannelNewsBlock {
-        private int ArticleId;
-        private String Title;
-        private int Digs;
-        private int Comments;
-        private String ImageUrl;
+        private int ArticleId;      // 文章id
+        private String Title;       // 标题
+        private int Digs;           // 点赞数
+        private int Comments;       // 评论数
+        private String ImageUrl;    // 缩略图地址
 
         public int getArticleId() {
             return ArticleId;

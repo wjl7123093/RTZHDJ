@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class PartyNewsEntity {
 
-    private List<SpecialBlock> specialBlock;
-    private List<ImportandBlock> importandBlock;
+    private List<SpecialBlock> specialBlock;        // 专题
+    private List<ImportandBlock> importandBlock;    // 要闻
 
     public List<SpecialBlock> getSpecialBlock() {
         return specialBlock;

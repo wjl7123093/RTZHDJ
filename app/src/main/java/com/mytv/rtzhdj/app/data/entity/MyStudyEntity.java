@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class MyStudyEntity {
 
-    private List<UserInfoBlock> UserInfoBlock;
-    private List<CoursewareBlock> CoursewareBlock;
+    private List<UserInfoBlock> UserInfoBlock;          // 用户信息
+    private List<CoursewareBlock> CoursewareBlock;      // 课件信息
 
     public List<MyStudyEntity.UserInfoBlock> getUserInfoBlock() {
         return UserInfoBlock;

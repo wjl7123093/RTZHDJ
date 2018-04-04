@@ -12,7 +12,7 @@ package com.mytv.rtzhdj.app.data.entity;
 public class PartyColumnsEntity {
 
     private int Node;
-    private String Title;
+    private String Title;   // 栏目标题
 
     public int getNode() {
         return Node;

@@ -12,9 +12,9 @@ package com.mytv.rtzhdj.app.data.entity;
 public class VoteListEntity {
 
     private int id;
-    private String title;
-    private String startTime;
-    private String endTime;
+    private String title;           // 标题
+    private String startTime;       // 起始时间
+    private String endTime;         // 结束时间
 
     public int getId() {
         return id;
