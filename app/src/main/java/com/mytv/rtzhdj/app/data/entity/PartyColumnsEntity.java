@@ -7,19 +7,19 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-4-4
- * @update
+ * @update 2018-4-5 更新了 NodeId 字段
  */
 public class PartyColumnsEntity {
 
-    private int Node;
+    private int NodeId;
     private String Title;   // 栏目标题
 
-    public int getNode() {
-        return Node;
+    public int getNodeId() {
+        return NodeId;
     }
 
-    public void setNode(int node) {
-        Node = node;
+    public void setNodeId(int nodeId) {
+        NodeId = nodeId;
     }
 
     public String getTitle() {

@@ -9,7 +9,7 @@ import java.util.List;
  * @version v1.0.0(1)
  *
  * @crdate 2018-4-4
- * @update
+ * @update 2018-4-5 update 结构
  */
 public class VolunteerDetailEntity {
 
@@ -21,9 +21,9 @@ public class VolunteerDetailEntity {
     private int enrollCount;                // 报名限额
     private int signedup;                   // 已报名人数
     private int score;                      // 活动评分
-    private int id;
-    private List<Comment> commentObjs;      // 评论
-    private List<SubColumn> subObjs;        // 子栏目
+    private int id;                         // 通过ID关联url显示内容到下面，活动回顾暂时没有设计
+//    private List<Comment> commentObjs;      // 评论
+//    private List<SubColumn> subObjs;        // 子栏目
 
     public String getTitle() {
         return title;
@@ -95,73 +95,6 @@ public class VolunteerDetailEntity {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public List<Comment> getCommentObjs() {
-        return commentObjs;
-    }
-
-    public void setCommentObjs(List<Comment> commentObjs) {
-        this.commentObjs = commentObjs;
-    }
-
-    public List<SubColumn> getSubObjs() {
-        return subObjs;
-    }
-
-    public void setSubObjs(List<SubColumn> subObjs) {
-        this.subObjs = subObjs;
-    }
-
-    class Comment {
-        private String username;
-        private String adddate;
-        private String content;
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getAdddate() {
-            return adddate;
-        }
-
-        public void setAdddate(String adddate) {
-            this.adddate = adddate;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-    }
-
-    class SubColumn {
-        private int nodeId;
-        private String title;
-
-        public int getNodeId() {
-            return nodeId;
-        }
-
-        public void setNodeId(int nodeId) {
-            this.nodeId = nodeId;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
     }
 
 }

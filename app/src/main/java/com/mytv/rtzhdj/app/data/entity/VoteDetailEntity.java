@@ -16,7 +16,7 @@ public class VoteDetailEntity {
     private int rank;           // 排名
     private String author;      // 作者
     private int voteCount;      // 投票数
-    private String imagurl;     // 作品图片地址
+    private String imageUrl;    // 作品图片地址
 
     public int getId() {
         return id;
@@ -58,11 +58,11 @@ public class VoteDetailEntity {
         this.voteCount = voteCount;
     }
 
-    public String getImagurl() {
-        return imagurl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImagurl(String imagurl) {
-        this.imagurl = imagurl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

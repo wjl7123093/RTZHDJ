@@ -9,12 +9,14 @@ import java.util.List;
  * @version v1.0.0(1)
  *
  * @crdate 2018-4-4
- * @update
+ * @update 2018-4-5 update 结构
  */
 public class MyStudyEntity {
 
     private List<UserInfoBlock> UserInfoBlock;          // 用户信息
-    private List<CoursewareBlock> CoursewareBlock;      // 课件信息
+    private List<CoursewareBlock> CourseChooseBlock;    // 选修课
+    private List<CoursewareBlock> CourseMustBlock;      // 必修课
+    private List<CoursewareBlock> CourseLittleBlock;    // 微党课
 
     public List<MyStudyEntity.UserInfoBlock> getUserInfoBlock() {
         return UserInfoBlock;
@@ -24,18 +26,35 @@ public class MyStudyEntity {
         UserInfoBlock = userInfoBlock;
     }
 
-    public List<MyStudyEntity.CoursewareBlock> getCoursewareBlock() {
-        return CoursewareBlock;
+    public List<CoursewareBlock> getCourseChooseBlock() {
+        return CourseChooseBlock;
     }
 
-    public void setCoursewareBlock(List<MyStudyEntity.CoursewareBlock> coursewareBlock) {
-        CoursewareBlock = coursewareBlock;
+    public void setCourseChooseBlock(List<CoursewareBlock> courseChooseBlock) {
+        CourseChooseBlock = courseChooseBlock;
+    }
+
+    public List<CoursewareBlock> getCourseMustBlock() {
+        return CourseMustBlock;
+    }
+
+    public void setCourseMustBlock(List<CoursewareBlock> courseMustBlock) {
+        CourseMustBlock = courseMustBlock;
+    }
+
+    public List<CoursewareBlock> getCourseLittleBlock() {
+        return CourseLittleBlock;
+    }
+
+    public void setCourseLittleBlock(List<CoursewareBlock> courseLittleBlock) {
+        CourseLittleBlock = courseLittleBlock;
     }
 
     class UserInfoBlock {
         private String UserName;
         private String PhotoUrl;
-        private String StudyLog;
+        private int NoStudyNum;
+        private int YesStudyNum;
         private String Integral;
 
         public String getUserName() {
@@ -54,12 +73,20 @@ public class MyStudyEntity {
             PhotoUrl = photoUrl;
         }
 
-        public String getStudyLog() {
-            return StudyLog;
+        public int getNoStudyNum() {
+            return NoStudyNum;
         }
 
-        public void setStudyLog(String studyLog) {
-            StudyLog = studyLog;
+        public void setNoStudyNum(int noStudyNum) {
+            NoStudyNum = noStudyNum;
+        }
+
+        public int getYesStudyNum() {
+            return YesStudyNum;
+        }
+
+        public void setYesStudyNum(int yesStudyNum) {
+            YesStudyNum = yesStudyNum;
         }
 
         public String getIntegral() {
