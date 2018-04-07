@@ -92,13 +92,13 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         mBtnToolbarMenu.setVisibility(View.GONE);
 
         mTvLink.setOnClickListener(view -> goWebviewActivity());
-        mBtnGetVertifyCode.setOnClickListener(view -> mPresenter.callMethodOfGetCode());
+        mBtnGetVertifyCode.setOnClickListener(view -> mPresenter.callMethodOfGetCode(
+                mEdtVertifyCode.getText().toString().trim()));
         mBtnRegister.setOnClickListener(view -> mPresenter.callMethodOfDoRegister(
                 mEdtMobilePhone.getText().toString().trim(),
                 mEdtCommunity.getText().toString().trim(),
                 mEdtPassword.getText().toString().trim(),
-                mEdtPassword2.getText().toString().trim(),
-                mEdtVertifyCode.getText().toString().trim()));
+                mEdtPassword2.getText().toString().trim()));
         mChkAgree.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) ->
             setBtnRegisterBg(b));
 

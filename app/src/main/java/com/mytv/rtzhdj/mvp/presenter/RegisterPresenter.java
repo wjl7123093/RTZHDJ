@@ -8,13 +8,22 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
+import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
+import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
 import com.mytv.rtzhdj.mvp.contract.RegisterContract;
-import com.mytv.rtzhdj.mvp.ui.activity.LoginActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.RegisterActivity;
+
+import java.util.List;
 
 
 @ActivityScope
@@ -52,32 +61,94 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
         mActivity = activity;
     }
 
+    @Override
+    public void callMethodOfGetUserCategory(boolean refresh) {
+        mModel.getUserCategory(refresh)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<List<UserCategoryEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull List<UserCategoryEntity> liveMultiItems) {
+
+
+                    }
+                });
+    }
+
     /**
      * 调用 获取验证码接口
      */
     @Override
-    public void callMethodOfGetCode() {
+    public void callMethodOfGetCode(@NonNull String telNumber) {
+        mModel.getVerifyCode(telNumber)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<VerifyCodeEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull VerifyCodeEntity liveMultiItems) {
 
+
+                    }
+                });
     }
 
     /**
      * 调用 注册接口
      * @param mobile    手机号
-     * @param community 社区
+     * @param publishmentSystemId 社区
      * @param pwd       密码
      * @param pwd2      密码2
-     * @param code      验证码
      */
     @Override
     public void callMethodOfDoRegister(@NonNull String mobile,
-                                       @NonNull String community,
+                                       @NonNull String publishmentSystemId,
                                        @NonNull String pwd,
-                                       @NonNull String pwd2,
-                                       @NonNull String code) {
+                                       @NonNull String pwd2) {
         if (!pwd.equals(pwd2)) {
             mRootView.showMessage("密码不一致");
             return;
         }
+
+        mModel.getUserRegister(mobile, publishmentSystemId, pwd)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<UserRegisterEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull UserRegisterEntity liveMultiItems) {
+
+
+                    }
+                });
 
     }
 }

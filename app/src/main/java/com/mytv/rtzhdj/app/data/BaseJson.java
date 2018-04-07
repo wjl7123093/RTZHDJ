@@ -1,6 +1,6 @@
 package com.mytv.rtzhdj.app.data;
 
-import com.mytv.rtzhdj.mvp.model.api.Api;
+import com.mytv.rtzhdj.app.data.api.Api;
 
 import java.io.Serializable;
 

@@ -19,13 +19,11 @@ import com.jess.arms.di.module.GlobalConfigModule;
 import com.jess.arms.integration.ConfigModule;
 import com.mytv.rtzhdj.BuildConfig;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.model.api.Api;
+import com.mytv.rtzhdj.app.data.api.Api;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
-import java.io.File;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
 

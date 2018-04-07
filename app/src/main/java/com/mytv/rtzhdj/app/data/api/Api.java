@@ -1,4 +1,4 @@
-package com.mytv.rtzhdj.mvp.model.api;
+package com.mytv.rtzhdj.app.data.api;
 
 /**
  * 定义 Api 统一接口 URL
