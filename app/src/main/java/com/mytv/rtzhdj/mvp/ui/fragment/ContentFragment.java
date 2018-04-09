@@ -94,8 +94,13 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
         initRefreshLayout();
 
-        // 获取党建新闻数据
-        mPresenter.callMethodOfGetPartyRecommend("typeId", PAGE_SIZE, false);
+        if (0 == getArguments().getInt("position")) {
+            // 获取党建新闻推荐列表数据
+            mPresenter.callMethodOfGetPartyRecommend("typeId", PAGE_SIZE, false);
+        } else {
+            // 获取党建新闻二级列表(除推荐)数据
+            mPresenter.callMethodOfGetPartySubList(0, "typeId", PAGE_SIZE, false);
+        }
     }
 
     /**

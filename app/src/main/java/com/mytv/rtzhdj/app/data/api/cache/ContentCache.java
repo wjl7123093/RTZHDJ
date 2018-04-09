@@ -3,6 +3,7 @@ package com.mytv.rtzhdj.app.data.api.cache;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
+import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,5 +25,8 @@ public interface ContentCache {
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
     Observable<Reply<PartyRecommendEntity>> getPartyRecommend(Observable<PartyRecommendEntity> data, EvictProvider evictProvider);
+
+    @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
+    Observable<Reply<PartySubNewsEntity>> getPartySubNews(Observable<PartySubNewsEntity> data, EvictProvider evictProvider);
 
 }

@@ -14,6 +14,7 @@ import com.mytv.rtzhdj.app.data.api.cache.ContentCache;
 import com.mytv.rtzhdj.app.data.api.service.ContentService;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
+import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
 
 import io.reactivex.Observable;
@@ -52,6 +53,22 @@ public class ContentModel extends BaseModel implements ContentContract.Model {
                     public ObservableSource<PartyRecommendEntity> apply(@NonNull Observable<PartyRecommendEntity> resultObservable) throws Exception {
                         return mRepositoryManager.obtainCacheService(ContentCache.class)
                                 .getPartyRecommend(resultObservable
+                                        , new EvictProvider(update))
+                                .map(resultReply -> resultReply.getData());
+                    }
+                });
+    }
+
+    @Override
+    public Observable<PartySubNewsEntity> getPartySubList(int nodeId, String typedId, int count, boolean update) {
+        return Observable.just(mRepositoryManager
+                .obtainRetrofitService(ContentService.class)
+                .getPartySubList(nodeId, typedId, count))
+                .flatMap(new Function<Observable<PartySubNewsEntity>, ObservableSource<PartySubNewsEntity>>() {
+                    @Override
+                    public ObservableSource<PartySubNewsEntity> apply(@NonNull Observable<PartySubNewsEntity> resultObservable) throws Exception {
+                        return mRepositoryManager.obtainCacheService(ContentCache.class)
+                                .getPartySubNews(resultObservable
                                         , new EvictProvider(update))
                                 .map(resultReply -> resultReply.getData());
                     }
