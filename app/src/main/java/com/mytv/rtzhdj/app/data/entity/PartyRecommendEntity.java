@@ -3,15 +3,15 @@ package com.mytv.rtzhdj.app.data.entity;
 import java.util.List;
 
 /**
- * PartyNewsEntity   党建新闻实体类
+ * PartyRecommendEntity   党建新闻推荐实体类
  *
  * @author Fred_W
  * @version v1.0.0(1)
  *
  * @crdate 2018-4-4
- * @update
+ * @update 2018-4-9 更新类名
  */
-public class PartyNewsEntity {
+public class PartyRecommendEntity {
 
     private List<SpecialBlock> specialBlock;        // 专题
     private List<ImportandBlock> importandBlock;    // 要闻

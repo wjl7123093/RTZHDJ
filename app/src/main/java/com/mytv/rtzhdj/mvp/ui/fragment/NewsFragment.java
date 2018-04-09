@@ -97,6 +97,9 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
 
         titles = new String[]{"推荐", "党建快讯", "基层动态", "干部任免", "身边典型", "老党员之声", "他山之石"};
         initTab();
+
+        // 获取二级栏目标题
+        mPresenter.callMethodOfGetPartyColumns("typeId", false);
     }
 
     /**

@@ -93,6 +93,9 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
             newsAdapter.removeAllHeaderView();
 
         initRefreshLayout();
+
+        // 获取党建新闻数据
+        mPresenter.callMethodOfGetPartyRecommend("typeId", PAGE_SIZE, false);
     }
 
     /**

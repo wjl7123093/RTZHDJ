@@ -10,7 +10,17 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.api.cache.ContentCache;
+import com.mytv.rtzhdj.app.data.api.service.ContentService;
+import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.rx_cache2.EvictProvider;
 
 
 @ActivityScope
@@ -32,4 +42,19 @@ public class ContentModel extends BaseModel implements ContentContract.Model {
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<PartyRecommendEntity> getPartyRecommend(String typedId, int count, boolean update) {
+        return Observable.just(mRepositoryManager
+                .obtainRetrofitService(ContentService.class)
+                .getPartyRecommend(typedId, count))
+                .flatMap(new Function<Observable<PartyRecommendEntity>, ObservableSource<PartyRecommendEntity>>() {
+                    @Override
+                    public ObservableSource<PartyRecommendEntity> apply(@NonNull Observable<PartyRecommendEntity> resultObservable) throws Exception {
+                        return mRepositoryManager.obtainCacheService(ContentCache.class)
+                                .getPartyRecommend(resultObservable
+                                        , new EvictProvider(update))
+                                .map(resultReply -> resultReply.getData());
+                    }
+                });
+    }
 }
