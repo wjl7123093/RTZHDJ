@@ -19,13 +19,20 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.Constant;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
 import com.mytv.rtzhdj.mvp.contract.StudyContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
@@ -181,5 +188,29 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 });
             }
         };
+    }
+
+    @Override
+    public void callMethodOfGetMyStudy(int userId, int count, boolean update) {
+        mModel.getMyStudy(userId, count, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<MyStudyEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull MyStudyEntity liveMultiItems) {
+
+
+                    }
+                });
     }
 }

@@ -46,6 +46,8 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class StudyFragment extends BaseFragment<StudyPresenter> implements StudyContract.View {
 
+    private final static int PAGE_SIZE = 10;
+
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
     @BindView(R.id.recyclerview)
@@ -81,6 +83,9 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         mPresenter.setActivity((MainActivity)getActivity());
         initRecyclerView();
         initRefreshLayout();
+
+        // 获取 我要学习数据
+        mPresenter.callMethodOfGetMyStudy(0, PAGE_SIZE, false);
     }
 
     /**

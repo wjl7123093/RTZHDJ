@@ -6,8 +6,12 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+
+import io.reactivex.Observable;
 
 
 public interface StudyContract {
@@ -22,6 +26,9 @@ public interface StudyContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
+        // 获取 我要学习数据
+        Observable<MyStudyEntity> getMyStudy(int userId, int count, boolean update);
+
     }
 
     //Presenter控制器
@@ -33,5 +40,8 @@ public interface StudyContract {
         BaseDelegateAdapter initTitle(String title, int arrayPos);
         BaseDelegateAdapter initList(int arrayPos);
         BaseDelegateAdapter initHeader(String url, String name, int noStudy, int hasStudy, int scores);
+
+        // 调用 获取我要学习数据
+        void callMethodOfGetMyStudy(int userId, int count, boolean update);
     }
 }
