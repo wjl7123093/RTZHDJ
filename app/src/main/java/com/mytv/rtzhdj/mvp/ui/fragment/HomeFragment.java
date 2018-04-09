@@ -50,6 +50,8 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View {
 
+    private final static int PAGE_SIZE = 10;    // 每页个数
+
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
     @BindView(R.id.recyclerview)
@@ -85,6 +87,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         mPresenter.setActivity((MainActivity)getActivity());
         initRecyclerView();
         initRefreshLayout();
+
+        // 获取首页数据
+        mPresenter.callMethodOfGetHomeData(0, PAGE_SIZE, false);
     }
 
     /**

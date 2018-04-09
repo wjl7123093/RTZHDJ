@@ -7,10 +7,8 @@ import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * 注册接口
@@ -27,7 +25,6 @@ public interface RegisterService {
      * 获取用户类型
      * @return
      */
-    @FormUrlEncoded
     @GET("/getUserIdentity")
     Observable<List<UserCategoryEntity>> getUserCategory();
 
@@ -35,18 +32,16 @@ public interface RegisterService {
      * 获取验证码
      * @return
      */
-    @FormUrlEncoded
     @GET("/getVerificationCode")
-    Observable<VerifyCodeEntity> getVerifyCode(@Field("telNumber") String telNumber);
+    Observable<VerifyCodeEntity> getVerifyCode(@Query("telNumber") String telNumber);
 
     /**
      * 注册
      * @return
      */
-    @FormUrlEncoded
     @GET("/userRegister")
-    Observable<UserRegisterEntity> getRegister(@Field("Mobile") String mobile,
-                                               @Field("PublishmentSystemId") String publishmentSystemId,
-                                               @Field("Password") String password);
+    Observable<UserRegisterEntity> getRegister(@Query("Mobile") String mobile,
+                                               @Query("PublishmentSystemId") String publishmentSystemId,
+                                               @Query("Password") String password);
 
 }

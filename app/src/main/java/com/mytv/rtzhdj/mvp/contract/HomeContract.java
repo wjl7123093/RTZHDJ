@@ -8,11 +8,15 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.youth.banner.Banner;
 
 import java.util.List;
+
+import io.reactivex.Observable;
 
 
 public interface HomeContract {
@@ -33,6 +37,8 @@ public interface HomeContract {
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
+        // 获取用户类型
+        Observable<HomeEntity> getHomeData(int curUserId, int pageSize, boolean update);
 
     }
 
@@ -50,5 +56,8 @@ public interface HomeContract {
         BaseDelegateAdapter initImage(String url);
         BaseDelegateAdapter initHeader(String title, String desc);
         BaseDelegateAdapter initOnePlusN();
+
+        // 调用 获取首页数据
+        void callMethodOfGetHomeData(int curUserId, int pageSize, boolean update);
     }
 }
