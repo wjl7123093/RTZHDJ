@@ -7,19 +7,31 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceDetailContract;
+import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceDetailActivity;
 
 
 @ActivityScope
-public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServiceDetailContract.Model, VolunteerServiceDetailContract.View> {
+public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServiceDetailContract.Model, VolunteerServiceDetailContract.View>
+    implements VolunteerServiceDetailContract.Presenter {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
+
+    private VolunteerServiceDetailActivity mActivity;
 
     @Inject
     public VolunteerServiceDetailPresenter(VolunteerServiceDetailContract.Model model, VolunteerServiceDetailContract.View rootView
@@ -41,4 +53,32 @@ public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServ
         this.mApplication = null;
     }
 
+    @Override
+    public void setActivity(VolunteerServiceDetailActivity activity) {
+        mActivity = activity;
+    }
+
+    @Override
+    public void callMethodOfGetVolunteerServiceDetail(String id, boolean update) {
+        mModel.getVolunteerServiceDetail(id, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<VolunteerDetailEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull VolunteerDetailEntity liveMultiItems) {
+
+
+                    }
+                });
+    }
 }

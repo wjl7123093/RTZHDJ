@@ -111,6 +111,9 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
 
         mBtnStar.setOnClickListener(view -> {});
         mBtnIsOver.setOnClickListener(view -> {});
+
+        // 获取 志愿服务详情
+        mPresenter.callMethodOfGetVolunteerServiceDetail("id", false);
     }
 
 
