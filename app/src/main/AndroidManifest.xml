@@ -74,7 +74,8 @@
             android:label="@string/title_topic" />
         <activity android:name=".mvp.ui.activity.TopicDetailActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivity" />
-        <activity android:name=".mvp.ui.activity.StudyRecordActivity" />
+        <activity android:name=".mvp.ui.activity.StudyRecordActivity"
+            android:label="@string/title_study_record"/>
         <activity
             android:name=".mvp.ui.activity.StudyCoursewareActivity"
             android:label="@string/title_study_courseware" />

@@ -194,9 +194,10 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
 
     @Override
     public void setOnStudyRecordClick() {
-        ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+        /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
                 .withString("from", "StudyRecordActivity")  // 该Activity并不存在，只用来区别 学习记录
-                .withString("title", this.getResources().getString(R.string.title_study_record)).navigation();
+                .withString("title", this.getResources().getString(R.string.title_study_record)).navigation();*/
+        ARouter.getInstance().build(ARoutePath.PATH_STUDY_RECORD).navigation();
     }
 
     private void initRecyclerView() {

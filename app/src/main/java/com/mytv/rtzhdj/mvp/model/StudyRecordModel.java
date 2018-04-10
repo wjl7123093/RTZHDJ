@@ -10,7 +10,16 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.api.cache.StudyRecordCache;
+import com.mytv.rtzhdj.app.data.api.service.StudyRecordService;
+import com.mytv.rtzhdj.app.data.entity.StudyRecordEntity;
 import com.mytv.rtzhdj.mvp.contract.StudyRecordContract;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.rx_cache2.EvictProvider;
 
 
 @ActivityScope
@@ -32,4 +41,19 @@ public class StudyRecordModel extends BaseModel implements StudyRecordContract.M
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<StudyRecordEntity> getLearningRecords(int userId, boolean update) {
+        return Observable.just(mRepositoryManager
+                .obtainRetrofitService(StudyRecordService.class)
+                .getLearningRecords(userId))
+                .flatMap(new Function<Observable<StudyRecordEntity>, ObservableSource<StudyRecordEntity>>() {
+                    @Override
+                    public ObservableSource<StudyRecordEntity> apply(@NonNull Observable<StudyRecordEntity> resultObservable) throws Exception {
+                        return mRepositoryManager.obtainCacheService(StudyRecordCache.class)
+                                .getLearningRecords(resultObservable
+                                        , new EvictProvider(update))
+                                .map(resultReply -> resultReply.getData());
+                    }
+                });
+    }
 }
