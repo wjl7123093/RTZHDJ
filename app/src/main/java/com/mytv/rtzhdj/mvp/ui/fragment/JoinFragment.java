@@ -47,6 +47,8 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinContract.View {
 
+    private final static int PAGE_SIZE = 10;
+
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
     @BindView(R.id.recyclerview)
@@ -82,6 +84,9 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
         mPresenter.setActivity((MainActivity)getActivity());
         initRecyclerView();
         initRefreshLayout();
+
+        // 获取 我要参与数据
+        mPresenter.callMethodOfGetMyPartIn(0, PAGE_SIZE, false);
     }
 
     /**

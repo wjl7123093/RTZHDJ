@@ -6,8 +6,11 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+
+import io.reactivex.Observable;
 
 
 public interface JoinContract {
@@ -21,6 +24,9 @@ public interface JoinContract {
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
+
+        // 获取 我要参与数据
+        Observable<MyJoinEntity> getMyPartIn(int userId, int count, boolean update);
 
     }
 
@@ -40,5 +46,8 @@ public interface JoinContract {
         BaseDelegateAdapter initOnePlusN2();
         BaseDelegateAdapter initColumnWish();
         BaseDelegateAdapter initColumnOnline();
+
+        // 调用 我要参与数据
+        void callMethodOfGetMyPartIn(int userId, int count, boolean update);
     }
 }
