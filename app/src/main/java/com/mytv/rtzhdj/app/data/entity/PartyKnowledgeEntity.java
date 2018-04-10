@@ -1,7 +1,7 @@
 package com.mytv.rtzhdj.app.data.entity;
 
 /**
- * PartyKnowledgeEntity   党建知识实体类
+ * PartyKnowledgeEntity   党建知识列表实体类
  *
  * @author Fred_W
  * @version v1.0.0(1)

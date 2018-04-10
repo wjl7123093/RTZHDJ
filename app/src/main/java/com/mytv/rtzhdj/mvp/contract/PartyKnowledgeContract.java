@@ -1,7 +1,19 @@
 package com.mytv.rtzhdj.mvp.contract;
 
+import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
+
+import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.entity.PartyKnowledgeEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
+import com.mytv.rtzhdj.mvp.ui.activity.PartyKnowledgeActivity;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 public interface PartyKnowledgeContract {
@@ -13,5 +25,17 @@ public interface PartyKnowledgeContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
+        // 获取 党建只是列表数据
+        Observable<PartyKnowledgeEntity> getPartyKnowledgeList(String nodeId, int count, int index, boolean update);
+
+    }
+    //Presenter控制器
+    interface Presenter extends IPresenter {
+        void setActivity(PartyKnowledgeActivity activity);
+        //初始化 RecyclerView
+        RecyclerView initRecyclerView(RecyclerView recyclerView);
+
+        // 调用 获取党建只是列表数据
+        void callMethodOfGetPartyKnowledgeList(String nodeId, int count, int index, boolean update);
     }
 }

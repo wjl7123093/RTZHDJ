@@ -3,10 +3,13 @@ package com.mytv.rtzhdj.mvp.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
@@ -17,11 +20,37 @@ import com.mytv.rtzhdj.mvp.contract.PartyKnowledgeContract;
 import com.mytv.rtzhdj.mvp.presenter.PartyKnowledgePresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.activity.PartyKnowledgeActivity;
+import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
-
+/**
+ * PartyKnowledgeFragment 党建知识 Fragment
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-4-10
+ * @update
+ */
 public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter> implements PartyKnowledgeContract.View {
+
+    @BindView(R.id.refreshLayout)
+    RefreshLayout mRefreshLayout;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+
+    private NewsAdapter newsAdapter;
+    private static final int PAGE_SIZE = 10;
 
 
     public static PartyKnowledgeFragment newInstance() {
@@ -46,6 +75,18 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
 
     @Override
     public void initData(Bundle savedInstanceState) {
+
+        final List<Object> imgUrls = new ArrayList<>();
+        imgUrls.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
+        imgUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
+
+        mPresenter.setActivity((PartyKnowledgeActivity)getActivity());
+        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
+        initAdapter();
+        initRefreshLayout();
+
+        // 获取 党建知识列表数据
+        mPresenter.callMethodOfGetPartyKnowledgeList("nodeId", PAGE_SIZE, 0, false);
 
     }
 
@@ -91,6 +132,36 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
 
     @Override
     public void killMyself() {
+
+    }
+
+    private void initRefreshLayout() {
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+//        mRefreshLayout.setEnableLoadmore(false);
+        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
+    }
+
+    private void initAdapter() {
+        newsAdapter = new NewsAdapter(getContext(), PAGE_SIZE);
+        newsAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(newsAdapter);
+
+        newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
