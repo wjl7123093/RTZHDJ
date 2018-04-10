@@ -9,9 +9,11 @@ import com.jess.arms.di.component.AppComponent;
 import com.mytv.rtzhdj.di.module.PartyKnowledgeModule;
 
 import com.mytv.rtzhdj.mvp.ui.activity.PartyKnowledgeActivity;
+import com.mytv.rtzhdj.mvp.ui.fragment.PartyKnowledgeFragment;
 
 @ActivityScope
 @Component(modules = PartyKnowledgeModule.class, dependencies = AppComponent.class)
 public interface PartyKnowledgeComponent {
     void inject(PartyKnowledgeActivity activity);
+    void inject(PartyKnowledgeFragment fragment);
 }

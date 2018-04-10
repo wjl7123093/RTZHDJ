@@ -25,6 +25,7 @@ import com.mytv.rtzhdj.mvp.presenter.PartyKnowledgePresenter;
 
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
+import com.mytv.rtzhdj.mvp.ui.fragment.PartyKnowledgeFragment;
 
 
 import java.util.ArrayList;
@@ -124,7 +125,7 @@ public class PartyKnowledgeActivity extends BaseActivity<PartyKnowledgePresenter
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(ContentFragment.newInstance(i));
+            fragments.add(PartyKnowledgeFragment.newInstance());
         }
 
 
