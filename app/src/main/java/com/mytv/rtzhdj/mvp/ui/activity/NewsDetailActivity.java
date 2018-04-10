@@ -90,6 +90,9 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
         mPresenter.setActivity(NewsDetailActivity.this);
         mPresenter.initWebview(mWebView, mWebProgressBar);
         mPresenter.getNewsDetail("http://www.tencent.com/");
+
+        // 获取新闻详情
+        mPresenter.callMethodOfGetContent("contentId", "modelType", false);
     }
 
 

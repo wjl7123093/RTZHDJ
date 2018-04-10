@@ -11,10 +11,17 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.NewsDetailContract;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsDetailActivity;
 import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
@@ -101,5 +108,29 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
             }
 
         });
+    }
+
+    @Override
+    public void callMethodOfGetContent(String contentId, String modelType, boolean update) {
+        mModel.getContent(contentId, modelType, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<NewsDetailEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull NewsDetailEntity liveMultiItems) {
+
+
+                    }
+                });
     }
 }
