@@ -85,6 +85,9 @@ public class VoteOnlineActivity extends BaseActivity<VoteOnlinePresenter> implem
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initAdapter();
         initRefreshLayout();
+
+        // 获取 投票列表数据
+        mPresenter.callMethodOfGetVoteList(0, false);
     }
 
 

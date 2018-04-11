@@ -9,11 +9,18 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.VoteListEntity;
 import com.mytv.rtzhdj.mvp.contract.VoteOnlineContract;
 import com.mytv.rtzhdj.mvp.ui.activity.VoteOnlineActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
@@ -69,5 +76,29 @@ public class VoteOnlinePresenter extends BasePresenter<VoteOnlineContract.Model,
                 LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 10)));
 
         return recyclerView;
+    }
+
+    @Override
+    public void callMethodOfGetVoteList(int typeId, boolean update) {
+        mModel.getVoteList(typeId, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<VoteListEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull VoteListEntity liveMultiItems) {
+
+
+                    }
+                });
     }
 }
