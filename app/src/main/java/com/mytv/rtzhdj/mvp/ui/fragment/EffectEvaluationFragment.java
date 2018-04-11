@@ -76,6 +76,9 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initAdapter();
         initRefreshLayout();
+
+        // 获取 效果测评列表数据
+        mPresenter.callMethodOfGetTestList(0, 0, false);
     }
 
     /**
