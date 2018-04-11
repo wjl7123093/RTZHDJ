@@ -38,7 +38,7 @@ import butterknife.BindView;
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * 投票详情界面
+ * 我要投票界面
  *
  * @author Fred_W
  * @version v1.0.0(1)
@@ -107,6 +107,8 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
             ARouter.getInstance().build(ARoutePath.PATH_VOTE_RESULT).navigation();
         });
 
+        // 获取 我要投票列表数据
+        mPresenter.callMethodOfGetMyVoteDetail(0, false);
     }
 
 

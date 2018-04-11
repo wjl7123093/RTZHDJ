@@ -5,7 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.VoteDetailEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.VoteDetailActivity;
+
+import io.reactivex.Observable;
 
 
 public interface VoteDetailContract {
@@ -17,6 +21,9 @@ public interface VoteDetailContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
+        // 获取我要投票详情
+        Observable<VoteDetailEntity> getMyVoteDetail(int id, boolean update);
+
     }
 
     //Presenter控制器
@@ -24,5 +31,8 @@ public interface VoteDetailContract {
         void setActivity(VoteDetailActivity activity);
         //初始化 RecyclerView
         RecyclerView initRecyclerView(RecyclerView recyclerView);
+
+        // 调用 获取我要投票详情
+        void callMethodOfGetMyVoteDetail(int id, boolean update);
     }
 }
