@@ -11,10 +11,17 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.data.entity.CoursewareDetailEntity;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.mvp.contract.CourseDetailContract;
 import com.mytv.rtzhdj.mvp.ui.activity.CourseDetailActivity;
 import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
@@ -101,5 +108,29 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Mo
             }
 
         });
+    }
+
+    @Override
+    public void callMethodOfGetCoursewareDetail(int id, boolean update) {
+        mModel.getCoursewareDetail(id, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<CoursewareDetailEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull CoursewareDetailEntity liveMultiItems) {
+
+
+                    }
+                });
     }
 }

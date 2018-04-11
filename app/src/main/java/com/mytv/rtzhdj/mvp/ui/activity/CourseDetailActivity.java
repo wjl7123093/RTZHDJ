@@ -88,6 +88,9 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mPresenter.setActivity(CourseDetailActivity.this);
         mPresenter.initWebview(mWebView, mWebProgressBar);
         mPresenter.getCourseDetail("http://www.tencent.com/");
+
+        // 获取课件详情数据
+        mPresenter.callMethodOfGetCoursewareDetail(0, false);
     }
 
 

@@ -5,8 +5,12 @@ import android.webkit.WebView;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.entity.CoursewareDetailEntity;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.CourseDetailActivity;
 import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
+
+import io.reactivex.Observable;
 
 
 public interface CourseDetailContract {
@@ -19,6 +23,9 @@ public interface CourseDetailContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
+        // 获取 课件详情
+        Observable<CoursewareDetailEntity> getCoursewareDetail(int id, boolean update);
+
     }
 
     //Presenter控制器
@@ -27,5 +34,7 @@ public interface CourseDetailContract {
         void getCourseDetail(String url);
         void initWebview(WebView mWebView, WebProgressBar mWebProgressBar);
 
+        // 调用 获取课件详情
+        void callMethodOfGetCoursewareDetail(int id, boolean update);
     }
 }
