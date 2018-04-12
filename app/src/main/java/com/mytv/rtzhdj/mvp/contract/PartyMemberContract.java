@@ -5,7 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.PartyMemberActivity;
+
+import io.reactivex.Observable;
 
 
 public interface PartyMemberContract {
@@ -17,6 +21,9 @@ public interface PartyMemberContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
+        // 获取 党员信息列表
+        Observable<PartyMemberEntity> getPartyMember(int publishmentSystemId, boolean update);
+
     }
 
     //Presenter控制器
@@ -24,5 +31,8 @@ public interface PartyMemberContract {
         void setActivity(PartyMemberActivity activity);
         //初始化 RecyclerView
         RecyclerView initRecyclerView(RecyclerView recyclerView);
+
+        // 调用 获取党员信息列表
+        void callMethodOfGetHomeData(int publishmentSystemId, boolean update);
     }
 }

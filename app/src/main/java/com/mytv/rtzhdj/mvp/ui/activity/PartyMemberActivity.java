@@ -95,6 +95,9 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initAdapter();
         initRefreshLayout();
+
+        // 获取 党员信息列表数据
+        mPresenter.callMethodOfGetHomeData(0, false);
     }
 
 
