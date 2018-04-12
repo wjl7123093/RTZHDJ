@@ -64,7 +64,8 @@ public class StartActivity extends BaseActivity<StartPresenter> implements Start
     public void initData(Bundle savedInstanceState) {
         new Handler().postDelayed(() -> {
 
-            ARouter.getInstance().build(ARoutePath.PATH_GUIDE).navigation();
+//            ARouter.getInstance().build(ARoutePath.PATH_GUIDE).navigation();
+            ARouter.getInstance().build(ARoutePath.PATH_LOGIN).navigation();
             StartActivity.this.finish();
         }, 2000);
     }

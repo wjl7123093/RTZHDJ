@@ -102,6 +102,9 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         mChkAgree.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) ->
             setBtnRegisterBg(b));
 
+        // 获取 用户类别
+        mPresenter.callMethodOfGetUserCategory(false);
+
     }
 
 

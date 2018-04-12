@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.cache;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 
 import java.util.List;
@@ -24,6 +25,6 @@ public interface RegisterCache {
 
     //    @Encrypt
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<List<UserCategoryEntity>>> getUserCategory(Observable<List<UserCategoryEntity>> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson<UserCategoryEntity>>> getUserCategory(Observable<BaseJson<UserCategoryEntity>> data, EvictProvider evictProvider);
 
 }

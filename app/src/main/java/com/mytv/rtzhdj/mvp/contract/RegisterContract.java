@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
 import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
@@ -25,7 +26,7 @@ public interface RegisterContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
         // 获取用户类型
-        Observable<List<UserCategoryEntity>> getUserCategory(boolean update);
+        Observable<BaseJson<UserCategoryEntity>> getUserCategory(boolean update);
 
         // 获取验证码
         Observable<VerifyCodeEntity> getVerifyCode(String telNumber);

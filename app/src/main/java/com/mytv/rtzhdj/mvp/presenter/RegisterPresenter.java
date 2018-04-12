@@ -1,7 +1,7 @@
 package com.mytv.rtzhdj.mvp.presenter;
 
 import android.app.Application;
-import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -9,6 +9,7 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -17,6 +18,7 @@ import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 import javax.inject.Inject;
 
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
 import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
@@ -64,22 +66,24 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
     @Override
     public void callMethodOfGetUserCategory(boolean refresh) {
         mModel.getUserCategory(refresh)
-                .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(new RetryWithDelay(3, 2))
                 .doOnSubscribe(disposable -> {
                     mRootView.showLoading();
                 })
-                .doFinally(() -> {
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> {
+                    // Action onFinally
                     mRootView.hideLoading();
                 })
-                .observeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<List<UserCategoryEntity>>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<UserCategoryEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull List<UserCategoryEntity> liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<UserCategoryEntity> userCategoryList) {
+                        Log.e("TAG", userCategoryList.toString());
 
+                        UserCategoryEntity userCategoryEntity = userCategoryList.getData();
 
                     }
                 });

@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
 import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
@@ -26,7 +27,7 @@ public interface RegisterService {
      * @return
      */
     @GET("getUserIdentity")
-    Observable<List<UserCategoryEntity>> getUserCategory();
+    Observable<BaseJson<UserCategoryEntity>> getUserCategory();
 
     /**
      * 获取验证码

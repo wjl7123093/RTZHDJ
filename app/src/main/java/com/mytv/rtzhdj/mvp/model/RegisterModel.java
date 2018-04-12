@@ -10,6 +10,7 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.RegisterCache;
 import com.mytv.rtzhdj.app.data.api.service.RegisterService;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
@@ -46,13 +47,13 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
     }
 
     @Override
-    public Observable<List<UserCategoryEntity>> getUserCategory(boolean update) {
+    public Observable<BaseJson<UserCategoryEntity>> getUserCategory(boolean update) {
         return Observable.just(mRepositoryManager
                 .obtainRetrofitService(RegisterService.class)
                 .getUserCategory())
-                .flatMap(new Function<Observable<List<UserCategoryEntity>>, ObservableSource<List<UserCategoryEntity>>>() {
+                .flatMap(new Function<Observable<BaseJson<UserCategoryEntity>>, ObservableSource<BaseJson<UserCategoryEntity>>>() {
                     @Override
-                    public ObservableSource<List<UserCategoryEntity>> apply(@NonNull Observable<List<UserCategoryEntity>> resultObservable) throws Exception {
+                    public ObservableSource<BaseJson<UserCategoryEntity>> apply(@NonNull Observable<BaseJson<UserCategoryEntity>> resultObservable) throws Exception {
                         return mRepositoryManager.obtainCacheService(RegisterCache.class)
                                 .getUserCategory(resultObservable
                                         , new EvictProvider(update))

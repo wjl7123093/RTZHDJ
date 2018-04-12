@@ -20,6 +20,7 @@ import com.jess.arms.integration.ConfigModule;
 import com.mytv.rtzhdj.BuildConfig;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.data.api.Api;
+import com.mytv.rtzhdj.app.data.api.intercreptor.LoggingInterceptor;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -43,7 +44,13 @@ public class GlobalConfiguration implements ConfigModule {
     @Override
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
         //使用builder可以为框架配置一些配置信息
-        builder.baseurl(Api.APP_DOMAIN);
+        builder.baseurl(Api.APP_DOMAIN)
+               .addInterceptor(new LoggingInterceptor())
+                .gsonConfiguration((context12, gsonBuilder) -> {//这里可以自己自定义配置Gson的参数
+                    gsonBuilder
+                            .serializeNulls()//支持序列化null的参数
+                            .enableComplexMapKeySerialization();//支持将序列化key为object的map,默认只能序列化key为string的map
+                });
 
         /**
          * 配置以下参数后，会导致 Glide 无法加载图片
