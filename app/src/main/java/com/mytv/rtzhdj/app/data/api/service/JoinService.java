@@ -21,7 +21,7 @@ public interface JoinService {
      * 获取我要参与数据
      * @return
      */
-    @GET("/getMyPartIn")
+    @GET("getMyPartIn")
     Observable<MyJoinEntity> getMyPartIn(@Query("userId") int userId,
                                          @Query("count") int count);
 

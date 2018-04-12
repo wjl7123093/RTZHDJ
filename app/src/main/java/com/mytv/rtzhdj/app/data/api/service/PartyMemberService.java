@@ -22,7 +22,7 @@ public interface PartyMemberService {
      * 获取党员信息列表数据
      * @return
      */
-    @GET("/getPartyMember")
+    @GET("getPartyMember")
     Observable<PartyMemberEntity> getPartyMember(@Query("PublishmentSystemId") int publishmentSystemId);
 
 }

@@ -22,7 +22,7 @@ public interface StudyService {
      * 获取我要学习数据
      * @return
      */
-    @GET("/getMyStudy")
+    @GET("getMyStudy")
     Observable<MyStudyEntity> getMyStudyData(@Query("UserId") int userId,
                                              @Query("count") int count);
 

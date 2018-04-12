@@ -23,7 +23,7 @@ public interface CourseDetailService {
      * 获取课件详情数据
      * @return
      */
-    @GET("/getCoursewareDetail")
+    @GET("getCoursewareDetail")
     Observable<CoursewareDetailEntity> getCoursewareDetail(@Query("id") int id);
 
 }

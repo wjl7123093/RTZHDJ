@@ -24,7 +24,7 @@ public interface ContentService {
      * 获取党建新闻推荐列表数据
      * @return
      */
-    @GET("/getPartyRecommend")
+    @GET("getPartyRecommend")
     Observable<PartyRecommendEntity> getPartyRecommend(@Query("typeId") String typeId,
                                                        @Query("count") int count);
 
@@ -32,7 +32,7 @@ public interface ContentService {
      * 获取党建新闻二级列表数据
      * @return
      */
-    @GET("/getPartySubList")
+    @GET("getPartySubList")
     Observable<PartySubNewsEntity> getPartySubList(@Query("NodeId") int nodeId,
                                                    @Query("typeId") String typeId,
                                                    @Query("count") int count);

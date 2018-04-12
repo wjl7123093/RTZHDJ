@@ -22,7 +22,7 @@ public interface SettingService {
      * 获取用户详情数据
      * @return
      */
-    @GET("/getUserDetail")
+    @GET("getUserDetail")
     Observable<UserDetailEntity> getUserDetail(@Query("userId") int userId);
 
 }

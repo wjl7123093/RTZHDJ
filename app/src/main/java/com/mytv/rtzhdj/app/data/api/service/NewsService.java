@@ -22,7 +22,7 @@ public interface NewsService {
      * 获取党建新闻二级栏目数据
      * @return
      */
-    @GET("/getPartyColumns")
+    @GET("getPartyColumns")
     Observable<PartyColumnsEntity> getPartyColumns(@Query("typeId") String typeId);
 
 }

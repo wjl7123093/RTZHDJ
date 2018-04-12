@@ -22,7 +22,7 @@ public interface VoteDetailService {
      * 获取我要投票数据
      * @return
      */
-    @GET("/getMyVoteDetail")
+    @GET("getMyVoteDetail")
     Observable<VoteDetailEntity> getMyVoteDetail(@Query("id") int id);
 
 }

@@ -22,7 +22,7 @@ public interface EffectEvaluationService {
      * 获取效果评测列表数据
      * @return
      */
-    @GET("/getTestList")
+    @GET("getTestList")
     Observable<EffectEvaluationEntity> getTestList(@Query("userId") int userId,
                                                    @Query("typeId") int typeId);
 

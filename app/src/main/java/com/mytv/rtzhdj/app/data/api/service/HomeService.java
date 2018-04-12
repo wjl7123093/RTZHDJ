@@ -21,7 +21,7 @@ public interface HomeService {
      * 获取首页数据
      * @return
      */
-    @GET("/getHomeInfo")
+    @GET("getHomeInfo")
     Observable<HomeEntity> getHomeData(@Query("CurUserId") int curUserId,
                                        @Query("PageSize") int pageSize);
 

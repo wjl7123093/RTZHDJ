@@ -22,7 +22,7 @@ public interface VoteOnlineService {
      * 获取投票列表数据
      * @return
      */
-    @GET("/getVoteList")
+    @GET("getVoteList")
     Observable<VoteListEntity> getVoteList(@Query("typeId") int curUserId);
 
 }

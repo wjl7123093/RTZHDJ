@@ -22,7 +22,7 @@ public interface StudyCoursewareService {
      * 获取学习课件数据
      * @return
      */
-    @GET("/getCoursewareList")
+    @GET("getCoursewareList")
     Observable<StudyCoursewareEntity> getCoursewareList(@Query("typeId") String typeId);
 
 }

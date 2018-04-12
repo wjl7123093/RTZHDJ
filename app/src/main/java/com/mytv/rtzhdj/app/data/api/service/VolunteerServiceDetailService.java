@@ -22,7 +22,7 @@ public interface VolunteerServiceDetailService {
      * 获取志愿服务详情数据
      * @return
      */
-    @GET("/getVolunteerServiceDetail")
+    @GET("getVolunteerServiceDetail")
     Observable<VolunteerDetailEntity> getVolunteerServiceDetail(@Query("id") String id);
 
 }

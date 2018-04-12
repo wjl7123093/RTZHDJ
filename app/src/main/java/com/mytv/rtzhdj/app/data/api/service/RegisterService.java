@@ -25,21 +25,21 @@ public interface RegisterService {
      * 获取用户类型
      * @return
      */
-    @GET("/getUserIdentity")
+    @GET("getUserIdentity")
     Observable<List<UserCategoryEntity>> getUserCategory();
 
     /**
      * 获取验证码
      * @return
      */
-    @GET("/getVerificationCode")
+    @GET("getVerificationCode")
     Observable<VerifyCodeEntity> getVerifyCode(@Query("telNumber") String telNumber);
 
     /**
      * 注册
      * @return
      */
-    @GET("/userRegister")
+    @GET("userRegister")
     Observable<UserRegisterEntity> getRegister(@Query("Mobile") String mobile,
                                                @Query("PublishmentSystemId") String publishmentSystemId,
                                                @Query("Password") String password);

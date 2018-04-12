@@ -22,7 +22,7 @@ public interface NewsDetailService {
      * 获取 新闻详情
      * @return
      */
-    @GET("/getContent")
+    @GET("getContent")
     Observable<NewsDetailEntity> getContent(@Query("contentId") String contentId,
                                             @Query("modelType") String modelType);
 

@@ -22,7 +22,7 @@ public interface StudyRecordService {
      * 获取学习记录数据
      * @return
      */
-    @GET("/getLearningRecords")
+    @GET("getLearningRecords")
     Observable<StudyRecordEntity> getLearningRecords(@Query("userId") int curUserId);
 
 }

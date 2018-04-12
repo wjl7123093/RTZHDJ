@@ -22,7 +22,7 @@ public interface PartyKnowledgeService {
      * 获取党建知识列表数据
      * @return
      */
-    @GET("/getPartyKnowledgeList")
+    @GET("getPartyKnowledgeList")
     Observable<PartyKnowledgeEntity> getPartyKnowledgeList(@Query("nodeId") String nodeId,
                                                            @Query("count") int count,
                                                            @Query("index") int index);
