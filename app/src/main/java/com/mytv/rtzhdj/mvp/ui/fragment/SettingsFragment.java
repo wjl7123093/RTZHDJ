@@ -76,6 +76,9 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
         else    // 入党基本信息
             initRecyclerView2();
         initRefreshLayout();
+
+        // 获取用户详情信息
+        mPresenter.callMethodOfGetUserDetail(0, false);
     }
 
     /**
