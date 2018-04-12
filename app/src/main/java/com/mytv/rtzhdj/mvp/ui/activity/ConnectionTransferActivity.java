@@ -51,6 +51,10 @@ public class ConnectionTransferActivity extends BaseActivity<ConnectionTransferP
     @Override
     public void initData(Bundle savedInstanceState) {
 
+
+
+        // 获取 组织关系转接结果
+        mPresenter.callMethodOfGetOrganizationalChange(0, "reason", 0, false);
     }
 
 

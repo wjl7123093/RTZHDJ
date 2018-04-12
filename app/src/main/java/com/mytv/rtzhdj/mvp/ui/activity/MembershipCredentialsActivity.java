@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
@@ -23,6 +24,8 @@ import com.mytv.rtzhdj.mvp.presenter.MembershipCredentialsPresenter;
 
 import com.mytv.rtzhdj.R;
 
+
+import net.qiujuer.genius.ui.widget.Button;
 
 import org.raphets.roundimageview.RoundImageView;
 
@@ -59,6 +62,8 @@ public class MembershipCredentialsActivity extends BaseActivity<MembershipCreden
     TextView mTvDuty;
     @BindView(R.id.tv_party_branch)
     TextView mTvPartyBranch;
+    @BindView(R.id.btn_transfer)
+    Button mBtnTransfer;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -83,6 +88,9 @@ public class MembershipCredentialsActivity extends BaseActivity<MembershipCreden
         mPresenter.initHeader(DataServer.getPartyMemberData(1).get(0), mIvHeader, mTvName,
                 mTvDuty, mTvPartyBranch);
 
+        mBtnTransfer.setOnClickListener(view -> {
+            ARouter.getInstance().build(ARoutePath.PATH_CONNECTION_TRANSFER).navigation();
+        });
     }
 
 
