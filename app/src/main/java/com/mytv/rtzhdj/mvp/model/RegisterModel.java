@@ -47,13 +47,13 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
     }
 
     @Override
-    public Observable<BaseJson<UserCategoryEntity>> getUserCategory(boolean update) {
+    public Observable<BaseJson<List<UserCategoryEntity>>> getUserCategory(boolean update) {
         return Observable.just(mRepositoryManager
                 .obtainRetrofitService(RegisterService.class)
                 .getUserCategory())
-                .flatMap(new Function<Observable<BaseJson<UserCategoryEntity>>, ObservableSource<BaseJson<UserCategoryEntity>>>() {
+                .flatMap(new Function<Observable<BaseJson<List<UserCategoryEntity>>>, ObservableSource<BaseJson<List<UserCategoryEntity>>>>() {
                     @Override
-                    public ObservableSource<BaseJson<UserCategoryEntity>> apply(@NonNull Observable<BaseJson<UserCategoryEntity>> resultObservable) throws Exception {
+                    public ObservableSource<BaseJson<List<UserCategoryEntity>>> apply(@NonNull Observable<BaseJson<List<UserCategoryEntity>>> resultObservable) throws Exception {
                         return mRepositoryManager.obtainCacheService(RegisterCache.class)
                                 .getUserCategory(resultObservable
                                         , new EvictProvider(update))

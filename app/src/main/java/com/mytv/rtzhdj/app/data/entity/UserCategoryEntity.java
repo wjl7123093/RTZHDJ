@@ -14,18 +14,6 @@ import java.util.List;
  */
 public class UserCategoryEntity implements Serializable {
 
-    private List<UserCategory> Item;
-
-    public List<UserCategory> getItem() {
-        return Item;
-    }
-
-    public void setItem(List<UserCategory> item) {
-        this.Item = item;
-    }
-
-    class UserCategory implements Serializable {
-
         private int CategoryId;         // 用户类型id
         private String ClassCode;       // 用户类型代码
         private String CategoryName;    // 用户类型名称（党员/群众）
@@ -53,5 +41,4 @@ public class UserCategoryEntity implements Serializable {
         public void setCategoryName(String categoryName) {
             this.CategoryName = categoryName;
         }
-    }
 }

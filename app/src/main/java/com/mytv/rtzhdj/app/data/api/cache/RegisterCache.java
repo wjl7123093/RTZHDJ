@@ -25,6 +25,6 @@ public interface RegisterCache {
 
     //    @Encrypt
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<BaseJson<UserCategoryEntity>>> getUserCategory(Observable<BaseJson<UserCategoryEntity>> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson<List<UserCategoryEntity>>>> getUserCategory(Observable<BaseJson<List<UserCategoryEntity>>> data, EvictProvider evictProvider);
 
 }

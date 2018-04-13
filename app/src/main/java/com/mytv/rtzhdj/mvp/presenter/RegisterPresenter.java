@@ -78,12 +78,12 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                     mRootView.hideLoading();
                 })
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseJson<UserCategoryEntity>>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<UserCategoryEntity>>>(mErrorHandler) {
                     @Override
-                    public void onNext(@NonNull BaseJson<UserCategoryEntity> userCategoryList) {
+                    public void onNext(@NonNull BaseJson<List<UserCategoryEntity>> userCategoryList) {
                         Log.e("TAG", userCategoryList.toString());
 
-                        UserCategoryEntity userCategoryEntity = userCategoryList.getData();
+                        List<UserCategoryEntity> userCategoryEntity = userCategoryList.getData();
 
                     }
                 });

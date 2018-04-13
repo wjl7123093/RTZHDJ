@@ -27,7 +27,7 @@ public interface RegisterService {
      * @return
      */
     @GET("getUserIdentity")
-    Observable<BaseJson<UserCategoryEntity>> getUserCategory();
+    Observable<BaseJson<List<UserCategoryEntity>>> getUserCategory();
 
     /**
      * 获取验证码
