@@ -75,7 +75,7 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
     }
 
     @Override
-    public Observable<VerifyCodeEntity> getVerifyCode(String telNumber) {
+    public Observable<BaseJson<VerifyCodeEntity>> getVerifyCode(String telNumber) {
         return mRepositoryManager.obtainRetrofitService(RegisterService.class)
                 .getVerifyCode(telNumber);
     }

@@ -30,7 +30,7 @@ public interface RegisterContract {
         Observable<BaseJson<List<UserCategoryEntity>>> getUserCategory(boolean update);
 
         // 获取验证码
-        Observable<VerifyCodeEntity> getVerifyCode(String telNumber);
+        Observable<BaseJson<VerifyCodeEntity>> getVerifyCode(String telNumber);
 
         // 注册
         Observable<UserRegisterEntity> getUserRegister(String mobile, String publishmentSystemId,

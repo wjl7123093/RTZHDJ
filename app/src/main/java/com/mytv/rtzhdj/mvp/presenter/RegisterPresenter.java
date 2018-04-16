@@ -109,9 +109,10 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<VerifyCodeEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<VerifyCodeEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull VerifyCodeEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<VerifyCodeEntity> verifyCode) {
+                        Log.e("TAG", verifyCode.toString());
 
 
                     }

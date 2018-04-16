@@ -36,7 +36,7 @@ public interface RegisterService {
      * @return
      */
     @GET("getVerificationCode")
-    Observable<VerifyCodeEntity> getVerifyCode(@Query("telNumber") String telNumber);
+    Observable<BaseJson<VerifyCodeEntity>> getVerifyCode(@Query("telNumber") String telNumber);
 
     /**
      * 注册

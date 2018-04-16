@@ -103,7 +103,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
         mTvLink.setOnClickListener(view -> goWebviewActivity());
         mBtnGetVertifyCode.setOnClickListener(view -> mPresenter.callMethodOfGetCode(
-                mEdtVertifyCode.getText().toString().trim()));
+                mEdtMobilePhone.getText().toString().trim()));
         mBtnRegister.setOnClickListener(view -> mPresenter.callMethodOfDoRegister(
                 mEdtMobilePhone.getText().toString().trim(),
                 mEdtCommunity.getText().toString().trim(),
