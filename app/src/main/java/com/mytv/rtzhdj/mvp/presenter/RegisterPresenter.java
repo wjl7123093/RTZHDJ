@@ -11,6 +11,7 @@ import com.jess.arms.http.imageloader.ImageLoader;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
+import io.rx_cache2.Reply;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
@@ -83,7 +84,8 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                     public void onNext(@NonNull BaseJson<List<UserCategoryEntity>> userCategoryList) {
                         Log.e("TAG", userCategoryList.toString());
 
-                        List<UserCategoryEntity> userCategoryEntity = userCategoryList.getData();
+                        List<UserCategoryEntity> userCategorys = userCategoryList.getData();
+                        mRootView.showDialog(userCategorys);
 
                     }
                 });

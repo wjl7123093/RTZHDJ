@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 /**
@@ -25,6 +26,7 @@ public interface RegisterService {
     /**
      * 获取用户类型
      * @return
+     * @Headers("Cache-Control:public ,max-age=60") 设置接口数据缓存（因为已经统一设置，故现在不需要单独设置）
      */
     @GET("getUserIdentity")
     Observable<BaseJson<List<UserCategoryEntity>>> getUserCategory();

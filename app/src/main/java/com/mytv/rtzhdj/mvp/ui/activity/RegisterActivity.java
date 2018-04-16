@@ -1,9 +1,12 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,13 +22,20 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.di.component.DaggerRegisterComponent;
 import com.mytv.rtzhdj.di.module.RegisterModule;
 import com.mytv.rtzhdj.mvp.contract.RegisterContract;
 import com.mytv.rtzhdj.mvp.presenter.RegisterPresenter;
 
 import com.mytv.rtzhdj.R;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
+
+import java.util.List;
+import java.util.Set;
 
 import butterknife.BindView;
 
@@ -147,5 +157,68 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     public void goWebviewActivity() {
         ARouter.getInstance().build(ARoutePath.PATH_WEBVIEW)
                 .withString("title", "用户注册协议").navigation();
+    }
+
+    @Override
+    public void showDialog(List<UserCategoryEntity> categoryList) {
+        String item1 = "";
+        String item2 = "";
+        for (int i = 0; i < categoryList.size(); i++) {
+            if (categoryList.get(i).getCategoryName().contains("群众")) {
+                item1 += categoryList.get(i).getCategoryName();
+            } else {
+                item2 += categoryList.get(i).getCategoryName() + "、";
+            }
+        }
+        item2 = item2.length() > 0 ? item2.substring(0, item2.length() - 1) : "";
+        String[] items = {item2, item1};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+        View dialogView = LayoutInflater.from(RegisterActivity.this).inflate(R.layout.dialog_select_usercategory, null);
+        TagFlowLayout mFlowLayout = dialogView.findViewById(R.id.flowlayout_usercategory);
+        mFlowLayout.setMaxSelectCount(1);   // 设置单选
+        mFlowLayout.setAdapter(new TagAdapter<String>(items)
+        {
+            @Override
+            public View getView(FlowLayout parent, int position, String s)
+            {
+                TextView tv = (TextView) LayoutInflater.from(RegisterActivity.this)
+                        .inflate(R.layout.tv, mFlowLayout, false);
+                tv.setText(s);
+                return tv;
+            }
+        });
+        mFlowLayout.getAdapter().setSelectedList(1);  // 设置预选项
+        builder.setView(dialogView);
+        builder.create();
+        AlertDialog dialog0 = builder.show();
+        mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()
+        {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent)
+            {
+                switch (position) {
+                    case 0: // 党员、预备党员和积极分子
+                        dialog0.dismiss();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(RegisterActivity.this);
+                        builder1.setTitle("提示");
+                        builder1.setMessage(getResources().getString(R.string.register_usercategory_info));
+                        builder1.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder1.create().show();
+                        break;
+                    case 1: // 群众
+                        dialog0.dismiss();
+                        break;
+                }
+
+                return true;
+            }
+        });
+
     }
 }

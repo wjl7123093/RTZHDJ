@@ -24,6 +24,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
+import io.rx_cache2.DynamicKey;
 import io.rx_cache2.EvictProvider;
 
 
@@ -48,7 +49,18 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
 
     @Override
     public Observable<BaseJson<List<UserCategoryEntity>>> getUserCategory(boolean update) {
-        return Observable.just(mRepositoryManager
+        return mRepositoryManager.obtainRetrofitService(RegisterService.class)
+                .getUserCategory(); // 直接进行请求（通过 okhttp3 自带缓存进行数据缓存）
+
+        /** 2. 使用 RxCache 作为缓存，但缓存的数据进行json转换时会出现 LinkedTreeMap cannot be cast to xxxbean.class 错误 */
+        /*return mRepositoryManager.obtainCacheService(RegisterCache.class)
+                .getUserCategory(mRepositoryManager.obtainRetrofitService(RegisterService.class)
+                .getUserCategory(), new DynamicKey(1), new EvictProvider(update))
+                .map(resultReply -> resultReply.getData());*/
+
+        /** 3. 使用 RxCache 作为缓存，同时用flatMap进行链式请求，
+         * 但缓存的数据进行json转换时会出现 LinkedTreeMap cannot be cast to xxxbean.class 错误 */
+        /*return Observable.just(mRepositoryManager
                 .obtainRetrofitService(RegisterService.class)
                 .getUserCategory())
                 .flatMap(new Function<Observable<BaseJson<List<UserCategoryEntity>>>, ObservableSource<BaseJson<List<UserCategoryEntity>>>>() {
@@ -59,7 +71,7 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
                                         , new EvictProvider(update))
                                 .map(resultReply -> resultReply.getData());
                     }
-                });
+                });*/
     }
 
     @Override

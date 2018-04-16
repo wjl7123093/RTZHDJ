@@ -19,8 +19,6 @@ import com.mytv.rtzhdj.mvp.presenter.LoginPresenter;
 
 import com.mytv.rtzhdj.R;
 
-
-import net.qiujuer.genius.kit.cmd.Telnet;
 import net.qiujuer.genius.ui.widget.Button;
 import net.qiujuer.genius.ui.widget.EditText;
 

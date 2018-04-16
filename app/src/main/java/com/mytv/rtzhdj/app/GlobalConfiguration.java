@@ -10,9 +10,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.baronzhang.retrofit2.converter.FastJsonConverterFactory;
 import com.jess.arms.base.App;
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.di.module.GlobalConfigModule;
@@ -20,13 +22,27 @@ import com.jess.arms.integration.ConfigModule;
 import com.mytv.rtzhdj.BuildConfig;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.data.api.Api;
+import com.mytv.rtzhdj.app.data.api.intercreptor.HttpLoggingInterceptor;
 import com.mytv.rtzhdj.app.data.api.intercreptor.LoggingInterceptor;
+//import com.mytv.rtzhdj.app.utils.fastjson.FastJsonConverterFactory;
+import com.mytv.rtzhdj.app.utils.NetworkUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
+import okhttp3.CacheControl;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import timber.log.Timber;
+
+import static com.mytv.rtzhdj.app.utils.CrashHandler.TAG;
 
 /**
  * app的全局配置信息在此配置,需要将此实现类声明到AndroidManifest中
@@ -36,6 +52,7 @@ import timber.log.Timber;
  *
  * @crdate 2017-1-18
  * @update 2018-1-29    删除相关参数，保证 Glide 正常加载图片
+ *         2018-4-16    新增 okhttp 缓存配置
  */
 public class GlobalConfiguration implements ConfigModule {
 
@@ -45,11 +62,10 @@ public class GlobalConfiguration implements ConfigModule {
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
         //使用builder可以为框架配置一些配置信息
         builder.baseurl(Api.APP_DOMAIN)
-               .addInterceptor(new LoggingInterceptor())
-                .gsonConfiguration((context12, gsonBuilder) -> {//这里可以自己自定义配置Gson的参数
-                    gsonBuilder
-                            .serializeNulls()//支持序列化null的参数
-                            .enableComplexMapKeySerialization();//支持将序列化key为object的map,默认只能序列化key为string的map
+                .addInterceptor(new LoggingInterceptor())
+                .retrofitConfiguration((context1, retrofitBuilder) -> {//这里可以自己自定义配置Retrofit的参数,甚至你可以替换系统配置好的okhttp对象
+//                    retrofitBuilder.addConverterFactory(FastJsonConverterFactory.create());//比如使用fastjson替代gson
+                    retrofitBuilder.client(getOkHttpClient(context1, true, true));  // 配置okhttpclient，使用okhttp自带缓存
                 });
 
         /**
@@ -194,6 +210,73 @@ public class GlobalConfiguration implements ConfigModule {
                 ((RefWatcher) ((App) f.getActivity().getApplication()).getAppComponent().extras().get(RefWatcher.class.getName())).watch(f);
             }
         });
+    }
+
+    private static final int DEFAULT_TIMEOUT = 5;
+    private static final int DEFAULT_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
+    /**
+     * 缓存策略
+     *
+     * @param context
+     * @param isAllowCache 是否允许使用缓存策略
+     * @param cacheMethod  false:有网和没有网都是先读缓存 true:离线可以缓存，在线就获取最新数据 default=false
+     * @return
+     */
+    private OkHttpClient getOkHttpClient(final Context context, boolean isAllowCache, boolean cacheMethod) {
+        /**
+         * 获取缓存
+         */
+        Interceptor baseInterceptor = new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                /*Request request = chain.request();
+                if (!NetworkUtils.isNetworkAvailable(context)) {
+                    *//**
+                     * 离线缓存控制  总的缓存时间=在线缓存时间+设置离线缓存时间
+                     *//*
+                    int maxStale = 60 * 60 * 24 * 28; // 离线时缓存保存4周,单位:秒
+                    CacheControl tempCacheControl = new CacheControl.Builder()
+                            .onlyIfCached()
+                            .maxStale(maxStale, TimeUnit.SECONDS)
+                            .build();
+                    request = request.newBuilder()
+                            .cacheControl(tempCacheControl)
+                            .build();
+                    Log.i(TAG, "intercept:no network ");
+                }
+                return chain.proceed(request);*/
+
+                Request request = chain.request();
+                Response response = chain.proceed(request);
+
+                if (NetworkUtils.isNetworkAvailable(context)) {
+                    int maxAge = 60*60*24*2;//缓存失效时间，单位为秒
+                    return response.newBuilder()
+                            .removeHeader("Pragma")//清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                            .header("Cache-Control", "public ,max-age=" + maxAge)
+                            .build();
+                }
+                return response;
+
+            }
+        };
+        //只有 网络拦截器环节 才会写入缓存写入缓存,在有网络的时候 设置缓存时间
+        HttpLoggingInterceptor rewriteCacheControlInterceptor = new HttpLoggingInterceptor(isAllowCache);
+        //设置缓存路径 内置存储
+        //File httpCacheDirectory = new File(context.getCacheDir(), "responses");
+        //外部存储
+        File httpCacheDirectory = new File(context.getExternalCacheDir(), "responses");
+        //设置缓存 10M
+        int cacheSize = DEFAULT_HTTP_CACHE_SIZE;
+        Cache cache = new Cache(httpCacheDirectory, cacheSize);
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.cache(cache);
+//        if (isAllowCache && cacheMethod) {
+//            builder.addNetworkInterceptor(baseInterceptor);
+//        }
+        builder.addNetworkInterceptor(baseInterceptor);
+        builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        return builder.build();
     }
 
 

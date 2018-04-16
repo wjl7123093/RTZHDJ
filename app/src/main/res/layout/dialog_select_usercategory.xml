@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * dialog_select_usercategory.xml 选择用户类型选择框
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-4-13
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/len_16">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请选择您的身份"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/primary_text"/>
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/flowlayout_usercategory"
+        zhy:max_select="-1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/len_10">
+    </com.zhy.view.flowlayout.TagFlowLayout>
+
+</LinearLayout>

@@ -88,4 +88,7 @@
         5.课件或影像每条信息首次阅读+2 每条信息首次评论+3
     </string>
 
+    <!-- register -->
+    <string name="register_usercategory_info">党员、预备党员和积极分子同志无需注册，请直接用身份证号登陆。若无法登陆，请联系支部管理员添加账号。</string>
+
 </resources>
