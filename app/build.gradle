@@ -159,9 +159,10 @@ dependencies {
     // 引入框架通用模块(使用Rxjava2)
     //    compile 'android.frame:MVPFrames:1.4.2'
     compile 'me.jessyan:arms:2.2.3'
-    // fast-json
-    compile rootProject.ext.dependencies["fast-json"]
-    compile 'com.github.BaronZ88:Retrofit2-FastJson-Converter:1.2'
+    // fastjson
+//    compile rootProject.ext.dependencies["fast-json"]
+    // fastjson 的转换库用于替代 GsonConverter 作为 Retrofit2 的json反序列化库
+//    compile 'com.github.BaronZ88:Retrofit2-FastJson-Converter:1.2'
 
     // Tools
     annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
