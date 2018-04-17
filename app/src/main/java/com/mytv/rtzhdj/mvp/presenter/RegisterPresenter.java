@@ -3,6 +3,7 @@ package com.mytv.rtzhdj.mvp.presenter;
 import android.app.Application;
 import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
@@ -19,12 +20,15 @@ import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 import javax.inject.Inject;
 
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
 import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
 import com.mytv.rtzhdj.mvp.contract.RegisterContract;
 import com.mytv.rtzhdj.mvp.ui.activity.RegisterActivity;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.List;
 
@@ -67,6 +71,10 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
     @Override
     public void callMethodOfGetUserCategory(boolean refresh) {
         mModel.getUserCategory(refresh)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<UserCategoryEntity>>>transformObservable("getUserCategory",
+                        new TypeToken<BaseJson<List<UserCategoryEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<UserCategoryEntity>>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .doOnSubscribe(disposable -> {

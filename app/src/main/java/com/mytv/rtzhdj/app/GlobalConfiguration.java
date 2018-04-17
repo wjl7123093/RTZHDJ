@@ -14,7 +14,6 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.baronzhang.retrofit2.converter.FastJsonConverterFactory;
 import com.jess.arms.base.App;
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.di.module.GlobalConfigModule;
@@ -62,11 +61,11 @@ public class GlobalConfiguration implements ConfigModule {
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
         //使用builder可以为框架配置一些配置信息
         builder.baseurl(Api.APP_DOMAIN)
-                .addInterceptor(new LoggingInterceptor())
-                .retrofitConfiguration((context1, retrofitBuilder) -> {//这里可以自己自定义配置Retrofit的参数,甚至你可以替换系统配置好的okhttp对象
-//                    retrofitBuilder.addConverterFactory(FastJsonConverterFactory.create());//比如使用fastjson替代gson
-                    retrofitBuilder.client(getOkHttpClient(context1, true, true));  // 配置okhttpclient，使用okhttp自带缓存
-                });
+                .addInterceptor(new LoggingInterceptor());
+//                .retrofitConfiguration((context1, retrofitBuilder) -> {//这里可以自己自定义配置Retrofit的参数,甚至你可以替换系统配置好的okhttp对象
+////                    retrofitBuilder.addConverterFactory(FastJsonConverterFactory.create());//比如使用fastjson替代gson
+//                    retrofitBuilder.client(getOkHttpClient(context1, true, true));  // 配置okhttpclient，使用okhttp自带缓存
+//                });
 
         /**
          * 配置以下参数后，会导致 Glide 无法加载图片

@@ -1,1 +1,1 @@
-include ':app', ':CalendarDemo', ':calendar', ':common'
+include ':app', ':CalendarDemo', ':calendar', ':common', ':rxcache'

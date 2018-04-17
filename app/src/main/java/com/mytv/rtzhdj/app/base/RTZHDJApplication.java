@@ -25,6 +25,10 @@ import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.sonic.sdk.SonicConfig;
 import com.tencent.sonic.sdk.SonicEngine;
+import com.zchu.rxcache.RxCache;
+import com.zchu.rxcache.diskconverter.GsonDiskConverter;
+
+import java.io.File;
 
 //import org.xutils.x;
 
@@ -62,6 +66,7 @@ public class RTZHDJApplication extends BaseApplication {
 
     private static Context mContext;
     public static DisplayImageOptions mOptions;
+    public static RxCache rxCache;
 
     @Override
     public void onCreate() {
@@ -81,6 +86,14 @@ public class RTZHDJApplication extends BaseApplication {
         // 初始化 xutils3
 //        x.Ext.init(this);
 //        x.Ext.setDebug(false); //输出debug日志，开启会影响性能
+
+        rxCache = new RxCache.Builder()
+                .appVersion(1)//当版本号改变,缓存路径下存储的所有数据都会被清除掉
+                .diskDir(new File(getCacheDir().getPath() + File.separator + "data-cache"))
+                .diskConverter(new GsonDiskConverter())//支持Serializable、Json(GsonDiskConverter)
+                .memoryMax(2*1024*1024)
+                .diskMax(20*1024*1024)
+                .build();
 
     }
 
