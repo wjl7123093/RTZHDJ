@@ -34,7 +34,9 @@
         android:textColor="@color/primary_text"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:text="文章标题。。。。。。。。"/>
+        android:text="文章标题。。。。。。。。"
+        android:layout_toLeftOf="@id/iv_image"
+        android:layout_marginRight="@dimen/len_10"/>
     <TextView
         android:id="@+id/tv_datetime"
         android:layout_width="wrap_content"

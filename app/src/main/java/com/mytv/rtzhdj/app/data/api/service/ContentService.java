@@ -34,8 +34,8 @@ public interface ContentService {
      * @return
      */
     @GET("getPartySubList")
-    Observable<PartySubNewsEntity> getPartySubList(@Query("NodeId") int nodeId,
-                                                   @Query("typeId") String typeId,
-                                                   @Query("count") int count);
+    Observable<BaseJson<PartySubNewsEntity>> getPartySubList(@Query("NodeId") int nodeId,
+                                                   @Query("PageIndex") int pageIndex,
+                                                   @Query("PageSize") int pageSize);
 
 }

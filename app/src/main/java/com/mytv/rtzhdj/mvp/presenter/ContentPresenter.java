@@ -150,9 +150,9 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     @Override
     public void callMethodOfGetPartyRecommend(int pageIndex, int pageSize, boolean update) {
         mModel.getPartyRecommend(pageIndex, pageSize, update)
-                .compose(RTZHDJApplication.rxCache.<BaseJson<PartyRecommendEntity>>transformObservable("getUserCategory",
+                .compose(RTZHDJApplication.rxCache.<BaseJson<PartyRecommendEntity>>transformObservable("getPartyRecommend",
                         new TypeToken<BaseJson<PartyRecommendEntity>>() { }.getType(),
-                        CacheStrategy.firstRemote()))
+                        CacheStrategy.firstCacheTimeout(60 * 1000)))    // 60s以内用缓存
                 .map(new CacheResult.MapFunc<BaseJson<PartyRecommendEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
@@ -177,8 +177,12 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     }
 
     @Override
-    public void callMethodOfGetPartySubList(int nodeId, String typeId, int count, boolean update) {
-        mModel.getPartySubList(nodeId, typeId, count, update)
+    public void callMethodOfGetPartySubList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartySubList(nodeId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<PartySubNewsEntity>>transformObservable("getPartySubList" + nodeId,
+                        new TypeToken<BaseJson<PartySubNewsEntity>>() { }.getType(),
+                        CacheStrategy.firstCacheTimeout(60 * 1000)))    // 60s以内用缓存
+                .map(new CacheResult.MapFunc<BaseJson<PartySubNewsEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -191,11 +195,12 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<PartySubNewsEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<PartySubNewsEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@NonNull PartySubNewsEntity partyRecommendData) {
+                    public void onNext(@NonNull BaseJson<PartySubNewsEntity> partySubListData) {
+                        Log.e(TAG, partySubListData.getData().toString());
 
-
+                        mRootView.showSubListData(partySubListData.getData());
                     }
                 });
     }

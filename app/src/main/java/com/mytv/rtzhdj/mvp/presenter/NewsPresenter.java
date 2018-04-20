@@ -71,7 +71,7 @@ public class NewsPresenter extends BasePresenter<NewsContract.Model, NewsContrac
         mModel.getPartyColumns(typeId, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<PartyColumnsEntity>>>transformObservable("getPartyColumns",
                         new TypeToken<BaseJson<List<PartyColumnsEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<PartyColumnsEntity>>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))

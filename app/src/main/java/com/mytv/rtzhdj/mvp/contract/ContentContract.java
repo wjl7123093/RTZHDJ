@@ -23,6 +23,7 @@ public interface ContentContract {
         void onBannerClick(int position);
 
         void showRecommendData(PartyRecommendEntity recommendEntity);
+        void showSubListData(PartySubNewsEntity subNewsEntity);
         void initAdapter(List<PartyNewsEntity> importandBlockList);
 //        void showOtherData();
     }
@@ -34,7 +35,7 @@ public interface ContentContract {
         Observable<BaseJson<PartyRecommendEntity>> getPartyRecommend(int pageIndex, int pageSize, boolean update);
 
         // 获取 党建新闻二级列表数据
-        Observable<PartySubNewsEntity> getPartySubList(int nodeId, String typedId, int count, boolean update);
+        Observable<BaseJson<PartySubNewsEntity>> getPartySubList(int nodeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -50,6 +51,6 @@ public interface ContentContract {
         void callMethodOfGetPartyRecommend(int pageIndex, int pageSize, boolean update);
 
         // 调用 获取党建新闻二级列表(除推荐)数据
-        void callMethodOfGetPartySubList(int nodeId, String typeId, int count, boolean update);
+        void callMethodOfGetPartySubList(int nodeId, int pageIndex, int pageSize, boolean update);
     }
 }

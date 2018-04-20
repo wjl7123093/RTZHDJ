@@ -11,15 +11,15 @@ package com.mytv.rtzhdj.app.data.entity;
  */
 public class PartyColumnsEntity {
 
-    private int NodeId;
+    private int NodeID;
     private String Title;   // 栏目标题
 
     public int getNodeId() {
-        return NodeId;
+        return NodeID;
     }
 
     public void setNodeId(int nodeId) {
-        NodeId = nodeId;
+        NodeID = nodeId;
     }
 
     public String getTitle() {

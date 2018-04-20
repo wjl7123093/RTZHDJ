@@ -16,6 +16,7 @@ import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
+import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerContentComponent;
 import com.mytv.rtzhdj.di.module.ContentModule;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
@@ -96,12 +97,12 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
         initRefreshLayout();
 
-        if (0 == getArguments().getInt("position")) {
+        if (0 == getArguments().getInt("nodeId")) {
             // 获取党建新闻推荐列表数据
             mPresenter.callMethodOfGetPartyRecommend(0, PAGE_SIZE, false);
         } else {
             // 获取党建新闻二级列表(除推荐)数据
-            mPresenter.callMethodOfGetPartySubList(0, "typeId", PAGE_SIZE, false);
+            mPresenter.callMethodOfGetPartySubList(getArguments().getInt("nodeId"), 0, PAGE_SIZE, false);
         }
     }
 
@@ -162,10 +163,17 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
         initAdapter(importandBlock);
         View headerView = mPresenter.initHeaderView(specialBlock, (ViewGroup) mRecyclerView.getParent());
-        if (0 == getArguments().getInt("position"))
+        if (0 == getArguments().getInt("nodeId"))
             newsAdapter.addHeaderView(headerView);
         else
             newsAdapter.removeAllHeaderView();
+    }
+
+    @Override
+    public void showSubListData(PartySubNewsEntity subNewsEntity) {
+        List<PartyNewsEntity> channelNewsBlock = subNewsEntity.getChannelNewsBlock();
+
+        initAdapter(channelNewsBlock);
     }
 
     @Override

@@ -51,18 +51,8 @@ public class ContentModel extends BaseModel implements ContentContract.Model {
     }
 
     @Override
-    public Observable<PartySubNewsEntity> getPartySubList(int nodeId, String typedId, int count, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(ContentService.class)
-                .getPartySubList(nodeId, typedId, count))
-                .flatMap(new Function<Observable<PartySubNewsEntity>, ObservableSource<PartySubNewsEntity>>() {
-                    @Override
-                    public ObservableSource<PartySubNewsEntity> apply(@NonNull Observable<PartySubNewsEntity> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(ContentCache.class)
-                                .getPartySubNews(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson<PartySubNewsEntity>> getPartySubList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(ContentService.class)
+                .getPartySubList(nodeId, pageIndex, pageSize);
     }
 }

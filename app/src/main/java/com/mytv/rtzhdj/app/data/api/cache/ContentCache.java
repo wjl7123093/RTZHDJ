@@ -28,6 +28,6 @@ public interface ContentCache {
     Observable<Reply<BaseJson<PartyRecommendEntity>>> getPartyRecommend(Observable<PartyRecommendEntity> data, EvictProvider evictProvider);
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<PartySubNewsEntity>> getPartySubNews(Observable<PartySubNewsEntity> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson<PartySubNewsEntity>>> getPartySubNews(Observable<BaseJson<PartySubNewsEntity>> data, EvictProvider evictProvider);
 
 }

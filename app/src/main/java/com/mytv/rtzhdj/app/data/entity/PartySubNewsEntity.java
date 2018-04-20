@@ -13,14 +13,14 @@ import java.util.List;
  */
 public class PartySubNewsEntity {
 
-    private List<PartyNewsEntity> channelNewsBlock;    // 二级新闻列表
+    private List<PartyNewsEntity> ChannelNewsBlock;    // 二级新闻列表
 
     public List<PartyNewsEntity> getChannelNewsBlock() {
-        return channelNewsBlock;
+        return ChannelNewsBlock;
     }
 
     public void setChannelNewsBlock(List<PartyNewsEntity> channelNewsBlock) {
-        this.channelNewsBlock = channelNewsBlock;
+        this.ChannelNewsBlock = channelNewsBlock;
     }
 
 }
