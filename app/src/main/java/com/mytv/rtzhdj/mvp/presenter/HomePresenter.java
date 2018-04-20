@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.alibaba.android.arouter.utils.TextUtils;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -39,6 +40,7 @@ import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
@@ -133,7 +135,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
         final List<Object> arrayList1 = new ArrayList<>();
         for (int i = 0; i < SpecialBlock.size(); i++) {
-            arrayList1.add(SpecialBlock.get(i).getImageUrl());
+            arrayList1.add(Api.APP_IMAGE_DOMAIN + SpecialBlock.get(i).getImageUrl().replace("@", ""));
         }
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         //banner
@@ -274,15 +276,20 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 holder.setText(R.id.tv_datetime, FocusNewsBlock_ChildContent.get(position).getAddDate());
                 holder.setText(R.id.tv_comment_num, FocusNewsBlock_ChildContent.get(position).getComments() + "");
                 holder.setText(R.id.tv_star_num, FocusNewsBlock_ChildContent.get(position).getDigs() + "");
-                mImageLoader.loadImage(getContext(),
-                        ImageConfigImpl
-                                .builder()
-                                .errorPic(R.mipmap.ic_error)
-                                .placeholder(R.mipmap.ic_placeholder)
-                                .url(FocusNewsBlock_ChildContent.get(position).getImageUrl())
-                                .imageView(holder.getView(R.id.iv_image))
-                                .build());
 
+                if (!TextUtils.isEmpty(FocusNewsBlock_ChildContent.get(position).getImageUrl())) {
+                    mImageLoader.loadImage(getContext(),
+                            ImageConfigImpl
+                                    .builder()
+                                    .errorPic(R.mipmap.ic_error)
+                                    .placeholder(R.mipmap.ic_placeholder)
+                                    .url(Api.APP_IMAGE_DOMAIN + FocusNewsBlock_ChildContent.get(position).getImageUrl().replace("@", ""))
+                                    .imageView(holder.getView(R.id.iv_image))
+                                    .build());
+                    holder.getView(R.id.iv_image).setVisibility(View.VISIBLE);
+                } else {
+                    holder.getView(R.id.iv_image).setVisibility(View.GONE);
+                }
 
                 holder.getView(R.id.rl_container).setOnClickListener(view -> {
                     // 新闻详情页
@@ -325,7 +332,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                                 .builder()
                                 .errorPic(R.mipmap.ic_error)
                                 .placeholder(R.mipmap.ic_placeholder)
-                                .url(AdBlock.get(0).getImageUrl())
+                                .url(Api.APP_IMAGE_DOMAIN + AdBlock.get(0).getImageUrl().replace("@", ""))
                                 .imageView(holder.getView(R.id.iv_image))
                                 .build());
 
@@ -496,7 +503,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         mModel.getHomeData(update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<HomeEntity>>transformObservable("getHomeData",
                         new TypeToken<BaseJson<HomeEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<HomeEntity>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))

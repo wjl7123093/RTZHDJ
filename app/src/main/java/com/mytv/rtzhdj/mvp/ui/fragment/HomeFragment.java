@@ -91,7 +91,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         initRefreshLayout();
 
         // 获取首页数据
-//        mPresenter.callMethodOfGetHomeData(false);
+        mPresenter.callMethodOfGetHomeData(false);
     }
 
     /**
@@ -273,8 +273,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
         DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
         //把轮播器添加到集合
-//        BaseDelegateAdapter bannerAdapter = mPresenter.initBannerAdapter(SpecialBlock);
-//        mAdapters.add(bannerAdapter);
+        BaseDelegateAdapter bannerAdapter = mPresenter.initBannerAdapter(SpecialBlock);
+        mAdapters.add(bannerAdapter);
 
         //初始化跑马灯
         BaseDelegateAdapter marqueeAdapter = mPresenter.initMarqueeView(NoticeBlock_ChildContent);
