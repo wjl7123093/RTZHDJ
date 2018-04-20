@@ -139,7 +139,7 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
 //                mRootView.onBannerClick(position);
 
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                        .withInt("articleId", specialBlockList.get(position).getArticleId());
+                        .withInt("articleId", specialBlockList.get(position).getArticleId()).navigation();
             }
         });
 
