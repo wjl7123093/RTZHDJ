@@ -8,7 +8,7 @@ import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
 
@@ -23,7 +23,7 @@ public interface ContentContract {
         void onBannerClick(int position);
 
         void showRecommendData(PartyRecommendEntity recommendEntity);
-        void initAdapter(List<PartyRecommendEntity.ImportandBlock> importandBlockList);
+        void initAdapter(List<PartyNewsEntity> importandBlockList);
 //        void showOtherData();
     }
 
@@ -44,7 +44,7 @@ public interface ContentContract {
         //初始化 RecyclerView
         RecyclerView initRecyclerView(RecyclerView recyclerView);
         // 初始化 头部View
-        android.view.View initHeaderView(List<PartyRecommendEntity.SpecialBlock> specialBlockList, ViewGroup parent);
+        android.view.View initHeaderView(List<PartyNewsEntity> specialBlockList, ViewGroup parent);
 
         // 调用 获取党建新闻推荐数据
         void callMethodOfGetPartyRecommend(int pageIndex, int pageSize, boolean update);

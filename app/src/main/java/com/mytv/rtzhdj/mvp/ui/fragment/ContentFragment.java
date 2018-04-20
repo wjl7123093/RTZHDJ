@@ -14,6 +14,7 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.di.component.DaggerContentComponent;
 import com.mytv.rtzhdj.di.module.ContentModule;
@@ -156,8 +157,8 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
     @Override
     public void showRecommendData(PartyRecommendEntity recommendEntity) {
-        List<PartyRecommendEntity.SpecialBlock> specialBlock = recommendEntity.getSpecialBlock();
-        List<PartyRecommendEntity.ImportandBlock> importandBlock = recommendEntity.getImportandBlock();
+        List<PartyNewsEntity> specialBlock = recommendEntity.getSpecialBlock();
+        List<PartyNewsEntity> importandBlock = recommendEntity.getImportandBlock();
 
         initAdapter(importandBlock);
         View headerView = mPresenter.initHeaderView(specialBlock, (ViewGroup) mRecyclerView.getParent());
@@ -168,7 +169,7 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
     }
 
     @Override
-    public void initAdapter(List<PartyRecommendEntity.ImportandBlock> importandBlockList) {
+    public void initAdapter(List<PartyNewsEntity> importandBlockList) {
         newsAdapter = new NewsAdapter(getContext(), importandBlockList);
         newsAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(newsAdapter);

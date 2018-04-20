@@ -34,6 +34,7 @@ import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
@@ -102,7 +103,7 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     }
 
     @Override
-    public View initHeaderView(List<PartyRecommendEntity.SpecialBlock> specialBlockList, ViewGroup parent) {
+    public View initHeaderView(List<PartyNewsEntity> specialBlockList, ViewGroup parent) {
         List<Object> imageUrls = new ArrayList<>();
         for (int i = 0; i < specialBlockList.size(); i++) {
             imageUrls.add(Api.APP_IMAGE_DOMAIN + specialBlockList.get(i).getImageUrl().replace("@", ""));
