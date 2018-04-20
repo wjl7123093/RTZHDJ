@@ -135,7 +135,7 @@ public class StudyRecordActivity extends BaseActivity<StudyRecordPresenter> impl
     }
 
     private void initAdapter() {
-        newsAdapter = new NewsAdapter(StudyRecordActivity.this, PAGE_SIZE);
+        /*newsAdapter = new NewsAdapter(StudyRecordActivity.this, PAGE_SIZE);
         newsAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(newsAdapter);
 
@@ -144,7 +144,7 @@ public class StudyRecordActivity extends BaseActivity<StudyRecordPresenter> impl
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 showMessage("" + Integer.toString(position));
             }
-        });
+        });*/
 
     }
 

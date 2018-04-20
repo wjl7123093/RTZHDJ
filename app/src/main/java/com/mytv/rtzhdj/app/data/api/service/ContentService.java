@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
@@ -25,8 +26,8 @@ public interface ContentService {
      * @return
      */
     @GET("getPartyRecommend")
-    Observable<PartyRecommendEntity> getPartyRecommend(@Query("typeId") String typeId,
-                                                       @Query("count") int count);
+    Observable<BaseJson<PartyRecommendEntity>> getPartyRecommend(@Query("PageIndex") int pageIndex,
+                                                                 @Query("PageSize") int pageSize);
 
     /**
      * 获取党建新闻二级列表数据

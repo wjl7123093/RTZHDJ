@@ -13,35 +13,44 @@ import java.util.List;
  */
 public class PartyRecommendEntity {
 
-    private List<SpecialBlock> specialBlock;        // 专题
-    private List<ImportandBlock> importandBlock;    // 要闻
+    private List<SpecialBlock> SpecialBlock;        // 专题
+    private List<ImportandBlock> ImportandBlock;    // 要闻
 
     public List<SpecialBlock> getSpecialBlock() {
-        return specialBlock;
+        return SpecialBlock;
     }
 
     public void setSpecialBlock(List<SpecialBlock> specialBlock) {
-        this.specialBlock = specialBlock;
+        this.SpecialBlock = specialBlock;
     }
 
     public List<ImportandBlock> getImportandBlock() {
-        return importandBlock;
+        return ImportandBlock;
     }
 
     public void setImportandBlock(List<ImportandBlock> importandBlock) {
-        this.importandBlock = importandBlock;
+        this.ImportandBlock = importandBlock;
     }
 
-    class SpecialBlock {
-        private int Article;
+    public class SpecialBlock {
+        private int ArticleId;
+        private String Title;
         private String ImageUrl;
 
-        public int getArticle() {
-            return Article;
+        public int getArticleId() {
+            return ArticleId;
         }
 
-        public void setArticle(int article) {
-            Article = article;
+        public void setArticleId(int articleId) {
+            ArticleId = articleId;
+        }
+
+        public String getTitle() {
+            return Title;
+        }
+
+        public void setTitle(String title) {
+            Title = title;
         }
 
         public String getImageUrl() {
@@ -53,12 +62,13 @@ public class PartyRecommendEntity {
         }
     }
 
-    class ImportandBlock {
+    public class ImportandBlock {
         private int ArticleId;
         private String Title;
         private int Digs;
         private int Comments;
         private String ImageUrl;
+        private String AddDate;
 
         public int getArticleId() {
             return ArticleId;
@@ -98,6 +108,14 @@ public class PartyRecommendEntity {
 
         public void setImageUrl(String imageUrl) {
             ImageUrl = imageUrl;
+        }
+
+        public String getAddDate() {
+            return AddDate;
+        }
+
+        public void setAddDate(String addDate) {
+            AddDate = addDate;
         }
     }
 

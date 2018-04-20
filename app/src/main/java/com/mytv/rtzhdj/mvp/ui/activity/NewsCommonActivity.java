@@ -148,7 +148,7 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     }
 
     private void initAdapter() {
-        newsAdapter = new NewsAdapter(NewsCommonActivity.this, PAGE_SIZE);
+        /*newsAdapter = new NewsAdapter(NewsCommonActivity.this, PAGE_SIZE);
         newsAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(newsAdapter);
 
@@ -157,7 +157,7 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 showMessage("" + Integer.toString(position));
             }
-        });
+        });*/
 
     }
 

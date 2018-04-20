@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.cache;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
@@ -24,7 +25,7 @@ import io.rx_cache2.Reply;
 public interface ContentCache {
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<PartyRecommendEntity>> getPartyRecommend(Observable<PartyRecommendEntity> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson<PartyRecommendEntity>>> getPartyRecommend(Observable<PartyRecommendEntity> data, EvictProvider evictProvider);
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
     Observable<Reply<PartySubNewsEntity>> getPartySubNews(Observable<PartySubNewsEntity> data, EvictProvider evictProvider);

@@ -6,15 +6,19 @@ import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -25,9 +29,14 @@ import javax.inject.Inject;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
@@ -35,7 +44,10 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -90,7 +102,12 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     }
 
     @Override
-    public View initHeaderView(List<?> imageUrls, ViewGroup parent) {
+    public View initHeaderView(List<PartyRecommendEntity.SpecialBlock> specialBlockList, ViewGroup parent) {
+        List<Object> imageUrls = new ArrayList<>();
+        for (int i = 0; i < specialBlockList.size(); i++) {
+            imageUrls.add(Api.APP_IMAGE_DOMAIN + specialBlockList.get(i).getImageUrl().replace("@", ""));
+        }
+
         View view = mActivity.getLayoutInflater().inflate(R.layout.item_vlayout_banner, parent, false);
 
         view.findViewById(R.id.tv_topic).setVisibility(View.GONE);
@@ -119,7 +136,10 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                mRootView.onBannerClick(position);
+//                mRootView.onBannerClick(position);
+
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                        .withInt("articleId", specialBlockList.get(position).getArticleId());
             }
         });
 
@@ -127,8 +147,12 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     }
 
     @Override
-    public void callMethodOfGetPartyRecommend(String typeId, int count, boolean update) {
-        mModel.getPartyRecommend(typeId, count, update)
+    public void callMethodOfGetPartyRecommend(int pageIndex, int pageSize, boolean update) {
+        mModel.getPartyRecommend(pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<PartyRecommendEntity>>transformObservable("getUserCategory",
+                        new TypeToken<BaseJson<PartyRecommendEntity>>() { }.getType(),
+                        CacheStrategy.firstRemote()))
+                .map(new CacheResult.MapFunc<BaseJson<PartyRecommendEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -141,11 +165,12 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<PartyRecommendEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<PartyRecommendEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull PartyRecommendEntity partyRecommendData) {
+                    public void onNext(@NonNull BaseJson<PartyRecommendEntity> partyRecommendData) {
+                        Log.e(TAG, partyRecommendData.getData().toString());
 
-
+                        mRootView.showRecommendData(partyRecommendData.getData());
                     }
                 });
     }
@@ -167,7 +192,7 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<PartySubNewsEntity>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull PartySubNewsEntity partyRecommendData) {
+                    public void onNext(@NonNull PartySubNewsEntity partyRecommendData) {
 
 
                     }

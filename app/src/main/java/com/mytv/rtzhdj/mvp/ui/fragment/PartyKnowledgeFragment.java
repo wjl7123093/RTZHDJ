@@ -152,7 +152,7 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
     }
 
     private void initAdapter() {
-        newsAdapter = new NewsAdapter(getContext(), PAGE_SIZE);
+        /*newsAdapter = new NewsAdapter(getContext(), PAGE_SIZE);
         newsAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(newsAdapter);
 
@@ -161,7 +161,7 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
     }
 

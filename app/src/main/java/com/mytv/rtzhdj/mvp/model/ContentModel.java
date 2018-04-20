@@ -10,6 +10,7 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.ContentCache;
 import com.mytv.rtzhdj.app.data.api.service.ContentService;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
@@ -44,19 +45,9 @@ public class ContentModel extends BaseModel implements ContentContract.Model {
     }
 
     @Override
-    public Observable<PartyRecommendEntity> getPartyRecommend(String typedId, int count, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(ContentService.class)
-                .getPartyRecommend(typedId, count))
-                .flatMap(new Function<Observable<PartyRecommendEntity>, ObservableSource<PartyRecommendEntity>>() {
-                    @Override
-                    public ObservableSource<PartyRecommendEntity> apply(@NonNull Observable<PartyRecommendEntity> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(ContentCache.class)
-                                .getPartyRecommend(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson<PartyRecommendEntity>> getPartyRecommend(int pageIndex, int pageSize, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(ContentService.class)
+                .getPartyRecommend(pageIndex, pageSize);
     }
 
     @Override

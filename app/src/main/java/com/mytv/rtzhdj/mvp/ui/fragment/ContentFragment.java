@@ -14,6 +14,7 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.di.component.DaggerContentComponent;
 import com.mytv.rtzhdj.di.module.ContentModule;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
@@ -84,19 +85,19 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
         mPresenter.setActivity(getActivity());
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
 
-        View headerView = mPresenter.initHeaderView(imgUrls, (ViewGroup) mRecyclerView.getParent());
-        if (0 == getArguments().getInt("position"))
-            newsAdapter.addHeaderView(headerView);
-        else
-            newsAdapter.removeAllHeaderView();
+//        View headerView = mPresenter.initHeaderView(imgUrls, (ViewGroup) mRecyclerView.getParent());
+//        if (0 == getArguments().getInt("position"))
+//            newsAdapter.addHeaderView(headerView);
+//        else
+//            newsAdapter.removeAllHeaderView();
 
         initRefreshLayout();
 
         if (0 == getArguments().getInt("position")) {
             // 获取党建新闻推荐列表数据
-            mPresenter.callMethodOfGetPartyRecommend("typeId", PAGE_SIZE, false);
+            mPresenter.callMethodOfGetPartyRecommend(0, PAGE_SIZE, false);
         } else {
             // 获取党建新闻二级列表(除推荐)数据
             mPresenter.callMethodOfGetPartySubList(0, "typeId", PAGE_SIZE, false);
@@ -153,6 +154,33 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
     }
 
+    @Override
+    public void showRecommendData(PartyRecommendEntity recommendEntity) {
+        List<PartyRecommendEntity.SpecialBlock> specialBlock = recommendEntity.getSpecialBlock();
+        List<PartyRecommendEntity.ImportandBlock> importandBlock = recommendEntity.getImportandBlock();
+
+        initAdapter(importandBlock);
+        View headerView = mPresenter.initHeaderView(specialBlock, (ViewGroup) mRecyclerView.getParent());
+        if (0 == getArguments().getInt("position"))
+            newsAdapter.addHeaderView(headerView);
+        else
+            newsAdapter.removeAllHeaderView();
+    }
+
+    @Override
+    public void initAdapter(List<PartyRecommendEntity.ImportandBlock> importandBlockList) {
+        newsAdapter = new NewsAdapter(getContext(), importandBlockList);
+        newsAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(newsAdapter);
+
+        newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -169,7 +197,7 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
         });
     }
 
-    private void initAdapter() {
+    /*private void initAdapter() {
         newsAdapter = new NewsAdapter(getContext(), PAGE_SIZE);
         newsAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(newsAdapter);
@@ -181,5 +209,5 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
             }
         });
 
-    }
+    }*/
 }
