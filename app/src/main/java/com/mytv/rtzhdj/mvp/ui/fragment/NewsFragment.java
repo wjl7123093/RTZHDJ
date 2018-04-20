@@ -21,6 +21,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsComponent;
 import com.mytv.rtzhdj.di.module.NewsModule;
 import com.mytv.rtzhdj.mvp.contract.NewsContract;
@@ -95,11 +96,11 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
             ARouter.getInstance().build(ARoutePath.PATH_SEARCH).navigation();
         });
 
-        titles = new String[]{"推荐", "党建快讯", "基层动态", "干部任免", "身边典型", "老党员之声", "他山之石"};
-        initTab();
+//        titles = new String[]{"推荐", "党建快讯", "基层动态", "干部任免", "身边典型", "老党员之声", "他山之石"};
+//        initTab();
 
         // 获取二级栏目标题
-//        mPresenter.callMethodOfGetPartyColumns("typeId", false);
+        mPresenter.callMethodOfGetPartyColumns(1, false);
     }
 
     /**
@@ -179,4 +180,30 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
         mTab.setupWithViewPager(mViewPager);
     }
 
+    @Override
+    public void initTab(List<PartyColumnsEntity> partyColumnsList) {
+        final List<Fragment> fragments = new ArrayList<>();
+        for (int i = 0; i < partyColumnsList.size(); i++) {
+            fragments.add(ContentFragment.newInstance(i));
+        }
+
+
+        mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return partyColumnsList.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return partyColumnsList.get(position).getTitle();
+            }
+        });
+        mTab.setupWithViewPager(mViewPager);
+    }
 }

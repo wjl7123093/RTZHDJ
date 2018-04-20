@@ -1,7 +1,10 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -23,6 +26,6 @@ public interface NewsService {
      * @return
      */
     @GET("getPartyColumns")
-    Observable<PartyColumnsEntity> getPartyColumns(@Query("typeId") String typeId);
+    Observable<BaseJson<List<PartyColumnsEntity>>> getPartyColumns(@Query("TypeId") int typeId);
 
 }

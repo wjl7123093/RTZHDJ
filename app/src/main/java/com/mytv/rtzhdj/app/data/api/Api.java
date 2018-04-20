@@ -12,6 +12,7 @@ package com.mytv.rtzhdj.app.data.api;
 public interface Api {
 
     String APP_DOMAIN = "http://61.157.136.102:8903/api/";
+    String APP_IMAGE_DOMAIN = "http://192.168.13.93";
     int RequestSuccess = 200;
 
 }

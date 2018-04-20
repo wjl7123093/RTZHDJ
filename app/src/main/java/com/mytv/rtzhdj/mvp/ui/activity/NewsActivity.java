@@ -19,6 +19,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsComponent;
 import com.mytv.rtzhdj.di.module.NewsModule;
 import com.mytv.rtzhdj.mvp.contract.NewsContract;
@@ -146,5 +147,32 @@ public class NewsActivity extends BaseActivity<NewsPresenter> implements NewsCon
             }
         });
         mTab.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    public void initTab(List<PartyColumnsEntity> partyColumnsList) {
+//        final List<Fragment> fragments = new ArrayList<>();
+//        for (int i = 0; i < partyColumnsList.size(); i++) {
+//            fragments.add(ContentFragment.newInstance(i));
+//        }
+//
+//
+//        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+//            @Override
+//            public Fragment getItem(int position) {
+//                return fragments.get(position);
+//            }
+//
+//            @Override
+//            public int getCount() {
+//                return partyColumnsList.size();
+//            }
+//
+//            @Override
+//            public CharSequence getPageTitle(int position) {
+//                return partyColumnsList.get(position).getTitle();
+//            }
+//        });
+//        mTab.setupWithViewPager(mViewPager);
     }
 }

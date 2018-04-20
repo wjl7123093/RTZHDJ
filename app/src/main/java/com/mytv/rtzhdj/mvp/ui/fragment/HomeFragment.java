@@ -91,7 +91,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         initRefreshLayout();
 
         // 获取首页数据
-        mPresenter.callMethodOfGetHomeData(false);
+//        mPresenter.callMethodOfGetHomeData(false);
     }
 
     /**
