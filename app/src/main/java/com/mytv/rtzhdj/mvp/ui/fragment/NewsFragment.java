@@ -22,6 +22,7 @@ import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsComponent;
 import com.mytv.rtzhdj.di.module.NewsModule;
 import com.mytv.rtzhdj.mvp.contract.NewsContract;
@@ -154,39 +155,17 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
         mTvToolbarTitle.setText("党建新闻");
     }
 
-    private void initTab() {
-        final List<Fragment> fragments = new ArrayList<>();
-        for (int i = 0; i < titles.length; i++) {
-            fragments.add(ContentFragment.newInstance(i));
-        }
-
-
-        mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return fragments.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return titles.length;
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return titles[position];
-            }
-        });
-        mTab.setupWithViewPager(mViewPager);
-    }
-
     @Override
     public void initTab(List<PartyColumnsEntity> partyColumnsList) {
+        PartyColumnsEntity columnsEntity = new PartyColumnsEntity();
+        columnsEntity.setTitle("推荐");
+        columnsEntity.setNodeId(0);
+        partyColumnsList.add(0, columnsEntity);
+
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < partyColumnsList.size(); i++) {
-            fragments.add(ContentFragment.newInstance(i));
+            fragments.add(ContentFragment.newInstance(partyColumnsList.get(i).getNodeId()));
         }
-
 
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override

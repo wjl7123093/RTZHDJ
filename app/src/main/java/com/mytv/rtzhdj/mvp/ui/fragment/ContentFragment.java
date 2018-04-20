@@ -54,10 +54,10 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
     private static final int PAGE_SIZE = 10;
 
 
-    public static ContentFragment newInstance(int position) {
+    public static ContentFragment newInstance(int nodeId) {
         ContentFragment fragment = new ContentFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("position", position);
+        bundle.putInt("nodeId", nodeId);
         fragment.setArguments(bundle);
         return fragment;
     }
