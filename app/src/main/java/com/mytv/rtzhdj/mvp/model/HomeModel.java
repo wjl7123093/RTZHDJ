@@ -10,6 +10,7 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
 import com.mytv.rtzhdj.app.data.api.cache.RegisterCache;
 import com.mytv.rtzhdj.app.data.api.service.HomeService;
@@ -47,18 +48,8 @@ public class HomeModel extends BaseModel implements HomeContract.Model {
     }
 
     @Override
-    public Observable<HomeEntity> getHomeData(int curUserId, int pageSize, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(HomeService.class)
-                .getHomeData(curUserId, pageSize))
-                .flatMap(new Function<Observable<HomeEntity>, ObservableSource<HomeEntity>>() {
-                    @Override
-                    public ObservableSource<HomeEntity> apply(@NonNull Observable<HomeEntity> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(HomeCache.class)
-                                .getHomeData(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson<HomeEntity>> getHomeData(boolean update) {
+        return mRepositoryManager.obtainRetrofitService(HomeService.class)
+                .getHomeData();
     }
 }

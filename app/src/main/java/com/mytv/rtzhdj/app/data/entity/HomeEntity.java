@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,53 +13,53 @@ import java.util.List;
  * @crdate 2018-4-4
  * @update
  */
-public class HomeEntity {
+public class HomeEntity implements Serializable {
 
-    private List<SpecialBlock> specialBlock;                // 专题
-    private List<NoticeBlock> noticeBlock;                  // 通知
-    private List<FocusNewsBlock> focusNewsBlock;            // 要闻
-    private List<AdBlock> adBlock;                          // 广告
-    private List<PublicSpiritedBlock> publicSpiritedBlock;  // 推荐活动
+    private List<SpecialBlock> SpecialBlock;                            // 专题
+    private List<NoticeBlock> NoticeBlock_ChildContent;                 // 通知
+    private List<FocusNewsBlock> FocusNewsBlock_ChildContent;           // 要闻
+    private List<AdBlock> AdBlock;                                      // 广告
+    private List<PublicSpiritedBlock> PublicSpiritedBlock_ChildContent; // 推荐活动
     private int myPositiveValue;    // 正能量值
 
-    public List<SpecialBlock> getSpecialBlock() {
-        return specialBlock;
+    public List<HomeEntity.SpecialBlock> getSpecialBlock() {
+        return SpecialBlock;
     }
 
-    public void setSpecialBlock(List<SpecialBlock> specialBlock) {
-        this.specialBlock = specialBlock;
+    public void setSpecialBlock(List<HomeEntity.SpecialBlock> specialBlock) {
+        SpecialBlock = specialBlock;
     }
 
-    public List<NoticeBlock> getNoticeBlock() {
-        return noticeBlock;
+    public List<NoticeBlock> getNoticeBlock_ChildContent() {
+        return NoticeBlock_ChildContent;
     }
 
-    public void setNoticeBlock(List<NoticeBlock> noticeBlock) {
-        this.noticeBlock = noticeBlock;
+    public void setNoticeBlock_ChildContent(List<NoticeBlock> noticeBlock_ChildContent) {
+        NoticeBlock_ChildContent = noticeBlock_ChildContent;
     }
 
-    public List<FocusNewsBlock> getFocusNewsBlock() {
-        return focusNewsBlock;
+    public List<FocusNewsBlock> getFocusNewsBlock_ChildContent() {
+        return FocusNewsBlock_ChildContent;
     }
 
-    public void setFocusNewsBlock(List<FocusNewsBlock> focusNewsBlock) {
-        this.focusNewsBlock = focusNewsBlock;
+    public void setFocusNewsBlock_ChildContent(List<FocusNewsBlock> focusNewsBlock_ChildContent) {
+        FocusNewsBlock_ChildContent = focusNewsBlock_ChildContent;
     }
 
-    public List<AdBlock> getAdBlock() {
-        return adBlock;
+    public List<HomeEntity.AdBlock> getAdBlock() {
+        return AdBlock;
     }
 
-    public void setAdBlock(List<AdBlock> adBlock) {
-        this.adBlock = adBlock;
+    public void setAdBlock(List<HomeEntity.AdBlock> adBlock) {
+        AdBlock = adBlock;
     }
 
-    public List<PublicSpiritedBlock> getPublicSpiritedBlock() {
-        return publicSpiritedBlock;
+    public List<PublicSpiritedBlock> getPublicSpiritedBlock_ChildContent() {
+        return PublicSpiritedBlock_ChildContent;
     }
 
-    public void setPublicSpiritedBlock(List<PublicSpiritedBlock> publicSpiritedBlock) {
-        this.publicSpiritedBlock = publicSpiritedBlock;
+    public void setPublicSpiritedBlock_ChildContent(List<PublicSpiritedBlock> publicSpiritedBlock_ChildContent) {
+        PublicSpiritedBlock_ChildContent = publicSpiritedBlock_ChildContent;
     }
 
     public int getMyPositiveValue() {
@@ -72,7 +73,7 @@ public class HomeEntity {
     /**
      * 首页专题
      */
-    class SpecialBlock {
+    public class SpecialBlock {
         private int NodeId;
         private String ImageUrl;
 
@@ -96,7 +97,7 @@ public class HomeEntity {
     /**
      * 通知
      */
-    class NoticeBlock {
+    public class NoticeBlock {
         private int NodeId;
         private int ID;
         private String Title;
@@ -138,7 +139,7 @@ public class HomeEntity {
     /**
      * 要闻
      */
-    class FocusNewsBlock {
+    public class FocusNewsBlock {
         private int NodeId;
         private int ID;
         private String Title;
@@ -207,7 +208,7 @@ public class HomeEntity {
     /**
      * 广告
      */
-    class AdBlock {
+    public class AdBlock {
         private int NodeId;
         private String ImageUrl;
 
@@ -231,7 +232,7 @@ public class HomeEntity {
     /**
      * 推荐活动
      */
-    class PublicSpiritedBlock {
+    public class PublicSpiritedBlock {
         private int NodeId;
         private int ArticleId;
         private String Title;

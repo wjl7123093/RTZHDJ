@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -35,6 +37,8 @@ import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
@@ -45,6 +49,9 @@ import com.sunfusheng.marqueeview.MarqueeView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -119,12 +126,16 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     }
 
     @Override
-    public BaseDelegateAdapter initBannerAdapter() {
-        final List<Object> arrayList = new ArrayList<>();
-        arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
-        arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
+    public BaseDelegateAdapter initBannerAdapter(List<HomeEntity.SpecialBlock> SpecialBlock) {
+//        final List<Object> arrayList = new ArrayList<>();
+//        arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
+//        arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
+
+        final List<Object> arrayList1 = new ArrayList<>();
+        for (int i = 0; i < SpecialBlock.size(); i++) {
+            arrayList1.add(SpecialBlock.get(i).getImageUrl());
+        }
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-//        linearLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
         //banner
         return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.item_vlayout_banner,
                 1, Constant.viewType.typeBanner) {
@@ -138,7 +149,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 //设置图片加载器
                 mBanner.setImageLoader(new BannerImageLoader());
                 //设置图片集合
-                mBanner.setImages(arrayList);
+                mBanner.setImages(arrayList1);
                 //设置banner动画效果
                 mBanner.setBannerAnimation(Transformer.DepthPage);
                 //设置标题集合（当banner样式有显示title时）
@@ -152,6 +163,14 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
                 //banner设置方法全部调用完毕时最后调用
                 mBanner.start();
+                mBanner.setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                        ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL)
+                                .withInt("nodeId", SpecialBlock.get(position).getNodeId())
+                                .navigation();
+                    }
+                });
 
                 mRootView.setBanner(mBanner);
                 holder.getView(R.id.tv_topic).setOnClickListener(view -> {
@@ -194,7 +213,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     }
 
     @Override
-    public BaseDelegateAdapter initMarqueeView() {
+    public BaseDelegateAdapter initMarqueeView(List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_marqueeview,
                 1, Constant.viewType.typeMarquee) {
@@ -204,14 +223,20 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 MarqueeView marqueeView = holder.getView(R.id.marqueeView1);
 
                 List<String> info1 = new ArrayList<>();
-                info1.add("1.坚持读书，写作，源于内心的动力！");
-                info1.add("2.欢迎订阅喜马拉雅听书！");
+                for (int i = 0; i < NoticeBlock_ChildContent.size(); i++) {
+                    info1.add(NoticeBlock_ChildContent.get(i).getTitle());
+//                    info1.add("2.欢迎订阅喜马拉雅听书！");
+                }
                 marqueeView.startWithList(info1);
                 // 在代码里设置自己的动画
                 marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position, TextView textView) {
-                        mRootView.setMarqueeClick(position);
+//                        mRootView.setMarqueeClick(position);
+
+                        ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                                .withInt("nodeId", NoticeBlock_ChildContent.get(position).getNodeId())
+                                .navigation();
                     }
                 });
             }
@@ -237,14 +262,28 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     }
 
     @Override
-    public BaseDelegateAdapter initList() {
+    public BaseDelegateAdapter initList(List<HomeEntity.FocusNewsBlock> FocusNewsBlock_ChildContent) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 1));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_image,
-                10, Constant.viewType.typeList) {
+                FocusNewsBlock_ChildContent.size(), Constant.viewType.typeList) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_title, FocusNewsBlock_ChildContent.get(position).getTitle());
+                holder.setText(R.id.tv_datetime, FocusNewsBlock_ChildContent.get(position).getAddDate());
+                holder.setText(R.id.tv_comment_num, FocusNewsBlock_ChildContent.get(position).getComments() + "");
+                holder.setText(R.id.tv_star_num, FocusNewsBlock_ChildContent.get(position).getDigs() + "");
+                mImageLoader.loadImage(getContext(),
+                        ImageConfigImpl
+                                .builder()
+                                .errorPic(R.mipmap.ic_error)
+                                .placeholder(R.mipmap.ic_placeholder)
+                                .url(FocusNewsBlock_ChildContent.get(position).getImageUrl())
+                                .imageView(holder.getView(R.id.iv_image))
+                                .build());
+
+
                 holder.getView(R.id.rl_container).setOnClickListener(view -> {
                     // 新闻详情页
 //                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
@@ -274,7 +313,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     }
 
     @Override
-    public BaseDelegateAdapter initImage(String url) {
+    public BaseDelegateAdapter initImage(List<HomeEntity.AdBlock> AdBlock) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_image2,
                 1, Constant.viewType.typeImage) {
@@ -286,12 +325,14 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                                 .builder()
                                 .errorPic(R.mipmap.ic_error)
                                 .placeholder(R.mipmap.ic_placeholder)
-                                .url(url)
+                                .url(AdBlock.get(0).getImageUrl())
                                 .imageView(holder.getView(R.id.iv_image))
                                 .build());
 
                 holder.getView(R.id.iv_image).setOnClickListener(view -> {
-                    mRootView.setOnclick();
+//                    mRootView.setOnclick();
+                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                            .withInt("nodeId", AdBlock.get(position).getNodeId()).navigation();
                 });
 
             }
@@ -313,10 +354,17 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     }
 
     @Override
-    public BaseDelegateAdapter initOnePlusN() {
+    public BaseDelegateAdapter initOnePlusN(List<HomeEntity.PublicSpiritedBlock> PublicSpiritedBlock_ChildContent,
+                                            int myPositiveValue) {
         final List<Object> arrayList = new ArrayList<>();
         arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
         arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
+//        final List<Object> arrayList1 = new ArrayList<>();
+//        arrayList1.add(PublicSpiritedBlock_ChildContent.get(0).getTitleImageUrl());
+//        arrayList1.add(PublicSpiritedBlock_ChildContent.get(1).getTitleImageUrl());
+//        final List<Object> arrayList2 = new ArrayList<>();
+//        arrayList1.add(PublicSpiritedBlock_ChildContent.get(2).getTitleImageUrl());
+//        arrayList1.add(PublicSpiritedBlock_ChildContent.get(3).getTitleImageUrl());
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
 //        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_oneplusn1,
@@ -353,6 +401,10 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
                 initBannerParams(banner1, arrayList);
                 initBannerParams(banner2, arrayList);
+//                initBannerParams(banner1, arrayList1);
+//                initBannerParams(banner2, arrayList2);
+                tvPowerNum.setText(myPositiveValue+"");
+
 
                 banner1.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                     @Override
@@ -375,6 +427,18 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                             tvTitle1.setText("Banner111   哈哈哈");
                         else
                             tvTitle1.setText("Banner111   嘿嘿嘿");
+
+//                        tvJoinNum1.setText(PublicSpiritedBlock_ChildContent.get(position).getEnrollCount());
+//                        tvTitle1.setText(PublicSpiritedBlock_ChildContent.get(position).getTitle());
+//                        tvStartNum1.setText(PublicSpiritedBlock_ChildContent.get(position).getDigs());
+//                        mImageLoader.loadImage(getContext(),
+//                                ImageConfigImpl
+//                                        .builder()
+//                                        .errorPic(R.mipmap.ic_error)
+//                                        .placeholder(R.mipmap.ic_placeholder)
+//                                        .url(PublicSpiritedBlock_ChildContent.get(position).getTitleImageUrl())
+//                                        .imageView(holder.getView(R.id.iv_image))
+//                                        .build());
                     }
 
                     @Override
@@ -403,6 +467,18 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                             tvTitle2.setText("Banner222   哈哈哈");
                         else
                             tvTitle2.setText("Banner222   嘿嘿嘿");
+
+//                        tvJoinNum2.setText(PublicSpiritedBlock_ChildContent.get(2+position).getEnrollCount());
+//                        tvTitle2.setText(PublicSpiritedBlock_ChildContent.get(2+position).getTitle());
+//                        tvStartNum2.setText(PublicSpiritedBlock_ChildContent.get(2+position).getDigs());
+//                        mImageLoader.loadImage(getContext(),
+//                                ImageConfigImpl
+//                                        .builder()
+//                                        .errorPic(R.mipmap.ic_error)
+//                                        .placeholder(R.mipmap.ic_placeholder)
+//                                        .url(PublicSpiritedBlock_ChildContent.get(2+position).getTitleImageUrl())
+//                                        .imageView(holder.getView(R.id.iv_image))
+//                                        .build());
                     }
 
                     @Override
@@ -416,25 +492,30 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     }
 
     @Override
-    public void callMethodOfGetHomeData(int curUserId, int pageSize, boolean update) {
-        mModel.getHomeData(curUserId, pageSize, update)
-                .retryWhen(new RetryWithDelay(3, 2))
+    public void callMethodOfGetHomeData(boolean update) {
+        mModel.getHomeData(update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<HomeEntity>>transformObservable("getHomeData",
+                        new TypeToken<BaseJson<HomeEntity>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<HomeEntity>>())
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(new RetryWithDelay(3, 2))
                 .doOnSubscribe(disposable -> {
                     mRootView.showLoading();
                 })
-                .doFinally(() -> {
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> {
+                    // Action onFinally
                     mRootView.hideLoading();
                 })
-                .observeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<HomeEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<HomeEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull HomeEntity liveMultiItems) {
+                    public void onNext(@io.reactivex.annotations.NonNull BaseJson<HomeEntity> homeData) {
+                        Log.e("TAG", homeData.toString());
 
-
+                        mRootView.showData(homeData);
                     }
                 });
     }

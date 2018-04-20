@@ -86,7 +86,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
         initRefreshLayout();
 
         // 获取 我要参与数据
-        mPresenter.callMethodOfGetMyPartIn(0, PAGE_SIZE, false);
+//        mPresenter.callMethodOfGetMyPartIn(0, PAGE_SIZE, false);
     }
 
     /**

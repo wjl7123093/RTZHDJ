@@ -85,7 +85,7 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         initRefreshLayout();
 
         // 获取 我要学习数据
-        mPresenter.callMethodOfGetMyStudy(0, PAGE_SIZE, false);
+//        mPresenter.callMethodOfGetMyStudy(0, PAGE_SIZE, false);
     }
 
     /**

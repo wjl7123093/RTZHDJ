@@ -16,6 +16,8 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
 import com.mytv.rtzhdj.di.component.DaggerHomeComponent;
 import com.mytv.rtzhdj.di.module.HomeModule;
@@ -46,7 +48,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-19
- * @update
+ * @update 2018-4-20    对接 getHomeInfo 接口
  */
 public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View {
 
@@ -85,11 +87,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     public void initData(Bundle savedInstanceState) {
         mAdapters = new LinkedList<>();
         mPresenter.setActivity((MainActivity)getActivity());
-        initRecyclerView();
+//        initRecyclerView();
         initRefreshLayout();
 
         // 获取首页数据
-        mPresenter.callMethodOfGetHomeData(0, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetHomeData(false);
     }
 
     /**
@@ -211,7 +213,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         ImageLoader.getInstance().showImage(getContext(), iv, url);
     }
 
-    private void initRecyclerView() {
+    @Override
+    public void showData(BaseJson<HomeEntity> homeData) {
+        initRecyclerView(homeData);
+    }
+
+    /*private void initRecyclerView() {
         DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
         //把轮播器添加到集合
         BaseDelegateAdapter bannerAdapter = mPresenter.initBannerAdapter();
@@ -246,6 +253,58 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
         //初始化 1PlusN
         BaseDelegateAdapter oneplusnAdapter = mPresenter.initOnePlusN();
+        mAdapters.add(oneplusnAdapter);
+
+        footerAdapter = mPresenter.initMoreData("更多公益活动");
+        mAdapters.add(footerAdapter);
+
+        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);
+    }*/
+
+    private void initRecyclerView(BaseJson<HomeEntity> homeData) {
+        List<HomeEntity.SpecialBlock> SpecialBlock = homeData.getData().getSpecialBlock();
+        List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent = homeData.getData().getNoticeBlock_ChildContent();
+        List<HomeEntity.FocusNewsBlock> FocusNewsBlock_ChildContent = homeData.getData().getFocusNewsBlock_ChildContent();
+        List<HomeEntity.AdBlock> AdBlock = homeData.getData().getAdBlock();
+        List<HomeEntity.PublicSpiritedBlock> PublicSpiritedBlock_ChildContent = homeData.getData().getPublicSpiritedBlock_ChildContent();
+        int myPositiveValue = homeData.getData().getMyPositiveValue();
+
+
+        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        //把轮播器添加到集合
+//        BaseDelegateAdapter bannerAdapter = mPresenter.initBannerAdapter(SpecialBlock);
+//        mAdapters.add(bannerAdapter);
+
+        //初始化跑马灯
+        BaseDelegateAdapter marqueeAdapter = mPresenter.initMarqueeView(NoticeBlock_ChildContent);
+        mAdapters.add(marqueeAdapter);
+
+        //初始化九宫格
+        BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
+        mAdapters.add(menuAdapter);
+
+
+        //初始化标题
+        BaseDelegateAdapter titleAdapter = mPresenter.initTitle("要闻");
+        mAdapters.add(titleAdapter);
+        //初始化list3
+        BaseDelegateAdapter listAdapter = mPresenter.initList(FocusNewsBlock_ChildContent);
+        mAdapters.add(listAdapter);
+        //初始化脚部
+        BaseDelegateAdapter footerAdapter = mPresenter.initMoreData("更多要闻");
+        mAdapters.add(footerAdapter);
+
+        //初始化图片
+        BaseDelegateAdapter imageAdapter = mPresenter.initImage(AdBlock);
+        mAdapters.add(imageAdapter);
+
+        //初始化头部
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader("推荐活动", "公益，让爱和美丽在你我之间传递");
+        mAdapters.add(headerAdapter);
+
+        //初始化 1PlusN
+        BaseDelegateAdapter oneplusnAdapter = mPresenter.initOnePlusN(PublicSpiritedBlock_ChildContent, myPositiveValue);
         mAdapters.add(oneplusnAdapter);
 
         footerAdapter = mPresenter.initMoreData("更多公益活动");

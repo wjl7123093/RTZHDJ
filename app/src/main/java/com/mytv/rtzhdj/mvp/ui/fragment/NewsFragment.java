@@ -99,7 +99,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
         initTab();
 
         // 获取二级栏目标题
-        mPresenter.callMethodOfGetPartyColumns("typeId", false);
+//        mPresenter.callMethodOfGetPartyColumns("typeId", false);
     }
 
     /**

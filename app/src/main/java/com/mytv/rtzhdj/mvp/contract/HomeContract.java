@@ -8,6 +8,7 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
@@ -33,12 +34,15 @@ public interface HomeContract {
         void setOnePlusNClick();
 
         void showImage(ImageView iv, String url);
+
+        void showData(BaseJson<HomeEntity> homeData);
+//        void setOnBannerClick(int position);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
         // 获取用户类型
-        Observable<HomeEntity> getHomeData(int curUserId, int pageSize, boolean update);
+        Observable<BaseJson<HomeEntity>> getHomeData(boolean update);
 
     }
 
@@ -47,17 +51,18 @@ public interface HomeContract {
         void setActivity(MainActivity activity);
         //初始化
         DelegateAdapter initRecyclerView(RecyclerView recyclerView);
-        BaseDelegateAdapter initBannerAdapter();
+        BaseDelegateAdapter initBannerAdapter(List<HomeEntity.SpecialBlock> SpecialBlock);
         BaseDelegateAdapter initGvMenu();
-        BaseDelegateAdapter initMarqueeView();
+        BaseDelegateAdapter initMarqueeView(List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent);
         BaseDelegateAdapter initTitle(String title);
-        BaseDelegateAdapter initList();
+        BaseDelegateAdapter initList(List<HomeEntity.FocusNewsBlock> FocusNewsBlock_ChildContent);
         BaseDelegateAdapter initMoreData(String moreStr);
-        BaseDelegateAdapter initImage(String url);
+        BaseDelegateAdapter initImage(List<HomeEntity.AdBlock> AdBlock);
         BaseDelegateAdapter initHeader(String title, String desc);
-        BaseDelegateAdapter initOnePlusN();
+        BaseDelegateAdapter initOnePlusN(List<HomeEntity.PublicSpiritedBlock> PublicSpiritedBlock_ChildContent,
+                                         int myPositiveValue);
 
         // 调用 获取首页数据
-        void callMethodOfGetHomeData(int curUserId, int pageSize, boolean update);
+        void callMethodOfGetHomeData(boolean update);
     }
 }

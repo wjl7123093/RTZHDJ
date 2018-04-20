@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 
 import io.reactivex.Observable;
@@ -22,7 +23,6 @@ public interface HomeService {
      * @return
      */
     @GET("getHomeInfo")
-    Observable<HomeEntity> getHomeData(@Query("CurUserId") int curUserId,
-                                       @Query("PageSize") int pageSize);
+    Observable<BaseJson<HomeEntity>> getHomeData();
 
 }
