@@ -182,6 +182,12 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
             public CharSequence getPageTitle(int position) {
                 return partyColumnsList.get(position).getTitle();
             }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                // 注释掉下面那行，解决 滑动卡顿 问题
+//                super.destroyItem(container, position, object);
+            }
         });
         mTab.setupWithViewPager(mViewPager);
     }
