@@ -15,6 +15,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
 import com.mytv.rtzhdj.di.component.DaggerStudyComponent;
 import com.mytv.rtzhdj.di.module.StudyModule;
 import com.mytv.rtzhdj.mvp.contract.StudyContract;
@@ -35,7 +36,7 @@ import butterknife.BindView;
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * StudyFragment 我要参与 Fragment
+ * StudyFragment 我要学习 Fragment
  *
  * @author Fred_W
  * @version v1.0.0(1)
@@ -81,11 +82,11 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     public void initData(Bundle savedInstanceState) {
         mAdapters = new LinkedList<>();
         mPresenter.setActivity((MainActivity)getActivity());
-        initRecyclerView();
+//        initRecyclerView();
         initRefreshLayout();
 
         // 获取 我要学习数据
-//        mPresenter.callMethodOfGetMyStudy(0, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetMyStudy(8, false);
     }
 
     /**
@@ -200,13 +201,59 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         ARouter.getInstance().build(ARoutePath.PATH_STUDY_RECORD).navigation();
     }
 
-    private void initRecyclerView() {
+    @Override
+    public void showStudyData(MyStudyEntity myStudyEntity) {
+        initRecyclerView(myStudyEntity);
+    }
+
+//    private void initRecyclerView() {
+//        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+//
+//        //初始化头部
+//        BaseDelegateAdapter headerAdapter = mPresenter.initHeader(
+//                "http://imgtu.5011.net/uploads/content/20170220/9520371487578487.jpg",
+//                "はたけ·カカシ", 17, 2, 18);
+//        mAdapters.add(headerAdapter);
+//
+//        //初始化九宫格
+//        BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
+//        mAdapters.add(menuAdapter);
+//
+//        //初始化标题 - 必修课
+//        BaseDelegateAdapter titleAdapter = mPresenter.initTitle("必修课", 0);
+//        mAdapters.add(titleAdapter);
+//        //初始化list
+//        BaseDelegateAdapter listAdapter = mPresenter.initList(0);
+//        mAdapters.add(listAdapter);
+//
+//        //初始化标题 - 选修课
+//        titleAdapter = mPresenter.initTitle("选修课", 1);
+//        mAdapters.add(titleAdapter);
+//        //初始化list
+//        listAdapter = mPresenter.initList(1);
+//        mAdapters.add(listAdapter);
+//
+//        //初始化标题 - 微党课
+//        titleAdapter = mPresenter.initTitle("微党课", 2);
+//        mAdapters.add(titleAdapter);
+//        //初始化list
+//        listAdapter = mPresenter.initList(2);
+//        mAdapters.add(listAdapter);
+//
+//        //设置适配器
+//        delegateAdapter.setAdapters(mAdapters);
+//    }
+
+    private void initRecyclerView(MyStudyEntity myStudyEntity) {
+        MyStudyEntity.UserInfoBlock userInfoBlock = myStudyEntity.getUserInfoBlock();
+        List<MyStudyEntity.CoursewareBlock> courseChooseBlock = myStudyEntity.getCourseChooseBlock();
+        List<MyStudyEntity.CoursewareBlock> courseMustBlock = myStudyEntity.getCourseMustBlock();
+        List<MyStudyEntity.CoursewareBlock> courseLittleBlock = myStudyEntity.getCourseLittleBlock();
+
         DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
 
         //初始化头部
-        BaseDelegateAdapter headerAdapter = mPresenter.initHeader(
-                "http://imgtu.5011.net/uploads/content/20170220/9520371487578487.jpg",
-                "はたけ·カカシ", 17, 2, 18);
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader(userInfoBlock);
         mAdapters.add(headerAdapter);
 
         //初始化九宫格
@@ -217,21 +264,21 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         BaseDelegateAdapter titleAdapter = mPresenter.initTitle("必修课", 0);
         mAdapters.add(titleAdapter);
         //初始化list
-        BaseDelegateAdapter listAdapter = mPresenter.initList(0);
+        BaseDelegateAdapter listAdapter = mPresenter.initList(courseMustBlock, 0);
         mAdapters.add(listAdapter);
 
         //初始化标题 - 选修课
         titleAdapter = mPresenter.initTitle("选修课", 1);
         mAdapters.add(titleAdapter);
         //初始化list
-        listAdapter = mPresenter.initList(1);
+        listAdapter = mPresenter.initList(courseChooseBlock, 1);
         mAdapters.add(listAdapter);
 
         //初始化标题 - 微党课
         titleAdapter = mPresenter.initTitle("微党课", 2);
         mAdapters.add(titleAdapter);
         //初始化list
-        listAdapter = mPresenter.initList(2);
+        listAdapter = mPresenter.initList(courseLittleBlock, 2);
         mAdapters.add(listAdapter);
 
         //设置适配器

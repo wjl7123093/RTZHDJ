@@ -1,8 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.cache;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyKnowledgeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 
 import java.util.List;

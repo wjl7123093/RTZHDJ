@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.cache;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
 
@@ -16,12 +17,12 @@ import io.rx_cache2.Reply;
  * @author Fred_W
  * @version v1.0.0
  *
- * @crdate 2017-4-9
+ * @crdate 2018-4-9
  * @update
  */
 public interface StudyCache {
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<MyStudyEntity>> getMyStudyData(Observable<MyStudyEntity> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson<MyStudyEntity>>> getMyStudyData(Observable<BaseJson<MyStudyEntity>> data, EvictProvider evictProvider);
 
 }

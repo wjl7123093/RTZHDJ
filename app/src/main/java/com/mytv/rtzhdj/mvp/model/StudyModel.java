@@ -10,6 +10,7 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
 import com.mytv.rtzhdj.app.data.api.cache.StudyCache;
 import com.mytv.rtzhdj.app.data.api.service.HomeService;
@@ -45,18 +46,8 @@ public class StudyModel extends BaseModel implements StudyContract.Model {
     }
 
     @Override
-    public Observable<MyStudyEntity> getMyStudy(int userId, int count, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(StudyService.class)
-                .getMyStudyData(userId, count))
-                .flatMap(new Function<Observable<MyStudyEntity>, ObservableSource<MyStudyEntity>>() {
-                    @Override
-                    public ObservableSource<MyStudyEntity> apply(@NonNull Observable<MyStudyEntity> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(StudyCache.class)
-                                .getMyStudyData(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson<MyStudyEntity>> getMyStudy(int userId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(StudyService.class)
+                .getMyStudyData(userId);
     }
 }

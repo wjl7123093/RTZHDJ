@@ -1,6 +1,5 @@
 package com.mytv.rtzhdj.mvp.presenter;
 
-import android.app.Activity;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,11 +23,8 @@ import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyKnowledgeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.contract.PartyKnowledgeContract;
 import com.mytv.rtzhdj.mvp.ui.activity.PartyKnowledgeActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;

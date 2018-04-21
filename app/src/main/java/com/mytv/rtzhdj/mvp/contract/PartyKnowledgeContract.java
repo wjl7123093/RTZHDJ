@@ -1,17 +1,13 @@
 package com.mytv.rtzhdj.mvp.contract;
 
-import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
 
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyKnowledgeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.PartyKnowledgeActivity;
 
 import java.util.List;

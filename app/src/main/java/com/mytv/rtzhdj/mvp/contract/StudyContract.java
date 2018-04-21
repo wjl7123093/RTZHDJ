@@ -6,10 +6,13 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -21,13 +24,15 @@ public interface StudyContract {
         void setOnListClick(int arrayPos, int position);
         void setOnMoreClick(int arrayPos, String title);
         void setOnStudyRecordClick();
+
+        void showStudyData(MyStudyEntity myStudyEntity);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
         // 获取 我要学习数据
-        Observable<MyStudyEntity> getMyStudy(int userId, int count, boolean update);
+        Observable<BaseJson<MyStudyEntity>> getMyStudy(int userId, boolean update);
 
     }
 
@@ -38,10 +43,10 @@ public interface StudyContract {
         DelegateAdapter initRecyclerView(RecyclerView recyclerView);
         BaseDelegateAdapter initGvMenu();
         BaseDelegateAdapter initTitle(String title, int arrayPos);
-        BaseDelegateAdapter initList(int arrayPos);
-        BaseDelegateAdapter initHeader(String url, String name, int noStudy, int hasStudy, int scores);
+        BaseDelegateAdapter initList(List<MyStudyEntity.CoursewareBlock> coursewareList, int arrayPos);
+        BaseDelegateAdapter initHeader(MyStudyEntity.UserInfoBlock userInfo);
 
         // 调用 获取我要学习数据
-        void callMethodOfGetMyStudy(int userId, int count, boolean update);
+        void callMethodOfGetMyStudy(int userId, boolean update);
     }
 }

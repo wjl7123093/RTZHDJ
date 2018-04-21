@@ -13,16 +13,16 @@ import java.util.List;
  */
 public class MyStudyEntity {
 
-    private List<UserInfoBlock> UserInfoBlock;          // 用户信息
+    private UserInfoBlock UserInfoBlock;          // 用户信息
     private List<CoursewareBlock> CourseChooseBlock;    // 选修课
     private List<CoursewareBlock> CourseMustBlock;      // 必修课
     private List<CoursewareBlock> CourseLittleBlock;    // 微党课
 
-    public List<MyStudyEntity.UserInfoBlock> getUserInfoBlock() {
+    public MyStudyEntity.UserInfoBlock getUserInfoBlock() {
         return UserInfoBlock;
     }
 
-    public void setUserInfoBlock(List<MyStudyEntity.UserInfoBlock> userInfoBlock) {
+    public void setUserInfoBlock(MyStudyEntity.UserInfoBlock userInfoBlock) {
         UserInfoBlock = userInfoBlock;
     }
 
@@ -50,7 +50,7 @@ public class MyStudyEntity {
         CourseLittleBlock = courseLittleBlock;
     }
 
-    class UserInfoBlock {
+    public class UserInfoBlock {
         private String UserName;
         private String PhotoUrl;
         private int NoStudyNum;
@@ -98,7 +98,7 @@ public class MyStudyEntity {
         }
     }
 
-    class CoursewareBlock {
+    public class CoursewareBlock {
         private int NodeId;
         private int ArticleId;
         private String Title;

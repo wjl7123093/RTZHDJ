@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
 
@@ -13,8 +14,8 @@ import retrofit2.http.Query;
  * @author Fred_W
  * @version v1.0.0
  *
- * @crdate 2017-4-9
- * @update
+ * @crdate 2018-4-9
+ * @update 2018-4-21 udpate
  */
 public interface StudyService {
 
@@ -23,7 +24,6 @@ public interface StudyService {
      * @return
      */
     @GET("getMyStudy")
-    Observable<MyStudyEntity> getMyStudyData(@Query("UserId") int userId,
-                                             @Query("count") int count);
+    Observable<BaseJson<MyStudyEntity>> getMyStudyData(@Query("UserId") int userId);
 
 }

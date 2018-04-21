@@ -3,16 +3,20 @@ package com.mytv.rtzhdj.mvp.presenter;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.utils.TextUtils;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -31,11 +35,16 @@ import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.Constant;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.contract.StudyContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import org.raphets.roundimageview.RoundImageView;
 
@@ -148,7 +157,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
     }
 
     @Override
-    public BaseDelegateAdapter initList(int arrayPos) {
+    public BaseDelegateAdapter initList(List<MyStudyEntity.CoursewareBlock> coursewareList, int arrayPos) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 10));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_text1,
@@ -156,6 +165,8 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_title, coursewareList.get(position).getTitle());
+
                 holder.getView(R.id.ll_container).setOnClickListener(view -> {
                     mRootView.setOnListClick(arrayPos, position);
                 });
@@ -165,23 +176,25 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
     }
 
     @Override
-    public BaseDelegateAdapter initHeader(String url, String name, int noStudy, int hasStudy, int scores) {
+    public BaseDelegateAdapter initHeader(MyStudyEntity.UserInfoBlock userInfo) {
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_header2,
                 1, Constant.viewType.typeHeader) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                holder.setText(R.id.tv_name, name);
-                holder.setText(R.id.tv_study_record, "未学: " + noStudy + "/已学: " + hasStudy);
-                holder.setText(R.id.tv_study_scores, "累积: " + scores);
+                holder.setText(R.id.tv_name, userInfo.getUserName());
+                holder.setText(R.id.tv_study_record, "未学: " + userInfo.getNoStudyNum() + "/已学: " + userInfo.getYesStudyNum());
+                holder.setText(R.id.tv_study_scores, "累积: " + userInfo.getIntegral());
 
-                mImageLoader.loadImage(activity,
-                        ImageConfigImpl
-                                .builder()
-                                .url(url)
-                                .imageView(holder.getView(R.id.iv_header))
-                                .build());
+                if (!TextUtils.isEmpty(userInfo.getPhotoUrl())) {
+                    mImageLoader.loadImage(activity,
+                            ImageConfigImpl
+                                    .builder()
+                                    .url(userInfo.getPhotoUrl())
+                                    .imageView(holder.getView(R.id.iv_header))
+                                    .build());
+                }
 
                 holder.getView(R.id.rl_study_record).setOnClickListener(view -> {
                     mRootView.setOnStudyRecordClick();
@@ -191,8 +204,12 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
     }
 
     @Override
-    public void callMethodOfGetMyStudy(int userId, int count, boolean update) {
-        mModel.getMyStudy(userId, count, update)
+    public void callMethodOfGetMyStudy(int userId, boolean update) {
+        mModel.getMyStudy(userId, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<MyStudyEntity>>transformObservable("getMyStudy" + userId,
+                        new TypeToken<BaseJson<MyStudyEntity>>() { }.getType(),
+                        CacheStrategy.firstRemote()))
+                .map(new CacheResult.MapFunc<BaseJson<MyStudyEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -205,10 +222,12 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<MyStudyEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<MyStudyEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull MyStudyEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<MyStudyEntity> myStudyData) {
+                        Log.e(TAG, myStudyData.toString());
 
+                        mRootView.showStudyData(myStudyData.getData());
 
                     }
                 });
