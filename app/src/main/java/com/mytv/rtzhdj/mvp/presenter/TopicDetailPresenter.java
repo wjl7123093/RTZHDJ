@@ -93,7 +93,7 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.Mode
 //                        List<UserCategoryEntity> userCategorys = userCategoryList.getData();
 //                        mRootView.showDialog(userCategorys);
                         mRootView.initBackground(specialColumnsEntity.getData());
-                        mRootView.initTab(specialColumnsEntity.getData().getSubObjs());
+                        mRootView.initTab(specialColumnsEntity.getData());
 
                     }
                 });

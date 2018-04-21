@@ -32,6 +32,8 @@ import com.mytv.rtzhdj.mvp.presenter.TopicDetailPresenter;
 
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
+import com.mytv.rtzhdj.mvp.ui.fragment.SpecialSubDetailFragment;
+import com.mytv.rtzhdj.mvp.ui.fragment.WebviewFragment;
 
 
 import java.util.ArrayList;
@@ -165,16 +167,17 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     }
 
     @Override
-    public void initTab(List<PartyColumnsEntity> partyColumnsList) {
+    public void initTab(SpecialColumnsEntity specialColumnsEntity) {
+        List<PartyColumnsEntity> partyColumnsList = specialColumnsEntity.getSubObjs();
         PartyColumnsEntity columnsEntity = new PartyColumnsEntity();
         columnsEntity.setTitle("简介");
         columnsEntity.setNodeId(0);
         partyColumnsList.add(0, columnsEntity);
 
         final List<Fragment> fragments = new ArrayList<>();
-        fragments.add(ContentFragment.newInstance(10));
-        for (int i = 0; i < partyColumnsList.size(); i++) {
-            fragments.add(ContentFragment.newInstance(i));
+        fragments.add(WebviewFragment.newInstance(specialColumnsEntity.getContent()));
+        for (int i = 1; i < partyColumnsList.size(); i++) {
+            fragments.add(SpecialSubDetailFragment.newInstance(partyColumnsList.get(i).getNodeId()));
         }
 
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {

@@ -9,9 +9,11 @@ import com.jess.arms.di.component.AppComponent;
 import com.mytv.rtzhdj.di.module.WebviewModule;
 
 import com.mytv.rtzhdj.mvp.ui.activity.WebviewActivity;
+import com.mytv.rtzhdj.mvp.ui.fragment.WebviewFragment;
 
 @ActivityScope
 @Component(modules = WebviewModule.class, dependencies = AppComponent.class)
 public interface WebviewComponent {
     void inject(WebviewActivity activity);
+    void inject(WebviewFragment fragment);
 }

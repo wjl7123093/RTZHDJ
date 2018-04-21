@@ -112,4 +112,9 @@ public class WebviewActivity extends BaseActivity<WebviewPresenter> implements W
         super.onResume();
         mTvToolbarTitle.setText(title);
     }
+
+    @Override
+    public void setWebviewProgress(int progress) {
+
+    }
 }
