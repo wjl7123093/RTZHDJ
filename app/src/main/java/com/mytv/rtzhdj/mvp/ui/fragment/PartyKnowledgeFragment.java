@@ -14,6 +14,7 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerPartyKnowledgeComponent;
 import com.mytv.rtzhdj.di.module.PartyKnowledgeModule;
 import com.mytv.rtzhdj.mvp.contract.PartyKnowledgeContract;
@@ -58,6 +59,14 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
         return fragment;
     }
 
+    public static PartyKnowledgeFragment newInstance(int nodeId) {
+        PartyKnowledgeFragment fragment = new PartyKnowledgeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("nodeId", nodeId);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public void setupFragmentComponent(AppComponent appComponent) {
         DaggerPartyKnowledgeComponent //如找不到该类,请编译一下项目
@@ -82,11 +91,11 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
 
         mPresenter.setActivity((PartyKnowledgeActivity)getActivity());
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
 
         // 获取 党建知识列表数据
-        mPresenter.callMethodOfGetPartyKnowledgeList("nodeId", PAGE_SIZE, 0, false);
+        mPresenter.callMethodOfGetPartyKnowledgeList(getArguments().getInt("nodeId"), 1, PAGE_SIZE, false);
 
     }
 
@@ -151,8 +160,9 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
         });
     }
 
-    private void initAdapter() {
-        /*newsAdapter = new NewsAdapter(getContext(), PAGE_SIZE);
+    @Override
+    public void initAdapter(List<PartyNewsEntity> newsList) {
+        newsAdapter = new NewsAdapter(getContext(), newsList);
         newsAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(newsAdapter);
 
@@ -161,7 +171,7 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
             }
-        });*/
+        });
 
     }
 

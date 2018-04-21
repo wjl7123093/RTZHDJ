@@ -10,14 +10,18 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
 import com.mytv.rtzhdj.app.data.api.cache.PartyKnowledgeCache;
 import com.mytv.rtzhdj.app.data.api.service.HomeService;
 import com.mytv.rtzhdj.app.data.api.service.PartyKnowledgeService;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyKnowledgeEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.mvp.contract.PartyKnowledgeContract;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -46,18 +50,9 @@ public class PartyKnowledgeModel extends BaseModel implements PartyKnowledgeCont
     }
 
     @Override
-    public Observable<PartyKnowledgeEntity> getPartyKnowledgeList(String nodeId, int count, int index, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(PartyKnowledgeService.class)
-                .getPartyKnowledgeList(nodeId, count, index))
-                .flatMap(new Function<Observable<PartyKnowledgeEntity>, ObservableSource<PartyKnowledgeEntity>>() {
-                    @Override
-                    public ObservableSource<PartyKnowledgeEntity> apply(@NonNull Observable<PartyKnowledgeEntity> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(PartyKnowledgeCache.class)
-                                .getPartyKnowledgeList(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson<List<PartyNewsEntity>>> getPartyKnowledgeList(
+            int nodeId, int pageIndex, int pageSize, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(PartyKnowledgeService.class)
+                .getPartyKnowledgeList(nodeId, pageIndex, pageSize);
     }
 }

@@ -99,10 +99,10 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
         if (0 == getArguments().getInt("nodeId")) {
             // 获取党建新闻推荐列表数据
-            mPresenter.callMethodOfGetPartyRecommend(0, PAGE_SIZE, false);
+            mPresenter.callMethodOfGetPartyRecommend(1, PAGE_SIZE, false);
         } else {
             // 获取党建新闻二级列表(除推荐)数据
-            mPresenter.callMethodOfGetPartySubList(getArguments().getInt("nodeId"), 0, PAGE_SIZE, false);
+            mPresenter.callMethodOfGetPartySubList(getArguments().getInt("nodeId"), 1, PAGE_SIZE, false);
         }
     }
 

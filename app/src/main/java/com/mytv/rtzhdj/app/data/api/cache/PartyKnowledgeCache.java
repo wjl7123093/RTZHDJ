@@ -1,8 +1,11 @@
 package com.mytv.rtzhdj.app.data.api.cache;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyKnowledgeEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -22,6 +25,6 @@ import io.rx_cache2.Reply;
 public interface PartyKnowledgeCache {
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<PartyKnowledgeEntity>> getPartyKnowledgeList(Observable<PartyKnowledgeEntity> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson<List<PartyNewsEntity>>>> getPartyKnowledgeList(Observable<BaseJson<List<PartyNewsEntity>>> data, EvictProvider evictProvider);
 
 }

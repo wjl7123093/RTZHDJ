@@ -507,7 +507,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         mModel.getHomeData(update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<HomeEntity>>transformObservable("getHomeData",
                         new TypeToken<BaseJson<HomeEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<HomeEntity>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))

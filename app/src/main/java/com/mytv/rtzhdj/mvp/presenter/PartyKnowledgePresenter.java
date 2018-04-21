@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
@@ -20,11 +22,21 @@ import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyKnowledgeEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.contract.PartyKnowledgeContract;
 import com.mytv.rtzhdj.mvp.ui.activity.PartyKnowledgeActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @ActivityScope
@@ -78,8 +90,31 @@ public class PartyKnowledgePresenter extends BasePresenter<PartyKnowledgeContrac
     }
 
     @Override
-    public void callMethodOfGetPartyKnowledgeList(String nodeId, int count, int index, boolean update) {
-        mModel.getPartyKnowledgeList(nodeId, count, index, update)
+    public List<PartyColumnsEntity> initColums() {
+        List<PartyColumnsEntity> partyColumnsList = new ArrayList<>();
+        PartyColumnsEntity columnsEntity = new PartyColumnsEntity();
+        columnsEntity.setTitle("组织工作");
+        columnsEntity.setNodeId(9051);
+        partyColumnsList.add(columnsEntity);
+        PartyColumnsEntity columnsEntity1 = new PartyColumnsEntity();
+        columnsEntity1.setTitle("干部工作");
+        columnsEntity1.setNodeId(9052);
+        partyColumnsList.add(columnsEntity1);
+        PartyColumnsEntity columnsEntity2 = new PartyColumnsEntity();
+        columnsEntity2.setTitle("支部工作");
+        columnsEntity2.setNodeId(9053);
+        partyColumnsList.add(columnsEntity2);
+
+        return partyColumnsList;
+    }
+
+    @Override
+    public void callMethodOfGetPartyKnowledgeList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartyKnowledgeList(nodeId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<PartyNewsEntity>>>transformObservable("getPartyKnowledgeList" + nodeId,
+                        new TypeToken<BaseJson<List<PartyNewsEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<PartyNewsEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -92,10 +127,12 @@ public class PartyKnowledgePresenter extends BasePresenter<PartyKnowledgeContrac
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<PartyKnowledgeEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<PartyNewsEntity>>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull PartyKnowledgeEntity liveMultiItems) {
+                    public void onNext(@io.reactivex.annotations.NonNull BaseJson<List<PartyNewsEntity>> partyKnowledgeLsit) {
+                        Log.e("TAG", partyKnowledgeLsit.toString());
 
+                        mRootView.initAdapter(partyKnowledgeLsit.getData());
 
                     }
                 });

@@ -18,6 +18,8 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerPartyKnowledgeComponent;
 import com.mytv.rtzhdj.di.module.PartyKnowledgeModule;
 import com.mytv.rtzhdj.mvp.contract.PartyKnowledgeContract;
@@ -90,8 +92,8 @@ public class PartyKnowledgeActivity extends BaseActivity<PartyKnowledgePresenter
             ARouter.getInstance().build(ARoutePath.PATH_SEARCH).navigation();
         });
 
-        titles = new String[]{"全部", "组织工作", "干部工作", "支部工作"};
-        initTab();
+//        titles = new String[]{"全部", "组织工作", "干部工作", "支部工作"};
+        initTab(mPresenter.initColums());
     }
 
 
@@ -122,7 +124,7 @@ public class PartyKnowledgeActivity extends BaseActivity<PartyKnowledgePresenter
         finish();
     }
 
-    private void initTab() {
+    /*private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
             fragments.add(PartyKnowledgeFragment.newInstance());
@@ -146,7 +148,36 @@ public class PartyKnowledgeActivity extends BaseActivity<PartyKnowledgePresenter
             }
         });
         mTab.setupWithViewPager(mViewPager);
+    }*/
+
+    private void initTab(List<PartyColumnsEntity> partyColumnList) {
+        final List<Fragment> fragments = new ArrayList<>();
+        for (int i = 0; i < partyColumnList.size(); i++) {
+            fragments.add(PartyKnowledgeFragment.newInstance(partyColumnList.get(i).getNodeId()));
+        }
+
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return partyColumnList.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return partyColumnList.get(position).getTitle();
+            }
+        });
+        mTab.setupWithViewPager(mViewPager);
     }
 
 
+    @Override
+    public void initAdapter(List<PartyNewsEntity> newsList) {
+
+    }
 }
