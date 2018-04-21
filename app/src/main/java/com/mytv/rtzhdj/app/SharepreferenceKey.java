@@ -13,5 +13,7 @@ public interface SharepreferenceKey {
 
     // Access_Token
     String KEY_ACCESS_TOKEN = "access_token";
+    // LoginUser
+    String KEY_LOGIN_USER = "login_user";
 
 }

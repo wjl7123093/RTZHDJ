@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     public void initData(Bundle savedInstanceState) {
         mPresenter.setActivity(LoginActivity.this);
 
-        mBtnLogin.setOnClickListener(view -> goMainActivity());
+        mBtnLogin.setOnClickListener(view -> mPresenter.callMethodOfDoLogin("18888888889", "w123456"));
         mTvRegister.setOnClickListener(view -> goRegisterActivity());
         mTvForgetPwd.setOnClickListener(view -> goForgetPwdActivity());
 
