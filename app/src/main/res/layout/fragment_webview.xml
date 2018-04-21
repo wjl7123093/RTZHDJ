@@ -8,11 +8,16 @@
  * @crdate 2018-4-21
  * @update
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+    <!-- NestedScrollView 包裹 Webview 是爲了解決 [CoordinatorLayout中使用WebView上下滑動冲突] -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar
         android:id="@+id/webProgressBar"
@@ -24,5 +29,6 @@
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    </LinearLayout>
 
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>
