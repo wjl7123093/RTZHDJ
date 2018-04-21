@@ -7,7 +7,7 @@ package com.mytv.rtzhdj.app;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-18
- * @update
+ * @update 2018-4-21
  */
 public interface SharepreferenceKey {
 
@@ -15,5 +15,7 @@ public interface SharepreferenceKey {
     String KEY_ACCESS_TOKEN = "access_token";
     // LoginUser
     String KEY_LOGIN_USER = "login_user";
+    // IsLogin
+    String KEY_IS_LOGIN = "is_login";   // 1 登录，0 注销
 
 }

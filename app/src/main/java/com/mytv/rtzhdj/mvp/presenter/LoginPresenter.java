@@ -96,6 +96,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
                         Log.e("TAG", loginData.toString());
 
 //                        mRootView.showData(homeData);
+                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_IS_LOGIN, 1); // 1 表示登录
                         DataHelper.saveDeviceData(mActivity, SharepreferenceKey.KEY_LOGIN_USER, loginData.getData());
                         mRootView.goMainActivity();
                     }

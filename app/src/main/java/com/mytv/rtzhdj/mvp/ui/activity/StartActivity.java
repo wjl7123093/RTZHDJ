@@ -17,6 +17,7 @@ import com.jess.arms.utils.ArmsUtils;
 
 import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.utils.StatusBarUtil;
 import com.mytv.rtzhdj.di.component.DaggerStartComponent;
 import com.mytv.rtzhdj.di.module.StartModule;
@@ -64,9 +65,14 @@ public class StartActivity extends BaseActivity<StartPresenter> implements Start
     public void initData(Bundle savedInstanceState) {
         new Handler().postDelayed(() -> {
 
-//            ARouter.getInstance().build(ARoutePath.PATH_GUIDE).navigation();
-            ARouter.getInstance().build(ARoutePath.PATH_LOGIN).navigation();
-            StartActivity.this.finish();
+            // 1 已登录
+            if (1 == DataHelper.getIntergerSF(StartActivity.this, SharepreferenceKey.KEY_IS_LOGIN)) {
+                ARouter.getInstance().build(ARoutePath.PATH_MAIN).navigation();
+                StartActivity.this.finish();
+            } else {    // 0 已注销
+                ARouter.getInstance().build(ARoutePath.PATH_LOGIN).navigation();
+                StartActivity.this.finish();
+            }
         }, 2000);
     }
 
