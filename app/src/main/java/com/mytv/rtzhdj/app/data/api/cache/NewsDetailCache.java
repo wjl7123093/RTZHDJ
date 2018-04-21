@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.cache;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 
@@ -22,6 +23,6 @@ import io.rx_cache2.Reply;
 public interface NewsDetailCache {
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<NewsDetailEntity>> getContent(Observable<NewsDetailEntity> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson<NewsDetailEntity>>> getContent(Observable<NewsDetailEntity> data, EvictProvider evictProvider);
 
 }

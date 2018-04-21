@@ -26,6 +26,7 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -174,7 +175,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                     }
                 });
 
-                mRootView.setBanner(mBanner);
+//                mRootView.setBanner(mBanner);
                 holder.getView(R.id.tv_topic).setOnClickListener(view -> {
                     mRootView.setOnTopicClick();
                 });
@@ -294,7 +295,10 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 holder.getView(R.id.rl_container).setOnClickListener(view -> {
                     // 新闻详情页
 //                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
-                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_VIDEO_DETAIL).navigation();
+                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                            .withInt("articleId", FocusNewsBlock_ChildContent.get(position).getID())
+                            .withInt("nodeId", FocusNewsBlock_ChildContent.get(position).getNodeId())
+                            .navigation();
                 });
 
             }
@@ -519,7 +523,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseJson<HomeEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull BaseJson<HomeEntity> homeData) {
+                    public void onNext(@NonNull BaseJson<HomeEntity> homeData) {
                         Log.e("TAG", homeData.toString());
 
                         mRootView.showData(homeData);

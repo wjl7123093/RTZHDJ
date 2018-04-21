@@ -7,44 +7,53 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-4-4
- * @update
+ * @update 2018-4-20 更新
  */
 public class NewsDetailEntity {
 
-    private int contentId;      // 内容id（跟在url末尾）
-    private String title;       // 文章标题
-    private int digs;           // 点赞数
-    private int comments;       // 评论数
+    private int ContentId;      // 内容id（跟在url末尾）
+    private String Title;       // 文章标题
+    private String Content;
+    private int Digs;           // 点赞数
+    private int Comments;       // 评论数
 
     public int getContentId() {
-        return contentId;
+        return ContentId;
     }
 
     public void setContentId(int contentId) {
-        this.contentId = contentId;
+        ContentId = contentId;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        Title = title;
+    }
+
+    public String getContent() {
+        return Content;
+    }
+
+    public void setContent(String content) {
+        Content = content;
     }
 
     public int getDigs() {
-        return digs;
+        return Digs;
     }
 
     public void setDigs(int digs) {
-        this.digs = digs;
+        Digs = digs;
     }
 
     public int getComments() {
-        return comments;
+        return Comments;
     }
 
     public void setComments(int comments) {
-        this.comments = comments;
+        Comments = comments;
     }
 }

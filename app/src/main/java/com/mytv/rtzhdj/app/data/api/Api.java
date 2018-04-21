@@ -7,12 +7,16 @@ package com.mytv.rtzhdj.app.data.api;
  * @version v1.0.0
  *
  * @crdate 2017-12-31
- * @update
+ * @update 2018-4-21    update
  */
 public interface Api {
 
+    // 服务端地址
     String APP_DOMAIN = "http://61.157.136.102:8903/api/";
+    // 图片地址
     String APP_IMAGE_DOMAIN = "http://192.168.13.93";
+    // 文章详情地址
+    String APP_ARTICLE_DOMAIN = "http://192.168.13.93/mobile/details.html?";
     int RequestSuccess = 200;
 
 }

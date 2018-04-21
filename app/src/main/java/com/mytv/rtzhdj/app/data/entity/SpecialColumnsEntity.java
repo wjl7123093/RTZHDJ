@@ -13,53 +13,32 @@ import java.util.List;
  */
 public class SpecialColumnsEntity {
 
-    private String imageUrl;                // 专题背景图地址
-    private String content;                 // 内容
-    private List<SpecialColumn> subObjs;    // 专题二级栏目列表
+    private String ImageUrl;                // 专题背景图地址
+    private String Content;                 // 内容
+    private List<PartyColumnsEntity> SubObjs;    // 专题二级栏目列表
 
     public String getImageUrl() {
-        return imageUrl;
+        return ImageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.ImageUrl = imageUrl;
     }
 
     public String getContent() {
-        return content;
+        return Content;
     }
 
     public void setContent(String content) {
-        this.content = content;
+        this.Content = content;
     }
 
-    public List<SpecialColumn> getSubObjs() {
-        return subObjs;
+    public List<PartyColumnsEntity> getSubObjs() {
+        return SubObjs;
     }
 
-    public void setSubObjs(List<SpecialColumn> subObjs) {
-        this.subObjs = subObjs;
-    }
-
-    class SpecialColumn {
-        private int nodeId;
-        private String title;   // 栏目名称
-
-        public int getNodeId() {
-            return nodeId;
-        }
-
-        public void setNodeId(int nodeId) {
-            this.nodeId = nodeId;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
+    public void setSubObjs(List<PartyColumnsEntity> subObjs) {
+        this.SubObjs = subObjs;
     }
 
 }

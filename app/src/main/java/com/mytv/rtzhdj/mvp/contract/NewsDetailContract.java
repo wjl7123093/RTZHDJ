@@ -6,6 +6,7 @@ import android.webkit.WebView;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.CommentActivity;
@@ -26,7 +27,7 @@ public interface NewsDetailContract {
     interface Model extends IModel {
 
         // 获取 新闻详情
-        Observable<NewsDetailEntity> getContent(String contentId, String modelType, boolean update);
+        Observable<BaseJson<NewsDetailEntity>> getContent(int id, int nodeId, boolean update);
 
     }
 
@@ -37,7 +38,7 @@ public interface NewsDetailContract {
         void initWebview(WebView mWebView, WebProgressBar mWebProgressBar);
 
         // 调用 获取新闻详情
-        void callMethodOfGetContent(String contentId, String modelType, boolean update);
+        void callMethodOfGetContent(int id, int nodeId, boolean update);
 
     }
 }

@@ -10,6 +10,7 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
 import com.mytv.rtzhdj.app.data.api.cache.NewsDetailCache;
 import com.mytv.rtzhdj.app.data.api.service.HomeService;
@@ -45,18 +46,8 @@ public class NewsDetailModel extends BaseModel implements NewsDetailContract.Mod
     }
 
     @Override
-    public Observable<NewsDetailEntity> getContent(String contentId, String modelType, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(NewsDetailService.class)
-                .getContent(contentId, modelType))
-                .flatMap(new Function<Observable<NewsDetailEntity>, ObservableSource<NewsDetailEntity>>() {
-                    @Override
-                    public ObservableSource<NewsDetailEntity> apply(@NonNull Observable<NewsDetailEntity> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(NewsDetailCache.class)
-                                .getContent(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson<NewsDetailEntity>> getContent(int id, int nodeId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
+                .getContent(id, nodeId);
     }
 }

@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 
@@ -23,7 +24,7 @@ public interface NewsDetailService {
      * @return
      */
     @GET("getContent")
-    Observable<NewsDetailEntity> getContent(@Query("contentId") String contentId,
-                                            @Query("modelType") String modelType);
+    Observable<BaseJson<NewsDetailEntity>> getContent(@Query("Id") int id,
+                                                      @Query("NodeId") int nodeId);
 
 }

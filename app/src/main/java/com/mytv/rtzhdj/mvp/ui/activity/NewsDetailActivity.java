@@ -14,12 +14,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.di.component.DaggerNewsDetailComponent;
 import com.mytv.rtzhdj.di.module.NewsDetailModule;
 import com.mytv.rtzhdj.mvp.contract.NewsDetailContract;
@@ -67,6 +70,11 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
     @BindView(R.id.iv_share)
     ImageView mIvShare;*/
 
+    @Autowired
+    int articleId;
+    @Autowired
+    int nodeId;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -80,6 +88,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_news_detail; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -89,10 +98,10 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
 
         mPresenter.setActivity(NewsDetailActivity.this);
         mPresenter.initWebview(mWebView, mWebProgressBar);
-        mPresenter.getNewsDetail("http://www.tencent.com/");
+        mPresenter.getNewsDetail(Api.APP_ARTICLE_DOMAIN + "nodeId=" + nodeId + "&id=" + articleId);
 
         // 获取新闻详情
-        mPresenter.callMethodOfGetContent("contentId", "modelType", false);
+//        mPresenter.callMethodOfGetContent(articleId, nodeId, false);
     }
 
 
