@@ -21,6 +21,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.SpecialColumnsEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
@@ -159,7 +160,8 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
 
     @Override
     public void initBackground(SpecialColumnsEntity specialColumnsEntity) {
-        ImageLoader.getInstance().showImage(TopicDetailActivity.this, mIvBackground, specialColumnsEntity.getImageUrl());
+        ImageLoader.getInstance().showImage(TopicDetailActivity.this, mIvBackground,
+                Api.APP_IMAGE_DOMAIN + specialColumnsEntity.getImageUrl().replace("@", ""));
     }
 
     @Override
