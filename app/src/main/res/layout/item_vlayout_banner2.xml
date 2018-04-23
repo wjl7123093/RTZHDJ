@@ -45,7 +45,6 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_14"
             android:textColor="@color/white"
-            android:text="4"
             android:layout_marginTop="@dimen/len_2"/>
     </LinearLayout>
 
@@ -62,15 +61,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/font_14"
-            android:textColor="@color/white"
-            android:text="爱心家教志愿者招募"/>
+            android:textColor="@color/white"/>
         <TextView
             android:id="@+id/tv_star_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_14"
             android:textColor="@color/white"
-            android:text="619"
             android:layout_marginRight="@dimen/len_10"/>
     </LinearLayout>
 </FrameLayout>
