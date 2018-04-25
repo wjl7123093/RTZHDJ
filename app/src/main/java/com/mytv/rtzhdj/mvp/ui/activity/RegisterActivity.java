@@ -3,25 +3,35 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bigkoo.pickerview.adapter.ArrayWheelAdapter;
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.contrarywind.listener.OnItemSelectedListener;
+import com.contrarywind.view.WheelView;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.di.component.DaggerRegisterComponent;
 import com.mytv.rtzhdj.di.module.RegisterModule;
@@ -34,6 +44,7 @@ import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -64,8 +75,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @BindView(R.id.edt_mobile_phone)
     EditText mEdtMobilePhone;
-    @BindView(R.id.edt_community)
-    EditText mEdtCommunity;
+    @BindView(R.id.tv_community)
+    TextView mEdtCommunity;
     @BindView(R.id.edt_password)
     EditText mEdtPassword;
     @BindView(R.id.edt_password2)
@@ -80,6 +91,9 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     TextView mTvLink;
     @BindView(R.id.btn_register)
     net.qiujuer.genius.ui.widget.Button mBtnRegister;
+
+
+    private ArrayList<String> options1Items = new ArrayList<>();
 
 
     @Override
@@ -102,6 +116,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         mBtnToolbarMenu.setVisibility(View.GONE);
 
         mTvLink.setOnClickListener(view -> goWebviewActivity());
+        mEdtCommunity.setOnClickListener(view -> mPresenter.callMethodOfPostAllPublishmentSystem(false));
         mBtnGetVertifyCode.setOnClickListener(view -> mPresenter.callMethodOfGetCode(
                 mEdtMobilePhone.getText().toString().trim()));
         mBtnRegister.setOnClickListener(view -> mPresenter.callMethodOfDoRegister(
@@ -220,5 +235,32 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
             }
         });
 
+    }
+
+    @Override
+    public void showPickerView(List<StationEntity> stationList) {// 弹出选择器
+        final List<String> mOptionsItems = new ArrayList<>();
+        mOptionsItems.add("item0");
+        mOptionsItems.add("item1");
+        mOptionsItems.add("item2");
+
+
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                String tx = stationList.get(options1).getPublishmentSystemName();
+
+                Toast.makeText(RegisterActivity.this, tx, Toast.LENGTH_SHORT).show();
+            }
+        })
+
+                .setTitleText("站点选择")
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20)
+                .build();
+
+        pvOptions.setPicker(stationList);//一级选择器
+        pvOptions.show();
     }
 }

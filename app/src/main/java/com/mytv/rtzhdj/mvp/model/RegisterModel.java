@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.RegisterCache;
 import com.mytv.rtzhdj.app.data.api.service.RegisterService;
+import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
 import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
@@ -72,6 +73,12 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
                                 .map(resultReply -> resultReply.getData());
                     }
                 });*/
+    }
+
+    @Override
+    public Observable<BaseJson<List<StationEntity>>> postAllPublishmentSystem(boolean update) {
+        return mRepositoryManager.obtainRetrofitService(RegisterService.class)
+                .postAllPublishmentSystem();
     }
 
     @Override

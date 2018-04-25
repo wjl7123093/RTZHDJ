@@ -6,6 +6,7 @@ import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
 import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
@@ -22,12 +23,16 @@ public interface RegisterContract {
         void setBtnRegisterBg(boolean isChecked);
         void goWebviewActivity();
         void showDialog(List<UserCategoryEntity> categoryList);
+        void showPickerView(List<StationEntity> stationList);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
         // 获取用户类型
         Observable<BaseJson<List<UserCategoryEntity>>> getUserCategory(boolean update);
+
+        // 获取站点集合
+        Observable<BaseJson<List<StationEntity>>> postAllPublishmentSystem(boolean update);
 
         // 获取验证码
         Observable<BaseJson<VerifyCodeEntity>> getVerifyCode(String telNumber);
@@ -42,6 +47,8 @@ public interface RegisterContract {
         void setActivity(RegisterActivity activity);
         // 调用 获取用户类型接口
         void callMethodOfGetUserCategory(boolean refresh);
+        // 调用 获取站点集合
+        void callMethodOfPostAllPublishmentSystem(boolean refresh);
         // 调用 获取验证码接口
         void callMethodOfGetCode(@NonNull String telNumber);
         // 调用 注册接口

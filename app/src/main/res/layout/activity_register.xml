@@ -60,8 +60,8 @@
             android:textColor="@color/primary_text"
             android:gravity="left|center_vertical"/>
 
-        <EditText
-            android:id="@+id/edt_community"
+        <TextView
+            android:id="@+id/tv_community"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请选择社区"

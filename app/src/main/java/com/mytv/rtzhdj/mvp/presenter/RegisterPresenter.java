@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
 import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
@@ -94,6 +95,40 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
 
                         List<UserCategoryEntity> userCategorys = userCategoryList.getData();
                         mRootView.showDialog(userCategorys);
+
+                    }
+                });
+    }
+
+    /**
+     * 调用 获取站点集合 接口
+     * @param refresh
+     */
+    @Override
+    public void callMethodOfPostAllPublishmentSystem(boolean refresh) {
+        mModel.postAllPublishmentSystem(refresh)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<StationEntity>>>transformObservable("postAllPublishmentSystem",
+                        new TypeToken<BaseJson<List<StationEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<StationEntity>>>())
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> {
+                    // Action onFinally
+                    mRootView.hideLoading();
+                })
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<StationEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<List<StationEntity>> stationList) {
+                        Log.e("TAG", stationList.toString());
+
+                        mRootView.showPickerView(stationList.getData());
 
                     }
                 });
