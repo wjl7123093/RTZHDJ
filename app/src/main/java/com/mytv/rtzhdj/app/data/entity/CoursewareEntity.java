@@ -9,61 +9,55 @@ package com.mytv.rtzhdj.app.data.entity;
  * @crdate 2018-2-6
  * @update 2018-2-7     新增 scores 字段
  *         2018-2-27    新增 status 字段
+ *         2018-4-25    修改实体类字段
  */
 public class CoursewareEntity {
 
-    private int id;
-    private String title;       // 标题
-    private String datetime;    // 上次学习时间
-    private int type;           // 课件类型（1 必修，2 选修，3 微党课）
-    private int scores;         // 得分
-    private int status;         // 学习状态（0 未学习，1 已学习未完成，2 已完成）
+    private int ContentId;
+    private String Title;           // 标题
+    private int CourseType;         // 学习状态（0 未学习，1 已学习未完成，2 已完成）
+    private String CourseTypeString;
+    private String LastStudyTime;   // 上次学习时间
+//    private int scores;         // 得分
+//    private int status;         // 学习状态（0 未学习，1 已学习未完成，2 已完成）
 
-    public int getId() {
-        return id;
+    public int getContentId() {
+        return ContentId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setContentId(int contentId) {
+        ContentId = contentId;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        Title = title;
     }
 
-    public String getDatetime() {
-        return datetime;
+    public int getCourseType() {
+        return CourseType;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public void setCourseType(int courseType) {
+        CourseType = courseType;
     }
 
-    public int getType() {
-        return type;
+    public String getCourseTypeString() {
+        return CourseTypeString;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setCourseTypeString(String courseTypeString) {
+        CourseTypeString = courseTypeString;
     }
 
-    public int getScores() {
-        return scores;
+    public String getLastStudyTime() {
+        return LastStudyTime;
     }
 
-    public void setScores(int scores) {
-        this.scores = scores;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
+    public void setLastStudyTime(String lastStudyTime) {
+        LastStudyTime = lastStudyTime;
     }
 }

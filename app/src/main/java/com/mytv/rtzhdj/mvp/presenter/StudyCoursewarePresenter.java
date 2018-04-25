@@ -151,18 +151,18 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, data.get(position).getTitle());
-                holder.setText(R.id.tv_datetime, data.get(position).getDatetime());
-                holder.setText(R.id.tv_type, data.get(position).getType() == 1 ? "必修课"
-                        : data.get(position).getType() == 2 ? "选修课" : "微党课");
+                holder.setText(R.id.tv_datetime, data.get(position).getLastStudyTime());
+//                holder.setText(R.id.tv_type, data.get(position).getType() == 1 ? "必修课"
+//                        : data.get(position).getType() == 2 ? "选修课" : "微党课");
 
-                holder.setBackgroundRes(R.id.tv_type,
-                        data.get(position).getType() == 1 ? R.drawable.sp_bg_courseware_type_red
-                        : data.get(position).getType() == 2 ? R.drawable.sp_bg_courseware_type_yellow
-                                : R.drawable.sp_bg_courseware_type_green);
-                holder.setTextColor(R.id.tv_type,
-                        data.get(position).getType() == 1 ? mActivity.getResources().getColor(R.color.primary_dark)
-                        : data.get(position).getType() == 2 ? mActivity.getResources().getColor(R.color.accent)
-                                : mActivity.getResources().getColor(R.color.green_400));
+//                holder.setBackgroundRes(R.id.tv_type,
+//                        data.get(position).getType() == 1 ? R.drawable.sp_bg_courseware_type_red
+//                        : data.get(position).getType() == 2 ? R.drawable.sp_bg_courseware_type_yellow
+//                                : R.drawable.sp_bg_courseware_type_green);
+//                holder.setTextColor(R.id.tv_type,
+//                        data.get(position).getType() == 1 ? mActivity.getResources().getColor(R.color.primary_dark)
+//                        : data.get(position).getType() == 2 ? mActivity.getResources().getColor(R.color.accent)
+//                                : mActivity.getResources().getColor(R.color.green_400));
 
             }
         };

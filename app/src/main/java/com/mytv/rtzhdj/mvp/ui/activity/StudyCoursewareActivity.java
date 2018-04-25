@@ -89,7 +89,7 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
         initRefreshLayout();
 
         // 获取 学习课件数据
-        mPresenter.callMethodOfGetCoursewareList("typeId", false);
+//        mPresenter.callMethodOfGetCoursewareList("typeId", false);
     }
 
 

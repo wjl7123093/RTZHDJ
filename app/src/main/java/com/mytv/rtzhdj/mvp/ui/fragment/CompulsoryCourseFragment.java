@@ -14,6 +14,7 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.di.component.DaggerCompulsoryCourseComponent;
 import com.mytv.rtzhdj.di.module.CompulsoryCourseModule;
 import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
@@ -25,6 +26,8 @@ import com.mytv.rtzhdj.mvp.ui.adapter.TestingAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -55,6 +58,14 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
         return fragment;
     }
 
+    public static CompulsoryCourseFragment newInstance(int studyState) {
+        CompulsoryCourseFragment fragment = new CompulsoryCourseFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("studyState", studyState);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public void setupFragmentComponent(AppComponent appComponent) {
         DaggerCompulsoryCourseComponent //如找不到该类,请编译一下项目
@@ -75,8 +86,11 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
 
         mPresenter.setActivity(getActivity());
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
+
+        // 获取课件列表(必修课)数据
+        mPresenter.callMethodOfGetCoursewareList(8, 9043, getArguments().getInt("studyState"), 1, PAGE_SIZE, false);
     }
 
     /**
@@ -140,8 +154,8 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
         });
     }
 
-    private void initAdapter() {
-        mAdapter = new CompulsoryCourseAdapter(getContext(), PAGE_SIZE);
+    private void initAdapter(List<CoursewareEntity> courseList) {
+        mAdapter = new CompulsoryCourseAdapter(getContext(), courseList);
         mAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -154,4 +168,8 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
 
     }
 
+    @Override
+    public void loadData(List<CoursewareEntity> courseList) {
+        initAdapter(courseList);
+    }
 }

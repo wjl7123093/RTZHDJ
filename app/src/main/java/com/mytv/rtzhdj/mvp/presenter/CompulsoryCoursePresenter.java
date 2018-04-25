@@ -4,19 +4,35 @@ import android.app.Activity;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
 
 
 @ActivityScope
@@ -67,5 +83,34 @@ public class CompulsoryCoursePresenter extends BasePresenter<CompulsoryCourseCon
         viewPool.setMaxRecycledViews(0, 20);
 
         return recyclerView;
+    }
+
+    @Override
+    public void callMethodOfGetCoursewareList(int userId, int nodeId, int studyState, int pageIndex, int pageSize, boolean update) {
+        mModel.getCoursewareList(userId, nodeId, studyState, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<CoursewareEntity>>>transformObservable("getCoursewareList" + userId + "," + nodeId,
+                        new TypeToken<BaseJson<List<CoursewareEntity>>>() { }.getType(),
+                        CacheStrategy.firstRemote()))    // 60s以内用缓存
+                .map(new CacheResult.MapFunc<BaseJson<List<CoursewareEntity>>>())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<CoursewareEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<List<CoursewareEntity>> courseList) {
+                        Log.e(TAG, courseList.getData().toString());
+
+                        mRootView.loadData(courseList.getData());
+                    }
+                });
     }
 }

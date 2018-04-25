@@ -54,12 +54,7 @@ public class DataServer {
         List<CoursewareEntity> list = new ArrayList<>();
         for (int i = 0; i < lenth; i++) {
             CoursewareEntity coursewareEntity = new CoursewareEntity();
-            coursewareEntity.setId(i + 1);
             coursewareEntity.setTitle("学习中共中央十九大精神 " + i);
-            coursewareEntity.setDatetime("04/05/" + i);
-            coursewareEntity.setType(i % 3 + 1);
-            coursewareEntity.setScores(i * 2);
-            coursewareEntity.setStatus(i % 3);
             list.add(coursewareEntity);
         }
         return list;

@@ -18,6 +18,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.di.component.DaggerCompulsoryCourseComponent;
 import com.mytv.rtzhdj.di.module.CompulsoryCourseModule;
 import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
@@ -136,7 +137,7 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(CompulsoryCourseFragment.newInstance());
+            fragments.add(CompulsoryCourseFragment.newInstance(i));
         }
 
 
@@ -168,4 +169,8 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
     }
 
 
+    @Override
+    public void loadData(List<CoursewareEntity> courseList) {
+
+    }
 }

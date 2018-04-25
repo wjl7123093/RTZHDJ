@@ -31,10 +31,10 @@ public class StudyRecordAdapter extends BaseQuickAdapter<CoursewareEntity, BaseV
     @Override
     protected void convert(BaseViewHolder helper, CoursewareEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
-        helper.setText(R.id.tv_datetime, item.getDatetime());
-        helper.setText(R.id.tv_type, item.getType() == 1 ? "必修课"
-                : item.getType() == 2 ? "选修课" : "微党课");
-        helper.setText(R.id.tv_scores, item.getScores() + "");
+        helper.setText(R.id.tv_datetime, item.getLastStudyTime());
+//        helper.setText(R.id.tv_type, item.getType() == 1 ? "必修课"
+//                : item.getType() == 2 ? "选修课" : "微党课");
+//        helper.setText(R.id.tv_scores, item.getScores() + "");
     }
 
 
