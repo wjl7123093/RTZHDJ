@@ -3,13 +3,16 @@ package com.mytv.rtzhdj.mvp.presenter;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -19,11 +22,18 @@ import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.VoteListEntity;
 import com.mytv.rtzhdj.mvp.contract.VoteOnlineContract;
 import com.mytv.rtzhdj.mvp.ui.activity.VoteOnlineActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
 
 
 @ActivityScope
@@ -79,8 +89,12 @@ public class VoteOnlinePresenter extends BasePresenter<VoteOnlineContract.Model,
     }
 
     @Override
-    public void callMethodOfGetVoteList(int typeId, boolean update) {
-        mModel.getVoteList(typeId, update)
+    public void callMethodOfGetVoteList(int typeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getVoteList(typeId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<VoteListEntity>>>transformObservable("postVoteList" + typeId,
+                        new TypeToken<BaseJson<List<VoteListEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<VoteListEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -93,11 +107,12 @@ public class VoteOnlinePresenter extends BasePresenter<VoteOnlineContract.Model,
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<VoteListEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<VoteListEntity>>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull VoteListEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<List<VoteListEntity>> voteList) {
+                        Log.e(TAG, voteList.toString());
 
-
+                        mRootView.loadData(voteList.getData());
                     }
                 });
     }

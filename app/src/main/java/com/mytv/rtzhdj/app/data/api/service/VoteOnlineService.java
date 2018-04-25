@@ -1,10 +1,16 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.VoteListEntity;
 
+import java.util.List;
+
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -22,7 +28,10 @@ public interface VoteOnlineService {
      * 获取投票列表数据
      * @return
      */
-    @GET("getVoteList")
-    Observable<VoteListEntity> getVoteList(@Query("typeId") int curUserId);
+    @FormUrlEncoded
+    @POST("postOnlineVoteList")
+    Observable<BaseJson<List<VoteListEntity>>> getVoteList(@Field("TypeId") int typeId,
+                                                           @Field("PageIndex") int pageIndex,
+                                                           @Field("PageSize") int pageSize);
 
 }
