@@ -10,6 +10,7 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
 import com.mytv.rtzhdj.app.data.api.cache.VolunteerServiceDetailCache;
 import com.mytv.rtzhdj.app.data.api.service.HomeService;
@@ -45,18 +46,8 @@ public class VolunteerServiceDetailModel extends BaseModel implements VolunteerS
     }
 
     @Override
-    public Observable<VolunteerDetailEntity> getVolunteerServiceDetail(String id, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(VolunteerServiceDetailService.class)
-                .getVolunteerServiceDetail(id))
-                .flatMap(new Function<Observable<VolunteerDetailEntity>, ObservableSource<VolunteerDetailEntity>>() {
-                    @Override
-                    public ObservableSource<VolunteerDetailEntity> apply(@NonNull Observable<VolunteerDetailEntity> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(VolunteerServiceDetailCache.class)
-                                .getVolunteerServiceDetail(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson<VolunteerDetailEntity>> getVolunteerServiceDetail(int id, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(VolunteerServiceDetailService.class)
+                .getVolunteerServiceDetail(id);
     }
 }

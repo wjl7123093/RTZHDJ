@@ -1,13 +1,16 @@
 package com.mytv.rtzhdj.mvp.presenter;
 
 import android.app.Application;
+import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -16,11 +19,18 @@ import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 import javax.inject.Inject;
 
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceDetailContract;
 import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceDetailActivity;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
 
 
 @ActivityScope
@@ -59,8 +69,12 @@ public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServ
     }
 
     @Override
-    public void callMethodOfGetVolunteerServiceDetail(String id, boolean update) {
+    public void callMethodOfGetVolunteerServiceDetail(int id, boolean update) {
         mModel.getVolunteerServiceDetail(id, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<VolunteerDetailEntity>>transformObservable("getVolunteerServiceDetail" + id,
+                        new TypeToken<BaseJson<VolunteerDetailEntity>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<VolunteerDetailEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -73,11 +87,12 @@ public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServ
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<VolunteerDetailEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<VolunteerDetailEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull VolunteerDetailEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<VolunteerDetailEntity> volunteerDetailEntity) {
+                        Log.e(TAG, volunteerDetailEntity.toString());
 
-
+                        mRootView.loadData(volunteerDetailEntity.getData());
                     }
                 });
     }

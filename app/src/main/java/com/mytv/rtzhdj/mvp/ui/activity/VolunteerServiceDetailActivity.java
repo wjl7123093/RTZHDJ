@@ -12,12 +12,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerVolunteerServiceDetailComponent;
 import com.mytv.rtzhdj.di.module.VolunteerServiceDetailModule;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceDetailContract;
@@ -82,6 +85,9 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
     @BindView(R.id.btn_is_over)
     Button mBtnIsOver;
 
+    @Autowired
+    int id;
+
     private ArrayList<Fragment> mFragments;
     private String[] titles;
     private String mTitle;      // 标题栏标题
@@ -99,6 +105,7 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_volunteer_service_detail; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -113,7 +120,7 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
         mBtnIsOver.setOnClickListener(view -> {});
 
         // 获取 志愿服务详情
-        mPresenter.callMethodOfGetVolunteerServiceDetail("id", false);
+        mPresenter.callMethodOfGetVolunteerServiceDetail(id, false);
     }
 
 
@@ -173,4 +180,15 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
     }
 
 
+    @Override
+    public void loadData(VolunteerDetailEntity volunteerDetailEntity) {
+        mTvTitle.setText(volunteerDetailEntity.getTitle());
+        mTvEnrollTime.setText(volunteerDetailEntity.getEnrollEndDate().split("T")[0] + "截至");
+        mTvEventTime.setText(volunteerDetailEntity.getStartDate().split("T")[0]
+                + " 至 " + volunteerDetailEntity.getEndDate().split("T")[0]);
+        mTvEventSite.setText(volunteerDetailEntity.getAddress());
+        mTvEnrollment.setText(volunteerDetailEntity.getSignedup()
+                + "/" + volunteerDetailEntity.getEnrollCount());
+        mTvGrade.setText(volunteerDetailEntity.getScore() + "分");
+    }
 }
