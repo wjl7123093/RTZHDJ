@@ -192,11 +192,13 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<UserRegisterEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<UserRegisterEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull UserRegisterEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<UserRegisterEntity> userRegisterEntity) {
+                        Log.e(TAG, userRegisterEntity.toString());
 
-
+                        mRootView.showMessage("注册成功");
+                        mRootView.killMyself();
                     }
                 });
 

@@ -9,6 +9,7 @@ import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -53,9 +54,10 @@ public interface RegisterService {
      * 注册
      * @return
      */
-    @GET("userRegister")
-    Observable<UserRegisterEntity> getRegister(@Query("Mobile") String mobile,
-                                               @Query("PublishmentSystemId") String publishmentSystemId,
-                                               @Query("Password") String password);
+    @FormUrlEncoded
+    @POST("postUserRegister")
+    Observable<BaseJson<UserRegisterEntity>> getRegister(@Field("Mobile") String mobile,
+                                                         @Field("PublishmentSystemId") String publishmentSystemId,
+                                                         @Field("Password") String password);
 
 }

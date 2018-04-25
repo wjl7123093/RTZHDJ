@@ -38,7 +38,7 @@ public interface RegisterContract {
         Observable<BaseJson<VerifyCodeEntity>> getVerifyCode(String telNumber);
 
         // 注册
-        Observable<UserRegisterEntity> getUserRegister(String mobile, String publishmentSystemId,
+        Observable<BaseJson<UserRegisterEntity>> getUserRegister(String mobile, String publishmentSystemId,
                                                        String password);
     }
 

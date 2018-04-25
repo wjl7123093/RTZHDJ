@@ -88,7 +88,7 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
     }
 
     @Override
-    public Observable<UserRegisterEntity> getUserRegister(String moblie, String publishmentSystemId, String password) {
+    public Observable<BaseJson<UserRegisterEntity>> getUserRegister(String moblie, String publishmentSystemId, String password) {
         return mRepositoryManager.obtainRetrofitService(RegisterService.class)
                 .getRegister(moblie, publishmentSystemId, password);
     }

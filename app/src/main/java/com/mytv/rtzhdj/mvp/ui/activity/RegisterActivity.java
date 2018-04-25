@@ -33,6 +33,7 @@ import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
+import com.mytv.rtzhdj.app.utils.KeyboardUtils;
 import com.mytv.rtzhdj.di.component.DaggerRegisterComponent;
 import com.mytv.rtzhdj.di.module.RegisterModule;
 import com.mytv.rtzhdj.mvp.contract.RegisterContract;
@@ -92,8 +93,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     @BindView(R.id.btn_register)
     net.qiujuer.genius.ui.widget.Button mBtnRegister;
 
-
-    private ArrayList<String> options1Items = new ArrayList<>();
+    private int mPublishmentSystemId = 0;   // 站点ID
 
 
     @Override
@@ -116,7 +116,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         mBtnToolbarMenu.setVisibility(View.GONE);
 
         mTvLink.setOnClickListener(view -> goWebviewActivity());
-        mEdtCommunity.setOnClickListener(view -> mPresenter.callMethodOfPostAllPublishmentSystem(false));
+        mEdtCommunity.setOnClickListener(view -> {
+            KeyboardUtils.hideKeyboard(view);
+            mPresenter.callMethodOfPostAllPublishmentSystem(false);
+        });
         mBtnGetVertifyCode.setOnClickListener(view -> mPresenter.callMethodOfGetCode(
                 mEdtMobilePhone.getText().toString().trim()));
         mBtnRegister.setOnClickListener(view -> mPresenter.callMethodOfDoRegister(
@@ -239,17 +242,15 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void showPickerView(List<StationEntity> stationList) {// 弹出选择器
-        final List<String> mOptionsItems = new ArrayList<>();
-        mOptionsItems.add("item0");
-        mOptionsItems.add("item1");
-        mOptionsItems.add("item2");
-
 
         OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
                 String tx = stationList.get(options1).getPublishmentSystemName();
+                mEdtCommunity.setText(tx);
+                mPublishmentSystemId = stationList.get(options1).getPublishmentSystemId();
+
 
                 Toast.makeText(RegisterActivity.this, tx, Toast.LENGTH_SHORT).show();
             }

@@ -7,27 +7,27 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-4-4
- * @update
+ * @update 2018-4-25
  */
 public class UserRegisterEntity {
 
-    private int userId;                     // 用户id
-    private String PublishmentSystemId;     // 党支部id
+    private int UserId;                     // 用户id
+    private int PublishmentSystemId;        // 党支部id
     private String Mobile;                  // 手机
 
     public int getUserId() {
-        return userId;
+        return UserId;
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        UserId = userId;
     }
 
-    public String getPublishmentSystemId() {
+    public int getPublishmentSystemId() {
         return PublishmentSystemId;
     }
 
-    public void setPublishmentSystemId(String publishmentSystemId) {
+    public void setPublishmentSystemId(int publishmentSystemId) {
         PublishmentSystemId = publishmentSystemId;
     }
 
