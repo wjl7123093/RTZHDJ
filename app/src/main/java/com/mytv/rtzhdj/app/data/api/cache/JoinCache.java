@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.cache;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 
 import java.util.concurrent.TimeUnit;
@@ -21,6 +22,6 @@ import io.rx_cache2.Reply;
 public interface JoinCache {
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<MyJoinEntity>> getMyPartIn(Observable<MyJoinEntity> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson<MyJoinEntity>>> getMyPartIn(Observable<BaseJson<MyJoinEntity>> data, EvictProvider evictProvider);
 
 }

@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 
 import io.reactivex.Observable;
@@ -22,7 +23,8 @@ public interface JoinService {
      * @return
      */
     @GET("getMyPartIn")
-    Observable<MyJoinEntity> getMyPartIn(@Query("userId") int userId,
-                                         @Query("count") int count);
+    Observable<BaseJson<MyJoinEntity>> getMyPartIn(@Query("UserId") int userId,
+                                                   @Query("pageIndex") int pageIndex,
+                                                   @Query("pageSize") int pageSize);
 
 }

@@ -6,9 +6,12 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -20,13 +23,15 @@ public interface JoinContract {
         void setOnListClick(int arrayPos, int position);
         void setOnFooterClick();
         void setOnColumnClick(int arrayPos, int position);
+
+        void loadData(MyJoinEntity myJoinEntity);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
         // 获取 我要参与数据
-        Observable<MyJoinEntity> getMyPartIn(int userId, int count, boolean update);
+        Observable<BaseJson<MyJoinEntity>> getMyPartIn(int userId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -37,10 +42,8 @@ public interface JoinContract {
         DelegateAdapter initRecyclerView(RecyclerView recyclerView);
         BaseDelegateAdapter initGvMenu();
         BaseDelegateAdapter initTitle(String title);
-        BaseDelegateAdapter initListVolunteer(String url, int status, int joinNum, int starNum,
-                                              int commentNum, String title, String deadtime);
-        BaseDelegateAdapter initListCommunity(String url, int starNum, int commentNum,
-                                              String title, String deadtime);
+        BaseDelegateAdapter initListVolunteer(List<MyJoinEntity.VolunteerBlock> volunteerBlocks);
+        BaseDelegateAdapter initListCommunity(List<MyJoinEntity.CommunityBlock> communityBlocks);
         BaseDelegateAdapter initHeader(String report);
         BaseDelegateAdapter initFooter(String footer);
         BaseDelegateAdapter initOnePlusN2();
@@ -48,6 +51,6 @@ public interface JoinContract {
         BaseDelegateAdapter initColumnOnline();
 
         // 调用 我要参与数据
-        void callMethodOfGetMyPartIn(int userId, int count, boolean update);
+        void callMethodOfGetMyPartIn(int userId, int pageIndex, int pageSize, boolean update);
     }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -35,6 +37,8 @@ import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
@@ -145,8 +149,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
     }
 
     @Override
-    public BaseDelegateAdapter initListVolunteer(String url, int status, int joinNum, int starNum,
-                                                 int commentNum, String title, String deadtime) {
+    public BaseDelegateAdapter initListVolunteer(List<MyJoinEntity.VolunteerBlock> volunteerBlocks) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 1));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_event,
@@ -159,24 +162,23 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                                 .builder()
                                 .errorPic(R.mipmap.ic_error)
                                 .placeholder(R.mipmap.ic_placeholder)
-                                .url(url)
+                                .url(Api.APP_IMAGE_DOMAIN + volunteerBlocks.get(position).getPicture().replace("@", ""))
                                 .imageView(holder.getView(R.id.iv_event))
                                 .build());
 
-                holder.setText(R.id.tv_status, status == 0 ? "进行中" : "已结束");
-                holder.setText(R.id.tv_join_num, "参与人数: " + joinNum);
-                holder.setText(R.id.tv_star_num, "" + starNum);
-                holder.setText(R.id.tv_comment_num, "" + commentNum);
-                holder.setText(R.id.tv_title, title);
-                holder.setText(R.id.tv_deadtime, "报名截止: " + deadtime);
+//                holder.setText(R.id.tv_status, status == 0 ? "进行中" : "已结束");
+//                holder.setText(R.id.tv_join_num, "参与人数: " + volunteerBlocks.get(position).);
+                holder.setText(R.id.tv_star_num, "" + volunteerBlocks.get(position).getDigs());
+                holder.setText(R.id.tv_comment_num, "" + volunteerBlocks.get(position).getComments());
+                holder.setText(R.id.tv_title, volunteerBlocks.get(position).getTitle());
+                holder.setText(R.id.tv_deadtime, "报名截止: " + volunteerBlocks.get(position).getEnrollEndDate());
 
             }
         };
     }
 
     @Override
-    public BaseDelegateAdapter initListCommunity(String url, int starNum, int commentNum,
-                                                 String title, String deadtime) {
+    public BaseDelegateAdapter initListCommunity(List<MyJoinEntity.CommunityBlock> communityBlocks) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 1));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_image,
@@ -189,14 +191,14 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                                 .builder()
                                 .errorPic(R.mipmap.ic_error)
                                 .placeholder(R.mipmap.ic_placeholder)
-                                .url(url)
+                                .url(Api.APP_IMAGE_DOMAIN + communityBlocks.get(position).getPicture().replace("@", ""))
                                 .imageView(holder.getView(R.id.iv_image))
                                 .build());
 
-                holder.setText(R.id.tv_star_num, "" + starNum);
-                holder.setText(R.id.tv_comment_num, "" + commentNum);
-                holder.setText(R.id.tv_title, title);
-                holder.setText(R.id.tv_datetime, deadtime);
+                holder.setText(R.id.tv_star_num, "" + communityBlocks.get(position).getDigs());
+                holder.setText(R.id.tv_comment_num, "" + communityBlocks.get(position).getComments());
+                holder.setText(R.id.tv_title, communityBlocks.get(position).getTitle());
+                holder.setText(R.id.tv_datetime, communityBlocks.get(position).getAddDate());
 
             }
         };
@@ -342,8 +344,8 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
     }
 
     @Override
-    public void callMethodOfGetMyPartIn(int userId, int count, boolean update) {
-        mModel.getMyPartIn(userId, count, update)
+    public void callMethodOfGetMyPartIn(int userId, int pageIndex, int pageSize, boolean update) {
+        mModel.getMyPartIn(userId, pageIndex, pageSize, update)
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -356,10 +358,12 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<MyJoinEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<MyJoinEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull MyJoinEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<MyJoinEntity> myJoinEntity) {
+                        Log.e(TAG, myJoinEntity.toString());
 
+                        mRootView.loadData(myJoinEntity.getData());
 
                     }
                 });

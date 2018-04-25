@@ -16,6 +16,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.di.component.DaggerJoinComponent;
 import com.mytv.rtzhdj.di.module.JoinModule;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
@@ -82,11 +83,11 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
     public void initData(Bundle savedInstanceState) {
         mAdapters = new LinkedList<>();
         mPresenter.setActivity((MainActivity)getActivity());
-        initRecyclerView();
+//        initRecyclerView();
         initRefreshLayout();
 
         // 获取 我要参与数据
-//        mPresenter.callMethodOfGetMyPartIn(0, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetMyPartIn(8, 1, PAGE_SIZE, false);
     }
 
     /**
@@ -209,8 +210,13 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
         }
     }
 
+    @Override
+    public void loadData(MyJoinEntity myJoinEntity) {
+        initRecyclerView(myJoinEntity);
+    }
+
     private void initRecyclerView() {
-        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        /*DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
 
         //初始化头部
         BaseDelegateAdapter headerAdapter = mPresenter.initHeader("点击立即报到");
@@ -252,6 +258,54 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
         BaseDelegateAdapter listAdapter2 = mPresenter.initListCommunity(
                 "http://pic22.photophoto.cn/20120105/0020033017931766_b.jpg",
                 639, 687, "志愿服务，从心开始", "2018-02-02");
+        mAdapters.add(listAdapter2);
+
+        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);*/
+    }
+
+    private void initRecyclerView(MyJoinEntity myJoinEntity) {
+        List<MyJoinEntity.VolunteerBlock> volunteerBlocks = myJoinEntity.getVolunteerBlock();
+        List<MyJoinEntity.CommunityBlock> communityBlocks = myJoinEntity.getCommunityBlock();
+
+        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+
+        //初始化头部
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader("点击立即报到");
+        mAdapters.add(headerAdapter);
+
+        //初始化九宫格
+        BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
+        mAdapters.add(menuAdapter);
+
+        //初始化 1PlusN
+        BaseDelegateAdapter oneplusnAdapter = mPresenter.initOnePlusN2();
+        mAdapters.add(oneplusnAdapter);
+
+        //初始化 格栏布局 - 我的心愿
+        BaseDelegateAdapter columnWishAdapter = mPresenter.initColumnWish();
+        mAdapters.add(columnWishAdapter);
+
+        //初始化 格栏布局 - 在线问卷
+        BaseDelegateAdapter columnOnlineAdapter = mPresenter.initColumnOnline();
+        mAdapters.add(columnOnlineAdapter);
+
+        //初始化标题 - 志愿服务
+        BaseDelegateAdapter titleAdapter = mPresenter.initTitle("志愿服务");
+        mAdapters.add(titleAdapter);
+        //初始化list
+        BaseDelegateAdapter listAdapter = mPresenter.initListVolunteer(volunteerBlocks);
+        mAdapters.add(listAdapter);
+
+        //初始化脚部
+        BaseDelegateAdapter footerAdapter = mPresenter.initFooter("更多志愿服务");
+        mAdapters.add(footerAdapter);
+
+        //初始化标题 - 社区动态
+        titleAdapter = mPresenter.initTitle("社区动态");
+        mAdapters.add(titleAdapter);
+        //初始化list
+        BaseDelegateAdapter listAdapter2 = mPresenter.initListCommunity(communityBlocks);
         mAdapters.add(listAdapter2);
 
         //设置适配器

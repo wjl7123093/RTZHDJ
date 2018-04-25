@@ -32,7 +32,7 @@ public class MyJoinEntity {
         this.CommunityBlock = communityBlock;
     }
 
-    class VolunteerBlock {
+    public class VolunteerBlock {
         private int ContentId;
         private String Title;
         private int Digs;
@@ -89,7 +89,7 @@ public class MyJoinEntity {
         }
     }
 
-    class CommunityBlock {
+    public class CommunityBlock {
         private int ContentId;
         private String Title;
         private int Digs;
