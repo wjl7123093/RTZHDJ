@@ -17,6 +17,7 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -37,12 +38,16 @@ import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
+import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,6 +177,14 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 holder.setText(R.id.tv_comment_num, "" + volunteerBlocks.get(position).getComments());
                 holder.setText(R.id.tv_title, volunteerBlocks.get(position).getTitle());
                 holder.setText(R.id.tv_deadtime, "报名截止: " + volunteerBlocks.get(position).getEnrollEndDate());
+
+                holder.getView(R.id.ll_container).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                                .withInt("id", volunteerBlocks.get(position).getContentId()).navigation();
+                    }
+                });
 
             }
         };
@@ -346,6 +359,10 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
     @Override
     public void callMethodOfGetMyPartIn(int userId, int pageIndex, int pageSize, boolean update) {
         mModel.getMyPartIn(userId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<MyJoinEntity>>transformObservable("getMyPartIn" + userId,
+                        new TypeToken<BaseJson<MyJoinEntity>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<MyJoinEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
