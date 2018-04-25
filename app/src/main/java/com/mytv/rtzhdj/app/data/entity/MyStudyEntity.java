@@ -102,6 +102,7 @@ public class MyStudyEntity {
         private int NodeId;
         private int ArticleId;
         private String Title;
+        private String LastStudyTime;
 
         public int getNodeId() {
             return NodeId;
@@ -125,6 +126,14 @@ public class MyStudyEntity {
 
         public void setTitle(String title) {
             Title = title;
+        }
+
+        public String getLastStudyTime() {
+            return LastStudyTime;
+        }
+
+        public void setLastStudyTime(String lastStudyTime) {
+            LastStudyTime = lastStudyTime;
         }
     }
 

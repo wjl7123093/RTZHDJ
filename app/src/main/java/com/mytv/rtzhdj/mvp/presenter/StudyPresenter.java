@@ -166,6 +166,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, coursewareList.get(position).getTitle());
+                holder.setText(R.id.tv_datetime, coursewareList.get(position).getLastStudyTime());
 
                 holder.getView(R.id.ll_container).setOnClickListener(view -> {
                     mRootView.setOnListClick(arrayPos, position);
