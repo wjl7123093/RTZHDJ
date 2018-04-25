@@ -13,71 +13,71 @@ import java.util.List;
  */
 public class MyJoinEntity {
 
-    private List<VolunteerBlock> volunteerBlock;    // 志愿服务
-    private List<CommunityBlock> communityBlock;    // 社区动态
+    private List<VolunteerBlock> VolunteerBlock;    // 志愿服务
+    private List<CommunityBlock> CommunityBlock;    // 社区动态
 
     public List<VolunteerBlock> getVolunteerBlock() {
-        return volunteerBlock;
+        return VolunteerBlock;
     }
 
     public void setVolunteerBlock(List<VolunteerBlock> volunteerBlock) {
-        this.volunteerBlock = volunteerBlock;
+        this.VolunteerBlock = volunteerBlock;
     }
 
     public List<CommunityBlock> getCommunityBlock() {
-        return communityBlock;
+        return CommunityBlock;
     }
 
     public void setCommunityBlock(List<CommunityBlock> communityBlock) {
-        this.communityBlock = communityBlock;
+        this.CommunityBlock = communityBlock;
     }
 
     class VolunteerBlock {
-        private int contentId;
-        private String title;
-        private int digs;
-        private int comments;
-        private String picture;
+        private int ContentId;
+        private String Title;
+        private int Digs;
+        private int Comments;
+        private String Picture;
         private String EnrollEndDate;
 
         public int getContentId() {
-            return contentId;
+            return ContentId;
         }
 
         public void setContentId(int contentId) {
-            this.contentId = contentId;
+            ContentId = contentId;
         }
 
         public String getTitle() {
-            return title;
+            return Title;
         }
 
         public void setTitle(String title) {
-            this.title = title;
+            Title = title;
         }
 
         public int getDigs() {
-            return digs;
+            return Digs;
         }
 
         public void setDigs(int digs) {
-            this.digs = digs;
+            Digs = digs;
         }
 
         public int getComments() {
-            return comments;
+            return Comments;
         }
 
         public void setComments(int comments) {
-            this.comments = comments;
+            Comments = comments;
         }
 
         public String getPicture() {
-            return picture;
+            return Picture;
         }
 
         public void setPicture(String picture) {
-            this.picture = picture;
+            Picture = picture;
         }
 
         public String getEnrollEndDate() {
@@ -90,51 +90,51 @@ public class MyJoinEntity {
     }
 
     class CommunityBlock {
-        private int contentId;
-        private String title;
-        private int digs;
-        private int comments;
-        private String picture;
+        private int ContentId;
+        private String Title;
+        private int Digs;
+        private int Comments;
+        private String Picture;
         private String AddDate;
 
         public int getContentId() {
-            return contentId;
+            return ContentId;
         }
 
         public void setContentId(int contentId) {
-            this.contentId = contentId;
+            ContentId = contentId;
         }
 
         public String getTitle() {
-            return title;
+            return Title;
         }
 
         public void setTitle(String title) {
-            this.title = title;
+            Title = title;
         }
 
         public int getDigs() {
-            return digs;
+            return Digs;
         }
 
         public void setDigs(int digs) {
-            this.digs = digs;
+            Digs = digs;
         }
 
         public int getComments() {
-            return comments;
+            return Comments;
         }
 
         public void setComments(int comments) {
-            this.comments = comments;
+            Comments = comments;
         }
 
         public String getPicture() {
-            return picture;
+            return Picture;
         }
 
         public void setPicture(String picture) {
-            this.picture = picture;
+            Picture = picture;
         }
 
         public String getAddDate() {
