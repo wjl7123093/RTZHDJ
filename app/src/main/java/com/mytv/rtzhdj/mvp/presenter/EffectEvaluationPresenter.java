@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -11,6 +12,7 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -20,10 +22,13 @@ import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.mvp.contract.EffectEvaluationContract;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+
+import java.util.List;
 
 
 @ActivityScope
@@ -77,8 +82,8 @@ public class EffectEvaluationPresenter extends BasePresenter<EffectEvaluationCon
     }
 
     @Override
-    public void callMethodOfGetTestList(int userId, int typeId, boolean update) {
-        mModel.getTestList(userId, typeId, update)
+    public void callMethodOfGetTestList(int userId, int testState, boolean update) {
+        mModel.getTestList(userId, testState, update)
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -91,11 +96,12 @@ public class EffectEvaluationPresenter extends BasePresenter<EffectEvaluationCon
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<EffectEvaluationEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<EffectEvaluationEntity>>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull EffectEvaluationEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<List<EffectEvaluationEntity>> effectList) {
+                        Log.e(TAG, effectList.toString());
 
-
+                        mRootView.loadData(effectList.getData());
                     }
                 });
     }

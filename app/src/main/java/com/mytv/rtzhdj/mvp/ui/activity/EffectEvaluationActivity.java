@@ -18,6 +18,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
 import com.mytv.rtzhdj.di.component.DaggerEffectEvaluationComponent;
 import com.mytv.rtzhdj.di.module.EffectEvaluationModule;
 import com.mytv.rtzhdj.mvp.contract.EffectEvaluationContract;
@@ -136,7 +137,7 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(EffectEvaluationFragment.newInstance());
+            fragments.add(EffectEvaluationFragment.newInstance(i));
         }
 
 
@@ -168,4 +169,8 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
     }
 
 
+    @Override
+    public void loadData(List<EffectEvaluationEntity> effectList) {
+
+    }
 }

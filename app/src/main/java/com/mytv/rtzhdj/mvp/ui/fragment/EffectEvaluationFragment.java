@@ -14,16 +14,20 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
 import com.mytv.rtzhdj.di.component.DaggerEffectEvaluationComponent;
 import com.mytv.rtzhdj.di.module.EffectEvaluationModule;
 import com.mytv.rtzhdj.mvp.contract.EffectEvaluationContract;
 import com.mytv.rtzhdj.mvp.presenter.EffectEvaluationPresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.adapter.EffectEvaluationAdapter;
 import com.mytv.rtzhdj.mvp.ui.adapter.TestingAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -45,12 +49,20 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
-    private TestingAdapter mAdapter;
+    private EffectEvaluationAdapter mAdapter;
     private static final int PAGE_SIZE = 10;
 
 
     public static EffectEvaluationFragment newInstance() {
         EffectEvaluationFragment fragment = new EffectEvaluationFragment();
+        return fragment;
+    }
+
+    public static EffectEvaluationFragment newInstance(int testState) {
+        EffectEvaluationFragment fragment = new EffectEvaluationFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("testState", testState);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -74,11 +86,11 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
 
         mPresenter.setActivity(getActivity());
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
 
         // 获取 效果测评列表数据
-        mPresenter.callMethodOfGetTestList(0, 0, false);
+        mPresenter.callMethodOfGetTestList(8, getArguments().getInt("testState"), false);
     }
 
     /**
@@ -142,8 +154,8 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
         });
     }
 
-    private void initAdapter() {
-        mAdapter = new TestingAdapter(getContext(), PAGE_SIZE);
+    private void initAdapter(List<EffectEvaluationEntity> effectList) {
+        mAdapter = new EffectEvaluationAdapter(getContext(), effectList);
         mAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -156,4 +168,8 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
 
     }
 
+    @Override
+    public void loadData(List<EffectEvaluationEntity> effectList) {
+        initAdapter(effectList);
+    }
 }

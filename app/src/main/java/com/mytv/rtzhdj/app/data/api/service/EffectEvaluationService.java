@@ -1,7 +1,10 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -23,7 +26,7 @@ public interface EffectEvaluationService {
      * @return
      */
     @GET("getTestList")
-    Observable<EffectEvaluationEntity> getTestList(@Query("userId") int userId,
-                                                   @Query("typeId") int typeId);
+    Observable<BaseJson<List<EffectEvaluationEntity>>> getTestList(@Query("UserId") int userId,
+                                                                   @Query("TestState") int testState);
 
 }
