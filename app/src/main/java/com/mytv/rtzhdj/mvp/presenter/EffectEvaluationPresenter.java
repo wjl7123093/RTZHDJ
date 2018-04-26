@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
@@ -22,11 +23,15 @@ import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.contract.EffectEvaluationContract;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.List;
 
@@ -84,6 +89,10 @@ public class EffectEvaluationPresenter extends BasePresenter<EffectEvaluationCon
     @Override
     public void callMethodOfGetTestList(int userId, int testState, boolean update) {
         mModel.getTestList(userId, testState, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<EffectEvaluationEntity>>>transformObservable("getTestList" + userId + testState,
+                        new TypeToken<BaseJson<List<EffectEvaluationEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<EffectEvaluationEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
