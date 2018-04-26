@@ -7,16 +7,16 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-2-11
- * @update
+ * @update 2018-4-26    更新实体类
  */
 public class PartyMemberEntity {
 
-    private int id;
-    private String name;
-    private String url;
+    private int Id;
+    private String UserName;
+    private String Photourl;
     private String duty;
     private String party_branch;
-    private String mobile;
+    private String Mobile;
     private String telephone;
     private String emergency_phone;
     private String other_connections;
@@ -25,27 +25,27 @@ public class PartyMemberEntity {
     private String email;
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        Id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return UserName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPhotourl() {
+        return Photourl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPhotourl(String photourl) {
+        Photourl = photourl;
     }
 
     public String getDuty() {
@@ -65,11 +65,11 @@ public class PartyMemberEntity {
     }
 
     public String getMobile() {
-        return mobile;
+        return Mobile;
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile;
+        Mobile = mobile;
     }
 
     public String getTelephone() {

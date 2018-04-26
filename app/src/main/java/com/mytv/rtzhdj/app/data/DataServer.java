@@ -129,8 +129,8 @@ public class DataServer {
         for (int i = 0; i < lenth; i++) {
             PartyMemberEntity partyMemberEntity = new PartyMemberEntity();
             partyMemberEntity.setId(i + 1);
-            partyMemberEntity.setName("はたけ·カカシ 影の分身" + i);
-            partyMemberEntity.setUrl("http://www.qq745.com/uploads/allimg/150217/1-15021G55929-50.jpg");
+            partyMemberEntity.setUserName("はたけ·カカシ 影の分身" + i);
+            partyMemberEntity.setPhotourl("http://www.qq745.com/uploads/allimg/150217/1-15021G55929-50.jpg");
             partyMemberEntity.setDuty("党员");
             partyMemberEntity.setParty_branch("xxxxxxxx支部");
             partyMemberEntity.setMobile("189xxxx8888");

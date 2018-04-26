@@ -1,7 +1,10 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -23,6 +26,6 @@ public interface PartyMemberService {
      * @return
      */
     @GET("getPartyMember")
-    Observable<PartyMemberEntity> getPartyMember(@Query("PublishmentSystemId") int publishmentSystemId);
+    Observable<BaseJson<List<PartyMemberEntity>>> getPartyMember(@Query("PublishmentSystemId") int publishmentSystemId);
 
 }

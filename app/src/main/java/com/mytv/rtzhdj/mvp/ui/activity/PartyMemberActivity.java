@@ -18,6 +18,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.di.component.DaggerPartyMemberComponent;
 import com.mytv.rtzhdj.di.module.PartyMemberModule;
 import com.mytv.rtzhdj.mvp.contract.PartyMemberContract;
@@ -30,6 +31,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -93,11 +96,11 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
         });
         mPresenter.setActivity(PartyMemberActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
 
         // 获取 党员信息列表数据
-        mPresenter.callMethodOfGetHomeData(0, false);
+        mPresenter.callMethodOfGetPartyMmeber(1, false);
     }
 
 
@@ -144,8 +147,8 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
         });
     }
 
-    private void initAdapter() {
-        partyMemberAdapter = new PartyMemberAdapter(PartyMemberActivity.this, PAGE_SIZE);
+    private void initAdapter(List<PartyMemberEntity> memberList) {
+        partyMemberAdapter = new PartyMemberAdapter(PartyMemberActivity.this, memberList);
         partyMemberAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(partyMemberAdapter);
 
@@ -162,4 +165,8 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
     }
 
 
+    @Override
+    public void loadData(List<PartyMemberEntity> memberList) {
+        initAdapter(memberList);
+    }
 }

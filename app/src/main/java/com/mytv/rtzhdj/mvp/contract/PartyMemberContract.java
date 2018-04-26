@@ -5,9 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.PartyMemberActivity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -15,14 +18,14 @@ import io.reactivex.Observable;
 public interface PartyMemberContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
-
+        void loadData(List<PartyMemberEntity> memberList);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
         // 获取 党员信息列表
-        Observable<PartyMemberEntity> getPartyMember(int publishmentSystemId, boolean update);
+        Observable<BaseJson<List<PartyMemberEntity>>> getPartyMember(int publishmentSystemId, boolean update);
 
     }
 
@@ -33,6 +36,6 @@ public interface PartyMemberContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取党员信息列表
-        void callMethodOfGetHomeData(int publishmentSystemId, boolean update);
+        void callMethodOfGetPartyMmeber(int publishmentSystemId, boolean update);
     }
 }

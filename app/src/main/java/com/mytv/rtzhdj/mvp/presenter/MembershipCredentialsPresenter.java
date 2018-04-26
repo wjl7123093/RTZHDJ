@@ -59,7 +59,7 @@ public class MembershipCredentialsPresenter extends BasePresenter<MembershipCred
     @Override
     public void initHeader(PartyMemberEntity partyMemberEntity, RoundImageView ivHeader,
                            TextView tvName, TextView tvDuty, TextView tvPartyBranch) {
-        tvName.setText("姓名: " + partyMemberEntity.getName());
+        tvName.setText("姓名: " + partyMemberEntity.getUserName());
         tvDuty.setText("职务: " + partyMemberEntity.getDuty());
         tvPartyBranch.setText("所属支部: " + partyMemberEntity.getParty_branch());
 
@@ -68,7 +68,7 @@ public class MembershipCredentialsPresenter extends BasePresenter<MembershipCred
                         .builder()
                         .errorPic(R.mipmap.ic_error)
                         .placeholder(R.mipmap.ic_placeholder)
-                        .url(partyMemberEntity.getUrl())
+                        .url(partyMemberEntity.getPhotourl())
                         .imageView(ivHeader)
                         .build());
     }
