@@ -127,10 +127,10 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
             case 0:
                 ARouter.getInstance().build(ARoutePath.PATH_COMPULSORY_COURSE).navigation();
                 break;
-            case 1:
-            case 2:
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
-                        .withString("from", "StudyCoursewareActivity")
+            case 1: // 选修课 nodeId = 9044
+            case 2: // 微党课 nodeId = 9045
+                ARouter.getInstance().build(ARoutePath.PATH_ELECTIVE_COURSE)
+                        .withInt("nodeId", position == 1 ? 9044 : 9045)
                         .withString("title", title).navigation();
                 break;
 

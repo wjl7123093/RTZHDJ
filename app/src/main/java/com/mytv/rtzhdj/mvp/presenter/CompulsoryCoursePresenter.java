@@ -90,7 +90,7 @@ public class CompulsoryCoursePresenter extends BasePresenter<CompulsoryCourseCon
         mModel.getCoursewareList(userId, nodeId, studyState, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<CoursewareEntity>>>transformObservable("getCoursewareList" + userId + "," + nodeId,
                         new TypeToken<BaseJson<List<CoursewareEntity>>>() { }.getType(),
-                        CacheStrategy.firstRemote()))    // 60s以内用缓存
+                        CacheStrategy.firstCache()))
                 .map(new CacheResult.MapFunc<BaseJson<List<CoursewareEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
