@@ -36,7 +36,7 @@ public interface RegisterService {
     Observable<BaseJson<List<UserCategoryEntity>>> getUserCategory();
 
     /**
-     * 获取用户类型
+     * 获取站点集合数据
      * @return
      * @Headers("Cache-Control:public ,max-age=60") 设置接口数据缓存（因为已经统一设置，故现在不需要单独设置）
      */
