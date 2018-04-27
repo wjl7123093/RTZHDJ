@@ -5,7 +5,10 @@ import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -26,5 +29,25 @@ public interface NewsDetailService {
     @GET("getContent")
     Observable<BaseJson<NewsDetailEntity>> getContent(@Query("Id") int id,
                                                       @Query("NodeId") int nodeId);
+
+    /**
+     * 提交评论
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("postComment")
+    Observable<BaseJson> postComment(@Field("UserID") int id,
+                                     @Field("NodeID") int nodeId,
+                                     @Field("ContentID") int contentId,
+                                     @Field("CommentInfo") String commentInfo);
+
+    /**
+     * 点赞
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("postDoDig")
+    Observable<BaseJson> postDoDig(@Field("NodeId") int nodeId,
+                                   @Field("contentID") int contentId);
 
 }

@@ -1,9 +1,13 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -30,6 +34,11 @@ import com.mytv.rtzhdj.mvp.presenter.NewsDetailPresenter;
 
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
+
+import net.qiujuer.genius.ui.widget.EditText;
 
 import butterknife.BindView;
 
@@ -61,19 +70,23 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
     WebView mWebView;
     @BindView(R.id.webProgressBar)
     WebProgressBar mWebProgressBar;
-    /*@BindView(R.id.tv_comment)
+    @BindView(R.id.tv_comment)
     TextView mTvComment;
     @BindView(R.id.tv_comment_num)
     TextView mTvCommentNum;
     @BindView(R.id.tv_star_num)
     TextView mTvStarNum;
     @BindView(R.id.iv_share)
-    ImageView mIvShare;*/
+    ImageView mIvShare;
 
     @Autowired
     int articleId;
     @Autowired
     int nodeId;
+    @Autowired
+    int digs;
+    @Autowired
+    int comments;
 
 
     @Override
@@ -102,6 +115,11 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
 
         // 获取新闻详情
 //        mPresenter.callMethodOfGetContent(articleId, nodeId, false);
+        mTvStarNum.setText(digs + "");
+        mTvCommentNum.setText(comments + "");
+
+        mTvComment.setOnClickListener(view -> showDialog());
+        mTvStarNum.setOnClickListener(view -> mPresenter.callMethodOfPostDoDig(nodeId, articleId, false));
     }
 
 
@@ -140,5 +158,27 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
     @Override
     public void setWebviewProgress(int progress) {
         mWebProgressBar.setProgress(progress);
+    }
+
+    @Override
+    public void showDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(NewsDetailActivity.this);
+        View dialogView = LayoutInflater.from(NewsDetailActivity.this).inflate(R.layout.dialog_comment, null);
+        EditText mEdtComment = (EditText) dialogView.findViewById(R.id.edt_comment);
+        builder.setView(dialogView);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (TextUtils.isEmpty(mEdtComment.getText().toString().trim())) {
+                    showMessage("评论内容不能为空");
+                    return;
+                }
+
+                mPresenter.callMethodOfPostComment(8, nodeId, articleId, mEdtComment.getText().toString().trim(), false);
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }

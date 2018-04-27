@@ -50,4 +50,16 @@ public class NewsDetailModel extends BaseModel implements NewsDetailContract.Mod
         return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
                 .getContent(id, nodeId);
     }
+
+    @Override
+    public Observable<BaseJson> postComment(int userId, int nodeId, int contentId, String commentInfo, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
+                .postComment(userId, nodeId, contentId, commentInfo);
+    }
+
+    @Override
+    public Observable<BaseJson> postDoDig(int nodeId, int contentId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
+                .postDoDig(nodeId, contentId);
+    }
 }

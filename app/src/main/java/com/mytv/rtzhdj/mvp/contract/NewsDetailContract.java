@@ -21,6 +21,7 @@ public interface NewsDetailContract {
     interface View extends IView {
         void loadWap(String url);
         void setWebviewProgress(int progress);
+        void showDialog();
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
@@ -28,6 +29,12 @@ public interface NewsDetailContract {
 
         // 获取 新闻详情
         Observable<BaseJson<NewsDetailEntity>> getContent(int id, int nodeId, boolean update);
+
+        // post 评论数据
+        Observable<BaseJson> postComment(int userId, int nodeId, int contentId, String commentInfo, boolean update);
+
+        // post 点赞
+        Observable<BaseJson> postDoDig(int nodeId, int contentId, boolean update);
 
     }
 
@@ -39,6 +46,10 @@ public interface NewsDetailContract {
 
         // 调用 获取新闻详情
         void callMethodOfGetContent(int id, int nodeId, boolean update);
+        // 调用 评论
+        void callMethodOfPostComment(int userId, int nodeId, int contentId, String commentInfo, boolean update);
+        // 调用 点赞
+        void callMethodOfPostDoDig(int nodeId, int contentId, boolean update);
 
     }
 }

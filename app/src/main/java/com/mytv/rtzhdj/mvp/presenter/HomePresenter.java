@@ -298,6 +298,8 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                     ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                             .withInt("articleId", FocusNewsBlock_ChildContent.get(position).getID())
                             .withInt("nodeId", FocusNewsBlock_ChildContent.get(position).getNodeId())
+                            .withInt("digs", FocusNewsBlock_ChildContent.get(position).getDigs())
+                            .withInt("comments", FocusNewsBlock_ChildContent.get(position).getComments())
                             .navigation();
                 });
 

@@ -147,4 +147,58 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
                     }
                 });
     }
+
+    @Override
+    public void callMethodOfPostComment(int userId, int nodeId, int contentId, String commentInfo, boolean update) {
+        mModel.postComment(userId, nodeId, contentId, commentInfo, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e(TAG, postResult.toString());
+
+                        if (postResult.getStatus() == 200)
+                            mRootView.showMessage("评论成功，审核中...");
+
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfPostDoDig(int nodeId, int contentId, boolean update) {
+        mModel.postDoDig(nodeId, contentId, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e(TAG, postResult.toString());
+
+                        if (postResult.getStatus() == 200)
+                            mRootView.showMessage("点赞成功");
+
+                    }
+                });
+    }
 }
