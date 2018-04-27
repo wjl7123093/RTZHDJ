@@ -265,7 +265,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent = homeData.getData().getNoticeBlock_ChildContent();
         List<HomeEntity.FocusNewsBlock> FocusNewsBlock_ChildContent = homeData.getData().getFocusNewsBlock_ChildContent();
         List<HomeEntity.AdBlock> AdBlock = homeData.getData().getAdBlock();
-        List<HomeEntity.PublicSpiritedBlock> PublicSpiritedBlock_ChildContent = homeData.getData().getPublicSpiritedBlock_ChildContent();
+        List<List<HomeEntity.PublicSpiritedBlock>> PublicSpiritedBlock_ChildContent = homeData.getData().getPublicSpiritedBlock_ChildContent();
         int myPositiveValue = homeData.getData().getMyPositiveValue();
 
 

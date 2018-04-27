@@ -59,7 +59,7 @@ public interface HomeContract {
         BaseDelegateAdapter initMoreData(String moreStr);
         BaseDelegateAdapter initImage(List<HomeEntity.AdBlock> AdBlock);
         BaseDelegateAdapter initHeader(String title, String desc);
-        BaseDelegateAdapter initOnePlusN(List<HomeEntity.PublicSpiritedBlock> PublicSpiritedBlock_ChildContent,
+        BaseDelegateAdapter initOnePlusN(List<List<HomeEntity.PublicSpiritedBlock>> PublicSpiritedBlock_ChildContent,
                                          int myPositiveValue);
 
         // 调用 获取首页数据

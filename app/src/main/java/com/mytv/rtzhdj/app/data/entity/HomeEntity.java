@@ -19,7 +19,7 @@ public class HomeEntity implements Serializable {
     private List<NoticeBlock> NoticeBlock_ChildContent;                 // 通知
     private List<FocusNewsBlock> FocusNewsBlock_ChildContent;           // 要闻
     private List<AdBlock> AdBlock;                                      // 广告
-    private List<PublicSpiritedBlock> PublicSpiritedBlock_ChildContent; // 推荐活动
+    private List<List<PublicSpiritedBlock>> PublicSpiritedBlock_ChildContent; // 推荐活动
     private int myPositiveValue;    // 正能量值
 
     public List<HomeEntity.SpecialBlock> getSpecialBlock() {
@@ -54,11 +54,11 @@ public class HomeEntity implements Serializable {
         AdBlock = adBlock;
     }
 
-    public List<PublicSpiritedBlock> getPublicSpiritedBlock_ChildContent() {
+    public List<List<PublicSpiritedBlock>> getPublicSpiritedBlock_ChildContent() {
         return PublicSpiritedBlock_ChildContent;
     }
 
-    public void setPublicSpiritedBlock_ChildContent(List<PublicSpiritedBlock> publicSpiritedBlock_ChildContent) {
+    public void setPublicSpiritedBlock_ChildContent(List<List<PublicSpiritedBlock>> publicSpiritedBlock_ChildContent) {
         PublicSpiritedBlock_ChildContent = publicSpiritedBlock_ChildContent;
     }
 
