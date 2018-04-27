@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.UserDetailEntity;
 
@@ -23,6 +24,6 @@ public interface SettingService {
      * @return
      */
     @GET("getUserDetail")
-    Observable<UserDetailEntity> getUserDetail(@Query("userId") int userId);
+    Observable<BaseJson<UserDetailEntity>> getUserDetail(@Query("UserId") int userId);
 
 }

@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.cache;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.UserDetailEntity;
 
@@ -22,6 +23,6 @@ import io.rx_cache2.Reply;
 public interface SettingCache {
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<UserDetailEntity>> getUserDetail(Observable<UserDetailEntity> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson<UserDetailEntity>>> getUserDetail(Observable<BaseJson<UserDetailEntity>> data, EvictProvider evictProvider);
 
 }

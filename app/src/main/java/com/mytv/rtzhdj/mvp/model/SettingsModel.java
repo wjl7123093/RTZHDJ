@@ -10,6 +10,7 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
 import com.mytv.rtzhdj.app.data.api.cache.SettingCache;
 import com.mytv.rtzhdj.app.data.api.service.HomeService;
@@ -45,18 +46,8 @@ public class SettingsModel extends BaseModel implements SettingsContract.Model {
     }
 
     @Override
-    public Observable<UserDetailEntity> getUserDetail(int userId, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(SettingService.class)
-                .getUserDetail(userId))
-                .flatMap(new Function<Observable<UserDetailEntity>, ObservableSource<UserDetailEntity>>() {
-                    @Override
-                    public ObservableSource<UserDetailEntity> apply(@NonNull Observable<UserDetailEntity> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(SettingCache.class)
-                                .getUserDetail(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson<UserDetailEntity>> getUserDetail(int userId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(SettingService.class)
+                .getUserDetail(userId);
     }
 }

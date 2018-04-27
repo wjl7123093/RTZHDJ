@@ -1,62 +1,66 @@
 package com.mytv.rtzhdj.app.data.entity;
 
+import java.io.Serializable;
+
 /**
  * UserDetailEntity   党员详情实体类
  *
  * @author Fred_W
  * @version v1.0.0(1)
  * @crdate 2018-4-4
- * @update 2018-4-5 update 结构
+ * @update 2018-4-5     update 结构
+ *         2018-4-26    update 结构
  */
-public class UserDetailEntity {
+public class UserDetailEntity implements Serializable {
 
-    private BaseInfo baseInfo;
-    private PartyInfo partyInfo;
+    private BaseInfo BaseInfo;
+    private PartyInfo PartyInfo;
 
-    public BaseInfo getBaseInfo() {
-        return baseInfo;
+    public UserDetailEntity.BaseInfo getBaseInfo() {
+        return BaseInfo;
     }
 
-    public void setBaseInfo(BaseInfo baseInfo) {
-        this.baseInfo = baseInfo;
+    public void setBaseInfo(UserDetailEntity.BaseInfo baseInfo) {
+        BaseInfo = baseInfo;
     }
 
-    public PartyInfo getPartyInfo() {
-        return partyInfo;
+    public UserDetailEntity.PartyInfo getPartyInfo() {
+        return PartyInfo;
     }
 
-    public void setPartyInfo(PartyInfo partyInfo) {
-        this.partyInfo = partyInfo;
+    public void setPartyInfo(UserDetailEntity.PartyInfo partyInfo) {
+        PartyInfo = partyInfo;
     }
 
-    class BaseInfo {
-        private int id;
-        private String userName;                // 姓名
+    public class BaseInfo implements Serializable {
+        private int Id;
+        private String UserName;                // 姓名
         private String PublishmentsystemName;   // 党支部名称
-        private String sex;                     // 性别
-        private String nation;                  // 民族
-        private String mobile;                  // 手机
-        private String phone;                   // 电话
-        private String enmergencyMobile;        // 紧急联系电话
-        private String otherContact;            // 其他联系方式
-        private String address;                 // 地址
-        private String qq;                      // QQ
-        private String mailbox;                 // 邮箱
+        private String Sex;                     // 性别
+        private String Nation;                  // 民族
+        private String Origo;                   // 籍贯
+        private String Mobile;                  // 手机
+        private String Phone;                   // 电话
+        private String EnmergencyMobile;        // 紧急联系电话
+        private String OtherContact;            // 其他联系方式
+        private String Address;                 // 地址
+        private String QQ;                      // QQ
+        private String Mailbox;                 // 邮箱
 
         public int getId() {
-            return id;
+            return Id;
         }
 
         public void setId(int id) {
-            this.id = id;
+            Id = id;
         }
 
         public String getUserName() {
-            return userName;
+            return UserName;
         }
 
         public void setUserName(String userName) {
-            this.userName = userName;
+            UserName = userName;
         }
 
         public String getPublishmentsystemName() {
@@ -68,83 +72,131 @@ public class UserDetailEntity {
         }
 
         public String getSex() {
-            return sex;
+            return Sex;
         }
 
         public void setSex(String sex) {
-            this.sex = sex;
+            Sex = sex;
         }
 
         public String getNation() {
-            return nation;
+            return Nation;
         }
 
         public void setNation(String nation) {
-            this.nation = nation;
+            Nation = nation;
+        }
+
+        public String getOrigo() {
+            return Origo;
+        }
+
+        public void setOrigo(String origo) {
+            Origo = origo;
         }
 
         public String getMobile() {
-            return mobile;
+            return Mobile;
         }
 
         public void setMobile(String mobile) {
-            this.mobile = mobile;
+            Mobile = mobile;
         }
 
         public String getPhone() {
-            return phone;
+            return Phone;
         }
 
         public void setPhone(String phone) {
-            this.phone = phone;
+            Phone = phone;
         }
 
         public String getEnmergencyMobile() {
-            return enmergencyMobile;
+            return EnmergencyMobile;
         }
 
         public void setEnmergencyMobile(String enmergencyMobile) {
-            this.enmergencyMobile = enmergencyMobile;
+            EnmergencyMobile = enmergencyMobile;
         }
 
         public String getOtherContact() {
-            return otherContact;
+            return OtherContact;
         }
 
         public void setOtherContact(String otherContact) {
-            this.otherContact = otherContact;
+            OtherContact = otherContact;
         }
 
         public String getAddress() {
-            return address;
+            return Address;
         }
 
         public void setAddress(String address) {
-            this.address = address;
+            Address = address;
         }
 
-        public String getQq() {
-            return qq;
+        public String getQQ() {
+            return QQ;
         }
 
-        public void setQq(String qq) {
-            this.qq = qq;
+        public void setQQ(String QQ) {
+            this.QQ = QQ;
         }
 
         public String getMailbox() {
-            return mailbox;
+            return Mailbox;
         }
 
         public void setMailbox(String mailbox) {
-            this.mailbox = mailbox;
+            Mailbox = mailbox;
         }
     }
 
-    class PartyInfo {
-        private String userName;        // 姓名
-        private String dateOfBirth;     // 生日日期
-        private String cartID;          // 身份证号
-        private int individualStatus;   //
-        private String wordTime;        //
+    public class PartyInfo implements Serializable {
+        private String UserName;        // 姓名
+        private String Birthday;        // 生日日期
+        private String IdCode;          // 身份证号
+        private String Education;       // 学历
+        private String WorkTime;        // 参加工作时间
+
+        public String getUserName() {
+            return UserName;
+        }
+
+        public void setUserName(String userName) {
+            UserName = userName;
+        }
+
+        public String getBirthday() {
+            return Birthday;
+        }
+
+        public void setBirthday(String birthday) {
+            Birthday = birthday;
+        }
+
+        public String getIdCode() {
+            return IdCode;
+        }
+
+        public void setIdCode(String idCode) {
+            IdCode = idCode;
+        }
+
+        public String getEducation() {
+            return Education;
+        }
+
+        public void setEducation(String education) {
+            Education = education;
+        }
+
+        public String getWorkTime() {
+            return WorkTime;
+        }
+
+        public void setWorkTime(String workTime) {
+            WorkTime = workTime;
+        }
     }
 }

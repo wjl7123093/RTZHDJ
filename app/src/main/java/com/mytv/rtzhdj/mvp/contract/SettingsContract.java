@@ -6,6 +6,7 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.UserDetailEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.SettingsActivity;
@@ -16,6 +17,7 @@ import io.reactivex.Observable;
 public interface SettingsContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
+        void loadData(UserDetailEntity userDetailEntity, int flag);
 
     }
 
@@ -23,7 +25,7 @@ public interface SettingsContract {
     interface Model extends IModel {
 
         // 获取 用户详情
-        Observable<UserDetailEntity> getUserDetail(int userId, boolean update);
+        Observable<BaseJson<UserDetailEntity>> getUserDetail(int userId, boolean update);
 
     }
 

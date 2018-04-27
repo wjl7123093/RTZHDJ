@@ -20,6 +20,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.UserDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerSettingsComponent;
 import com.mytv.rtzhdj.di.module.SettingsModule;
 import com.mytv.rtzhdj.mvp.contract.SettingsContract;
@@ -149,4 +150,8 @@ public class SettingsActivity extends BaseActivity<SettingsPresenter> implements
 //        tabLayout.setTabTextColors(Color.BLACK, Color.RED);
     }
 
+    @Override
+    public void loadData(UserDetailEntity userDetailEntity, int flag) {
+
+    }
 }

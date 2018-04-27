@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
+import com.mytv.rtzhdj.app.data.entity.UserDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerSettingsComponent;
 import com.mytv.rtzhdj.di.module.SettingsModule;
 import com.mytv.rtzhdj.mvp.contract.SettingsContract;
@@ -71,14 +75,9 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
     public void initData(Bundle savedInstanceState) {
         mAdapters = new LinkedList<>();
         mPresenter.setActivity((SettingsActivity) getActivity());
-        if (getArguments().getInt("flag") == 0)     // 基本信息
-            initRecyclerView1();
-        else    // 入党基本信息
-            initRecyclerView2();
+
         initRefreshLayout();
 
-        // 获取用户详情信息
-        mPresenter.callMethodOfGetUserDetail(0, false);
     }
 
     /**
@@ -124,6 +123,28 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
     @Override
     public void killMyself() {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getUserVisibleHint()) {
+            if (getArguments().getInt("flag") == 0) {    // 基本信息
+                // 获取用户详情信息
+                mPresenter.callMethodOfGetUserDetail(8, false);
+            }
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        // Fragment 对用户可见时再调用
+        if (isVisibleToUser) {
+            if (getArguments().getInt("flag") == 1) { // 入党基本信息
+                loadData((UserDetailEntity) DataHelper.getDeviceData(getActivity(), SharepreferenceKey.KEY_LOGIN_USER_DETAIL), 1);
+            }
+        }
+        super.setUserVisibleHint(isVisibleToUser);
     }
 
     private void initRecyclerView1() {
@@ -228,6 +249,115 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
         delegateAdapter.setAdapters(mAdapters);
     }
 
+    private void initRecyclerView1(UserDetailEntity userDetailEntity) {
+        UserDetailEntity.BaseInfo baseInfo = userDetailEntity.getBaseInfo();
+
+        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+
+        //初始化头部1
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader1(
+                "http://imgtu.5011.net/uploads/content/20170220/9520371487578487.jpg");
+        mAdapters.add(headerAdapter);
+
+        //初始化信息1
+        BaseDelegateAdapter infoAdapter = mPresenter.initInfo1("真实姓名:", baseInfo.getUserName());
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("性别:", baseInfo.getSex());
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("民族:", baseInfo.getNation());
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("籍贯:", baseInfo.getOrigo());
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("所属支部:", baseInfo.getPublishmentsystemName());
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("职务:", "无");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("报道社区:", baseInfo.getPublishmentsystemName());
+        mAdapters.add(infoAdapter);
+
+        //初始化手机
+        BaseDelegateAdapter mobileAdapter = mPresenter.initMobilePhone(baseInfo.getMobile(), false);
+        mAdapters.add(mobileAdapter);
+
+        //初始化信息2
+        BaseDelegateAdapter infoAdapter2 = mPresenter.initInfo2("pwd", "修改密码:", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("info", "QQ:", baseInfo.getQQ(), "你的QQ号");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("info", "邮箱:", baseInfo.getMailbox(), "你的邮箱");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("info", "座机:", baseInfo.getPhone(), "你的座机号");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("info", "紧急联系电话:", baseInfo.getEnmergencyMobile(), "你的紧急联系电话");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("info", "通讯地址:", baseInfo.getAddress(), "你的通讯地址");
+        mAdapters.add(infoAdapter2);
+
+        //初始化其他联系方式
+        BaseDelegateAdapter infoAdapter3 = mPresenter.initOtherContacts("其他联系方式", baseInfo.getOtherContact(), "其他联系方式");
+        mAdapters.add(infoAdapter3);
+
+        //初始化信息2
+        infoAdapter2 = mPresenter.initInfo2("webview", "用户协议", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("webview", "技术支持", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("webview", "版本更新", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter2 = mPresenter.initInfo2("feedback", "意见反馈", "", "");
+        mAdapters.add(infoAdapter2);
+        infoAdapter = mPresenter.initInfo1("退出当前账户", "");
+        mAdapters.add(infoAdapter);
+
+        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);
+    }
+
+    private void initRecyclerView2(UserDetailEntity userDetailEntity) {
+        if (null == userDetailEntity)
+            return;
+
+        UserDetailEntity.PartyInfo partyInfo = userDetailEntity.getPartyInfo();
+
+        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+
+        //初始化头部1
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader2(
+                "http://imgtu.5011.net/uploads/content/20170220/9520371487578487.jpg");
+        mAdapters.add(headerAdapter);
+
+        //初始化信息1
+        BaseDelegateAdapter infoAdapter = mPresenter.initInfo1("个人身份:", "公有经济控制企业专业技术人员");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("学历:", partyInfo.getEducation());
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("学位:", "学士");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("出生日期:", partyInfo.getBirthday());
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("身份证号:", partyInfo.getIdCode());
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("一线情况:", "机关第一线");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("技术职务:", "为评定资格或未聘任");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("工作单位:", "绵阳市XXXXX局");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("单位属性:", "机关");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("入党时间:", partyInfo.getWorkTime());
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("转正时间:", "2010-01-03 00:00:00");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("增加时间:", "2016-01-15 00:00:00");
+        mAdapters.add(infoAdapter);
+        infoAdapter = mPresenter.initInfo1("党员增加:", "自本市(县、区、街道)内的其他乡(镇、街道)转入");
+        mAdapters.add(infoAdapter);
+
+        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);
+    }
+
     private void initRefreshLayout() {
         mRefreshLayout.setEnableRefresh(false);
         /*mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -245,4 +375,17 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
         });*/
     }
 
+    @Override
+    public void loadData(UserDetailEntity userDetailEntity, int flag) {
+//        initRecyclerView1(userDetailEntity);
+//        initRecyclerView2(userDetailEntity);
+        switch (flag) {
+            case 0:
+                initRecyclerView1(userDetailEntity);
+                break;
+            case 1:
+                initRecyclerView2(userDetailEntity);
+                break;
+        }
+    }
 }

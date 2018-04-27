@@ -17,5 +17,7 @@ public interface SharepreferenceKey {
     String KEY_LOGIN_USER = "login_user";
     // IsLogin
     String KEY_IS_LOGIN = "is_login";   // 1 登录，0 注销
+    // LoginUserDetail
+    String KEY_LOGIN_USER_DETAIL = "login_user_detail";
 
 }
