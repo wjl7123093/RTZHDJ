@@ -1,5 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.cache;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 
 import java.util.concurrent.TimeUnit;
@@ -21,6 +22,6 @@ import io.rx_cache2.Reply;
 public interface ConnectionTransferCache {
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<String>> getOrganizationalChange(Observable<String> data, EvictProvider evictProvider);
+    Observable<Reply<BaseJson>> getOrganizationalChange(Observable<BaseJson> data, EvictProvider evictProvider);
 
 }

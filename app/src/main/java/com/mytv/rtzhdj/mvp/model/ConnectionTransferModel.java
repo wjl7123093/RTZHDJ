@@ -10,12 +10,17 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.ConnectionTransferCache;
 import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
 import com.mytv.rtzhdj.app.data.api.service.ConnectionTransferService;
 import com.mytv.rtzhdj.app.data.api.service.HomeService;
+import com.mytv.rtzhdj.app.data.api.service.RegisterService;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.mvp.contract.ConnectionTransferContract;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -44,18 +49,14 @@ public class ConnectionTransferModel extends BaseModel implements ConnectionTran
     }
 
     @Override
-    public Observable<String> getOrganizationalChange(int publishmentsystemId, String reason, int userId, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(ConnectionTransferService.class)
-                .getOrganizationalChange(publishmentsystemId, reason, userId))
-                .flatMap(new Function<Observable<String>, ObservableSource<String>>() {
-                    @Override
-                    public ObservableSource<String> apply(@NonNull Observable<String> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(ConnectionTransferCache.class)
-                                .getOrganizationalChange(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson> getOrganizationalChange(int publishmentsystemId, String reason, int userId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(ConnectionTransferService.class)
+                .getOrganizationalChange(publishmentsystemId, reason, userId);
+    }
+
+    @Override
+    public Observable<BaseJson<List<StationEntity>>> postAllPublishmentSystem(boolean update) {
+        return mRepositoryManager.obtainRetrofitService(ConnectionTransferService.class)
+                .postAllPublishmentSystem();
     }
 }
