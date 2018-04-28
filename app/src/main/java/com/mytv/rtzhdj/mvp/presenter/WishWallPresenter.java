@@ -83,7 +83,7 @@ public class WishWallPresenter extends BasePresenter<WishWallContract.Model, Wis
 
         //设置item间距
         recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
-                LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 10)));
+                LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 0)));
 
         return recyclerView;
     }

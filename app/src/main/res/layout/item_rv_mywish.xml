@@ -15,8 +15,8 @@
     android:padding="@dimen/len_10">
 
     <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:src="@mipmap/xyq_03"/>
 
     <!-- 名称 -->
