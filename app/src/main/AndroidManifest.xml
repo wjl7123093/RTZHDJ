@@ -74,8 +74,9 @@
             android:label="@string/title_topic" />
         <activity android:name=".mvp.ui.activity.TopicDetailActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivity" />
-        <activity android:name=".mvp.ui.activity.StudyRecordActivity"
-            android:label="@string/title_study_record"/>
+        <activity
+            android:name=".mvp.ui.activity.StudyRecordActivity"
+            android:label="@string/title_study_record" />
         <activity
             android:name=".mvp.ui.activity.StudyCoursewareActivity"
             android:label="@string/title_study_courseware" />
@@ -86,8 +87,9 @@
             android:label="@string/title_compulsory_course" />
         <activity android:name=".mvp.ui.activity.ElectiveCourseActivity" />
         <activity android:name=".mvp.ui.activity.CourseDetailActivity" />
-        <activity android:name=".mvp.ui.activity.MyTaskActivity"
-            android:label="@string/title_my_task"/>
+        <activity
+            android:name=".mvp.ui.activity.MyTaskActivity"
+            android:label="@string/title_my_task" />
         <activity
             android:name=".mvp.ui.activity.DoubleReportingActivity"
             android:label="@string/title_double_reporting" />
@@ -204,8 +206,11 @@
         <activity
             android:name=".mvp.ui.activity.VoteEntryDetailActivity"
             android:label="@string/title_vote_entry_detail" />
-        <activity android:name=".mvp.ui.activity.VolunteerServiceDetailActivity"
-            android:label="@string/title_volunteer_service_detail"></activity>
+        <activity
+            android:name=".mvp.ui.activity.VolunteerServiceDetailActivity"
+            android:label="@string/title_volunteer_service_detail" />
+        <activity android:name=".mvp.ui.activity.WishDetailActivity"
+            android:label="@string/title_wish_detail"></activity>
     </application>
 
 </manifest>

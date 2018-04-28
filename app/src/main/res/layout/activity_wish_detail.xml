@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_20"
+        android:textColor="@color/primary_text"
+        android:text="XX的心愿"
+        android:layout_margin="@dimen/space_20dp"/>
+
+    <TextView
+        android:id="@+id/tv_datetime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/secondary_text"
+        android:text="许愿时间  2018-04-27"
+        android:layout_marginLeft="@dimen/space_20dp"/>
+
+    <TextView
+        android:id="@+id/tv_mobile_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/secondary_text"
+        android:text="联系电话  15322228888"
+        android:layout_margin="@dimen/space_20dp"
+        android:drawableRight="@mipmap/ic_call"
+        android:drawablePadding="@dimen/space_10dp"/>
+
+    <lib.kingja.switchbutton.SwitchMultiButton
+        android:id="@+id/switchmultibutton"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="4dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="4dp"
+        app:switchTabs="@array/switch_tabs_wish_detail"
+        app:selectedColor="@color/colorAccent"
+        app:selectedTab="0"
+        app:strokeRadius="0dp"
+        app:strokeWidth="0dp"
+        app:textsize="@dimen/font_16"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/secondary_text"
+        android:layout_margin="@dimen/space_20dp"/>
+
+</LinearLayout>

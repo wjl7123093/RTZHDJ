@@ -475,4 +475,10 @@
         <item>设置</item>
     </string-array>
 
+    <!-- 心愿详情 Tab 2018-4-28 -->
+    <string-array name="switch_tabs_wish_detail">
+        <item>TA的心愿</item>
+        <item>谁实现了？</item>
+    </string-array>
+
 </resources>

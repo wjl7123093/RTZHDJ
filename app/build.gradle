@@ -230,4 +230,5 @@ dependencies {
     compile 'com.hyman:flowlayout-lib:1.1.2'
     // RxCache [避免了 泛型擦除问题]
     compile project(':rxcache')
+    compile project(':libk-switchbutton')
 }

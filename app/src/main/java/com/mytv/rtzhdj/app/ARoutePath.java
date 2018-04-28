@@ -165,5 +165,7 @@ public interface ARoutePath {
     String PATH_VOTE_ENTRY_DETAIL = "/rtdzdj/vote_entry_detail";
     // VolunteerServiceDetail 志愿服务详情
     String PATH_VOLUNTEER_SERVICE_DETAIL = "/rtdzdj/volunteer_service_detail";
+    // WishDetail 愿望详情
+    String PATH_WISH_DETAIL = "/rtdzdj/wish_detail";
 
 }

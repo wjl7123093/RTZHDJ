@@ -162,8 +162,8 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                showMessage("" + Integer.toString(position));
-                ARouter.getInstance().build(ARoutePath.PATH_VOTE_DETAIL)
-                        .withString("title", "投票活动名称").navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_WISH_DETAIL)
+                        .withInt("wishId", wishList.get(position).getID()).navigation();
             }
         });
 
