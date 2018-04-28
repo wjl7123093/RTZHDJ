@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -54,6 +55,15 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 @Route(path = ARoutePath.PATH_WISH_WALL)
 public class WishWallActivity extends BaseActivity<WishWallPresenter> implements WishWallContract.View {
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView mTvToolbarTitle;
+    @BindView(R.id.toolbar_back)
+    RelativeLayout mBtnToolbarBack;
+    @BindView(R.id.toolbar_menu)
+    RelativeLayout mBtnToolbarMenu;
+
     @BindView(R.id.tabs)
     TabLayout tabLayout;
     @BindView(R.id.vp_content)
@@ -85,9 +95,10 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mBtnToolbarMenu.setVisibility(View.GONE);
+
         titles = new String[]{"心愿单", "未被认领", "已被认领"};
 //        initTab();
-
     }
 
 
@@ -202,6 +213,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
         else
             mTitle = getResources().getString(R.string.title_my_wish);
 
+        mTvToolbarTitle.setText(mTitle);
 //        initToolBar();
         initTab();
     }
