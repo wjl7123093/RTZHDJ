@@ -19,6 +19,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.di.component.DaggerWishWallComponent;
 import com.mytv.rtzhdj.di.module.WishWallModule;
 import com.mytv.rtzhdj.mvp.contract.WishWallContract;
@@ -26,6 +27,7 @@ import com.mytv.rtzhdj.mvp.presenter.WishWallPresenter;
 
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.fragment.MyReceiveFragment;
+import com.mytv.rtzhdj.mvp.ui.fragment.WishWallFragment;
 
 
 import java.util.ArrayList;
@@ -125,7 +127,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(MyReceiveFragment.newInstance());
+            fragments.add(WishWallFragment.newInstance(i));
         }
 
 
@@ -159,5 +161,10 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
 
         initToolBar();
         initTab();
+    }
+
+    @Override
+    public void loadData(List<MyWishEntity> myWishList) {
+
     }
 }

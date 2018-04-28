@@ -10,13 +10,24 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.JoinService;
+import com.mytv.rtzhdj.app.data.api.service.WishWallService;
+import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.mvp.contract.WishWallContract;
+import com.mytv.rtzhdj.mvp.ui.activity.WishWallActivity;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
 public class WishWallModel extends BaseModel implements WishWallContract.Model {
     private Gson mGson;
     private Application mApplication;
+
+    private WishWallActivity mActivity;
 
     @Inject
     public WishWallModel(IRepositoryManager repositoryManager, Gson gson, Application application) {
@@ -32,4 +43,9 @@ public class WishWallModel extends BaseModel implements WishWallContract.Model {
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<List<MyWishEntity>>> postMyWishList(int userId, int type, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(WishWallService.class)
+                .postMyWishList(userId, type);
+    }
 }

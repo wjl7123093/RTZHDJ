@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_rv_xyq.xml recyclerview 我的心愿列表项
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-4-27
+ * @update
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/len_10">
+
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@mipmap/xyq_03"/>
+
+    <!-- 名称 -->
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:text="我的心愿"
+        android:gravity="left|top"
+        android:paddingTop="40dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="40dp"/>
+    <!-- 时间 -->
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="100dp"
+        android:layout_height="24dp"
+        android:background="@color/orange_500"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/white"
+        android:text="审核中"
+        android:gravity="center"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="20dp"/>
+
+</FrameLayout>
