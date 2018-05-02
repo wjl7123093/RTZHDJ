@@ -158,7 +158,8 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
 //                showMessage("" + Integer.toString(position));
 
                 ARouter.getInstance().build(ARoutePath.PATH_PARTY_MEMBER_DETAIL)
-                        .withString("id", "").navigation();
+                        .withInt("id", memberList.get(position).getId())
+                        .withString("name", memberList.get(position).getUserName()).navigation();
             }
         });
 

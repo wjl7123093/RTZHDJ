@@ -43,7 +43,8 @@ public class PartyMemberAdapter extends BaseQuickAdapter<PartyMemberEntity, Base
 
         helper.getView(R.id.tv_msg).setOnClickListener(view -> {
             ARouter.getInstance().build(ARoutePath.PATH_SEND_MSG)
-                    .withString("id", "").withString("name", "").navigation();
+                    .withInt("id", item.getId())
+                    .withString("name", item.getUserName()).navigation();
         });
     }
 

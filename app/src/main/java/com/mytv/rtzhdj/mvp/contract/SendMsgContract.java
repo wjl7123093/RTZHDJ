@@ -3,8 +3,11 @@ package com.mytv.rtzhdj.mvp.contract;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.SendMsgActivity;
 
+import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 
 
@@ -17,14 +20,18 @@ public interface SendMsgContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
+        // 发送私信
+        Observable<BaseJson> postSendMessage(int userId, int receiveId, String topic, String msg);
+
     }
 
     //Presenter控制器
     interface Presenter extends IPresenter {
         void setActivity(SendMsgActivity activity);
         // 调用 发送私信接口
-        void callMethodOfSendMsg(@NonNull String name,
-                                 @NonNull String theme,
-                                 @NonNull String msg);
+        void callMethodOfPostSendMessage(@NonNull int userId,
+                                        @NonNull int receiveId,
+                                        @NonNull String topic,
+                                        @NonNull String msg);
     }
 }

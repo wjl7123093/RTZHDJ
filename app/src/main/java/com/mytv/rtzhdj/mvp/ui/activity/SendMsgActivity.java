@@ -62,7 +62,7 @@ public class SendMsgActivity extends BaseActivity<SendMsgPresenter> implements S
     Button mBtnOK;
 
     @Autowired
-    String id;
+    int id;
     @Autowired
     String name;
 
@@ -88,10 +88,8 @@ public class SendMsgActivity extends BaseActivity<SendMsgPresenter> implements S
         mBtnToolbarMenu.setVisibility(View.GONE);
 
         mTvName.setText(name);
-        mBtnOK.setOnClickListener(view -> mPresenter.callMethodOfSendMsg(
-                mTvName.getText().toString(),
-                mEdtTheme.getText().toString().trim(),
-                mEdtMsg.getText().toString().trim()));
+        mBtnOK.setOnClickListener(view -> mPresenter.callMethodOfPostSendMessage(
+                8, id, mEdtTheme.getText().toString().trim(), mEdtMsg.getText().toString().trim()));
     }
 
 

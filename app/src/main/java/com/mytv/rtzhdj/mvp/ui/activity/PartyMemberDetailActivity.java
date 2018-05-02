@@ -77,7 +77,9 @@ public class PartyMemberDetailActivity extends BaseActivity<PartyMemberDetailPre
     TextView mTvEmail;
 
     @Autowired
-    String id;
+    int id;
+    @Autowired
+    String name;
 
 
     @Override
@@ -104,12 +106,13 @@ public class PartyMemberDetailActivity extends BaseActivity<PartyMemberDetailPre
         mTvMenu.setText("私信TA");
         mTvMenu.setOnClickListener(view -> {
             ARouter.getInstance().build(ARoutePath.PATH_SEND_MSG)
-                    .withString("id", "").withString("name", "").navigation();
+                    .withInt("id", id)
+                    .withString("name", name).navigation();
         });
 
         initRefreshLayout();
         // 获取党员详情
-        mPresenter.callMethodOfGetPartyMemberDetails(id);
+        mPresenter.callMethodOfGetPartyMemberDetails(id + "");
     }
 
 
