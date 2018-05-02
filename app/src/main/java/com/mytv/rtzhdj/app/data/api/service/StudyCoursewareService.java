@@ -1,7 +1,10 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.StudyCoursewareEntity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -22,7 +25,9 @@ public interface StudyCoursewareService {
      * 获取学习课件数据
      * @return
      */
-    @GET("getCoursewareList")
-    Observable<StudyCoursewareEntity> getCoursewareList(@Query("typeId") String typeId);
+    @GET("getNewCoursewareList")
+    Observable<BaseJson<List<StudyCoursewareEntity>>> getNewCoursewareList(@Query("UserId") int userId,
+                                                                           @Query("PageIndex") int pageIndex,
+                                                                           @Query("PageSize") int pageSize);
 
 }

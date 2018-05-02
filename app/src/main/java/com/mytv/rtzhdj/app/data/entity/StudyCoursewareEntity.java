@@ -7,53 +7,45 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-4-4
- * @update
+ * @update 2018-5-2     修改了结构
  */
 public class StudyCoursewareEntity {
 
-    private int contentId;              // 内容id（拼接在url末尾）
-    private String title;               // 课件标题
-    private int courseType;             // 课件类型
-    private String lastStudyTime;       // 上次学习时间
-    private String courseTypeName;      // 课件类型描述
+    private int ContentId;              // 内容id（拼接在url末尾）
+    private String Title;               // 课件标题
+//    private int courseType;             // 课件类型
+    private String LastStudyTime;       // 上次学习时间
+    private String CourseTypeName;      // 课件类型描述
 
     public int getContentId() {
-        return contentId;
+        return ContentId;
     }
 
     public void setContentId(int contentId) {
-        this.contentId = contentId;
+        ContentId = contentId;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getCourseType() {
-        return courseType;
-    }
-
-    public void setCourseType(int courseType) {
-        this.courseType = courseType;
+        Title = title;
     }
 
     public String getLastStudyTime() {
-        return lastStudyTime;
+        return LastStudyTime;
     }
 
     public void setLastStudyTime(String lastStudyTime) {
-        this.lastStudyTime = lastStudyTime;
+        LastStudyTime = lastStudyTime;
     }
 
     public String getCourseTypeName() {
-        return courseTypeName;
+        return CourseTypeName;
     }
 
     public void setCourseTypeName(String courseTypeName) {
-        this.courseTypeName = courseTypeName;
+        CourseTypeName = courseTypeName;
     }
 }

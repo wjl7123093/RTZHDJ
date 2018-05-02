@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -12,12 +13,14 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -29,13 +32,18 @@ import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.Constant;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
 import com.mytv.rtzhdj.app.data.entity.StudyCoursewareEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.contract.StudyCoursewareContract;
 import com.mytv.rtzhdj.mvp.ui.activity.StudyCoursewareActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,7 +150,7 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
     }
 
     @Override
-    public BaseDelegateAdapter initList(List<CoursewareEntity> data) {
+    public BaseDelegateAdapter initList(List<StudyCoursewareEntity> data) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(mActivity, 10));
         return new BaseDelegateAdapter(mActivity, linearLayoutHelper , R.layout.item_rv_study_courseware,
@@ -152,8 +160,7 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, data.get(position).getTitle());
                 holder.setText(R.id.tv_datetime, data.get(position).getLastStudyTime());
-//                holder.setText(R.id.tv_type, data.get(position).getType() == 1 ? "必修课"
-//                        : data.get(position).getType() == 2 ? "选修课" : "微党课");
+                holder.setText(R.id.tv_type, data.get(position).getCourseTypeName());
 
 //                holder.setBackgroundRes(R.id.tv_type,
 //                        data.get(position).getType() == 1 ? R.drawable.sp_bg_courseware_type_red
@@ -169,8 +176,12 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
     }
 
     @Override
-    public void callMethodOfGetCoursewareList(String typeId, boolean update) {
-        mModel.getCoursewareList(typeId, update)
+    public void callMethodOfGetNewCoursewareList(int userId, int pageIndex, int pageSize, boolean update) {
+        mModel.getNewCoursewareList(userId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<StudyCoursewareEntity>>>transformObservable("getNewCoursewareList" + userId,
+                        new TypeToken<BaseJson<List<StudyCoursewareEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<StudyCoursewareEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -183,11 +194,13 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<StudyCoursewareEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<StudyCoursewareEntity>>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull StudyCoursewareEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<List<StudyCoursewareEntity>> courseList) {
+                        Log.e(TAG, courseList.toString());
 
-
+                        if (courseList.isSuccess())
+                            mRootView.loadData(courseList.getData());
                     }
                 });
     }

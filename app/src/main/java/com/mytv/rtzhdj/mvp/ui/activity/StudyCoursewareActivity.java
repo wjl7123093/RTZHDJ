@@ -17,6 +17,7 @@ import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.DataServer;
+import com.mytv.rtzhdj.app.data.entity.StudyCoursewareEntity;
 import com.mytv.rtzhdj.di.component.DaggerStudyCoursewareComponent;
 import com.mytv.rtzhdj.di.module.StudyCoursewareModule;
 import com.mytv.rtzhdj.mvp.contract.StudyCoursewareContract;
@@ -48,6 +49,8 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 @Route(path = ARoutePath.PATH_STUDY_COURSEWARE)
 public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresenter> implements StudyCoursewareContract.View {
 
+    private final int PAGE_SIZE = 10;
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.toolbar_title)
@@ -64,6 +67,7 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
 
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
+    private DelegateAdapter delegateAdapter = null;
 
 
     @Override
@@ -89,7 +93,7 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
         initRefreshLayout();
 
         // 获取 学习课件数据
-//        mPresenter.callMethodOfGetCoursewareList("typeId", false);
+        mPresenter.callMethodOfGetNewCoursewareList(8, 1, PAGE_SIZE, false);
     }
 
 
@@ -142,8 +146,16 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
 
     }
 
+    @Override
+    public void loadData(List<StudyCoursewareEntity> courseList) {
+        //初始化list
+        BaseDelegateAdapter listAdapter = mPresenter.initList(courseList);
+        mAdapters.add(listAdapter);
+        delegateAdapter.setAdapters(mAdapters);
+    }
+
     private void initRecyclerView() {
-        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
 
         //初始化九宫格
         BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
@@ -152,9 +164,9 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
         //初始化标题 - 必修课
         BaseDelegateAdapter titleAdapter = mPresenter.initTitle("最新课件");
         mAdapters.add(titleAdapter);
-        //初始化list
-        BaseDelegateAdapter listAdapter = mPresenter.initList(DataServer.getCoursewareData(10));
-        mAdapters.add(listAdapter);
+//        //初始化list
+//        BaseDelegateAdapter listAdapter = mPresenter.initList(DataServer.getCoursewareData(10));
+//        mAdapters.add(listAdapter);
 
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);

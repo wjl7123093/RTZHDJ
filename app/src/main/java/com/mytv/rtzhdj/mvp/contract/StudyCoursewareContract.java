@@ -6,6 +6,7 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.StudyCoursewareEntity;
@@ -22,13 +23,14 @@ public interface StudyCoursewareContract {
     interface View extends IView {
         void setOnGridClick(int position, String title);
         void setOnListClick(int position);
+        void loadData(List<StudyCoursewareEntity> courseList);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
         // 获取 学习课件列表数据
-        Observable<StudyCoursewareEntity> getCoursewareList(String typeId, boolean update);
+        Observable<BaseJson<List<StudyCoursewareEntity>>> getNewCoursewareList(int userId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -39,9 +41,9 @@ public interface StudyCoursewareContract {
         DelegateAdapter initRecyclerView(RecyclerView recyclerView);
         BaseDelegateAdapter initGvMenu();
         BaseDelegateAdapter initTitle(String title);
-        BaseDelegateAdapter initList(List<CoursewareEntity> data);
+        BaseDelegateAdapter initList(List<StudyCoursewareEntity> courseList);
 
         // 调用 获取学习课件列表数据
-        void callMethodOfGetCoursewareList(String typeId, boolean update);
+        void callMethodOfGetNewCoursewareList(int userId, int pageIndex, int pageSize, boolean update);
     }
 }
