@@ -3,29 +3,60 @@ package com.mytv.rtzhdj.mvp.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.di.component.DaggerMyReceiveWishComponent;
 import com.mytv.rtzhdj.di.module.MyReceiveWishModule;
 import com.mytv.rtzhdj.mvp.contract.MyReceiveWishContract;
 import com.mytv.rtzhdj.mvp.presenter.MyReceiveWishPresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.activity.MyReceiveWishActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.WishWallActivity;
+import com.mytv.rtzhdj.mvp.ui.adapter.MyWishAdapter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.List;
+
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 
 public class MyReceiveWishFragment extends BaseFragment<MyReceiveWishPresenter> implements MyReceiveWishContract.View {
 
+    @BindView(R.id.refreshLayout)
+    RefreshLayout mRefreshLayout;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+
+    private MyWishAdapter wishAdapter;
+    private static final int PAGE_SIZE = 10;
+
 
     public static MyReceiveWishFragment newInstance() {
         MyReceiveWishFragment fragment = new MyReceiveWishFragment();
+        return fragment;
+    }
+
+    public static MyReceiveWishFragment newInstance(int type) {
+        MyReceiveWishFragment fragment = new MyReceiveWishFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", type);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -46,6 +77,12 @@ public class MyReceiveWishFragment extends BaseFragment<MyReceiveWishPresenter> 
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mPresenter.setActivity((MyReceiveWishActivity) getActivity());
+        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
+        initRefreshLayout();
+
+        // 获取心愿数据
+        mPresenter.callMethodOfPostMyClaimWishList(8, getArguments().getInt("type"), false);
 
     }
 
@@ -91,6 +128,46 @@ public class MyReceiveWishFragment extends BaseFragment<MyReceiveWishPresenter> 
 
     @Override
     public void killMyself() {
+
+    }
+
+    @Override
+    public void loadData(List<MyWishEntity> myWishList) {
+        if (myWishList.size() == 0)
+            showMessage("暂无数据");
+
+        initAdapter(myWishList);
+    }
+
+    private void initRefreshLayout() {
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+//        mRefreshLayout.setEnableLoadmore(false);
+        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
+    }
+
+    private void initAdapter(List<MyWishEntity> wishList) {
+        wishAdapter = new MyWishAdapter(getActivity(), wishList);
+        wishAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(wishAdapter);
+
+        wishAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                showMessage("" + Integer.toString(position));
+                ARouter.getInstance().build(ARoutePath.PATH_WISH_DETAIL)
+                        .withInt("wishId", wishList.get(position).getID()).navigation();
+            }
+        });
 
     }
 
