@@ -10,7 +10,11 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.UpdatePwdService;
 import com.mytv.rtzhdj.mvp.contract.UpdatePwdContract;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +36,9 @@ public class UpdatePwdModel extends BaseModel implements UpdatePwdContract.Model
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson> postUpdatePassword(int userId, String oldPwd, String newPwd) {
+        return mRepositoryManager.obtainRetrofitService(UpdatePwdService.class)
+                .postUpdatePassword(userId, oldPwd, newPwd);
+    }
 }

@@ -22,6 +22,9 @@ import com.mytv.rtzhdj.mvp.presenter.UpdatePwdPresenter;
 import com.mytv.rtzhdj.R;
 
 
+import net.qiujuer.genius.ui.widget.Button;
+import net.qiujuer.genius.ui.widget.EditText;
+
 import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
@@ -47,6 +50,19 @@ public class UpdatePwdActivity extends BaseActivity<UpdatePwdPresenter> implemen
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
 
+    @BindView(R.id.edt_old_pwd)
+    EditText mEdtOldPwd;
+    @BindView(R.id.edt_new_pwd)
+    EditText mEdtNewPwd;
+    @BindView(R.id.edt_new_pwd2)
+    EditText mEdtNewPwd2;
+    @BindView(R.id.edt_code)
+    EditText mEdtVertifyCode;
+    @BindView(R.id.btn_get_code)
+    Button mBtnGetCode;
+    @BindView(R.id.btn_ok)
+    Button mBtnOk;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -67,6 +83,10 @@ public class UpdatePwdActivity extends BaseActivity<UpdatePwdPresenter> implemen
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
 
+        mPresenter.setActivity(UpdatePwdActivity.this);
+        mBtnOk.setOnClickListener(view ->
+            mPresenter.callMethodOfPostUpdatePassword(8, mEdtOldPwd.getText().toString().trim(),
+                    mEdtNewPwd.getText().toString().trim(), mEdtNewPwd2.getText().toString().trim()));
     }
 
 
