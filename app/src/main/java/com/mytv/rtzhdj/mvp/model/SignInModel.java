@@ -10,7 +10,11 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.SigninService;
 import com.mytv.rtzhdj.mvp.contract.SignInContract;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +36,9 @@ public class SignInModel extends BaseModel implements SignInContract.Model {
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson> postSignForScore(int userId) {
+        return mRepositoryManager.obtainRetrofitService(SigninService.class)
+                .postSignForScore(userId);
+    }
 }

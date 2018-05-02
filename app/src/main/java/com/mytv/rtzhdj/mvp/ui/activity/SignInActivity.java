@@ -47,6 +47,29 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
 
+    @BindView(R.id.tv_sign_big)
+    TextView mTvSignBig;
+    @BindView(R.id.tv_sign_status)
+    TextView mTvSignStatus;
+    @BindView(R.id.tv_scores_info)
+    TextView mTvScoresInfo;
+    @BindView(R.id.tv_sign_1)
+    TextView mTvSign1;
+    @BindView(R.id.tv_sign_2)
+    TextView mTvSign2;
+    @BindView(R.id.tv_sign_3)
+    TextView mTvSign3;
+    @BindView(R.id.tv_sign_4)
+    TextView mTvSign4;
+    @BindView(R.id.tv_sign_5)
+    TextView mTvSign5;
+    @BindView(R.id.tv_sign_6)
+    TextView mTvSign6;
+    @BindView(R.id.tv_sign_7)
+    TextView mTvSign7;
+    @BindView(R.id.tv_sign_days)
+    TextView mTvSignDays;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -66,6 +89,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @Override
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
+
+        mTvSignBig.setOnClickListener(view -> mPresenter.callMethodOfPostSignForScore(8));
 
     }
 
@@ -98,4 +123,10 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     }
 
 
+    @Override
+    public void changeStatus() {
+        mTvSignStatus.setText("今日已签到");
+        mTvScoresInfo.setText("你还差1天签到获" + 2 + "积分");
+        mTvSignDays.setText("连续签到" + 1 + "天");
+    }
 }
