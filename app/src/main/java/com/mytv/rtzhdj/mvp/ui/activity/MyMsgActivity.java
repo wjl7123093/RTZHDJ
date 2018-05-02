@@ -19,6 +19,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.MyMsgEntity;
 import com.mytv.rtzhdj.di.component.DaggerMyMsgComponent;
 import com.mytv.rtzhdj.di.module.MyMsgModule;
 import com.mytv.rtzhdj.mvp.contract.MyMsgContract;
@@ -26,6 +27,7 @@ import com.mytv.rtzhdj.mvp.presenter.MyMsgPresenter;
 
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
+import com.mytv.rtzhdj.mvp.ui.fragment.MyMsgFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.SettingsFragment;
 
 
@@ -124,7 +126,7 @@ public class MyMsgActivity extends BaseActivity<MyMsgPresenter> implements MyMsg
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(ContentFragment.newInstance(i));
+            fragments.add(MyMsgFragment.newInstance(i+1));  // 1 收到，2 发出
         }
 
 
@@ -148,4 +150,8 @@ public class MyMsgActivity extends BaseActivity<MyMsgPresenter> implements MyMsg
 //        tabLayout.setTabTextColors(Color.BLACK, Color.RED);
     }
 
+    @Override
+    public void loadData(List<MyMsgEntity> msgList) {
+
+    }
 }

@@ -10,7 +10,14 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.MyMsgService;
+import com.mytv.rtzhdj.app.data.entity.MyMsgEntity;
 import com.mytv.rtzhdj.mvp.contract.MyMsgContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +39,9 @@ public class MyMsgModel extends BaseModel implements MyMsgContract.Model {
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<List<MyMsgEntity>>> postMyMessage(int userId, int messageType) {
+        return mRepositoryManager.obtainRetrofitService(MyMsgService.class)
+                .postMyMessage(userId, messageType);
+    }
 }
