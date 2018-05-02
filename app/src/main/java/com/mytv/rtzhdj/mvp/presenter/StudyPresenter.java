@@ -209,7 +209,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
         mModel.getMyStudy(userId, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<MyStudyEntity>>transformObservable("getMyStudy" + userId,
                         new TypeToken<BaseJson<MyStudyEntity>>() { }.getType(),
-                        CacheStrategy.firstRemote()))
+                        CacheStrategy.firstCache()))
                 .map(new CacheResult.MapFunc<BaseJson<MyStudyEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
