@@ -1,1 +1,1 @@
-include ':app', ':CalendarDemo', ':calendar', ':common', ':rxcache'
+include ':app', ':CalendarDemo', ':calendar', ':common', ':rxcache', ':libk-switchbutton'
