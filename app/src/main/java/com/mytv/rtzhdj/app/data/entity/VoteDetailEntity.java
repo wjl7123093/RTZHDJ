@@ -7,62 +7,54 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-4-4
- * @update
+ * @update 2018-5-2 修改结构
  */
 public class VoteDetailEntity {
 
-    private int id;
-    private String title;       // 标题
-    private int rank;           // 排名
-    private String author;      // 作者
-    private int voteCount;      // 投票数
-    private String imageUrl;    // 作品图片地址
+    private int Id;
+    private String Title;       // 标题
+    private int Ranking;        // 排名
+//    private String author;      // 作者
+    private int VoteNum;        // 投票数
+    private String ImgUrl;      // 作品图片地址
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        Id = id;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        Title = title;
     }
 
-    public int getRank() {
-        return rank;
+    public int getRanking() {
+        return Ranking;
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
+    public void setRanking(int ranking) {
+        Ranking = ranking;
     }
 
-    public String getAuthor() {
-        return author;
+    public int getVoteNum() {
+        return VoteNum;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setVoteNum(int voteNum) {
+        VoteNum = voteNum;
     }
 
-    public int getVoteCount() {
-        return voteCount;
+    public String getImgUrl() {
+        return ImgUrl;
     }
 
-    public void setVoteCount(int voteCount) {
-        this.voteCount = voteCount;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImgUrl(String imgUrl) {
+        ImgUrl = imgUrl;
     }
 }
