@@ -7,80 +7,56 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-3-26
- * @update
+ * @update 2018-5-3     更新结构
  */
 public class VoteEntrylEntity {
 
-    private int id;
-    private String name;        // 作品名称
-    private String author;      // 作者
-    private String datetime;    // 时间
-    private String img_url;     // 作品图片地址
-    private String content;     // 作品描述
-    private int rank;           // 排名
-    private int votes;          // 得票数
+    private int Id;
+    private String Title;        // 作品名称
+//    private String author;      // 作者
+//    private String datetime;    // 时间
+    private String ImgUrl;     // 作品图片地址
+//    private String content;     // 作品描述
+    private int Ranking;           // 排名
+    private int VoteNum;          // 得票数
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        Id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return Title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        Title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getImgUrl() {
+        return ImgUrl;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setImgUrl(String imgUrl) {
+        ImgUrl = imgUrl;
     }
 
-    public String getDatetime() {
-        return datetime;
+    public int getRanking() {
+        return Ranking;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public void setRanking(int ranking) {
+        Ranking = ranking;
     }
 
-    public String getImg_url() {
-        return img_url;
+    public int getVoteNum() {
+        return VoteNum;
     }
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getRank() {
-        return rank;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
+    public void setVoteNum(int voteNum) {
+        VoteNum = voteNum;
     }
 }

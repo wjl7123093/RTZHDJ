@@ -29,9 +29,9 @@ public class VoteResultAdapter extends BaseQuickAdapter<VoteEntrylEntity, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, VoteEntrylEntity item) {
-        helper.setText(R.id.tv_name, item.getName() + "作者: " + item.getAuthor());
-        helper.setText(R.id.tv_rank, "第" + item.getRank() + "名");
-        helper.setText(R.id.tv_votes, item.getVotes() + "");
+        helper.setText(R.id.tv_name, item.getTitle());
+        helper.setText(R.id.tv_rank, "第" + item.getRanking() + "名");
+        helper.setText(R.id.tv_votes, item.getVoteNum() + "");
 
     }
 

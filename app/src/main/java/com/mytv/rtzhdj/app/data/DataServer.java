@@ -217,13 +217,12 @@ public class DataServer {
         for (int i = 0; i < lenth; i++) {
             VoteEntrylEntity voteEntrylEntity = new VoteEntrylEntity();
             voteEntrylEntity.setId(i + 1);
-            voteEntrylEntity.setName("《无题》");
-            voteEntrylEntity.setAuthor("佚名");
-            voteEntrylEntity.setImg_url("http://p.3761.com/pic/89371406508468.jpg");
-            voteEntrylEntity.setContent("作品描述作品描述作品描述作品描述作品描述作品描述");
-            voteEntrylEntity.setDatetime("2017-12-11 09:43");
-            voteEntrylEntity.setVotes(40 - i);
-            voteEntrylEntity.setRank(i + 1);
+            voteEntrylEntity.setTitle("《无题》 作者: 佚名");
+            voteEntrylEntity.setImgUrl("http://p.3761.com/pic/89371406508468.jpg");
+//            voteEntrylEntity.setContent("作品描述作品描述作品描述作品描述作品描述作品描述");
+//            voteEntrylEntity.setDatetime("2017-12-11 09:43");
+            voteEntrylEntity.setVoteNum(40 - i);
+            voteEntrylEntity.setRanking(i + 1);
             list.add(voteEntrylEntity);
         }
         return list;

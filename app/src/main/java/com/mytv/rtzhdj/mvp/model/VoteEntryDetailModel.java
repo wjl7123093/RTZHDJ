@@ -10,7 +10,12 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.VoteEntryDetailService;
+import com.mytv.rtzhdj.app.data.entity.VoteEntrylEntity;
 import com.mytv.rtzhdj.mvp.contract.VoteEntryDetailContract;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +37,9 @@ public class VoteEntryDetailModel extends BaseModel implements VoteEntryDetailCo
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<VoteEntrylEntity>> postOnlineVoteDetails(int id, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(VoteEntryDetailService.class)
+                .postOnlineVoteDetails(id);
+    }
 }

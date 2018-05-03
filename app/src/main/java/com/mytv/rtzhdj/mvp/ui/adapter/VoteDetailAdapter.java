@@ -30,10 +30,10 @@ public class VoteDetailAdapter extends BaseQuickAdapter<VoteEntrylEntity, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, VoteEntrylEntity item) {
-        helper.setText(R.id.tv_name, item.getName() + "作者: " + item.getAuthor());
-        helper.setText(R.id.tv_rank, "第" + item.getRank() + "名  票数: " + item.getVotes());
+        helper.setText(R.id.tv_name, item.getTitle());
+        helper.setText(R.id.tv_rank, "第" + item.getRanking() + "名  票数: " + item.getVoteNum());
 
-        ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image), item.getImg_url());
+        ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image), item.getImgUrl());
     }
 
 

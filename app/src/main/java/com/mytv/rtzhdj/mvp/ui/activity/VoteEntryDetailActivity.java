@@ -9,12 +9,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.api.Api;
+import com.mytv.rtzhdj.app.data.entity.VoteEntrylEntity;
+import com.mytv.rtzhdj.app.utils.ImageLoader;
 import com.mytv.rtzhdj.di.component.DaggerVoteEntryDetailComponent;
 import com.mytv.rtzhdj.di.module.VoteEntryDetailModule;
 import com.mytv.rtzhdj.mvp.contract.VoteEntryDetailContract;
@@ -59,6 +64,9 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
     @BindView(R.id.tv_votes)
     TextView mTvVotes;
 
+    @Autowired
+    int id;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -72,6 +80,7 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_vote_entry_detail; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -79,6 +88,8 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
 
+        // 获取 投票作品详情
+        mPresenter.callMethodOfPostOnlineVoteDetails(37, false);
     }
 
 
@@ -110,4 +121,14 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
     }
 
 
+    @Override
+    public void loadData(VoteEntrylEntity voteEntrylEntity) {
+        mTvTitle.setText(voteEntrylEntity.getTitle());
+        mTvRank.setText(voteEntrylEntity.getRanking() + "");
+        mTvVotes.setText(voteEntrylEntity.getVoteNum() + "");
+        ImageLoader.getInstance().showImage(VoteEntryDetailActivity.this, mIvImage1,
+                Api.APP_IMAGE_DOMAIN + voteEntrylEntity.getImgUrl().replace("@", ""));
+        ImageLoader.getInstance().showImage(VoteEntryDetailActivity.this, mIvImage2,
+                Api.APP_IMAGE_DOMAIN + voteEntrylEntity.getImgUrl().replace("@", ""));
+    }
 }
