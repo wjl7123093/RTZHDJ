@@ -37,10 +37,10 @@ public class MyDonationAdapter extends BaseQuickAdapter<MyDonateEntity, BaseView
         helper.setText(R.id.tv_topic, item.getTopic());
         helper.setText(R.id.tv_phone, item.getPhone());
 
-        if (!TextUtils.isEmpty(item.getImgurl())) {
-            ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
-                    Api.APP_IMAGE_DOMAIN + item.getImgurl().replace("@", ""));
-        }
+//        if (!TextUtils.isEmpty(item.getImgurl())) {
+//            ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
+//                    Api.APP_IMAGE_DOMAIN + item.getImgurl().replace("@", ""));
+//        }
     }
 
 

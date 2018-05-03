@@ -19,6 +19,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.MyDonateEntity;
 import com.mytv.rtzhdj.di.component.DaggerMyReceiveComponent;
 import com.mytv.rtzhdj.di.module.MyReceiveModule;
 import com.mytv.rtzhdj.mvp.contract.MyReceiveContract;
@@ -126,7 +127,7 @@ public class MyReceiveActivity extends BaseActivity<MyReceivePresenter> implemen
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(MyReceiveFragment.newInstance());
+            fragments.add(MyReceiveFragment.newInstance(i));
         }
 
 
@@ -150,4 +151,8 @@ public class MyReceiveActivity extends BaseActivity<MyReceivePresenter> implemen
     }
 
 
+    @Override
+    public void loadData(List<MyDonateEntity> donationList) {
+
+    }
 }

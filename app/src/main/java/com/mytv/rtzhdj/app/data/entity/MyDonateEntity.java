@@ -16,6 +16,7 @@ public class MyDonateEntity {
     private String Phone;
     private String Topic;
     private String Imgurl;
+    private String ImageUrl;
 
     public int getID() {
         return ID;
@@ -55,5 +56,13 @@ public class MyDonateEntity {
 
     public void setImgurl(String imgurl) {
         Imgurl = imgurl;
+    }
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
     }
 }
