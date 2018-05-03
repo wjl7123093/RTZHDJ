@@ -9,13 +9,16 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.VoteDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerVoteResultComponent;
 import com.mytv.rtzhdj.di.module.VoteResultModule;
 import com.mytv.rtzhdj.mvp.contract.VoteResultContract;
@@ -28,6 +31,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -62,6 +67,9 @@ public class VoteResultActivity extends BaseActivity<VoteResultPresenter> implem
     private VoteResultAdapter mAdapter;
     private static final int PAGE_SIZE = 10;
 
+    @Autowired
+    int id;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -75,6 +83,7 @@ public class VoteResultActivity extends BaseActivity<VoteResultPresenter> implem
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_vote_result; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -84,8 +93,12 @@ public class VoteResultActivity extends BaseActivity<VoteResultPresenter> implem
 
         mPresenter.setActivity(VoteResultActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
+
+        // 获取 投票结果数据
+        mPresenter.callMethodOfPostOnlineVoteResult(id, false);
+
     }
 
 
@@ -133,8 +146,8 @@ public class VoteResultActivity extends BaseActivity<VoteResultPresenter> implem
         });*/
     }
 
-    private void initAdapter() {
-        mAdapter = new VoteResultAdapter(VoteResultActivity.this, PAGE_SIZE);
+    private void initAdapter(List<VoteDetailEntity> voteResultList) {
+        mAdapter = new VoteResultAdapter(VoteResultActivity.this, voteResultList);
         mAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -148,4 +161,8 @@ public class VoteResultActivity extends BaseActivity<VoteResultPresenter> implem
     }
 
 
+    @Override
+    public void loadData(List<VoteDetailEntity> voteResultList) {
+        initAdapter(voteResultList);
+    }
 }

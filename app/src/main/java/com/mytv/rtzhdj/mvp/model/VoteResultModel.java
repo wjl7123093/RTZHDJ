@@ -10,7 +10,14 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.VoteResultService;
+import com.mytv.rtzhdj.app.data.entity.VoteDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.VoteResultContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +39,9 @@ public class VoteResultModel extends BaseModel implements VoteResultContract.Mod
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<List<VoteDetailEntity>>> postOnlineVoteResult(int id, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(VoteResultService.class)
+                .postOnlineVoteResult(id);
+    }
 }

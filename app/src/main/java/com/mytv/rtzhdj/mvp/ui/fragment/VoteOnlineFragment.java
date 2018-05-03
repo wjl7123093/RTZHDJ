@@ -158,6 +158,7 @@ public class VoteOnlineFragment extends BaseFragment<VoteOnlinePresenter> implem
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                showMessage("" + Integer.toString(position));
                 ARouter.getInstance().build(ARoutePath.PATH_VOTE_DETAIL)
+                        .withInt("id", voteList.get(position).getId())
                         .withString("title", "投票活动名称").navigation();
             }
         });

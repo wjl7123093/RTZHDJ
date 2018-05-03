@@ -69,6 +69,8 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
     Button mBtnVoteResult;
 
     @Autowired
+    int id;
+    @Autowired
     String title;
 
     private VoteDetailAdapter mAdapter;
@@ -104,7 +106,8 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
             ARouter.getInstance().build(ARoutePath.PATH_VOTE_BRIEF).navigation();
         });
         mBtnVoteResult.setOnClickListener(view -> {
-            ARouter.getInstance().build(ARoutePath.PATH_VOTE_RESULT).navigation();
+            ARouter.getInstance().build(ARoutePath.PATH_VOTE_RESULT)
+                    .withInt("id", id).navigation();
         });
 
         // 获取 我要投票列表数据
