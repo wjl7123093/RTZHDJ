@@ -19,12 +19,14 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.MyDonateEntity;
 import com.mytv.rtzhdj.di.component.DaggerMyDonationComponent;
 import com.mytv.rtzhdj.di.module.MyDonationModule;
 import com.mytv.rtzhdj.mvp.contract.MyDonationContract;
 import com.mytv.rtzhdj.mvp.presenter.MyDonationPresenter;
 
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.fragment.MyDonationFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.MyReceiveFragment;
 
 import java.util.ArrayList;
@@ -128,7 +130,7 @@ public class MyDonationActivity extends BaseActivity<MyDonationPresenter> implem
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(MyReceiveFragment.newInstance());
+            fragments.add(MyDonationFragment.newInstance(i));
         }
 
 
@@ -159,5 +161,10 @@ public class MyDonationActivity extends BaseActivity<MyDonationPresenter> implem
         } else {
             mTvToolbarTitle.setText(getResources().getString(R.string.title_my_donation));
         }
+    }
+
+    @Override
+    public void loadData(List<MyDonateEntity> donationList) {
+
     }
 }

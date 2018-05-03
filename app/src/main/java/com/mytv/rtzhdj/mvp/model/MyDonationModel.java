@@ -10,7 +10,14 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.MyDonationService;
+import com.mytv.rtzhdj.app.data.entity.MyDonateEntity;
 import com.mytv.rtzhdj.mvp.contract.MyDonationContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +39,9 @@ public class MyDonationModel extends BaseModel implements MyDonationContract.Mod
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<List<MyDonateEntity>>> postMyClaimDonateList(int userId, int type, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(MyDonationService.class)
+                .postMyClaimDonateList(userId, type);
+    }
 }
