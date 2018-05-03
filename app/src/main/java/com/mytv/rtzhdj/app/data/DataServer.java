@@ -154,12 +154,12 @@ public class DataServer {
         List<CommentEntity> list = new ArrayList<>();
         for (int i = 0; i < lenth; i++) {
             CommentEntity commentEntity = new CommentEntity();
-            commentEntity.setId(i + 1);
-            commentEntity.setName("はたけ·カカシ 影の分身" + i);
-            commentEntity.setImg_url("http://p.3761.com/pic/89371406508468.jpg");
-            commentEntity.setDatetime("2017-12-23 23:34:22");
-            commentEntity.setContent("坚决拥护中国共产党！");
-            commentEntity.setStar_num(i);
+            commentEntity.setCommentId(i + 1);
+            commentEntity.setUserName("はたけ·カカシ 影の分身" + i);
+            commentEntity.setAvatarUrl("http://p.3761.com/pic/89371406508468.jpg");
+            commentEntity.setCommentTime("2017-12-23 23:34:22");
+            commentEntity.setCommentInfo("坚决拥护中国共产党！");
+            commentEntity.setLikeNum(i);
             list.add(commentEntity);
         }
         return list;

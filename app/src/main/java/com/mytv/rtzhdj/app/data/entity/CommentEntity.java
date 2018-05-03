@@ -7,62 +7,62 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-2-27
- * @update
+ * @update 2018-5-3     更新结构
  */
 public class CommentEntity {
 
-    private int id;
-    private String name;
-    private String datetime;
-    private String img_url;
-    private String content;
-    private int star_num;
+    private int CommentId;
+    private String UserName;
+    private String CommentTime;
+    private String AvatarUrl;
+    private String commentInfo;
+    private int likeNum;
 
-    public int getId() {
-        return id;
+    public int getCommentId() {
+        return CommentId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCommentId(int commentId) {
+        CommentId = commentId;
     }
 
-    public String getDatetime() {
-        return datetime;
+    public String getUserName() {
+        return UserName;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 
-    public String getImg_url() {
-        return img_url;
+    public String getCommentTime() {
+        return CommentTime;
     }
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+    public void setCommentTime(String commentTime) {
+        CommentTime = commentTime;
     }
 
-    public int getStar_num() {
-        return star_num;
+    public String getAvatarUrl() {
+        return AvatarUrl;
     }
 
-    public void setStar_num(int star_num) {
-        this.star_num = star_num;
+    public void setAvatarUrl(String avatarUrl) {
+        AvatarUrl = avatarUrl;
     }
 
-    public String getName() {
-        return name;
+    public String getCommentInfo() {
+        return commentInfo;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCommentInfo(String commentInfo) {
+        this.commentInfo = commentInfo;
     }
 
-    public String getContent() {
-        return content;
+    public int getLikeNum() {
+        return likeNum;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setLikeNum(int likeNum) {
+        this.likeNum = likeNum;
     }
 }

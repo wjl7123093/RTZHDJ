@@ -10,7 +10,14 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.CommentService;
+import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.mvp.contract.CommentContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +39,9 @@ public class CommentModel extends BaseModel implements CommentContract.Model {
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<List<CommentEntity>>> getCommentList(int nodeId, int contentId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(CommentService.class)
+                .getCommentList(nodeId, contentId);
+    }
 }

@@ -120,6 +120,9 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
 
         mTvComment.setOnClickListener(view -> showDialog());
         mTvStarNum.setOnClickListener(view -> mPresenter.callMethodOfPostDoDig(nodeId, articleId, false));
+        mTvCommentNum.setOnClickListener(view ->
+            ARouter.getInstance().build(ARoutePath.PATH_COMMENT)
+                    .withInt("nodeId", nodeId).withInt("contentId", articleId).navigation());
     }
 
 

@@ -9,13 +9,16 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.di.component.DaggerCommentComponent;
 import com.mytv.rtzhdj.di.module.CommentModule;
 import com.mytv.rtzhdj.mvp.contract.CommentContract;
@@ -27,6 +30,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -61,6 +66,11 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
     private CommentAdapter mAdapter;
     private static final int PAGE_SIZE = 10;
 
+    @Autowired
+    int nodeId;
+    @Autowired
+    int contentId;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -74,6 +84,7 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_comment; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -83,8 +94,11 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
 
         mPresenter.setActivity(CommentActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
+
+        // 获取 评论列表
+        mPresenter.callMethodOfGetCommentList(2425, 1, false);
     }
 
 
@@ -132,8 +146,8 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
         });
     }
 
-    private void initAdapter() {
-        mAdapter = new CommentAdapter(CommentActivity.this, PAGE_SIZE);
+    private void initAdapter(List<CommentEntity> commentList) {
+        mAdapter = new CommentAdapter(CommentActivity.this, commentList);
         mAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -146,4 +160,8 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
 
     }
 
+    @Override
+    public void loadData(List<CommentEntity> commentList) {
+        initAdapter(commentList);
+    }
 }
