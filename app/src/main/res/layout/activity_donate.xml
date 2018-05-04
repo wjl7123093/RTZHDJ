@@ -90,13 +90,21 @@
         android:layout_height="0.5dp"
         android:background="@color/app_bg_grey"></View>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <!-- 展示照片/视频 -->
+    <GridView
+        android:id="@+id/gv_publish"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_weight="1"
+        android:stretchMode="columnWidth"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:verticalSpacing="1dp"
+        android:listSelector="@null"
+        android:layout_marginTop="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+    </GridView>
 
     <net.qiujuer.genius.ui.widget.Button
         android:id="@+id/btn_donate"
