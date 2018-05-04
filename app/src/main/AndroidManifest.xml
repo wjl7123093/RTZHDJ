@@ -40,7 +40,8 @@
             android:name="com.mytv.rtzhdj.app.GlobalConfiguration"
             android:value="ConfigModule" />
 
-        <activity android:name=".mvp.ui.activity.StartActivity">
+        <activity android:name=".mvp.ui.activity.StartActivity"
+            android:theme="@style/SplashTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

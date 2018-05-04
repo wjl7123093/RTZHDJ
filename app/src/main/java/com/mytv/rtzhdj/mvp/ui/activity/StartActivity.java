@@ -41,6 +41,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  *
  * @crdate 2018-1-20
  * @update 2018-3-23    填充UI布局
+ *         2018-5-4     修复 启动白屏
  */
 @Route(path = ARoutePath.PATH_START)
 public class StartActivity extends BaseActivity<StartPresenter> implements StartContract.View {
@@ -57,12 +58,9 @@ public class StartActivity extends BaseActivity<StartPresenter> implements Start
 
     @Override
     public int initView(Bundle savedInstanceState) {
-        StatusBarUtil.hideStarusBar(StartActivity.this);
-        return R.layout.activity_start; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
-    }
+//        StatusBarUtil.hideStarusBar(StartActivity.this);
 
-    @Override
-    public void initData(Bundle savedInstanceState) {
+        // 通过设置 AndroidManifest.xml 里设置 theme 来解决 启动白屏 问题
         new Handler().postDelayed(() -> {
 
             // 1 已登录
@@ -74,6 +72,13 @@ public class StartActivity extends BaseActivity<StartPresenter> implements Start
                 StartActivity.this.finish();
             }
         }, 2000);
+
+        return 0; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+
     }
 
 
