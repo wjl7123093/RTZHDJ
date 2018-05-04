@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: item_lv_uploadphoto2.xml
+  * @Description:  上传照片GridView的项视图 XML
+  * @author wangjl  
+  * @crdate 2017-4-17
+  * @update 
+  * @version v1.0   
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="100dp" >
+
+    <ImageView
+        android:id="@+id/ivItemPhoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" >
+    </ImageView>
+
+    <!--<com.mytv.rtmedia.widget.IconView
+        android:id="@+id/iconPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/icon_publish_gv_play"
+        android:textColor="@color/WHITE_H"
+        android:textSize="40dp" />-->
+
+</RelativeLayout>

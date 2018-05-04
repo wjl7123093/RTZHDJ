@@ -40,7 +40,8 @@
             android:name="com.mytv.rtzhdj.app.GlobalConfiguration"
             android:value="ConfigModule" />
 
-        <activity android:name=".mvp.ui.activity.StartActivity"
+        <activity
+            android:name=".mvp.ui.activity.StartActivity"
             android:theme="@style/SplashTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -210,8 +211,11 @@
         <activity
             android:name=".mvp.ui.activity.VolunteerServiceDetailActivity"
             android:label="@string/title_volunteer_service_detail" />
-        <activity android:name=".mvp.ui.activity.WishDetailActivity"
-            android:label="@string/title_wish_detail"></activity>
+        <activity
+            android:name=".mvp.ui.activity.WishDetailActivity"
+            android:label="@string/title_wish_detail" />
+        <activity android:name=".mvp.ui.activity.MyJoinActivity"
+            android:label="@string/title_my_join"></activity>
     </application>
 
 </manifest>
