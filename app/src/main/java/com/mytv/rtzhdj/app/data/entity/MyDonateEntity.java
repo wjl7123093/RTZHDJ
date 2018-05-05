@@ -7,7 +7,7 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-5-3
- * @update
+ * @update 2018-5-5
  */
 public class MyDonateEntity {
 
@@ -16,6 +16,9 @@ public class MyDonateEntity {
     private String Phone;
     private String Topic;
     private String ImgUrl;
+
+    // 所有捐赠
+    private int NodeId;
 
     public int getID() {
         return ID;
@@ -55,5 +58,13 @@ public class MyDonateEntity {
 
     public void setImgUrl(String imgUrl) {
         ImgUrl = imgUrl;
+    }
+
+    public int getNodeId() {
+        return NodeId;
+    }
+
+    public void setNodeId(int nodeId) {
+        NodeId = nodeId;
     }
 }

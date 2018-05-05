@@ -28,6 +28,9 @@ public interface MyDonationContract {
         // 获取 我的捐赠数据
         Observable<BaseJson<List<MyDonateEntity>>> postMyClaimDonateList(int userId, int type, boolean update);
 
+        // 获取 所有捐赠数据
+        Observable<BaseJson<List<MyDonateEntity>>> getAllDonateList(int userId, int typeId, int pageIndex, int pageSize, boolean update);
+
     }
 
     //Presenter控制器
@@ -38,5 +41,8 @@ public interface MyDonationContract {
 
         // 调用 获取我的捐赠API
         void callMethodOfPostMyClaimDonateList(int userId, int type, boolean update);
+
+        // 调用 获取所有捐赠API
+        void callMethodOfGetAllDonateList(int userId, int typeId, int pageIndex, int pageSize, boolean update);
     }
 }

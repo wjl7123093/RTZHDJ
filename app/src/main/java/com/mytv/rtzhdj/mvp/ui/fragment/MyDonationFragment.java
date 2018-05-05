@@ -54,10 +54,11 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
         return fragment;
     }
 
-    public static MyDonationFragment newInstance(int type) {
+    public static MyDonationFragment newInstance(int typeId, String pageType) {
         MyDonationFragment fragment = new MyDonationFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("type", type);
+        bundle.putInt("typeId", typeId);
+        bundle.putString("pageType", pageType);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -83,8 +84,13 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initRefreshLayout();
 
-        // 获取我的捐赠数据
-        mPresenter.callMethodOfPostMyClaimDonateList(8, getArguments().getInt("type"), false);
+        if (getArguments().getString("pageType").equals("all")) {
+            // 获取 所有捐赠数据
+            mPresenter.callMethodOfGetAllDonateList(8, getArguments().getInt("typeId"), 1, PAGE_SIZE, false);
+        } else {
+            // 获取 我的捐赠数据
+            mPresenter.callMethodOfPostMyClaimDonateList(8, getArguments().getInt("typeId"), false);
+        }
     }
 
     /**

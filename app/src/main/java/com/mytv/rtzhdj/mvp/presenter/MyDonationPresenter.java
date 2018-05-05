@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
@@ -22,12 +23,16 @@ import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MyDonateEntity;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.contract.MyDonationContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MyDonationActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.List;
 
@@ -87,6 +92,37 @@ public class MyDonationPresenter extends BasePresenter<MyDonationContract.Model,
     @Override
     public void callMethodOfPostMyClaimDonateList(int userId, int type, boolean update) {
         mModel.postMyClaimDonateList(userId, type, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<MyDonateEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<List<MyDonateEntity>> myDonationList) {
+                        Log.e(TAG, myDonationList.toString());
+
+                        if (myDonationList.isSuccess())
+                            mRootView.loadData(myDonationList.getData());
+
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfGetAllDonateList(int userId, int typeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getAllDonateList(userId, typeId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<MyDonateEntity>>>transformObservable("getAllDonateList" + userId + typeId,
+                        new TypeToken<BaseJson<List<MyDonateEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<MyDonateEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

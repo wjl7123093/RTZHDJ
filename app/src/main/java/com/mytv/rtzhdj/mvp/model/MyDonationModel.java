@@ -44,4 +44,10 @@ public class MyDonationModel extends BaseModel implements MyDonationContract.Mod
         return mRepositoryManager.obtainRetrofitService(MyDonationService.class)
                 .postMyClaimDonateList(userId, type);
     }
+
+    @Override
+    public Observable<BaseJson<List<MyDonateEntity>>> getAllDonateList(int userId, int typeId, int pageIndex, int pageSize, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(MyDonationService.class)
+                .getAllDonateList(userId, typeId, pageIndex, pageSize);
+    }
 }

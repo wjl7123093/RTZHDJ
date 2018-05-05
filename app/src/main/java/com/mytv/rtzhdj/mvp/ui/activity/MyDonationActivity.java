@@ -130,7 +130,7 @@ public class MyDonationActivity extends BaseActivity<MyDonationPresenter> implem
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(MyDonationFragment.newInstance(i));
+            fragments.add(MyDonationFragment.newInstance(i, type));
         }
 
 
