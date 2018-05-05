@@ -148,7 +148,7 @@ public class ScheduleFragment extends BaseFragment implements OnCalendarClickLis
     public void onClick(View v) {
         if (v.getId() == R.id.ibMainClock) {
             showSelectDateDialog();
-        } else if (v.getId() == R.id.ibMainOk) {
+        } else if (v.getId() == R.id.ibMainOk) {    // 新增 记事
             addSchedule();
         }
 

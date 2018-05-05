@@ -25,4 +25,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':calendar')
+    compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.alibaba:fastjson:1.2.12'
 }

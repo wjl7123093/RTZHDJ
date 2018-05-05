@@ -3,6 +3,7 @@ package com.jeek.calendar.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,9 +22,16 @@ import com.jeek.calendar.utils.JeekUtils;
 import com.jimmy.common.base.app.BaseActivity;
 import com.jimmy.common.listener.OnTaskFinishedListener;
 import com.jimmy.common.util.ToastUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.Call;
 
 /**
  * Created by Jimmy on 2016/10/15 0015.
@@ -86,7 +94,7 @@ public class ScheduleDetailActivity extends BaseActivity implements View.OnClick
         if (v.getId() == R.id.tvCancel) {
             setResult(UPDATE_SCHEDULE_CANCEL);
             finish();
-        } else if (v.getId() == R.id.tvFinish) {
+        } else if (v.getId() == R.id.tvFinish) {    // 添加记事
             confirm();
         } else if (v.getId() == R.id.llScheduleEventSet) {
             showSelectEventSetDialog();
@@ -130,6 +138,38 @@ public class ScheduleDetailActivity extends BaseActivity implements View.OnClick
         } else {
             ToastUtils.showShortToast(this, R.string.schedule_input_content_is_no_null);
         }
+
+
+        // 上传记事信息[添加记事本接口 postWriteMemos]
+        String url = "http://61.157.136.102:8903/api/postWriteMemos";
+        OkHttpUtils.post().url(url)
+                .addParams("UserID", 8 + "")
+                .addParams("Theme", etScheduleTitle.getText().toString().trim())
+                .addParams("MemosTime", tvScheduleTime.getText().toString().trim())
+                .addParams("MemosAdress", tvScheduleLocation.getText().toString().trim())
+                .addParams("MemosContent", etScheduleDesc.getText().toString().trim())
+                .addParams("MemosPictures", "pictures")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtils.showShortToast(ScheduleDetailActivity.this, e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            if (jsonResponse.getInt("status") == 200) {
+                                ToastUtils.showShortToast(ScheduleDetailActivity.this, "操作成功");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 
     private void showSelectEventSetDialog() {
