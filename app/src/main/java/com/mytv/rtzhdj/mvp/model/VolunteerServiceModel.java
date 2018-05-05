@@ -10,7 +10,14 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.VolunteerService;
+import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +39,9 @@ public class VolunteerServiceModel extends BaseModel implements VolunteerService
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<List<VoluteerServiceEntity>>> getVoluntaryserviceList(int typeId, int pageIndex, int pageSize, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(VolunteerService.class)
+                .getVoluntaryserviceList(typeId, pageIndex, pageSize);
+    }
 }

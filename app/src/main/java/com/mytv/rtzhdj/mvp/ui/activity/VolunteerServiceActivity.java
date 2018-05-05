@@ -18,6 +18,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 import com.mytv.rtzhdj.di.component.DaggerVolunteerServiceComponent;
 import com.mytv.rtzhdj.di.module.VolunteerServiceModule;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceContract;
@@ -125,7 +126,7 @@ public class VolunteerServiceActivity extends BaseActivity<VolunteerServicePrese
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(VolunteerServiceFragment.newInstance());
+            fragments.add(VolunteerServiceFragment.newInstance(i));
         }
 
 
@@ -149,4 +150,8 @@ public class VolunteerServiceActivity extends BaseActivity<VolunteerServicePrese
     }
 
 
+    @Override
+    public void loadData(List<VoluteerServiceEntity> volunteerServiceList) {
+
+    }
 }

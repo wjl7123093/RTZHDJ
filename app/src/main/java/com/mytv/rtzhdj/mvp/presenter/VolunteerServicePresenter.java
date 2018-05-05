@@ -3,21 +3,37 @@ package com.mytv.rtzhdj.mvp.presenter;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
+import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceContract;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsCommonActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
 
 
 @ActivityScope
@@ -70,5 +86,34 @@ public class VolunteerServicePresenter extends BasePresenter<VolunteerServiceCon
                 LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 10)));
 
         return recyclerView;
+    }
+
+    @Override
+    public void callMethodOfGetVoluntaryserviceList(int typeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getVoluntaryserviceList(typeId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<VoluteerServiceEntity>>>transformObservable("getVoluntaryserviceList" + typeId,
+                        new TypeToken<BaseJson<List<VoluteerServiceEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<VoluteerServiceEntity>>>())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<VoluteerServiceEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<List<VoluteerServiceEntity>> volunteerServiceList) {
+                        Log.e(TAG, volunteerServiceList.toString());
+
+                        mRootView.loadData(volunteerServiceList.getData());
+                    }
+                });
     }
 }

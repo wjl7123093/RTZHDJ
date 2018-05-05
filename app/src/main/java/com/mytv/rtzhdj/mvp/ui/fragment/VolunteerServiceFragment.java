@@ -16,6 +16,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 import com.mytv.rtzhdj.di.component.DaggerVolunteerServiceComponent;
 import com.mytv.rtzhdj.di.module.VolunteerServiceModule;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceContract;
@@ -29,6 +30,8 @@ import com.mytv.rtzhdj.mvp.ui.adapter.VoluteerServiceAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -47,6 +50,14 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
 
     public static VolunteerServiceFragment newInstance() {
         VolunteerServiceFragment fragment = new VolunteerServiceFragment();
+        return fragment;
+    }
+
+    public static VolunteerServiceFragment newInstance(int typeId) {
+        VolunteerServiceFragment fragment = new VolunteerServiceFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("typeId", typeId);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -69,8 +80,11 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
     public void initData(Bundle savedInstanceState) {
         mPresenter.setActivity((VolunteerServiceActivity) getActivity());
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
+
+        // 获取志愿服务列表
+        mPresenter.callMethodOfGetVoluntaryserviceList(getArguments().getInt("typeId"), 1, PAGE_SIZE, false);
     }
 
     /**
@@ -134,8 +148,8 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
         });
     }
 
-    private void initAdapter() {
-        voluteerServiceAdapter = new VoluteerServiceAdapter(getActivity(), PAGE_SIZE);
+    private void initAdapter(List<VoluteerServiceEntity> serviceList) {
+        voluteerServiceAdapter = new VoluteerServiceAdapter(getActivity(), serviceList);
         voluteerServiceAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(voluteerServiceAdapter);
 
@@ -150,4 +164,8 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
 
     }
 
+    @Override
+    public void loadData(List<VoluteerServiceEntity> volunteerServiceList) {
+        initAdapter(volunteerServiceList);
+    }
 }

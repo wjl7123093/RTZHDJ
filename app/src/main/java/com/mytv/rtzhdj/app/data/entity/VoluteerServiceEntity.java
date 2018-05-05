@@ -7,89 +7,71 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-2-7
- * @update
+ * @update 2018-5-5     更新结构
  */
 public class VoluteerServiceEntity {
 
-    private int id;
-    private String url;             // 活动图片
-    private String deadtime;        // 截止日期
-    private String title;           // 标题
-    private int star_num;           // 点赞数
-    private int comment_num;        // 评论数
-    private int join_num;           // 参与人数
-    private int total_num;          // 总人数
-    private int status;             // 状态（0 进行，1 结束）
+    private int Id;                         //
+    private String Title;                   // 活动标题
+    private String ImgUrl;
+    private boolean IsEnd;
+    private String EnrollEndDate;           // 报名截止日期
+    private int EnrollCount;                // 报名限额
+    private int Signedup;                   // 已报名人数
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getDeadtime() {
-        return deadtime;
-    }
-
-    public void setDeadtime(String deadtime) {
-        this.deadtime = deadtime;
+        Id = id;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        Title = title;
     }
 
-    public int getStar_num() {
-        return star_num;
+    public String getImgUrl() {
+        return ImgUrl;
     }
 
-    public void setStar_num(int star_num) {
-        this.star_num = star_num;
+    public void setImgUrl(String imgUrl) {
+        ImgUrl = imgUrl;
     }
 
-    public int getComment_num() {
-        return comment_num;
+    public boolean isEnd() {
+        return IsEnd;
     }
 
-    public void setComment_num(int comment_num) {
-        this.comment_num = comment_num;
+    public void setEnd(boolean end) {
+        IsEnd = end;
     }
 
-    public int getJoin_num() {
-        return join_num;
+    public String getEnrollEndDate() {
+        return EnrollEndDate;
     }
 
-    public void setJoin_num(int join_num) {
-        this.join_num = join_num;
+    public void setEnrollEndDate(String enrollEndDate) {
+        EnrollEndDate = enrollEndDate;
     }
 
-    public int getTotal_num() {
-        return total_num;
+    public int getEnrollCount() {
+        return EnrollCount;
     }
 
-    public void setTotal_num(int total_num) {
-        this.total_num = total_num;
+    public void setEnrollCount(int enrollCount) {
+        EnrollCount = enrollCount;
     }
 
-    public int getStatus() {
-        return status;
+    public int getSignedup() {
+        return Signedup;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setSignedup(int signedup) {
+        Signedup = signedup;
     }
 }

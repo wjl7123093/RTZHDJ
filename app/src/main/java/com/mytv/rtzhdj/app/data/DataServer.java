@@ -71,13 +71,13 @@ public class DataServer {
             VoluteerServiceEntity voluteerServiceEntity = new VoluteerServiceEntity();
             voluteerServiceEntity.setId(i + 1);
             voluteerServiceEntity.setTitle("志愿服务，从心开始 " + i);
-            voluteerServiceEntity.setDeadtime("04/05/" + i);
-            voluteerServiceEntity.setUrl("http://pic117.nipic.com/file/20161213/24416158_165731241000_2.jpg");
-            voluteerServiceEntity.setStar_num(i * 3);
-            voluteerServiceEntity.setComment_num(i * 5);
-            voluteerServiceEntity.setJoin_num(i * 18);
-            voluteerServiceEntity.setTotal_num(i * 30);
-            voluteerServiceEntity.setStatus(i % 2);
+            voluteerServiceEntity.setEnrollEndDate("04/05/" + i);
+            voluteerServiceEntity.setImgUrl("http://pic117.nipic.com/file/20161213/24416158_165731241000_2.jpg");
+//            voluteerServiceEntity.setStar_num(i * 3);
+//            voluteerServiceEntity.setComment_num(i * 5);
+            voluteerServiceEntity.setSignedup(i * 18);
+            voluteerServiceEntity.setEnrollCount(i * 30);
+            voluteerServiceEntity.setEnd(i % 2 == 0);
             list.add(voluteerServiceEntity);
         }
         return list;
