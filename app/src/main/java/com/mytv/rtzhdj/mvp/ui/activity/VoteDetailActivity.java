@@ -18,6 +18,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.VoteDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerVoteDetailComponent;
 import com.mytv.rtzhdj.di.module.VoteDetailModule;
 import com.mytv.rtzhdj.mvp.contract.VoteDetailContract;
@@ -32,6 +33,8 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 
 import net.qiujuer.genius.ui.widget.Button;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -99,7 +102,7 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
 
         mPresenter.setActivity(VoteDetailActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
 
         mBtnVoteBrief.setOnClickListener(view -> {
@@ -111,7 +114,7 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
         });
 
         // 获取 我要投票列表数据
-        mPresenter.callMethodOfGetMyVoteDetail(0, false);
+        mPresenter.callMethodOfGetVoteOptionsList(id, 8, false);
     }
 
 
@@ -163,8 +166,8 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
         });
     }
 
-    private void initAdapter() {
-        mAdapter = new VoteDetailAdapter(VoteDetailActivity.this, PAGE_SIZE);
+    private void initAdapter(List<VoteDetailEntity> voteDetailList) {
+        mAdapter = new VoteDetailAdapter(VoteDetailActivity.this, voteDetailList);
         mAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -178,5 +181,8 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
 
     }
 
-
+    @Override
+    public void loadData(List<VoteDetailEntity> voteDetailList) {
+        initAdapter(voteDetailList);
+    }
 }

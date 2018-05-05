@@ -4,13 +4,16 @@ import android.app.Application;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -20,11 +23,18 @@ import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.data.entity.VoteDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.VoteDetailContract;
 import com.mytv.rtzhdj.mvp.ui.activity.VoteDetailActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
 
 
 @ActivityScope
@@ -80,8 +90,12 @@ public class VoteDetailPresenter extends BasePresenter<VoteDetailContract.Model,
     }
 
     @Override
-    public void callMethodOfGetMyVoteDetail(int id, boolean update) {
-        mModel.getMyVoteDetail(id, update)
+    public void callMethodOfGetVoteOptionsList(int id, int userId, boolean update) {
+        mModel.getVoteOptionsList(id, userId, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<VoteDetailEntity>>>transformObservable("getVoteOptionsList" + id,
+                        new TypeToken<BaseJson<List<VoteDetailEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<VoteDetailEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -94,12 +108,14 @@ public class VoteDetailPresenter extends BasePresenter<VoteDetailContract.Model,
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<VoteDetailEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<VoteDetailEntity>>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull VoteDetailEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<List<VoteDetailEntity>> voteDetailList) {
+                        Log.e(TAG, voteDetailList.toString());
 
-
+                        mRootView.loadData(voteDetailList.getData());
                     }
                 });
     }
+
 }

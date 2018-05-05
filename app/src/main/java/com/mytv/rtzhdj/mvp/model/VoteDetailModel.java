@@ -10,6 +10,7 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
 import com.mytv.rtzhdj.app.data.api.cache.VoteDetailCache;
 import com.mytv.rtzhdj.app.data.api.service.HomeService;
@@ -17,6 +18,8 @@ import com.mytv.rtzhdj.app.data.api.service.VoteDetailService;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.VoteDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.VoteDetailContract;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -45,18 +48,8 @@ public class VoteDetailModel extends BaseModel implements VoteDetailContract.Mod
     }
 
     @Override
-    public Observable<VoteDetailEntity> getMyVoteDetail(int id, boolean update) {
-        return Observable.just(mRepositoryManager
-                .obtainRetrofitService(VoteDetailService.class)
-                .getMyVoteDetail(id))
-                .flatMap(new Function<Observable<VoteDetailEntity>, ObservableSource<VoteDetailEntity>>() {
-                    @Override
-                    public ObservableSource<VoteDetailEntity> apply(@NonNull Observable<VoteDetailEntity> resultObservable) throws Exception {
-                        return mRepositoryManager.obtainCacheService(VoteDetailCache.class)
-                                .getMyVoteDetail(resultObservable
-                                        , new EvictProvider(update))
-                                .map(resultReply -> resultReply.getData());
-                    }
-                });
+    public Observable<BaseJson<List<VoteDetailEntity>>> getVoteOptionsList(int id, int userId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(VoteDetailService.class)
+                .getVoteOptionsList(id, userId);
     }
 }

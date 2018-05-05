@@ -8,6 +8,7 @@ package com.mytv.rtzhdj.app.data.entity;
  *
  * @crdate 2018-4-4
  * @update 2018-5-2 修改结构
+ *         2018-5-5 修改结构
  */
 public class VoteDetailEntity {
 
@@ -17,6 +18,11 @@ public class VoteDetailEntity {
 //    private String author;      // 作者
     private int VoteNum;        // 投票数
     private String ImgUrl;      // 作品图片地址
+
+    // 投票作品列表 实体
+    private int ContentId;          // 活动ID
+    private int poll;               // 得票数
+    private int IsVote;             // 是否可以投票
 
     public int getId() {
         return Id;
@@ -56,5 +62,29 @@ public class VoteDetailEntity {
 
     public void setImgUrl(String imgUrl) {
         ImgUrl = imgUrl;
+    }
+
+    public int getContentId() {
+        return ContentId;
+    }
+
+    public void setContentId(int contentId) {
+        ContentId = contentId;
+    }
+
+    public int getPoll() {
+        return poll;
+    }
+
+    public void setPoll(int poll) {
+        this.poll = poll;
+    }
+
+    public int getIsVote() {
+        return IsVote;
+    }
+
+    public void setIsVote(int isVote) {
+        IsVote = isVote;
     }
 }
