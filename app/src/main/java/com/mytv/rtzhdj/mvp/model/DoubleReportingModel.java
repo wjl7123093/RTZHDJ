@@ -10,7 +10,16 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.DoubleReportingService;
+import com.mytv.rtzhdj.app.data.api.service.RegisterService;
+import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
+import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.mvp.contract.DoubleReportingContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +41,15 @@ public class DoubleReportingModel extends BaseModel implements DoubleReportingCo
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson> postPersonalReach(int userId, int publishmentSystemId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(DoubleReportingService.class)
+                .postPersonalReach(userId, publishmentSystemId);
+    }
+
+    @Override
+    public Observable<BaseJson<List<StationEntity>>> postAllPublishmentSystem(boolean update) {
+        return mRepositoryManager.obtainRetrofitService(RegisterService.class)
+                .postAllPublishmentSystem();
+    }
 }

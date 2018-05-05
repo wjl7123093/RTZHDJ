@@ -1,6 +1,7 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
@@ -8,13 +9,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.StationEntity;
+import com.mytv.rtzhdj.app.utils.KeyboardUtils;
 import com.mytv.rtzhdj.di.component.DaggerDoubleReportingComponent;
 import com.mytv.rtzhdj.di.module.DoubleReportingModule;
 import com.mytv.rtzhdj.mvp.contract.DoubleReportingContract;
@@ -24,6 +31,8 @@ import com.mytv.rtzhdj.R;
 
 
 import net.qiujuer.genius.ui.widget.Button;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -57,6 +66,8 @@ public class DoubleReportingActivity extends BaseActivity<DoubleReportingPresent
     @BindView(R.id.btn_ok)
     Button mBtnOk;
 
+    private int mPublishmentSystemId = 0;   // 站点ID
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -79,7 +90,16 @@ public class DoubleReportingActivity extends BaseActivity<DoubleReportingPresent
 
         mTvChooseCommunity.setOnClickListener(view -> {});
         mBtnOk.setOnClickListener(view -> {
-            mPresenter.callMethodOfDoDoubleReport("member_id", "community_id");
+            if (0 == mPublishmentSystemId) {
+                showMessage("还未选择站点");
+                return;
+            }
+
+            mPresenter.callMethodOfPostPersonalReach(8, mPublishmentSystemId);
+        });
+        mEdtCommunity.setOnClickListener(view -> {
+            KeyboardUtils.hideKeyboard(view);
+            mPresenter.callMethodOfPostAllPublishmentSystem(false);
         });
 
     }
@@ -113,4 +133,27 @@ public class DoubleReportingActivity extends BaseActivity<DoubleReportingPresent
     }
 
 
+    @Override
+    public void showPickerView(List<StationEntity> stationList) {
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                String tx = stationList.get(options1).getPublishmentSystemName();
+                mEdtCommunity.setText(tx);
+                mPublishmentSystemId = stationList.get(options1).getPublishmentSystemId();
+
+
+                Toast.makeText(DoubleReportingActivity.this, tx, Toast.LENGTH_SHORT).show();
+            }
+        })
+
+                .setTitleText("站点选择")
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20)
+                .build();
+
+        pvOptions.setPicker(stationList);//一级选择器
+        pvOptions.show();
+    }
 }
