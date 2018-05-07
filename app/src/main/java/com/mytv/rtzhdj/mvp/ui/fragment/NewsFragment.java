@@ -157,10 +157,12 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
 
     @Override
     public void initTab(List<PartyColumnsEntity> partyColumnsList) {
-        PartyColumnsEntity columnsEntity = new PartyColumnsEntity();
-        columnsEntity.setTitle("推荐");
-        columnsEntity.setNodeId(0);
-        partyColumnsList.add(0, columnsEntity);
+        if (!partyColumnsList.get(0).getTitle().equals("推荐")) {
+            PartyColumnsEntity columnsEntity = new PartyColumnsEntity();
+            columnsEntity.setTitle("推荐");
+            columnsEntity.setNodeId(0);
+            partyColumnsList.add(0, columnsEntity);
+        }
 
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < partyColumnsList.size(); i++) {

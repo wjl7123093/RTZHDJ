@@ -169,16 +169,25 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         ArmsUtils.snackbarText("Grid点击了" + position);
         switch (position) {
             case 0: // 时政新闻
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS).navigation();
+//                ARouter.getInstance().build(ARoutePath.PATH_NEWS).navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
+                        .withInt("nodeId", 1002)
+                        .withString("title", getResources().getString(R.string.title_news)).navigation();
                 break;
             case 1: // 党员教育
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_EDUCATION).navigation();
                 break;
             case 2: // 党风廉政
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_CLEAN).navigation();
+//                ARouter.getInstance().build(ARoutePath.PATH_NEWS_CLEAN).navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
+                        .withInt("nodeId", 3005)
+                        .withString("title", getResources().getString(R.string.title_news_clean)).navigation();
                 break;
             case 3: // 脱贫攻坚
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_POVERTY).navigation();
+//                ARouter.getInstance().build(ARoutePath.PATH_NEWS_POVERTY).navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
+                        .withInt("nodeId", 3006)
+                        .withString("title", getResources().getString(R.string.title_news_poverty)).navigation();
                 break;
             case 4: // 党建直播
                 break;
