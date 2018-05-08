@@ -23,7 +23,7 @@ import retrofit2.http.Query;
  * @version v1.0.0
  *
  * @crdate 2017-5-3
- * @update
+ * @update 2017-5-8     新增 postVoteSubmit 接口
  */
 public interface VoteEntryDetailService {
 
@@ -34,5 +34,15 @@ public interface VoteEntryDetailService {
     @FormUrlEncoded
     @POST("postOnlineVoteDetails")
     Observable<BaseJson<VoteEntrylEntity>> postOnlineVoteDetails(@Field("id") int id);
+
+    /**
+     * 在线投票
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("postVoteSubmit")
+    Observable<BaseJson> postVoteSubmit(@Field("ContentId") int contentId,
+                                        @Field("Id") int id,
+                                        @Field("UserId") int userId);
 
 }

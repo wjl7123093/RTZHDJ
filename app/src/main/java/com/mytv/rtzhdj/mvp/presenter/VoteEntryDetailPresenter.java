@@ -90,4 +90,31 @@ public class VoteEntryDetailPresenter extends BasePresenter<VoteEntryDetailContr
                     }
                 });
     }
+
+    @Override
+    public void callMethodOfPostVoteSubmit(int contentId, int id, int userId) {
+        mModel.postVoteSubmit(contentId, id, userId)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e(TAG, postResult.toString());
+
+                        if (postResult.isSuccess())
+                            mRootView.showMessage(postResult.getInfo());
+
+                    }
+                });
+    }
 }

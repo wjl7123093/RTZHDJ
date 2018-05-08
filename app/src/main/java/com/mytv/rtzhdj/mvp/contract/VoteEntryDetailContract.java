@@ -28,6 +28,9 @@ public interface VoteEntryDetailContract {
         // 获取 投票作品详情数据
         Observable<BaseJson<VoteEntrylEntity>> postOnlineVoteDetails(int id, boolean update);
 
+        // post 投票
+        Observable<BaseJson> postVoteSubmit(int contentId, int id, int userId);
+
     }
 
     //Presenter控制器
@@ -36,5 +39,8 @@ public interface VoteEntryDetailContract {
 
         // 调用 获取投票作品详情API
         void callMethodOfPostOnlineVoteDetails(int id, boolean update);
+
+        // 调用 在线投票 api
+        void callMethodOfPostVoteSubmit(int contentId, int id, int userId);
     }
 }

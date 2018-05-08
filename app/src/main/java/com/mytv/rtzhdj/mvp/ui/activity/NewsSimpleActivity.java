@@ -42,12 +42,12 @@ import me.weyye.library.colortrackview.ColorTrackTabLayout;
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * 党建直播界面
+ * 带"推荐"通用二级界面
  *
  * @author Fred_W
  * @version v1.0.0(1)
  *
- * @crdate 2018-1-20
+ * @crdate 2018-5-7
  * @update
  */
 @Route(path = ARoutePath.PATH_NEWS_SIMPLE)
@@ -102,9 +102,6 @@ public class NewsSimpleActivity extends BaseActivity<NewsSimplePresenter> implem
             // 跳转到搜索页面
             ARouter.getInstance().build(ARoutePath.PATH_SEARCH).navigation();
         });
-
-//        titles = new String[]{"推荐", "政策文件", "任务进度", "扶贫动态", "助力产销"};
-//        initTab();
 
         // 获取 带"推荐"通用二级页面
         mPresenter.callMethodOfGetTwoLevelList(nodeId, 1, PAGE_SIZE, false);
