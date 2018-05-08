@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ * fragment_news_simple.xml 带"推荐"二级页面内容页 fragment
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-5-7
+ * @update
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:descendantFocusability="blocksDescendants">
+    <!-- android:descendantFocusability="blocksDescendants" 保证当前页面焦点在顶部 -->
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:background="@color/app_bg_grey" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

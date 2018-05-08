@@ -12,8 +12,11 @@ import javax.inject.Inject;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.NewsSimpleService;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.mvp.contract.NewsSimpleContract;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -41,5 +44,11 @@ public class NewsSimpleModel extends BaseModel implements NewsSimpleContract.Mod
     public Observable<BaseJson<NewsSimpleEntity>> getTwoLevelList(int nodeId, int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(NewsSimpleService.class)
                 .getTwoLevelList(nodeId, pageIndex, pageSize);
+    }
+
+    @Override
+    public Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(NewsSimpleService.class)
+                .getTwoLevelInfoList(nodeId, pageIndex, pageSize);
     }
 }

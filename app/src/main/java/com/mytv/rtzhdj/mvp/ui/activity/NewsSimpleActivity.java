@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -152,13 +153,13 @@ public class NewsSimpleActivity extends BaseActivity<NewsSimplePresenter> implem
         if (!partyColumnsList.get(0).getTitle().equals("推荐")) {
             PartyColumnsEntity columnsEntity = new PartyColumnsEntity();
             columnsEntity.setTitle("推荐");
-            columnsEntity.setNodeID(0);
+            columnsEntity.setNodeId(0);
             partyColumnsList.add(0, columnsEntity);
         }
 
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < partyColumnsList.size(); i++) {
-            fragments.add(NewsSimpleFragment.newInstance());
+            fragments.add(NewsSimpleFragment.newInstance(partyColumnsList.get(i).getNodeId(), newsSimpleEntity));
         }
 
 
@@ -177,6 +178,12 @@ public class NewsSimpleActivity extends BaseActivity<NewsSimplePresenter> implem
             public CharSequence getPageTitle(int position) {
                 return partyColumnsList.get(position).getTitle();
             }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                // 注释掉下面那行，解决 滑动卡顿 问题
+//                super.destroyItem(container, position, object);
+            }
         });
         mTab.setupWithViewPager(mViewPager);
     }
@@ -185,5 +192,10 @@ public class NewsSimpleActivity extends BaseActivity<NewsSimplePresenter> implem
     @Override
     public void loadData(NewsSimpleEntity newsSimpleEntity) {
         initTab(newsSimpleEntity);
+    }
+
+    @Override
+    public void loadListData(List<NewsDetailEntity> newsList) {
+
     }
 }

@@ -42,11 +42,11 @@ public class PartyColumnsEntity implements Parcelable {
     };
 
     public int getNodeId() {
-        return NodeID;
+        return NodeId;
     }
 
     public void setNodeId(int nodeId) {
-        NodeID = nodeId;
+        NodeId = nodeId;
     }
 
     public String getTitle() {

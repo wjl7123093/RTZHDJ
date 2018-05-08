@@ -1,6 +1,7 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
@@ -35,5 +36,14 @@ public interface NewsSimpleService {
     Observable<BaseJson<NewsSimpleEntity>> getTwoLevelList(@Query("NodeId") int nodeId,
                                                            @Query("PageIndex") int pageIndex,
                                                            @Query("PageSize") int pageSize);
+
+    /**
+     * 获取 二级通用列表
+     * @return
+     */
+    @GET("getTwoLevelInfoList")
+    Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(@Query("NodeId") int nodeId,
+                                                                     @Query("PageIndex") int pageIndex,
+                                                                     @Query("PageSize") int pageSize);
 
 }
