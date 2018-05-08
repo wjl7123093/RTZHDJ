@@ -10,7 +10,16 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.DonateService;
 import com.mytv.rtzhdj.mvp.contract.DonateContract;
+
+import java.util.List;
+import java.util.Map;
+
+import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 @ActivityScope
@@ -32,4 +41,9 @@ public class DonateModel extends BaseModel implements DonateContract.Model {
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson> postDonateSubmit(Map<String, RequestBody> params, List<MultipartBody.Part> parts) {
+        return mRepositoryManager.obtainRetrofitService(DonateService.class)
+                .postDonateSubmit(params, parts);
+    }
 }

@@ -214,8 +214,11 @@
         <activity
             android:name=".mvp.ui.activity.WishDetailActivity"
             android:label="@string/title_wish_detail" />
-        <activity android:name=".mvp.ui.activity.MyJoinActivity"
-            android:label="@string/title_my_join"></activity>
+        <activity
+            android:name=".mvp.ui.activity.MyJoinActivity"
+            android:label="@string/title_my_join" />
+        <activity android:name=".mvp.ui.activity.NewsAllActivityActivity" />
+        <activity android:name=".mvp.ui.activity.NewsAllActivity"></activity>
     </application>
 
 </manifest>

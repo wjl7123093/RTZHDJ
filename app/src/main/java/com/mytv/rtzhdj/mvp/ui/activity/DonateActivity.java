@@ -24,6 +24,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.utils.FileUtils;
 import com.mytv.rtzhdj.app.utils.ImageTools;
 import com.mytv.rtzhdj.app.utils.RouteSystemUIUtils;
@@ -39,12 +40,18 @@ import com.mytv.rtzhdj.mvp.ui.widget.BottomDialog;
 
 import net.qiujuer.genius.ui.widget.Button;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -55,7 +62,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-21
- * @update
+ * @update 2018-5-8     对接 postDonateSubmit 接口
  */
 @Route(path = ARoutePath.PATH_DONATE)
 public class DonateActivity extends BaseActivity<DonatePresenter> implements DonateContract.View {
@@ -99,6 +106,8 @@ public class DonateActivity extends BaseActivity<DonatePresenter> implements Don
     private String uploadPicture = "";
     private String uploadPictureFromList = "";
 
+    private Map<String, RequestBody> params = new HashMap<>();
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -137,6 +146,50 @@ public class DonateActivity extends BaseActivity<DonatePresenter> implements Don
                 }
 
             }
+        });
+
+        // 我要捐赠
+        mBtnDonate.setOnClickListener(view -> {
+            params.put("UserId", RequestBody.create(MediaType.parse("text/plain"), "8"));
+            params.put("Topic", RequestBody.create(MediaType.parse("text/plain"), mEdtDonateTheme.getText().toString().trim()));
+            params.put("TelePhone", RequestBody.create(MediaType.parse("text/plain"), mEdtPhone.getText().toString().trim()));
+            params.put("Content", RequestBody.create(MediaType.parse("text/plain"), mEdtDonateContent.getText().toString().trim()));
+
+            // 调用 我要捐赠 api
+            mPresenter.callMethodOfPostDonateSubmit(
+                    params,
+                    files2Parts("ImageUrls", list_path.toArray(new String[list_path.size()]), MediaType.parse("image/jpg")));
+
+            /*String url = Api.APP_DOMAIN + "postDonateSubmit";
+            OkHttpUtils.post().url(url)
+                    .addFile("ImageUrls", list_pic.get(0), new File(list_path.get(0)))
+                    .addParams("UserId", "8")
+                    .addParams("Topic", mEdtDonateTheme.getText().toString().trim())
+                    .addParams("TelePhone", mEdtPhone.getText().toString().trim())
+                    .addParams("Content", mEdtDonateContent.getText().toString().trim())
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            showMessage(e.getMessage());
+
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            showMessage(response);
+                            try {
+                                JSONObject jsonResponse = new JSONObject(response);
+                                if (jsonResponse.getInt("code") == 200) {
+                                    showMessage("提交成功");
+                                } else {
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });*/
         });
     }
 
@@ -186,7 +239,8 @@ public class DonateActivity extends BaseActivity<DonatePresenter> implements Don
                     // 将处理过的图片添加到缩略图列表并保存到本地
                     ImageTools.savePhotoToSDCard(newBitmap, FileUtils.SDPATH,fileName);
                     lists.add(newBitmap);
-                    list_path.add(fileName+".jpg");
+                    list_path.add(FileUtils.SDPATH + fileName + ".jpg");
+                    list_pic.add(fileName + ".jpg");
 
                     // 上传图片流
                     try {
@@ -224,7 +278,8 @@ public class DonateActivity extends BaseActivity<DonatePresenter> implements Don
                             // 将处理过的图片添加到缩略图列表并保存到本地
                             ImageTools.savePhotoToSDCard(smallBitmap, FileUtils.SDPATH,fileName);
                             lists.add(smallBitmap);
-                            list_path.add(fileName+".jpg");
+                            list_path.add(FileUtils.SDPATH + fileName + ".jpg");
+                            list_pic.add(fileName + ".jpg");
 
                             // 上传图片流
                             try {
@@ -285,5 +340,78 @@ public class DonateActivity extends BaseActivity<DonatePresenter> implements Don
             }
         });
     }
+
+    /**
+     * 将文件路径数组封装为{@link List<MultipartBody.Part>}
+     * @param key 对应请求正文中name的值。目前服务器给出的接口中，所有图片文件使用<br>
+     * 同一个name值，实际情况中有可能需要多个
+     * @param filePaths 文件路径数组
+     * @param imageType 文件类型
+     */
+    public static List<MultipartBody.Part> files2Parts(String key, String[] filePaths, MediaType imageType) {
+        List<MultipartBody.Part> parts = new ArrayList<>(filePaths.length);
+        for (String filePath : filePaths) {
+            File file = new File(filePath);
+            // 根据类型及File对象创建RequestBody（okhttp的类）
+            RequestBody requestBody = RequestBody.create(imageType, file);
+            // 将RequestBody封装成MultipartBody.Part类型（同样是okhttp的）
+            MultipartBody.Part part = MultipartBody.Part.createFormData(key, file.getName(), requestBody);
+            // 添加进集合
+            parts.add(part);
+
+        }
+        return parts;
+    }
+
+    /**
+     * 其实也是将File封装成RequestBody，然后再封装成Part，<br>
+     * 不同的是使用MultipartBody.Builder来构建MultipartBody
+     * @param key 同上
+     * @param filePaths 同上
+     * @param imageType 同上
+     */
+    public static MultipartBody filesToMultipartBody(String key, String[] filePaths, MediaType imageType) {
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        for (String filePath : filePaths) {
+            File file = new File(filePath);
+            RequestBody requestBody = RequestBody.create(imageType, file);
+            builder.addFormDataPart(key, file.getName(), requestBody);
+        }
+        builder.setType(MultipartBody.FORM);
+        return builder.build();
+
+    }
+
+    /**
+     * 直接添加文本类型的Part到的MultipartBody的Part集合中
+     * @param parts Part集合
+     * @param key 参数名（name属性）
+     * @param value 文本内容
+     * @param position 插入的位置
+     */
+    public static void addTextPart(List<MultipartBody.Part> parts, String key, String value, int position) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), value);
+        MultipartBody.Part part = MultipartBody.Part.createFormData(key, null, requestBody);
+        parts.add(position, part);
+    }
+
+    /**
+     * 添加文本类型的Part到的MultipartBody.Builder中
+     * @param builder 用于构建MultipartBody的Builder
+     * @param key 参数名（name属性）
+     * @param value 文本内容
+     */
+    public static MultipartBody.Builder addTextPart(MultipartBody.Builder builder, String key, String value) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), value);
+        // MultipartBody.Builder的addFormDataPart()有一个直接添加key value的重载，但坑的是这个方法
+        // 不会设置编码类型，会出乱码，所以可以使用3个参数的，将中间的filename置为null就可以了
+        // builder.addFormDataPart(key, value);
+        // 还有一个坑就是，后台取数据的时候有可能是有顺序的，比如必须先取文本后取文件，
+        // 否则就取不到（真弱啊...），所以还要注意add的顺序
+        builder.addFormDataPart(key, null, requestBody);
+        return builder; }
+
+
+
 
 }

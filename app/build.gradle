@@ -231,4 +231,6 @@ dependencies {
     // RxCache [避免了 泛型擦除问题]
     compile project(':rxcache')
     compile project(':libk-switchbutton')
+//    // OkHttpUtils
+//    compile 'com.zhy:okhttputils:2.6.2'
 }

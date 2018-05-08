@@ -35,6 +35,7 @@ package com.mytv.rtzhdj.app;
  *         2018-3-26 新增 VoteDetail/VoteBrief/VoteResult/VoteEntryDetail 页面path
  *         2018-3-28 新增 VolunteerServiceDetail 页面path
  *         2018-5-4  新增 MyJoin 页面path
+ *         2018-5-8  新增 NewsAll 页面path
  */
 public interface ARoutePath {
 
@@ -170,5 +171,7 @@ public interface ARoutePath {
     String PATH_WISH_DETAIL = "/rtdzdj/wish_detail";
     // MyJoin 我要参与
     String PATH_MY_JOIN = "/rtdzdj/my_join";
+    // NewsAll 带"全部"二级页面
+    String PATH_NEWS_ALL = "/rtdzdj/news_all";
 
 }

@@ -1,4 +1,4 @@
-﻿package com.mytv.rtzhdj.app.utils;
+package com.mytv.rtzhdj.app.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
