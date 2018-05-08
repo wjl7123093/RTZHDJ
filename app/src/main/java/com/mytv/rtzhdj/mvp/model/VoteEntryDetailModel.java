@@ -42,4 +42,10 @@ public class VoteEntryDetailModel extends BaseModel implements VoteEntryDetailCo
         return mRepositoryManager.obtainRetrofitService(VoteEntryDetailService.class)
                 .postOnlineVoteDetails(id);
     }
+
+    @Override
+    public Observable<BaseJson> postVoteSubmit(int contentId, int id, int userId) {
+        return mRepositoryManager.obtainRetrofitService(VoteEntryDetailService.class)
+                .postVoteSubmit(contentId, id, userId);
+    }
 }

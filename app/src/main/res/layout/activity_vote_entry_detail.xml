@@ -8,18 +8,20 @@
  * @crdate 2018-3-26
  * @update
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_toolbar"></include>
+    <include layout="@layout/include_toolbar"
+        android:id="@+id/toolbar"></include>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:layout_below="@id/toolbar">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -89,4 +91,14 @@
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <net.qiujuer.genius.ui.widget.Button
+        android:id="@+id/btn_vote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="投TA一票"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_16"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

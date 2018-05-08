@@ -28,6 +28,8 @@ import com.mytv.rtzhdj.mvp.presenter.VoteEntryDetailPresenter;
 import com.mytv.rtzhdj.R;
 
 
+import net.qiujuer.genius.ui.widget.Button;
+
 import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
@@ -63,7 +65,11 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
     TextView mTvRank;
     @BindView(R.id.tv_votes)
     TextView mTvVotes;
+    @BindView(R.id.btn_vote)
+    Button mBtnVote;
 
+    @Autowired
+    int contentId;
     @Autowired
     int id;
 
@@ -90,6 +96,10 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
 
         // 获取 投票作品详情
         mPresenter.callMethodOfPostOnlineVoteDetails(37, false);
+
+        // post 在线投票
+        mBtnVote.setOnClickListener(view ->
+            mPresenter.callMethodOfPostVoteSubmit(contentId, id, 8));
     }
 
 
