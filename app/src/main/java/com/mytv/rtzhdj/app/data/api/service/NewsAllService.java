@@ -1,0 +1,43 @@
+package com.mytv.rtzhdj.app.data.api.service;
+
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.NewsAllEntity;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
+import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
+
+import java.util.List;
+
+import io.reactivex.Observable;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
+/**
+ * 带"全部"通用 tab 新闻界面接口
+ *
+ * @author Fred_W
+ * @version v1.0.0
+ *
+ * @crdate 2017-5-7
+ * @update
+ */
+public interface NewsAllService {
+
+    /**
+     * 获取 带"全部"通用二级页面
+     * @return
+     */
+    @GET("getTwoLevelAllList")
+    Observable<BaseJson<NewsAllEntity>> getTwoLevelAllList(@Query("NodeId") int nodeId,
+                                                           @Query("PageIndex") int pageIndex,
+                                                           @Query("PageSize") int pageSize);
+
+    /**
+     * 获取 二级通用列表
+     * @return
+     */
+    @GET("getTwoLevelInfoList")
+    Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(@Query("NodeId") int nodeId,
+                                                                     @Query("PageIndex") int pageIndex,
+                                                                     @Query("PageSize") int pageSize);
+
+}

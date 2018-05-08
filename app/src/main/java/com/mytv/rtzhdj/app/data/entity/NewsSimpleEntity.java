@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.List;
 
 /**
- * NewsSimpleEntity   通用 tab 新闻界面实体类
+ * NewsSimpleEntity   带"推荐"通用 tab 新闻界面实体类
  *
  * @author Fred_W
  * @version v1.0.0(1)

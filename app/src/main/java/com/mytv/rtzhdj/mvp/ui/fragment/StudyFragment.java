@@ -147,10 +147,16 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
                         .withString("title", title).navigation();
                 break;
             case 2: // 党建知识
-                ARouter.getInstance().build(ARoutePath.PATH_PARTY_KNOWLEDGE).navigation();
+//                ARouter.getInstance().build(ARoutePath.PATH_PARTY_KNOWLEDGE).navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_ALL)
+                        .withInt("nodeId", 6018)
+                        .withString("title", getResources().getString(R.string.title_party_knowledge)).navigation();
                 break;
             case 4: // 绵阳党史
-                ARouter.getInstance().build(ARoutePath.PATH_PARTY_HISTORY).navigation();
+//                ARouter.getInstance().build(ARoutePath.PATH_PARTY_HISTORY).navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_ALL)
+                        .withInt("nodeId", 6016)
+                        .withString("title", getResources().getString(R.string.title_party_history)).navigation();
                 break;
             case 5: // 效果测评
                 ARouter.getInstance().build(ARoutePath.PATH_EFFECT_EVALUATION).navigation();

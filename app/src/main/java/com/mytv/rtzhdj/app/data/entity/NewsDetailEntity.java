@@ -21,7 +21,8 @@ public class NewsDetailEntity implements Parcelable {
     private int Comments;       // 评论数
 
     // 通用 tab 界面
-    private int Id;
+    private int NodeId;         // 节点ID
+    private int Id;             // 内容ID
     private String AddDate;     // 发布时间
     private String ImgUrl;      // 图片地址
 
@@ -33,6 +34,7 @@ public class NewsDetailEntity implements Parcelable {
         Content = in.readString();
         Digs = in.readInt();
         Comments = in.readInt();
+        NodeId = in.readInt();
         Id = in.readInt();
         AddDate = in.readString();
         ImgUrl = in.readString();
@@ -114,6 +116,14 @@ public class NewsDetailEntity implements Parcelable {
         ImgUrl = imgUrl;
     }
 
+    public int getNodeId() {
+        return NodeId;
+    }
+
+    public void setNodeId(int nodeId) {
+        NodeId = nodeId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -126,6 +136,7 @@ public class NewsDetailEntity implements Parcelable {
         parcel.writeString(Content);
         parcel.writeInt(Digs);
         parcel.writeInt(Comments);
+        parcel.writeInt(NodeId);
         parcel.writeInt(Id);
         parcel.writeString(AddDate);
         parcel.writeString(ImgUrl);
