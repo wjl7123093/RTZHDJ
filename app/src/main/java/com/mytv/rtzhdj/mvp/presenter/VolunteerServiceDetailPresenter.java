@@ -92,7 +92,8 @@ public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServ
                     public void onNext(@NonNull BaseJson<VolunteerDetailEntity> volunteerDetailEntity) {
                         Log.e(TAG, volunteerDetailEntity.toString());
 
-                        mRootView.loadData(volunteerDetailEntity.getData());
+                        if (volunteerDetailEntity.isSuccess())
+                            mRootView.loadData(volunteerDetailEntity.getData());
                     }
                 });
     }

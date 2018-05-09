@@ -21,14 +21,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.utils.FileUtils;
 import com.mytv.rtzhdj.app.utils.ImageTools;
+import com.mytv.rtzhdj.app.utils.MultiPartParamsUtils;
 import com.mytv.rtzhdj.di.component.DaggerMyJoinComponent;
 import com.mytv.rtzhdj.di.module.MyJoinModule;
 import com.mytv.rtzhdj.mvp.contract.MyJoinContract;
@@ -37,30 +41,39 @@ import com.mytv.rtzhdj.mvp.presenter.MyJoinPresenter;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.GridViewAdapter;
 import com.mytv.rtzhdj.mvp.ui.widget.BottomDialog;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 
 import net.qiujuer.genius.ui.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * 志愿服务详情界面
+ * 参加志愿服务 界面
  *
  * @author Fred_W
  * @version v1.0.0(1)
  *
- * @crdate 2018-3-28
- * @update
+ * @crdate 2018-5-2
+ * @update 2018-5-9     对接了 postJoinVolunteerService 接口
  */
 @Route(path = ARoutePath.PATH_MY_JOIN)
 public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJoinContract.View {
@@ -93,6 +106,9 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
     @BindView(R.id.btn_submit)
     Button mBtnSubmit;
 
+    @Autowired
+    int contentId;
+
     // 图片 九宫格适配器
     private GridViewAdapter gvAdapter;
     private BottomDialog mBottomDialog;
@@ -109,8 +125,8 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
     private List<String> list_pic = new ArrayList<String>();
     // 用于保存图片路径
     private List<String> list_path = new ArrayList<String>();
-    private String uploadPicture = "";
-    private String uploadPictureFromList = "";
+
+    private Map<String, RequestBody> params = new HashMap<>();
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -124,6 +140,7 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_my_join; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -148,6 +165,18 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
                 }
 
             }
+        });
+
+        mBtnSubmit.setOnClickListener(view -> {
+            params.put("UserId", RequestBody.create(MediaType.parse("text/plain"), "8"));
+            params.put("ContentID", RequestBody.create(MediaType.parse("text/plain"), contentId + ""));
+            params.put("Address", RequestBody.create(MediaType.parse("text/plain"), mEdtAddress.getText().toString().trim()));
+            params.put("Feelings", RequestBody.create(MediaType.parse("text/plain"), mEdtContent.getText().toString().trim()));
+
+            mPresenter.callMethodOfPostJoinVolunteerService(
+                    params,
+                    MultiPartParamsUtils.files2Parts("Pictures", list_path.toArray(new String[list_path.size()]), MediaType.parse("image/jpg")));
+
         });
     }
 
@@ -199,7 +228,8 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
                     // 将处理过的图片添加到缩略图列表并保存到本地
                     ImageTools.savePhotoToSDCard(newBitmap, FileUtils.SDPATH,fileName);
                     lists.add(newBitmap);
-                    list_path.add(fileName+".jpg");
+                    list_path.add(FileUtils.SDPATH + fileName + ".jpg");
+                    list_pic.add(fileName);
 
                     // 上传图片流
                     try {
@@ -237,7 +267,8 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
                             // 将处理过的图片添加到缩略图列表并保存到本地
                             ImageTools.savePhotoToSDCard(smallBitmap, FileUtils.SDPATH,fileName);
                             lists.add(smallBitmap);
-                            list_path.add(fileName+".jpg");
+                            list_path.add(FileUtils.SDPATH + fileName + ".jpg");
+                            list_pic.add(fileName);
 
                             // 上传图片流
                             try {

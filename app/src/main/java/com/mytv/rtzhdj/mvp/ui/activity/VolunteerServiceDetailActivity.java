@@ -118,7 +118,8 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
 
         mBtnStar.setOnClickListener(view -> {});
         mBtnIsOver.setOnClickListener(view ->
-            ARouter.getInstance().build(ARoutePath.PATH_MY_JOIN).navigation());
+            ARouter.getInstance().build(ARoutePath.PATH_MY_JOIN)
+                    .withInt("contentId", id).navigation());
 
         // 获取 志愿服务详情
         mPresenter.callMethodOfGetVolunteerServiceDetail(id, false);

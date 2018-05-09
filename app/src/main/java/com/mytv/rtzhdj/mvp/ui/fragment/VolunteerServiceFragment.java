@@ -158,7 +158,8 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                showMessage("" + Integer.toString(position));
 
-                ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL).navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                        .withInt("id", serviceList.get(position).getId()).navigation();
             }
         });
 
