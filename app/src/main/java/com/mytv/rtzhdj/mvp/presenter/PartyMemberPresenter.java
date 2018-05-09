@@ -26,6 +26,7 @@ import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyMienEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.contract.PartyMemberContract;
 import com.mytv.rtzhdj.mvp.ui.activity.PartyMemberActivity;
@@ -112,7 +113,38 @@ public class PartyMemberPresenter extends BasePresenter<PartyMemberContract.Mode
                     public void onNext(@NonNull BaseJson<List<PartyMemberEntity>> memberList) {
                         Log.e(TAG, memberList.toString());
 
-                        mRootView.loadData(memberList.getData());
+                        if (memberList.isSuccess())
+                            mRootView.loadData(memberList.getData());
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfGetPartymembermien(int publishmentSystemId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartymembermien(publishmentSystemId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<PartyMienEntity>>>transformObservable("getPartymembermien" + publishmentSystemId,
+                        new TypeToken<BaseJson<List<PartyMienEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<PartyMienEntity>>>())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<PartyMienEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<List<PartyMienEntity>> memberList) {
+                        Log.e(TAG, memberList.toString());
+
+                        if (memberList.isSuccess())
+                            mRootView.loadDataMine(memberList.getData());
                     }
                 });
     }

@@ -19,6 +19,7 @@ import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyMienEntity;
 import com.mytv.rtzhdj.di.component.DaggerPartyMemberComponent;
 import com.mytv.rtzhdj.di.module.PartyMemberModule;
 import com.mytv.rtzhdj.mvp.contract.PartyMemberContract;
@@ -100,7 +101,9 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
         initRefreshLayout();
 
         // 获取 党员信息列表数据
-        mPresenter.callMethodOfGetPartyMmeber(1, false);
+//        mPresenter.callMethodOfGetPartyMmeber(1, false);
+        mPresenter.callMethodOfGetPartymembermien(1, 1, PAGE_SIZE, false);
+
     }
 
 
@@ -147,7 +150,7 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
         });
     }
 
-    private void initAdapter(List<PartyMemberEntity> memberList) {
+    private void initAdapter(List<PartyMienEntity> memberList) {
         partyMemberAdapter = new PartyMemberAdapter(PartyMemberActivity.this, memberList);
         partyMemberAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(partyMemberAdapter);
@@ -158,8 +161,8 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
 //                showMessage("" + Integer.toString(position));
 
                 ARouter.getInstance().build(ARoutePath.PATH_PARTY_MEMBER_DETAIL)
-                        .withInt("id", memberList.get(position).getId())
-                        .withString("name", memberList.get(position).getUserName()).navigation();
+                        .withInt("id", memberList.get(position).getID())
+                        .withString("name", memberList.get(position).getTitle()).navigation();
             }
         });
 
@@ -168,6 +171,11 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
 
     @Override
     public void loadData(List<PartyMemberEntity> memberList) {
+//        initAdapter(memberList);
+    }
+
+    @Override
+    public void loadDataMine(List<PartyMienEntity> memberList) {
         initAdapter(memberList);
     }
 }

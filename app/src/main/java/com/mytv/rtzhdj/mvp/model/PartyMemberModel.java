@@ -17,6 +17,7 @@ import com.mytv.rtzhdj.app.data.api.service.HomeService;
 import com.mytv.rtzhdj.app.data.api.service.PartyMemberService;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyMienEntity;
 import com.mytv.rtzhdj.mvp.contract.PartyMemberContract;
 
 import java.util.List;
@@ -51,5 +52,11 @@ public class PartyMemberModel extends BaseModel implements PartyMemberContract.M
     public Observable<BaseJson<List<PartyMemberEntity>>> getPartyMember(int publishmentSystemId, boolean update) {
         return mRepositoryManager.obtainRetrofitService(PartyMemberService.class)
                 .getPartyMember(publishmentSystemId);
+    }
+
+    @Override
+    public Observable<BaseJson<List<PartyMienEntity>>> getPartymembermien(int publishmentSystemId, int pageIndex, int pageSize, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(PartyMemberService.class)
+                .getPartymembermien(publishmentSystemId, pageIndex, pageSize);
     }
 }
