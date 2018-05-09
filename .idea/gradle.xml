@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/calendar" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/libk-switchbutton" />
             <option value="$PROJECT_DIR$/rxcache" />
           </set>
         </option>
