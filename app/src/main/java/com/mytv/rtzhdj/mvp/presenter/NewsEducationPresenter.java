@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,22 +14,35 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.Constant;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
+import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.mvp.contract.NewsEducationContract;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsEducationActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,7 +149,7 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
     }
 
     @Override
-    public BaseDelegateAdapter initList(List<NewsEntity> data) {
+    public BaseDelegateAdapter initList(List<NewsDetailEntity> data) {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(mActivity, 1));
         return new BaseDelegateAdapter(mActivity, linearLayoutHelper , R.layout.item_vlayout_list_image,
@@ -144,14 +158,45 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, data.get(position).getTitle());
-                holder.setText(R.id.tv_datetime, data.get(position).getDatetime());
-                holder.setText(R.id.tv_star_num, data.get(position).getStar_num() + "");
-                holder.setText(R.id.tv_comment_num, data.get(position).getComment_num() + "");
+                holder.setText(R.id.tv_datetime, data.get(position).getAddDate());
+                holder.setText(R.id.tv_star_num, data.get(position).getDigs() + "");
+                holder.setText(R.id.tv_comment_num, data.get(position).getComments() + "");
 
                 com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(mActivity,
-                        holder.getView(R.id.iv_image), data.get(position).getImg_url());
+                        holder.getView(R.id.iv_image), data.get(position).getImgUrl());
 
             }
         };
+    }
+
+    @Override
+    public void callMethodOfGetTwoLevelList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getTwoLevelList(nodeId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<NewsSimpleEntity>>transformObservable("getTwoLevelList" + nodeId,
+                        new TypeToken<BaseJson<NewsSimpleEntity>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<NewsSimpleEntity>>())
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> {
+                    // Action onFinally
+                    mRootView.hideLoading();
+                })
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<NewsSimpleEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<NewsSimpleEntity> newsSimpleEntity) {
+                        Log.e("TAG", newsSimpleEntity.toString());
+
+                        if (newsSimpleEntity.isSuccess())
+                            mRootView.loadData(newsSimpleEntity.getData());
+
+                    }
+                });
     }
 }

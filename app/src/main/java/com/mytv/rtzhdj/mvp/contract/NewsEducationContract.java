@@ -6,12 +6,17 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsEntity;
+import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsEducationActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 
 import java.util.List;
+
+import io.reactivex.Observable;
 
 
 public interface NewsEducationContract {
@@ -20,10 +25,14 @@ public interface NewsEducationContract {
         void setOnGridClick(int position, String title);
         void setOnListClick(int position);
 
+        void loadData(NewsSimpleEntity newsSimpleEntity);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
+
+        // 获取 带“推荐”通用二级页面
+        Observable<BaseJson<NewsSimpleEntity>> getTwoLevelList(int nodeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -34,6 +43,9 @@ public interface NewsEducationContract {
         DelegateAdapter initRecyclerView(RecyclerView recyclerView);
         BaseDelegateAdapter initGvMenu();
         BaseDelegateAdapter initTitle(String title);
-        BaseDelegateAdapter initList(List<NewsEntity> data);
+        BaseDelegateAdapter initList(List<NewsDetailEntity> data);
+
+        // 调用 获取带“推荐”通用二级页面 api
+        void callMethodOfGetTwoLevelList(int nodeId, int pageIndex, int pageSize, boolean update);
     }
 }

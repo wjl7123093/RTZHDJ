@@ -17,6 +17,7 @@ import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.DataServer;
+import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsEducationComponent;
 import com.mytv.rtzhdj.di.module.NewsEducationModule;
 import com.mytv.rtzhdj.mvp.contract.NewsEducationContract;
@@ -62,8 +63,11 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
+    private final int PAGE_SIZE = 10;
+
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
+    private DelegateAdapter delegateAdapter = null;
 
 
     @Override
@@ -87,6 +91,9 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
         mPresenter.setActivity(NewsEducationActivity.this);
         initRecyclerView();
         initRefreshLayout();
+
+        // 获取 带"推荐"通用二级页面
+        mPresenter.callMethodOfGetTwoLevelList(6020, 1, PAGE_SIZE, false);
     }
 
 
@@ -130,8 +137,19 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
 
     }
 
+    @Override
+    public void loadData(NewsSimpleEntity newsSimpleEntity) {
+
+        //初始化list
+        BaseDelegateAdapter listAdapter = mPresenter.initList(newsSimpleEntity.getList_listBlock());
+        mAdapters.add(listAdapter);
+        delegateAdapter.setAdapters(mAdapters);
+        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);
+    }
+
     private void initRecyclerView() {
-        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
 
         //初始化九宫格
         BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
@@ -140,9 +158,9 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
         //初始化标题 - 必修课
         BaseDelegateAdapter titleAdapter = mPresenter.initTitle("推荐");
         mAdapters.add(titleAdapter);
-        //初始化list
-        BaseDelegateAdapter listAdapter = mPresenter.initList(DataServer.getNewsData(10));
-        mAdapters.add(listAdapter);
+//        //初始化list
+//        BaseDelegateAdapter listAdapter = mPresenter.initList(DataServer.getNewsData(10));
+//        mAdapters.add(listAdapter);
 
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);
