@@ -218,6 +218,16 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 holder.setText(R.id.tv_title, communityBlocks.get(position).getTitle());
                 holder.setText(R.id.tv_datetime, communityBlocks.get(position).getAddDate());
 
+                holder.getView(R.id.rl_container).setOnClickListener(view -> {
+                    // 新闻详情页
+                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                            .withInt("articleId", communityBlocks.get(position).getContentId())
+                            .withInt("nodeId", 0)
+                            .withInt("digs", communityBlocks.get(position).getDigs())
+                            .withInt("comments", communityBlocks.get(position).getComments())
+                            .navigation();
+                });
+
             }
         };
     }
