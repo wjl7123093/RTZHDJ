@@ -163,6 +163,12 @@ public class ElectiveCourseActivity extends BaseActivity<ElectiveCoursePresenter
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(ElectiveCourseActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+
+                // 跳转到 课件详情
+                ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
+                        .withString("title", title)
+                        .withInt("nodeId", nodeId)
+                        .withInt("articleId", courseList.get(position).getContentId()).navigation();
             }
         });
 

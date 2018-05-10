@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.di.component.DaggerCompulsoryCourseComponent;
 import com.mytv.rtzhdj.di.module.CompulsoryCourseModule;
@@ -163,6 +165,12 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+
+                // 跳转到 课件详情
+                ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
+                        .withString("title", "必修课")
+                        .withInt("nodeId", 9043)
+                        .withInt("articleId", courseList.get(position).getContentId()).navigation();
             }
         });
 

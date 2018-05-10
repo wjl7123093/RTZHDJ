@@ -33,7 +33,8 @@ public class CompulsoryCourseAdapter extends BaseQuickAdapter<CoursewareEntity, 
     @Override
     protected void convert(BaseViewHolder helper, CoursewareEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
-        helper.setText(R.id.tv_status, item.getCourseType() == 0 ? "未学习" : item.getCourseType() == 1 ? "已学习，未完成" : "已完成");
+//        helper.setText(R.id.tv_status, item.getCourseType() == 0 ? "未学习" : item.getCourseType() == 1 ? "已学习，未完成" : "已完成");
+        helper.setText(R.id.tv_status, item.getCourseTypeString());
         helper.setText(R.id.tv_last_time, item.getLastStudyTime());
 
         helper.setTextColor(R.id.tv_status, item.getCourseType() == 0 ?
