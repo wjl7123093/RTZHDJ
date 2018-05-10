@@ -136,8 +136,14 @@ public class NewsSimplePresenter extends BasePresenter<NewsSimpleContract.Model,
             public void OnBannerClick(int position) {
 //                mRootView.onBannerClick(position);
 
+                // 新闻详情页
+//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                        .withInt("articleId", recommendList.get(position).getContentId()).navigation();
+                        .withInt("articleId", recommendList.get(position).getId())
+                        .withInt("nodeId", recommendList.get(position).getNodeId())
+                        .withInt("digs", recommendList.get(position).getDigs())
+                        .withInt("comments", recommendList.get(position).getComments())
+                        .navigation();
             }
         });
 

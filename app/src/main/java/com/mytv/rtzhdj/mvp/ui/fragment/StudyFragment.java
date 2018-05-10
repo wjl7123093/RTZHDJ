@@ -192,8 +192,12 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
                 break;
             case 1: // 选修课
             case 2: // 微党课
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
-                        .withString("from", "StudyCoursewareActivity")
+//                ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+//                        .withString("from", "StudyCoursewareActivity")
+//                        .withString("title", title).navigation();
+
+                ARouter.getInstance().build(ARoutePath.PATH_ELECTIVE_COURSE)
+                        .withInt("nodeId", arrayPos == 1 ? 9044 : 9045)
                         .withString("title", title).navigation();
                 break;
         }
