@@ -193,5 +193,6 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
         // 这一步必须要做,否则不会显示.
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mTvStarNum.setCompoundDrawables(drawable,null,null,null);
+        mTvStarNum.setText(digs + 1 + "");
     }
 }
