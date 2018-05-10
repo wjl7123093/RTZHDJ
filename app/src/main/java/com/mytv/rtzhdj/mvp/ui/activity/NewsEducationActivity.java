@@ -144,8 +144,6 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
         BaseDelegateAdapter listAdapter = mPresenter.initList(newsSimpleEntity.getList_listBlock());
         mAdapters.add(listAdapter);
         delegateAdapter.setAdapters(mAdapters);
-        //设置适配器
-        delegateAdapter.setAdapters(mAdapters);
     }
 
     private void initRecyclerView() {

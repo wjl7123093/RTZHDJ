@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -32,6 +33,7 @@ import javax.inject.Inject;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
@@ -164,6 +166,16 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
 
                 com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(mActivity,
                         holder.getView(R.id.iv_image), data.get(position).getImgUrl());
+
+                holder.getView(R.id.rl_container).setOnClickListener(view -> {
+                    // 新闻详情页
+                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                            .withInt("articleId", data.get(position).getId())
+                            .withInt("nodeId", data.get(position).getNodeId())
+                            .withInt("digs", data.get(position).getDigs())
+                            .withInt("comments", data.get(position).getComments())
+                            .navigation();
+                });
 
             }
         };
