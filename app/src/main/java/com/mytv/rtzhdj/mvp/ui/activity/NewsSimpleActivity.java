@@ -97,7 +97,7 @@ public class NewsSimpleActivity extends BaseActivity<NewsSimplePresenter> implem
     @Override
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarBack.setOnClickListener(view -> this.finish());
-        mIvMenu.setImageResource(R.mipmap.ic_launcher);
+        mIvMenu.setImageResource(R.mipmap.ic_search);
         mBtnToolbarMenu.setOnClickListener(view -> {
             // 跳转到搜索页面
             ARouter.getInstance().build(ARoutePath.PATH_SEARCH).navigation();

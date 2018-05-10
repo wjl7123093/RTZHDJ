@@ -10,6 +10,7 @@
   * @update 2018-1-26   新增 右侧功能键(menu)
   *         2018-3-24   新增 右侧文本菜单健
  -->
+<!-- 阴影设置 android:elevation="@dimen/len_6"-->
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +19,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
-    android:elevation="@dimen/len_6"
     app:contentInsetStart="0dp"
     app:titleMarginStart="20dp"
     app:layout_scrollFlags="scroll|enterAlways"
@@ -64,7 +64,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_search"
+            android:scaleType="centerCrop"/>
 
     </RelativeLayout>
 

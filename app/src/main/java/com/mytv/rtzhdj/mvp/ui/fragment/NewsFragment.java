@@ -91,7 +91,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     @Override
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarBack.setVisibility(View.GONE);
-        mIvMenu.setImageResource(R.mipmap.ic_launcher);
+        mIvMenu.setImageResource(R.mipmap.ic_search);
         mBtnToolbarMenu.setOnClickListener(view -> {
             // 跳转到搜索页面
             ARouter.getInstance().build(ARoutePath.PATH_SEARCH).navigation();

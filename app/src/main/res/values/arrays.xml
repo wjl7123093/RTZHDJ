@@ -163,16 +163,16 @@
 
     <!--党员教育页Grid-->
     <integer-array name="education_gv_images">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_education_important</item>
+        <item>@mipmap/ic_education_night_school</item>
+        <item>@mipmap/ic_education_remote</item>
+        <item>@mipmap/ic_education_teachers</item>
     </integer-array>
     <string-array name="education_gv_title">
-        <item>主题教育</item>
-        <item>工作动态</item>
         <item>重点培训</item>
-        <item>党员干部现代远程教育</item>
+        <item>农民夜校</item>
+        <item>远程教育</item>
+        <item>师资库</item>
     </string-array>
 
     <!--/////////////////////////////////////学习课件///////////////////////////////////-->

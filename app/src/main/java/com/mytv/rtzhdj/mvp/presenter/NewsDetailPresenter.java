@@ -195,8 +195,8 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
                     public void onNext(@NonNull BaseJson postResult) {
                         Log.e(TAG, postResult.toString());
 
-                        if (postResult.getStatus() == 200)
-                            mRootView.showMessage("点赞成功");
+                        if (postResult.isSuccess())
+                            mRootView.changeDigsStatus();
 
                     }
                 });

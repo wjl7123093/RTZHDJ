@@ -3,6 +3,7 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
@@ -183,5 +184,14 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public void changeDigsStatus() {
+        Drawable drawable= getResources().getDrawable(R.mipmap.ic_digs_select);
+
+        // 这一步必须要做,否则不会显示.
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        mTvStarNum.setCompoundDrawables(drawable,null,null,null);
     }
 }
