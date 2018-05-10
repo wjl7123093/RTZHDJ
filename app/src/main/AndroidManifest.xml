@@ -217,8 +217,9 @@
         <activity
             android:name=".mvp.ui.activity.MyJoinActivity"
             android:label="@string/title_my_join" />
-        <activity android:name=".mvp.ui.activity.NewsAllActivityActivity" />
-        <activity android:name=".mvp.ui.activity.NewsAllActivity"></activity>
+        <activity android:name=".mvp.ui.activity.NewsAllActivity" />
+        <activity android:name=".mvp.ui.activity.ScoresDetailsActivity"
+            android:label="@string/title_scores_details"></activity>
     </application>
 
 </manifest>

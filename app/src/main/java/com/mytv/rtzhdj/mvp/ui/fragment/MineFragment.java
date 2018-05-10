@@ -160,6 +160,15 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 }
                 break;
             case 2: // 我的积分
+                switch (position) {
+                    case 0: // 积分明细
+                        ARouter.getInstance().build(ARoutePath.PATH_SCORES_DETAILS).navigation();
+                        break;
+                    case 1: // 积分商城
+                        break;
+                    case 2: // 积分兑换
+                        break;
+                }
                 break;
             case 3: // 生活助手
                 break;
