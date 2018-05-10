@@ -20,6 +20,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsCommonComponent;
 import com.mytv.rtzhdj.di.module.NewsCommonModule;
 import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
@@ -27,10 +28,13 @@ import com.mytv.rtzhdj.mvp.presenter.NewsCommonPresenter;
 
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
+import com.mytv.rtzhdj.mvp.ui.adapter.NewsSimpleAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -66,8 +70,10 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     String from;
     @Autowired
     String title;
+    @Autowired
+    int nodeId;
 
-    private NewsAdapter newsAdapter;
+    private NewsSimpleAdapter newsAdapter;
     private static final int PAGE_SIZE = 10;
 
 
@@ -93,8 +99,11 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 
         mPresenter.setActivity(NewsCommonActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView, from);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
+
+        // 获取二级通用列表数据
+        mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, 1, PAGE_SIZE, false);
     }
 
 
@@ -147,18 +156,30 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
         });
     }
 
-    private void initAdapter() {
-        /*newsAdapter = new NewsAdapter(NewsCommonActivity.this, PAGE_SIZE);
+    public void initAdapter(List<NewsDetailEntity> newsDetailList) {
+        newsAdapter = new NewsSimpleAdapter(NewsCommonActivity.this, newsDetailList);
         newsAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(newsAdapter);
 
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showMessage("" + Integer.toString(position));
-            }
-        });*/
+                Toast.makeText(NewsCommonActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
+                // 新闻详情页
+//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                        .withInt("articleId", newsDetailList.get(position).getId())
+                        .withInt("nodeId", newsDetailList.get(position).getNodeId())
+                        .withInt("digs", newsDetailList.get(position).getDigs())
+                        .withInt("comments", newsDetailList.get(position).getComments())
+                        .navigation();
+            }
+        });
     }
 
+    @Override
+    public void loadListData(List<NewsDetailEntity> newsList) {
+        initAdapter(newsList);
+    }
 }

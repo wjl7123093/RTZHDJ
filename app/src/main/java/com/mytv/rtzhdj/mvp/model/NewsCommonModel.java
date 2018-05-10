@@ -10,7 +10,16 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.ContentService;
+import com.mytv.rtzhdj.app.data.api.service.NewsSimpleService;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
+import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
 import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +41,9 @@ public class NewsCommonModel extends BaseModel implements NewsCommonContract.Mod
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(NewsSimpleService.class)
+                .getTwoLevelInfoList(nodeId, pageIndex, pageSize);
+    }
 }
