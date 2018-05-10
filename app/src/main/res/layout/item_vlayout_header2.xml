@@ -51,13 +51,15 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_14"
                 android:textColor="@color/white"
                 android:text="学习记录"
                 android:gravity="center"
-                />
+                android:drawableLeft="@mipmap/ic_study_record"
+                android:drawablePadding="4dp"
+                android:layout_centerHorizontal="true"/>
             <TextView
                 android:id="@+id/tv_study_record"
                 android:layout_width="match_parent"
@@ -81,22 +83,27 @@
             android:layout_weight="1"
             android:orientation="vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_14"
                 android:textColor="@color/white"
                 android:text="学习积分"
                 android:gravity="center"
-                />
+                android:drawableLeft="@mipmap/ic_study_scores"
+                android:drawablePadding="4dp"
+                android:layout_centerHorizontal="true" />
             <TextView
                 android:id="@+id/tv_study_scores"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_14"
                 android:textColor="@color/yellow_800"
                 android:text="累积：6"
                 android:gravity="center"
-                android:layout_alignParentBottom="true"/>
+                android:drawableRight="@mipmap/ic_study_money"
+                android:drawablePadding="4dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
     </LinearLayout>
     

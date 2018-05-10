@@ -270,7 +270,7 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                     // 设置
                     mRootView.setOnSettingsClick();
                 });
-                holder.getView(R.id.tv_sign).setOnClickListener(view -> {
+                holder.getView(R.id.iv_sign).setOnClickListener(view -> {
                     // 天天签到
                     mRootView.setOnSignClick();
                 });

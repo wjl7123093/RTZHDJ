@@ -49,12 +49,12 @@
 
     <!--学习页图片-->
     <integer-array name="study_gv_image">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_study_grid_courseware</item>
+        <item>@mipmap/ic_study_grid_law</item>
+        <item>@mipmap/ic_study_grid_knowleadge</item>
+        <item>@mipmap/ic_study_grid_research</item>
+        <item>@mipmap/ic_study_grid_history</item>
+        <item>@mipmap/ic_study_grid_effect</item>
     </integer-array>
     <!--学习页图片对应的位子-->
     <string-array name="study_gv_title">
@@ -62,7 +62,7 @@
         <item>党内法规</item>
         <item>党建知识</item>
         <item>党建研究</item>
-        <item>绵阳党史</item>
+        <item>壤塘党史</item>
         <item>效果测评</item>
     </string-array>
 
@@ -70,10 +70,10 @@
 
     <!--参与页图片-->
     <integer-array name="join_gv_image">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_join_activity</item>
+        <item>@mipmap/ic_join_volunteer_service</item>
+        <item>@mipmap/ic_join_report_community</item>
+        <item>@mipmap/ic_join_surround_community</item>
     </integer-array>
     <!--参与页图片对应的位子-->
     <string-array name="join_gv_title">
@@ -86,9 +86,9 @@
 
     <!--参与页心愿墙区域-->
     <integer-array name="join_plus_image">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_join_wishwall</item>
+        <item>@mipmap/ic_join_donate</item>
+        <item>@mipmap/ic_join_all_donation</item>
     </integer-array>
     <string-array name="join_plus_title">
         <item>心愿墙</item>
@@ -104,10 +104,10 @@
 
     <!--参与页我的心愿区域-->
     <integer-array name="join_column_wish_image">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_join_my_wish</item>
+        <item>@mipmap/ic_join_my_receive_wish</item>
+        <item>@mipmap/ic_join_my_donation</item>
+        <item>@mipmap/ic_join_my_receive</item>
     </integer-array>
     <string-array name="join_column_wish_title">
         <item>我的心愿</item>
@@ -121,11 +121,11 @@
 
     <!--我的页Grid - 我的支部-->
     <integer-array name="mine_gv_party_branch_images">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_mine_grid_mien</item>
+        <item>@mipmap/ic_mine_grid_work_note</item>
+        <item>@mipmap/ic_mine_grid_relationship</item>
+        <item>@mipmap/ic_mine_grid_flow</item>
+        <item>@mipmap/ic_mine_grid_notebook</item>
     </integer-array>
     <string-array name="mine_gv_party_branch_title">
         <item>党员风采</item>
@@ -138,9 +138,9 @@
 
     <!--我的页Grid - 我的积分-->
     <integer-array name="mine_gv_scores_images">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_mine_grid_scores_details</item>
+        <item>@mipmap/ic_mine_grid_scores_shop</item>
+        <item>@mipmap/ic_mine_grid_scores_exchange</item>
     </integer-array>
     <string-array name="mine_gv_scores_title">
         <item>积分明细</item>
@@ -151,8 +151,8 @@
 
     <!--我的页Grid - 生活助手-->
     <integer-array name="mine_gv_assistant_images">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_mine_grid_healthy_living</item>
+        <item>@mipmap/ic_mine_grid_living_payment</item>
     </integer-array>
     <string-array name="mine_gv_assistant_title">
         <item>健康生活</item>
@@ -195,14 +195,14 @@
 
     <!--发现页图片-->
     <integer-array name="find_gv_image">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_home_grid_news</item>
+        <item>@mipmap/ic_home_grid_news_education</item>
+        <item>@mipmap/ic_home_grid_news_clean</item>
+        <item>@mipmap/ic_home_grid_news_poverty</item>
+        <item>@mipmap/ic_home_grid_news_live</item>
+        <item>@mipmap/ic_home_grid_map</item>
+        <item>@mipmap/ic_home_grid_enmergency</item>
+        <item>@mipmap/ic_home_grid_bigdata</item>
     </integer-array>
     <!--发现页图片对应的位子-->
     <string-array name="find_gv_title">

@@ -149,6 +149,11 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, title);
                 holder.setGone(R.id.tv_moredata, false);
+
+                if (title.equals("志愿服务")) {
+                    holder.setGone(R.id.view_divider, false);
+                    holder.setGone(R.id.iv_volunteer, true);
+                }
             }
         };
     }

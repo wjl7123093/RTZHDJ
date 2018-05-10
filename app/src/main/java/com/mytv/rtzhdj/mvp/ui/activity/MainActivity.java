@@ -109,11 +109,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mBottomNavigationBar.setBarBackgroundColor(R.color.white);//set background color for navigation bar
         mBottomNavigationBar.setInActiveColor(R.color.divider);//unSelected icon color
         mBottomNavigationBar.setActiveColor(R.color.primary); // selected icon color
-        mBottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, R.string.tab_home).setBadgeItem(badgeItem))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, R.string.tab_news))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, R.string.tab_study))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, R.string.tab_join))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, R.string.tab_mine))
+        mBottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_tab_home, R.string.tab_home).setBadgeItem(badgeItem))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_tab_news, R.string.tab_news))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_tab_study, R.string.tab_study))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_tab_join, R.string.tab_join))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_tab_mine, R.string.tab_mine))
                 .setFirstSelectedPosition(0)
                 .initialise();
 

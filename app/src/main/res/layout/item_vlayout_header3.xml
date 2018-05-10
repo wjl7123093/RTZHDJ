@@ -53,7 +53,7 @@
         android:id="@+id/btn_my_report"
         android:layout_width="@dimen/len_40"
         android:layout_height="@dimen/len_40"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/ic_join_my_report"
         android:scaleType="centerCrop"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"/>

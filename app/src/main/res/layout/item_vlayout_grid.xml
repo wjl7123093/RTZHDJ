@@ -21,13 +21,13 @@
         android:id="@+id/iv_icon"
         android:layout_width="@dimen/len_40"
         android:layout_height="@dimen/len_40"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitCenter"/>
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_14"
         android:textColor="@color/secondary_text"
-        android:layout_marginTop="@dimen/len_2"/>
+        android:layout_marginTop="@dimen/len_4"/>
 
 </LinearLayout>

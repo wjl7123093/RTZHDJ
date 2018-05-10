@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:background="@color/primary_dark"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/bg_join_love_hourse"
+            android:background="#cc0100"/>
     </LinearLayout>
     <View
         android:layout_width="1dp"
