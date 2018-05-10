@@ -47,7 +47,7 @@
             android:layout_width="@dimen/len_16"
             android:layout_height="@dimen/font_16"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_study_money"
             android:layout_gravity="bottom"/>
         <View
             android:layout_width="0dp"

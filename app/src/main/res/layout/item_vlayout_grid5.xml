@@ -47,9 +47,9 @@
     <ImageView
         android:id="@+id/iv_desc"
         android:layout_width="@dimen/len_16"
-        android:layout_height="@dimen/len_16"
+        android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:layout_marginTop="@dimen/len_6"
         android:visibility="gone"/>
 

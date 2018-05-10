@@ -49,13 +49,13 @@
         android:layout_alignParentLeft="true"/>
 
     <!-- 我的报到 -->
-    <ImageButton
-        android:id="@+id/btn_my_report"
-        android:layout_width="@dimen/len_40"
-        android:layout_height="@dimen/len_40"
+    <ImageView
+        android:id="@+id/iv_my_report"
+        android:layout_width="@dimen/len_28"
+        android:layout_height="@dimen/len_28"
         android:src="@mipmap/ic_join_my_report"
         android:scaleType="centerCrop"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

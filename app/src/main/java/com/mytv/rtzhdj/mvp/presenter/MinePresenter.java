@@ -312,7 +312,7 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                         holder.setText(R.id.tv_title, "累计积分");
                         holder.setGone(R.id.tv_desc, false);
                         holder.setGone(R.id.iv_desc, true);
-                        holder.setImageResource(R.id.iv_desc, R.mipmap.ic_launcher);
+                        holder.setImageResource(R.id.iv_desc, R.mipmap.ic_mine_scores_total);
                         break;
                     case 1:
                         holder.setText(R.id.tv_scores, power + "");
@@ -326,7 +326,7 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                         holder.setText(R.id.tv_title, "全市排名");
                         holder.setGone(R.id.tv_desc, false);
                         holder.setGone(R.id.iv_desc, true);
-                        holder.setImageResource(R.id.iv_desc, R.mipmap.ic_launcher);
+                        holder.setImageResource(R.id.iv_desc, R.mipmap.ic_mine_scores_rank);
                         break;
                 }
             }
