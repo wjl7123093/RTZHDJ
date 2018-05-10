@@ -17,9 +17,9 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/bg_login_logo"/>
 
     <!-- 账号 -->
     <net.qiujuer.genius.ui.widget.EditText

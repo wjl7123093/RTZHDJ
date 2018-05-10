@@ -25,6 +25,7 @@ import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
+import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.DataHelper;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
@@ -142,6 +143,14 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_info, title + content);
+
+                holder.getView(R.id.ll_container).setOnClickListener(view -> {
+                    if (title.contains("退出")) {
+                        ArmsUtils.exitApp();
+                        ARouter.getInstance().build(ARoutePath.PATH_LOGIN).navigation();
+                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_IS_LOGIN, 0);    // 退出登录
+                    }
+                });
             }
         };
     }

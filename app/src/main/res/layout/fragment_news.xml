@@ -35,19 +35,18 @@
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/tab_selected_color"
             app:tabTextAppearance="@style/TextAppearanceHome"
-            app:tabTextColor="#ff222222"
-            android:layout_marginRight="@dimen/len_40"/>
+            app:tabTextColor="#ff222222"/>
 
-        <ImageView
-            android:id="@+id/iv_operation"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingLeft="5dp"
-            android:scaleType="center"
-            android:src="@mipmap/ic_launcher"
-            />
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_operation"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:paddingLeft="5dp"-->
+            <!--android:scaleType="center"-->
+            <!--android:src="@mipmap/ic_launcher"-->
+            <!--/>-->
 
     </RelativeLayout>
 

@@ -179,9 +179,9 @@
 
     <!--学习课件页Grid-->
     <integer-array name="courseware_gv_images">
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
-        <item>@mipmap/ic_launcher</item>
+        <item>@mipmap/ic_compulsory_course</item>
+        <item>@mipmap/ic_choose_course</item>
+        <item>@mipmap/ic_little_course</item>
     </integer-array>
     <string-array name="courseware_gv_title">
         <item>必修课</item>
