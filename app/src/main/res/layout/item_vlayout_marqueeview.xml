@@ -24,7 +24,9 @@
         android:background="@color/red_800"
         android:textSize="@dimen/font_14"
         android:textColor="@color/white"
-        android:text="通知"/>
+        android:text="通知"
+        android:drawableLeft="@mipmap/ic_home_notice"
+        android:padding="@dimen/space_10dp"/>
 
     <com.sunfusheng.marqueeview.MarqueeView
         android:id="@+id/marqueeView1"

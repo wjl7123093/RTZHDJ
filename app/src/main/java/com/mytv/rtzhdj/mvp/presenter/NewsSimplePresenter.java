@@ -108,7 +108,7 @@ public class NewsSimplePresenter extends BasePresenter<NewsSimpleContract.Model,
 
         View view = mActivity.getLayoutInflater().inflate(R.layout.item_vlayout_banner, parent, false);
 
-        view.findViewById(R.id.tv_topic).setVisibility(View.GONE);
+        view.findViewById(R.id.iv_topic).setVisibility(View.GONE);
         // 绑定数据
         Banner mBanner = view.findViewById(R.id.banner);
         //设置banner样式

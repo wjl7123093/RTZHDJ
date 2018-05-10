@@ -16,15 +16,11 @@
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="150dp" />
-    <TextView
-        android:id="@+id/tv_topic"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/len_28"
-        android:text="党建专题 >>"
-        android:textSize="@dimen/font_16"
-        android:textColor="@color/colorAccent"
-        android:background="@drawable/sp_bg_mine_btn_sign"
-        android:gravity="center"
+    <ImageView
+        android:id="@+id/iv_topic"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_home_special_logo"
         android:layout_gravity="bottom|left"
         android:layout_marginLeft="@dimen/len_10"
         android:layout_marginBottom="@dimen/len_10"/>

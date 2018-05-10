@@ -176,7 +176,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 });
 
 //                mRootView.setBanner(mBanner);
-                holder.getView(R.id.tv_topic).setOnClickListener(view -> {
+                holder.getView(R.id.iv_topic).setOnClickListener(view -> {
                     mRootView.setOnTopicClick();
                 });
             }

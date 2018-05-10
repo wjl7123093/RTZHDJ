@@ -22,7 +22,10 @@
         android:layout_height="wrap_content"
         android:text="推荐活动"
         android:textSize="@dimen/font_20"
-        android:textColor="@color/orange_800"/>
+        android:textColor="@color/orange_800"
+        android:drawableLeft="@mipmap/ic_home_line_left"
+        android:drawableRight="@mipmap/ic_home_line_right"
+        android:drawablePadding="@dimen/len_4"/>
 
     <TextView
         android:id="@+id/tv_desc"
