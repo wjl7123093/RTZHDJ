@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_14"
                 android:textColor="@color/white"
-                android:text="学习记录"
+                android:text="学习记录 >>"
                 android:gravity="center"
                 android:drawableLeft="@mipmap/ic_study_record"
                 android:drawablePadding="4dp"

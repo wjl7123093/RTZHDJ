@@ -71,7 +71,7 @@ public class StartActivity extends BaseActivity<StartPresenter> implements Start
                 ARouter.getInstance().build(ARoutePath.PATH_LOGIN).navigation();
                 StartActivity.this.finish();
             }
-        }, 2000);
+        }, 1000);
 
         return 0; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }

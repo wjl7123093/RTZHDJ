@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -185,7 +186,8 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_name, userInfo.getUserName());
-                holder.setText(R.id.tv_study_record, "未学: " + userInfo.getNoStudyNum() + "/已学: " + userInfo.getYesStudyNum());
+                holder.setText(R.id.tv_study_record, Html.fromHtml("未学: " + userInfo.getNoStudyNum()
+                        + "<font color=\"#ffffff\">/已学: " + userInfo.getYesStudyNum() + "</font>"));
                 holder.setText(R.id.tv_study_scores, "累积: " + userInfo.getIntegral());
 
                 if (!TextUtils.isEmpty(userInfo.getPhotoUrl())) {
