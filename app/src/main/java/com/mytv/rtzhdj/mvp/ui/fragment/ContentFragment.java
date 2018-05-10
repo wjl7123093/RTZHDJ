@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
@@ -186,6 +188,15 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+
+                // 新闻详情页
+//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                        .withInt("articleId", importandBlockList.get(position).getArticleId())
+                        .withInt("nodeId", 3004)
+                        .withInt("digs", importandBlockList.get(position).getDigs())
+                        .withInt("comments", importandBlockList.get(position).getComments())
+                        .navigation();
             }
         });
     }

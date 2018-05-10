@@ -160,13 +160,13 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
         if (!partyColumnsList.get(0).getTitle().equals("推荐")) {
             PartyColumnsEntity columnsEntity = new PartyColumnsEntity();
             columnsEntity.setTitle("推荐");
-            columnsEntity.setNodeId(0);
+            columnsEntity.setNodeID(0);
             partyColumnsList.add(0, columnsEntity);
         }
 
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < partyColumnsList.size(); i++) {
-            fragments.add(ContentFragment.newInstance(partyColumnsList.get(i).getNodeId()));
+            fragments.add(ContentFragment.newInstance(partyColumnsList.get(i).getNodeID()));
         }
 
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
