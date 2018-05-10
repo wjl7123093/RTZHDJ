@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.arouter.utils.TextUtils;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -35,6 +36,7 @@ import javax.inject.Inject;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
@@ -170,7 +172,28 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 holder.setText(R.id.tv_datetime, coursewareList.get(position).getLastStudyTime());
 
                 holder.getView(R.id.ll_container).setOnClickListener(view -> {
-                    mRootView.setOnListClick(arrayPos, position);
+//                    mRootView.setOnListClick(arrayPos, position);
+
+                    switch (arrayPos) {
+                        case 0: // 必修课
+                            ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
+                                    .withString("title", "必修课")
+                                    .withInt("nodeId", coursewareList.get(position).getNodeId())
+                                    .withInt("articleId", coursewareList.get(position).getArticleId()).navigation();
+                            break;
+                        case 1: // 选修课
+                            ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
+                                    .withString("title", "选修课")
+                                    .withInt("nodeId", coursewareList.get(position).getNodeId())
+                                    .withInt("articleId", coursewareList.get(position).getArticleId()).navigation();
+                            break;
+                        case 2: // 微党课
+                            ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
+                                    .withString("title", "微党课")
+                                    .withInt("nodeId", coursewareList.get(position).getNodeId())
+                                    .withInt("articleId", coursewareList.get(position).getArticleId()).navigation();
+                            break;
+                    }
                 });
 
             }

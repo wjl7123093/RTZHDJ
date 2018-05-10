@@ -17,6 +17,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.di.component.DaggerCourseDetailComponent;
 import com.mytv.rtzhdj.di.module.CourseDetailModule;
 import com.mytv.rtzhdj.mvp.contract.CourseDetailContract;
@@ -63,6 +64,10 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     @Autowired
     String title;
+    @Autowired
+    int nodeId;
+    @Autowired
+    int articleId;
 
 
     @Override
@@ -87,7 +92,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
         mPresenter.setActivity(CourseDetailActivity.this);
         mPresenter.initWebview(mWebView, mWebProgressBar);
-        mPresenter.getCourseDetail("http://www.tencent.com/");
+        mPresenter.getCourseDetail(Api.APP_COURSE_DOMAIN + "nodeId=" + nodeId + "&id=" + articleId);
 
         // 获取课件详情数据
         mPresenter.callMethodOfGetCoursewareDetail(0, false);

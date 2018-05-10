@@ -168,10 +168,10 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     public void setOnListClick(int arrayPos, int position) {
         switch (arrayPos) {
             case 0: // 必修课
-//                ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
-//                        .withString("title", "必修课").navigation();
-                ARouter.getInstance().build(ARoutePath.PATH_COURSE_VIDEO_DETAIL)
+                ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                         .withString("title", "必修课").navigation();
+//                ARouter.getInstance().build(ARoutePath.PATH_COURSE_VIDEO_DETAIL)
+//                        .withString("title", "必修课").navigation();
                 break;
             case 1: // 选修课
                 ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)

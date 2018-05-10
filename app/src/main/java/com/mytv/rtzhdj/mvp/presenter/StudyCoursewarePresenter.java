@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -31,6 +32,7 @@ import javax.inject.Inject;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
@@ -170,6 +172,13 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
 //                        data.get(position).getType() == 1 ? mActivity.getResources().getColor(R.color.primary_dark)
 //                        : data.get(position).getType() == 2 ? mActivity.getResources().getColor(R.color.accent)
 //                                : mActivity.getResources().getColor(R.color.green_400));
+
+                holder.getView(R.id.ll_container).setOnClickListener(view -> {
+                    ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
+                            .withString("title", data.get(position).getCourseTypeName())
+                            .withInt("nodeId", 0)
+                            .withInt("articleId", data.get(position).getContentId()).navigation();
+                });
 
             }
         };
