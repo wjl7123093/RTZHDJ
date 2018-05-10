@@ -12,6 +12,25 @@ import java.util.List;
  * @update
  */
 public class PartyNewsEntity {
+    private int Nodeid;         // 父节点id
+    private int NodeId;         // 父节点Id
+
+    public int getNodeid() {
+        return Nodeid;
+    }
+
+    public void setNodeid(int nodeid) {
+        Nodeid = nodeid;
+    }
+
+    public int getNodeId() {
+        return NodeId;
+    }
+
+    public void setNodeId(int nodeId) {
+        NodeId = nodeId;
+    }
+
     private int ArticleId;      // 文章id
     private String Title;       // 标题
     private int Digs;           // 点赞数

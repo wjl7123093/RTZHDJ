@@ -193,7 +193,7 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 //                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                         .withInt("articleId", importandBlockList.get(position).getArticleId())
-                        .withInt("nodeId", 3004)
+                        .withInt("nodeId", importandBlockList.get(position).getNodeid())
                         .withInt("digs", importandBlockList.get(position).getDigs())
                         .withInt("comments", importandBlockList.get(position).getComments())
                         .navigation();
