@@ -64,6 +64,9 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
 
+    @BindView(R.id.ll_btn_wish)
+    LinearLayout mLlBtnWish;
+
     @BindView(R.id.tabs)
     TabLayout tabLayout;
     @BindView(R.id.vp_content)
@@ -99,6 +102,10 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
 
         titles = new String[]{"心愿单", "未被认领", "已被认领"};
 //        initTab();
+
+        mLlBtnWish.setOnClickListener(view -> {
+            showMessage("我要许愿");
+        });
     }
 
 

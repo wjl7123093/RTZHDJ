@@ -6,16 +6,20 @@
  * @version v1.0.0(1)
  *
  * @crdate 2018-2-9
- * @update
+ * @update 2018-5-10    新增 我要许 按钮
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@mipmap/xyq_00">
+    android:orientation="vertical">
 
     <include layout="@layout/include_toolbar"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/xyq_00">
 
     <android.support.design.widget.CoordinatorLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -80,4 +84,34 @@
         </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
+
+        <!-- 我要许愿 -->
+        <LinearLayout
+            android:id="@+id/ll_btn_wish"
+            android:layout_width="@dimen/len_80"
+            android:layout_height="@dimen/len_80"
+            android:background="@drawable/sp_bg_wish_btn"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/space_30dp"
+            android:layout_marginRight="@dimen/space_20dp">
+
+            <ImageView
+                android:layout_width="@dimen/len_36"
+                android:layout_height="@dimen/len_36"
+                android:src="@mipmap/ic_wyjz"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我要许"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_14"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>

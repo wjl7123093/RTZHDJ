@@ -62,6 +62,9 @@ public class MyReceiveWishActivity extends BaseActivity<MyReceiveWishPresenter> 
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
 
+    @BindView(R.id.ll_btn_wish)
+    LinearLayout mLlBtnWish;
+
     @BindView(R.id.tabs)
     TabLayout tabLayout;
     @BindView(R.id.vp_content)
@@ -92,6 +95,10 @@ public class MyReceiveWishActivity extends BaseActivity<MyReceiveWishPresenter> 
         titles = new String[]{"心愿单", "未实现", "已实现"};
 
 //        collapsingToolbar.setTitleEnabled(false);
+
+        mLlBtnWish.setOnClickListener(view -> {
+            showMessage("我要许愿");
+        });
     }
 
 
