@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -126,6 +127,18 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     public void killMyself() {
         finish();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //点击back键finish当前activity
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
+    }
+
 
     private void initToolBar(String title) {
         setSupportActionBar(mToolbar);
