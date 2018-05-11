@@ -2,6 +2,7 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.api.Api;
+import com.mytv.rtzhdj.app.utils.TimeTools;
 import com.mytv.rtzhdj.di.component.DaggerCourseDetailComponent;
 import com.mytv.rtzhdj.di.module.CourseDetailModule;
 import com.mytv.rtzhdj.mvp.contract.CourseDetailContract;
@@ -25,6 +27,8 @@ import com.mytv.rtzhdj.mvp.presenter.CourseDetailPresenter;
 
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
+
+import net.qiujuer.genius.ui.widget.Button;
 
 import butterknife.BindView;
 
@@ -61,6 +65,8 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     TextView mTvTime;
     @BindView(R.id.tv_scores)
     TextView mTvScores;
+    @BindView(R.id.btn_done)
+    Button mBtnDone;
 
     @Autowired
     String title;
@@ -68,6 +74,11 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     int nodeId;
     @Autowired
     int articleId;
+
+    private CountDownTimer mCountDownTimer;
+    private static final long MAX_TIME = 62 * 1000;
+    private long curTime = 0;
+    private boolean isPause = false;
 
 
     @Override
@@ -96,6 +107,9 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
         // 获取课件详情数据
         mPresenter.callMethodOfGetCoursewareDetail(0, false);
+
+        initCountDownTimer(MAX_TIME);
+        mCountDownTimer.start();
     }
 
 
@@ -130,6 +144,34 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     protected void onResume() {
         super.onResume();
         mTvToolbarTitle.setText(title);
+
+        // 继续倒计时
+        if (curTime != 0 && isPause) {
+            //将上次当前剩余时间作为新的时长
+            initCountDownTimer(curTime);
+            mCountDownTimer.start();
+            isPause = false;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // 暂停倒计时
+        if (!isPause) {
+            isPause = true;
+            mCountDownTimer.cancel();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 取消
+        isPause = false;
+        mCountDownTimer.cancel();
     }
 
     @Override
@@ -140,6 +182,23 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @Override
     public void setWebviewProgress(int progress) {
         mWebProgressBar.setProgress(progress);
+    }
+
+
+
+    public void initCountDownTimer(long millisInFuture) {
+        mCountDownTimer = new CountDownTimer(millisInFuture, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                curTime = millisUntilFinished;
+                mTvTime.setText(TimeTools.getCountTimeByLong(millisUntilFinished));
+                isPause = false;
+            }
+
+            public void onFinish() {
+                mTvTime.setText("完成!");
+            }
+        };
     }
 
 

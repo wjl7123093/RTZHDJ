@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/sp_bg_course_time"
             android:textSize="@dimen/font_14"
-            android:textColor="@color/secondary_text"
+            android:textColor="@color/white"
             android:text="00:54"
             android:padding="@dimen/len_4"/>
         <TextView
@@ -63,6 +63,7 @@
     <!--<include layout="@layout/include_comment_bar"></include>-->
 
     <net.qiujuer.genius.ui.widget.Button
+        android:id="@+id/btn_done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"

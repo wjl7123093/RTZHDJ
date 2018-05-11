@@ -9,7 +9,7 @@
  * @update
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
-    <solid android:color="@color/divider"/>
+    <solid android:color="@color/accent"/>
     <corners android:radius="@dimen/len_4"/>
 
 </shape>
