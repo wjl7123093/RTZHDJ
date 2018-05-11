@@ -139,6 +139,11 @@ public class MyReceiveWishFragment extends BaseFragment<MyReceiveWishPresenter> 
         initAdapter(myWishList);
     }
 
+    @Override
+    public void showDialog() {
+
+    }
+
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override

@@ -158,7 +158,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
         initDialog();
 
         mLlBtnWish.setOnClickListener(view -> {
-            showMessage("我要许愿");
+//            showMessage("我要许愿");
             showDialog();
         });
     }
@@ -404,6 +404,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
             params.put("UserID", RequestBody.create(MediaType.parse("text/plain"), "8"));
             params.put("WishDtail", RequestBody.create(MediaType.parse("text/plain"), mEdtWish.getText().toString().trim()));
 
+            // 提交我的心愿
             mPresenter.callMethodOfPostMyWish(
                     params,
                     MultiPartParamsUtils.files2Parts("Pictures", list_path.toArray(new String[list_path.size()]), MediaType.parse("image/jpg")));

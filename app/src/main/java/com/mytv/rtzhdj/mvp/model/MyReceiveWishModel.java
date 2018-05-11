@@ -12,12 +12,16 @@ import javax.inject.Inject;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.MyReceiveWishService;
+import com.mytv.rtzhdj.app.data.api.service.WishWallService;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.mvp.contract.MyReceiveWishContract;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 @ActivityScope
@@ -43,5 +47,11 @@ public class MyReceiveWishModel extends BaseModel implements MyReceiveWishContra
     public Observable<BaseJson<List<MyWishEntity>>> postMyClaimWishList(int userId, int type, boolean update) {
         return mRepositoryManager.obtainRetrofitService(MyReceiveWishService.class)
                 .postMyClaimWishList(userId, type);
+    }
+
+    @Override
+    public Observable<BaseJson> postMyWish(Map<String, RequestBody> params, List<MultipartBody.Part> parts) {
+        return mRepositoryManager.obtainRetrofitService(WishWallService.class)
+                .postMyWish(params, parts);
     }
 }
