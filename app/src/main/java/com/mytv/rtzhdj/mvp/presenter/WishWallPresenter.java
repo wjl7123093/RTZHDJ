@@ -18,6 +18,8 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import javax.inject.Inject;
 
@@ -34,6 +36,7 @@ import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.List;
+import java.util.Map;
 
 
 @ActivityScope
@@ -109,6 +112,33 @@ public class WishWallPresenter extends BasePresenter<WishWallContract.Model, Wis
                         Log.e(TAG, myWishList.toString());
 
                         mRootView.loadData(myWishList.getData());
+
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfPostMyWish(Map<String, RequestBody> params, List<MultipartBody.Part> parts) {
+        mModel.postMyWish(params, parts)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e(TAG, postResult.toString());
+
+                        if (postResult.isSuccess())
+                            mRootView.showMessage("提交成功");
 
                     }
                 });

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * dialog_wish.xml 许愿对话框
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-5-11
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/len_16"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <EditText
+            android:id="@+id/edt_wish_content"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/secondary_text"
+            android:padding="@dimen/len_16"
+            android:hint="请输入正文"
+            android:gravity="left|top"
+            android:background="@color/white"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/app_bg_grey"></View>
+
+        <!-- 展示照片/视频 -->
+        <GridView
+            android:id="@+id/gv_publish"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:stretchMode="columnWidth"
+            android:numColumns="3"
+            android:scrollbars="none"
+            android:verticalSpacing="1dp"
+            android:listSelector="@null"
+            android:layout_marginTop="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10">
+        </GridView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_wish"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_32"
+        android:background="@color/accent"
+        android:text="我许好了"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_16"
+        android:layout_marginTop="@dimen/len_16"/>
+
+</LinearLayout>

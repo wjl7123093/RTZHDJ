@@ -18,8 +18,11 @@ import com.mytv.rtzhdj.mvp.contract.WishWallContract;
 import com.mytv.rtzhdj.mvp.ui.activity.WishWallActivity;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 @ActivityScope
@@ -47,5 +50,11 @@ public class WishWallModel extends BaseModel implements WishWallContract.Model {
     public Observable<BaseJson<List<MyWishEntity>>> postMyWishList(int userId, int type, boolean update) {
         return mRepositoryManager.obtainRetrofitService(WishWallService.class)
                 .postMyWishList(userId, type);
+    }
+
+    @Override
+    public Observable<BaseJson> postMyWish(Map<String, RequestBody> params, List<MultipartBody.Part> parts) {
+        return mRepositoryManager.obtainRetrofitService(WishWallService.class)
+                .postMyWish(params, parts);
     }
 }

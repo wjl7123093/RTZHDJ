@@ -135,11 +135,11 @@ public class GridViewAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			if(typeFrom==0){
 				if (getItemViewType(position) == IPhotoType.IPHOTO_UPLOAD) {
-					convertView = LayoutInflater.from(mContext).inflate(R.layout.item_gv_uploadphoto1,
+					convertView = LayoutInflater.from(mContext).inflate(R.layout.item_gv_dialog_uploadphoto1,
 							parent, false);
 					holder.tvPhoto = (TextView) convertView.findViewById(R.id.tvPhoto);
 				} else {
-					convertView = LayoutInflater.from(mContext).inflate(R.layout.item_gv_uploadphoto2,
+					convertView = LayoutInflater.from(mContext).inflate(R.layout.item_gv_dialog_uploadphoto2,
 							parent, false);
 					holder.image = (ImageView) convertView
 							.findViewById(R.id.ivItemPhoto);

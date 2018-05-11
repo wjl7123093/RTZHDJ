@@ -137,6 +137,11 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
         initAdapter(myWishList);
     }
 
+    @Override
+    public void showDialog() {
+
+    }
+
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override

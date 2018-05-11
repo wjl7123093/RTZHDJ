@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: item_lv_uploadphoto1.xml
+  * @Description:  上传照片GridView的项视图 XML
+  * @author wangjl  
+  * @crdate 2017-4-17
+  * @update 
+  * @version v1.0   
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llAddPicOrVideo"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:background="#f5f5f5"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <!--<com.mytv.rtmedia.widget.IconView
+        android:id="@+id/iconPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/icon_publish_gv_camera"
+        android:textColor="#cbcbcb"
+        android:textSize="50dp" />-->
+
+    <TextView
+        android:id="@+id/tvPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加照片"
+        android:textColor="#9e9e9e"
+        android:textSize="@dimen/font_14" />
+
+</LinearLayout>
