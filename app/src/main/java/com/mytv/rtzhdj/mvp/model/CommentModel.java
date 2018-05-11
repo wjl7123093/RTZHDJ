@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.CommentService;
+import com.mytv.rtzhdj.app.data.api.service.NewsDetailService;
 import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.mvp.contract.CommentContract;
 
@@ -43,5 +44,11 @@ public class CommentModel extends BaseModel implements CommentContract.Model {
     public Observable<BaseJson<List<CommentEntity>>> getCommentList(int nodeId, int contentId, boolean update) {
         return mRepositoryManager.obtainRetrofitService(CommentService.class)
                 .getCommentList(nodeId, contentId);
+    }
+
+    @Override
+    public Observable<BaseJson> postComment(int userId, int nodeId, int contentId, String commentInfo, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
+                .postComment(userId, nodeId, contentId, commentInfo);
     }
 }

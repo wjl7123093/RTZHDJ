@@ -179,6 +179,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
                     return;
                 }
 
+                // 提交评论
                 mPresenter.callMethodOfPostComment(8, nodeId, articleId, mEdtComment.getText().toString().trim(), false);
                 dialog.dismiss();
             }

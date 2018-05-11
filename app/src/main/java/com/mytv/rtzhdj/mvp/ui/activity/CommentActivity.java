@@ -1,11 +1,17 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,6 +35,7 @@ import com.mytv.rtzhdj.mvp.ui.adapter.CommentAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
 
 
 import java.util.List;
@@ -57,6 +64,9 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
     RelativeLayout mBtnToolbarBack;
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
+
+    @BindView(R.id.btn_comment)
+    Button mBtnComment;
 
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
@@ -96,6 +106,7 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
 //        initAdapter();
         initRefreshLayout();
+        mBtnComment.setOnClickListener(view -> showDialog());
 
         // 获取 评论列表
         mPresenter.callMethodOfGetCommentList(2425, 1, false);
@@ -163,5 +174,27 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
     @Override
     public void loadData(List<CommentEntity> commentList) {
         initAdapter(commentList);
+    }
+
+    @Override
+    public void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CommentActivity.this);
+        View dialogView = LayoutInflater.from(CommentActivity.this).inflate(R.layout.dialog_comment, null);
+        EditText mEdtComment = (EditText) dialogView.findViewById(R.id.edt_comment);
+        builder.setView(dialogView);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (TextUtils.isEmpty(mEdtComment.getText().toString().trim())) {
+                    showMessage("评论内容不能为空");
+                    return;
+                }
+
+                // 提交评论
+                mPresenter.callMethodOfPostComment(8, nodeId, contentId, mEdtComment.getText().toString().trim(), false);
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }

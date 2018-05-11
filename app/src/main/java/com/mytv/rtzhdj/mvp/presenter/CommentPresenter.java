@@ -112,7 +112,35 @@ public class CommentPresenter extends BasePresenter<CommentContract.Model, Comme
                         Log.e("TAG", commentList.toString());
 
 //                        mRootView.showPickerView(stationList.getData());
-                        mRootView.loadData(commentList.getData());
+                        if (commentList.isSuccess())
+                            mRootView.loadData(commentList.getData());
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfPostComment(int userId, int nodeId, int contentId, String commentInfo, boolean update) {
+        mModel.postComment(userId, nodeId, contentId, commentInfo, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e(TAG, postResult.toString());
+
+                        if (postResult.isSuccess())
+                            mRootView.showMessage("评论成功，审核中...");
+
                     }
                 });
     }

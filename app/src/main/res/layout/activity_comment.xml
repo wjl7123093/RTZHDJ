@@ -30,8 +30,8 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <TextView
-        android:id="@+id/tv_comment"
+    <Button
+        android:id="@+id/btn_comment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_40"
         android:background="@color/divider"
