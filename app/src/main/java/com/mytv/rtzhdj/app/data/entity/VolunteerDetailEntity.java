@@ -10,6 +10,7 @@ import java.util.List;
  *
  * @crdate 2018-4-4
  * @update 2018-4-25 update 结构
+ *         2018-5-14 update 结构
  */
 public class VolunteerDetailEntity {
 
@@ -25,6 +26,9 @@ public class VolunteerDetailEntity {
     private String review;                  // ?
 //    private List<Comment> commentObjs;      // 评论
 //    private List<SubColumn> subObjs;        // 子栏目
+
+    private int digs;                       // 点赞数
+    private int IfJoin;                     // 是否结束 0 正在报名 1 已报名
 
 
     public String getTitle() {
@@ -105,5 +109,21 @@ public class VolunteerDetailEntity {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public int getDigs() {
+        return digs;
+    }
+
+    public void setDigs(int digs) {
+        this.digs = digs;
+    }
+
+    public int getIfJoin() {
+        return IfJoin;
+    }
+
+    public void setIfJoin(int ifJoin) {
+        IfJoin = ifJoin;
     }
 }

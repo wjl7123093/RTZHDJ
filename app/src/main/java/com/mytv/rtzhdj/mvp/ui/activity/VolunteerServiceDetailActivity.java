@@ -117,9 +117,13 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
         initTab();
 
         mBtnStar.setOnClickListener(view -> {});
-        mBtnIsOver.setOnClickListener(view ->
-            ARouter.getInstance().build(ARoutePath.PATH_MY_JOIN)
-                    .withInt("contentId", id).navigation());
+        mBtnIsOver.setOnClickListener(view -> {
+            if (mBtnIsOver.getText().equals("正在报名")) {
+                ARouter.getInstance().build(ARoutePath.PATH_MY_JOIN)
+                        .withInt("contentId", id).navigation();
+            } else {
+               showMessage("已报名，无需再次报名");
+            }});
 
         // 获取 志愿服务详情
         mPresenter.callMethodOfGetVolunteerServiceDetail(id, false);
@@ -192,5 +196,8 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
         mTvEnrollment.setText(volunteerDetailEntity.getSignedup()
                 + "/" + volunteerDetailEntity.getEnrollCount());
         mTvGrade.setText(volunteerDetailEntity.getScore() + "分");
+
+        mBtnStar.setText("点赞(" + volunteerDetailEntity.getDigs() + ")");
+        mBtnIsOver.setText(volunteerDetailEntity.getIfJoin() == 0 ? "正在报名" : "已报名");
     }
 }
