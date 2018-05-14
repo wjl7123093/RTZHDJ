@@ -8,9 +8,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -40,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 import static com.mytv.rtzhdj.app.EventBusTags.ACTIVITY_FRAGMENT_REPLACE;
@@ -58,13 +64,66 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         BottomNavigationBar.OnTabSelectedListener {
 
     // 方案1
-    @BindView(R.id.main_frame)
+    /*@BindView(R.id.main_frame)
     FrameLayout mFrameMain;
     // 方案2
 //    @BindView(R.id.content)
 //    ViewPager viewPager;
     @BindView(R.id.bottom_navigation_bar)
-    BottomNavigationBar mBottomNavigationBar;
+    BottomNavigationBar mBottomNavigationBar;*/
+    
+    // 方案3
+
+    /** 当前Fragment标识 */
+    private String CF_TAG = "";
+    /** 记录上一个按下的Tab栏导航键 */
+    private String mLastTab = TAB_1;
+
+    public final static String TAB_1 = "tab_1";
+    public final static String TAB_2 = "tab_2";
+    public final static String TAB_3 = "tab_3";
+    public final static String TAB_4 = "tab_4";
+    public final static String TAB_5 = "tab_5";
+
+    /** 头条 */
+    @BindView(R.id.fl1)
+    LinearLayout mFl1;
+    @BindView(R.id.icon1)
+    ImageView mIcon1;
+    @BindView(R.id.tv1)
+    TextView mTv1;
+
+    /** 直播 */
+    @BindView(R.id.fl2)
+    LinearLayout mFl2;
+    @BindView(R.id.icon2)
+    ImageView mIcon2;
+    @BindView(R.id.tv2)
+    TextView mTv2;
+
+    /** 视讯 */
+    @BindView(R.id.fl3)
+    LinearLayout mFl3;
+    @BindView(R.id.icon3)
+    ImageView mIcon3;
+    @BindView(R.id.tv3)
+    TextView mTv3;
+
+    /** 政务 */
+    @BindView(R.id.fl4)
+    LinearLayout mFl4;
+    @BindView(R.id.icon4)
+    ImageView mIcon4;
+    @BindView(R.id.tv4)
+    TextView mTv4;
+
+    /** 便民 */
+    @BindView(R.id.fl5)
+    LinearLayout mFl5;
+    @BindView(R.id.icon5)
+    ImageView mIcon5;
+    @BindView(R.id.tv5)
+    TextView mTv5;
 
     private HomeFragment homeFragment;
     private NewsFragment newsFragment;
@@ -87,24 +146,30 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public int initView(Bundle savedInstanceState) {
-        return R.layout.activity_main; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_main_test; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
 
+        // 默认页面
+        HomeFragment f1 = new HomeFragment();
+        changeFragment(f1, TAB_1);
+        mLastTab = TAB_1;
+        setTabStyle(mIcon1, mTv1, 1);
+
         /*** the setting for BadgeItem ***/
-        BadgeItem badgeItem = new BadgeItem();
+        /*BadgeItem badgeItem = new BadgeItem();
         badgeItem.setHideOnSelect(false)
                 .setText("10")
                 .setBackgroundColorResource(R.color.primary)
                 .setBorderWidth(0)
-                .setHideOnSelect(true);
+                .setHideOnSelect(true);*/
 
         /*** the setting for BottomNavigationBar ***/
 
         /** 样式 1 */
-        mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
+        /*mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         mBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
         mBottomNavigationBar.setBarBackgroundColor(R.color.white);//set background color for navigation bar
         mBottomNavigationBar.setInActiveColor(R.color.divider);//unSelected icon color
@@ -118,7 +183,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 .initialise();
 
         mBottomNavigationBar.setTabSelectedListener(this);
-        setDefaultFragment(savedInstanceState);
+        setDefaultFragment(savedInstanceState);*/
 
         //状态栏透明和间距处理
 //        StatusBarUtil.immersive(this, 0xff000000, 0.1f);
@@ -240,6 +305,161 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
         // ===================方案1 activity_main.xml -> FrameLayout做容器=========================
         FragmentUtils.addFragments(getSupportFragmentManager(), mFragments, R.id.main_frame, 0);
+    }
+
+
+
+    /** Fragment Tab 标签点击事件 */
+    @OnClick({R.id.fl1, R.id.fl2, R.id.fl3, R.id.fl4, R.id.fl5})
+    public void fragmentTabClick(View v) {
+        switch (v.getId()) {
+            case R.id.fl1:
+                doClick(0, v);
+                break;
+            case R.id.fl2:
+                doClick(1, v);
+                break;
+            case R.id.fl3:
+                doClick(2, v);
+                break;
+            case R.id.fl4:
+                doClick(3, v);
+                break;
+            case R.id.fl5:
+                doClick(4, v);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * fragment页面调用切换页面
+     *
+     * @param i
+     *            0:主页 1:个人中心
+     */
+    public void doClick(int i, View v) {
+        switch (i) {
+            case 0: // 头条
+                mLastTab = TAB_1;
+                setTabStyle(mIcon1, mTv1, 1);
+                if (null == homeFragment)
+                    homeFragment = new HomeFragment();
+                changeFragment(homeFragment, TAB_1);
+                break;
+
+            case 1: // 直播
+                mLastTab = TAB_2;
+                setTabStyle(mIcon2, mTv2, 2);
+                if (null == newsFragment)
+                    newsFragment = new NewsFragment();
+                changeFragment(newsFragment, TAB_2);
+                break;
+
+            case 2: // 视讯
+                mLastTab = TAB_3;
+                setTabStyle(mIcon3, mTv3, 3);
+                if (null == studyFragment)
+                    studyFragment = new StudyFragment();
+                changeFragment(studyFragment, TAB_3);
+                break;
+
+            case 3: // 政务
+                mLastTab = TAB_4;
+                setTabStyle(mIcon4, mTv4, 4);
+                if (null == joinFragment)
+                    joinFragment = new JoinFragment();
+                changeFragment(joinFragment, TAB_4);
+                break;
+
+            case 4: // 便民
+                mLastTab = TAB_5;
+                setTabStyle(mIcon5, mTv5, 5);
+                if (null == mineFragment)
+                    mineFragment = new MineFragment();
+                changeFragment(mineFragment, TAB_5);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 切换界面Fragment
+     *
+     * @param fragment
+     * @param tag
+     */
+    private void changeFragment(Fragment fragment, String tag) {
+
+        if (CF_TAG.equals(tag)) {
+            return;
+        }
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        if (fm.findFragmentByTag(tag) == null) {
+            ft.add(R.id.flMain, fragment, tag);
+        } else {
+            ft.show(fm.findFragmentByTag(tag));
+        }
+
+        if (fm.findFragmentByTag(CF_TAG) != null) {
+            ft.hide(fm.findFragmentByTag(CF_TAG));
+        }
+//		ft.commit();
+        ft.commitAllowingStateLoss();	// 防止 commit() 是在Activity的onSaveInstanceState()之后调用产生的 BUG
+        CF_TAG = tag;
+
+    }
+
+    /**
+     * 设置底部tab状态
+     *
+     * @param iconView
+     * @param tv
+     */
+    public void setTabStyle(ImageView iconView, TextView tv, int position) {
+
+        mIcon1.setImageResource(R.mipmap.ic_tab_home);
+        mIcon2.setImageResource(R.mipmap.ic_tab_news);
+        mIcon3.setImageResource(R.mipmap.ic_tab_study);
+        mIcon4.setImageResource(R.mipmap.ic_tab_join);
+        mIcon5.setImageResource(R.mipmap.ic_tab_mine);
+
+        mTv1.setTextColor(getResources().getColor(R.color.secondary_text));
+        mTv2.setTextColor(getResources().getColor(R.color.secondary_text));
+        mTv3.setTextColor(getResources().getColor(R.color.secondary_text));
+        mTv4.setTextColor(getResources().getColor(R.color.secondary_text));
+        mTv5.setTextColor(getResources().getColor(R.color.secondary_text));
+
+        tv.setTextColor(getResources().getColor(R.color.colorPrimary));
+        switch (position) {
+            case 1:	// 头条
+                mIcon1.setImageResource(R.mipmap.ic_tab_home_select);
+                break;
+
+            case 2:	// 直播
+                mIcon2.setImageResource(R.mipmap.ic_tab_news_select);
+                break;
+
+            case 3:	// 视讯
+                mIcon3.setImageResource(R.mipmap.ic_tab_study_select);
+                break;
+
+            case 4:	// 政务
+                mIcon4.setImageResource(R.mipmap.ic_tab_join_select);
+                break;
+
+            case 5:	// 便民
+                mIcon5.setImageResource(R.mipmap.ic_tab_mine_select);
+                break;
+
+            default:
+                break;
+        }
     }
 
 }

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activity_main.xml
+  * @Description: 主页面 XML
+  * @author wangjl
+  * @crdate 2017-4-5
+  * @update 2017-5-3
+  * @version v1.0
+ -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <FrameLayout
+        android:id="@+id/flMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"  >
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/main_bottom_tab"
+        android:background="@color/app_bg_grey" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_tab"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+
+        <!-- 头条 -->
+        <LinearLayout
+            android:id="@+id/fl1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/icon1"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_tab_home"/>
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:text="@string/tab_home"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/font_12"
+                android:gravity="center" >
+            </TextView>
+        </LinearLayout>
+
+        <!-- 直播 -->
+        <LinearLayout
+            android:id="@+id/fl2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/icon2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_tab_news"/>
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:text="@string/tab_news"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/font_12"
+                android:gravity="center" >
+            </TextView>
+        </LinearLayout>
+
+        <!-- 视讯 -->
+        <LinearLayout
+            android:id="@+id/fl3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/icon3"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_tab_study"/>
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:text="@string/tab_study"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/font_12"
+                android:gravity="center" >
+            </TextView>
+        </LinearLayout>
+
+        <!-- 政务 -->
+        <LinearLayout
+            android:id="@+id/fl4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/icon4"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_tab_join"/>
+
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:text="@string/tab_join"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/font_12"
+                android:gravity="center" >
+            </TextView>
+        </LinearLayout>
+
+        <!-- 便民 -->
+        <LinearLayout
+            android:id="@+id/fl5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/icon5"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_tab_mine"/>
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:text="@string/tab_mine"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/font_12"
+                android:gravity="center" >
+            </TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
