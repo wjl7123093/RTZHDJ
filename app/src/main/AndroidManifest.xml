@@ -50,7 +50,8 @@
             </intent-filter>
         </activity>
         <!-- <activity android:name=".mvp.ui.activity.StartActivity" /> -->
-        <activity android:name=".mvp.ui.activity.MainActivity" />
+        <activity android:name=".mvp.ui.activity.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity
             android:name=".mvp.ui.activity.RegisterActivity"

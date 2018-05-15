@@ -31,6 +31,7 @@ import com.mytv.rtzhdj.mvp.ui.widget.AutoLoadRecyclerViewGlide;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.squareup.haha.perflib.Main;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -156,7 +157,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void setOnclick() {
-
+        // 更多要闻 点击
+        ((MainActivity) getActivity()).doClick(1, null);
     }
 
     @Override

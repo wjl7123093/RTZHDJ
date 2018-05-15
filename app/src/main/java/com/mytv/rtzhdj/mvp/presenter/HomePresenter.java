@@ -319,7 +319,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
                 holder.getView(R.id.btn_moredata).setOnClickListener(view -> {
                     if (moreStr.equals("更多要闻")) {
-
+                        mRootView.setOnclick();
                     } else if (moreStr.equals("更多公益活动")) {
                         ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE).navigation();
                     }
