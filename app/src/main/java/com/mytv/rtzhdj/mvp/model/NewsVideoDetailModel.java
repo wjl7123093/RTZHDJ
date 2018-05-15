@@ -10,7 +10,12 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.NewsVideoDetailService;
+import com.mytv.rtzhdj.app.data.entity.PartyLiveEntity;
 import com.mytv.rtzhdj.mvp.contract.NewsVideoDetailContract;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +37,9 @@ public class NewsVideoDetailModel extends BaseModel implements NewsVideoDetailCo
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<PartyLiveEntity>> getContent(boolean update) {
+        return mRepositoryManager.obtainRetrofitService(NewsVideoDetailService.class)
+                .GetPartyLiveInfo();
+    }
 }

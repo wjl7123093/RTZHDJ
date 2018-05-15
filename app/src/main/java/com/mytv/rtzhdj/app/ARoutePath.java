@@ -176,5 +176,7 @@ public interface ARoutePath {
     String PATH_NEWS_ALL = "/rtdzdj/news_all";
     // ScoresDetails 积分明细
     String PATH_SCORES_DETAILS = "/rtdzdj/scores_details";
+    // Questionaire 问卷调查页面
+    String PATH_QUESTIONAIRE = "/rtdzdj/questionaire";
 
 }

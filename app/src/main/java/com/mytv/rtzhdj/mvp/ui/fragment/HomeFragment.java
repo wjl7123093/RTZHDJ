@@ -192,6 +192,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
                         .withString("title", getResources().getString(R.string.title_news_poverty)).navigation();
                 break;
             case 4: // 党建直播
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_VIDEO_DETAIL).navigation();
                 break;
             case 5: // 党建地图
                 break;
