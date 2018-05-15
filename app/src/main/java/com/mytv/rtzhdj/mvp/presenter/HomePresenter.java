@@ -508,16 +508,16 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 banner1.setOnBannerListener(new OnBannerListener() {
                     @Override
                     public void OnBannerClick(int position) {
-                        ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL)
-                                .withInt("nodeId", PublicSpiritedBlock_ChildContent.get(0).get(position).getNodeId())
+                        ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                                .withInt("id", PublicSpiritedBlock_ChildContent.get(0).get(position).getArticleId())
                                 .navigation();
                     }
                 });
                 banner2.setOnBannerListener(new OnBannerListener() {
                     @Override
                     public void OnBannerClick(int position) {
-                        ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL)
-                                .withInt("nodeId", PublicSpiritedBlock_ChildContent.get(1).get(position).getNodeId())
+                        ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                                .withInt("id", PublicSpiritedBlock_ChildContent.get(1).get(position).getArticleId())
                                 .navigation();
                     }
                 });
