@@ -9,7 +9,8 @@ import java.util.List;
  * @version v1.0.0(1)
  *
  * @crdate 2018-4-4
- * @update 2018-4-5 update 结构
+ * @update 2018-4-5     update 结构
+ *         2018-5-16    update 结构
  */
 public class MyStudyEntity {
 
@@ -103,6 +104,9 @@ public class MyStudyEntity {
         private int ArticleId;
         private String Title;
         private String LastStudyTime;
+
+        private int CourseType;
+        private String CourseTypeString;
 
         public int getNodeId() {
             return NodeId;
