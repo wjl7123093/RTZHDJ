@@ -92,6 +92,7 @@ public class NewsVideoDetailActivity extends BaseActivity<NewsVideoDetailPresent
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mTvDesc.setVisibility(View.GONE);
 
         mPresenter.setActivity(NewsVideoDetailActivity.this);
         // 获取 党建直播data
@@ -230,7 +231,7 @@ public class NewsVideoDetailActivity extends BaseActivity<NewsVideoDetailPresent
                 .setShowFullAnimation(false)
                 .setNeedLockFull(true)
                 .setSeekRatio(1)
-                .setUrl("http://video.7k.cn/app_video/20171202/6c8cf3ea/v.m3u8.mp4")
+                .setUrl(partyLiveEntity.getAllVideoUrl())
                 .setCacheWithPlay(false)
                 .setVideoTitle(partyLiveEntity.getTitle())
                 .setVideoAllCallBack(new GSYSampleCallBack() {

@@ -7,7 +7,7 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-5-15
- * @update
+ * @update 2018-5-16    update 结构
  */
 public class PartyLiveEntity {
 
@@ -16,6 +16,10 @@ public class PartyLiveEntity {
     private int Digs;
     private int Comments;
     private int SubObjects;
+
+    private int ContentID;
+    private int NodeId;
+    private String AllVideoUrl;
 
     public String getTitle() {
         return Title;
@@ -55,6 +59,30 @@ public class PartyLiveEntity {
 
     public void setSubObjects(int subObjects) {
         SubObjects = subObjects;
+    }
+
+    public int getContentID() {
+        return ContentID;
+    }
+
+    public void setContentID(int contentID) {
+        ContentID = contentID;
+    }
+
+    public int getNodeId() {
+        return NodeId;
+    }
+
+    public void setNodeId(int nodeId) {
+        NodeId = nodeId;
+    }
+
+    public String getAllVideoUrl() {
+        return AllVideoUrl;
+    }
+
+    public void setAllVideoUrl(String allVideoUrl) {
+        AllVideoUrl = allVideoUrl;
     }
 
     public class Comment {
