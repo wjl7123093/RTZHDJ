@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
 import com.mytv.rtzhdj.di.component.DaggerEffectEvaluationComponent;
 import com.mytv.rtzhdj.di.module.EffectEvaluationModule;
@@ -163,6 +165,9 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+                // 跳转到 问卷调查页面
+                ARouter.getInstance().build(ARoutePath.PATH_QUESTIONAIRE)
+                        .withInt("examinationId", effectList.get(position).getId()).navigation();
             }
         });
 

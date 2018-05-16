@@ -50,7 +50,8 @@
             </intent-filter>
         </activity>
         <!-- <activity android:name=".mvp.ui.activity.StartActivity" /> -->
-        <activity android:name=".mvp.ui.activity.MainActivity"
+        <activity
+            android:name=".mvp.ui.activity.MainActivity"
             android:launchMode="singleTask" />
         <activity android:name=".mvp.ui.activity.LoginActivity" />
         <activity
@@ -219,8 +220,11 @@
             android:name=".mvp.ui.activity.MyJoinActivity"
             android:label="@string/title_my_join" />
         <activity android:name=".mvp.ui.activity.NewsAllActivity" />
-        <activity android:name=".mvp.ui.activity.ScoresDetailsActivity"
-            android:label="@string/title_scores_details"></activity>
+        <activity
+            android:name=".mvp.ui.activity.ScoresDetailsActivity"
+            android:label="@string/title_scores_details" />
+        <activity android:name=".mvp.ui.activity.QuestionnaireActivity"
+            android:label="@string/title_questionaire"></activity>
     </application>
 
 </manifest>
