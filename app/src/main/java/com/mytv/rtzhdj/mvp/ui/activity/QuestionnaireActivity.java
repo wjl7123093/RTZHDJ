@@ -22,7 +22,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
@@ -76,6 +78,9 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
     @BindView(R.id.btnSubmit)
     Button mBtnSubmit;
 
+    @Autowired
+    int examinationId;
+
     /** 加载进度条 */
     private CenterDialog centerDialog;
 
@@ -109,6 +114,7 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_questionnaire; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -121,7 +127,7 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
         xInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // 获取 问卷调查信息
-        mPresenter.callMethodOfGetTestInfo(8, false);
+        mPresenter.callMethodOfGetTestInfo(examinationId, false);
 
     }
 
