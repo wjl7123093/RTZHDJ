@@ -10,7 +10,14 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.QuestionOnlineService;
+import com.mytv.rtzhdj.app.data.entity.QuestionOnlineEntity;
 import com.mytv.rtzhdj.mvp.contract.QuestionOnlineContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +39,9 @@ public class QuestionOnlineModel extends BaseModel implements QuestionOnlineCont
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<List<QuestionOnlineEntity>>> getSurveyList(int publishmentSystemId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(QuestionOnlineService.class)
+                .GetSurveyList(publishmentSystemId);
+    }
 }

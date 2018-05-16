@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.QuestionOnlineEntity;
 import com.mytv.rtzhdj.di.component.DaggerQuestionOnlineComponent;
 import com.mytv.rtzhdj.di.module.QuestionOnlineModule;
 import com.mytv.rtzhdj.mvp.contract.QuestionOnlineContract;
@@ -29,6 +31,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -60,6 +64,9 @@ public class QuestionOnlineActivity extends BaseActivity<QuestionOnlinePresenter
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
+    @Autowired
+    int publishmentSystemId;
+
     private QuestionAdapter questionAdapter;
     private static final int PAGE_SIZE = 10;
 
@@ -76,6 +83,7 @@ public class QuestionOnlineActivity extends BaseActivity<QuestionOnlinePresenter
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_question_online; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -85,8 +93,11 @@ public class QuestionOnlineActivity extends BaseActivity<QuestionOnlinePresenter
 
         mPresenter.setActivity(QuestionOnlineActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
+
+        // 获取 在线问卷调查
+        mPresenter.callMethodOfGetSurveyList(publishmentSystemId, false);
     }
 
 
@@ -133,8 +144,22 @@ public class QuestionOnlineActivity extends BaseActivity<QuestionOnlinePresenter
         });
     }
 
-    private void initAdapter() {
+    /*private void initAdapter() {
         questionAdapter = new QuestionAdapter(QuestionOnlineActivity.this, PAGE_SIZE);
+        questionAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(questionAdapter);
+
+        questionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                showMessage("" + Integer.toString(position));
+            }
+        });
+
+    }*/
+
+    private void initAdapter(List<QuestionOnlineEntity> questionList) {
+        questionAdapter = new QuestionAdapter(QuestionOnlineActivity.this, questionList);
         questionAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(questionAdapter);
 
@@ -148,4 +173,8 @@ public class QuestionOnlineActivity extends BaseActivity<QuestionOnlinePresenter
     }
 
 
+    @Override
+    public void loadData(List<QuestionOnlineEntity> questionList) {
+        initAdapter(questionList);
+    }
 }
