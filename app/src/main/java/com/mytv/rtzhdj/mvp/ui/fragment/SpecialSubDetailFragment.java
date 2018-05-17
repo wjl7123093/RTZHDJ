@@ -8,17 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerSpecialSubDetailComponent;
 import com.mytv.rtzhdj.di.module.SpecialSubDetailModule;
 import com.mytv.rtzhdj.mvp.contract.SpecialSubDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.SpecialSubDetailPresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
+import com.mytv.rtzhdj.mvp.ui.activity.TopicDetailActivity;
+import com.mytv.rtzhdj.mvp.ui.adapter.NewsSimpleAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -46,7 +47,7 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
-    private NewsAdapter newsAdapter;
+    private NewsSimpleAdapter newsAdapter;
     private static final int PAGE_SIZE = 10;
 
 
@@ -85,13 +86,13 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
         imgUrls.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
         imgUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
 
-        /*mPresenter.setActivity(getActivity());
+        mPresenter.setActivity((TopicDetailActivity) getActivity());
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
 
         initRefreshLayout();
 
         // 获取党建新闻二级列表(除推荐)数据
-        mPresenter.callMethodOfGetPartySubList(getArguments().getInt("nodeId"), 0, PAGE_SIZE, false);*/
+        mPresenter.callMethodOfGetPartySpecialList(getArguments().getInt("nodeId"), false);
     }
 
     /**
@@ -155,4 +156,24 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
         });
     }
 
+    private void initAdapter(List<NewsDetailEntity> newsList) {
+        newsAdapter = new NewsSimpleAdapter(getActivity(), newsList);
+        newsAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(newsAdapter);
+
+        newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                showMessage("" + Integer.toString(position));
+
+
+            }
+        });
+
+    }
+
+    @Override
+    public void loadData(List<NewsDetailEntity> newsList) {
+        initAdapter(newsList);
+    }
 }

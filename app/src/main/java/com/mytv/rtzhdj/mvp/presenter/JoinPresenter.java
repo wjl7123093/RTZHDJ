@@ -18,21 +18,11 @@ import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.google.gson.reflect.TypeToken;
+import com.jess.arms.di.scope.ActivityScope;
+import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
-import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
@@ -42,7 +32,6 @@ import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
-import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
@@ -51,6 +40,15 @@ import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -395,7 +393,8 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                     public void onNext(@NonNull BaseJson<MyJoinEntity> myJoinEntity) {
                         Log.e(TAG, myJoinEntity.toString());
 
-                        mRootView.loadData(myJoinEntity.getData());
+                        if (myJoinEntity.isSuccess())
+                            mRootView.loadData(myJoinEntity.getData());
 
                     }
                 });
