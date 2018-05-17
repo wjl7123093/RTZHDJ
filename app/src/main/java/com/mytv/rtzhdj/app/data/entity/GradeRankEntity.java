@@ -1,5 +1,7 @@
 package com.mytv.rtzhdj.app.data.entity;
 
+import java.util.List;
+
 /**
  * GradeRankEntity   成绩排名实体类
  *
@@ -7,71 +9,104 @@ package com.mytv.rtzhdj.app.data.entity;
  * @version v1.0.0(1)
  *
  * @crdate 2018-2-28
- * @update
+ * @update 2018-5-16    update 结构
  */
 public class GradeRankEntity {
 
-    private int id;
-    private String name;
-    private String party_branch;
-    private String img_url;
-    private String time;
-    private int grade;
-    private int rank;
+    private int MyScore;
+    private int TotalScore;
+    private String Ranking;
+    private String Achievement;
+    private String Times;
+    private List<GradeRank> TestCompareList;
 
-    public int getId() {
-        return id;
+    public int getMyScore() {
+        return MyScore;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMyScore(int myScore) {
+        MyScore = myScore;
     }
 
-    public String getName() {
-        return name;
+    public int getTotalScore() {
+        return TotalScore;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTotalScore(int totalScore) {
+        TotalScore = totalScore;
     }
 
-    public String getParty_branch() {
-        return party_branch;
+    public String getRanking() {
+        return Ranking;
     }
 
-    public void setParty_branch(String party_branch) {
-        this.party_branch = party_branch;
+    public void setRanking(String ranking) {
+        Ranking = ranking;
     }
 
-    public String getImg_url() {
-        return img_url;
+    public String getAchievement() {
+        return Achievement;
     }
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+    public void setAchievement(String achievement) {
+        Achievement = achievement;
     }
 
-    public String getTime() {
-        return time;
+    public String getTimes() {
+        return Times;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTimes(String times) {
+        Times = times;
     }
 
-    public int getGrade() {
-        return grade;
+    public List<GradeRank> getTestCompareList() {
+        return TestCompareList;
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
+    public void setTestCompareList(List<GradeRank> testCompareList) {
+        TestCompareList = testCompareList;
     }
 
-    public int getRank() {
-        return rank;
-    }
+    public class GradeRank {
 
-    public void setRank(int rank) {
-        this.rank = rank;
+        public GradeRank() {}
+
+        private int UserID;
+        private String UserName;
+        private String PublishmentSystemName;
+        private int Score;
+
+        public int getUserID() {
+            return UserID;
+        }
+
+        public void setUserID(int userID) {
+            UserID = userID;
+        }
+
+        public String getUserName() {
+            return UserName;
+        }
+
+        public void setUserName(String userName) {
+            UserName = userName;
+        }
+
+        public String getPublishmentSystemName() {
+            return PublishmentSystemName;
+        }
+
+        public void setPublishmentSystemName(String publishmentSystemName) {
+            PublishmentSystemName = publishmentSystemName;
+        }
+
+        public int getScore() {
+            return Score;
+        }
+
+        public void setScore(int score) {
+            Score = score;
+        }
     }
 }

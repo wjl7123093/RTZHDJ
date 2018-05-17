@@ -192,17 +192,17 @@ public class DataServer {
      * @param lenth
      * @return
      */
-    public static List<GradeRankEntity> getGradeRankData(int lenth) {
-        List<GradeRankEntity> list = new ArrayList<>();
+    public static List<GradeRankEntity.GradeRank> getGradeRankData(int lenth) {
+        List<GradeRankEntity.GradeRank> list = new ArrayList<>();
         for (int i = 0; i < lenth; i++) {
-            GradeRankEntity rankEntity = new GradeRankEntity();
-            rankEntity.setId(i + 1);
-            rankEntity.setName("はたけ·カカシ");
-            rankEntity.setImg_url("http://p.3761.com/pic/89371406508468.jpg");
-            rankEntity.setParty_branch("中共阿坝州壤塘县xxxxxx第一党支部");
-            rankEntity.setTime("2017-12-11 09:43");
-            rankEntity.setRank(i + 1);
-            list.add(rankEntity);
+            /*GradeRankEntity.GradeRank rankEntity = new GradeRankEntity.GradeRank();
+            rankEntity.setUserID(i + 1);
+            rankEntity.setUserName("はたけ·カカシ");
+//            rankEntity.setImg_url("http://p.3761.com/pic/89371406508468.jpg");
+            rankEntity.setPublishmentSystemName("中共阿坝州壤塘县xxxxxx第一党支部");
+//            rankEntity.setTime("2017-12-11 09:43");
+//            rankEntity.setRank(i + 1);
+            list.add(rankEntity);*/
         }
         return list;
     }

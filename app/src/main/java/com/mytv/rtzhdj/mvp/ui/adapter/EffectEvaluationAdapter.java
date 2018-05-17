@@ -7,9 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.DataServer;
 import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
-import com.mytv.rtzhdj.app.data.entity.TestingEntity;
 
 import java.util.List;
 
@@ -41,7 +39,8 @@ public class EffectEvaluationAdapter extends BaseQuickAdapter<EffectEvaluationEn
         helper.setText(R.id.tv_last_time, "最近测试时间: " + item.getLastStudyTime());
 
         helper.getView(R.id.tv_grade_rank).setOnClickListener(view -> {
-            ARouter.getInstance().build(ARoutePath.PATH_GRADE_RANK).navigation();
+            ARouter.getInstance().build(ARoutePath.PATH_GRADE_RANK)
+                    .withInt("examinationId", item.getId()).navigation();
         });
 
     }

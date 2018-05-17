@@ -3,14 +3,17 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.GradeRankService;
+import com.mytv.rtzhdj.app.data.entity.GradeRankEntity;
+import com.mytv.rtzhdj.mvp.contract.GradeRankContract;
 
 import javax.inject.Inject;
 
-import com.mytv.rtzhdj.mvp.contract.GradeRankContract;
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +35,9 @@ public class GradeRankModel extends BaseModel implements GradeRankContract.Model
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<GradeRankEntity>> getTestResultList(int examinationID, int userID, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(GradeRankService.class)
+                .getTestResultList(examinationID, userID);
+    }
 }

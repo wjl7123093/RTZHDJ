@@ -3,20 +3,32 @@ package com.mytv.rtzhdj.mvp.presenter;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
-import com.jess.arms.integration.AppManager;
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-
-import javax.inject.Inject;
-
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.GradeRankEntity;
 import com.mytv.rtzhdj.mvp.contract.GradeRankContract;
 import com.mytv.rtzhdj.mvp.ui.activity.GradeRankActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -69,5 +81,36 @@ public class GradeRankPresenter extends BasePresenter<GradeRankContract.Model, G
                 LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 10)));
 
         return recyclerView;
+    }
+
+    @Override
+    public void callMethodOfGetTestResultList(int examinationID, int userID, boolean refresh) {
+        mModel.getTestResultList(examinationID, userID, refresh)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<GradeRankEntity>>transformObservable("getTestResultList" + examinationID + userID,
+                        new TypeToken<BaseJson<GradeRankEntity>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<GradeRankEntity>>())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<GradeRankEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<GradeRankEntity> gradeRankEntity) {
+                        Log.e(TAG, gradeRankEntity.getData().toString());
+
+                        if (gradeRankEntity.isSuccess())
+                            mRootView.loadData(gradeRankEntity.getData());
+
+                    }
+                });
     }
 }

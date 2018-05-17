@@ -9,24 +9,26 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.GradeRankEntity;
 import com.mytv.rtzhdj.di.component.DaggerGradeRankComponent;
 import com.mytv.rtzhdj.di.module.GradeRankModule;
 import com.mytv.rtzhdj.mvp.contract.GradeRankContract;
 import com.mytv.rtzhdj.mvp.presenter.GradeRankPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.GradeRankAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
-
 import org.raphets.roundimageview.RoundImageView;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -71,6 +73,9 @@ public class GradeRankActivity extends BaseActivity<GradeRankPresenter> implemen
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
+    @Autowired
+    int examinationId;
+
     private GradeRankAdapter mAdapter;
     private static final int PAGE_SIZE = 10;
 
@@ -87,6 +92,7 @@ public class GradeRankActivity extends BaseActivity<GradeRankPresenter> implemen
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_grade_rank; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -96,8 +102,11 @@ public class GradeRankActivity extends BaseActivity<GradeRankPresenter> implemen
 
         mPresenter.setActivity(GradeRankActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
+
+        // 获取 成绩排行数据
+        mPresenter.callMethodOfGetTestResultList(examinationId, 8, false);
     }
 
 
@@ -145,8 +154,8 @@ public class GradeRankActivity extends BaseActivity<GradeRankPresenter> implemen
         });*/
     }
 
-    private void initAdapter() {
-        mAdapter = new GradeRankAdapter(GradeRankActivity.this, PAGE_SIZE);
+    private void initAdapter(List<GradeRankEntity.GradeRank> gradeRankList) {
+        mAdapter = new GradeRankAdapter(GradeRankActivity.this, gradeRankList);
         mAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -160,4 +169,8 @@ public class GradeRankActivity extends BaseActivity<GradeRankPresenter> implemen
     }
 
 
+    @Override
+    public void loadData(GradeRankEntity gradeRankEntity) {
+        initAdapter(gradeRankEntity.getTestCompareList());
+    }
 }
