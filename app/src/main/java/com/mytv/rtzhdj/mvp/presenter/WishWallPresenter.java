@@ -7,27 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-
-import javax.inject.Inject;
-
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.mvp.contract.WishWallContract;
 import com.mytv.rtzhdj.mvp.ui.activity.WishWallActivity;
@@ -37,6 +24,17 @@ import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 @ActivityScope
@@ -113,6 +111,37 @@ public class WishWallPresenter extends BasePresenter<WishWallContract.Model, Wis
 
                         mRootView.loadData(myWishList.getData());
 
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfGetWishList(int userId, int type, boolean update) {
+        mModel.getWishList(userId, type, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<MyWishEntity>>>transformObservable("getWishList" + userId + type,
+                        new TypeToken<BaseJson<List<MyWishEntity>>>() { }.getType(),
+                        CacheStrategy.firstCache()))
+                .map(new CacheResult.MapFunc<BaseJson<List<MyWishEntity>>>())
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> {
+                    // Action onFinally
+                    mRootView.hideLoading();
+                })
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<MyWishEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<List<MyWishEntity>> wishList) {
+                        Log.e("TAG", wishList.toString());
+
+//                        mRootView.showPickerView(stationList.getData());
+                        if (wishList.isSuccess())
+                            mRootView.loadData(wishList.getData());
                     }
                 });
     }

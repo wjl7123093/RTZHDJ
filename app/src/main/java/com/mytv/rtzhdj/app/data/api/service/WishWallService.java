@@ -1,7 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 
 import java.util.List;
@@ -38,6 +37,14 @@ public interface WishWallService {
     @POST("postMyWishList")
     Observable<BaseJson<List<MyWishEntity>>> postMyWishList(@Field("UserId") int userId,
                                                             @Field("Type") int type);
+
+    /**
+     * 获取心愿墙数据
+     * @return
+     */
+    @GET("getWishList")
+    Observable<BaseJson<List<MyWishEntity>>> getWishList(@Query("UserId") int userId,
+                                                         @Query("Type") int type);
     /**
      * post 我要许愿
      * @return

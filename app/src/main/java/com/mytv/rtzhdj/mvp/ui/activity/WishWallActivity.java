@@ -2,17 +2,14 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -35,7 +32,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.app.utils.FileUtils;
@@ -46,17 +43,10 @@ import com.mytv.rtzhdj.di.component.DaggerWishWallComponent;
 import com.mytv.rtzhdj.di.module.WishWallModule;
 import com.mytv.rtzhdj.mvp.contract.WishWallContract;
 import com.mytv.rtzhdj.mvp.presenter.WishWallPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.GridViewAdapter;
-import com.mytv.rtzhdj.mvp.ui.fragment.MyReceiveFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.WishWallFragment;
 import com.mytv.rtzhdj.mvp.ui.widget.BottomDialog;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
-import com.zhy.view.flowlayout.FlowLayout;
-import com.zhy.view.flowlayout.TagAdapter;
-import com.zhy.view.flowlayout.TagFlowLayout;
-
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -194,7 +184,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
     private void initTab() {
         final List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(WishWallFragment.newInstance(i));
+            fragments.add(WishWallFragment.newInstance(i, type));
         }
 
 

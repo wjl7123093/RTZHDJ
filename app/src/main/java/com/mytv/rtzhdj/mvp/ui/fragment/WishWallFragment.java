@@ -13,20 +13,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
-import com.mytv.rtzhdj.app.data.entity.VoteListEntity;
 import com.mytv.rtzhdj.di.component.DaggerWishWallComponent;
 import com.mytv.rtzhdj.di.module.WishWallModule;
 import com.mytv.rtzhdj.mvp.contract.WishWallContract;
 import com.mytv.rtzhdj.mvp.presenter.WishWallPresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.activity.VoteOnlineActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.WishWallActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.MyWishAdapter;
-import com.mytv.rtzhdj.mvp.ui.adapter.VoteOnlineAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -54,10 +49,11 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
         return fragment;
     }
 
-    public static WishWallFragment newInstance(int type) {
+    public static WishWallFragment newInstance(int type, String pageType) {
         WishWallFragment fragment = new WishWallFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("type", type);
+        bundle.putString("pageType", pageType);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -84,7 +80,13 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
         initRefreshLayout();
 
         // 获取心愿数据
-        mPresenter.callMethodOfPostMyWishList(8, getArguments().getInt("type"), false);
+        if (getArguments().getString("pageType").equals("wall")) {
+            // 心愿墙
+            mPresenter.callMethodOfGetWishList(8, getArguments().getInt("type"), false);
+        } else {
+            // 我的心愿
+            mPresenter.callMethodOfPostMyWishList(8, getArguments().getInt("type"), false);
+        }
     }
 
     /**

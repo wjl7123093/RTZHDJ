@@ -2,13 +2,11 @@ package com.mytv.rtzhdj.mvp.contract;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
-import com.mytv.rtzhdj.mvp.ui.activity.VoteOnlineActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.WishWallActivity;
 
 import java.util.List;
@@ -32,6 +30,9 @@ public interface WishWallContract {
         // 获取 我的心愿数据
         Observable<BaseJson<List<MyWishEntity>>> postMyWishList(int userId, int type, boolean update);
 
+        // 获取 心愿墙数据
+        Observable<BaseJson<List<MyWishEntity>>> getWishList(int userId, int type, boolean update);
+
         // 上传 我要许愿 数据
         Observable<BaseJson> postMyWish(Map<String, RequestBody> params,
                                         List<MultipartBody.Part> parts);
@@ -46,6 +47,9 @@ public interface WishWallContract {
 
         // 调用 获取我的心愿API
         void callMethodOfPostMyWishList(int userId, int type, boolean update);
+
+        // 调用 获取心愿墙API
+        void callMethodOfGetWishList(int userId, int type, boolean update);
 
         // 调用 上传我要许愿数据
         void callMethodOfPostMyWish(Map<String, RequestBody> params,
