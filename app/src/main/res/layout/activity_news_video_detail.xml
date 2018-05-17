@@ -54,12 +54,26 @@
                     android:layout_marginTop="@dimen/len_4"/>
             </LinearLayout>
 
-            <WebView
+            <!--<WebView
                 android:id="@+id/webView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            </WebView>
+            </WebView>-->
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:background="@color/app_bg_grey" />
+
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
         </LinearLayout>
 

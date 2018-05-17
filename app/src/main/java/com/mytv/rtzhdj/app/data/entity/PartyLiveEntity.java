@@ -1,5 +1,7 @@
 package com.mytv.rtzhdj.app.data.entity;
 
+import java.util.List;
+
 /**
  * PartyLiveEntity   党建直播 实体类
  *
@@ -15,7 +17,7 @@ public class PartyLiveEntity {
     private String VideoUrl;
     private int Digs;
     private int Comments;
-    private int SubObjects;
+    private List<Comment> SubObjs;
 
     private int ContentID;
     private int NodeId;
@@ -53,12 +55,12 @@ public class PartyLiveEntity {
         Comments = comments;
     }
 
-    public int getSubObjects() {
-        return SubObjects;
+    public List<Comment> getSubObjects() {
+        return SubObjs;
     }
 
-    public void setSubObjects(int subObjects) {
-        SubObjects = subObjects;
+    public void setSubObjects(List<Comment> subObjects) {
+        SubObjs = subObjects;
     }
 
     public int getContentID() {

@@ -1,10 +1,11 @@
 package com.mytv.rtzhdj.mvp.contract;
 
+import android.support.v7.widget.RecyclerView;
+
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyLiveEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsVideoDetailActivity;
 
@@ -28,6 +29,8 @@ public interface NewsVideoDetailContract {
     //Presenter控制器
     interface Presenter extends IPresenter {
         void setActivity(NewsVideoDetailActivity activity);
+        //初始化 RecyclerView
+        RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取新闻详情
         void callMethodOfGetContent(boolean update);

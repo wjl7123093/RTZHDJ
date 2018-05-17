@@ -5,26 +5,29 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.PartyLiveEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsVideoDetailComponent;
 import com.mytv.rtzhdj.di.module.NewsVideoDetailModule;
 import com.mytv.rtzhdj.mvp.contract.NewsVideoDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.NewsVideoDetailPresenter;
-
-import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.mvp.ui.adapter.CommentLiveAdapter;
 import com.mytv.rtzhdj.mvp.ui.widget.LandLayoutVideo;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
@@ -34,6 +37,7 @@ import com.shuyu.gsyvideoplayer.utils.Debuger;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
 
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -66,8 +70,16 @@ public class NewsVideoDetailActivity extends BaseActivity<NewsVideoDetailPresent
     TextView mTvTitle;
     @BindView(R.id.tv_desc)
     TextView mTvDesc;
-    @BindView(R.id.webView)
-    WebView mWebView;
+//    @BindView(R.id.webView)
+//    WebView mWebView;
+
+    @BindView(R.id.refreshLayout)
+    RefreshLayout mRefreshLayout;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+
+    private CommentLiveAdapter mAdapter;
+    private static final int PAGE_SIZE = 10;
 
     private boolean isPlay;
     private boolean isPause;
@@ -94,15 +106,14 @@ public class NewsVideoDetailActivity extends BaseActivity<NewsVideoDetailPresent
     public void initData(Bundle savedInstanceState) {
         mTvDesc.setVisibility(View.GONE);
 
+        initRefreshLayout();
         mPresenter.setActivity(NewsVideoDetailActivity.this);
+        mPresenter.initRecyclerView(mRecyclerView);
         // 获取 党建直播data
         mPresenter.callMethodOfGetContent(false);
 
-
         String url =  "http://video.7k.cn/app_video/20171202/6c8cf3ea/v.m3u8.mp4";
 //        String url =  "http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8";
-
-
 
 
     }
@@ -203,6 +214,38 @@ public class NewsVideoDetailActivity extends BaseActivity<NewsVideoDetailPresent
     @Override
     public void loadData(PartyLiveEntity partyLiveEntity) {
         initPlayer(partyLiveEntity);
+        initAdapter(partyLiveEntity.getSubObjects());
+    }
+
+
+    private void initRefreshLayout() {
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+//        mRefreshLayout.setEnableLoadmore(false);
+        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
+    }
+
+    private void initAdapter(List<PartyLiveEntity.Comment> commentList) {
+        mAdapter = new CommentLiveAdapter(NewsVideoDetailActivity.this, commentList);
+        mAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                showMessage("" + Integer.toString(position));
+            }
+        });
+
     }
 
     private void initPlayer(PartyLiveEntity partyLiveEntity) {
