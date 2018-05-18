@@ -90,7 +90,7 @@ public class SpecialSubDetailPresenter extends BasePresenter<SpecialSubDetailCon
         mModel.getPartySpecialList(nodeId, refresh)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<NewsDetailEntity>>>transformObservable("getCommentList" + nodeId,
                         new TypeToken<BaseJson<List<NewsDetailEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<NewsDetailEntity>>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))

@@ -88,7 +88,7 @@ public class EffectEvaluationPresenter extends BasePresenter<EffectEvaluationCon
         mModel.getTestList(userId, testState, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<EffectEvaluationEntity>>>transformObservable("getTestList" + userId + testState,
                         new TypeToken<BaseJson<List<EffectEvaluationEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<EffectEvaluationEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

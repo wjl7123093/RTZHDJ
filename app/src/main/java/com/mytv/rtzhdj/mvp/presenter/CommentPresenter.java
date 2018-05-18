@@ -90,7 +90,7 @@ public class CommentPresenter extends BasePresenter<CommentContract.Model, Comme
         mModel.getCommentList(nodeId, contentId, refresh)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<CommentEntity>>>transformObservable("getCommentList" + nodeId + contentId,
                         new TypeToken<BaseJson<List<CommentEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<CommentEntity>>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))

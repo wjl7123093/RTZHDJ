@@ -72,7 +72,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
         mModel.getUserCategory(refresh)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<UserCategoryEntity>>>transformObservable("getUserCategory",
                         new TypeToken<BaseJson<List<UserCategoryEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<UserCategoryEntity>>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))
@@ -109,7 +109,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
         mModel.postAllPublishmentSystem(refresh)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<StationEntity>>>transformObservable("postAllPublishmentSystem",
                         new TypeToken<BaseJson<List<StationEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<StationEntity>>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))
@@ -197,8 +197,10 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                     public void onNext(@NonNull BaseJson<UserRegisterEntity> userRegisterEntity) {
                         Log.e(TAG, userRegisterEntity.toString());
 
-                        mRootView.showMessage("注册成功");
-                        mRootView.killMyself();
+                        if (userRegisterEntity.isSuccess()) {
+                            mRootView.showMessage("注册成功");
+                            mRootView.killMyself();
+                        }
                     }
                 });
 

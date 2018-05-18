@@ -8,10 +8,21 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
+import com.mytv.rtzhdj.mvp.contract.NewsDetailContract;
+import com.mytv.rtzhdj.mvp.ui.activity.NewsDetailActivity;
+import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -19,22 +30,6 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
-import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
-import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
-import com.mytv.rtzhdj.mvp.contract.NewsDetailContract;
-import com.mytv.rtzhdj.mvp.ui.activity.NewsDetailActivity;
-import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
-
-import java.util.List;
 
 
 @ActivityScope
@@ -125,7 +120,7 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
         mModel.getContent(id, nodeId, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<NewsDetailEntity>>transformObservable("getContent" + id,
                         new TypeToken<BaseJson<NewsDetailEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<NewsDetailEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

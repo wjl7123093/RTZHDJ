@@ -120,7 +120,7 @@ public class WishWallPresenter extends BasePresenter<WishWallContract.Model, Wis
         mModel.getWishList(userId, type, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<MyWishEntity>>>transformObservable("getWishList" + userId + type,
                         new TypeToken<BaseJson<List<MyWishEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<MyWishEntity>>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))

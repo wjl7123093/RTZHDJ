@@ -183,7 +183,7 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
         mModel.getTwoLevelList(nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<NewsSimpleEntity>>transformObservable("getTwoLevelList" + nodeId,
                         new TypeToken<BaseJson<NewsSimpleEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<NewsSimpleEntity>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))

@@ -90,7 +90,7 @@ public class VoteOnlinePresenter extends BasePresenter<VoteOnlineContract.Model,
         mModel.getVoteList(typeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<VoteListEntity>>>transformObservable("postVoteList" + typeId,
                         new TypeToken<BaseJson<List<VoteListEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<VoteListEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

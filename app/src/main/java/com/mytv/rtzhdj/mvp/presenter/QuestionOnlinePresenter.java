@@ -90,7 +90,7 @@ public class QuestionOnlinePresenter extends BasePresenter<QuestionOnlineContrac
         mModel.getSurveyList(publishmentSystemId, refresh)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<QuestionOnlineEntity>>>transformObservable("getSurveyList" + publishmentSystemId,
                         new TypeToken<BaseJson<List<QuestionOnlineEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<QuestionOnlineEntity>>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))

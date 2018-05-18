@@ -88,7 +88,7 @@ public class ElectiveCoursePresenter extends BasePresenter<ElectiveCourseContrac
         mModel.getCoursewareList(userId, nodeId, studyState, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<CoursewareEntity>>>transformObservable("getCoursewareList" + userId + "," + nodeId,
                         new TypeToken<BaseJson<List<CoursewareEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<CoursewareEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

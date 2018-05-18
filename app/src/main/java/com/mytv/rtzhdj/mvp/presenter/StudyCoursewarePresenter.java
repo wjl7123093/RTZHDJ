@@ -184,7 +184,7 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
         mModel.getNewCoursewareList(userId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<StudyCoursewareEntity>>>transformObservable("getNewCoursewareList" + userId,
                         new TypeToken<BaseJson<List<StudyCoursewareEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<StudyCoursewareEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

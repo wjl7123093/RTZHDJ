@@ -91,7 +91,7 @@ public class VoteDetailPresenter extends BasePresenter<VoteDetailContract.Model,
         mModel.getVoteOptionsList(id, userId, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<VoteDetailEntity>>>transformObservable("getVoteOptionsList" + id,
                         new TypeToken<BaseJson<List<VoteDetailEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<VoteDetailEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

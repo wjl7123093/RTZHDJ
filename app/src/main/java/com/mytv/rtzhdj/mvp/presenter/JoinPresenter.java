@@ -374,7 +374,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
         mModel.getMyPartIn(userId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<MyJoinEntity>>transformObservable("getMyPartIn" + userId,
                         new TypeToken<BaseJson<MyJoinEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<MyJoinEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

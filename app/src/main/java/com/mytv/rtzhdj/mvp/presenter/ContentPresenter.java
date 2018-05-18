@@ -150,7 +150,7 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
         mModel.getPartyRecommend(pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<PartyRecommendEntity>>transformObservable("getPartyRecommend",
                         new TypeToken<BaseJson<PartyRecommendEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))    // 60s以内用缓存
+                        CacheStrategy.firstRemote()))    // 60s以内用缓存
                 .map(new CacheResult.MapFunc<BaseJson<PartyRecommendEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

@@ -91,7 +91,7 @@ public class PartyMemberPresenter extends BasePresenter<PartyMemberContract.Mode
         mModel.getPartyMember(publishmentSystemId, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<PartyMemberEntity>>>transformObservable("getPartyMember" + publishmentSystemId,
                         new TypeToken<BaseJson<List<PartyMemberEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<PartyMemberEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
@@ -121,7 +121,7 @@ public class PartyMemberPresenter extends BasePresenter<PartyMemberContract.Mode
         mModel.getPartymembermien(publishmentSystemId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<PartyMienEntity>>>transformObservable("getPartymembermien" + publishmentSystemId,
                         new TypeToken<BaseJson<List<PartyMienEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<PartyMienEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

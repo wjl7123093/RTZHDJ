@@ -118,7 +118,7 @@ public class MyDonationPresenter extends BasePresenter<MyDonationContract.Model,
         mModel.getAllDonateList(userId, typeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<MyDonateEntity>>>transformObservable("getAllDonateList" + userId + typeId,
                         new TypeToken<BaseJson<List<MyDonateEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<MyDonateEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

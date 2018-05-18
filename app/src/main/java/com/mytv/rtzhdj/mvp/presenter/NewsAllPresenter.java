@@ -89,7 +89,7 @@ public class NewsAllPresenter extends BasePresenter<NewsAllContract.Model, NewsA
         mModel.getTwoLevelAllList(nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<NewsAllEntity>>transformObservable("getTwoLevelAllList" + nodeId,
                         new TypeToken<BaseJson<NewsAllEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<NewsAllEntity>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))
@@ -120,7 +120,7 @@ public class NewsAllPresenter extends BasePresenter<NewsAllContract.Model, NewsA
         mModel.getTwoLevelInfoList(nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<NewsDetailEntity>>>transformObservable("getTwoLevelInfoList" + nodeId,
                         new TypeToken<BaseJson<List<NewsDetailEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<NewsDetailEntity>>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))

@@ -67,7 +67,7 @@ public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServ
         mModel.getVolunteerServiceDetail(id, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<VolunteerDetailEntity>>transformObservable("getVolunteerServiceDetail" + id,
                         new TypeToken<BaseJson<VolunteerDetailEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<VolunteerDetailEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

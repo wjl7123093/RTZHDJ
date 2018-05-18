@@ -108,7 +108,7 @@ public class PartyKnowledgePresenter extends BasePresenter<PartyKnowledgeContrac
         mModel.getPartyKnowledgeList(nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<PartyNewsEntity>>>transformObservable("getPartyKnowledgeList" + nodeId,
                         new TypeToken<BaseJson<List<PartyNewsEntity>>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<PartyNewsEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())

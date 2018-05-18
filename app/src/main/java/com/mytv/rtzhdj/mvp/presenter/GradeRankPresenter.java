@@ -88,7 +88,7 @@ public class GradeRankPresenter extends BasePresenter<GradeRankContract.Model, G
         mModel.getTestResultList(examinationID, userID, refresh)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<GradeRankEntity>>transformObservable("getTestResultList" + examinationID + userID,
                         new TypeToken<BaseJson<GradeRankEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<GradeRankEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
