@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -27,13 +26,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.app.utils.FileUtils;
 import com.mytv.rtzhdj.app.utils.ImageTools;
@@ -43,14 +43,10 @@ import com.mytv.rtzhdj.di.component.DaggerMyReceiveWishComponent;
 import com.mytv.rtzhdj.di.module.MyReceiveWishModule;
 import com.mytv.rtzhdj.mvp.contract.MyReceiveWishContract;
 import com.mytv.rtzhdj.mvp.presenter.MyReceiveWishPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.GridViewAdapter;
-import com.mytv.rtzhdj.mvp.ui.fragment.MyReceiveFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.MyReceiveWishFragment;
 import com.mytv.rtzhdj.mvp.ui.widget.BottomDialog;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
-
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -384,7 +380,8 @@ public class MyReceiveWishActivity extends BaseActivity<MyReceiveWishPresenter> 
             }
         });
         mBtnWish.setOnClickListener(view -> {
-            params.put("UserID", RequestBody.create(MediaType.parse("text/plain"), "8"));
+            params.put("UserID", RequestBody.create(MediaType.parse("text/plain"),
+                    "" + DataHelper.getIntergerSF(MyReceiveWishActivity.this, SharepreferenceKey.KEY_USER_ID)));
             params.put("WishDtail", RequestBody.create(MediaType.parse("text/plain"), mEdtWish.getText().toString().trim()));
 
             // 提交我的心愿

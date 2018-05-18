@@ -12,15 +12,14 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.di.component.DaggerSignInComponent;
 import com.mytv.rtzhdj.di.module.SignInModule;
 import com.mytv.rtzhdj.mvp.contract.SignInContract;
 import com.mytv.rtzhdj.mvp.presenter.SignInPresenter;
-
-import com.mytv.rtzhdj.R;
-
 
 import butterknife.BindView;
 
@@ -90,7 +89,9 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
 
-        mTvSignBig.setOnClickListener(view -> mPresenter.callMethodOfPostSignForScore(8));
+        mTvSignBig.setOnClickListener(view -> mPresenter.callMethodOfPostSignForScore(
+                DataHelper.getIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_USER_ID)
+        ));
 
     }
 

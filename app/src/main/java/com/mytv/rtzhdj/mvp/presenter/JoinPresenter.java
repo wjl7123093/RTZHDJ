@@ -231,7 +231,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
     }
 
     @Override
-    public BaseDelegateAdapter initHeader(String report) {
+    public BaseDelegateAdapter initHeader(MyJoinEntity.PartyInfoModel partyInfoModel) {
 //        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_header3,
@@ -239,12 +239,31 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                holder.getView(R.id.tv_report).setOnClickListener(view -> {
-                    ARouter.getInstance().build(ARoutePath.PATH_DOUBLE_REPORTING).navigation();
-                });
-                holder.getView(R.id.iv_my_report).setOnClickListener(view -> {
-                    ARouter.getInstance().build(ARoutePath.PATH_MY_REPORTING).navigation();
-                });
+                if (null == partyInfoModel) {
+                    holder.getView(R.id.rl_container1).setVisibility(View.VISIBLE);
+                    holder.getView(R.id.rl_container2).setVisibility(View.GONE);
+                    holder.getView(R.id.tv_report).setOnClickListener(view -> {
+                        ARouter.getInstance().build(ARoutePath.PATH_DOUBLE_REPORTING).navigation();
+                    });
+                    holder.getView(R.id.iv_my_report).setOnClickListener(view -> {
+                        ARouter.getInstance().build(ARoutePath.PATH_MY_REPORTING).navigation();
+                    });
+                } else {
+                    holder.getView(R.id.rl_container1).setVisibility(View.GONE);
+                    holder.getView(R.id.rl_container2).setVisibility(View.VISIBLE);
+                    holder.getView(R.id.tv_phone).setOnClickListener(view -> {
+                        // 打电话
+
+                    });
+                    holder.getView(R.id.tv_guider).setOnClickListener(view -> {
+                        // 导航
+
+                    });
+                    holder.getView(R.id.iv_my_report2).setOnClickListener(view -> {
+                        ARouter.getInstance().build(ARoutePath.PATH_MY_REPORTING).navigation();
+                    });
+                }
+
             }
         };
     }

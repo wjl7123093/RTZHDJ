@@ -19,16 +19,15 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.di.component.DaggerConnectionTransferComponent;
 import com.mytv.rtzhdj.di.module.ConnectionTransferModule;
 import com.mytv.rtzhdj.mvp.contract.ConnectionTransferContract;
 import com.mytv.rtzhdj.mvp.presenter.ConnectionTransferPresenter;
-
-import com.mytv.rtzhdj.R;
-
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -101,7 +100,8 @@ public class ConnectionTransferActivity extends BaseActivity<ConnectionTransferP
 
             // post 组织关系转接
             mPresenter.callMethodOfGetOrganizationalChange(
-                    mPublishmentSystemId, mEdtReason.getText().toString().trim(), 8, false);
+                    mPublishmentSystemId, mEdtReason.getText().toString().trim(),
+                    DataHelper.getIntergerSF(ConnectionTransferActivity.this, SharepreferenceKey.KEY_USER_ID), false);
         });
 
 

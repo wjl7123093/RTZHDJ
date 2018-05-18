@@ -13,17 +13,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.di.component.DaggerMyReceiveWishComponent;
 import com.mytv.rtzhdj.di.module.MyReceiveWishModule;
 import com.mytv.rtzhdj.mvp.contract.MyReceiveWishContract;
 import com.mytv.rtzhdj.mvp.presenter.MyReceiveWishPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.MyReceiveWishActivity;
-import com.mytv.rtzhdj.mvp.ui.activity.WishWallActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.MyWishAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -82,7 +81,9 @@ public class MyReceiveWishFragment extends BaseFragment<MyReceiveWishPresenter> 
         initRefreshLayout();
 
         // 获取心愿数据
-        mPresenter.callMethodOfPostMyClaimWishList(8, getArguments().getInt("type"), false);
+        mPresenter.callMethodOfPostMyClaimWishList(
+                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                getArguments().getInt("type"), false);
 
     }
 

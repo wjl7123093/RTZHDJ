@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,21 +12,17 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
 import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.UserDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerSettingsComponent;
 import com.mytv.rtzhdj.di.module.SettingsModule;
 import com.mytv.rtzhdj.mvp.contract.SettingsContract;
 import com.mytv.rtzhdj.mvp.presenter.SettingsPresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.SettingsActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -131,7 +126,8 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
         if (getUserVisibleHint()) {
             if (getArguments().getInt("flag") == 0) {    // 基本信息
                 // 获取用户详情信息
-                mPresenter.callMethodOfGetUserDetail(8, false);
+                mPresenter.callMethodOfGetUserDetail(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID), false);
             }
         }
     }

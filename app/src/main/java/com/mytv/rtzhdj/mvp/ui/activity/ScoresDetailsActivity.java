@@ -8,30 +8,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.ScoresDetailsEntity;
 import com.mytv.rtzhdj.di.component.DaggerScoresDetailsComponent;
 import com.mytv.rtzhdj.di.module.ScoresDetailsModule;
 import com.mytv.rtzhdj.mvp.contract.ScoresDetailsContract;
 import com.mytv.rtzhdj.mvp.presenter.ScoresDetailsPresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.adapter.NewsSimpleAdapter;
 import com.mytv.rtzhdj.mvp.ui.adapter.ScoresDetailsAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 
 import java.util.List;
 
@@ -98,7 +92,7 @@ public class ScoresDetailsActivity extends BaseActivity<ScoresDetailsPresenter> 
         initRefreshLayout();
 
         // 获取积分明细数据
-        mPresenter.callMethodOfPostMyScore(8, false);
+        mPresenter.callMethodOfPostMyScore(DataHelper.getIntergerSF(ScoresDetailsActivity.this, SharepreferenceKey.KEY_USER_ID), false);
 
     }
 

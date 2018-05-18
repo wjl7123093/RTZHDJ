@@ -3,9 +3,9 @@ package com.mytv.rtzhdj.mvp.contract;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
@@ -44,7 +44,7 @@ public interface JoinContract {
         BaseDelegateAdapter initTitle(String title);
         BaseDelegateAdapter initListVolunteer(List<MyJoinEntity.VolunteerBlock> volunteerBlocks);
         BaseDelegateAdapter initListCommunity(List<MyJoinEntity.CommunityBlock> communityBlocks);
-        BaseDelegateAdapter initHeader(String report);
+        BaseDelegateAdapter initHeader(MyJoinEntity.PartyInfoModel partyInfoModel);
         BaseDelegateAdapter initFooter(String footer);
         BaseDelegateAdapter initOnePlusN2();
         BaseDelegateAdapter initColumnWish();

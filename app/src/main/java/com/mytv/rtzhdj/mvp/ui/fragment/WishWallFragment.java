@@ -13,8 +13,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.di.component.DaggerWishWallComponent;
 import com.mytv.rtzhdj.di.module.WishWallModule;
@@ -82,10 +84,14 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
         // 获取心愿数据
         if (getArguments().getString("pageType").equals("wall")) {
             // 心愿墙
-            mPresenter.callMethodOfGetWishList(8, getArguments().getInt("type"), false);
+            mPresenter.callMethodOfGetWishList(
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                    getArguments().getInt("type"), false);
         } else {
             // 我的心愿
-            mPresenter.callMethodOfPostMyWishList(8, getArguments().getInt("type"), false);
+            mPresenter.callMethodOfPostMyWishList(
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                    getArguments().getInt("type"), false);
         }
     }
 

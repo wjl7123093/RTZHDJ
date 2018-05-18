@@ -15,15 +15,14 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.di.component.DaggerSendMsgComponent;
 import com.mytv.rtzhdj.di.module.SendMsgModule;
 import com.mytv.rtzhdj.mvp.contract.SendMsgContract;
 import com.mytv.rtzhdj.mvp.presenter.SendMsgPresenter;
-
-import com.mytv.rtzhdj.R;
-
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -89,7 +88,8 @@ public class SendMsgActivity extends BaseActivity<SendMsgPresenter> implements S
 
         mTvName.setText(name);
         mBtnOK.setOnClickListener(view -> mPresenter.callMethodOfPostSendMessage(
-                8, id, mEdtTheme.getText().toString().trim(), mEdtMsg.getText().toString().trim()));
+                DataHelper.getIntergerSF(SendMsgActivity.this, SharepreferenceKey.KEY_USER_ID),
+                id, mEdtTheme.getText().toString().trim(), mEdtMsg.getText().toString().trim()));
     }
 
 

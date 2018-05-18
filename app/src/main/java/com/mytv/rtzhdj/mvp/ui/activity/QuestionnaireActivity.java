@@ -28,8 +28,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.AnswerEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionEntity;
 import com.mytv.rtzhdj.di.component.DaggerQuestionnaireComponent;
@@ -328,7 +330,8 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 //            this.finish();
 
             // 提交 评测结果
-            mPresenter.callMethodOfPostTestInfo(8, examinationId, mScore, false);
+            mPresenter.callMethodOfPostTestInfo(DataHelper.getIntergerSF(QuestionnaireActivity.this,
+                    SharepreferenceKey.KEY_USER_ID), examinationId, mScore, false);
             showMessage("答题结束，分数为：" + mScore);
         }
     }

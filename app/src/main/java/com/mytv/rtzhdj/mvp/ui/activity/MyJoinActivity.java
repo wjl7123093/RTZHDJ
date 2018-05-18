@@ -27,9 +27,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.api.Api;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.utils.FileUtils;
 import com.mytv.rtzhdj.app.utils.ImageTools;
 import com.mytv.rtzhdj.app.utils.MultiPartParamsUtils;
@@ -37,19 +38,10 @@ import com.mytv.rtzhdj.di.component.DaggerMyJoinComponent;
 import com.mytv.rtzhdj.di.module.MyJoinModule;
 import com.mytv.rtzhdj.mvp.contract.MyJoinContract;
 import com.mytv.rtzhdj.mvp.presenter.MyJoinPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.GridViewAdapter;
 import com.mytv.rtzhdj.mvp.ui.widget.BottomDialog;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
 
 import net.qiujuer.genius.ui.widget.EditText;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,7 +52,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -168,7 +159,8 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
         });
 
         mBtnSubmit.setOnClickListener(view -> {
-            params.put("UserId", RequestBody.create(MediaType.parse("text/plain"), "8"));
+            params.put("UserId", RequestBody.create(MediaType.parse("text/plain"),
+                    "" + DataHelper.getIntergerSF(MyJoinActivity.this, SharepreferenceKey.KEY_USER_ID)));
             params.put("ContentID", RequestBody.create(MediaType.parse("text/plain"), contentId + ""));
             params.put("Address", RequestBody.create(MediaType.parse("text/plain"), mEdtAddress.getText().toString().trim()));
             params.put("Feelings", RequestBody.create(MediaType.parse("text/plain"), mEdtContent.getText().toString().trim()));

@@ -10,11 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,19 +21,16 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.di.component.DaggerNewsDetailComponent;
 import com.mytv.rtzhdj.di.module.NewsDetailModule;
 import com.mytv.rtzhdj.mvp.contract.NewsDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.NewsDetailPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
-import com.zhy.view.flowlayout.FlowLayout;
-import com.zhy.view.flowlayout.TagAdapter;
-import com.zhy.view.flowlayout.TagFlowLayout;
 
 import net.qiujuer.genius.ui.widget.EditText;
 
@@ -180,7 +173,8 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
                 }
 
                 // 提交评论
-                mPresenter.callMethodOfPostComment(8, nodeId, articleId, mEdtComment.getText().toString().trim(), false);
+                mPresenter.callMethodOfPostComment(DataHelper.getIntergerSF(NewsDetailActivity.this,
+                        SharepreferenceKey.KEY_USER_ID), nodeId, articleId, mEdtComment.getText().toString().trim(), false);
                 dialog.dismiss();
             }
         });

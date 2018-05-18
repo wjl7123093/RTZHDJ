@@ -14,17 +14,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.di.component.DaggerCompulsoryCourseComponent;
 import com.mytv.rtzhdj.di.module.CompulsoryCourseModule;
 import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
 import com.mytv.rtzhdj.mvp.presenter.CompulsoryCoursePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.CompulsoryCourseAdapter;
-import com.mytv.rtzhdj.mvp.ui.adapter.TestingAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -92,7 +91,9 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
         initRefreshLayout();
 
         // 获取课件列表(必修课)数据
-        mPresenter.callMethodOfGetCoursewareList(8, 9043, getArguments().getInt("studyState"), 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetCoursewareList(
+                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                9043, getArguments().getInt("studyState"), 1, PAGE_SIZE, false);
     }
 
     /**

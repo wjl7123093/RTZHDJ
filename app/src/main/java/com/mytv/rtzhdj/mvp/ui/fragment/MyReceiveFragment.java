@@ -12,15 +12,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyDonateEntity;
 import com.mytv.rtzhdj.di.component.DaggerMyReceiveComponent;
 import com.mytv.rtzhdj.di.module.MyReceiveModule;
 import com.mytv.rtzhdj.mvp.contract.MyReceiveContract;
 import com.mytv.rtzhdj.mvp.presenter.MyReceivePresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.activity.MyDonationActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.MyReceiveActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.MyDonationAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -80,7 +79,9 @@ public class MyReceiveFragment extends BaseFragment<MyReceivePresenter> implemen
         initRefreshLayout();
 
         // 获取我的捐赠数据
-        mPresenter.callMethodOfPostMyClaimGoodsList(8, getArguments().getInt("type"), false);
+        mPresenter.callMethodOfPostMyClaimGoodsList(
+                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                getArguments().getInt("type"), false);
 
     }
 

@@ -8,25 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
-import com.mytv.rtzhdj.app.ARoutePath;
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyDonateEntity;
-import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.di.component.DaggerMyDonationComponent;
 import com.mytv.rtzhdj.di.module.MyDonationModule;
 import com.mytv.rtzhdj.mvp.contract.MyDonationContract;
 import com.mytv.rtzhdj.mvp.presenter.MyDonationPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.MyDonationActivity;
-import com.mytv.rtzhdj.mvp.ui.activity.MyReceiveWishActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.MyDonationAdapter;
-import com.mytv.rtzhdj.mvp.ui.adapter.MyWishAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -86,10 +81,14 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
 
         if (getArguments().getString("pageType").equals("all")) {
             // 获取 所有捐赠数据
-            mPresenter.callMethodOfGetAllDonateList(8, getArguments().getInt("typeId"), 1, PAGE_SIZE, false);
+            mPresenter.callMethodOfGetAllDonateList(
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                    getArguments().getInt("typeId"), 1, PAGE_SIZE, false);
         } else {
             // 获取 我的捐赠数据
-            mPresenter.callMethodOfPostMyClaimDonateList(8, getArguments().getInt("typeId"), false);
+            mPresenter.callMethodOfPostMyClaimDonateList(
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                    getArguments().getInt("typeId"), false);
         }
     }
 

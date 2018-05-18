@@ -14,17 +14,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
 import com.mytv.rtzhdj.di.component.DaggerEffectEvaluationComponent;
 import com.mytv.rtzhdj.di.module.EffectEvaluationModule;
 import com.mytv.rtzhdj.mvp.contract.EffectEvaluationContract;
 import com.mytv.rtzhdj.mvp.presenter.EffectEvaluationPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.EffectEvaluationAdapter;
-import com.mytv.rtzhdj.mvp.ui.adapter.TestingAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -92,7 +91,9 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
         initRefreshLayout();
 
         // 获取 效果测评列表数据
-        mPresenter.callMethodOfGetTestList(8, getArguments().getInt("testState"), false);
+        mPresenter.callMethodOfGetTestList(
+                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                getArguments().getInt("testState"), false);
     }
 
     /**

@@ -158,7 +158,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 10));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_text1,
-                3, Constant.viewType.typeList) {
+                coursewareList.size(), Constant.viewType.typeList) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);

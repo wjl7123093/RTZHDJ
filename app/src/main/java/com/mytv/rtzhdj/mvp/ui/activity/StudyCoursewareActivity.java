@@ -14,21 +14,19 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.DataServer;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.StudyCoursewareEntity;
 import com.mytv.rtzhdj.di.component.DaggerStudyCoursewareComponent;
 import com.mytv.rtzhdj.di.module.StudyCoursewareModule;
 import com.mytv.rtzhdj.mvp.contract.StudyCoursewareContract;
 import com.mytv.rtzhdj.mvp.presenter.StudyCoursewarePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 
 import java.util.LinkedList;
 import java.util.List;
@@ -93,7 +91,8 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
         initRefreshLayout();
 
         // 获取 学习课件数据
-        mPresenter.callMethodOfGetNewCoursewareList(8, 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetNewCoursewareList(DataHelper.getIntergerSF(StudyCoursewareActivity.this,
+                SharepreferenceKey.KEY_USER_ID), 1, PAGE_SIZE, false);
     }
 
 

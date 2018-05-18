@@ -9,23 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyMsgEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerMyMsgComponent;
 import com.mytv.rtzhdj.di.module.MyMsgModule;
 import com.mytv.rtzhdj.mvp.contract.MyMsgContract;
 import com.mytv.rtzhdj.mvp.presenter.MyMsgPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.MyMsgActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.MyMsgAdapter;
-import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -83,7 +80,9 @@ public class MyMsgFragment extends BaseFragment<MyMsgPresenter> implements MyMsg
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initRefreshLayout();
 
-        mPresenter.callMethodOfPostMyMessage(8, getArguments().getInt("messageType"));
+        mPresenter.callMethodOfPostMyMessage(
+                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                getArguments().getInt("messageType"));
     }
 
     /**

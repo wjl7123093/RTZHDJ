@@ -13,17 +13,16 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
 import com.mytv.rtzhdj.di.component.DaggerStudyComponent;
 import com.mytv.rtzhdj.di.module.StudyModule;
 import com.mytv.rtzhdj.mvp.contract.StudyContract;
 import com.mytv.rtzhdj.mvp.presenter.StudyPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
-import com.mytv.rtzhdj.mvp.ui.activity.StudyCoursewareActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -86,7 +85,8 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         initRefreshLayout();
 
         // 获取 我要学习数据
-        mPresenter.callMethodOfGetMyStudy(8, false);
+        mPresenter.callMethodOfGetMyStudy(
+                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID), false);
     }
 
     /**
@@ -144,7 +144,7 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
                         .withString("from", "StudyFragment")
                         .withString("title", title)
-                        .withInt("nodeId", 6017).navigation();
+                        .withInt("nodeId", 9050).navigation();
                 break;
             case 3: // 党建研究
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
@@ -279,23 +279,29 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         //初始化标题 - 必修课
         BaseDelegateAdapter titleAdapter = mPresenter.initTitle("必修课", 0);
         mAdapters.add(titleAdapter);
-        //初始化list
-        BaseDelegateAdapter listAdapter = mPresenter.initList(courseMustBlock, 0);
-        mAdapters.add(listAdapter);
+        if (courseMustBlock.size() > 0) {
+            //初始化list
+            BaseDelegateAdapter listAdapter = mPresenter.initList(courseMustBlock, 0);
+            mAdapters.add(listAdapter);
+        }
 
         //初始化标题 - 选修课
         titleAdapter = mPresenter.initTitle("选修课", 1);
         mAdapters.add(titleAdapter);
-        //初始化list
-        listAdapter = mPresenter.initList(courseChooseBlock, 1);
-        mAdapters.add(listAdapter);
+        if (courseChooseBlock.size() > 0) {
+            //初始化list
+            BaseDelegateAdapter listAdapter = mPresenter.initList(courseChooseBlock, 1);
+            mAdapters.add(listAdapter);
+        }
 
         //初始化标题 - 微党课
         titleAdapter = mPresenter.initTitle("微党课", 2);
         mAdapters.add(titleAdapter);
-        //初始化list
-        listAdapter = mPresenter.initList(courseLittleBlock, 2);
-        mAdapters.add(listAdapter);
+        if (courseLittleBlock.size() > 0) {
+            //初始化list
+            BaseDelegateAdapter listAdapter = mPresenter.initList(courseLittleBlock, 2);
+            mAdapters.add(listAdapter);
+        }
 
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);

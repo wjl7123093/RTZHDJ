@@ -32,8 +32,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.app.utils.FileUtils;
 import com.mytv.rtzhdj.app.utils.ImageTools;
@@ -391,7 +393,8 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
             }
         });
         mBtnWish.setOnClickListener(view -> {
-            params.put("UserID", RequestBody.create(MediaType.parse("text/plain"), "8"));
+            params.put("UserID", RequestBody.create(MediaType.parse("text/plain"),
+                    "" + DataHelper.getIntergerSF(WishWallActivity.this, SharepreferenceKey.KEY_USER_ID)));
             params.put("WishDtail", RequestBody.create(MediaType.parse("text/plain"), mEdtWish.getText().toString().trim()));
 
             // 提交我的心愿

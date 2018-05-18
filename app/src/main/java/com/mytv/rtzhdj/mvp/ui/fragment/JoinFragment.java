@@ -10,22 +10,18 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
-import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.di.component.DaggerJoinComponent;
 import com.mytv.rtzhdj.di.module.JoinModule;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.presenter.JoinPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
-import com.mytv.rtzhdj.mvp.ui.widget.AutoLoadRecyclerViewGlide;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -87,7 +83,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
         initRefreshLayout();
 
         // 获取 我要参与数据
-        mPresenter.callMethodOfGetMyPartIn(8, 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetMyPartIn(39, 1, PAGE_SIZE, false);
     }
 
     /**
@@ -268,11 +264,12 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
     private void initRecyclerView(MyJoinEntity myJoinEntity) {
         List<MyJoinEntity.VolunteerBlock> volunteerBlocks = myJoinEntity.getVolunteerBlock();
         List<MyJoinEntity.CommunityBlock> communityBlocks = myJoinEntity.getCommunityBlock();
+        MyJoinEntity.PartyInfoModel partyInfoModel = myJoinEntity.getPartyInfoModel();
 
         DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
 
         //初始化头部
-        BaseDelegateAdapter headerAdapter = mPresenter.initHeader("点击立即报到");
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader(partyInfoModel);
         mAdapters.add(headerAdapter);
 
         //初始化九宫格

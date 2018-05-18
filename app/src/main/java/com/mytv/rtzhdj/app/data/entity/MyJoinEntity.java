@@ -15,6 +15,7 @@ public class MyJoinEntity {
 
     private List<VolunteerBlock> VolunteerBlock;    // 志愿服务
     private List<CommunityBlock> CommunityBlock;    // 社区动态
+    private PartyInfoModel PartyInfoModel;          // 报道信息
 
     public List<VolunteerBlock> getVolunteerBlock() {
         return VolunteerBlock;
@@ -30,6 +31,14 @@ public class MyJoinEntity {
 
     public void setCommunityBlock(List<CommunityBlock> communityBlock) {
         this.CommunityBlock = communityBlock;
+    }
+
+    public MyJoinEntity.PartyInfoModel getPartyInfoModel() {
+        return PartyInfoModel;
+    }
+
+    public void setPartyInfoModel(MyJoinEntity.PartyInfoModel partyInfoModel) {
+        PartyInfoModel = partyInfoModel;
     }
 
     public class VolunteerBlock {
@@ -143,6 +152,45 @@ public class MyJoinEntity {
 
         public void setAddDate(String addDate) {
             AddDate = addDate;
+        }
+    }
+
+    public class PartyInfoModel {
+        private String Name;
+        private String Phone;
+        private String Address;
+        private String OptDate;
+
+        public String getName() {
+            return Name;
+        }
+
+        public void setName(String name) {
+            Name = name;
+        }
+
+        public String getPhone() {
+            return Phone;
+        }
+
+        public void setPhone(String phone) {
+            Phone = phone;
+        }
+
+        public String getAddress() {
+            return Address;
+        }
+
+        public void setAddress(String address) {
+            Address = address;
+        }
+
+        public String getOptDate() {
+            return OptDate;
+        }
+
+        public void setOptDate(String optDate) {
+            OptDate = optDate;
         }
     }
 

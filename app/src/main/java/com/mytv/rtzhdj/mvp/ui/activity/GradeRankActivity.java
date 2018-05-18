@@ -16,8 +16,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.GradeRankEntity;
 import com.mytv.rtzhdj.di.component.DaggerGradeRankComponent;
 import com.mytv.rtzhdj.di.module.GradeRankModule;
@@ -106,7 +108,8 @@ public class GradeRankActivity extends BaseActivity<GradeRankPresenter> implemen
         initRefreshLayout();
 
         // 获取 成绩排行数据
-        mPresenter.callMethodOfGetTestResultList(examinationId, 8, false);
+        mPresenter.callMethodOfGetTestResultList(examinationId,
+                DataHelper.getIntergerSF(GradeRankActivity.this, SharepreferenceKey.KEY_USER_ID), false);
     }
 
 

@@ -12,15 +12,14 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.di.component.DaggerUpdatePwdComponent;
 import com.mytv.rtzhdj.di.module.UpdatePwdModule;
 import com.mytv.rtzhdj.mvp.contract.UpdatePwdContract;
 import com.mytv.rtzhdj.mvp.presenter.UpdatePwdPresenter;
-
-import com.mytv.rtzhdj.R;
-
 
 import net.qiujuer.genius.ui.widget.Button;
 import net.qiujuer.genius.ui.widget.EditText;
@@ -85,7 +84,8 @@ public class UpdatePwdActivity extends BaseActivity<UpdatePwdPresenter> implemen
 
         mPresenter.setActivity(UpdatePwdActivity.this);
         mBtnOk.setOnClickListener(view ->
-            mPresenter.callMethodOfPostUpdatePassword(8, mEdtOldPwd.getText().toString().trim(),
+            mPresenter.callMethodOfPostUpdatePassword(DataHelper.getIntergerSF(UpdatePwdActivity.this,
+                    SharepreferenceKey.KEY_USER_ID), mEdtOldPwd.getText().toString().trim(),
                     mEdtNewPwd.getText().toString().trim(), mEdtNewPwd2.getText().toString().trim()));
     }
 

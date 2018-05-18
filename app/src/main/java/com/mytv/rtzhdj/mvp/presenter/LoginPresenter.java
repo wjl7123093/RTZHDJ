@@ -5,30 +5,28 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.DataHelper;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.LoginEntity;
+import com.mytv.rtzhdj.mvp.contract.LoginContract;
+import com.mytv.rtzhdj.mvp.ui.activity.LoginActivity;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.DataHelper;
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.SharepreferenceKey;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
-import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
-import com.mytv.rtzhdj.app.data.entity.LoginEntity;
-import com.mytv.rtzhdj.mvp.contract.LoginContract;
-import com.mytv.rtzhdj.mvp.ui.activity.LoginActivity;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -98,6 +96,9 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
 //                        mRootView.showData(homeData);
                         DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_IS_LOGIN, 1); // 1 表示登录
                         DataHelper.saveDeviceData(mActivity, SharepreferenceKey.KEY_LOGIN_USER, loginData.getData());
+//                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_USER_ID, loginData.getData().getUserId());
+                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_USER_ID, 39);
+
                         mRootView.goMainActivity();
                     }
                 });

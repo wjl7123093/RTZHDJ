@@ -22,21 +22,19 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.di.component.DaggerCommentComponent;
 import com.mytv.rtzhdj.di.module.CommentModule;
 import com.mytv.rtzhdj.mvp.contract.CommentContract;
 import com.mytv.rtzhdj.mvp.presenter.CommentPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.CommentAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
-
 
 import java.util.List;
 
@@ -191,7 +189,7 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
                 }
 
                 // 提交评论
-                mPresenter.callMethodOfPostComment(8, nodeId, contentId, mEdtComment.getText().toString().trim(), false);
+                mPresenter.callMethodOfPostComment(DataHelper.getIntergerSF(CommentActivity.this, SharepreferenceKey.KEY_USER_ID), nodeId, contentId, mEdtComment.getText().toString().trim(), false);
                 dialog.dismiss();
             }
         });

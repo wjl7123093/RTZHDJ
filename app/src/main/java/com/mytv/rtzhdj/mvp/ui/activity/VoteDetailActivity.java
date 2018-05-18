@@ -16,21 +16,19 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.VoteDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerVoteDetailComponent;
 import com.mytv.rtzhdj.di.module.VoteDetailModule;
 import com.mytv.rtzhdj.mvp.contract.VoteDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.VoteDetailPresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.adapter.CommentAdapter;
 import com.mytv.rtzhdj.mvp.ui.adapter.VoteDetailAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -114,7 +112,8 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
         });
 
         // 获取 我要投票列表数据
-        mPresenter.callMethodOfGetVoteOptionsList(id, 8, false);
+        mPresenter.callMethodOfGetVoteOptionsList(id, DataHelper.getIntergerSF(VoteDetailActivity.this,
+                SharepreferenceKey.KEY_USER_ID), false);
     }
 
 

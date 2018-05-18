@@ -18,17 +18,16 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.app.utils.KeyboardUtils;
 import com.mytv.rtzhdj.di.component.DaggerDoubleReportingComponent;
 import com.mytv.rtzhdj.di.module.DoubleReportingModule;
 import com.mytv.rtzhdj.mvp.contract.DoubleReportingContract;
 import com.mytv.rtzhdj.mvp.presenter.DoubleReportingPresenter;
-
-import com.mytv.rtzhdj.R;
-
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -95,7 +94,8 @@ public class DoubleReportingActivity extends BaseActivity<DoubleReportingPresent
                 return;
             }
 
-            mPresenter.callMethodOfPostPersonalReach(8, mPublishmentSystemId);
+            mPresenter.callMethodOfPostPersonalReach(
+                    DataHelper.getIntergerSF(DoubleReportingActivity.this, SharepreferenceKey.KEY_USER_ID), mPublishmentSystemId);
         });
         mEdtCommunity.setOnClickListener(view -> {
             KeyboardUtils.hideKeyboard(view);

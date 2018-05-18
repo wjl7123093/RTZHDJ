@@ -15,8 +15,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.VoteEntrylEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
@@ -24,9 +26,6 @@ import com.mytv.rtzhdj.di.component.DaggerVoteEntryDetailComponent;
 import com.mytv.rtzhdj.di.module.VoteEntryDetailModule;
 import com.mytv.rtzhdj.mvp.contract.VoteEntryDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.VoteEntryDetailPresenter;
-
-import com.mytv.rtzhdj.R;
-
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -99,7 +98,8 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
 
         // post 在线投票
         mBtnVote.setOnClickListener(view ->
-            mPresenter.callMethodOfPostVoteSubmit(contentId, id, 8));
+            mPresenter.callMethodOfPostVoteSubmit(contentId, id,
+                    DataHelper.getIntergerSF(VoteEntryDetailActivity.this, SharepreferenceKey.KEY_USER_ID)));
     }
 
 

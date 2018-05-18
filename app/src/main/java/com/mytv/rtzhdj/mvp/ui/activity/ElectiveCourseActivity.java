@@ -17,20 +17,19 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.di.component.DaggerElectiveCourseComponent;
 import com.mytv.rtzhdj.di.module.ElectiveCourseModule;
 import com.mytv.rtzhdj.mvp.contract.ElectiveCourseContract;
 import com.mytv.rtzhdj.mvp.presenter.ElectiveCoursePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.CompulsoryCourseAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 
 import java.util.List;
 
@@ -96,7 +95,8 @@ public class ElectiveCourseActivity extends BaseActivity<ElectiveCoursePresenter
         initRefreshLayout();
 
         // 获取课件列表(必修课)数据
-        mPresenter.callMethodOfGetCoursewareList(8, nodeId, 0, 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetCoursewareList(DataHelper.getIntergerSF(ElectiveCourseActivity.this,
+                SharepreferenceKey.KEY_USER_ID), nodeId, 0, 1, PAGE_SIZE, false);
     }
 
 
