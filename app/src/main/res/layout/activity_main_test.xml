@@ -15,7 +15,8 @@
     <FrameLayout
         android:id="@+id/flMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"  >
+        android:layout_height="match_parent"
+        android:layout_marginBottom="52.5dp">
     </FrameLayout>
 
     <View

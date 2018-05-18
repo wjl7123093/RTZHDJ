@@ -223,7 +223,9 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 List<String> info1 = new ArrayList<>();
                 for (int i = 0; i < NoticeBlock_ChildContent.size(); i++) {
                     info1.add(NoticeBlock_ChildContent.get(i).getTitle());
-//                    info1.add("2.欢迎订阅喜马拉雅听书！");
+                }
+                if (info1.size() == 1) {    // size == 1时，marquee 组件会失效报null，所以再加一个。
+                    info1.add(info1.get(0));
                 }
                 if (info1.size() > 0) {
                     marqueeView.startWithList(info1);
@@ -233,9 +235,15 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                         public void onItemClick(int position, TextView textView) {
 //                        mRootView.setMarqueeClick(position);
 
-                            ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                                    .withInt("nodeId", NoticeBlock_ChildContent.get(position).getNodeId())
-                                    .navigation();
+                            if (NoticeBlock_ChildContent.size() == 1) {
+                                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                                        .withInt("nodeId", NoticeBlock_ChildContent.get(0).getNodeId())
+                                        .navigation();
+                            } else {
+                                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                                        .withInt("nodeId", NoticeBlock_ChildContent.get(position).getNodeId())
+                                        .navigation();
+                            }
                         }
                     });
                 }
