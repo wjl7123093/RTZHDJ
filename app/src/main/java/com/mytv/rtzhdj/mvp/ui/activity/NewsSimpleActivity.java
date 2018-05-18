@@ -18,7 +18,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
@@ -27,11 +27,7 @@ import com.mytv.rtzhdj.di.component.DaggerNewsSimpleComponent;
 import com.mytv.rtzhdj.di.module.NewsSimpleModule;
 import com.mytv.rtzhdj.mvp.contract.NewsSimpleContract;
 import com.mytv.rtzhdj.mvp.presenter.NewsSimplePresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.NewsSimpleFragment;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,6 +142,9 @@ public class NewsSimpleActivity extends BaseActivity<NewsSimplePresenter> implem
         List<PartyColumnsEntity> partyColumnsList = newsSimpleEntity.getList_columnList();
         List<NewsDetailEntity> recommendList = newsSimpleEntity.getList_recommendBlock();
         List<NewsDetailEntity> newsDetailList = newsSimpleEntity.getList_listBlock();
+
+        if (null == partyColumnsList || partyColumnsList.size() == 0)
+            return;
 
         if (!partyColumnsList.get(0).getTitle().equals("推荐")) {
             PartyColumnsEntity columnsEntity = new PartyColumnsEntity();
