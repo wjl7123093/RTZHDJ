@@ -14,7 +14,7 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
@@ -23,15 +23,10 @@ import com.mytv.rtzhdj.di.component.DaggerHomeComponent;
 import com.mytv.rtzhdj.di.module.HomeModule;
 import com.mytv.rtzhdj.mvp.contract.HomeContract;
 import com.mytv.rtzhdj.mvp.presenter.HomePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
-import com.mytv.rtzhdj.mvp.ui.widget.AutoLoadRecyclerViewGlide;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.squareup.haha.perflib.Main;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -273,6 +268,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     }*/
 
     private void initRecyclerView(BaseJson<HomeEntity> homeData) {
+        if (homeData.getData() == null)
+            return;
+
         List<HomeEntity.SpecialBlock> SpecialBlock = homeData.getData().getSpecialBlock();
         List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent = homeData.getData().getNoticeBlock_ChildContent();
         List<HomeEntity.FocusNewsBlock> FocusNewsBlock_ChildContent = homeData.getData().getFocusNewsBlock_ChildContent();

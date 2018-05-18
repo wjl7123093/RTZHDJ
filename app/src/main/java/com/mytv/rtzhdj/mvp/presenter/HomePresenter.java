@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -19,21 +18,11 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.google.gson.reflect.TypeToken;
+import com.jess.arms.di.scope.ActivityScope;
+import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
-import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
@@ -43,7 +32,6 @@ import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.mvp.contract.HomeContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
@@ -56,10 +44,17 @@ import com.youth.banner.listener.OnBannerListener;
 import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
 
-import net.qiujuer.genius.ui.widget.Button;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 /**
  * 首页 P层
@@ -230,18 +225,20 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                     info1.add(NoticeBlock_ChildContent.get(i).getTitle());
 //                    info1.add("2.欢迎订阅喜马拉雅听书！");
                 }
-                marqueeView.startWithList(info1);
-                // 在代码里设置自己的动画
-                marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position, TextView textView) {
+                if (info1.size() > 0) {
+                    marqueeView.startWithList(info1);
+                    // 在代码里设置自己的动画
+                    marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position, TextView textView) {
 //                        mRootView.setMarqueeClick(position);
 
-                        ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                                .withInt("nodeId", NoticeBlock_ChildContent.get(position).getNodeId())
-                                .navigation();
-                    }
-                });
+                            ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                                    .withInt("nodeId", NoticeBlock_ChildContent.get(position).getNodeId())
+                                    .navigation();
+                        }
+                    });
+                }
             }
         };
     }
@@ -377,11 +374,18 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 //        arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
 //        arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
         final List<Object> arrayList1 = new ArrayList<>();
-        arrayList1.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(0).get(0).getTitleImageUrl().replace("@", ""));
-        arrayList1.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(0).get(1).getTitleImageUrl().replace("@", ""));
         final List<Object> arrayList2 = new ArrayList<>();
-        arrayList2.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(1).get(0).getTitleImageUrl().replace("@", ""));
-        arrayList2.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(1).get(1).getTitleImageUrl().replace("@", ""));
+        if (PublicSpiritedBlock_ChildContent.size()>1) {
+            if (PublicSpiritedBlock_ChildContent.get(0).size() > 1) {
+                arrayList1.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(0).get(0).getTitleImageUrl().replace("@", ""));
+                arrayList1.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(0).get(1).getTitleImageUrl().replace("@", ""));
+            }
+
+            if (PublicSpiritedBlock_ChildContent.get(1).size() > 1) {
+                arrayList2.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(1).get(0).getTitleImageUrl().replace("@", ""));
+                arrayList2.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(1).get(1).getTitleImageUrl().replace("@", ""));
+            }
+        }
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
 //        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_oneplusn1,
@@ -404,6 +408,8 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 TextView tvStartNum2 = includeBanner2.findViewById(R.id.tv_star_num);
                 Banner banner2 = includeBanner2.findViewById(R.id.banner);
 
+                tvPowerNum.setText(myPositiveValue+"");
+
                 /**
                  * 解决 “RecyclerView自动滚动” 的BUG
                  * Step 1:
@@ -418,36 +424,37 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
 //                initBannerParams(banner1, arrayList);
 //                initBannerParams(banner2, arrayList);
-                initBannerParams(banner1, arrayList1);
-                initBannerParams(banner2, arrayList2);
-                tvPowerNum.setText(myPositiveValue+"");
+
+                if (arrayList1.size() > 0 && arrayList2.size() > 0) {
+                    initBannerParams(banner1, arrayList1);
+                    initBannerParams(banner2, arrayList2);
 
 
-                banner1.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    banner1.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onPageSelected(int position) {
-                        /**
-                         * 解决 “RecyclerView自动滚动” 的BUG
-                         * Step 2:
-                         *
-                         * 在 banner 滚动时，不停的聚焦该控件顶层控件焦点，以防止 recyclerview 自动下滚
-                         */
-                        viewFocus.setFocusableInTouchMode(true);
-                        viewFocus.requestFocus();
+                        @Override
+                        public void onPageSelected(int position) {
+                            /**
+                             * 解决 “RecyclerView自动滚动” 的BUG
+                             * Step 2:
+                             *
+                             * 在 banner 滚动时，不停的聚焦该控件顶层控件焦点，以防止 recyclerview 自动下滚
+                             */
+                            viewFocus.setFocusableInTouchMode(true);
+                            viewFocus.requestFocus();
 
 //                        if (0 == position)
 //                            tvTitle1.setText("Banner111   哈哈哈");
 //                        else
 //                            tvTitle1.setText("Banner111   嘿嘿嘿");
 
-                        tvJoinNum1.setText(PublicSpiritedBlock_ChildContent.get(0).get(position).getEnrollCount() + "");
-                        tvTitle1.setText(PublicSpiritedBlock_ChildContent.get(0).get(position).getTitle());
-                        tvStartNum1.setText(PublicSpiritedBlock_ChildContent.get(0).get(position).getDigs() + "");
+                            tvJoinNum1.setText(PublicSpiritedBlock_ChildContent.get(0).get(position).getEnrollCount() + "");
+                            tvTitle1.setText(PublicSpiritedBlock_ChildContent.get(0).get(position).getTitle());
+                            tvStartNum1.setText(PublicSpiritedBlock_ChildContent.get(0).get(position).getDigs() + "");
 //                        mImageLoader.loadImage(getContext(),
 //                                ImageConfigImpl
 //                                        .builder()
@@ -457,38 +464,38 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 //                                                PublicSpiritedBlock_ChildContent.get(position).getTitleImageUrl().replace("@", ""))
 //                                        .imageView(holder.getView(R.id.iv_image))
 //                                        .build());
-                    }
+                        }
 
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
 
-                    }
-                });
-                banner2.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        }
+                    });
+                    banner2.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onPageSelected(int position) {
-                        /**
-                         * 解决 “RecyclerView自动滚动” 的BUG
-                         * Step 2:
-                         *
-                         * 在 banner 滚动时，不停的聚焦该控件顶层控件焦点，以防止 recyclerview 自动下滚
-                         */
-                        viewFocus.setFocusableInTouchMode(true);
-                        viewFocus.requestFocus();
+                        @Override
+                        public void onPageSelected(int position) {
+                            /**
+                             * 解决 “RecyclerView自动滚动” 的BUG
+                             * Step 2:
+                             *
+                             * 在 banner 滚动时，不停的聚焦该控件顶层控件焦点，以防止 recyclerview 自动下滚
+                             */
+                            viewFocus.setFocusableInTouchMode(true);
+                            viewFocus.requestFocus();
 
 //                        if (0 == position)
 //                            tvTitle2.setText("Banner222   哈哈哈");
 //                        else
 //                            tvTitle2.setText("Banner222   嘿嘿嘿");
 
-                        tvJoinNum2.setText(PublicSpiritedBlock_ChildContent.get(1).get(position).getEnrollCount() + "");
-                        tvTitle2.setText(PublicSpiritedBlock_ChildContent.get(1).get(position).getTitle());
-                        tvStartNum2.setText(PublicSpiritedBlock_ChildContent.get(1).get(position).getDigs() + "");
+                            tvJoinNum2.setText(PublicSpiritedBlock_ChildContent.get(1).get(position).getEnrollCount() + "");
+                            tvTitle2.setText(PublicSpiritedBlock_ChildContent.get(1).get(position).getTitle());
+                            tvStartNum2.setText(PublicSpiritedBlock_ChildContent.get(1).get(position).getDigs() + "");
 //                        mImageLoader.loadImage(getContext(),
 //                                ImageConfigImpl
 //                                        .builder()
@@ -498,29 +505,30 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 //                                                PublicSpiritedBlock_ChildContent.get(position).getTitleImageUrl().replace("@", ""))
 //                                        .imageView(holder.getView(R.id.iv_image))
 //                                        .build());
-                    }
+                        }
 
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
 
-                    }
-                });
-                banner1.setOnBannerListener(new OnBannerListener() {
-                    @Override
-                    public void OnBannerClick(int position) {
-                        ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
-                                .withInt("id", PublicSpiritedBlock_ChildContent.get(0).get(position).getArticleId())
-                                .navigation();
-                    }
-                });
-                banner2.setOnBannerListener(new OnBannerListener() {
-                    @Override
-                    public void OnBannerClick(int position) {
-                        ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
-                                .withInt("id", PublicSpiritedBlock_ChildContent.get(1).get(position).getArticleId())
-                                .navigation();
-                    }
-                });
+                        }
+                    });
+                    banner1.setOnBannerListener(new OnBannerListener() {
+                        @Override
+                        public void OnBannerClick(int position) {
+                            ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                                    .withInt("id", PublicSpiritedBlock_ChildContent.get(0).get(position).getArticleId())
+                                    .navigation();
+                        }
+                    });
+                    banner2.setOnBannerListener(new OnBannerListener() {
+                        @Override
+                        public void OnBannerClick(int position) {
+                            ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                                    .withInt("id", PublicSpiritedBlock_ChildContent.get(1).get(position).getArticleId())
+                                    .navigation();
+                        }
+                    });
+                }
             }
         };
     }
@@ -530,7 +538,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         mModel.getHomeData(update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<HomeEntity>>transformObservable("getHomeData",
                         new TypeToken<BaseJson<HomeEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<HomeEntity>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))
