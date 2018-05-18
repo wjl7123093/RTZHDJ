@@ -4,24 +4,13 @@ import android.app.Application;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionEntity;
 import com.mytv.rtzhdj.mvp.contract.QuestionnaireContract;
 import com.mytv.rtzhdj.mvp.ui.activity.QuestionnaireActivity;
@@ -29,6 +18,15 @@ import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -93,6 +91,35 @@ public class QuestionnairePresenter extends BasePresenter<QuestionnaireContract.
 //                        mRootView.showPickerView(stationList.getData());
                         if (questionList.isSuccess())
                             mRootView.loadData(questionList.getData());
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfPostTestInfo(int userID, int examinationID, int score, boolean refresh) {
+        mModel.postTestInfo(userID, examinationID, score, refresh)
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> {
+                    // Action onFinally
+                    mRootView.hideLoading();
+                })
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e("TAG", postResult.toString());
+
+//                        mRootView.showPickerView(stationList.getData());
+                        if (postResult.isSuccess()) {
+                            mRootView.showMessage("问卷提交成功");
+                            mRootView.killMyself();
+                        }
                     }
                 });
     }

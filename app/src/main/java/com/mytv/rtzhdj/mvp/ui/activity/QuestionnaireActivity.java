@@ -28,7 +28,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.AnswerEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionEntity;
@@ -36,10 +36,7 @@ import com.mytv.rtzhdj.di.component.DaggerQuestionnaireComponent;
 import com.mytv.rtzhdj.di.module.QuestionnaireModule;
 import com.mytv.rtzhdj.mvp.contract.QuestionnaireContract;
 import com.mytv.rtzhdj.mvp.presenter.QuestionnairePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.widget.CenterDialog;
-
 
 import org.json.JSONArray;
 
@@ -101,6 +98,9 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
     private List<List<TextView>> txtListParent = new ArrayList<List<TextView>>();
     private List<TextView> txtList;
 
+    private int mScore = 0; // 评测结果分数
+    private boolean mIsAnswerCorret = false;    // 是否正确答案
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -128,6 +128,11 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 
         // 获取 问卷调查信息
         mPresenter.callMethodOfGetTestInfo(examinationId, false);
+
+        mBtnSubmit.setOnClickListener(view -> {
+            // 提交 评测结果
+            doSubmit();
+        });
 
     }
 
@@ -280,7 +285,19 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
                             strResult += "<p><span class='text-color-red'>问：</span>" + mQuestionList.get(i).getTitle() + "</p>";
                             strResult += "<p><span class='text-color-blue'>答：</span>"
                                     + mAnswerList.get(j) + "</p>";
+
+                            // 判断正确答案
+                            if (mQuestionList.get(i).getCorrectAnswer().contains(j+1+"")) {
+                                mIsAnswerCorret = true;
+                            } else {
+                                mIsAnswerCorret = false;
+                            }
                         }
+                    }
+
+                    // 计算分值
+                    if (mIsAnswerCorret) {
+                        mScore += mQuestionList.get(i).getScore();
                     }
                 } else {    // 单选
                     strResult += "<p><span class='text-color-red'>问：</span>" + mQuestionList.get(i).getTitle() + "</p>";
@@ -288,6 +305,11 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
                         if(mAnswerList.get(j).getAns_state()==1){
                             strResult += "<p><span class='text-color-blue'>答：</span>"
                                     + mAnswerList.get(j) + "</p>";
+
+                            // 计算分值
+                            if (mQuestionList.get(i).getCorrectAnswer().equals(j+1+"")) {
+                                mScore += mQuestionList.get(i).getScore();
+                            }
                             break;
                         }
                     }
@@ -300,10 +322,14 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 //            mApplication.setmQuestionList(mQuestionList);
 //            mApplication.setmIsDidQuestionnaire(true);
 
-            Intent data = new Intent();
-            data.putExtra("result", strResult);
-            this.setResult(RESULT_CODE_QUESTIONNAIRE, data);
-            this.finish();
+//            Intent data = new Intent();
+//            data.putExtra("result", strResult);
+//            this.setResult(RESULT_CODE_QUESTIONNAIRE, data);
+//            this.finish();
+
+            // 提交 评测结果
+            mPresenter.callMethodOfPostTestInfo(8, examinationId, mScore, false);
+            showMessage("答题结束，分数为：" + mScore);
         }
     }
 

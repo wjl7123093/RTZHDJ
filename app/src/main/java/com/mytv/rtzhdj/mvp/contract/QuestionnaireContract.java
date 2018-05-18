@@ -1,11 +1,10 @@
 package com.mytv.rtzhdj.mvp.contract;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.QuestionEntity;
-import com.mytv.rtzhdj.app.data.entity.ScoresDetailsEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.QuestionnaireActivity;
 
 import java.util.List;
@@ -25,6 +24,9 @@ public interface QuestionnaireContract {
         // 获取 效果评测问卷
         Observable<BaseJson<List<QuestionEntity>>> getTestInfo(int examinationId, boolean update);
 
+        // 提交 效果评测结果
+        Observable<BaseJson> postTestInfo(int userID, int examinationID, int score, boolean update);
+
     }
 
     //Presenter控制器
@@ -33,5 +35,9 @@ public interface QuestionnaireContract {
 
         // 调用 获取效果评测问卷
         void callMethodOfGetTestInfo(int examinationId, boolean refresh);
+
+        // 调用 提交效果评测结果
+        void callMethodOfPostTestInfo(int userID, int examinationID, int score, boolean refresh);
+
     }
 }
