@@ -107,7 +107,7 @@ public class GradeRankPresenter extends BasePresenter<GradeRankContract.Model, G
                     public void onNext(@NonNull BaseJson<GradeRankEntity> gradeRankEntity) {
                         Log.e(TAG, gradeRankEntity.getData().toString());
 
-                        if (gradeRankEntity.isSuccess())
+                        if (gradeRankEntity.isSuccess() && gradeRankEntity.getData() != null)
                             mRootView.loadData(gradeRankEntity.getData());
 
                     }

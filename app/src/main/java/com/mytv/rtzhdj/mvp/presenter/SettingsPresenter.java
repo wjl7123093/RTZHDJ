@@ -10,21 +10,11 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.jess.arms.di.scope.ActivityScope;
+import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
-import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.DataHelper;
 import com.jess.arms.utils.RxLifecycleUtils;
@@ -33,11 +23,19 @@ import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.UserDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.SettingsContract;
 import com.mytv.rtzhdj.mvp.ui.activity.SettingsActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -239,8 +237,10 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
                     public void onNext(@NonNull BaseJson<UserDetailEntity> userDetailEntity) {
                         Log.e(TAG, userDetailEntity.toString());
 
-                        DataHelper.saveDeviceData(mActivity, SharepreferenceKey.KEY_LOGIN_USER_DETAIL, userDetailEntity.getData());
-                        mRootView.loadData(userDetailEntity.getData(), 0);
+                        if (userDetailEntity.isSuccess() && userDetailEntity.getData() != null) {
+                            DataHelper.saveDeviceData(mActivity, SharepreferenceKey.KEY_LOGIN_USER_DETAIL, userDetailEntity.getData());
+                            mRootView.loadData(userDetailEntity.getData(), 0);
+                        }
                     }
                 });
     }

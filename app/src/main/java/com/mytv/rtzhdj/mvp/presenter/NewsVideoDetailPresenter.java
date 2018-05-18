@@ -107,7 +107,7 @@ public class NewsVideoDetailPresenter extends BasePresenter<NewsVideoDetailContr
                     public void onNext(@NonNull BaseJson<PartyLiveEntity> partyLiveEntity) {
                         Log.e(TAG, partyLiveEntity.getData().toString());
 
-                        if (partyLiveEntity.isSuccess())
+                        if (partyLiveEntity.isSuccess() && partyLiveEntity.getData() != null)
                             mRootView.loadData(partyLiveEntity.getData());
 
                     }

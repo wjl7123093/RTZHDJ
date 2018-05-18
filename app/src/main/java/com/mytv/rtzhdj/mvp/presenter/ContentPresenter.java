@@ -2,8 +2,6 @@ package com.mytv.rtzhdj.mvp.presenter;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,20 +10,10 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
@@ -33,11 +21,9 @@ import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.Api;
-import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
@@ -50,6 +36,15 @@ import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -174,7 +169,8 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
                     public void onNext(@NonNull BaseJson<PartyRecommendEntity> partyRecommendData) {
                         Log.e(TAG, partyRecommendData.getData().toString());
 
-                        mRootView.showRecommendData(partyRecommendData.getData());
+                        if (partyRecommendData.isSuccess() && partyRecommendData.getData() != null)
+                            mRootView.showRecommendData(partyRecommendData.getData());
                     }
                 });
     }
@@ -203,7 +199,8 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
                     public void onNext(@NonNull BaseJson<PartySubNewsEntity> partySubListData) {
                         Log.e(TAG, partySubListData.getData().toString());
 
-                        mRootView.showSubListData(partySubListData.getData());
+                        if (partySubListData.isSuccess() && partySubListData.getData() != null)
+                            mRootView.showSubListData(partySubListData.getData());
                     }
                 });
     }

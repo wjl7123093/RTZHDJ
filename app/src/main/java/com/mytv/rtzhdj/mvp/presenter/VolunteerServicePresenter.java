@@ -6,10 +6,24 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
+import com.mytv.rtzhdj.mvp.contract.VolunteerServiceContract;
+import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceActivity;
+import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -17,23 +31,6 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.ArmsUtils;
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
-import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
-import com.mytv.rtzhdj.mvp.contract.VolunteerServiceContract;
-import com.mytv.rtzhdj.mvp.ui.activity.NewsCommonActivity;
-import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceActivity;
-import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
-
-import java.util.List;
 
 
 @ActivityScope
@@ -112,7 +109,8 @@ public class VolunteerServicePresenter extends BasePresenter<VolunteerServiceCon
                     public void onNext(@NonNull BaseJson<List<VoluteerServiceEntity>> volunteerServiceList) {
                         Log.e(TAG, volunteerServiceList.toString());
 
-                        mRootView.loadData(volunteerServiceList.getData());
+                        if (volunteerServiceList.isSuccess() && volunteerServiceList.getData() != null)
+                            mRootView.loadData(volunteerServiceList.getData());
                     }
                 });
     }

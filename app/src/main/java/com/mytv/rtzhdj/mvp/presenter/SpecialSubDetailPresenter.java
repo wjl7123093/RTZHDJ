@@ -110,7 +110,7 @@ public class SpecialSubDetailPresenter extends BasePresenter<SpecialSubDetailCon
                         Log.e("TAG", newsList.toString());
 
 //                        mRootView.showPickerView(stationList.getData());
-                        if (newsList.isSuccess())
+                        if (newsList.isSuccess() && newsList.getData() != null)
                             mRootView.loadData(newsList.getData());
                     }
                 });

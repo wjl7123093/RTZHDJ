@@ -5,20 +5,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.data.BaseJson;
@@ -28,6 +18,15 @@ import com.mytv.rtzhdj.mvp.ui.activity.MyMsgActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
 
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -102,7 +101,7 @@ public class MyMsgPresenter extends BasePresenter<MyMsgContract.Model, MyMsgCont
                     public void onNext(@NonNull BaseJson<List<MyMsgEntity>> msgList) {
                         Log.e(TAG, msgList.toString());
 
-                        if (msgList.isSuccess()) {
+                        if (msgList.isSuccess() && msgList.getData() != null) {
                             mRootView.loadData(msgList.getData());
                         }
                     }

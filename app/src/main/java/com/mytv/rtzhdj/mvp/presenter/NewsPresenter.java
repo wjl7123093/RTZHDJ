@@ -5,10 +5,21 @@ import android.app.Application;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
+import com.mytv.rtzhdj.mvp.contract.NewsContract;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -16,19 +27,6 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
-import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
-import com.mytv.rtzhdj.mvp.contract.NewsContract;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
-
-import java.util.List;
 
 
 @ActivityScope
@@ -90,7 +88,8 @@ public class NewsPresenter extends BasePresenter<NewsContract.Model, NewsContrac
                     public void onNext(@NonNull BaseJson<List<PartyColumnsEntity>> partyColumnsData) {
                         Log.e(TAG, partyColumnsData.getData().toString());
 
-                        mRootView.initTab(partyColumnsData.getData());
+                        if (partyColumnsData.isSuccess() && partyColumnsData.getData() != null)
+                            mRootView.initTab(partyColumnsData.getData());
                     }
                 });
     }

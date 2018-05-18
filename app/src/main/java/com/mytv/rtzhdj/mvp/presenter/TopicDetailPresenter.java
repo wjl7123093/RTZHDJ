@@ -4,10 +4,20 @@ import android.app.Application;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.SpecialColumnsEntity;
+import com.mytv.rtzhdj.mvp.contract.TopicDetailContract;
+import com.mytv.rtzhdj.mvp.ui.activity.TopicDetailActivity;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -15,20 +25,6 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
-import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.SpecialColumnsEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
-import com.mytv.rtzhdj.mvp.contract.TopicDetailContract;
-import com.mytv.rtzhdj.mvp.ui.activity.TopicDetailActivity;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
-
-import java.util.List;
 
 
 @ActivityScope
@@ -92,8 +88,10 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.Mode
 
 //                        List<UserCategoryEntity> userCategorys = userCategoryList.getData();
 //                        mRootView.showDialog(userCategorys);
-                        mRootView.initBackground(specialColumnsEntity.getData());
-                        mRootView.initTab(specialColumnsEntity.getData());
+                        if (specialColumnsEntity.isSuccess() && specialColumnsEntity.getData() != null) {
+                            mRootView.initBackground(specialColumnsEntity.getData());
+                            mRootView.initTab(specialColumnsEntity.getData());
+                        }
 
                     }
                 });

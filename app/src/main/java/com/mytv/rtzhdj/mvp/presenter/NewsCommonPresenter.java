@@ -1,16 +1,29 @@
 package com.mytv.rtzhdj.mvp.presenter;
 
-import android.app.Activity;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
+import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
+import com.mytv.rtzhdj.mvp.ui.activity.NewsCommonActivity;
+import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -18,24 +31,6 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.ArmsUtils;
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
-import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
-import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
-import com.mytv.rtzhdj.mvp.ui.activity.NewsCommonActivity;
-import com.mytv.rtzhdj.mvp.ui.activity.NewsEducationActivity;
-import com.mytv.rtzhdj.mvp.ui.activity.StudyCoursewareActivity;
-import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
-
-import java.util.List;
 
 
 @ActivityScope
@@ -119,7 +114,7 @@ public class NewsCommonPresenter extends BasePresenter<NewsCommonContract.Model,
                     public void onNext(@NonNull BaseJson<List<NewsDetailEntity>> newsList) {
                         Log.e("TAG", newsList.toString());
 
-                        if (newsList.isSuccess())
+                        if (newsList.isSuccess() && newsList.getData() != null)
                             mRootView.loadListData(newsList.getData());
 
                     }

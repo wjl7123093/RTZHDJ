@@ -6,19 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
@@ -33,6 +24,14 @@ import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -128,7 +127,8 @@ public class PartyKnowledgePresenter extends BasePresenter<PartyKnowledgeContrac
                     public void onNext(@io.reactivex.annotations.NonNull BaseJson<List<PartyNewsEntity>> partyKnowledgeLsit) {
                         Log.e("TAG", partyKnowledgeLsit.toString());
 
-                        mRootView.initAdapter(partyKnowledgeLsit.getData());
+                        if (partyKnowledgeLsit.isSuccess() && partyKnowledgeLsit.getData() != null)
+                            mRootView.initAdapter(partyKnowledgeLsit.getData());
 
                     }
                 });

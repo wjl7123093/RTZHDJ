@@ -89,7 +89,7 @@ public class QuestionnairePresenter extends BasePresenter<QuestionnaireContract.
                         Log.e("TAG", questionList.toString());
 
 //                        mRootView.showPickerView(stationList.getData());
-                        if (questionList.isSuccess())
+                        if (questionList.isSuccess() && questionList.getData() != null)
                             mRootView.loadData(questionList.getData());
                     }
                 });

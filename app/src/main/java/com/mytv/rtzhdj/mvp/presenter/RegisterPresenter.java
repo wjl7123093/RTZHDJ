@@ -4,21 +4,10 @@ import android.app.Application;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import io.rx_cache2.Reply;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
@@ -32,6 +21,15 @@ import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -93,8 +91,10 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                     public void onNext(@NonNull BaseJson<List<UserCategoryEntity>> userCategoryList) {
                         Log.e("TAG", userCategoryList.toString());
 
-                        List<UserCategoryEntity> userCategorys = userCategoryList.getData();
-                        mRootView.showDialog(userCategorys);
+                        if (userCategoryList.isSuccess() && userCategoryList.getData() != null) {
+                            List<UserCategoryEntity> userCategorys = userCategoryList.getData();
+                            mRootView.showDialog(userCategorys);
+                        }
 
                     }
                 });

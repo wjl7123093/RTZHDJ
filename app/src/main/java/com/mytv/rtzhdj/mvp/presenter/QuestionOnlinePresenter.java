@@ -6,25 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.QuestionEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionOnlineEntity;
 import com.mytv.rtzhdj.mvp.contract.QuestionOnlineContract;
 import com.mytv.rtzhdj.mvp.ui.activity.QuestionOnlineActivity;
@@ -33,6 +22,15 @@ import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -112,7 +110,7 @@ public class QuestionOnlinePresenter extends BasePresenter<QuestionOnlineContrac
                         Log.e("TAG", questionList.toString());
 
 //                        mRootView.showPickerView(stationList.getData());
-                        if (questionList.isSuccess())
+                        if (questionList.isSuccess() && questionList.getData() != null)
                             mRootView.loadData(questionList.getData());
                     }
                 });

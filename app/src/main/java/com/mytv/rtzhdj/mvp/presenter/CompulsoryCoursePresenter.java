@@ -7,10 +7,23 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
+import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
+import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -18,21 +31,6 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.ArmsUtils;
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
-import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
-import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
-import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
-
-import java.util.List;
 
 
 @ActivityScope
@@ -109,7 +107,8 @@ public class CompulsoryCoursePresenter extends BasePresenter<CompulsoryCourseCon
                     public void onNext(@NonNull BaseJson<List<CoursewareEntity>> courseList) {
                         Log.e(TAG, courseList.getData().toString());
 
-                        mRootView.loadData(courseList.getData());
+                        if (courseList.isSuccess() && courseList.getData() != null)
+                            mRootView.loadData(courseList.getData());
                     }
                 });
     }

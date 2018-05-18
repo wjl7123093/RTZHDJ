@@ -140,7 +140,7 @@ public class WishWallPresenter extends BasePresenter<WishWallContract.Model, Wis
                         Log.e("TAG", wishList.toString());
 
 //                        mRootView.showPickerView(stationList.getData());
-                        if (wishList.isSuccess())
+                        if (wishList.isSuccess() && wishList.getData() != null)
                             mRootView.loadData(wishList.getData());
                     }
                 });

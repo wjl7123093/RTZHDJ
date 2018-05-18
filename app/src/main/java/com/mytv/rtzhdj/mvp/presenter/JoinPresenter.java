@@ -393,7 +393,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                     public void onNext(@NonNull BaseJson<MyJoinEntity> myJoinEntity) {
                         Log.e(TAG, myJoinEntity.toString());
 
-                        if (myJoinEntity.isSuccess())
+                        if (myJoinEntity.isSuccess() && myJoinEntity.getData() != null)
                             mRootView.loadData(myJoinEntity.getData());
 
                     }

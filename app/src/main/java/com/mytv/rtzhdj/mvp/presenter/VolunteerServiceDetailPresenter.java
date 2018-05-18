@@ -4,10 +4,20 @@ import android.app.Application;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
+import com.mytv.rtzhdj.mvp.contract.VolunteerServiceDetailContract;
+import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceDetailActivity;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -15,22 +25,6 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
-import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
-import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
-import com.mytv.rtzhdj.mvp.contract.VolunteerServiceDetailContract;
-import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceActivity;
-import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceDetailActivity;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
-
-import java.util.List;
 
 
 @ActivityScope
@@ -92,7 +86,7 @@ public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServ
                     public void onNext(@NonNull BaseJson<VolunteerDetailEntity> volunteerDetailEntity) {
                         Log.e(TAG, volunteerDetailEntity.toString());
 
-                        if (volunteerDetailEntity.isSuccess())
+                        if (volunteerDetailEntity.isSuccess() && volunteerDetailEntity.getData() != null)
                             mRootView.loadData(volunteerDetailEntity.getData());
                     }
                 });
