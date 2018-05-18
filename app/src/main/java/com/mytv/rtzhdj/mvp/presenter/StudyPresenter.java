@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.arouter.utils.TextUtils;
@@ -19,20 +18,11 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.google.gson.reflect.TypeToken;
+import com.jess.arms.di.scope.ActivityScope;
+import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
-import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
@@ -40,19 +30,23 @@ import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.contract.StudyContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
 
-import org.raphets.roundimageview.RoundImageView;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -234,7 +228,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
         mModel.getMyStudy(userId, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<MyStudyEntity>>transformObservable("getMyStudy" + userId,
                         new TypeToken<BaseJson<MyStudyEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))
+                        CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<MyStudyEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
@@ -253,7 +247,8 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                     public void onNext(@NonNull BaseJson<MyStudyEntity> myStudyData) {
                         Log.e(TAG, myStudyData.toString());
 
-                        mRootView.showStudyData(myStudyData.getData());
+                        if (myStudyData.isSuccess() && myStudyData.getData() != null)
+                            mRootView.showStudyData(myStudyData.getData());
 
                     }
                 });
