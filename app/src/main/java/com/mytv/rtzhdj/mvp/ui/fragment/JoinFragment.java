@@ -13,8 +13,10 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.di.component.DaggerJoinComponent;
 import com.mytv.rtzhdj.di.module.JoinModule;
@@ -83,7 +85,8 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
         initRefreshLayout();
 
         // 获取 我要参与数据
-        mPresenter.callMethodOfGetMyPartIn(39, 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetMyPartIn(DataHelper.getIntergerSF(getActivity(),
+                SharepreferenceKey.KEY_USER_ID), 1, PAGE_SIZE, false);
     }
 
     /**
