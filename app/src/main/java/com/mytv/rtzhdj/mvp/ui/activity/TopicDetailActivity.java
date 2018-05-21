@@ -3,7 +3,9 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -29,12 +31,12 @@ import com.mytv.rtzhdj.mvp.contract.TopicDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.TopicDetailPresenter;
 import com.mytv.rtzhdj.mvp.ui.fragment.SpecialSubDetailFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.WebviewFragment;
+import com.mytv.rtzhdj.mvp.ui.widget.AppBarStateChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import me.weyye.library.colortrackview.ColorTrackTabLayout;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -50,6 +52,8 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 @Route(path = ARoutePath.PATH_TOPIC_DETAIL)
 public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> implements TopicDetailContract.View {
 
+    @BindView(R.id.main_appbar)
+    AppBarLayout mAppBarLayout;
     @BindView(R.id.main_collapsing)
     CollapsingToolbarLayout mCollapsingToolbar;
     @BindView(R.id.toolbar)
@@ -58,7 +62,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     ImageView mIvBackground;
 
     @BindView(R.id.tab_channel)
-    ColorTrackTabLayout mTab;
+    TabLayout mTab;
     @BindView(R.id.vp_content)
     ViewPager mViewPager;
 
@@ -91,6 +95,24 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
         mCollapsingToolbar.setTitleEnabled(false);
         // 获取 专题二级栏目
         mPresenter.callMethodOfGetSpecialClass(nodeId, false);
+
+        // 监听 Appbarlayout 的滑动状态
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                if ( state == State.EXPANDED ) {
+                    //展开状态
+                    mToolbar.setTitle("");
+                } else if (state == State.COLLAPSED) {
+                    //折叠状态
+                    mToolbar.setTitle("专题详情");
+                } else {
+                    //中间状态
+                    mToolbar.setTitle("");
+                }
+
+            }
+        });
     }
 
 
@@ -135,7 +157,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
 
     private void initToolBar(String title) {
         setSupportActionBar(mToolbar);
-//        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
