@@ -25,6 +25,8 @@ public interface SpecialSubDetailService {
      * @return
      */
     @GET("getPartySpecialList")
-    Observable<BaseJson<List<NewsDetailEntity>>> getPartySpecialList(@Query("NodeId") int nodeId);
+    Observable<BaseJson<List<NewsDetailEntity>>> getPartySpecialList(@Query("NodeId") int nodeId,
+                                                                     @Query("PageIndex") int pageIndex,
+                                                                     @Query("PageSize") int pageSize);
 
 }

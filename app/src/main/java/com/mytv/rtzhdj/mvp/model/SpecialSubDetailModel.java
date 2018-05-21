@@ -38,8 +38,8 @@ public class SpecialSubDetailModel extends BaseModel implements SpecialSubDetail
     }
 
     @Override
-    public Observable<BaseJson<List<NewsDetailEntity>>> getPartySpecialList(int nodeId, boolean update) {
+    public Observable<BaseJson<List<NewsDetailEntity>>> getPartySpecialList(int nodeId, int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(SpecialSubDetailService.class)
-                .getPartySpecialList(nodeId);
+                .getPartySpecialList(nodeId, pageIndex, pageSize);
     }
 }

@@ -24,7 +24,7 @@ public interface SpecialSubDetailContract {
     interface Model extends IModel {
 
         // 获取评论列表
-        Observable<BaseJson<List<NewsDetailEntity>>> getPartySpecialList(int nodeId, boolean update);
+        Observable<BaseJson<List<NewsDetailEntity>>> getPartySpecialList(int nodeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -35,6 +35,6 @@ public interface SpecialSubDetailContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取专题二级列表
-        void callMethodOfGetPartySpecialList(int nodeId, boolean refresh);
+        void callMethodOfGetPartySpecialList(int nodeId, int pageIndex, int pageSize, boolean refresh);
     }
 }

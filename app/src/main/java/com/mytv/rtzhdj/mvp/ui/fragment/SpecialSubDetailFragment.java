@@ -92,7 +92,7 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
         initRefreshLayout();
 
         // 获取党建新闻二级列表(除推荐)数据
-        mPresenter.callMethodOfGetPartySpecialList(getArguments().getInt("nodeId"), false);
+        mPresenter.callMethodOfGetPartySpecialList(getArguments().getInt("nodeId"), 1, PAGE_SIZE, false);
     }
 
     /**

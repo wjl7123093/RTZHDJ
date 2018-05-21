@@ -34,7 +34,7 @@ public class NewsSimpleAdapter extends BaseQuickAdapter<NewsDetailEntity, BaseVi
     @Override
     protected void convert(BaseViewHolder helper, NewsDetailEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
-        helper.setText(R.id.tv_datetime, item.getAddDate());
+        helper.setText(R.id.tv_datetime, item.getAddDate().split("T")[0]);
         helper.setText(R.id.tv_star_num, item.getDigs() + "");
         helper.setText(R.id.tv_comment_num, item.getComments() + "");
 
