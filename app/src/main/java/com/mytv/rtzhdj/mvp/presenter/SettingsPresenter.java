@@ -10,6 +10,7 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
@@ -22,11 +23,14 @@ import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.UserDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.SettingsContract;
 import com.mytv.rtzhdj.mvp.ui.activity.SettingsActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import javax.inject.Inject;
 
@@ -220,6 +224,10 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
     @Override
     public void callMethodOfGetUserDetail(int userId, boolean update) {
         mModel.getUserDetail(userId, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<UserDetailEntity>>transformObservable("getUserDetail" + userId,
+                        new TypeToken<BaseJson<UserDetailEntity>>() { }.getType(),
+                        CacheStrategy.firstRemote()))
+                .map(new CacheResult.MapFunc<BaseJson<UserDetailEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
