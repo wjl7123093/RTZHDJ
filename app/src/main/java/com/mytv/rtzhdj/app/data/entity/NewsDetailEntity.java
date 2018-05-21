@@ -25,6 +25,7 @@ public class NewsDetailEntity implements Parcelable {
     private int Id;             // 内容ID
     private String AddDate;     // 发布时间
     private String ImgUrl;      // 图片地址
+    private String AllImgUrl;
 
     public NewsDetailEntity() {}
 
@@ -38,6 +39,7 @@ public class NewsDetailEntity implements Parcelable {
         Id = in.readInt();
         AddDate = in.readString();
         ImgUrl = in.readString();
+        AllImgUrl = in.readString();
     }
 
     public static final Creator<NewsDetailEntity> CREATOR = new Creator<NewsDetailEntity>() {
@@ -124,6 +126,14 @@ public class NewsDetailEntity implements Parcelable {
         NodeId = nodeId;
     }
 
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -140,5 +150,6 @@ public class NewsDetailEntity implements Parcelable {
         parcel.writeInt(Id);
         parcel.writeString(AddDate);
         parcel.writeString(ImgUrl);
+        parcel.writeString(AllImgUrl);
     }
 }

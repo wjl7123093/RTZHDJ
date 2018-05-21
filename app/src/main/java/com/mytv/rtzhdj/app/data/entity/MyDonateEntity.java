@@ -16,6 +16,7 @@ public class MyDonateEntity {
     private String Phone;
     private String Topic;
     private String ImgUrl;
+    private String AllImgUrl;
 
     // 所有捐赠
     private int NodeId;
@@ -66,5 +67,13 @@ public class MyDonateEntity {
 
     public void setNodeId(int nodeId) {
         NodeId = nodeId;
+    }
+
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
     }
 }

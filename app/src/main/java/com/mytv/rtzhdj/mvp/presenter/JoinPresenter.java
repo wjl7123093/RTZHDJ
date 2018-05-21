@@ -30,7 +30,6 @@ import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
@@ -170,7 +169,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                                 .builder()
                                 .errorPic(R.mipmap.ic_error)
                                 .placeholder(R.mipmap.ic_placeholder)
-                                .url(Api.APP_IMAGE_DOMAIN + volunteerBlocks.get(position).getPicture().replace("@", ""))
+                                .url(volunteerBlocks.get(position).getAllImgUrl())
                                 .imageView(holder.getView(R.id.iv_event))
                                 .build());
 
@@ -207,7 +206,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                                 .builder()
                                 .errorPic(R.mipmap.ic_error)
                                 .placeholder(R.mipmap.ic_placeholder)
-                                .url(Api.APP_IMAGE_DOMAIN + communityBlocks.get(position).getPicture().replace("@", ""))
+                                .url(communityBlocks.get(position).getAllImgUrl())
                                 .imageView(holder.getView(R.id.iv_image))
                                 .build());
 

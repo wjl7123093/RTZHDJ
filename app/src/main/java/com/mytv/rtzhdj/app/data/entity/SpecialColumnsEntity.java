@@ -16,6 +16,7 @@ public class SpecialColumnsEntity {
     private String ImageUrl;                // 专题背景图地址
     private String Content;                 // 内容
     private List<PartyColumnsEntity> SubObjs;    // 专题二级栏目列表
+    private String AllImgUrl;
 
     public String getImageUrl() {
         return ImageUrl;
@@ -41,4 +42,11 @@ public class SpecialColumnsEntity {
         this.SubObjs = subObjs;
     }
 
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
+    }
 }

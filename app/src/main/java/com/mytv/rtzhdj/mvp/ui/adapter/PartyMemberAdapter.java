@@ -8,9 +8,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.DataServer;
-import com.mytv.rtzhdj.app.data.entity.NewsEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyMienEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
 
@@ -40,8 +37,8 @@ public class PartyMemberAdapter extends BaseQuickAdapter<PartyMienEntity, BaseVi
         helper.setText(R.id.tv_name, item.getTitle());
         helper.setText(R.id.tv_phone, item.getTelePhone());
 
-        if (!TextUtils.isEmpty(item.getImageUrl()))
-            ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_header), item.getImageUrl());
+        if (!TextUtils.isEmpty(item.getAllImgUrl()))
+            ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_header), item.getAllImgUrl());
 
         helper.getView(R.id.tv_msg).setOnClickListener(view -> {
             ARouter.getInstance().build(ARoutePath.PATH_SEND_MSG)

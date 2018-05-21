@@ -1,7 +1,5 @@
 package com.mytv.rtzhdj.app.data.entity;
 
-import java.util.List;
-
 /**
  * PartyNewsEntity   党建新闻实体类
  *
@@ -37,6 +35,7 @@ public class PartyNewsEntity {
     private int Comments;       // 评论数
     private String ImageUrl;    // 缩略图地址
     private String AddDate;     // 时间
+    private String AllImgUrl;
 
     public int getArticleId() {
         return ArticleId;
@@ -84,5 +83,13 @@ public class PartyNewsEntity {
 
     public void setAddDate(String addDate) {
         AddDate = addDate;
+    }
+
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
     }
 }

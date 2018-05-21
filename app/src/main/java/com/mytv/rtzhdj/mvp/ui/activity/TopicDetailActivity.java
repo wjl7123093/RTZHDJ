@@ -1,14 +1,12 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -20,9 +18,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.SpecialColumnsEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
@@ -30,12 +27,8 @@ import com.mytv.rtzhdj.di.component.DaggerTopicDetailComponent;
 import com.mytv.rtzhdj.di.module.TopicDetailModule;
 import com.mytv.rtzhdj.mvp.contract.TopicDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.TopicDetailPresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.SpecialSubDetailFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.WebviewFragment;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,7 +135,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
 
     private void initToolBar(String title) {
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(title);
+//        getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -175,8 +168,10 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
 
     @Override
     public void initBackground(SpecialColumnsEntity specialColumnsEntity) {
+//        ImageLoader.getInstance().showImage(TopicDetailActivity.this, mIvBackground,
+//                Api.APP_IMAGE_DOMAIN + specialColumnsEntity.getImageUrl().replace("@", ""));
         ImageLoader.getInstance().showImage(TopicDetailActivity.this, mIvBackground,
-                Api.APP_IMAGE_DOMAIN + specialColumnsEntity.getImageUrl().replace("@", ""));
+                specialColumnsEntity.getAllImgUrl());
     }
 
     @Override

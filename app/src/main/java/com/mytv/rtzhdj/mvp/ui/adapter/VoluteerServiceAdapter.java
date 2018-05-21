@@ -1,13 +1,11 @@
 package com.mytv.rtzhdj.mvp.ui.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.data.DataServer;
-import com.mytv.rtzhdj.app.data.api.Api;
-import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
 
@@ -40,8 +38,11 @@ public class VoluteerServiceAdapter extends BaseQuickAdapter<VoluteerServiceEnti
         helper.setText(R.id.tv_join_num, "参与人数: " + item.getSignedup() + "/" + item.getEnrollCount());
         helper.setText(R.id.tv_status, item.isEnd() ? "已结束" : "正在进行");
 
-        ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
-                Api.APP_IMAGE_DOMAIN + item.getImgUrl().replace("@", ""));
+//        ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
+//                Api.APP_IMAGE_DOMAIN + item.getImgUrl().replace("@", ""));
+        if (!TextUtils.isEmpty(item.getAllImgUrl()))
+            ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
+                    item.getAllImgUrl());
     }
 
 

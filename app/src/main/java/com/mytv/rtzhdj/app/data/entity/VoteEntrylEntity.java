@@ -16,6 +16,7 @@ public class VoteEntrylEntity {
 //    private String author;      // 作者
 //    private String datetime;    // 时间
     private String ImgUrl;     // 作品图片地址
+    private String AllImgUrl;
 //    private String content;     // 作品描述
     private int Ranking;           // 排名
     private int VoteNum;          // 得票数
@@ -58,5 +59,13 @@ public class VoteEntrylEntity {
 
     public void setVoteNum(int voteNum) {
         VoteNum = voteNum;
+    }
+
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
     }
 }

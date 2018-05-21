@@ -1,15 +1,12 @@
 package com.mytv.rtzhdj.mvp.ui.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.data.DataServer;
-import com.mytv.rtzhdj.app.data.api.Api;
-import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.app.data.entity.VoteDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.VoteEntrylEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
 
 import java.util.List;
@@ -37,8 +34,11 @@ public class VoteDetailAdapter extends BaseQuickAdapter<VoteDetailEntity, BaseVi
         helper.setText(R.id.tv_name, item.getTitle());
         helper.setText(R.id.tv_rank, "票数: " + item.getPoll());
 
-        ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
-                Api.APP_IMAGE_DOMAIN + item.getImgUrl().replace("@", ""));
+//        ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
+//                Api.APP_IMAGE_DOMAIN + item.getImgUrl().replace("@", ""));
+        if (!TextUtils.isEmpty(item.getAllImgUrl()))
+            ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
+                    item.getAllImgUrl());
     }
 
 

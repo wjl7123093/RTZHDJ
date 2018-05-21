@@ -48,6 +48,7 @@ public class MyJoinEntity {
         private int Comments;
         private String Picture;
         private String EnrollEndDate;
+        private String AllImgUrl;
 
         public int getContentId() {
             return ContentId;
@@ -96,6 +97,14 @@ public class MyJoinEntity {
         public void setEnrollEndDate(String enrollEndDate) {
             EnrollEndDate = enrollEndDate;
         }
+
+        public String getAllImgUrl() {
+            return AllImgUrl;
+        }
+
+        public void setAllImgUrl(String allImgUrl) {
+            AllImgUrl = allImgUrl;
+        }
     }
 
     public class CommunityBlock {
@@ -105,6 +114,7 @@ public class MyJoinEntity {
         private int Comments;
         private String Picture;
         private String AddDate;
+        private String AllImgUrl;
 
         public int getContentId() {
             return ContentId;
@@ -152,6 +162,14 @@ public class MyJoinEntity {
 
         public void setAddDate(String addDate) {
             AddDate = addDate;
+        }
+
+        public String getAllImgUrl() {
+            return AllImgUrl;
+        }
+
+        public void setAllImgUrl(String allImgUrl) {
+            AllImgUrl = allImgUrl;
         }
     }
 

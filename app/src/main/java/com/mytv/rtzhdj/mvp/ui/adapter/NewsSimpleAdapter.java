@@ -7,9 +7,7 @@ import com.alibaba.android.arouter.utils.TextUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
 
 import java.util.List;
@@ -40,9 +38,11 @@ public class NewsSimpleAdapter extends BaseQuickAdapter<NewsDetailEntity, BaseVi
         helper.setText(R.id.tv_star_num, item.getDigs() + "");
         helper.setText(R.id.tv_comment_num, item.getComments() + "");
 
-        if (!TextUtils.isEmpty(item.getImgUrl())) {
+        if (!TextUtils.isEmpty(item.getAllImgUrl())) {
+//            ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
+//                    Api.APP_IMAGE_DOMAIN + item.getImgUrl().replace("@", ""));
             ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
-                    Api.APP_IMAGE_DOMAIN + item.getImgUrl().replace("@", ""));
+                    item.getAllImgUrl());
             helper.getView(R.id.iv_image).setVisibility(View.VISIBLE);
         } else {
             helper.getView(R.id.iv_image).setVisibility(View.GONE);

@@ -15,6 +15,7 @@ public class PartyMienEntity {
     private String Title;
     private String ImageUrl;
     private String TelePhone;
+    private String AllImgUrl;
 
     public int getID() {
         return ID;
@@ -46,5 +47,13 @@ public class PartyMienEntity {
 
     public void setTelePhone(String telePhone) {
         TelePhone = telePhone;
+    }
+
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
     }
 }

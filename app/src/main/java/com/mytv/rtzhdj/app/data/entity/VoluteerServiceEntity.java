@@ -18,6 +18,7 @@ public class VoluteerServiceEntity {
     private String EnrollEndDate;           // 报名截止日期
     private int EnrollCount;                // 报名限额
     private int Signedup;                   // 已报名人数
+    private String AllImgUrl;
 
     public int getId() {
         return Id;
@@ -73,5 +74,13 @@ public class VoluteerServiceEntity {
 
     public void setSignedup(int signedup) {
         Signedup = signedup;
+    }
+
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
     }
 }

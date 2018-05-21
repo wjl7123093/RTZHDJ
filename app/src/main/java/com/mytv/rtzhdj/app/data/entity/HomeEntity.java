@@ -1,7 +1,6 @@
 package com.mytv.rtzhdj.app.data.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,6 +75,7 @@ public class HomeEntity implements Serializable {
     public class SpecialBlock {
         private int NodeId;
         private String ImageUrl;
+        private String AllImgUrl;
 
         public int getNodeId() {
             return NodeId;
@@ -91,6 +91,14 @@ public class HomeEntity implements Serializable {
 
         public void setImageUrl(String imageUrl) {
             ImageUrl = imageUrl;
+        }
+
+        public String getAllImgUrl() {
+            return AllImgUrl;
+        }
+
+        public void setAllImgUrl(String allImgUrl) {
+            AllImgUrl = allImgUrl;
         }
     }
 
@@ -147,6 +155,7 @@ public class HomeEntity implements Serializable {
         private int Digs;
         private int Comments;
         private String ImageUrl;
+        private String AllImgUrl;
 
         public int getNodeId() {
             return NodeId;
@@ -203,6 +212,14 @@ public class HomeEntity implements Serializable {
         public void setImageUrl(String imageUrl) {
             ImageUrl = imageUrl;
         }
+
+        public String getAllImgUrl() {
+            return AllImgUrl;
+        }
+
+        public void setAllImgUrl(String allImgUrl) {
+            AllImgUrl = allImgUrl;
+        }
     }
 
     /**
@@ -211,6 +228,7 @@ public class HomeEntity implements Serializable {
     public class AdBlock {
         private int NodeId;
         private String ImageUrl;
+        private String AllImgUrl;
 
         public int getNodeId() {
             return NodeId;
@@ -227,6 +245,14 @@ public class HomeEntity implements Serializable {
         public void setImageUrl(String imageUrl) {
             ImageUrl = imageUrl;
         }
+
+        public String getAllImgUrl() {
+            return AllImgUrl;
+        }
+
+        public void setAllImgUrl(String allImgUrl) {
+            AllImgUrl = allImgUrl;
+        }
     }
 
     /**
@@ -239,6 +265,7 @@ public class HomeEntity implements Serializable {
         private int Digs;
         private int EnrollCount;
         private String TitleImageUrl;
+        private String AllImgUrl;
 
         public int getNodeId() {
             return NodeId;
@@ -286,6 +313,14 @@ public class HomeEntity implements Serializable {
 
         public void setTitleImageUrl(String titleImageUrl) {
             TitleImageUrl = titleImageUrl;
+        }
+
+        public String getAllImgUrl() {
+            return AllImgUrl;
+        }
+
+        public void setAllImgUrl(String allImgUrl) {
+            AllImgUrl = allImgUrl;
         }
     }
 

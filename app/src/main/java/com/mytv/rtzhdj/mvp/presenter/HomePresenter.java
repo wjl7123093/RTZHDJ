@@ -30,7 +30,6 @@ import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
 import com.mytv.rtzhdj.mvp.contract.HomeContract;
@@ -131,7 +130,8 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
         final List<Object> arrayList1 = new ArrayList<>();
         for (int i = 0; i < SpecialBlock.size(); i++) {
-            arrayList1.add(Api.APP_IMAGE_DOMAIN + SpecialBlock.get(i).getImageUrl().replace("@", ""));
+//            arrayList1.add(Api.APP_IMAGE_DOMAIN + SpecialBlock.get(i).getImageUrl().replace("@", ""));
+            arrayList1.add(SpecialBlock.get(i).getAllImgUrl());
         }
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         //banner
@@ -289,7 +289,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                                     .builder()
                                     .errorPic(R.mipmap.ic_error)
                                     .placeholder(R.mipmap.ic_placeholder)
-                                    .url(Api.APP_IMAGE_DOMAIN + FocusNewsBlock_ChildContent.get(position).getImageUrl().replace("@", ""))
+                                    .url(FocusNewsBlock_ChildContent.get(position).getAllImgUrl())
                                     .imageView(holder.getView(R.id.iv_image))
                                     .build());
                     holder.getView(R.id.iv_image).setVisibility(View.VISIBLE);
@@ -347,7 +347,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                                 .builder()
                                 .errorPic(R.mipmap.ic_error)
                                 .placeholder(R.mipmap.ic_placeholder)
-                                .url(Api.APP_IMAGE_DOMAIN + AdBlock.get(0).getImageUrl().replace("@", ""))
+                                .url(AdBlock.get(0).getAllImgUrl())
                                 .imageView(holder.getView(R.id.iv_image))
                                 .build());
 
@@ -385,13 +385,13 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         final List<Object> arrayList2 = new ArrayList<>();
         if (PublicSpiritedBlock_ChildContent.size()>1) {
             if (PublicSpiritedBlock_ChildContent.get(0).size() > 1) {
-                arrayList1.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(0).get(0).getTitleImageUrl().replace("@", ""));
-                arrayList1.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(0).get(1).getTitleImageUrl().replace("@", ""));
+                arrayList1.add(PublicSpiritedBlock_ChildContent.get(0).get(0).getAllImgUrl());
+                arrayList1.add(PublicSpiritedBlock_ChildContent.get(0).get(1).getAllImgUrl());
             }
 
             if (PublicSpiritedBlock_ChildContent.get(1).size() > 1) {
-                arrayList2.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(1).get(0).getTitleImageUrl().replace("@", ""));
-                arrayList2.add(Api.APP_IMAGE_DOMAIN + PublicSpiritedBlock_ChildContent.get(1).get(1).getTitleImageUrl().replace("@", ""));
+                arrayList2.add(PublicSpiritedBlock_ChildContent.get(1).get(0).getAllImgUrl());
+                arrayList2.add(PublicSpiritedBlock_ChildContent.get(1).get(1).getAllImgUrl());
             }
         }
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();

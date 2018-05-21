@@ -1,15 +1,12 @@
 package com.mytv.rtzhdj.mvp.ui.adapter;
 
 import android.content.Context;
-import android.view.View;
 
 import com.alibaba.android.arouter.utils.TextUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.MyDonateEntity;
-import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
 
 import java.util.List;
@@ -37,9 +34,12 @@ public class MyDonationAdapter extends BaseQuickAdapter<MyDonateEntity, BaseView
         helper.setText(R.id.tv_topic, item.getTopic());
         helper.setText(R.id.tv_phone, item.getPhone());
 
-        if (!TextUtils.isEmpty(item.getImgUrl())) {
+        if (!TextUtils.isEmpty(item.getAllImgUrl())) {
+//            ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
+//                    Api.APP_IMAGE_DOMAIN + item.getImgUrl().replace("@", ""));
+
             ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image),
-                    Api.APP_IMAGE_DOMAIN + item.getImgUrl().replace("@", ""));
+                    item.getAllImgUrl());
         }
     }
 

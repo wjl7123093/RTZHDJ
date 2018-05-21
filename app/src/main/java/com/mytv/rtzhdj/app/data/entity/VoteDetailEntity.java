@@ -18,6 +18,7 @@ public class VoteDetailEntity {
 //    private String author;      // 作者
     private int VoteNum;        // 投票数
     private String ImgUrl;      // 作品图片地址
+    private String AllImgUrl;
 
     // 投票作品列表 实体
     private int ContentId;          // 活动ID
@@ -86,5 +87,13 @@ public class VoteDetailEntity {
 
     public void setIsVote(int isVote) {
         IsVote = isVote;
+    }
+
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
     }
 }
