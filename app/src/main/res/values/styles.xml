@@ -73,4 +73,14 @@
         <item name="@android:windowExitAnimation">@anim/bottom_menu_exit</item>
     </style>
 
+    <!-- RatingBar style -->
+    <style name="GlimmerRatingBar"
+        parent="Base.Widget.AppCompat.RatingBar">
+        <!-- 修改默认图片 -->
+        <item name="android:progressDrawable">@drawable/glimmerratingbar</item>
+        <!-- 修改默认大小 -->
+        <item name="android:maxHeight">22dp</item>
+        <item name="android:minHeight">22dp</item>
+    </style>
+
 </resources>

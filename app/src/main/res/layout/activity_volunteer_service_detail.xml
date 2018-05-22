@@ -9,7 +9,6 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -81,9 +80,11 @@
                 android:id="@+id/tv_scores"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_10"
+                android:textSize="@dimen/font_12"
                 android:textColor="@color/white"
-                android:text="4"/>
+                android:text="4"
+                android:drawableRight="@mipmap/ic_study_money"
+                android:drawablePadding="@dimen/len_2"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -184,6 +185,14 @@
             android:textSize="@dimen/font_16"
             android:textColor="@color/secondary_text"
             android:gravity="center_vertical|right"/>
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            style="@style/GlimmerRatingBar"
+            android:numStars="5"
+            android:rating="1.5"
+            android:stepSize="0.5"
+            android:layout_marginLeft="@dimen/len_16"/>
         <TextView
             android:id="@+id/tv_grade"
             android:layout_width="0dp"
@@ -193,7 +202,7 @@
             android:textSize="@dimen/font_16"
             android:textColor="@color/primary_text"
             android:gravity="center_vertical|left"
-            android:layout_marginLeft="@dimen/len_16"/>
+            android:layout_marginLeft="@dimen/len_8"/>
     </LinearLayout>
 
     <android.support.design.widget.TabLayout
