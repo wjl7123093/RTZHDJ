@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -16,18 +17,14 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
 import com.mytv.rtzhdj.di.component.DaggerCompulsoryCourseComponent;
 import com.mytv.rtzhdj.di.module.CompulsoryCourseModule;
 import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
 import com.mytv.rtzhdj.mvp.presenter.CompulsoryCoursePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.fragment.CompulsoryCourseFragment;
-import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
-
 
 import org.raphets.roundimageview.RoundImageView;
 
@@ -126,6 +123,17 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
     @Override
     public void killMyself() {
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //点击back键finish当前activity
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 
     private void initToolBar() {
