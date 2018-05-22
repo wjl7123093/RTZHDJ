@@ -3,38 +3,33 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.QuestionOnlineEntity;
 import com.mytv.rtzhdj.di.component.DaggerQuestionOnlineComponent;
 import com.mytv.rtzhdj.di.module.QuestionOnlineModule;
 import com.mytv.rtzhdj.mvp.contract.QuestionOnlineContract;
 import com.mytv.rtzhdj.mvp.presenter.QuestionOnlinePresenter;
+import com.mytv.rtzhdj.mvp.ui.fragment.QuestionOnlineFragment;
 
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
-import com.mytv.rtzhdj.mvp.ui.adapter.QuestionAdapter;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
-
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import me.weyye.library.colortrackview.ColorTrackTabLayout;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -59,16 +54,12 @@ public class QuestionOnlineActivity extends BaseActivity<QuestionOnlinePresenter
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
 
-    @BindView(R.id.refreshLayout)
-    RefreshLayout mRefreshLayout;
-    @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    @BindView(R.id.tab_channel)
+    ColorTrackTabLayout mTab;
+    @BindView(R.id.vp_content)
+    ViewPager mViewPager;
 
-    @Autowired
-    int publishmentSystemId;
-
-    private QuestionAdapter questionAdapter;
-    private static final int PAGE_SIZE = 10;
+    String[] titles;
 
 
     @Override
@@ -91,13 +82,8 @@ public class QuestionOnlineActivity extends BaseActivity<QuestionOnlinePresenter
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
 
-        mPresenter.setActivity(QuestionOnlineActivity.this);
-        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-//        initAdapter();
-        initRefreshLayout();
-
-        // 获取 在线问卷调查
-        mPresenter.callMethodOfGetSurveyList(publishmentSystemId, false);
+        titles = new String[]{"全部", "进行中", "已结束"};
+        initTab();
     }
 
 
@@ -128,53 +114,35 @@ public class QuestionOnlineActivity extends BaseActivity<QuestionOnlinePresenter
         finish();
     }
 
-    private void initRefreshLayout() {
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-            }
-        });
-//        mRefreshLayout.setEnableLoadmore(false);
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
-            }
-        });
-    }
-
-    /*private void initAdapter() {
-        questionAdapter = new QuestionAdapter(QuestionOnlineActivity.this, PAGE_SIZE);
-        questionAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(questionAdapter);
-
-        questionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showMessage("" + Integer.toString(position));
-            }
-        });
-
-    }*/
-
-    private void initAdapter(List<QuestionOnlineEntity> questionList) {
-        questionAdapter = new QuestionAdapter(QuestionOnlineActivity.this, questionList);
-        questionAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(questionAdapter);
-
-        questionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showMessage("" + Integer.toString(position));
-            }
-        });
-
-    }
-
 
     @Override
     public void loadData(List<QuestionOnlineEntity> questionList) {
-        initAdapter(questionList);
+
+    }
+
+    private void initTab() {
+        final List<Fragment> fragments = new ArrayList<>();
+        for (int i = 0; i < titles.length; i++) {
+            fragments.add(QuestionOnlineFragment.newInstance(i));
+        }
+
+
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return titles.length;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titles[position];
+            }
+        });
+        mTab.setupWithViewPager(mViewPager);
     }
 }

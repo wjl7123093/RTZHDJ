@@ -86,8 +86,8 @@ public class QuestionOnlinePresenter extends BasePresenter<QuestionOnlineContrac
     }
 
     @Override
-    public void callMethodOfGetSurveyList(int publishmentSystemId, boolean refresh) {
-        mModel.getSurveyList(publishmentSystemId, refresh)
+    public void callMethodOfGetSurveyList(int publishmentSystemId, int type, boolean refresh) {
+        mModel.getSurveyList(publishmentSystemId, type, refresh)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<QuestionOnlineEntity>>>transformObservable("getSurveyList" + publishmentSystemId,
                         new TypeToken<BaseJson<List<QuestionOnlineEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

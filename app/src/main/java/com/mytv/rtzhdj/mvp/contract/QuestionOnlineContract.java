@@ -2,11 +2,10 @@ package com.mytv.rtzhdj.mvp.contract;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.QuestionEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionOnlineEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.QuestionOnlineActivity;
 
@@ -25,7 +24,7 @@ public interface QuestionOnlineContract {
     interface Model extends IModel {
 
         // 获取 在线问卷列表
-        Observable<BaseJson<List<QuestionOnlineEntity>>> getSurveyList(int publishmentSystemId, boolean update);
+        Observable<BaseJson<List<QuestionOnlineEntity>>> getSurveyList(int publishmentSystemId, int type, boolean update);
 
     }
 
@@ -36,6 +35,6 @@ public interface QuestionOnlineContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取在线问卷列表
-        void callMethodOfGetSurveyList(int publishmentSystemId, boolean refresh);
+        void callMethodOfGetSurveyList(int publishmentSystemId, int type, boolean refresh);
     }
 }

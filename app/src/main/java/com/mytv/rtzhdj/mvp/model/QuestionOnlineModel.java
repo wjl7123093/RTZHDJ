@@ -3,19 +3,17 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.QuestionOnlineService;
 import com.mytv.rtzhdj.app.data.entity.QuestionOnlineEntity;
 import com.mytv.rtzhdj.mvp.contract.QuestionOnlineContract;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
@@ -40,8 +38,8 @@ public class QuestionOnlineModel extends BaseModel implements QuestionOnlineCont
     }
 
     @Override
-    public Observable<BaseJson<List<QuestionOnlineEntity>>> getSurveyList(int publishmentSystemId, boolean update) {
+    public Observable<BaseJson<List<QuestionOnlineEntity>>> getSurveyList(int publishmentSystemId, int type, boolean update) {
         return mRepositoryManager.obtainRetrofitService(QuestionOnlineService.class)
-                .GetSurveyList(publishmentSystemId);
+                .GetSurveyList(publishmentSystemId, type);
     }
 }

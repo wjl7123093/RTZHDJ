@@ -1,7 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionOnlineEntity;
 
 import java.util.List;
@@ -26,6 +25,7 @@ public interface QuestionOnlineService {
      * @return
      */
     @GET("GetSurveyList")
-    Observable<BaseJson<List<QuestionOnlineEntity>>> GetSurveyList(@Query("PublishmentSystemId") int publishmentSystemId);
+    Observable<BaseJson<List<QuestionOnlineEntity>>> GetSurveyList(@Query("PublishmentSystemId") int publishmentSystemId,
+                                                                   @Query("Type") int type);
 
 }

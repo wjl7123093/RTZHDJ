@@ -200,8 +200,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
             case 2: // 在线问卷区
                 switch (position) {
                     case 0: // 在线问卷
-                        ARouter.getInstance().build(ARoutePath.PATH_QUESTION_ONLINE)
-                                .withInt("publishmentSystemId", 1).navigation();
+                        ARouter.getInstance().build(ARoutePath.PATH_QUESTION_ONLINE).navigation();
                         break;
                     case 1: // 在线投票
                         ARouter.getInstance().build(ARoutePath.PATH_VOTE_ONLINE).navigation();

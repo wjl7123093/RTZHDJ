@@ -5,11 +5,7 @@ import android.content.Context;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.data.DataServer;
-import com.mytv.rtzhdj.app.data.entity.NewsEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionOnlineEntity;
-import com.mytv.rtzhdj.app.data.entity.QuestionaireEntitiy;
-import com.mytv.rtzhdj.app.utils.ImageLoader;
 
 import java.util.List;
 
@@ -34,7 +30,8 @@ public class QuestionAdapter extends BaseQuickAdapter<QuestionOnlineEntity, Base
     @Override
     protected void convert(BaseViewHolder helper, QuestionOnlineEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
-        helper.setText(R.id.tv_datetime, "活动时间: " + item.getStartDate() + "至" + item.getEndDate());
+        helper.setText(R.id.tv_datetime, "问卷时间: " + item.getStartDate().split("T")[0]
+                + "至" + item.getEndDate().split("T")[0]);
         helper.setText(R.id.tv_status, item.getStat() == 1 ? "进行中" : "已结束");
     }
 
