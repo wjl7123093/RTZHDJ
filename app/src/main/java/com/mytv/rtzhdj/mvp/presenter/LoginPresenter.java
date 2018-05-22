@@ -97,7 +97,9 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
                         DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_IS_LOGIN, 1); // 1 表示登录
                         DataHelper.saveDeviceData(mActivity, SharepreferenceKey.KEY_LOGIN_USER, loginData.getData());
 //                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_USER_ID, loginData.getData().getUserId());
+//                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID, loginData.getData().getPublishmentSystemId());
                         DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_USER_ID, 39);
+                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID, 1);
 
                         mRootView.goMainActivity();
                     }

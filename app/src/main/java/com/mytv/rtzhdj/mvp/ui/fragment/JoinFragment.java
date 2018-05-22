@@ -137,14 +137,15 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
     @Override
     public void setOnGridClick(int position) {
         switch (position) {
-            case 0:
+            case 0: // 组织活动
+                ARouter.getInstance().build(ARoutePath.PATH_ORGANIZATIONAL).navigation();
                 break;
-            case 1:
+            case 1: // 志愿服务
                 ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE).navigation();
                 break;
-            case 2:
+            case 2: // 报道社区
                 break;
-            case 3:
+            case 3: // 周边社区
                 ARouter.getInstance().build(ARoutePath.PATH_SURROUNDING_COMMUNITY).navigation();
                 break;
         }

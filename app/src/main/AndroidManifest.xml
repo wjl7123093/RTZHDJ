@@ -100,7 +100,6 @@
         <activity
             android:name=".mvp.ui.activity.MyReportingActivity"
             android:label="@string/title_my_reporting" />
-        <activity android:name=".mvp.ui.activity.OrganizationalActivity" />
         <activity
             android:name=".mvp.ui.activity.VolunteerServiceActivity"
             android:label="@string/title_volunteer_service" />
@@ -223,8 +222,11 @@
         <activity
             android:name=".mvp.ui.activity.ScoresDetailsActivity"
             android:label="@string/title_scores_details" />
-        <activity android:name=".mvp.ui.activity.QuestionnaireActivity"
-            android:label="@string/title_questionaire"></activity>
+        <activity
+            android:name=".mvp.ui.activity.QuestionnaireActivity"
+            android:label="@string/title_questionaire" />
+        <activity android:name=".mvp.ui.activity.OrganizationActivity"
+            android:label="@string/title_organization"></activity>
     </application>
 
 </manifest>
