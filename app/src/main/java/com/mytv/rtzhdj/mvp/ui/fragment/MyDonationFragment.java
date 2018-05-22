@@ -7,13 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.MyDonateEntity;
 import com.mytv.rtzhdj.di.component.DaggerMyDonationComponent;
@@ -39,6 +42,8 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
     RefreshLayout mRefreshLayout;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
+    @BindView(R.id.ll_btn_donate)
+    LinearLayout mLlBtnDonate;
 
     private MyDonationAdapter wishAdapter;
     private static final int PAGE_SIZE = 10;
@@ -90,6 +95,9 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
                     DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
                     getArguments().getInt("typeId"), false);
         }
+
+        // 我要捐赠
+        mLlBtnDonate.setOnClickListener(view -> ARouter.getInstance().build(ARoutePath.PATH_DONATE).navigation());
     }
 
     /**
