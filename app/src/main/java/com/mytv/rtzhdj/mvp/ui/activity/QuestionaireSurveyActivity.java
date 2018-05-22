@@ -34,10 +34,10 @@ import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.AnswerEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionEntity;
-import com.mytv.rtzhdj.di.component.DaggerQuestionnaireComponent;
-import com.mytv.rtzhdj.di.module.QuestionnaireModule;
-import com.mytv.rtzhdj.mvp.contract.QuestionnaireContract;
-import com.mytv.rtzhdj.mvp.presenter.QuestionnairePresenter;
+import com.mytv.rtzhdj.di.component.DaggerQuestionaireSurveyComponent;
+import com.mytv.rtzhdj.di.module.QuestionaireSurveyModule;
+import com.mytv.rtzhdj.mvp.contract.QuestionaireSurveyContract;
+import com.mytv.rtzhdj.mvp.presenter.QuestionaireSurveyPresenter;
 import com.mytv.rtzhdj.mvp.ui.widget.CenterDialog;
 
 import org.json.JSONArray;
@@ -50,16 +50,16 @@ import butterknife.BindView;
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * 效果评测问卷 页面
+ * 在线问卷调查 页面
  *
  * @author Fred_W
  * @version v1.0.0(1)
  *
- * @crdate 2018-5-15
+ * @crdate 2018-5-22
  * @update
  */
-@Route(path = ARoutePath.PATH_QUESTIONAIRE)
-public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> implements QuestionnaireContract.View {
+@Route(path = ARoutePath.PATH_QUESTIONAIRE_SURVEY)
+public class QuestionaireSurveyActivity extends BaseActivity<QuestionaireSurveyPresenter> implements QuestionaireSurveyContract.View {
 
     public static final int RESULT_CODE_QUESTIONNAIRE = 0x402;
 
@@ -78,7 +78,7 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
     Button mBtnSubmit;
 
     @Autowired
-    int examinationId;
+    int onlineSurveyId;
 
     /** 加载进度条 */
     private CenterDialog centerDialog;
@@ -102,14 +102,15 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 
     private int mScore = 0; // 评测结果分数
     private boolean mIsAnswerCorret = false;    // 是否正确答案
+    private String mAnswerString = "";  // 所选答案
 
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
-        DaggerQuestionnaireComponent //如找不到该类,请编译一下项目
+        DaggerQuestionaireSurveyComponent //如找不到该类,请编译一下项目
                 .builder()
                 .appComponent(appComponent)
-                .questionnaireModule(new QuestionnaireModule(this))
+                .questionaireSurveyModule(new QuestionaireSurveyModule(this))
                 .build()
                 .inject(this);
     }
@@ -117,19 +118,19 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
     @Override
     public int initView(Bundle savedInstanceState) {
         ARouter.getInstance().inject(this);
-        return R.layout.activity_questionnaire; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_questionaire_survey; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
-        centerDialog = new CenterDialog(QuestionnaireActivity.this, R.layout.dialog_comment,
+        centerDialog = new CenterDialog(QuestionaireSurveyActivity.this, R.layout.dialog_comment,
                 new int[]{});
 
         xInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // 获取 问卷调查信息
-        mPresenter.callMethodOfGetTestInfo(examinationId, false);
+        mPresenter.callMethodOfGetSurveyDetailList(onlineSurveyId, false);
 
         mBtnSubmit.setOnClickListener(view -> {
             // 提交 评测结果
@@ -166,14 +167,12 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
         finish();
     }
 
-
     @Override
     public void loadData(List<QuestionEntity> questionList) {
         mQuestionList = questionList;
         bindDataToUI(mQuestionList);
         displayQuestionnaireResult(mQuestionList);
     }
-
 
 
     /**
@@ -218,7 +217,7 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
                 txtList.add(txt_ans);
                 txt_ans.setText(mAnswerList.get(j).getContent());
                 LinearLayout lly_answer_size=(LinearLayout)ans_view.findViewById(R.id.lly_answer_size);
-                lly_answer_size.setOnClickListener(new answerItemOnClickListener(i, j, mAnswerList, txt_ans, txtList));
+                lly_answer_size.setOnClickListener(new QuestionaireSurveyActivity.answerItemOnClickListener(i, j, mAnswerList, txt_ans, txtList));
                 add_layout.addView(ans_view);
             }
 			/*for(int r=0; r<imglist2.size();r++){
@@ -288,19 +287,11 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
                             strResult += "<p><span class='text-color-blue'>答：</span>"
                                     + mAnswerList.get(j) + "</p>";
 
-                            // 判断正确答案
-                            if (mQuestionList.get(i).getCorrectAnswer().contains(j+1+"")) {
-                                mIsAnswerCorret = true;
-                            } else {
-                                mIsAnswerCorret = false;
-                            }
+                            // 拼接答案
+                            mAnswerString += mAnswerList.get(j).getOptionID() + ",";
                         }
                     }
 
-                    // 计算分值
-                    if (mIsAnswerCorret) {
-                        mScore += mQuestionList.get(i).getScore();
-                    }
                 } else {    // 单选
                     strResult += "<p><span class='text-color-red'>问：</span>" + mQuestionList.get(i).getTitle() + "</p>";
                     for(int j=0;j<mAnswerList.size();j++){
@@ -308,10 +299,8 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
                             strResult += "<p><span class='text-color-blue'>答：</span>"
                                     + mAnswerList.get(j) + "</p>";
 
-                            // 计算分值
-                            if (mQuestionList.get(i).getCorrectAnswer().equals(j+1+"")) {
-                                mScore += mQuestionList.get(i).getScore();
-                            }
+                            // 拼接答案
+                            mAnswerString += mAnswerList.get(j).getOptionID() + ",";
                             break;
                         }
                     }
@@ -329,10 +318,10 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 //            this.setResult(RESULT_CODE_QUESTIONNAIRE, data);
 //            this.finish();
 
-            // 提交 评测结果
-            mPresenter.callMethodOfPostTestInfo(DataHelper.getIntergerSF(QuestionnaireActivity.this,
-                    SharepreferenceKey.KEY_USER_ID), examinationId, mScore, false);
-            showMessage("答题结束，分数为：" + mScore);
+            // 提交 问卷调查结果
+            mPresenter.callMethodOfPostSurveyInfo(DataHelper.getIntergerSF(QuestionaireSurveyActivity.this,
+                    SharepreferenceKey.KEY_USER_ID), mAnswerString, false);
+//            showMessage("答题结束，分数为：" + mScore);
         }
     }
 
@@ -455,4 +444,5 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 
         }
     }
+
 }

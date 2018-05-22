@@ -18,8 +18,8 @@ public class QuestionEntity {
     private int IsMulti;            // 是否多选
     private String CorrectAnswer;   // 正确答案
     private int Score;              // 分数
-    private List<AnswerEntity> Items;     // 答案列表
-    private int que_state;              //是否解答
+    private List<AnswerEntity> Items;   // 答案列表
+    private int que_state;              // 是否解答
 
     public int getId() {
         return Id;

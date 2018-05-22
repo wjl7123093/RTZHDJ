@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.QuestionOnlineEntity;
 import com.mytv.rtzhdj.di.component.DaggerQuestionOnlineComponent;
@@ -161,6 +163,9 @@ public class QuestionOnlineFragment extends BaseFragment<QuestionOnlinePresenter
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 showMessage("" + questionList.get(position).getID());
+
+                ARouter.getInstance().build(ARoutePath.PATH_QUESTIONAIRE_SURVEY)
+                        .withInt("onlineSurveyId", questionList.get(position).getID()).navigation();
             }
         });
 

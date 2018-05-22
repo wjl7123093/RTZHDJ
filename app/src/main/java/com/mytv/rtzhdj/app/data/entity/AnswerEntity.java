@@ -1,7 +1,5 @@
 package com.mytv.rtzhdj.app.data.entity;
 
-import java.util.List;
-
 /**
  * AnswerEntity   问卷答案实体类
  *
@@ -13,9 +11,17 @@ import java.util.List;
  */
 public class AnswerEntity {
 
-//    private int Id;                 // 答案id
+    private int OptionID;           // 答案id
     private String Content;         // 答案
     private int ans_state;          // 答案是否被解答
+
+    public int getOptionID() {
+        return OptionID;
+    }
+
+    public void setOptionID(int optionID) {
+        OptionID = optionID;
+    }
 
     public String getContent() {
         return Content;
