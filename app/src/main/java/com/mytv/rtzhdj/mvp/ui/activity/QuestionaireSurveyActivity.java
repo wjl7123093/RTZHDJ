@@ -320,7 +320,7 @@ public class QuestionaireSurveyActivity extends BaseActivity<QuestionaireSurveyP
 
             // 提交 问卷调查结果
             mPresenter.callMethodOfPostSurveyInfo(DataHelper.getIntergerSF(QuestionaireSurveyActivity.this,
-                    SharepreferenceKey.KEY_USER_ID), mAnswerString, false);
+                    SharepreferenceKey.KEY_USER_ID), mAnswerString.substring(0, mAnswerString.length()-1), false);
 //            showMessage("答题结束，分数为：" + mScore);
         }
     }

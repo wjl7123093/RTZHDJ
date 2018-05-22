@@ -118,7 +118,7 @@ public class QuestionaireSurveyPresenter extends BasePresenter<QuestionaireSurve
 //                        mRootView.showPickerView(stationList.getData());
                         if (postResult.isSuccess()) {
                             mRootView.showMessage("问卷提交成功");
-                            mRootView.killMyself();
+//                            mRootView.killMyself();
                         }
                     }
                 });
