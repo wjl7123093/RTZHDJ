@@ -3,27 +3,18 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
-import com.mytv.rtzhdj.app.data.api.cache.VolunteerServiceDetailCache;
-import com.mytv.rtzhdj.app.data.api.service.HomeService;
+import com.mytv.rtzhdj.app.data.api.service.NewsDetailService;
 import com.mytv.rtzhdj.app.data.api.service.VolunteerServiceDetailService;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceDetailContract;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
-import io.rx_cache2.EvictProvider;
 
 
 @ActivityScope
@@ -46,8 +37,14 @@ public class VolunteerServiceDetailModel extends BaseModel implements VolunteerS
     }
 
     @Override
-    public Observable<BaseJson<VolunteerDetailEntity>> getVolunteerServiceDetail(int id, boolean update) {
+    public Observable<BaseJson<VolunteerDetailEntity>> getVolunteerServiceDetail(int id, int userId, boolean update) {
         return mRepositoryManager.obtainRetrofitService(VolunteerServiceDetailService.class)
-                .getVolunteerServiceDetail(id);
+                .getVolunteerServiceDetail(id, userId);
+    }
+
+    @Override
+    public Observable<BaseJson> postDoDig(int nodeId, int contentId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
+                .postDoDig(nodeId, contentId);
     }
 }

@@ -63,9 +63,9 @@ public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServ
     }
 
     @Override
-    public void callMethodOfGetVolunteerServiceDetail(int id, boolean update) {
-        mModel.getVolunteerServiceDetail(id, update)
-                .compose(RTZHDJApplication.rxCache.<BaseJson<VolunteerDetailEntity>>transformObservable("getVolunteerServiceDetail" + id,
+    public void callMethodOfGetVolunteerServiceDetail(int id, int userId, boolean update) {
+        mModel.getVolunteerServiceDetail(id, userId, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<VolunteerDetailEntity>>transformObservable("getVolunteerServiceDetail" + id + userId,
                         new TypeToken<BaseJson<VolunteerDetailEntity>>() { }.getType(),
                         CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<VolunteerDetailEntity>>())
@@ -88,6 +88,33 @@ public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServ
 
                         if (volunteerDetailEntity.isSuccess() && volunteerDetailEntity.getData() != null)
                             mRootView.loadData(volunteerDetailEntity.getData());
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfPostDoDig(int nodeId, int contentId, boolean update) {
+        mModel.postDoDig(nodeId, contentId, update)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e(TAG, postResult.toString());
+
+                        if (postResult.isSuccess())
+                            mRootView.changeDigsStatus();
+
                     }
                 });
     }

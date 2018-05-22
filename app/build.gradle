@@ -233,4 +233,6 @@ dependencies {
     compile project(':libk-switchbutton')
 //    // OkHttpUtils
 //    compile 'com.zhy:okhttputils:2.6.2'
+    // Sweet-Dialog
+    compile 'cn.pedant.sweetalert:library:1.3'
 }

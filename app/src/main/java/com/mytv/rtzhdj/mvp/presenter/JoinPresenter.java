@@ -184,6 +184,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                     @Override
                     public void onClick(View view) {
                         ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                                .withInt("nodeId", volunteerBlocks.get(position).getNodeId())
                                 .withInt("id", volunteerBlocks.get(position).getContentId()).navigation();
                     }
                 });

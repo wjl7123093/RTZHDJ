@@ -10,14 +10,12 @@ import android.view.ViewGroup;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerVolunteerServiceDetailComponent;
 import com.mytv.rtzhdj.di.module.VolunteerServiceDetailModule;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.VolunteerServiceDetailPresenter;
-
-import com.mytv.rtzhdj.R;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -97,6 +95,11 @@ public class VolunteerServiceDetailFragment extends BaseFragment<VolunteerServic
 
     @Override
     public void loadData(VolunteerDetailEntity volunteerDetailEntity) {
+
+    }
+
+    @Override
+    public void changeDigsStatus() {
 
     }
 }

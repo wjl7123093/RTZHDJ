@@ -11,6 +11,7 @@ package com.mytv.rtzhdj.app.data.entity;
  */
 public class VoluteerServiceEntity {
 
+    private int NodeId;
     private int Id;                         //
     private String Title;                   // 活动标题
     private String ImgUrl;
@@ -19,6 +20,14 @@ public class VoluteerServiceEntity {
     private int EnrollCount;                // 报名限额
     private int Signedup;                   // 已报名人数
     private String AllImgUrl;
+
+    public int getNodeId() {
+        return NodeId;
+    }
+
+    public void setNodeId(int nodeId) {
+        NodeId = nodeId;
+    }
 
     public int getId() {
         return Id;

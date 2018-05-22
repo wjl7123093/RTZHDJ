@@ -1,6 +1,7 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,19 +20,16 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerVolunteerServiceDetailComponent;
 import com.mytv.rtzhdj.di.module.VolunteerServiceDetailModule;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.VolunteerServiceDetailPresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.fragment.SettingsFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.VolunteerServiceDetailFragment;
-import com.mytv.rtzhdj.mvp.ui.fragment.VolunteerServiceFragment;
-
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -38,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -74,6 +74,10 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
     TextView mTvEnrollment;
     @BindView(R.id.tv_grade)
     TextView mTvGrade;
+    @BindView(R.id.ratingbar)
+    RatingBar mRatingBar;
+    @BindView(R.id.tv_scores)
+    TextView mTvScores;
 
     @BindView(R.id.tabs)
     TabLayout tabLayout;
@@ -86,11 +90,17 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
     Button mBtnIsOver;
 
     @Autowired
+    int nodeId;
+    @Autowired
     int id;
 
     private ArrayList<Fragment> mFragments;
     private String[] titles;
     private String mTitle;      // 标题栏标题
+    private int mDigs = 0;      // 点赞数
+
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
 
 
     @Override
@@ -116,7 +126,7 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
         titles = new String[]{"活动详情", "活动回顾"};
         initTab();
 
-        mBtnStar.setOnClickListener(view -> {});
+        mBtnStar.setOnClickListener(view -> mPresenter.callMethodOfPostDoDig(nodeId, id, false));
         mBtnIsOver.setOnClickListener(view -> {
             if (mBtnIsOver.getText().equals("正在报名")) {
                 ARouter.getInstance().build(ARoutePath.PATH_MY_JOIN)
@@ -126,18 +136,23 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
             }});
 
         // 获取 志愿服务详情
-        mPresenter.callMethodOfGetVolunteerServiceDetail(id, false);
+        mPresenter.callMethodOfGetVolunteerServiceDetail(id, DataHelper.getIntergerSF(
+                VolunteerServiceDetailActivity.this, SharepreferenceKey.KEY_USER_ID), false);
     }
 
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override
@@ -196,8 +211,16 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
         mTvEnrollment.setText(volunteerDetailEntity.getSignedup()
                 + "/" + volunteerDetailEntity.getEnrollCount());
         mTvGrade.setText(volunteerDetailEntity.getScore() + "分");
+        mTvScores.setText(volunteerDetailEntity.getJoinScore() + "");
+        mRatingBar.setRating(volunteerDetailEntity.getScore());
 
+        mDigs = volunteerDetailEntity.getDigs();
         mBtnStar.setText("点赞(" + volunteerDetailEntity.getDigs() + ")");
         mBtnIsOver.setText(volunteerDetailEntity.getIfJoin() == 0 ? "正在报名" : "已报名");
+    }
+
+    @Override
+    public void changeDigsStatus() {
+        mBtnStar.setText("点赞(" + ++mDigs + ")");
     }
 }

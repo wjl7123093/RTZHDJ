@@ -1,7 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 
 import io.reactivex.Observable;
@@ -24,6 +23,7 @@ public interface VolunteerServiceDetailService {
      * @return
      */
     @GET("getVolunteerServiceDetail")
-    Observable<BaseJson<VolunteerDetailEntity>> getVolunteerServiceDetail(@Query("Id") int id);
+    Observable<BaseJson<VolunteerDetailEntity>> getVolunteerServiceDetail(@Query("Id") int id,
+                                                                          @Query("UserId") int userId);
 
 }

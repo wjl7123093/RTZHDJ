@@ -524,6 +524,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                         @Override
                         public void OnBannerClick(int position) {
                             ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                                    .withInt("nodeId", PublicSpiritedBlock_ChildContent.get(0).get(position).getNodeId())
                                     .withInt("id", PublicSpiritedBlock_ChildContent.get(0).get(position).getArticleId())
                                     .navigation();
                         }
@@ -532,6 +533,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                         @Override
                         public void OnBannerClick(int position) {
                             ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                                    .withInt("nodeId", PublicSpiritedBlock_ChildContent.get(1).get(position).getNodeId())
                                     .withInt("id", PublicSpiritedBlock_ChildContent.get(1).get(position).getArticleId())
                                     .navigation();
                         }

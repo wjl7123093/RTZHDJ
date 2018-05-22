@@ -42,6 +42,7 @@ public class MyJoinEntity {
     }
 
     public class VolunteerBlock {
+        private int NodeId;
         private int ContentId;
         private String Title;
         private int Digs;
@@ -49,6 +50,14 @@ public class MyJoinEntity {
         private String Picture;
         private String EnrollEndDate;
         private String AllImgUrl;
+
+        public int getNodeId() {
+            return NodeId;
+        }
+
+        public void setNodeId(int nodeId) {
+            NodeId = nodeId;
+        }
 
         public int getContentId() {
             return ContentId;
