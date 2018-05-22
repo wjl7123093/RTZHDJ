@@ -7,12 +7,14 @@
  *
  * @crdate 2018-1-22
  * @update 2018-3-2     新增 父窗体 ID
+ *         2018-5-22    update UI
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:orientation="horizontal"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="@color/white">
     <RelativeLayout
         android:id="@+id/rl_container"
         android:layout_width="0dp"
@@ -46,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_14"
-            android:textColor="@color/primary_text"
-            android:drawableLeft="@mipmap/ic_comment"
+            android:textColor="@color/secondary_text"
+            android:drawableLeft="@mipmap/ic_comment_small"
             android:drawablePadding="@dimen/len_4"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
@@ -57,8 +59,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_14"
-            android:textColor="@color/primary_text"
-            android:drawableLeft="@mipmap/ic_digs"
+            android:textColor="@color/secondary_text"
+            android:drawableLeft="@mipmap/ic_digs_small"
             android:drawablePadding="@dimen/len_4"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@id/tv_comment_num"
@@ -75,5 +77,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/len_6"
-        android:background="@mipmap/ic_launcher"/>
+        android:background="@mipmap/ic_launcher"
+        android:layout_marginRight="@dimen/dp_10"/>
 </LinearLayout>
