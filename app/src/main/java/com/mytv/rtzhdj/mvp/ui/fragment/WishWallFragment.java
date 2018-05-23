@@ -150,6 +150,11 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
 
     }
 
+    @Override
+    public void dismissDialog() {
+
+    }
+
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override

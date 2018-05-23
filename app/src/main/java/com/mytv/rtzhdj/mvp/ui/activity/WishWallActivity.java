@@ -121,6 +121,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
     private String uploadPictureFromList = "";
 
     private Map<String, RequestBody> params = new HashMap<>();
+    private AlertDialog dialog0 = null;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -404,8 +405,13 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
         });
         builder.setView(dialogView);
         builder.create();
-        AlertDialog dialog0 = builder.show();
+        dialog0 = builder.show();
 
+    }
+
+    @Override
+    public void dismissDialog() {
+        dialog0.dismiss();
     }
 
 

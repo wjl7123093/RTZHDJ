@@ -166,8 +166,10 @@ public class WishWallPresenter extends BasePresenter<WishWallContract.Model, Wis
                     public void onNext(@NonNull BaseJson postResult) {
                         Log.e(TAG, postResult.toString());
 
-                        if (postResult.isSuccess())
+                        if (postResult.isSuccess()) {
                             mRootView.showMessage("提交成功");
+                            mRootView.dismissDialog();
+                        }
 
                     }
                 });
