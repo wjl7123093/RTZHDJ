@@ -1,8 +1,7 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.CoursewareDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -15,7 +14,7 @@ import retrofit2.http.Query;
  * @version v1.0.0
  *
  * @crdate 2017-4-11
- * @update
+ * @update 2017-5-23
  */
 public interface CourseDetailService {
 
@@ -24,6 +23,6 @@ public interface CourseDetailService {
      * @return
      */
     @GET("getCoursewareDetail")
-    Observable<CoursewareDetailEntity> getCoursewareDetail(@Query("id") int id);
+    Observable<BaseJson<CoursewareDetailEntity>> getCoursewareDetail(@Query("id") int id);
 
 }

@@ -1,30 +1,31 @@
 package com.mytv.rtzhdj.mvp.presenter;
 
 import android.app.Application;
+import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.CoursewareDetailEntity;
+import com.mytv.rtzhdj.mvp.contract.CourseDetailContract;
+import com.mytv.rtzhdj.mvp.ui.activity.CourseDetailActivity;
+import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.data.entity.CoursewareDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
-import com.mytv.rtzhdj.mvp.contract.CourseDetailContract;
-import com.mytv.rtzhdj.mvp.ui.activity.CourseDetailActivity;
-import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
 
 
 @ActivityScope
@@ -125,10 +126,13 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Mo
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<CoursewareDetailEntity>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<CoursewareDetailEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@io.reactivex.annotations.NonNull CoursewareDetailEntity liveMultiItems) {
+                    public void onNext(@NonNull BaseJson<CoursewareDetailEntity> coursewareDetailEntity) {
+                        Log.e(TAG, coursewareDetailEntity.toString());
 
+                        if (coursewareDetailEntity.isSuccess())
+                            mRootView.showData(coursewareDetailEntity.getData());
 
                     }
                 });

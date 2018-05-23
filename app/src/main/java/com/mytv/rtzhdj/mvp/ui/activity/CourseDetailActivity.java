@@ -1,10 +1,12 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
@@ -16,16 +18,15 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.api.Api;
+import com.mytv.rtzhdj.app.data.entity.CoursewareDetailEntity;
 import com.mytv.rtzhdj.app.utils.TimeTools;
 import com.mytv.rtzhdj.di.component.DaggerCourseDetailComponent;
 import com.mytv.rtzhdj.di.module.CourseDetailModule;
 import com.mytv.rtzhdj.mvp.contract.CourseDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.CourseDetailPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
 
 import net.qiujuer.genius.ui.widget.Button;
@@ -78,7 +79,11 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     private CountDownTimer mCountDownTimer;
     private static final long MAX_TIME = 62 * 1000;
     private long curTime = 0;
-    private boolean isPause = false;
+    private boolean isPause = false;    // 是否暂停
+    private boolean isFinish = false;   // 是否结束
+
+    private AlertDialog dialog0 = null;
+    CoursewareDetailEntity mCoursewareDetailEntity = null;
 
 
     @Override
@@ -106,10 +111,17 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mPresenter.getCourseDetail(Api.APP_COURSE_DOMAIN + "nodeId=" + nodeId + "&id=" + articleId);
 
         // 获取课件详情数据
-        mPresenter.callMethodOfGetCoursewareDetail(0, false);
+        mPresenter.callMethodOfGetCoursewareDetail(13294, false);
 
-        initCountDownTimer(MAX_TIME);
-        mCountDownTimer.start();
+        mBtnDone.setOnClickListener(view -> {
+            if (isFinish)
+                killMyself();
+            else
+                showMessage("尚未学习完成");
+        });
+
+//        initCountDownTimer(MAX_TIME);
+//        mCountDownTimer.start();
     }
 
 
@@ -184,7 +196,34 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mWebProgressBar.setProgress(progress);
     }
 
+    @Override
+    public void showData(CoursewareDetailEntity coursewareDetailEntity) {
+        mCoursewareDetailEntity = coursewareDetailEntity;
+        initCountDownTimer(coursewareDetailEntity.getStudyTime() * 1000);
+        mTvScores.setText(" 可获取" + coursewareDetailEntity.getIntegral() + "积分哦！");
+        mCountDownTimer.start();
+    }
 
+    @Override
+    public void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetailActivity.this);
+        View dialogView = LayoutInflater.from(CourseDetailActivity.this).inflate(R.layout.dialog_study_finish, null);
+        android.widget.Button mBtnStudy = dialogView.findViewById(R.id.btn_study);
+        android.widget.Button mBtnExit = dialogView.findViewById(R.id.btn_exit);
+        TextView mTvScores = dialogView.findViewById(R.id.tv_scores);
+        mTvScores.setText("+" + mCoursewareDetailEntity.getIntegral());
+
+        mBtnStudy.setOnClickListener(view -> {
+            dialog0.dismiss();
+        });
+        mBtnExit.setOnClickListener(view -> {
+            dialog0.dismiss();
+            killMyself();
+        });
+        builder.setView(dialogView);
+        builder.create();
+        dialog0 = builder.show();
+    }
 
     public void initCountDownTimer(long millisInFuture) {
         mCountDownTimer = new CountDownTimer(millisInFuture, 1000) {
@@ -196,7 +235,9 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
             }
 
             public void onFinish() {
-                mTvTime.setText("完成!");
+                mTvTime.setText("00:00:00");
+                isFinish = true;
+                showDialog();
             }
         };
     }

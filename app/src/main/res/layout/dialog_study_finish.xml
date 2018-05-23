@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * dialog_study_finish.xml 学习结束对话框
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-5-23
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/len_16"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="恭喜您在本次学习中获得积分"
+        android:textSize="@dimen/font_20"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_scores"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:text="+5"
+        android:textSize="80dp"
+        android:textColor="@color/colorAccent"
+        android:drawableRight="@mipmap/ic_study_money"
+        android:drawablePadding="@dimen/len_4"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_study"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/len_32"
+            android:layout_weight="1"
+            android:background="@color/accent"
+            android:text="继续学习"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_16"
+            android:layout_marginTop="@dimen/len_16"/>
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/len_32"
+            android:layout_weight="1"
+            android:background="@color/accent"
+            android:text="退出"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_16"
+            android:layout_marginTop="@dimen/len_16"
+            android:layout_marginLeft="@dimen/space_20dp"/>
+    </LinearLayout>
+
+</LinearLayout>

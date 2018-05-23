@@ -9,7 +9,6 @@
  * @update 2018-3-14     修改UI（填充布局）
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -37,7 +36,7 @@
             android:background="@drawable/sp_bg_course_time"
             android:textSize="@dimen/font_14"
             android:textColor="@color/white"
-            android:text="00:54"
+            android:text="00:00:01"
             android:padding="@dimen/len_4"/>
         <TextView
             android:id="@+id/tv_scores"
