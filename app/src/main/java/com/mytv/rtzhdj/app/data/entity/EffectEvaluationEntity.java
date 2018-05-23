@@ -9,6 +9,7 @@ package com.mytv.rtzhdj.app.data.entity;
  * @crdate 2018-4-4
  * @update 2018-4-26    更新实体类（小写 -> 大写）
  *         2018-5-15    update 结构
+ *         2018-5-23    update 结构
  */
 public class EffectEvaluationEntity {
 
@@ -22,6 +23,7 @@ public class EffectEvaluationEntity {
     private String LastStudyTime;       // 最近测试时间
 
     private int examinationTime;        // 测评时间
+    private int IfOver;                 // 评测是否结束 0 没有，1 结束
 
     public int getId() {
         return Id;
@@ -93,5 +95,13 @@ public class EffectEvaluationEntity {
 
     public void setExaminationTime(int examinationTime) {
         this.examinationTime = examinationTime;
+    }
+
+    public int getIfOver() {
+        return IfOver;
+    }
+
+    public void setIfOver(int ifOver) {
+        IfOver = ifOver;
     }
 }

@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -165,10 +164,15 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
-                // 跳转到 问卷调查页面
-                ARouter.getInstance().build(ARoutePath.PATH_QUESTIONAIRE)
-                        .withInt("examinationId", effectList.get(position).getId()).navigation();
+//                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+
+                if (effectList.get(position).getIfOver() == 0) {
+                    // 跳转到 问卷调查页面
+                    ARouter.getInstance().build(ARoutePath.PATH_QUESTIONAIRE)
+                            .withInt("examinationId", effectList.get(position).getId()).navigation();
+                } else {
+                    showMessage("该次评测已经结束");
+                }
             }
         });
 

@@ -37,6 +37,7 @@ public class EffectEvaluationAdapter extends BaseQuickAdapter<EffectEvaluationEn
         helper.setText(R.id.tv_test_time, item.getStartTime().split("T")[0] + " 至 "
                 + item.getEndTime().split("T")[0]);
         helper.setText(R.id.tv_last_time, "最近测试时间: " + item.getLastStudyTime());
+        helper.setText(R.id.tv_status, item.getIfOver() == 0 ? "正在进行" : "已经结束");
 
         helper.getView(R.id.tv_grade_rank).setOnClickListener(view -> {
             ARouter.getInstance().build(ARoutePath.PATH_GRADE_RANK)
