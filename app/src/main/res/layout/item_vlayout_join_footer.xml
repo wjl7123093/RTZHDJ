@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_moredata.xml vlayout 更多数据（通栏布局）
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-23
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:gravity="center"
+    android:layout_marginBottom="@dimen/len_12"
+    android:background="@color/white">
+
+    <net.qiujuer.genius.ui.widget.Button
+        android:id="@+id/btn_moredata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更多新闻"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:background="@drawable/sp_bg_vlayout_footer"/>
+
+</LinearLayout>

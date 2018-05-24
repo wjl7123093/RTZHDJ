@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.alibaba.android.arouter.utils.TextUtils;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -202,14 +203,20 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                mImageLoader.loadImage(activity,
-                        ImageConfigImpl
-                                .builder()
-                                .errorPic(R.mipmap.ic_error)
-                                .placeholder(R.mipmap.ic_placeholder)
-                                .url(communityBlocks.get(position).getAllImgUrl())
-                                .imageView(holder.getView(R.id.iv_image))
-                                .build());
+
+                if (!TextUtils.isEmpty(communityBlocks.get(position).getAllImgUrl())) {
+                    mImageLoader.loadImage(activity,
+                            ImageConfigImpl
+                                    .builder()
+                                    .errorPic(R.mipmap.ic_error)
+                                    .placeholder(R.mipmap.ic_placeholder)
+                                    .url(communityBlocks.get(position).getAllImgUrl())
+                                    .imageView(holder.getView(R.id.iv_image))
+                                    .build());
+                    holder.getView(R.id.iv_image).setVisibility(View.VISIBLE);
+                } else {
+                    holder.getView(R.id.iv_image).setVisibility(View.GONE);
+                }
 
                 holder.setText(R.id.tv_star_num, "" + communityBlocks.get(position).getDigs());
                 holder.setText(R.id.tv_comment_num, "" + communityBlocks.get(position).getComments());
