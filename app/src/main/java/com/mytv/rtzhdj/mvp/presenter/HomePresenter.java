@@ -181,25 +181,21 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     @Override
     public BaseDelegateAdapter initGvMenu() {
         // 在构造函数设置每行的网格个数
-        final TypedArray proPic = activity.getResources().obtainTypedArray(R.array.find_gv_image);
+        final String[] proPic = activity.getResources().getStringArray(R.array.find_gv_image);
         final String[] proName = activity.getResources().getStringArray(R.array.find_gv_title);
-        final List<Integer> images = new ArrayList<>();
-        for(int a=0 ; a<proName.length ; a++){
-            images.add(proPic.getResourceId(a,R.mipmap.ic_launcher));
-        }
-        proPic.recycle();
+
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4);
 //        gridLayoutHelper.setPadding(0, 16, 0, 16);
         gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(2);    // 控制子元素之间的水平间距
 //        gridLayoutHelper.setBgColor(Color.WHITE);
 //        gridLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
-        return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vlayout_grid, 8, Constant.viewType.typeGv) {
+        return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vlayout_home_grid, 8, Constant.viewType.typeGv) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_name, proName[position]);
-                holder.setImageResource(R.id.iv_icon, images.get(position));
+                holder.setText(R.id.ic_grid, proPic[position]);
                 holder.getView(R.id.ll_container).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

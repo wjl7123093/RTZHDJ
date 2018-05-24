@@ -74,11 +74,21 @@
     <string name="tab_mine">我的</string>
 
     <!-- iconfont -->
+    <!-- tab -->
     <string name="ic_home">&#xe710;</string>
     <string name="ic_news">&#xe72f;</string>
     <string name="ic_study">&#xe65d;</string>
     <string name="ic_join">&#xe77a;</string>
     <string name="ic_mine">&#xe671;</string>
+    <!-- home grid -->
+    <string name="ic_home_grid_news">&#xe664;</string>
+    <string name="ic_home_grid_education">&#xe64e;</string>
+    <string name="ic_home_grid_clean">&#xe637;</string>
+    <string name="ic_home_grid_poverty">&#xe641;</string>
+    <string name="ic_home_grid_live">&#xe630;</string>
+    <string name="ic_home_grid_map">&#xe61f;</string>
+    <string name="ic_home_grid_enmergency">&#xe60a;</string>
+    <string name="ic_home_grid_bigdata">&#xe639;</string>
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

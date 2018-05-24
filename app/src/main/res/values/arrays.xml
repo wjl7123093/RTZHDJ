@@ -4,29 +4,6 @@
     <!--///////////////////////////////////////首页/////////////////////////////////////-->
 
 
-    <!--首页底部导航栏的标题，未选中时-->
-    <integer-array name="main_tab_un_select">
-        <item name="tab_home">@mipmap/ic_launcher</item>
-        <item name="tab_find">@mipmap/ic_launcher</item>
-        <item name="tab_data">@mipmap/ic_launcher</item>
-        <item name="tab_me">@mipmap/ic_launcher</item>
-    </integer-array>
-
-    <!--首页底部导航栏的标题，选中时-->
-    <integer-array name="main_tab_select">
-        <item name="tab_home">@mipmap/ic_launcher</item>
-        <item name="tab_find">@mipmap/ic_launcher</item>
-        <item name="tab_data">@mipmap/ic_launcher</item>
-        <item name="tab_me">@mipmap/ic_launcher</item>
-    </integer-array>
-
-    <!--首页底部导航栏文字-->
-    <string-array name="main_title">
-        <item>首页</item>
-        <item>数据</item>
-        <item>工具</item>
-        <item>更多</item>
-    </string-array>
 
 
     <!--首页精选跑马灯文字-->
@@ -194,16 +171,16 @@
 
 
     <!--发现页图片-->
-    <integer-array name="find_gv_image">
-        <item>@mipmap/ic_home_grid_news</item>
-        <item>@mipmap/ic_home_grid_news_education</item>
-        <item>@mipmap/ic_home_grid_news_clean</item>
-        <item>@mipmap/ic_home_grid_news_poverty</item>
-        <item>@mipmap/ic_home_grid_news_live</item>
-        <item>@mipmap/ic_home_grid_map</item>
-        <item>@mipmap/ic_home_grid_enmergency</item>
-        <item>@mipmap/ic_home_grid_bigdata</item>
-    </integer-array>
+    <string-array name="find_gv_image">
+        <item>@string/ic_home_grid_news</item>
+        <item>@string/ic_home_grid_education</item>
+        <item>@string/ic_home_grid_clean</item>
+        <item>@string/ic_home_grid_poverty</item>
+        <item>@string/ic_home_grid_live</item>
+        <item>@string/ic_home_grid_map</item>
+        <item>@string/ic_home_grid_enmergency</item>
+        <item>@string/ic_home_grid_bigdata</item>
+    </string-array>
     <!--发现页图片对应的位子-->
     <string-array name="find_gv_title">
         <item>时政新闻</item>
