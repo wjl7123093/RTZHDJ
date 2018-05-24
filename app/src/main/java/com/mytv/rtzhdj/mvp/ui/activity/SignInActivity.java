@@ -141,6 +141,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         mSignEntity.setIfSign(1);
         changeUI(mSignEntity.getDays());
 
+        mTvSignBig.setText("已签到");
         mTvSignStatus.setText("今日已签到");
         mTvScoresInfo.setText("你还差1天签到获" + 2 + "积分");
         mTvSignDays.setText("连续签到" + mSignEntity.getDays() + "天");
