@@ -16,6 +16,7 @@ import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
+import com.mytv.rtzhdj.app.data.entity.HeaderIntegralEntity;
 import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
 import com.zchu.rxcache.data.CacheResult;
@@ -109,6 +110,36 @@ public class CompulsoryCoursePresenter extends BasePresenter<CompulsoryCourseCon
 
                         if (courseList.isSuccess() && courseList.getData() != null)
                             mRootView.loadData(courseList.getData());
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfGetMyScore(int userId, boolean update) {
+        mModel.getMyScore(userId)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<HeaderIntegralEntity>>transformObservable("getMyScore" + userId,
+                        new TypeToken<BaseJson<HeaderIntegralEntity>>() { }.getType(),
+                        CacheStrategy.firstRemote()))
+                .map(new CacheResult.MapFunc<BaseJson<HeaderIntegralEntity>>())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<HeaderIntegralEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<HeaderIntegralEntity> headerIntegralEntity) {
+                        Log.e(TAG, headerIntegralEntity.getData().toString());
+
+                        if (headerIntegralEntity.isSuccess() && headerIntegralEntity.getData() != null)
+                            mRootView.loadHeaderData(headerIntegralEntity.getData());
                     }
                 });
     }

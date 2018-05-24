@@ -2,6 +2,7 @@ package com.mytv.rtzhdj.app.data.api.service;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
+import com.mytv.rtzhdj.app.data.entity.HeaderIntegralEntity;
 
 import java.util.List;
 
@@ -30,5 +31,12 @@ public interface CompulsoryCourseService {
                                                                    @Query("StudyState") int StudyState,
                                                                    @Query("PageIndex") int PageIndex,
                                                                    @Query("PageSize") int PageSize);
+
+    /**
+     * 获取 头部积分信息
+     * @return
+     */
+    @GET("GetMyScore")
+    Observable<BaseJson<HeaderIntegralEntity>> getMyScore(@Query("UserId") int UserId);
 
 }

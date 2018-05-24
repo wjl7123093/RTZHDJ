@@ -19,6 +19,7 @@ import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
+import com.mytv.rtzhdj.app.data.entity.HeaderIntegralEntity;
 import com.mytv.rtzhdj.di.component.DaggerCompulsoryCourseComponent;
 import com.mytv.rtzhdj.di.module.CompulsoryCourseModule;
 import com.mytv.rtzhdj.mvp.contract.CompulsoryCourseContract;
@@ -180,5 +181,10 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
     @Override
     public void loadData(List<CoursewareEntity> courseList) {
         initAdapter(courseList);
+    }
+
+    @Override
+    public void loadHeaderData(HeaderIntegralEntity headerIntegralEntity) {
+
     }
 }
