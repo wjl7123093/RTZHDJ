@@ -198,7 +198,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 1));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_image,
-                10, Constant.viewType.typeNews) {
+                communityBlocks.size(), Constant.viewType.typeNews) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
