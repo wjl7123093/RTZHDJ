@@ -1,12 +1,7 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.StationEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
-import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
-import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
-
-import java.util.List;
+import com.mytv.rtzhdj.app.data.entity.SignEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -33,5 +28,12 @@ public interface SigninService {
     @FormUrlEncoded
     @POST("postSignForScore")
     Observable<BaseJson> postSignForScore(@Field("userID") int userId);
+
+    /**
+     * 获取签到信息
+     * @return
+     */
+    @GET("GetSignList")
+    Observable<BaseJson<SignEntity>> getSignList(@Query("UserID") int userId);
 
 }

@@ -3,16 +3,15 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.SigninService;
+import com.mytv.rtzhdj.app.data.entity.SignEntity;
 import com.mytv.rtzhdj.mvp.contract.SignInContract;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
@@ -40,5 +39,11 @@ public class SignInModel extends BaseModel implements SignInContract.Model {
     public Observable<BaseJson> postSignForScore(int userId) {
         return mRepositoryManager.obtainRetrofitService(SigninService.class)
                 .postSignForScore(userId);
+    }
+
+    @Override
+    public Observable<BaseJson<SignEntity>> getSignList(int userId) {
+        return mRepositoryManager.obtainRetrofitService(SigninService.class)
+                .getSignList(userId);
     }
 }

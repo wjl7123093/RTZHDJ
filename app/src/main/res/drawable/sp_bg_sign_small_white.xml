@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * sp_bg_sign_small.xml 天天签到 - 签到天数（小） 背景
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-2-28
+ * @update
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval" >
+    <solid android:color="@color/white" />
+    <corners android:radius="16dp"/>
+    <!-- 边线颜色 -->
+    <!--<stroke
+        android:width="0.5dp" 
+        android:color="@color/green_400"/>-->
+    <!--<padding
+        android:left="@dimen/len_4"
+        android:right="@dimen/len_4"
+        android:top="@dimen/len_4"
+        android:bottom="@dimen/len_4" />-->
+
+</shape>

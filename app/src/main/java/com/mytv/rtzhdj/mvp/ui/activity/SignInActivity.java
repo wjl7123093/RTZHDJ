@@ -16,6 +16,7 @@ import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
+import com.mytv.rtzhdj.app.data.entity.SignEntity;
 import com.mytv.rtzhdj.di.component.DaggerSignInComponent;
 import com.mytv.rtzhdj.di.module.SignInModule;
 import com.mytv.rtzhdj.mvp.contract.SignInContract;
@@ -69,6 +70,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @BindView(R.id.tv_sign_days)
     TextView mTvSignDays;
 
+    private SignEntity mSignEntity = new SignEntity();
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -89,9 +92,17 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
 
-        mTvSignBig.setOnClickListener(view -> mPresenter.callMethodOfPostSignForScore(
-                DataHelper.getIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_USER_ID)
-        ));
+        mTvSignBig.setOnClickListener(view -> {
+            if (mSignEntity.getIfSign() == 0) {
+                mPresenter.callMethodOfPostSignForScore(
+                        DataHelper.getIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_USER_ID));
+            } else {
+                showMessage("今日已签到");
+            }
+        });
+
+        // 获取 签到信息
+        mPresenter.callMethodOfGetSignList(DataHelper.getIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_USER_ID));
 
     }
 
@@ -126,8 +137,70 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     @Override
     public void changeStatus() {
+        mSignEntity.setDays(mSignEntity.getDays() + 1);
+        mSignEntity.setIfSign(1);
+        changeUI(mSignEntity.getDays());
+
         mTvSignStatus.setText("今日已签到");
         mTvScoresInfo.setText("你还差1天签到获" + 2 + "积分");
-        mTvSignDays.setText("连续签到" + 1 + "天");
+        mTvSignDays.setText("连续签到" + mSignEntity.getDays() + "天");
+    }
+
+    @Override
+    public void loadData(SignEntity signEntity) {
+        mSignEntity = signEntity;
+        if (signEntity.getIfSign() == 0) {
+            mTvSignStatus.setText("尚未签到");
+        }
+        mTvSignDays.setText("连续签到" + signEntity.getDays() + "天");
+
+        changeUI(signEntity.getDays());
+    }
+
+    private void changeUI(int days) {
+        switch (days) {
+            case 1:
+                mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                break;
+            case 2:
+                mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign2.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                break;
+            case 3:
+                mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign2.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign3.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                break;
+            case 4:
+                mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign2.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign3.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign4.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                break;
+            case 5:
+                mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign2.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign3.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign4.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign5.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                break;
+            case 6:
+                mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign2.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign3.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign4.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign5.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign6.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                break;
+            case 7:
+                mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign2.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign3.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign4.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign5.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign6.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvSign7.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                break;
+        }
     }
 }
