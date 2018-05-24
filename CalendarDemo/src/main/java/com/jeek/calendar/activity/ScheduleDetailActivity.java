@@ -3,15 +3,12 @@ package com.jeek.calendar.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jeek.calendar.R;
-import com.jimmy.common.bean.EventSet;
-import com.jimmy.common.bean.Schedule;
 import com.jeek.calendar.dialog.InputLocationDialog;
 import com.jeek.calendar.dialog.SelectDateDialog;
 import com.jeek.calendar.dialog.SelectEventSetDialog;
@@ -20,18 +17,13 @@ import com.jeek.calendar.task.schedule.UpdateScheduleTask;
 import com.jeek.calendar.utils.DateUtils;
 import com.jeek.calendar.utils.JeekUtils;
 import com.jimmy.common.base.app.BaseActivity;
+import com.jimmy.common.bean.EventSet;
+import com.jimmy.common.bean.Schedule;
 import com.jimmy.common.listener.OnTaskFinishedListener;
 import com.jimmy.common.util.ToastUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.Call;
 
 /**
  * Created by Jimmy on 2016/10/15 0015.
@@ -141,7 +133,7 @@ public class ScheduleDetailActivity extends BaseActivity implements View.OnClick
 
 
         // 上传记事信息[添加记事本接口 postWriteMemos]
-        String url = "http://61.157.136.102:8903/api/postWriteMemos";
+        /*String url = "http://61.157.136.102:8903/api/postWriteMemos";
         OkHttpUtils.post().url(url)
                 .addParams("UserID", 8 + "")
                 .addParams("Theme", etScheduleTitle.getText().toString().trim())
@@ -169,7 +161,7 @@ public class ScheduleDetailActivity extends BaseActivity implements View.OnClick
                             e.printStackTrace();
                         }
                     }
-                });
+                });*/
     }
 
     private void showSelectEventSetDialog() {
