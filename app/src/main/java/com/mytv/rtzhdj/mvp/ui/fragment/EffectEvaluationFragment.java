@@ -18,6 +18,7 @@ import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
+import com.mytv.rtzhdj.app.data.entity.HeaderIntegralEntity;
 import com.mytv.rtzhdj.di.component.DaggerEffectEvaluationComponent;
 import com.mytv.rtzhdj.di.module.EffectEvaluationModule;
 import com.mytv.rtzhdj.mvp.contract.EffectEvaluationContract;
@@ -181,5 +182,10 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
     @Override
     public void loadData(List<EffectEvaluationEntity> effectList) {
         initAdapter(effectList);
+    }
+
+    @Override
+    public void loadHeaderData(HeaderIntegralEntity headerIntegralEntity) {
+
     }
 }

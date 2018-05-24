@@ -17,9 +17,12 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
+import com.mytv.rtzhdj.app.data.entity.HeaderIntegralEntity;
 import com.mytv.rtzhdj.di.component.DaggerEffectEvaluationComponent;
 import com.mytv.rtzhdj.di.module.EffectEvaluationModule;
 import com.mytv.rtzhdj.mvp.contract.EffectEvaluationContract;
@@ -95,6 +98,10 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
             ARouter.getInstance().build(ARoutePath.PATH_MY_TASK).navigation();
         });
         collapsingToolbar.setTitleEnabled(false);
+
+        // 获取头部信息
+        mPresenter.callMethodOfGetMyScore(DataHelper.getIntergerSF(EffectEvaluationActivity.this,
+                SharepreferenceKey.KEY_USER_ID), false);
     }
 
 
@@ -180,5 +187,12 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
     @Override
     public void loadData(List<EffectEvaluationEntity> effectList) {
 
+    }
+
+    @Override
+    public void loadHeaderData(HeaderIntegralEntity headerIntegralEntity) {
+        mTvScores.setText("本月获得积分: " + headerIntegralEntity.getIntegral());
+        mTvPowerNum.setText("您的正能量值: " + headerIntegralEntity.getPlanValue());
+        mTvDifferFrom.setText("距下一积分任务还差: " + headerIntegralEntity.getNextValue() + " 请继续加油!");
     }
 }
