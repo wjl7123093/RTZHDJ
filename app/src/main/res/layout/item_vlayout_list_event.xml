@@ -66,7 +66,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_14"
                 android:textColor="@color/white"
-                android:layout_marginRight="@dimen/len_10"/>
+                android:layout_marginRight="@dimen/len_10"
+                android:drawableLeft="@mipmap/ic_digs"
+                android:drawablePadding="@dimen/len_4"/>
             <!-- 评论数 -->
             <TextView
                 android:id="@+id/tv_comment_num"
@@ -74,7 +76,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_14"
                 android:textColor="@color/white"
-                android:layout_marginRight="@dimen/len_10"/>
+                android:layout_marginRight="@dimen/len_10"
+                android:drawableLeft="@mipmap/ic_comment"
+                android:drawablePadding="@dimen/len_4"/>
         </LinearLayout>
     </RelativeLayout>
 
