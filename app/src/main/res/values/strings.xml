@@ -68,10 +68,17 @@
 
     <!-- main tab -->
     <string name="tab_home">首页</string>
-    <string name="tab_news">党建新闻</string>
-    <string name="tab_study">我要学习</string>
-    <string name="tab_join">我要参与</string>
+    <string name="tab_news">新闻</string>
+    <string name="tab_study">学习</string>
+    <string name="tab_join">活动</string>
     <string name="tab_mine">我的</string>
+
+    <!-- iconfont -->
+    <string name="ic_home">&#xe710;</string>
+    <string name="ic_news">&#xe72f;</string>
+    <string name="ic_study">&#xe65d;</string>
+    <string name="ic_join">&#xe77a;</string>
+    <string name="ic_mine">&#xe671;</string>
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

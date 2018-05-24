@@ -40,6 +40,7 @@ import com.mytv.rtzhdj.mvp.ui.fragment.JoinFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.MineFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.NewsFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.StudyFragment;
+import com.mytv.rtzhdj.mvp.ui.widget.IconView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +90,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @BindView(R.id.fl1)
     LinearLayout mFl1;
     @BindView(R.id.icon1)
-    ImageView mIcon1;
+    IconView mIcon1;
     @BindView(R.id.tv1)
     TextView mTv1;
 
@@ -97,7 +98,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @BindView(R.id.fl2)
     LinearLayout mFl2;
     @BindView(R.id.icon2)
-    ImageView mIcon2;
+    IconView mIcon2;
     @BindView(R.id.tv2)
     TextView mTv2;
 
@@ -105,7 +106,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @BindView(R.id.fl3)
     LinearLayout mFl3;
     @BindView(R.id.icon3)
-    ImageView mIcon3;
+    IconView mIcon3;
     @BindView(R.id.tv3)
     TextView mTv3;
 
@@ -113,7 +114,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @BindView(R.id.fl4)
     LinearLayout mFl4;
     @BindView(R.id.icon4)
-    ImageView mIcon4;
+    IconView mIcon4;
     @BindView(R.id.tv4)
     TextView mTv4;
 
@@ -121,7 +122,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @BindView(R.id.fl5)
     LinearLayout mFl5;
     @BindView(R.id.icon5)
-    ImageView mIcon5;
+    IconView mIcon5;
     @BindView(R.id.tv5)
     TextView mTv5;
 
@@ -421,13 +422,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
      * @param iconView
      * @param tv
      */
-    public void setTabStyle(ImageView iconView, TextView tv, int position) {
+    public void setTabStyle(IconView iconView, TextView tv, int position) {
 
-        mIcon1.setImageResource(R.mipmap.ic_tab_home);
-        mIcon2.setImageResource(R.mipmap.ic_tab_news);
-        mIcon3.setImageResource(R.mipmap.ic_tab_study);
-        mIcon4.setImageResource(R.mipmap.ic_tab_join);
-        mIcon5.setImageResource(R.mipmap.ic_tab_mine);
+        mIcon1.setTextColor(getResources().getColor(R.color.secondary_text));
+        mIcon2.setTextColor(getResources().getColor(R.color.secondary_text));
+        mIcon3.setTextColor(getResources().getColor(R.color.secondary_text));
+        mIcon4.setTextColor(getResources().getColor(R.color.secondary_text));
+        mIcon5.setTextColor(getResources().getColor(R.color.secondary_text));
 
         mTv1.setTextColor(getResources().getColor(R.color.secondary_text));
         mTv2.setTextColor(getResources().getColor(R.color.secondary_text));
@@ -436,30 +437,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mTv5.setTextColor(getResources().getColor(R.color.secondary_text));
 
         tv.setTextColor(getResources().getColor(R.color.colorPrimary));
-        switch (position) {
-            case 1:	// 头条
-                mIcon1.setImageResource(R.mipmap.ic_tab_home_select);
-                break;
+        iconView.setTextColor(getResources().getColor(R.color.colorPrimary));
 
-            case 2:	// 直播
-                mIcon2.setImageResource(R.mipmap.ic_tab_news_select);
-                break;
-
-            case 3:	// 视讯
-                mIcon3.setImageResource(R.mipmap.ic_tab_study_select);
-                break;
-
-            case 4:	// 政务
-                mIcon4.setImageResource(R.mipmap.ic_tab_join_select);
-                break;
-
-            case 5:	// 便民
-                mIcon5.setImageResource(R.mipmap.ic_tab_mine_select);
-                break;
-
-            default:
-                break;
-        }
     }
 
 }

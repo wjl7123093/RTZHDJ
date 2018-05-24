@@ -43,11 +43,13 @@
             android:orientation="vertical"
             android:gravity="center" >
 
-            <ImageView
+            <com.mytv.rtzhdj.mvp.ui.widget.IconView
                 android:id="@+id/icon1"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@mipmap/ic_tab_home"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_home"
+                android:textSize="@dimen/font_24"
+                android:textColor="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/tv1"
@@ -69,11 +71,13 @@
             android:orientation="vertical"
             android:gravity="center" >
 
-            <ImageView
+            <com.mytv.rtzhdj.mvp.ui.widget.IconView
                 android:id="@+id/icon2"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@mipmap/ic_tab_news"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_news"
+                android:textSize="@dimen/font_24"
+                android:textColor="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/tv2"
@@ -95,11 +99,13 @@
             android:orientation="vertical"
             android:gravity="center" >
 
-            <ImageView
+            <com.mytv.rtzhdj.mvp.ui.widget.IconView
                 android:id="@+id/icon3"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@mipmap/ic_tab_study"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_study"
+                android:textSize="@dimen/font_24"
+                android:textColor="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/tv3"
@@ -121,11 +127,13 @@
             android:orientation="vertical"
             android:gravity="center" >
 
-            <ImageView
+            <com.mytv.rtzhdj.mvp.ui.widget.IconView
                 android:id="@+id/icon4"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@mipmap/ic_tab_join"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_join"
+                android:textSize="@dimen/font_24"
+                android:textColor="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/tv4"
@@ -147,11 +155,13 @@
             android:orientation="vertical"
             android:gravity="center" >
 
-            <ImageView
+            <com.mytv.rtzhdj.mvp.ui.widget.IconView
                 android:id="@+id/icon5"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@mipmap/ic_tab_mine"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_mine"
+                android:textSize="@dimen/font_24"
+                android:textColor="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/tv5"
