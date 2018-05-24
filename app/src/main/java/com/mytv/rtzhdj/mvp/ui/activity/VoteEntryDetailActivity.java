@@ -19,7 +19,6 @@ import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
-import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.VoteEntrylEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
 import com.mytv.rtzhdj.di.component.DaggerVoteEntryDetailComponent;
@@ -94,7 +93,7 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
         mBtnToolbarMenu.setVisibility(View.GONE);
 
         // 获取 投票作品详情
-        mPresenter.callMethodOfPostOnlineVoteDetails(37, false);
+        mPresenter.callMethodOfPostOnlineVoteDetails(id, false);
 
         // post 在线投票
         mBtnVote.setOnClickListener(view ->
@@ -134,11 +133,9 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
     @Override
     public void loadData(VoteEntrylEntity voteEntrylEntity) {
         mTvTitle.setText(voteEntrylEntity.getTitle());
-        mTvRank.setText(voteEntrylEntity.getRanking() + "");
-        mTvVotes.setText(voteEntrylEntity.getVoteNum() + "");
-        ImageLoader.getInstance().showImage(VoteEntryDetailActivity.this, mIvImage1,
-                Api.APP_IMAGE_DOMAIN + voteEntrylEntity.getImgUrl().replace("@", ""));
-        ImageLoader.getInstance().showImage(VoteEntryDetailActivity.this, mIvImage2,
-                Api.APP_IMAGE_DOMAIN + voteEntrylEntity.getImgUrl().replace("@", ""));
+        mTvRank.setText("第" + voteEntrylEntity.getRanking() + "名");
+        mTvVotes.setText(voteEntrylEntity.getVoteNum() + "票");
+        ImageLoader.getInstance().showImage(VoteEntryDetailActivity.this, mIvImage1, voteEntrylEntity.getAllImgUrl());
+        ImageLoader.getInstance().showImage(VoteEntryDetailActivity.this, mIvImage2, voteEntrylEntity.getAllImgUrl());
     }
 }
