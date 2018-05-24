@@ -16,9 +16,9 @@ public interface Api {
     // 图片地址
     String APP_IMAGE_DOMAIN = "http://192.168.13.93";
     // 文章详情地址
-    String APP_ARTICLE_DOMAIN = "http://192.168.13.93/mobile/details.html?";
+    String APP_ARTICLE_DOMAIN = "http://61.157.136.102:8904/mobile/details.html?";
     // 学习课件地址
-    String APP_COURSE_DOMAIN = "http://192.168.13.93/mobile/studydetails.html?";
+    String APP_COURSE_DOMAIN = "http://61.157.136.102:8904/mobile/studydetails.html?";
     int RequestSuccess = 200;
 
 }
