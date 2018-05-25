@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ * item_vlayout_header2.xml vlayout 通栏布局(我要学习头部)
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-31
+ * @update 2018-2-2     修改了UI（调整了字体大小，背景色，间距）
+-->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/rl_container"
+    android:layout_marginLeft="@dimen/len_6"
+    android:layout_marginRight="@dimen/len_6"
+    app:cardCornerRadius="@dimen/len_6"
+    app:cardElevation="@dimen/len_4"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/len_10"
+            android:paddingLeft="@dimen/len_16"
+            android:paddingRight="@dimen/len_16"
+            android:paddingTop="@dimen/len_10"
+            android:text="我的党费"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/font_16" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/app_bg_grey"></View>
+
+        <com.mytv.rtzhdj.mvp.ui.widget.MyGridView
+            android:id="@+id/gv_mine_column"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:horizontalSpacing="1dp"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="1dp">
+
+        </com.mytv.rtzhdj.mvp.ui.widget.MyGridView>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

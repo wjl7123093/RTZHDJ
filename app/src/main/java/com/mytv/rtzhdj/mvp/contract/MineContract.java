@@ -39,5 +39,8 @@ public interface MineContract {
         BaseDelegateAdapter initSingle(float payment, int isPay);
         BaseDelegateAdapter initColumn1(int scores, int power, int rank);
         BaseDelegateAdapter initColumn2(int meetingTimes, int lessonTimes, int activeTimes);
+
+        // 通栏[itemPos = 1 我的党支部，= 2 组织生活]
+        BaseDelegateAdapter initColumn(int itemPos, String title);
     }
 }

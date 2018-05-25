@@ -65,10 +65,10 @@
             android:textSize="@dimen/font_14" />
     </LinearLayout>
 
-    <!--<View
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/app_bg_grey"
-        android:layout_marginLeft="@dimen/len_16"></View>-->
+        android:layout_marginLeft="@dimen/len_16"></View>
 
 </LinearLayout>

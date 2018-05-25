@@ -196,26 +196,34 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 "はたけ·カカシ", "xxxxxx党支部");
         mAdapters.add(headerAdapter);
 
+        // 我的党支部
+        BaseDelegateAdapter columnAdapter = mPresenter.initColumn(1, "我的党支部");
+        mAdapters.add(columnAdapter);
+        // 组织生活
+        columnAdapter = mPresenter.initColumn(2, "组织生活");
+        mAdapters.add(columnAdapter);
+
         /*//初始化 格栏布局 - 积分
         BaseDelegateAdapter columnAdapter = mPresenter.initColumn1(17, 10, 19797);
         mAdapters.add(columnAdapter);*/
 
-        //初始化标题 - 我的支部
+        /*//初始化标题 - 我的支部
         BaseDelegateAdapter titleAdapter = mPresenter.initTitle(1, "我的支部", "", -1);
         mAdapters.add(titleAdapter);
         //初始化网格
         BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu1();
         mAdapters.add(menuAdapter);
 
+
         //初始化标题 - 组织活动
         titleAdapter = mPresenter.initTitle(2, "组织活动", "", -1);
         mAdapters.add(titleAdapter);
         //初始化 格栏布局
         BaseDelegateAdapter columnAdapter2 = mPresenter.initColumn2(0, 0, 0);
-        mAdapters.add(columnAdapter2);
+        mAdapters.add(columnAdapter2);*/
 
         //初始化标题 - 我的党费
-        titleAdapter = mPresenter.initTitle(3, "我的党费", "银行卡管理>>", -1);
+        BaseDelegateAdapter titleAdapter = mPresenter.initTitle(3, "我的党费", "银行卡管理>>", -1);
         mAdapters.add(titleAdapter);
         //初始化 通栏布局
         BaseDelegateAdapter singleAdapter = mPresenter.initSingle(25.75f, 1);
@@ -225,7 +233,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         titleAdapter = mPresenter.initTitle(4, "我的积分", "怎样获取积分?", 17);
         mAdapters.add(titleAdapter);
         //初始化网格
-        menuAdapter = mPresenter.initGvMenu2();
+        BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu2();
         mAdapters.add(menuAdapter);
 
         //初始化标题 - 生活助手

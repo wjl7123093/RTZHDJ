@@ -6,6 +6,8 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.SimpleAdapter;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -26,9 +28,13 @@ import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.mvp.contract.MineContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.mytv.rtzhdj.mvp.ui.adapter.MineGridAdapter;
+import com.mytv.rtzhdj.mvp.ui.widget.MyGridView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -44,6 +50,9 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
     private AppManager mAppManager;
 
     private MainActivity activity;
+
+    private String[] from = { "image", "title" };
+    private int[] to = { R.id.ic_grid, R.id.tv_name };
 
     @Inject
     public MinePresenter(MineContract.Model model, MineContract.View rootView
@@ -357,6 +366,69 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                         holder.setText(R.id.tv_title, "活动记录");
                         break;
                 }
+            }
+        };
+    }
+
+    @Override
+    public BaseDelegateAdapter initColumn(int itemPos, String title) {
+        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_mine_column,
+                1, Constant.viewType.typeTopHeader) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_title, title);
+
+                List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                MyGridView gridView = (MyGridView) holder.getView(R.id.gv_mine_column);
+                switch (itemPos) {
+                    case 1: // 我的党支部
+
+                        gridView.setNumColumns(4);
+                        // GridView。。。
+                        // 在构造函数设置每行的网格个数
+                        final String[] proPic1 = activity.getResources().getStringArray(R.array.mine_gv_party_branch_images);
+                        final String[] proName1 = activity.getResources().getStringArray(R.array.mine_gv_party_branch_title);
+
+
+                        Map<String, Object> map1 = null;
+                        for (int i = 0; i < proPic1.length; i++) {
+                            map1 = new HashMap<String, Object>();
+                            map1.put("image", proPic1[i]);
+                            map1.put("title", proName1[i]);
+                            list.add(map1);
+                        }
+
+                        break;
+                    case 2: // 组织生活
+
+                        gridView.setNumColumns(3);
+                        // GridView。。。
+                        // 在构造函数设置每行的网格个数
+                        final String[] proPic2 = activity.getResources().getStringArray(R.array.mine_gv_organization_times);
+                        final String[] proName2 = activity.getResources().getStringArray(R.array.mine_gv_organization_title);
+
+
+                        Map<String, Object> map2 = null;
+                        for (int i = 0; i < proPic2.length; i++) {
+                            map2 = new HashMap<String, Object>();
+                            map2.put("image", proPic2[i]);
+                            map2.put("title", proName2[i]);
+                            list.add(map2);
+                        }
+
+                        break;
+                }
+
+                MineGridAdapter adapter = new MineGridAdapter(activity, list);
+                gridView.setAdapter(adapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        mRootView.setOnGridClick(itemPos, position);
+                    }
+                });
             }
         };
     }
