@@ -8,10 +8,9 @@
  * @crdate 2018-4-27
  * @update
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160dp"
+    android:layout_height="160dp"
     android:padding="@dimen/len_10">
 
     <ImageView
@@ -19,20 +18,29 @@
         android:layout_height="140dp"
         android:src="@mipmap/xyq_03"/>
 
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"/>
+
+
     <!-- 名称 -->
     <TextView
         android:id="@+id/tv_content"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="@dimen/font_14"
         android:textColor="@color/secondary_text"
         android:text="我的心愿"
-        android:gravity="left|top"
-        android:paddingTop="40dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="40dp"/>
-    <!-- 时间 -->
+        android:layout_toRightOf="@id/iv_image"
+        android:layout_marginTop="@dimen/len_40"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_marginRight="@dimen/dp_10"/>
+    <!-- 状态 -->
     <TextView
         android:id="@+id/tv_status"
         android:layout_width="100dp"
@@ -42,7 +50,8 @@
         android:textColor="@color/white"
         android:text="审核中"
         android:gravity="center"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="20dp"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_10"/>
 
-</FrameLayout>
+</RelativeLayout>

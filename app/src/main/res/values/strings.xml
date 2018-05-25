@@ -90,7 +90,8 @@
     <string name="ic_home_grid_enmergency">&#xe60a;</string>
     <string name="ic_home_grid_bigdata">&#xe639;</string>
     <!-- study header -->
-    <!--<string name="ic_study_"-->
+    <string name="ic_study_record">&#xe65c;</string>
+    <string name="ic_study_scores">&#xe77a;</string>
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

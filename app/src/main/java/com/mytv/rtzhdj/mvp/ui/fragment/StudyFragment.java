@@ -222,44 +222,6 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         initRecyclerView(myStudyEntity);
     }
 
-//    private void initRecyclerView() {
-//        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
-//
-//        //初始化头部
-//        BaseDelegateAdapter headerAdapter = mPresenter.initHeader(
-//                "http://imgtu.5011.net/uploads/content/20170220/9520371487578487.jpg",
-//                "はたけ·カカシ", 17, 2, 18);
-//        mAdapters.add(headerAdapter);
-//
-//        //初始化九宫格
-//        BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
-//        mAdapters.add(menuAdapter);
-//
-//        //初始化标题 - 必修课
-//        BaseDelegateAdapter titleAdapter = mPresenter.initTitle("必修课", 0);
-//        mAdapters.add(titleAdapter);
-//        //初始化list
-//        BaseDelegateAdapter listAdapter = mPresenter.initList(0);
-//        mAdapters.add(listAdapter);
-//
-//        //初始化标题 - 选修课
-//        titleAdapter = mPresenter.initTitle("选修课", 1);
-//        mAdapters.add(titleAdapter);
-//        //初始化list
-//        listAdapter = mPresenter.initList(1);
-//        mAdapters.add(listAdapter);
-//
-//        //初始化标题 - 微党课
-//        titleAdapter = mPresenter.initTitle("微党课", 2);
-//        mAdapters.add(titleAdapter);
-//        //初始化list
-//        listAdapter = mPresenter.initList(2);
-//        mAdapters.add(listAdapter);
-//
-//        //设置适配器
-//        delegateAdapter.setAdapters(mAdapters);
-//    }
-
     private void initRecyclerView(MyStudyEntity myStudyEntity) {
         MyStudyEntity.UserInfoBlock userInfoBlock = myStudyEntity.getUserInfoBlock();
         List<MyStudyEntity.CoursewareBlock> courseChooseBlock = myStudyEntity.getCourseChooseBlock();

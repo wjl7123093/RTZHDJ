@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 
@@ -197,15 +196,15 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
     @Override
     public BaseDelegateAdapter initHeader(MyStudyEntity.UserInfoBlock userInfo) {
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
-        return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_header2,
+        return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_study_header,
                 1, Constant.viewType.typeHeader) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_name, userInfo.getUserName());
-                holder.setText(R.id.tv_study_record, Html.fromHtml("未学: " + userInfo.getNoStudyNum()
-                        + "<font color=\"#ffffff\">/已学: " + userInfo.getYesStudyNum() + "</font>"));
-                holder.setText(R.id.tv_study_scores, "累积: " + userInfo.getIntegral());
+                holder.setText(R.id.tv_study_record, userInfo.getNoStudyNum()
+                        + "/" + userInfo.getYesStudyNum());
+                holder.setText(R.id.tv_study_scores, userInfo.getIntegral());
 
                 if (!TextUtils.isEmpty(userInfo.getPhotoUrl())) {
                     mImageLoader.loadImage(activity,
