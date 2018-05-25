@@ -97,18 +97,16 @@
     <!--///////////////////////////////////////我的/////////////////////////////////////-->
 
     <!--我的页Grid - 我的支部-->
-    <integer-array name="mine_gv_party_branch_images">
-        <item>@mipmap/ic_mine_grid_mien</item>
-        <item>@mipmap/ic_mine_grid_work_note</item>
-        <item>@mipmap/ic_mine_grid_relationship</item>
-        <item>@mipmap/ic_mine_grid_flow</item>
-        <item>@mipmap/ic_mine_grid_notebook</item>
-    </integer-array>
+    <string-array name="mine_gv_party_branch_images">
+        <item>@string/ic_mine_member</item>
+        <item>@string/ic_mine_membership</item>
+        <item>@string/ic_mine_work</item>
+        <item>@string/ic_mine_notebook</item>
+    </string-array>
     <string-array name="mine_gv_party_branch_title">
         <item>党员风采</item>
-        <item>党支部工作手册</item>
         <item>组织关系</item>
-        <item>流动党员思想汇报</item>
+        <item>工作手册</item>
         <item>记事本</item>
     </string-array>
 

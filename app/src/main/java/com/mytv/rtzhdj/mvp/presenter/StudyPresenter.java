@@ -151,6 +151,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, title);
+                holder.setTextColor(R.id.tv_title, activity.getResources().getColor(R.color.colorPrimary));
 
                 holder.getView(R.id.tv_moredata).setOnClickListener(view -> {
                     mRootView.setOnMoreClick(arrayPos, title);

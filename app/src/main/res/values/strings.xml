@@ -92,6 +92,17 @@
     <!-- study header -->
     <string name="ic_study_record">&#xe65c;</string>
     <string name="ic_study_scores">&#xe77a;</string>
+    <!-- study title -->
+    <string name="ic_study_title">&#xe620;</string>
+    <!-- mine column -->
+    <string name="ic_mine_scores">&#xe663;</string>
+    <string name="ic_mine_power">&#xe624;</string>
+    <string name="ic_mine_rank">&#xe67d;</string>
+    <!-- mine grid1 -->
+    <string name="ic_mine_member">&#xe671;</string>
+    <string name="ic_mine_membership">&#xe611;</string>
+    <string name="ic_mine_work">&#xe60e;</string>
+    <string name="ic_mine_notebook">&#xe614;</string>
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

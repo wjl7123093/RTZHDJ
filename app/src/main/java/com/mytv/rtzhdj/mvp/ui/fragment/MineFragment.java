@@ -13,18 +13,15 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.di.component.DaggerMineComponent;
 import com.mytv.rtzhdj.di.module.MineModule;
 import com.mytv.rtzhdj.mvp.contract.MineContract;
 import com.mytv.rtzhdj.mvp.presenter.MinePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.LinkedList;
@@ -199,9 +196,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 "はたけ·カカシ", "xxxxxx党支部");
         mAdapters.add(headerAdapter);
 
-        //初始化 格栏布局 - 积分
+        /*//初始化 格栏布局 - 积分
         BaseDelegateAdapter columnAdapter = mPresenter.initColumn1(17, 10, 19797);
-        mAdapters.add(columnAdapter);
+        mAdapters.add(columnAdapter);*/
 
         //初始化标题 - 我的支部
         BaseDelegateAdapter titleAdapter = mPresenter.initTitle(1, "我的支部", "", -1);

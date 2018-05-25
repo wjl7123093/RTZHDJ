@@ -11,19 +11,13 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
-import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.jess.arms.di.scope.ActivityScope;
+import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
-import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.http.imageloader.ImageLoader;
-
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-
-import javax.inject.Inject;
-
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.Constant;
@@ -33,6 +27,10 @@ import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 
 @ActivityScope
@@ -92,25 +90,21 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
     @Override
     public BaseDelegateAdapter initGvMenu1() {
         // 在构造函数设置每行的网格个数
-        final TypedArray proPic = activity.getResources().obtainTypedArray(R.array.mine_gv_party_branch_images);
+        final String[] proPic = activity.getResources().getStringArray(R.array.mine_gv_party_branch_images);
         final String[] proName = activity.getResources().getStringArray(R.array.mine_gv_party_branch_title);
-        final List<Integer> images = new ArrayList<>();
-        for(int a=0 ; a<proName.length ; a++){
-            images.add(proPic.getResourceId(a,R.mipmap.ic_launcher));
-        }
-        proPic.recycle();
-        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(2);
-//        gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
-//        gridLayoutHelper.setHGap(2);    // 控制子元素之间的水平间距
-        gridLayoutHelper.setPadding(ArmsUtils.dip2px(activity, 16), 0,
-                ArmsUtils.dip2px(activity, 16), 0);
-        gridLayoutHelper.setBgColor(Color.WHITE);
-        return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vlayout_grid3, 5, Constant.viewType.typeGv) {
+
+        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4);
+        gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
+        gridLayoutHelper.setHGap(2);    // 控制子元素之间的水平间距
+//        gridLayoutHelper.setPadding(ArmsUtils.dip2px(activity, 16), 0,
+//                ArmsUtils.dip2px(activity, 16), 0);
+//        gridLayoutHelper.setBgColor(Color.WHITE);
+        return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vlayout_mine_grid, 4, Constant.viewType.typeGv) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_name, proName[position]);
-                holder.setImageResource(R.id.iv_icon, images.get(position));
+                holder.setText(R.id.ic_grid, proPic[position]);
                 holder.getView(R.id.ll_container).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -249,7 +243,7 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
     @Override
     public BaseDelegateAdapter initHeader(String url, String name, String partyBranch) {
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
-        return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_header4,
+        return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_mine_header,
                 1, Constant.viewType.typeHeader) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
@@ -266,10 +260,10 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                                 .imageView(holder.getView(R.id.iv_header))
                                 .build());
 
-                holder.getView(R.id.tv_settings).setOnClickListener(view -> {
+                /*holder.getView(R.id.tv_settings).setOnClickListener(view -> {
                     // 设置
                     mRootView.setOnSettingsClick();
-                });
+                });*/
                 holder.getView(R.id.iv_sign).setOnClickListener(view -> {
                     // 天天签到
                     mRootView.setOnSignClick();
