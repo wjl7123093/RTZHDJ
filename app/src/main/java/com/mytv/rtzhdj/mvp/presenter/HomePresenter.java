@@ -122,6 +122,19 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     }
 
     @Override
+    public BaseDelegateAdapter initTopHeader() {
+        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
+        return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_home_header,
+                1, Constant.viewType.typeTopHeader) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+
+            }
+        };
+    }
+
+    @Override
     public BaseDelegateAdapter initBannerAdapter(List<HomeEntity.SpecialBlock> SpecialBlock,
                                                  List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent) {
 //        final List<Object> arrayList = new ArrayList<>();
@@ -157,7 +170,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 //设置自动轮播，默认为true
                 mBanner.isAutoPlay(true);
                 //设置轮播时间
-                mBanner.setDelayTime(5000);
+                mBanner.setDelayTime(3000);
                 //设置指示器位置（当banner模式中有指示器时）
                 mBanner.setIndicatorGravity(BannerConfig.CENTER);
 

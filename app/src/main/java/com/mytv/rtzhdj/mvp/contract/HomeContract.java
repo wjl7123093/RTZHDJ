@@ -49,6 +49,7 @@ public interface HomeContract {
         void setActivity(MainActivity activity);
         //初始化
         DelegateAdapter initRecyclerView(RecyclerView recyclerView);
+        BaseDelegateAdapter initTopHeader();
         BaseDelegateAdapter initBannerAdapter(List<HomeEntity.SpecialBlock> SpecialBlock,
                                               List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent);
         BaseDelegateAdapter initGvMenu();

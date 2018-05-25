@@ -16,6 +16,7 @@ public class Constant {
     // 如果 item 布局不一致，那么 type 就必须不一致，否则就会导致 滑动卡顿
     // e.g. 两个不同布局的 item，却使用同一个 type，那么就会导致 滑动卡顿
     public interface viewType{
+        int typeTopHeader = 0;      //home 顶部头部
         int typeBanner = 1;         //轮播图
         int typeGv = 2;             //九宫格
         int typeTitle = 3;          //标题
