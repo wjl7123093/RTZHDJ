@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  * item_vlayout_list_text1.xml vlayout 文本项（列表布局）
  *
  * @author Fred_W
@@ -10,31 +9,42 @@
  *         2018-2-2     修改了UI（增加背景色，模拟数据）
  *         2018-3-14    新增了 父窗体id
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_container"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/len_16"
-    android:background="@color/white">
+    android:layout_marginLeft="@dimen/len_6"
+    android:layout_marginRight="@dimen/len_6"
+    app:cardCornerRadius="@dimen/len_6"
+    app:cardElevation="@dimen/len_4"
+    app:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/tv_title"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:textSize="@dimen/font_16"
-        android:textColor="@color/primary_text"
-        android:text="年关将至，习近平总书记这20句反“四风”硬话要牢记"/>
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/len_16">
 
-    <TextView
-        android:id="@+id/tv_datetime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/font_14"
-        android:textColor="@color/secondary_text"
-        android:text="上次学习: 2018-01-26 08:49:01"
-        android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="年关将至，习近平总书记这20句反“四风”硬话要牢记"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/font_16" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_datetime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="上次学习: 2018-01-26 08:49:01"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/font_14" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
