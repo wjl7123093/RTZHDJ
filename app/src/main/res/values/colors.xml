@@ -18,4 +18,6 @@
     <color name="app_bg_grey">#f1f1f1</color>
     <!-- tablayout tab选中色 -->
     <color name="tab_selected_color">#fff85959</color>
+    <!-- 输入框提示文字颜色 -->
+    <color name="app_text_color_hint">#cccccc</color>
 </resources>

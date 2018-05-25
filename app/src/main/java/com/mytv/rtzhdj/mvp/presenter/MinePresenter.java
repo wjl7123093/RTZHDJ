@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
@@ -20,6 +21,7 @@ import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.mvp.contract.MineContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
@@ -268,6 +270,9 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                     // 天天签到
                     mRootView.setOnSignClick();
                 });
+                holder.getView(R.id.iv_header).setOnClickListener(view -> {
+                    ARouter.getInstance().build(ARoutePath.PATH_SETTINGS).navigation();
+                });
             }
         };
     }
@@ -331,10 +336,7 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
     public BaseDelegateAdapter initColumn2(int meetingTimes, int lessonTimes, int activeTimes) {
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(3);
         gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
-        gridLayoutHelper.setHGap(ArmsUtils.dip2px(activity, 10));    // 控制子元素之间的水平间距
-        gridLayoutHelper.setPadding(ArmsUtils.dip2px(activity, 16), ArmsUtils.dip2px(activity, 16),
-                ArmsUtils.dip2px(activity, 16), ArmsUtils.dip2px(activity, 16));
-        gridLayoutHelper.setBgColor(Color.WHITE);
+        gridLayoutHelper.setHGap(2);    // 控制子元素之间的水平间距
         return new BaseDelegateAdapter(activity, gridLayoutHelper , R.layout.item_vlayout_grid4,
                 3, Constant.viewType.typePlus) {
             @Override
@@ -343,15 +345,15 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
 
                 switch (position) {
                     case 0:
-                        holder.setText(R.id.tv_times, meetingTimes + "次 >>");
+                        holder.setText(R.id.tv_times, meetingTimes + "");
                         holder.setText(R.id.tv_title, "参会记录");
                         break;
                     case 1:
-                        holder.setText(R.id.tv_times, lessonTimes + "次 >>");
+                        holder.setText(R.id.tv_times, lessonTimes + "");
                         holder.setText(R.id.tv_title, "听课记录");
                         break;
                     case 2:
-                        holder.setText(R.id.tv_times, activeTimes + "次 >>");
+                        holder.setText(R.id.tv_times, activeTimes + "");
                         holder.setText(R.id.tv_title, "活动记录");
                         break;
                 }
