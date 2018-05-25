@@ -113,7 +113,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
         }
         proPic.recycle();
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(3);
-//        gridLayoutHelper.setPadding(0, 16, 0, 16);
+//        gridLayoutHelper.setPadding(16, 0, 16, 0);
         gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(2);    // 控制子元素之间的水平间距
 //        gridLayoutHelper.setBgColor(Color.WHITE);
