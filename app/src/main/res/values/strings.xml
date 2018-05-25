@@ -89,6 +89,8 @@
     <string name="ic_home_grid_map">&#xe61f;</string>
     <string name="ic_home_grid_enmergency">&#xe60a;</string>
     <string name="ic_home_grid_bigdata">&#xe639;</string>
+    <!-- study header -->
+    <!--<string name="ic_study_"-->
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

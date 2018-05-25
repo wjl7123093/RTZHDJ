@@ -13,11 +13,13 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:background="@color/white"
+    android:background="@color/trans"
     android:layout_marginTop="@dimen/len_12"
-    android:layout_marginBottom="@dimen/len_12">
+    android:layout_marginBottom="@dimen/len_12"
+    android:paddingLeft="@dimen/len_12"
+    android:paddingRight="@dimen/len_12">
 
-    <TextView
+    <!--<TextView
         android:layout_width="@dimen/len_72"
         android:layout_height="@dimen/len_40"
         android:gravity="center"
@@ -26,19 +28,24 @@
         android:textColor="@color/white"
         android:text="通知"
         android:drawableLeft="@mipmap/ic_home_notice"
-        android:padding="@dimen/space_10dp"/>
+        android:padding="@dimen/space_10dp"/>-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/bg_title_marquee"/>
 
     <com.sunfusheng.marqueeview.MarqueeView
         android:id="@+id/marqueeView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/len_6"
-        android:layout_marginRight="@dimen/len_6"
+        android:background="@drawable/sp_bg_marquee"
         app:mvAnimDuration="1000"
         app:mvDirection="bottom_to_top"
         app:mvInterval="3000"
         app:mvSingleLine="true"
         app:mvTextColor="@color/secondary_text"
-        app:mvTextSize="@dimen/font_14" />
+        app:mvTextSize="@dimen/font_14"
+        android:paddingLeft="@dimen/len_6"
+        android:paddingRight="@dimen/len_6"/>
 
 </LinearLayout>

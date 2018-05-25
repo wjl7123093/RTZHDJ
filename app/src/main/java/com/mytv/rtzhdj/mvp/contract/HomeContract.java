@@ -4,13 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
-import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.youth.banner.Banner;
@@ -51,7 +49,8 @@ public interface HomeContract {
         void setActivity(MainActivity activity);
         //初始化
         DelegateAdapter initRecyclerView(RecyclerView recyclerView);
-        BaseDelegateAdapter initBannerAdapter(List<HomeEntity.SpecialBlock> SpecialBlock);
+        BaseDelegateAdapter initBannerAdapter(List<HomeEntity.SpecialBlock> SpecialBlock,
+                                              List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent);
         BaseDelegateAdapter initGvMenu();
         BaseDelegateAdapter initMarqueeView(List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent);
         BaseDelegateAdapter initTitle(String title);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_banner.xml vlayout banner项（通栏布局）
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-1-22
+ * @update 2018-2-6     修改了UI（新增 党建专题按钮）
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+    <ImageView
+        android:id="@+id/iv_topic"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_home_special_logo"
+        android:layout_gravity="bottom|left"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_marginBottom="@dimen/len_10"
+        android:visibility="gone"/>
+    <include layout="@layout/item_vlayout_marqueeview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="126dp"
+        android:layout_marginBottom="12dp"></include>
+</FrameLayout>

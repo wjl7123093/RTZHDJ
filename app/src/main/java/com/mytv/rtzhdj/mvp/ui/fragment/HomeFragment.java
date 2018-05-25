@@ -223,50 +223,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         initRecyclerView(homeData);
     }
 
-    /*private void initRecyclerView() {
-        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
-        //把轮播器添加到集合
-        BaseDelegateAdapter bannerAdapter = mPresenter.initBannerAdapter();
-        mAdapters.add(bannerAdapter);
-
-        //初始化跑马灯
-        BaseDelegateAdapter marqueeAdapter = mPresenter.initMarqueeView();
-        mAdapters.add(marqueeAdapter);
-
-        //初始化九宫格
-        BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
-        mAdapters.add(menuAdapter);
-
-
-        //初始化标题
-        BaseDelegateAdapter titleAdapter = mPresenter.initTitle("要闻");
-        mAdapters.add(titleAdapter);
-        //初始化list3
-        BaseDelegateAdapter listAdapter = mPresenter.initList();
-        mAdapters.add(listAdapter);
-        //初始化脚部
-        BaseDelegateAdapter footerAdapter = mPresenter.initMoreData("更多要闻");
-        mAdapters.add(footerAdapter);
-
-        //初始化图片
-        BaseDelegateAdapter imageAdapter = mPresenter.initImage("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
-        mAdapters.add(imageAdapter);
-
-        //初始化头部
-        BaseDelegateAdapter headerAdapter = mPresenter.initHeader("推荐活动", "公益，让爱和美丽在你我之间传递");
-        mAdapters.add(headerAdapter);
-
-        //初始化 1PlusN
-        BaseDelegateAdapter oneplusnAdapter = mPresenter.initOnePlusN();
-        mAdapters.add(oneplusnAdapter);
-
-        footerAdapter = mPresenter.initMoreData("更多公益活动");
-        mAdapters.add(footerAdapter);
-
-        //设置适配器
-        delegateAdapter.setAdapters(mAdapters);
-    }*/
-
     private void initRecyclerView(BaseJson<HomeEntity> homeData) {
         if (homeData.getData() == null)
             return;
@@ -281,12 +237,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
         DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
         //把轮播器添加到集合
-        BaseDelegateAdapter bannerAdapter = mPresenter.initBannerAdapter(SpecialBlock);
+        BaseDelegateAdapter bannerAdapter = mPresenter.initBannerAdapter(SpecialBlock, NoticeBlock_ChildContent);
         mAdapters.add(bannerAdapter);
 
-        //初始化跑马灯
+        /*//初始化跑马灯
         BaseDelegateAdapter marqueeAdapter = mPresenter.initMarqueeView(NoticeBlock_ChildContent);
-        mAdapters.add(marqueeAdapter);
+        mAdapters.add(marqueeAdapter);*/
 
         //初始化九宫格
         BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();

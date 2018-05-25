@@ -3,7 +3,6 @@ package com.mytv.rtzhdj.mvp.presenter;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -123,7 +122,8 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
     }
 
     @Override
-    public BaseDelegateAdapter initBannerAdapter(List<HomeEntity.SpecialBlock> SpecialBlock) {
+    public BaseDelegateAdapter initBannerAdapter(List<HomeEntity.SpecialBlock> SpecialBlock,
+                                                 List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent) {
 //        final List<Object> arrayList = new ArrayList<>();
 //        arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
 //        arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
@@ -135,11 +135,13 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         }
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         //banner
-        return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.item_vlayout_banner,
+        return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.item_vlayout_home_banner,
                 1, Constant.viewType.typeBanner) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
+
+                // Banner。。。
                 // 绑定数据
                 Banner mBanner = holder.getView(R.id.banner);
                 //设置banner样式
@@ -174,6 +176,37 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 holder.getView(R.id.iv_topic).setOnClickListener(view -> {
                     mRootView.setOnTopicClick();
                 });
+
+                // 跑马灯。。。
+                MarqueeView marqueeView = holder.getView(R.id.marqueeView1);
+
+                List<String> info1 = new ArrayList<>();
+                for (int i = 0; i < NoticeBlock_ChildContent.size(); i++) {
+                    info1.add(NoticeBlock_ChildContent.get(i).getTitle());
+                }
+                if (info1.size() == 1) {    // size == 1时，marquee 组件会失效报null，所以再加一个。
+                    info1.add(info1.get(0));
+                }
+                if (info1.size() > 0) {
+                    marqueeView.startWithList(info1);
+                    // 在代码里设置自己的动画
+                    marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position, TextView textView) {
+//                        mRootView.setMarqueeClick(position);
+
+                            if (NoticeBlock_ChildContent.size() == 1) {
+                                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                                        .withInt("nodeId", NoticeBlock_ChildContent.get(0).getNodeId())
+                                        .navigation();
+                            } else {
+                                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                                        .withInt("nodeId", NoticeBlock_ChildContent.get(position).getNodeId())
+                                        .navigation();
+                            }
+                        }
+                    });
+                }
             }
         };
     }
