@@ -234,9 +234,9 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         BaseDelegateAdapter headerAdapter = mPresenter.initHeader(userInfoBlock);
         mAdapters.add(headerAdapter);
 
-        //初始化九宫格
+        /*//初始化九宫格
         BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
-        mAdapters.add(menuAdapter);
+        mAdapters.add(menuAdapter);*/
 
         //初始化标题 - 必修课
         BaseDelegateAdapter titleAdapter = mPresenter.initTitle("必修课", 0);

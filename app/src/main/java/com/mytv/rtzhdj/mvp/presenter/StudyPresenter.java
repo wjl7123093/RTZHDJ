@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.SimpleAdapter;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.arouter.utils.TextUtils;
@@ -33,11 +35,15 @@ import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
 import com.mytv.rtzhdj.mvp.contract.StudyContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.mytv.rtzhdj.mvp.ui.widget.MyGridView;
 import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -57,6 +63,8 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
     private AppManager mAppManager;
 
     private MainActivity activity;
+    private String[] from = { "image", "title" };
+    private int[] to = { R.id.iv_icon, R.id.tv_name };
 
     @Inject
     public StudyPresenter(StudyContract.Model model, StudyContract.View rootView
@@ -113,7 +121,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
         }
         proPic.recycle();
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(3);
-//        gridLayoutHelper.setPadding(16, 0, 16, 0);
+        gridLayoutHelper.setMargin(20, 20, 20, 20);
         gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(2);    // 控制子元素之间的水平间距
 //        gridLayoutHelper.setBgColor(Color.WHITE);
@@ -218,6 +226,38 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 holder.getView(R.id.rl_study_record).setOnClickListener(view -> {
                     mRootView.setOnStudyRecordClick();
                 });
+
+
+                // GridView。。。
+                // 在构造函数设置每行的网格个数
+                final TypedArray proPic = activity.getResources().obtainTypedArray(R.array.study_gv_image);
+                final String[] proName = activity.getResources().getStringArray(R.array.study_gv_title);
+                final List<Integer> images = new ArrayList<>();
+                for(int a=0 ; a<proName.length ; a++){
+                    images.add(proPic.getResourceId(a,R.mipmap.ic_launcher));
+                }
+                proPic.recycle();
+
+                List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                Map<String, Object> map = null;
+                for (int i = 0; i < images.size(); i++) {
+                    map = new HashMap<String, Object>();
+                    map.put("image", images.get(i));
+                    map.put("title", proName[i]);
+                    list.add(map);
+                }
+
+                MyGridView gridView = (MyGridView) holder.getView(R.id.gv_study_header);
+                SimpleAdapter pictureAdapter = new SimpleAdapter(activity, list,
+                        R.layout.item_vlayout_grid, from, to);
+                gridView.setAdapter(pictureAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        mRootView.setOnGridClick(position, proName[position]);
+                    }
+                });
+
             }
         };
     }
@@ -251,5 +291,28 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
 
                     }
                 });
+    }
+
+    /**
+     * 根据 icon 名称获取图片资源 ID
+     * @param imgName 图片名称
+     * @return 资源 ID
+     */
+    private int getResourceIdDrawable(String imgName)
+    {
+        Field field;
+        int resId = R.mipmap.ic_launcher;
+        try {
+            field = R.drawable.class.getField(imgName);
+            resId = (int) field.get(null);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
+        return resId;
     }
 }
