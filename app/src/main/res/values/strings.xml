@@ -103,6 +103,9 @@
     <string name="ic_mine_membership">&#xe611;</string>
     <string name="ic_mine_work">&#xe60e;</string>
     <string name="ic_mine_notebook">&#xe614;</string>
+    <!-- login edt -->
+    <string name="ic_login_acc">&#xe6a2;</string>
+    <string name="ic_login_pwd">&#xe616;</string>
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

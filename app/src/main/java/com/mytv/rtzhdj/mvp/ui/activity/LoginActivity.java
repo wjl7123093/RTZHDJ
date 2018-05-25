@@ -3,6 +3,7 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -18,8 +19,6 @@ import com.mytv.rtzhdj.di.module.LoginModule;
 import com.mytv.rtzhdj.mvp.contract.LoginContract;
 import com.mytv.rtzhdj.mvp.presenter.LoginPresenter;
 import com.mytv.rtzhdj.mvp.ui.widget.ClearEditText;
-
-import net.qiujuer.genius.ui.widget.Button;
 
 import butterknife.BindView;
 

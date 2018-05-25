@@ -12,58 +12,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@mipmap/bg_login">
+    android:background="@mipmap/bg_login"
+    android:paddingLeft="@dimen/len_48"
+    android:paddingRight="@dimen/len_48">
 
-    <com.mytv.rtzhdj.mvp.ui.widget.ClearEditText
-        android:id="@+id/edt_acc"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/len_16"
-        android:layout_marginRight="@dimen/len_16"
-        android:layout_marginTop="260dp"
+        android:layout_height="@dimen/len_40"
         android:background="@drawable/sp_bg_login_edt"
-        android:hint="请输入账号"
-        android:textColorHint="@color/app_text_color_hint"
-        android:textSize="@dimen/font_14"
-        android:textColor="@color/primary_text"
-        android:drawablePadding="10dp"
-        android:padding="@dimen/len_10"/>
-
-    <com.mytv.rtzhdj.mvp.ui.widget.ClearEditText
-        android:id="@+id/edt_pwd"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/len_16"
-        android:layout_marginRight="@dimen/len_16"
-        android:layout_marginTop="@dimen/len_10"
-        android:background="@drawable/sp_bg_login_edt"
-        android:hint="请输入密码"
-        android:textColorHint="@color/app_text_color_hint"
-        android:textSize="@dimen/font_14"
-        android:textColor="@color/primary_text"
-        android:drawablePadding="10dp"
         android:padding="@dimen/len_10"
-        android:inputType="textPassword"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="270dp">
+        <com.mytv.rtzhdj.mvp.ui.widget.IconView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ic_login_acc"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_20"/>
+        <com.mytv.rtzhdj.mvp.ui.widget.ClearEditText
+            android:id="@+id/edt_acc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入账号"
+            android:textColorHint="@color/app_text_color_hint"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/primary_text"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_40"
+        android:background="@drawable/sp_bg_login_edt"
+        android:padding="@dimen/len_10"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/len_10">
+        <com.mytv.rtzhdj.mvp.ui.widget.IconView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ic_login_pwd"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_20"/>
+        <com.mytv.rtzhdj.mvp.ui.widget.ClearEditText
+            android:id="@+id/edt_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:textColorHint="@color/app_text_color_hint"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/primary_text"
+            android:inputType="textPassword"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
 
     <!-- 登陆 -->
-    <net.qiujuer.genius.ui.widget.Button
+    <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="登陆"
         android:textSize="@dimen/font_16"
         android:textColor="@color/white"
         android:background="@mipmap/bg_login_btn"
-        android:layout_marginLeft="@dimen/len_16"
-        android:layout_marginRight="@dimen/len_16"
         android:layout_marginTop="@dimen/len_10"/>
 
     <!-- 注册/忘记密码 -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/len_16"
-        android:layout_marginRight="@dimen/len_16"
         android:layout_marginTop="@dimen/len_8">
 
         <TextView
