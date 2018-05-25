@@ -118,19 +118,27 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <com.mytv.rtzhdj.mvp.ui.widget.MyGridView
-        android:id="@+id/gv_study_header"
+    <android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/sp_bg_study_grid"
-        android:layout_marginLeft="@dimen/len_10"
-        android:layout_marginRight="@dimen/len_10"
-        android:verticalSpacing="1dp"
-        android:horizontalSpacing="1dp"
-        android:numColumns="3"
-        android:stretchMode="columnWidth"
-        android:layout_below="@id/rl_container" >
+        android:layout_marginLeft="@dimen/len_6"
+        android:layout_marginRight="@dimen/len_6"
+        app:cardCornerRadius="@dimen/len_6"
+        app:cardElevation="@dimen/len_4"
+        app:cardUseCompatPadding="true"
+        android:layout_below="@id/rl_container">
+        <com.mytv.rtzhdj.mvp.ui.widget.MyGridView
+            android:id="@+id/gv_study_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_bg_grey"
+            android:verticalSpacing="1dp"
+            android:horizontalSpacing="1dp"
+            android:numColumns="3"
+            android:stretchMode="columnWidth" >
 
-    </com.mytv.rtzhdj.mvp.ui.widget.MyGridView>
+        </com.mytv.rtzhdj.mvp.ui.widget.MyGridView>
+    </android.support.v7.widget.CardView>
     
 </RelativeLayout>
