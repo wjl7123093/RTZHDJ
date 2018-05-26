@@ -148,19 +148,8 @@ public class QuestionOnlineFragment extends BaseFragment<QuestionOnlinePresenter
     }
 
     private void initRefreshLayout() {
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-            }
-        });
-//        mRefreshLayout.setEnableLoadmore(false);
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
-            }
-        });
+        mRefreshLayout.setEnableRefresh(false);
+        mRefreshLayout.setEnableLoadmore(false);
     }
 
     private void initAdapter(List<QuestionOnlineEntity> questionList) {
