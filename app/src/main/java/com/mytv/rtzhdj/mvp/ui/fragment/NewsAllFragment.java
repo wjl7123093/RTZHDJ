@@ -19,7 +19,6 @@ import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.NewsAllEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsAllComponent;
 import com.mytv.rtzhdj.di.module.NewsAllModule;
 import com.mytv.rtzhdj.mvp.contract.NewsAllContract;
@@ -33,6 +32,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,6 +50,11 @@ public class NewsAllFragment extends BaseFragment<NewsAllPresenter> implements N
 
     private NewsSimpleAdapter newsAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<NewsDetailEntity> mNewsList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -91,12 +96,13 @@ public class NewsAllFragment extends BaseFragment<NewsAllPresenter> implements N
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         if (0 == getArguments().getInt("nodeId")) {
             // 展示 全部页 数据
             loadData(getArguments().getParcelable("entity"));
         } else {
             // 获取二级通用列表数据
-            mPresenter.callMethodOfGetTwoLevelInfoList(getArguments().getInt("nodeId"), 1, PAGE_SIZE, false);
+            mPresenter.callMethodOfGetTwoLevelInfoList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, false);
         }
 
     }
@@ -154,18 +160,40 @@ public class NewsAllFragment extends BaseFragment<NewsAllPresenter> implements N
     public void loadData(NewsAllEntity newsAllEntity) {
         List<NewsDetailEntity> importandBlock = newsAllEntity.getList_allinfoBlock();
 
-        initAdapter(importandBlock);
+        initAdapter(importandBlock, false);
     }
 
     @Override
-    public void loadListData(List<NewsDetailEntity> newsList) {
-        initAdapter(newsList);
+    public void loadListData(List<NewsDetailEntity> newsList, boolean update) {
+        initAdapter(newsList, update);
     }
 
-    public void initAdapter(List<NewsDetailEntity> newsDetailList) {
-        newsAdapter = new NewsSimpleAdapter(getContext(), newsDetailList);
-        newsAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(newsAdapter);
+    public void initAdapter(List<NewsDetailEntity> newsDetailList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                newsAdapter.notifyItemRangeRemoved(0, mNewsList.size());
+                // 2. 再清空
+                mNewsList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        mCurPos = mNewsList.size();
+        if (null == newsAdapter) {
+            mNewsList = newsDetailList;
+            newsAdapter = new NewsSimpleAdapter(getContext(), newsDetailList);
+            newsAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(newsAdapter);
+        } else {
+            mNewsList.addAll(newsDetailList);
+            newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+        }
 
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -188,14 +216,32 @@ public class NewsAllFragment extends BaseFragment<NewsAllPresenter> implements N
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                if (0 == getArguments().getInt("nodeId")) { // 全部
+                    refreshlayout.finishRefresh(2000);  // 模拟效果
+                } else {    // 其他页
+                    mIsRefresh = true;
+                    PAGE_INDEX = 1;
+                    // 获取二级通用列表数据
+                    mPresenter.callMethodOfGetTwoLevelInfoList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, true);
+                }
+
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                if (0 == getArguments().getInt("nodeId")) { // 全部
+                    refreshlayout.finishLoadmore(2000);  // 模拟效果
+                } else {    // 其他页
+                    mIsLoadMore = true;
+                    // 获取二级通用列表数据
+                    mPresenter.callMethodOfGetTwoLevelInfoList(getArguments().getInt("nodeId"), ++PAGE_INDEX, PAGE_SIZE, true);
+                }
             }
         });
     }

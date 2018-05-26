@@ -140,7 +140,7 @@ public class NewsAllPresenter extends BasePresenter<NewsAllContract.Model, NewsA
                         Log.e("TAG", newsList.toString());
 
                         if (newsList.isSuccess() && newsList.getData() != null)
-                            mRootView.loadListData(newsList.getData());
+                            mRootView.loadListData(newsList.getData(), update);
 
                     }
                 });

@@ -152,7 +152,7 @@ public class NewsAllActivity extends BaseActivity<NewsAllPresenter> implements N
     }
 
     @Override
-    public void loadListData(List<NewsDetailEntity> newsList) {
+    public void loadListData(List<NewsDetailEntity> newsList, boolean update) {
 
     }
 
