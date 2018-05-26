@@ -50,9 +50,10 @@ public class WishWallModel extends BaseModel implements WishWallContract.Model {
     }
 
     @Override
-    public Observable<BaseJson<List<MyWishEntity>>> getWishList(int userId, int type, boolean update) {
+    public Observable<BaseJson<List<MyWishEntity>>> getWishList(int userId, int type,
+                                                                int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(WishWallService.class)
-                .getWishList(userId, type);
+                .getWishList(userId, type, pageIndex, pageSize);
     }
 
     @Override

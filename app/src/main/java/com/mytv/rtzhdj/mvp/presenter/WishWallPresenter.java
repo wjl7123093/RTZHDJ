@@ -109,16 +109,17 @@ public class WishWallPresenter extends BasePresenter<WishWallContract.Model, Wis
                     public void onNext(@NonNull BaseJson<List<MyWishEntity>> myWishList) {
                         Log.e(TAG, myWishList.toString());
 
-                        mRootView.loadData(myWishList.getData());
+                        if (myWishList.isSuccess() && myWishList.getData() != null)
+                            mRootView.loadData(myWishList.getData(), update);
 
                     }
                 });
     }
 
     @Override
-    public void callMethodOfGetWishList(int userId, int type, boolean update) {
-        mModel.getWishList(userId, type, update)
-                .compose(RTZHDJApplication.rxCache.<BaseJson<List<MyWishEntity>>>transformObservable("getWishList" + userId + type,
+    public void callMethodOfGetWishList(int userId, int type, int pageIndex, int pageSize, boolean update) {
+        mModel.getWishList(userId, type, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<MyWishEntity>>>transformObservable("getWishList" + userId + type + pageIndex,
                         new TypeToken<BaseJson<List<MyWishEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<MyWishEntity>>>())
@@ -141,7 +142,7 @@ public class WishWallPresenter extends BasePresenter<WishWallContract.Model, Wis
 
 //                        mRootView.showPickerView(stationList.getData());
                         if (wishList.isSuccess() && wishList.getData() != null)
-                            mRootView.loadData(wishList.getData());
+                            mRootView.loadData(wishList.getData(), update);
                     }
                 });
     }

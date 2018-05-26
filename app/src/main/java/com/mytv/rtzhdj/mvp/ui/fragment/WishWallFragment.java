@@ -29,6 +29,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,6 +47,11 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
 
     private MyWishAdapter wishAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<MyWishEntity> mWishList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -86,12 +92,13 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         // 获取心愿数据
         if (getArguments().getString("pageType").equals("wall")) {
-            // 心愿墙
+            // 心愿墙  有分页
             mPresenter.callMethodOfGetWishList(
                     DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
-                    getArguments().getInt("type"), false);
+                    getArguments().getInt("type"), PAGE_INDEX, PAGE_SIZE, false);
         } else {
             // 我的心愿
             mPresenter.callMethodOfPostMyWishList(
@@ -150,8 +157,8 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
     }
 
     @Override
-    public void loadData(List<MyWishEntity> myWishList) {
-        initAdapter(myWishList);
+    public void loadData(List<MyWishEntity> myWishList, boolean update) {
+        initAdapter(myWishList, update);
     }
 
     @Override
@@ -165,25 +172,72 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
     }
 
     private void initRefreshLayout() {
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-            }
-        });
-//        mRefreshLayout.setEnableLoadmore(false);
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
-            }
-        });
+        if (getArguments().getString("pageType").equals("wall")) {  // 心愿墙
+            mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+                @Override
+                public void onRefresh(RefreshLayout refreshlayout) {
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                    mIsRefresh = true;
+                    PAGE_INDEX = 1;
+                    // 心愿墙  有分页
+                    mPresenter.callMethodOfGetWishList(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                            getArguments().getInt("type"), PAGE_INDEX, PAGE_SIZE, true);
+
+                }
+            });
+            mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+                @Override
+                public void onLoadmore(RefreshLayout refreshlayout) {
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                    mIsLoadMore = true;
+                    // 心愿墙  有分页
+                    mPresenter.callMethodOfGetWishList(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                            getArguments().getInt("type"), ++PAGE_INDEX, PAGE_SIZE, true);
+                }
+            });
+        } else {    // 我的心愿
+            mRefreshLayout.setEnableRefresh(false);
+            mRefreshLayout.setEnableLoadmore(false);
+        }
     }
 
-    private void initAdapter(List<MyWishEntity> wishList) {
-        wishAdapter = new MyWishAdapter(getActivity(), wishList);
-        wishAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(wishAdapter);
+    private void initAdapter(List<MyWishEntity> wishList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                wishAdapter.notifyItemRangeRemoved(0, mWishList.size());
+                // 2. 再清空
+                mWishList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        if (getArguments().getString("pageType").equals("wall")) {  // 心愿墙
+            mCurPos = mWishList.size();
+            if (null == wishAdapter) {
+                mWishList = wishList;
+                wishAdapter = new MyWishAdapter(getActivity(), wishList);
+                wishAdapter.openLoadAnimation();
+                mRecyclerView.setAdapter(wishAdapter);
+            } else {
+                mWishList.addAll(wishList);
+                wishAdapter.notifyItemRangeChanged(mCurPos, wishList.size());
+            }
+        } else {    // 我的心愿
+            mWishList = wishList;
+            wishAdapter = new MyWishAdapter(getActivity(), wishList);
+            wishAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(wishAdapter);
+        }
 
         wishAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override

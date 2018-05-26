@@ -375,7 +375,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
     }
 
     @Override
-    public void loadData(List<MyWishEntity> myWishList) {
+    public void loadData(List<MyWishEntity> myWishList, boolean update) {
 
     }
 

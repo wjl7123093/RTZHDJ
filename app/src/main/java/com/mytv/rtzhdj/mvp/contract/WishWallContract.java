@@ -20,7 +20,7 @@ import okhttp3.RequestBody;
 public interface WishWallContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
-        void loadData(List<MyWishEntity> myWishList);
+        void loadData(List<MyWishEntity> myWishList, boolean update);
         void showDialog();
         void dismissDialog();
     }
@@ -32,7 +32,8 @@ public interface WishWallContract {
         Observable<BaseJson<List<MyWishEntity>>> postMyWishList(int userId, int type, boolean update);
 
         // 获取 心愿墙数据
-        Observable<BaseJson<List<MyWishEntity>>> getWishList(int userId, int type, boolean update);
+        Observable<BaseJson<List<MyWishEntity>>> getWishList(int userId, int type,
+                                                             int pageIndex, int pageSize, boolean update);
 
         // 上传 我要许愿 数据
         Observable<BaseJson> postMyWish(Map<String, RequestBody> params,
@@ -50,7 +51,7 @@ public interface WishWallContract {
         void callMethodOfPostMyWishList(int userId, int type, boolean update);
 
         // 调用 获取心愿墙API
-        void callMethodOfGetWishList(int userId, int type, boolean update);
+        void callMethodOfGetWishList(int userId, int type, int pageIndex, int pageSize, boolean update);
 
         // 调用 上传我要许愿数据
         void callMethodOfPostMyWish(Map<String, RequestBody> params,

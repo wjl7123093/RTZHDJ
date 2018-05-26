@@ -44,7 +44,9 @@ public interface WishWallService {
      */
     @GET("getWishList")
     Observable<BaseJson<List<MyWishEntity>>> getWishList(@Query("UserId") int userId,
-                                                         @Query("Type") int type);
+                                                         @Query("Type") int type,
+                                                         @Query("PageIndex") int pageIndex,
+                                                         @Query("PageSize") int pageSize);
     /**
      * post 我要许愿
      * @return
