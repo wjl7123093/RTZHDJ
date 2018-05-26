@@ -170,33 +170,6 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-//    private void initTab() {
-//        final List<Fragment> fragments = new ArrayList<>();
-//        for (int i = 0; i < titles.length; i++) {
-//            fragments.add(ContentFragment.newInstance(i));
-//        }
-//
-//
-//        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-//            @Override
-//            public Fragment getItem(int position) {
-//                return fragments.get(position);
-//            }
-//
-//            @Override
-//            public int getCount() {
-//                return titles.length;
-//            }
-//
-//            @Override
-//            public CharSequence getPageTitle(int position) {
-//                return titles[position];
-//            }
-//        });
-//        mTab.setupWithViewPager(mViewPager);
-////        mTab.setTabTextColors(Color.BLACK, Color.RED);
-//    }
-
     @Override
     public void initBackground(SpecialColumnsEntity specialColumnsEntity) {
 //        ImageLoader.getInstance().showImage(TopicDetailActivity.this, mIvBackground,
