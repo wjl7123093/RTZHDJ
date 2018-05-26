@@ -244,7 +244,7 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                showMessage("" + Integer.toString(position));
                 ARouter.getInstance().build(ARoutePath.PATH_WISH_DETAIL)
-                        .withInt("wishId", wishList.get(position).getID()).navigation();
+                        .withInt("wishId", mWishList.get(position).getID()).navigation();
             }
         });
 

@@ -221,7 +221,7 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
                 ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                         .withString("title", "必修课")
                         .withInt("nodeId", 9043)
-                        .withInt("articleId", courseList.get(position).getContentId()).navigation();
+                        .withInt("articleId", mCourseList.get(position).getContentId()).navigation();
             }
         });
 

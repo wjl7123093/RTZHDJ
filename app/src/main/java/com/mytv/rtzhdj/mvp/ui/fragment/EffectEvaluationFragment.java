@@ -221,7 +221,7 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
                 if (effectList.get(position).getIfOver() == 0) {
                     // 跳转到 问卷调查页面
                     ARouter.getInstance().build(ARoutePath.PATH_QUESTIONAIRE)
-                            .withInt("examinationId", effectList.get(position).getId()).navigation();
+                            .withInt("examinationId", mEffectList.get(position).getId()).navigation();
                 } else {
                     showMessage("该次评测已经结束");
                 }
