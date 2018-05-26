@@ -158,7 +158,7 @@ public class VoteOnlineActivity extends BaseActivity<VoteOnlinePresenter> implem
     }
 
     @Override
-    public void loadData(List<VoteListEntity> voteList) {
+    public void loadData(List<VoteListEntity> voteList, boolean update) {
 
     }
 }

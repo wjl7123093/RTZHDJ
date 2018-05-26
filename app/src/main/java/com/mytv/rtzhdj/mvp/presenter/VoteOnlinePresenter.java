@@ -110,7 +110,7 @@ public class VoteOnlinePresenter extends BasePresenter<VoteOnlineContract.Model,
                         Log.e(TAG, voteList.toString());
 
                         if (voteList.isSuccess() && null != voteList.getData())
-                            mRootView.loadData(voteList.getData());
+                            mRootView.loadData(voteList.getData(), update);
                     }
                 });
     }
