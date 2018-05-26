@@ -86,8 +86,8 @@ public class SpecialSubDetailPresenter extends BasePresenter<SpecialSubDetailCon
     }
 
     @Override
-    public void callMethodOfGetPartySpecialList(int nodeId, int pageIndex, int pageSize, boolean refresh) {
-        mModel.getPartySpecialList(nodeId, pageIndex, pageSize, refresh)
+    public void callMethodOfGetPartySpecialList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartySpecialList(nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<NewsDetailEntity>>>transformObservable("getCommentList" + nodeId,
                         new TypeToken<BaseJson<List<NewsDetailEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))
@@ -111,7 +111,7 @@ public class SpecialSubDetailPresenter extends BasePresenter<SpecialSubDetailCon
 
 //                        mRootView.showPickerView(stationList.getData());
                         if (newsList.isSuccess() && newsList.getData() != null)
-                            mRootView.loadData(newsList.getData());
+                            mRootView.loadData(newsList.getData(), update);
                     }
                 });
     }

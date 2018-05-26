@@ -51,6 +51,11 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
 
     private NewsSimpleAdapter newsAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<NewsDetailEntity> mNewsList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -96,8 +101,9 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
 
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         // 获取党建新闻二级列表(除推荐)数据
-        mPresenter.callMethodOfGetPartySpecialList(getArguments().getInt("nodeId"), 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetPartySpecialList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, false);
     }
 
     /**
@@ -153,22 +159,53 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                // 获取党建新闻二级列表(除推荐)数据
+                mPresenter.callMethodOfGetPartySpecialList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                // 获取党建新闻二级列表(除推荐)数据
+                mPresenter.callMethodOfGetPartySpecialList(getArguments().getInt("nodeId"), ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }
 
-    private void initAdapter(List<NewsDetailEntity> newsList) {
-        newsAdapter = new NewsSimpleAdapter(getActivity(), newsList);
-        newsAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(newsAdapter);
+    private void initAdapter(List<NewsDetailEntity> newsList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                newsAdapter.notifyItemRangeRemoved(0, mNewsList.size());
+                // 2. 再清空
+                mNewsList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        mCurPos = mNewsList.size();
+        if (null == newsAdapter) {
+            mNewsList = newsList;
+            newsAdapter = new NewsSimpleAdapter(getActivity(), newsList);
+            newsAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(newsAdapter);
+        } else {
+            mNewsList.addAll(newsList);
+            newsAdapter.notifyItemRangeInserted(mCurPos, newsList.size());
+        }
 
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -182,7 +219,7 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
     }
 
     @Override
-    public void loadData(List<NewsDetailEntity> newsList) {
-        initAdapter(newsList);
+    public void loadData(List<NewsDetailEntity> newsList, boolean update) {
+        initAdapter(newsList, update);
     }
 }
