@@ -1,6 +1,7 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -62,6 +64,9 @@ public class SurroundingCommunityActivity extends BaseActivity<SurroundingCommun
     private SurroundingCommunityAdapter communityAdapter;
     private static final int PAGE_SIZE = 10;
 
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
+
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
         DaggerSurroundingCommunityComponent //如找不到该类,请编译一下项目
@@ -90,12 +95,16 @@ public class SurroundingCommunityActivity extends BaseActivity<SurroundingCommun
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override

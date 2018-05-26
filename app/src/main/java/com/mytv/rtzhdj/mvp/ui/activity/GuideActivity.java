@@ -1,6 +1,7 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.mytv.rtzhdj.R;
 import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import cn.bingoogolapple.bgabanner.BGALocalImageSize;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -44,6 +46,9 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     BGABanner mBackgroundBanner;
 //    @BindView(R.id.banner_guide_foreground)
 //    BGABanner mForegroundBanner;
+
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
 
 
     @Override
@@ -73,12 +78,16 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override

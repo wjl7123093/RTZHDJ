@@ -1,6 +1,7 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.mytv.rtzhdj.mvp.presenter.LoginPresenter;
 import com.mytv.rtzhdj.mvp.ui.widget.ClearEditText;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -46,6 +48,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     TextView mTvRegister;
     @BindView(R.id.tv_forget_pwd)
     TextView mTvForgetPwd;
+
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
 
 
     @Override
@@ -79,12 +84,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override

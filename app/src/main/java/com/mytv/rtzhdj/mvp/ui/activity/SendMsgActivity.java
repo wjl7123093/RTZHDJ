@@ -1,6 +1,7 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +28,7 @@ import com.mytv.rtzhdj.mvp.presenter.SendMsgPresenter;
 import net.qiujuer.genius.ui.widget.Button;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -65,6 +67,9 @@ public class SendMsgActivity extends BaseActivity<SendMsgPresenter> implements S
     @Autowired
     String name;
 
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -95,12 +100,16 @@ public class SendMsgActivity extends BaseActivity<SendMsgPresenter> implements S
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -57,6 +58,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -117,6 +119,10 @@ public class MyReceiveWishActivity extends BaseActivity<MyReceiveWishPresenter> 
 
     private Map<String, RequestBody> params = new HashMap<>();
 
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
+
+
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
         DaggerMyReceiveWishComponent //如找不到该类,请编译一下项目
@@ -151,12 +157,16 @@ public class MyReceiveWishActivity extends BaseActivity<MyReceiveWishPresenter> 
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.mytv.rtzhdj.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -47,6 +48,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 import static com.mytv.rtzhdj.app.EventBusTags.ACTIVITY_FRAGMENT_REPLACE;
@@ -135,6 +137,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private List<Fragment> mFragments;
     private int mReplace = 0;
 
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
+
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
         DaggerMainComponent //如找不到该类,请编译一下项目
@@ -213,12 +218,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override

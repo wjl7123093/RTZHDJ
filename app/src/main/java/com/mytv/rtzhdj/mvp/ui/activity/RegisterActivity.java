@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.Set;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -95,6 +96,9 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     private int mPublishmentSystemId = 0;   // 站点ID
 
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -138,12 +142,16 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override

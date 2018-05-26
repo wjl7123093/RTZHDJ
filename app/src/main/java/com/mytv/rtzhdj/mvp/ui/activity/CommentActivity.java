@@ -3,6 +3,7 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +40,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -79,6 +81,9 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
     @Autowired
     int contentId;
 
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -113,12 +118,16 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override

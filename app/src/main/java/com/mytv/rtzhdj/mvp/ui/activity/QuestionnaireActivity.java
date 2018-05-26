@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -103,6 +104,9 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
     private int mScore = 0; // 评测结果分数
     private boolean mIsAnswerCorret = false;    // 是否正确答案
 
+    /** 加载进度条 */
+    private SweetAlertDialog pDialog;
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -141,12 +145,16 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 
     @Override
     public void showLoading() {
-
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        pDialog.dismiss();
     }
 
     @Override
