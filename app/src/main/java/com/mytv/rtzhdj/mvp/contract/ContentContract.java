@@ -22,9 +22,9 @@ public interface ContentContract {
     interface View extends IView {
         void onBannerClick(int position);
 
-        void showRecommendData(PartyRecommendEntity recommendEntity);
-        void showSubListData(PartySubNewsEntity subNewsEntity);
-        void initAdapter(List<PartyNewsEntity> importandBlockList);
+        void showRecommendData(PartyRecommendEntity recommendEntity, boolean update);
+        void showSubListData(PartySubNewsEntity subNewsEntity, boolean update);
+        void initAdapter(List<PartyNewsEntity> importandBlockListm, boolean update);
 //        void showOtherData();
     }
 

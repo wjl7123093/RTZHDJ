@@ -170,7 +170,7 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
                         Log.e(TAG, partyRecommendData.getData().toString());
 
                         if (partyRecommendData.isSuccess() && partyRecommendData.getData() != null)
-                            mRootView.showRecommendData(partyRecommendData.getData());
+                            mRootView.showRecommendData(partyRecommendData.getData(), update);
                     }
                 });
     }
@@ -178,9 +178,9 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     @Override
     public void callMethodOfGetPartySubList(int nodeId, int pageIndex, int pageSize, boolean update) {
         mModel.getPartySubList(nodeId, pageIndex, pageSize, update)
-                .compose(RTZHDJApplication.rxCache.<BaseJson<PartySubNewsEntity>>transformObservable("getPartySubList" + nodeId,
+                .compose(RTZHDJApplication.rxCache.<BaseJson<PartySubNewsEntity>>transformObservable("getPartySubList" + nodeId + pageIndex,
                         new TypeToken<BaseJson<PartySubNewsEntity>>() { }.getType(),
-                        CacheStrategy.firstCache()))    // 60s以内用缓存
+                        CacheStrategy.firstRemote()))    // 60s以内用缓存
                 .map(new CacheResult.MapFunc<BaseJson<PartySubNewsEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
@@ -200,7 +200,7 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
                         Log.e(TAG, partySubListData.getData().toString());
 
                         if (partySubListData.isSuccess() && partySubListData.getData() != null)
-                            mRootView.showSubListData(partySubListData.getData());
+                            mRootView.showSubListData(partySubListData.getData(), update);
                     }
                 });
     }
