@@ -176,7 +176,7 @@ public class MyMsgFragment extends BaseFragment<MyMsgPresenter> implements MyMsg
             mRecyclerView.setAdapter(msgAdapter);
         } else {
             mMsgList.addAll(msgList);
-            msgAdapter.notifyItemRangeChanged(mCurPos, msgList.size());
+            msgAdapter.notifyItemRangeInserted(mCurPos, msgList.size());
         }
 
         msgAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

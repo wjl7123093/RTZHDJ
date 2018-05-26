@@ -230,7 +230,7 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
                 mRecyclerView.setAdapter(wishAdapter);
             } else {
                 mWishList.addAll(wishList);
-                wishAdapter.notifyItemRangeChanged(mCurPos, wishList.size());
+                wishAdapter.notifyItemRangeInserted(mCurPos, wishList.size());
             }
         } else {    // 我的心愿
             mWishList = wishList;

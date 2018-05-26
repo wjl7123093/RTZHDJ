@@ -238,7 +238,7 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
                 mRecyclerView.setAdapter(wishAdapter);
             } else {
                 mDonationList.addAll(donationList);
-                wishAdapter.notifyItemRangeChanged(mCurPos, donationList.size());
+                wishAdapter.notifyItemRangeInserted(mCurPos, donationList.size());
             }
         } else {    // 我的捐赠
             mDonationList = donationList;

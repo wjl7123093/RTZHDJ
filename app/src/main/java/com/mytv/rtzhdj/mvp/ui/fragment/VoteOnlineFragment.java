@@ -197,7 +197,7 @@ public class VoteOnlineFragment extends BaseFragment<VoteOnlinePresenter> implem
             mRecyclerView.setAdapter(voteAdapter);
         } else {
             mVoteList.addAll(voteList);
-            voteAdapter.notifyItemRangeChanged(mCurPos, voteList.size());
+            voteAdapter.notifyItemRangeInserted(mCurPos, voteList.size());
         }
 
         voteAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

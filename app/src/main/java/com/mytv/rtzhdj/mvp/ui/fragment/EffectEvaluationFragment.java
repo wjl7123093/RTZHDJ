@@ -210,7 +210,7 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
             mRecyclerView.setAdapter(mAdapter);
         } else {
             mEffectList.addAll(effectList);
-            mAdapter.notifyItemRangeChanged(mCurPos, effectList.size());
+            mAdapter.notifyItemRangeInserted(mCurPos, effectList.size());
         }
 
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
