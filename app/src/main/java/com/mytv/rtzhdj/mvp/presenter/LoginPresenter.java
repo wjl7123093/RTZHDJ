@@ -93,15 +93,26 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
                     public void onNext(@NonNull BaseJson<LoginEntity> loginData) {
                         Log.e("TAG", loginData.toString());
 
+                        if (loginData.isSuccess() && loginData.getData() != null) {
 //                        mRootView.showData(homeData);
-                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_IS_LOGIN, 1); // 1 表示登录
-                        DataHelper.saveDeviceData(mActivity, SharepreferenceKey.KEY_LOGIN_USER, loginData.getData());
+                            DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_IS_LOGIN, 1); // 1 表示登录
+                            DataHelper.saveDeviceData(mActivity, SharepreferenceKey.KEY_LOGIN_USER, loginData.getData());
 //                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_USER_ID, loginData.getData().getUserId());
 //                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID, loginData.getData().getPublishmentSystemId());
-                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_USER_ID, 39);
-                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID, 1);
+                            DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_USER_ID, 39);
+                            DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID, 1);
+                            DataHelper.setStringSF(mActivity, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_NAME, loginData.getData().getPublishmentSystemName());
+                            DataHelper.setStringSF(mActivity, SharepreferenceKey.KEY_LOGIN_USER_NAME, loginData.getData().getUserName());
+                            DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_LOGIN_USER_TYPE, loginData.getData().getUserTypeId());
+                            DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_LOGIN_USER_RANK, loginData.getData().getRanking());
+                            DataHelper.setStringSF(mActivity, SharepreferenceKey.KEY_LOGIN_HEADER_URL, loginData.getData().getPhotoUrl());
+                            DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_LOGIN_INTEGRAL, loginData.getData().getIntegral());
+                            DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_POSITIVE_ENERGY_VALUE, loginData.getData().getPositiveEnergyValue());
 
-                        mRootView.goMainActivity();
+
+                            mRootView.goMainActivity();
+                            mRootView.killMyself();
+                        }
                     }
                 });
 

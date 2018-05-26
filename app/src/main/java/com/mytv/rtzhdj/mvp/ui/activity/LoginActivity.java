@@ -75,7 +75,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         StatusBarCompat.translucentStatusBar(LoginActivity.this, true);
         mPresenter.setActivity(LoginActivity.this);
 
-        mBtnLogin.setOnClickListener(view -> mPresenter.callMethodOfDoLogin("18888888889", "w123456"));
+        mBtnLogin.setOnClickListener(view -> mPresenter.callMethodOfDoLogin("15181738275", "w123456"));
         mTvRegister.setOnClickListener(view -> goRegisterActivity());
         mTvForgetPwd.setOnClickListener(view -> goForgetPwdActivity());
 

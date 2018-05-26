@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SimpleAdapter;
@@ -22,9 +23,11 @@ import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.mvp.contract.MineContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
@@ -259,17 +262,26 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                holder.setText(R.id.tv_name, name);
-                holder.setText(R.id.tv_party_branch, partyBranch);
+                holder.setText(R.id.tv_name,
+                        DataHelper.getStringSF(activity, SharepreferenceKey.KEY_LOGIN_USER_NAME));
+                holder.setText(R.id.tv_party_branch,
+                        DataHelper.getStringSF(activity, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_NAME));
+                holder.setText(R.id.tv_study_scores,
+                        DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL) + "");
+                holder.setText(R.id.tv_power_num,
+                        DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_POSITIVE_ENERGY_VALUE) + "");
+                holder.setText(R.id.tv_grade_rank,
+                        DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_RANK) + "");
 
-                mImageLoader.loadImage(activity,
-                        ImageConfigImpl
-                                .builder()
-                                .errorPic(R.mipmap.ic_error)
-                                .placeholder(R.mipmap.ic_placeholder)
-                                .url(url)
-                                .imageView(holder.getView(R.id.iv_header))
-                                .build());
+                if (!TextUtils.isEmpty(DataHelper.getStringSF(activity, SharepreferenceKey.KEY_LOGIN_HEADER_URL)))
+                    mImageLoader.loadImage(activity,
+                            ImageConfigImpl
+                                    .builder()
+                                    .errorPic(R.mipmap.ic_error)
+                                    .placeholder(R.mipmap.ic_placeholder)
+                                    .url(DataHelper.getStringSF(activity, SharepreferenceKey.KEY_LOGIN_HEADER_URL))
+                                    .imageView(holder.getView(R.id.iv_header))
+                                    .build());
 
                 /*holder.getView(R.id.tv_settings).setOnClickListener(view -> {
                     // 设置
