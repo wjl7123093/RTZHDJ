@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -214,6 +215,12 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
             @Override
             public CharSequence getPageTitle(int position) {
                 return titles[position];
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                // 注释掉下面那行，解决 滑动卡顿 问题
+//                super.destroyItem(container, position, object);
             }
         });
         tabLayout.setupWithViewPager(mViewPager);

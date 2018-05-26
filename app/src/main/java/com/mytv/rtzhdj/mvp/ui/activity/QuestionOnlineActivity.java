@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -150,6 +151,12 @@ public class QuestionOnlineActivity extends BaseActivity<QuestionOnlinePresenter
             @Override
             public CharSequence getPageTitle(int position) {
                 return titles[position];
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                // 注释掉下面那行，解决 滑动卡顿 问题
+//                super.destroyItem(container, position, object);
             }
         });
         mTab.setupWithViewPager(mViewPager);
