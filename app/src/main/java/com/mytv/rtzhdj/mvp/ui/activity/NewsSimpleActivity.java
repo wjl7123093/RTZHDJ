@@ -200,7 +200,7 @@ public class NewsSimpleActivity extends BaseActivity<NewsSimplePresenter> implem
     }
 
     @Override
-    public void loadListData(List<NewsDetailEntity> newsList) {
+    public void loadListData(List<NewsDetailEntity> newsList, boolean udpate) {
 
     }
 }

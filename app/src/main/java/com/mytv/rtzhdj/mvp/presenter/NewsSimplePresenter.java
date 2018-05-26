@@ -181,7 +181,7 @@ public class NewsSimplePresenter extends BasePresenter<NewsSimpleContract.Model,
     @Override
     public void callMethodOfGetTwoLevelInfoList(int nodeId, int pageIndex, int pageSize, boolean update) {
         mModel.getTwoLevelInfoList(nodeId, pageIndex, pageSize, update)
-                .compose(RTZHDJApplication.rxCache.<BaseJson<List<NewsDetailEntity>>>transformObservable("getTwoLevelInfoList" + nodeId,
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<NewsDetailEntity>>>transformObservable("getTwoLevelInfoList" + nodeId + pageIndex,
                         new TypeToken<BaseJson<List<NewsDetailEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<NewsDetailEntity>>>())
@@ -203,7 +203,7 @@ public class NewsSimplePresenter extends BasePresenter<NewsSimpleContract.Model,
                         Log.e("TAG", newsList.toString());
 
                         if (newsList.isSuccess() && newsList.getData() != null)
-                            mRootView.loadListData(newsList.getData());
+                            mRootView.loadListData(newsList.getData(), update);
 
                     }
                 });
