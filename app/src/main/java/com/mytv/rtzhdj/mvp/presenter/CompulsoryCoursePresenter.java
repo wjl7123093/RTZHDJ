@@ -109,7 +109,7 @@ public class CompulsoryCoursePresenter extends BasePresenter<CompulsoryCourseCon
                         Log.e(TAG, courseList.getData().toString());
 
                         if (courseList.isSuccess() && courseList.getData() != null)
-                            mRootView.loadData(courseList.getData());
+                            mRootView.loadData(courseList.getData(), update);
                     }
                 });
     }

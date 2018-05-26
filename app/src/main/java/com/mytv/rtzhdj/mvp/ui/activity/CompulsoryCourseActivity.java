@@ -194,7 +194,7 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
 
 
     @Override
-    public void loadData(List<CoursewareEntity> courseList) {
+    public void loadData(List<CoursewareEntity> courseList, boolean update) {
 
     }
 

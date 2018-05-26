@@ -224,7 +224,7 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
                 // 新闻详情页
 //                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
