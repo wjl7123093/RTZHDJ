@@ -82,8 +82,10 @@ public class MyMsgPresenter extends BasePresenter<MyMsgContract.Model, MyMsgCont
     }
 
     @Override
-    public void callMethodOfPostMyMessage(@NonNull int userId, @NonNull int messageType) {
-        mModel.postMyMessage(userId, messageType)
+    public void callMethodOfPostMyMessage(@NonNull int userId, @NonNull int messageType,
+                                          @NonNull int pageIndex, @NonNull int pageSize,
+                                          boolean update) {
+        mModel.postMyMessage(userId, messageType, pageIndex, pageSize, update)
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -102,7 +104,7 @@ public class MyMsgPresenter extends BasePresenter<MyMsgContract.Model, MyMsgCont
                         Log.e(TAG, msgList.toString());
 
                         if (msgList.isSuccess() && msgList.getData() != null) {
-                            mRootView.loadData(msgList.getData());
+                            mRootView.loadData(msgList.getData(), update);
                         }
                     }
                 });

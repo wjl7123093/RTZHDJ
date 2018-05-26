@@ -160,7 +160,7 @@ public class MyMsgActivity extends BaseActivity<MyMsgPresenter> implements MyMsg
     }
 
     @Override
-    public void loadData(List<MyMsgEntity> msgList) {
+    public void loadData(List<MyMsgEntity> msgList, boolean udpate) {
 
     }
 }

@@ -28,6 +28,8 @@ public interface MyMsgService {
     @FormUrlEncoded
     @POST("postMyMessage")
     Observable<BaseJson<List<MyMsgEntity>>> postMyMessage(@Field("UserID") int userId,
-                                                          @Field("MessageType") int messageType);
+                                                          @Field("MessageType") int messageType,
+                                                          @Field("PageIndex") int pageIndex,
+                                                          @Field("PageSize") int pageSize);
 
 }

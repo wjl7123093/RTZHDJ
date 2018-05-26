@@ -28,6 +28,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,6 +46,11 @@ public class MyMsgFragment extends BaseFragment<MyMsgPresenter> implements MyMsg
 
     private MyMsgAdapter msgAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<MyMsgEntity> mMsgList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -85,9 +91,11 @@ public class MyMsgFragment extends BaseFragment<MyMsgPresenter> implements MyMsg
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
+        // 获取 我的私信
         mPresenter.callMethodOfPostMyMessage(
                 DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
-                getArguments().getInt("messageType"));
+                getArguments().getInt("messageType"), PAGE_INDEX, PAGE_SIZE, false);
     }
 
     /**
@@ -140,19 +148,41 @@ public class MyMsgFragment extends BaseFragment<MyMsgPresenter> implements MyMsg
     }
 
     @Override
-    public void loadData(List<MyMsgEntity> msgList) {
-        initAdapter(msgList);
+    public void loadData(List<MyMsgEntity> msgList, boolean update) {
+        initAdapter(msgList, update);
     }
 
-    private void initAdapter(List<MyMsgEntity> msgList) {
-        msgAdapter = new MyMsgAdapter(getContext(), msgList);
-        msgAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(msgAdapter);
+    private void initAdapter(List<MyMsgEntity> msgList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                msgAdapter.notifyItemRangeRemoved(0, mMsgList.size());
+                // 2. 再清空
+                mMsgList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        mCurPos = mMsgList.size();
+        if (null == msgAdapter) {
+            mMsgList = msgList;
+            msgAdapter = new MyMsgAdapter(getContext(), msgList);
+            msgAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(msgAdapter);
+        } else {
+            mMsgList.addAll(msgList);
+            msgAdapter.notifyItemRangeChanged(mCurPos, msgList.size());
+        }
 
         msgAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -161,14 +191,27 @@ public class MyMsgFragment extends BaseFragment<MyMsgPresenter> implements MyMsg
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                // 获取 我的私信
+                mPresenter.callMethodOfPostMyMessage(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                        getArguments().getInt("messageType"), PAGE_INDEX, PAGE_SIZE, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                // 获取 我的私信
+                mPresenter.callMethodOfPostMyMessage(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                        getArguments().getInt("messageType"), ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }

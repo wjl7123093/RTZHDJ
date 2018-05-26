@@ -40,8 +40,9 @@ public class MyMsgModel extends BaseModel implements MyMsgContract.Model {
     }
 
     @Override
-    public Observable<BaseJson<List<MyMsgEntity>>> postMyMessage(int userId, int messageType) {
+    public Observable<BaseJson<List<MyMsgEntity>>> postMyMessage(int userId, int messageType,
+                                                                 int pageIndex, int pageSize, boolean udpate) {
         return mRepositoryManager.obtainRetrofitService(MyMsgService.class)
-                .postMyMessage(userId, messageType);
+                .postMyMessage(userId, messageType, pageIndex, pageSize);
     }
 }

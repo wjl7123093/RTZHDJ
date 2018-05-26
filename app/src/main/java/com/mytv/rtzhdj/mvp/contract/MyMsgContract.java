@@ -18,14 +18,16 @@ import io.reactivex.annotations.NonNull;
 public interface MyMsgContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
-        void loadData(List<MyMsgEntity> msgList);
+        void loadData(List<MyMsgEntity> msgList, boolean update);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
 
-        // 发送私信
-        Observable<BaseJson<List<MyMsgEntity>>> postMyMessage(int userId, int messageType);
+        // 我的私信
+        Observable<BaseJson<List<MyMsgEntity>>> postMyMessage(int userId, int messageType,
+                                                              int pageIndex, int pageSize,
+                                                              boolean update);
 
     }
 
@@ -35,8 +37,11 @@ public interface MyMsgContract {
         //初始化 RecyclerView
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
-        // 调用 发送私信接口
+        // 调用 我的私信接口
         void callMethodOfPostMyMessage(@NonNull int userId,
-                                       @NonNull int messageType);
+                                       @NonNull int messageType,
+                                       @NonNull int pageIndex,
+                                       @NonNull int pageSize,
+                                       boolean update);
     }
 }
