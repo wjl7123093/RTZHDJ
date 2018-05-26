@@ -85,9 +85,9 @@ public class EffectEvaluationPresenter extends BasePresenter<EffectEvaluationCon
     }
 
     @Override
-    public void callMethodOfGetTestList(int userId, int testState, boolean update) {
-        mModel.getTestList(userId, testState, update)
-                .compose(RTZHDJApplication.rxCache.<BaseJson<List<EffectEvaluationEntity>>>transformObservable("getTestList" + userId + testState,
+    public void callMethodOfGetTestList(int userId, int testState, int pageIndex, int pageSize, boolean update) {
+        mModel.getTestList(userId, testState, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<EffectEvaluationEntity>>>transformObservable("getTestList" + userId + testState + pageIndex,
                         new TypeToken<BaseJson<List<EffectEvaluationEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<EffectEvaluationEntity>>>())
@@ -109,7 +109,7 @@ public class EffectEvaluationPresenter extends BasePresenter<EffectEvaluationCon
                         Log.e(TAG, effectList.toString());
 
                         if (effectList.isSuccess() && effectList.getData() != null)
-                            mRootView.loadData(effectList.getData());
+                            mRootView.loadData(effectList.getData(), update);
                     }
                 });
     }

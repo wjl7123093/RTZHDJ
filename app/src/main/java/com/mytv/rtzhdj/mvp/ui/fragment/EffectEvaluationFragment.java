@@ -29,6 +29,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,6 +55,11 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
 
     private EffectEvaluationAdapter mAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<EffectEvaluationEntity> mEffectList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -95,10 +101,11 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
 //        initAdapter();
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         // 获取 效果测评列表数据
         mPresenter.callMethodOfGetTestList(
                 DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
-                getArguments().getInt("testState"), false);
+                getArguments().getInt("testState"), PAGE_INDEX, PAGE_SIZE, false);
     }
 
     /**
@@ -154,22 +161,57 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                // 获取 效果测评列表数据
+                mPresenter.callMethodOfGetTestList(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                        getArguments().getInt("testState"), PAGE_INDEX, PAGE_SIZE, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                // 获取 效果测评列表数据
+                mPresenter.callMethodOfGetTestList(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                        getArguments().getInt("testState"), ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }
 
-    private void initAdapter(List<EffectEvaluationEntity> effectList) {
-        mAdapter = new EffectEvaluationAdapter(getContext(), effectList);
-        mAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(mAdapter);
+    private void initAdapter(List<EffectEvaluationEntity> effectList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                mAdapter.notifyItemRangeRemoved(0, mEffectList.size());
+                // 2. 再清空
+                mEffectList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        mCurPos = mEffectList.size();
+        if (null == mAdapter) {
+            mEffectList = effectList;
+            mAdapter = new EffectEvaluationAdapter(getContext(), effectList);
+            mAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(mAdapter);
+        } else {
+            mEffectList.addAll(effectList);
+            mAdapter.notifyItemRangeChanged(mCurPos, effectList.size());
+        }
 
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -189,8 +231,8 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
     }
 
     @Override
-    public void loadData(List<EffectEvaluationEntity> effectList) {
-        initAdapter(effectList);
+    public void loadData(List<EffectEvaluationEntity> effectList, boolean update) {
+        initAdapter(effectList, update);
     }
 
     @Override

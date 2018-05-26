@@ -40,9 +40,10 @@ public class EffectEvaluationModel extends BaseModel implements EffectEvaluation
     }
 
     @Override
-    public Observable<BaseJson<List<EffectEvaluationEntity>>> getTestList(int userId, int testState, boolean update) {
+    public Observable<BaseJson<List<EffectEvaluationEntity>>> getTestList(int userId, int testState,
+                                                                          int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(EffectEvaluationService.class)
-                .getTestList(userId, testState);
+                .getTestList(userId, testState, pageIndex, pageSize);
     }
 
     @Override

@@ -18,7 +18,7 @@ import io.reactivex.Observable;
 public interface EffectEvaluationContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
-        void loadData(List<EffectEvaluationEntity> effectList);
+        void loadData(List<EffectEvaluationEntity> effectList, boolean update);
         void loadHeaderData(HeaderIntegralEntity headerIntegralEntity);
     }
 
@@ -26,7 +26,8 @@ public interface EffectEvaluationContract {
     interface Model extends IModel {
 
         // 获取 效果评测列表
-        Observable<BaseJson<List<EffectEvaluationEntity>>> getTestList(int userId, int typeId, boolean update);
+        Observable<BaseJson<List<EffectEvaluationEntity>>> getTestList(int userId, int typeId,
+                                                                       int pageIndex, int pageSize, boolean update);
 
         // 获取 头部积分数据
         Observable<BaseJson<HeaderIntegralEntity>> getMyScore(int userId);
@@ -40,7 +41,7 @@ public interface EffectEvaluationContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取效果评测列表
-        void callMethodOfGetTestList(int userId, int testState, boolean update);
+        void callMethodOfGetTestList(int userId, int testState, int pageIndex, int pageSize, boolean update);
 
         // 调用 获取头部积分数据
         void callMethodOfGetMyScore(int userId, boolean update);

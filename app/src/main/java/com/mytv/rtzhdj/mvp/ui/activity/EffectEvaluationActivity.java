@@ -194,7 +194,7 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
 
 
     @Override
-    public void loadData(List<EffectEvaluationEntity> effectList) {
+    public void loadData(List<EffectEvaluationEntity> effectList, boolean update) {
 
     }
 

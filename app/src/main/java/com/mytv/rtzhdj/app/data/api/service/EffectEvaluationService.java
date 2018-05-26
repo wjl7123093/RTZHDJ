@@ -27,6 +27,8 @@ public interface EffectEvaluationService {
      */
     @GET("getTestList")
     Observable<BaseJson<List<EffectEvaluationEntity>>> getTestList(@Query("UserId") int userId,
-                                                                   @Query("TestState") int testState);
+                                                                   @Query("TestState") int testState,
+                                                                   @Query("PageIndex") int pageIndex,
+                                                                   @Query("PageSize") int pageSize);
 
 }
