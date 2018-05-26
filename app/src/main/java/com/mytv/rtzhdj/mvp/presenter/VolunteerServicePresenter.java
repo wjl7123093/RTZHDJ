@@ -88,7 +88,7 @@ public class VolunteerServicePresenter extends BasePresenter<VolunteerServiceCon
     @Override
     public void callMethodOfGetVoluntaryserviceList(int typeId, int pageIndex, int pageSize, boolean update) {
         mModel.getVoluntaryserviceList(typeId, pageIndex, pageSize, update)
-                .compose(RTZHDJApplication.rxCache.<BaseJson<List<VoluteerServiceEntity>>>transformObservable("getVoluntaryserviceList" + typeId,
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<VoluteerServiceEntity>>>transformObservable("getVoluntaryserviceList" + typeId + pageIndex,
                         new TypeToken<BaseJson<List<VoluteerServiceEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<VoluteerServiceEntity>>>())
@@ -110,7 +110,7 @@ public class VolunteerServicePresenter extends BasePresenter<VolunteerServiceCon
                         Log.e(TAG, volunteerServiceList.toString());
 
                         if (volunteerServiceList.isSuccess() && volunteerServiceList.getData() != null)
-                            mRootView.loadData(volunteerServiceList.getData());
+                            mRootView.loadData(volunteerServiceList.getData(), update);
                     }
                 });
     }

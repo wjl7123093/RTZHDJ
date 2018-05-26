@@ -27,6 +27,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,6 +45,11 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
 
     private VoluteerServiceAdapter voluteerServiceAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<VoluteerServiceEntity> mServiceList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -83,8 +89,9 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
 //        initAdapter();
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         // 获取志愿服务列表
-        mPresenter.callMethodOfGetVoluntaryserviceList(getArguments().getInt("typeId"), 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetVoluntaryserviceList(getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, false);
     }
 
     /**
@@ -140,22 +147,53 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                // 获取志愿服务列表
+                mPresenter.callMethodOfGetVoluntaryserviceList(getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                // 获取志愿服务列表
+                mPresenter.callMethodOfGetVoluntaryserviceList(getArguments().getInt("typeId"), ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }
 
-    private void initAdapter(List<VoluteerServiceEntity> serviceList) {
-        voluteerServiceAdapter = new VoluteerServiceAdapter(getActivity(), serviceList);
-        voluteerServiceAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(voluteerServiceAdapter);
+    private void initAdapter(List<VoluteerServiceEntity> serviceList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                voluteerServiceAdapter.notifyItemRangeRemoved(0, mServiceList.size());
+                // 2. 再清空
+                mServiceList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        mCurPos = mServiceList.size();
+        if (null == voluteerServiceAdapter) {
+            mServiceList = serviceList;
+            voluteerServiceAdapter = new VoluteerServiceAdapter(getActivity(), serviceList);
+            voluteerServiceAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(voluteerServiceAdapter);
+        } else {
+            mServiceList.addAll(serviceList);
+            voluteerServiceAdapter.notifyItemRangeInserted(mCurPos, serviceList.size());
+        }
 
         voluteerServiceAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -163,15 +201,15 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
 //                showMessage("" + Integer.toString(position));
 
                 ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
-                        .withInt("nodeId", serviceList.get(position).getNodeId())
-                        .withInt("id", serviceList.get(position).getId()).navigation();
+                        .withInt("nodeId", mServiceList.get(position).getNodeId())
+                        .withInt("id", mServiceList.get(position).getId()).navigation();
             }
         });
 
     }
 
     @Override
-    public void loadData(List<VoluteerServiceEntity> volunteerServiceList) {
-        initAdapter(volunteerServiceList);
+    public void loadData(List<VoluteerServiceEntity> volunteerServiceList, boolean update) {
+        initAdapter(volunteerServiceList, update);
     }
 }
