@@ -153,14 +153,12 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                     case 0: // 党员风采
                         ARouter.getInstance().build(ARoutePath.PATH_PARTY_MEMBER).navigation();
                         break;
-                    case 1: // 党支部工作手册
-                        break;
-                    case 2: // 组织关系
+                    case 1: // 组织关系
                         ARouter.getInstance().build(ARoutePath.PATH_MEMBERSHIP_CREDENTIALS).navigation();
                         break;
-                    case 3: // 流动党员思想汇报
+                    case 2: // 党支部工作手册
                         break;
-                    case 4:
+                    case 3: // 记事本
                         ArmsUtils.startActivity(new Intent(getActivity(), com.jeek.calendar.activity.MainActivity.class));
                         break;
                 }
