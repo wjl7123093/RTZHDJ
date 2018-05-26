@@ -30,6 +30,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,6 +50,11 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
 
     private MyDonationAdapter wishAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<MyDonateEntity> mDonationList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -89,11 +95,12 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         if (getArguments().getString("pageType").equals("all")) {
             // 获取 所有捐赠数据
             mPresenter.callMethodOfGetAllDonateList(
                     DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
-                    getArguments().getInt("typeId"), 1, PAGE_SIZE, false);
+                    getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, false);
         } else {
             // 获取 我的捐赠数据
             mPresenter.callMethodOfPostMyClaimDonateList(
@@ -155,35 +162,90 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
     }
 
     @Override
-    public void loadData(List<MyDonateEntity> donationList) {
-        if (donationList.size() == 0) {
+    public void loadData(List<MyDonateEntity> donationList, boolean update) {
+        /*if (donationList.size() == 0) {
             showMessage("暂无数据");
-            return;
-        }
 
-        initAdapter(donationList);
+            if (mIsRefresh)
+                mRefreshLayout.finishRefresh();
+            if (mIsLoadMore)
+                mRefreshLayout.finishLoadmore();
+            return;
+        }*/
+
+        initAdapter(donationList, update);
     }
 
     private void initRefreshLayout() {
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-            }
-        });
-//        mRefreshLayout.setEnableLoadmore(false);
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
-            }
-        });
+        if (getArguments().getString("pageType").equals("all")) {   // 所有捐赠
+            mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+                @Override
+                public void onRefresh(RefreshLayout refreshlayout) {
+//                    refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                    mIsRefresh = true;
+                    PAGE_INDEX = 1;
+                    if (getArguments().getString("pageType").equals("all")) {
+                        // 获取 所有捐赠数据
+                        mPresenter.callMethodOfGetAllDonateList(
+                                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                                getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, true);
+                    }
+                }
+            });
+            mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+                @Override
+                public void onLoadmore(RefreshLayout refreshlayout) {
+//                    refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                    mIsLoadMore = true;
+                    if (getArguments().getString("pageType").equals("all")) {
+                        // 获取 所有捐赠数据
+                        mPresenter.callMethodOfGetAllDonateList(
+                                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
+                                getArguments().getInt("typeId"), ++PAGE_INDEX, PAGE_SIZE, true);
+                    }
+                }
+            });
+        } else {    // 我的捐赠
+            mRefreshLayout.setEnableRefresh(false);
+            mRefreshLayout.setEnableLoadmore(false);
+        }
     }
 
-    private void initAdapter(List<MyDonateEntity> donationList) {
-        wishAdapter = new MyDonationAdapter(getActivity(), donationList);
-        wishAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(wishAdapter);
+    private void initAdapter(List<MyDonateEntity> donationList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                wishAdapter.notifyItemRangeRemoved(0, mDonationList.size());
+                // 2. 再清空
+                mDonationList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        if (getArguments().getString("pageType").equals("all")) {   // 所有捐赠
+            mCurPos = mDonationList.size();
+            if (null == wishAdapter) {
+                mDonationList = donationList;
+                wishAdapter = new MyDonationAdapter(getActivity(), donationList);
+                wishAdapter.openLoadAnimation();
+                mRecyclerView.setAdapter(wishAdapter);
+            } else {
+                mDonationList.addAll(donationList);
+                wishAdapter.notifyItemRangeChanged(mCurPos, donationList.size());
+            }
+        } else {    // 我的捐赠
+            mDonationList = donationList;
+            wishAdapter = new MyDonationAdapter(getActivity(), donationList);
+            wishAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(wishAdapter);
+        }
 
         wishAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override

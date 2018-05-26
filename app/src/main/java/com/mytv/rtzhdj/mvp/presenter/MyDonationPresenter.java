@@ -107,7 +107,7 @@ public class MyDonationPresenter extends BasePresenter<MyDonationContract.Model,
                         Log.e(TAG, myDonationList.toString());
 
                         if (myDonationList.isSuccess() && myDonationList.getData() != null)
-                            mRootView.loadData(myDonationList.getData());
+                            mRootView.loadData(myDonationList.getData(), update);
 
                     }
                 });
@@ -138,7 +138,7 @@ public class MyDonationPresenter extends BasePresenter<MyDonationContract.Model,
                         Log.e(TAG, myDonationList.toString());
 
                         if (myDonationList.isSuccess() && myDonationList.getData() != null)
-                            mRootView.loadData(myDonationList.getData());
+                            mRootView.loadData(myDonationList.getData(), update);
 
                     }
                 });

@@ -173,7 +173,7 @@ public class MyDonationActivity extends BaseActivity<MyDonationPresenter> implem
     }
 
     @Override
-    public void loadData(List<MyDonateEntity> donationList) {
+    public void loadData(List<MyDonateEntity> donationList, boolean update) {
 
     }
 }
