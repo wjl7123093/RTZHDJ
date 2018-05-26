@@ -144,6 +144,7 @@ public class MyReceiveWishActivity extends BaseActivity<MyReceiveWishPresenter> 
         titles = new String[]{"心愿单", "未实现", "已实现"};
 
 //        collapsingToolbar.setTitleEnabled(false);
+        initTab();
 
         mBottomDialog = new BottomDialog(MyReceiveWishActivity.this, R.layout.dialog_publish,
                 new int[]{R.id.tvCamera, R.id.tvAlbum, R.id.tvCancel});
@@ -274,7 +275,7 @@ public class MyReceiveWishActivity extends BaseActivity<MyReceiveWishPresenter> 
         super.onResume();
 
 //        initToolBar();
-        initTab();
+//        initTab();
     }
 
     @Override

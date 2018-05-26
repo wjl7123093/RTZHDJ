@@ -150,7 +150,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
         mBtnToolbarMenu.setVisibility(View.GONE);
 
         titles = new String[]{"心愿单", "未被认领", "已被认领"};
-//        initTab();
+        initTab();
 
         mBottomDialog = new BottomDialog(WishWallActivity.this, R.layout.dialog_publish,
                 new int[]{R.id.tvCamera, R.id.tvAlbum, R.id.tvCancel});
@@ -286,7 +286,7 @@ public class WishWallActivity extends BaseActivity<WishWallPresenter> implements
 
         mTvToolbarTitle.setText(mTitle);
 //        initToolBar();
-        initTab();
+//        initTab();
     }
 
     @Override

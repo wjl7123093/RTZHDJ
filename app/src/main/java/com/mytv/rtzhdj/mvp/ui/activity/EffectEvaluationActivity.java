@@ -104,6 +104,7 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
             ARouter.getInstance().build(ARoutePath.PATH_MY_TASK).navigation();
         });
         collapsingToolbar.setTitleEnabled(false);
+        initTab();
 
         // 获取头部信息
         mPresenter.callMethodOfGetMyScore(DataHelper.getIntergerSF(EffectEvaluationActivity.this,
@@ -196,7 +197,7 @@ public class EffectEvaluationActivity extends BaseActivity<EffectEvaluationPrese
     protected void onResume() {
         super.onResume();
         initToolBar();
-        initTab();
+//        initTab();    // 在OnResume()初始化 tab 会导致从 Activity 返回此页面后，tab下数据为空 bug
     }
 
 

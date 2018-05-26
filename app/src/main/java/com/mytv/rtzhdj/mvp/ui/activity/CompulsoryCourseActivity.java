@@ -104,6 +104,7 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
             ARouter.getInstance().build(ARoutePath.PATH_MY_TASK).navigation();
         });
         collapsingToolbar.setTitleEnabled(false);
+        initTab();
 
         // 获取头部信息
         mPresenter.callMethodOfGetMyScore(DataHelper.getIntergerSF(CompulsoryCourseActivity.this,
@@ -196,7 +197,7 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
     protected void onResume() {
         super.onResume();
         initToolBar();
-        initTab();
+//        initTab();
     }
 
 
