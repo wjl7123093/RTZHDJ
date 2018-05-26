@@ -83,7 +83,7 @@ public class MyReceiveFragment extends BaseFragment<MyReceivePresenter> implemen
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
         initRefreshLayout();
 
-        // 获取我的捐赠数据
+        // 获取领取的物品数据
         mPresenter.callMethodOfPostMyClaimGoodsList(
                 DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
                 getArguments().getInt("type"), false);
@@ -142,7 +142,7 @@ public class MyReceiveFragment extends BaseFragment<MyReceivePresenter> implemen
     @Override
     public void loadData(List<MyDonateEntity> receiveList) {
         if (receiveList.size() == 0) {
-            showMessage("暂无数据");
+//            showMessage("暂无数据");
             return;
         }
 
@@ -150,19 +150,8 @@ public class MyReceiveFragment extends BaseFragment<MyReceivePresenter> implemen
     }
 
     private void initRefreshLayout() {
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-            }
-        });
-//        mRefreshLayout.setEnableLoadmore(false);
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
-            }
-        });
+        mRefreshLayout.setEnableRefresh(false);
+        mRefreshLayout.setEnableLoadmore(false);
     }
 
     private void initAdapter(List<MyDonateEntity> receiveList) {
