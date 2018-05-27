@@ -1,15 +1,13 @@
 package com.mytv.rtzhdj.mvp.ui.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.DataServer;
 import com.mytv.rtzhdj.app.data.entity.MyWishEntity;
-import com.mytv.rtzhdj.app.data.entity.TestingEntity;
+import com.mytv.rtzhdj.app.utils.ImageLoader;
 
 import java.util.List;
 
@@ -36,6 +34,12 @@ public class MyWishAdapter extends BaseQuickAdapter<MyWishEntity, BaseViewHolder
         helper.setText(R.id.tv_content, item.getContent());
         helper.setText(R.id.tv_status, item.isAuditStatus() ? "审核完成" : "待审核");
 
+        if (TextUtils.isEmpty(item.getAllImgUrl())) {
+            helper.setGone(R.id.iv_image, false);
+        } else {
+            helper.setGone(R.id.iv_image, true);
+            ImageLoader.getInstance().showImage(mContext, helper.getView(R.id.iv_image), item.getAllImgUrl());
+        }
     }
 
 

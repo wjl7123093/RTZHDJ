@@ -14,6 +14,7 @@ public class MyWishEntity {
     private int ID;
     private String Content;
     private boolean AuditStatus;
+    private String AllImgUrl;
 
     public int getID() {
         return ID;
@@ -37,5 +38,13 @@ public class MyWishEntity {
 
     public void setAuditStatus(boolean auditStatus) {
         AuditStatus = auditStatus;
+    }
+
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
     }
 }
