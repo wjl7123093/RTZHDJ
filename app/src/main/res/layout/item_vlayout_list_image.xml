@@ -77,6 +77,5 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/len_6"
-        android:background="@mipmap/ic_launcher"
         android:layout_marginRight="@dimen/dp_10"/>
 </LinearLayout>

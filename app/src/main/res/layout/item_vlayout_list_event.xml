@@ -67,7 +67,7 @@
                 android:textSize="@dimen/font_14"
                 android:textColor="@color/white"
                 android:layout_marginRight="@dimen/len_10"
-                android:drawableLeft="@mipmap/ic_digs"
+                android:drawableLeft="@mipmap/ic_join_volunteer_digs"
                 android:drawablePadding="@dimen/len_4"/>
             <!-- 评论数 -->
             <TextView
@@ -77,7 +77,7 @@
                 android:textSize="@dimen/font_14"
                 android:textColor="@color/white"
                 android:layout_marginRight="@dimen/len_10"
-                android:drawableLeft="@mipmap/ic_comment"
+                android:drawableLeft="@mipmap/ic_join_volunteer_comments"
                 android:drawablePadding="@dimen/len_4"/>
         </LinearLayout>
     </RelativeLayout>
