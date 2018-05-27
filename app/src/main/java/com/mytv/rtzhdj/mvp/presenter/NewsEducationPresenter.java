@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -161,8 +162,13 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
                 holder.setText(R.id.tv_star_num, data.get(position).getDigs() + "");
                 holder.setText(R.id.tv_comment_num, data.get(position).getComments() + "");
 
-                com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(mActivity,
-                        holder.getView(R.id.iv_image), data.get(position).getImgUrl());
+                if (!TextUtils.isEmpty(data.get(position).getAllImgUrl())) {
+                    holder.setGone(R.id.iv_image, true);
+                    com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(mActivity,
+                            holder.getView(R.id.iv_image), data.get(position).getAllImgUrl());
+                } else {
+                    holder.setGone(R.id.iv_image, false);
+                }
 
                 holder.getView(R.id.rl_container).setOnClickListener(view -> {
                     // 新闻详情页
