@@ -15,7 +15,9 @@ import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.di.component.DaggerMyReportingComponent;
 import com.mytv.rtzhdj.di.module.MyReportingModule;
 import com.mytv.rtzhdj.mvp.contract.MyReportingContract;
@@ -79,6 +81,7 @@ public class MyReportingActivity extends BaseActivity<MyReportingPresenter> impl
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
 
+        mTvPartyBranch.setText(DataHelper.getStringSF(MyReportingActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_NAME));
     }
 
 
