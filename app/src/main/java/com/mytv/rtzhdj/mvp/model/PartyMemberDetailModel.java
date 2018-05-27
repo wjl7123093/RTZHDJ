@@ -10,7 +10,13 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.api.service.PartyMemberDetailService;
+import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyMienEntity;
 import com.mytv.rtzhdj.mvp.contract.PartyMemberDetailContract;
+
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +38,9 @@ public class PartyMemberDetailModel extends BaseModel implements PartyMemberDeta
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<PartyMienEntity>> getPartyMemberDetail(int memberId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(PartyMemberDetailService.class)
+                .getPartyMemberDetail(memberId);
+    }
 }

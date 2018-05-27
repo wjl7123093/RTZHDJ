@@ -12,11 +12,14 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.alibaba.android.arouter.utils.TextUtils;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.PartyMienEntity;
+import com.mytv.rtzhdj.app.utils.ImageLoader;
 import com.mytv.rtzhdj.di.component.DaggerPartyMemberDetailComponent;
 import com.mytv.rtzhdj.di.module.PartyMemberDetailModule;
 import com.mytv.rtzhdj.mvp.contract.PartyMemberDetailContract;
@@ -117,7 +120,7 @@ public class PartyMemberDetailActivity extends BaseActivity<PartyMemberDetailPre
 
         initRefreshLayout();
         // 获取党员详情
-        mPresenter.callMethodOfGetPartyMemberDetails(id + "");
+        mPresenter.callMethodOfGetPartyMemberDetails(id, false);
     }
 
 
@@ -158,4 +161,18 @@ public class PartyMemberDetailActivity extends BaseActivity<PartyMemberDetailPre
     }
 
 
+    @Override
+    public void loadData(PartyMienEntity memberInfo) {
+        mTvName.setText(memberInfo.getTitle());
+        mTvPartyBranch.setText(memberInfo.getPublishmentSystemName());
+        mTvContacts.setText(memberInfo.getTelePhone());
+        mTvOtherContacts.setText(memberInfo.getLinkPhone());
+        mTvAddress.setText(memberInfo.getAddress());
+        mTvQQ.setText(memberInfo.getQQ());
+        mTvEmail.setText(memberInfo.getEmail());
+
+        if (!TextUtils.isEmpty(memberInfo.getAllImgUrl())) {
+            ImageLoader.getInstance().showImage(PartyMemberDetailActivity.this, mIvHeader, memberInfo.getAllImgUrl());
+        }
+    }
 }
