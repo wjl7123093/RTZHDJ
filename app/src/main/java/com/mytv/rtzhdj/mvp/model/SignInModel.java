@@ -9,6 +9,7 @@ import com.jess.arms.mvp.BaseModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.SigninService;
 import com.mytv.rtzhdj.app.data.entity.SignEntity;
+import com.mytv.rtzhdj.app.data.entity.SignScoresEntity;
 import com.mytv.rtzhdj.mvp.contract.SignInContract;
 
 import javax.inject.Inject;
@@ -36,7 +37,7 @@ public class SignInModel extends BaseModel implements SignInContract.Model {
     }
 
     @Override
-    public Observable<BaseJson> postSignForScore(int userId) {
+    public Observable<BaseJson<SignScoresEntity>> postSignForScore(int userId) {
         return mRepositoryManager.obtainRetrofitService(SigninService.class)
                 .postSignForScore(userId);
     }

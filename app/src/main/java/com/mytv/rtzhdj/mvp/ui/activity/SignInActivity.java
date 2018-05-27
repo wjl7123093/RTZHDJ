@@ -18,6 +18,7 @@ import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.SignEntity;
+import com.mytv.rtzhdj.app.data.entity.SignScoresEntity;
 import com.mytv.rtzhdj.di.component.DaggerSignInComponent;
 import com.mytv.rtzhdj.di.module.SignInModule;
 import com.mytv.rtzhdj.mvp.contract.SignInContract;
@@ -145,15 +146,20 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
 
     @Override
-    public void changeStatus() {
-        mSignEntity.setDays(mSignEntity.getDays() + 1);
+    public void changeStatus(SignScoresEntity signScoresEntity) {
         mSignEntity.setIfSign(1);
-        changeUI(mSignEntity.getDays());
+        changeUI(mSignEntity.getDays() + mSignEntity.getIfSign());
 
-        mTvSignBig.setText("已签到");
+        mTvSignBig.setText("+" + signScoresEntity.getIntegral());
         mTvSignStatus.setText("今日已签到");
-        mTvScoresInfo.setText("你还差1天签到获" + 2 + "积分");
         mTvSignDays.setText("连续签到" + mSignEntity.getDays() + "天");
+
+        // 保存总积分
+        DataHelper.setIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_LOGIN_INTEGRAL,
+                signScoresEntity.getCurrentIntegral());
+        // 保存增加积分
+        DataHelper.setIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_LOGIN_ADD_INTEGRAL,
+                signScoresEntity.getIntegral());
     }
 
     @Override
@@ -161,31 +167,38 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         mSignEntity = signEntity;
         if (signEntity.getIfSign() == 0) {
             mTvSignStatus.setText("尚未签到");
+        } else {
+            mTvSignStatus.setText("已签到");
+            mTvSignBig.setText("+" + DataHelper.getIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_LOGIN_ADD_INTEGRAL));
         }
         mTvSignDays.setText("连续签到" + signEntity.getDays() + "天");
 
-        changeUI(signEntity.getDays());
+        changeUI(signEntity.getDays() + signEntity.getIfSign());
     }
 
     private void changeUI(int days) {
         switch (days) {
             case 1:
                 mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvScoresInfo.setText("你还差 1 天签到获 2 积分");
                 break;
             case 2:
                 mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign2.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvScoresInfo.setText("你还差 1 天签到获 3 积分");
                 break;
             case 3:
                 mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign2.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign3.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvScoresInfo.setText("你还差 1 天签到获 4 积分");
                 break;
             case 4:
                 mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign2.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign3.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign4.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvScoresInfo.setText("你还差 1 天签到获 5 积分");
                 break;
             case 5:
                 mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
@@ -193,6 +206,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 mTvSign3.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign4.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign5.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvScoresInfo.setText("你还差 1 天签到获 6 积分");
                 break;
             case 6:
                 mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
@@ -201,6 +215,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 mTvSign4.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign5.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign6.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvScoresInfo.setText("你还差 1 天签到获 10 积分");
                 break;
             case 7:
                 mTvSign1.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
@@ -210,6 +225,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 mTvSign5.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign6.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
                 mTvSign7.setBackground(getResources().getDrawable(R.drawable.sp_bg_sign_small));
+                mTvScoresInfo.setText("你还差 1 天签到获 10 积分");
                 break;
         }
     }

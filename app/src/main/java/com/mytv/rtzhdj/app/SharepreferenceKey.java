@@ -33,7 +33,9 @@ public interface SharepreferenceKey {
     // PhotoUrl
     String KEY_LOGIN_HEADER_URL = "login_header_url"; // 用户头像
     // Integral
-    String KEY_LOGIN_INTEGRAL = "login_integral"; // 积分
+    String KEY_LOGIN_INTEGRAL = "login_integral"; // 当前总积分
+    // AddIntegral
+    String KEY_LOGIN_ADD_INTEGRAL = "login_add_integral"; // 当前增加积分
     // PositiveEnergyValue
     String KEY_POSITIVE_ENERGY_VALUE = "login_positive_energy_value"; // 正能量值
     // UserTypeId

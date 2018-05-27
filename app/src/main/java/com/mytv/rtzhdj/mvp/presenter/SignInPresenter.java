@@ -13,6 +13,7 @@ import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.SignEntity;
+import com.mytv.rtzhdj.app.data.entity.SignScoresEntity;
 import com.mytv.rtzhdj.mvp.contract.SignInContract;
 import com.mytv.rtzhdj.mvp.ui.activity.SignInActivity;
 import com.zchu.rxcache.data.CacheResult;
@@ -77,13 +78,13 @@ public class SignInPresenter extends BasePresenter<SignInContract.Model, SignInC
                     mRootView.hideLoading();
                 })
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<SignScoresEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@NonNull BaseJson postResult) {
-                        Log.e("TAG", postResult.toString());
+                    public void onNext(@NonNull BaseJson<SignScoresEntity> signScoreEntity) {
+                        Log.e("TAG", signScoreEntity.toString());
 
-                        if (postResult.isSuccess())
-                            mRootView.changeStatus();
+                        if (signScoreEntity.isSuccess() && signScoreEntity.getData() != null)
+                            mRootView.changeStatus(signScoreEntity.getData());
                     }
                 });
     }
