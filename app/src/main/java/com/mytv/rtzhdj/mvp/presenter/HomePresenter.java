@@ -191,19 +191,26 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 });
 
                 // 跑马灯。。。
-                MarqueeView marqueeView = holder.getView(R.id.marqueeView1);
+                MarqueeView marqueeView1 = holder.getView(R.id.marqueeView1);
+                MarqueeView marqueeView2 = holder.getView(R.id.marqueeView2);
 
                 List<String> info1 = new ArrayList<>();
+                List<String> info2 = new ArrayList<>();
                 for (int i = 0; i < NoticeBlock_ChildContent.size(); i++) {
                     info1.add(NoticeBlock_ChildContent.get(i).getTitle());
                 }
+                for (int i = 0; i < NoticeBlock_ChildContent.size(); i++) {
+                    info2.add(NoticeBlock_ChildContent.get(i).getAddDate());
+                }
                 if (info1.size() == 1) {    // size == 1时，marquee 组件会失效报null，所以再加一个。
                     info1.add(info1.get(0));
+                    info2.add(info2.get(0));
                 }
                 if (info1.size() > 0) {
-                    marqueeView.startWithList(info1);
+                    marqueeView1.startWithList(info1);
+                    marqueeView2.startWithList(info2);
                     // 在代码里设置自己的动画
-                    marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
+                    marqueeView1.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position, TextView textView) {
 //                        mRootView.setMarqueeClick(position);
@@ -260,19 +267,26 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                MarqueeView marqueeView = holder.getView(R.id.marqueeView1);
+                MarqueeView marqueeView1 = holder.getView(R.id.marqueeView1);
+                MarqueeView marqueeView2 = holder.getView(R.id.marqueeView2);
 
                 List<String> info1 = new ArrayList<>();
+                List<String> info2 = new ArrayList<>();
                 for (int i = 0; i < NoticeBlock_ChildContent.size(); i++) {
                     info1.add(NoticeBlock_ChildContent.get(i).getTitle());
                 }
+                for (int i = 0; i < NoticeBlock_ChildContent.size(); i++) {
+                    info2.add(NoticeBlock_ChildContent.get(i).getAddDate());
+                }
                 if (info1.size() == 1) {    // size == 1时，marquee 组件会失效报null，所以再加一个。
                     info1.add(info1.get(0));
+                    info2.add(info2.get(0));
                 }
                 if (info1.size() > 0) {
-                    marqueeView.startWithList(info1);
+                    marqueeView1.startWithList(info1);
+                    marqueeView2.startWithList(info2);
                     // 在代码里设置自己的动画
-                    marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
+                    marqueeView1.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position, TextView textView) {
 //                        mRootView.setMarqueeClick(position);
