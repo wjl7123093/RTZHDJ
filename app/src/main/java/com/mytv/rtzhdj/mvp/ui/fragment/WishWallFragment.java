@@ -200,8 +200,20 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
                 }
             });
         } else {    // 我的心愿
-            mRefreshLayout.setEnableRefresh(false);
-            mRefreshLayout.setEnableLoadmore(false);
+//            mRefreshLayout.setEnableRefresh(false);
+//            mRefreshLayout.setEnableLoadmore(false);
+            mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+                @Override
+                public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+                }
+            });
+            mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+                @Override
+                public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+                }
+            });
         }
     }
 

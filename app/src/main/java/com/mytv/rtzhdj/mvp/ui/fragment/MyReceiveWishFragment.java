@@ -157,8 +157,20 @@ public class MyReceiveWishFragment extends BaseFragment<MyReceiveWishPresenter> 
     }
 
     private void initRefreshLayout() {
-        mRefreshLayout.setEnableRefresh(false);
-        mRefreshLayout.setEnableLoadmore(false);
+//        mRefreshLayout.setEnableRefresh(false);
+//        mRefreshLayout.setEnableLoadmore(false);
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
     }
 
     private void initAdapter(List<MyWishEntity> wishList) {
