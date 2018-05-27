@@ -30,6 +30,9 @@ public class Constant {
         int typeImage = 11;         //图片
         int typeHeader = 12;        //头部
         int typeSingle = 13;        //通栏布局
+
+        int typeScores = 14;        //积分栏
+        int typeCash = 15;          //缴费栏
     }
 
     // RecyclerView item 类型

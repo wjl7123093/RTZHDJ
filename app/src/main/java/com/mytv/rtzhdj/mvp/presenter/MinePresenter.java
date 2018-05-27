@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.SimpleAdapter;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -441,6 +440,37 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                         mRootView.setOnGridClick(itemPos, position);
                     }
                 });
+            }
+        };
+    }
+
+    @Override
+    public BaseDelegateAdapter initScores() {
+        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_mine_scores,
+                1, Constant.viewType.typeScores) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_scores, DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL) + "");
+
+                holder.getView(R.id.ll_scores_detail).setOnClickListener(view -> {
+                    // 积分明细
+                    ARouter.getInstance().build(ARoutePath.PATH_SCORES_DETAILS).navigation();
+                });
+            }
+        };
+    }
+
+    @Override
+    public BaseDelegateAdapter initCash() {
+        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_mine_cash,
+                1, Constant.viewType.typeCash) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+
             }
         };
     }

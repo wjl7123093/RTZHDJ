@@ -3,9 +3,9 @@ package com.mytv.rtzhdj.mvp.contract;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 
@@ -42,5 +42,9 @@ public interface MineContract {
 
         // 通栏[itemPos = 1 我的党支部，= 2 组织生活]
         BaseDelegateAdapter initColumn(int itemPos, String title);
+        // 积分栏
+        BaseDelegateAdapter initScores();
+        // 缴费栏
+        BaseDelegateAdapter initCash();
     }
 }
