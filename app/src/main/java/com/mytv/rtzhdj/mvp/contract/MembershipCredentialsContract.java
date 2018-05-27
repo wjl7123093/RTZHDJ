@@ -29,7 +29,7 @@ public interface MembershipCredentialsContract {
     interface Model extends IModel {
 
         // 获取组织关系列表
-        Observable<BaseJson<List<MembershipEntity>>> getUserTransList(boolean update);
+        Observable<BaseJson<List<MembershipEntity>>> getUserTransList(int userId, boolean update);
 
     }
 
@@ -42,7 +42,7 @@ public interface MembershipCredentialsContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取组织关系列表
-        void callMethodOfGetUserTransList(boolean refresh);
+        void callMethodOfGetUserTransList(int userId, boolean update);
 
     }
 }

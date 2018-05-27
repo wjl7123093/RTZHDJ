@@ -16,8 +16,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.DataServer;
 import com.mytv.rtzhdj.app.data.entity.MembershipEntity;
 import com.mytv.rtzhdj.di.component.DaggerMembershipCredentialsComponent;
@@ -69,6 +71,8 @@ public class MembershipCredentialsActivity extends BaseActivity<MembershipCreden
     TextView mTvDuty;
     @BindView(R.id.tv_party_branch)
     TextView mTvPartyBranch;
+    @BindView(R.id.tv_no_data)
+    TextView mTvNoData;
     @BindView(R.id.btn_transfer)
     Button mBtnTransfer;
 
@@ -114,7 +118,9 @@ public class MembershipCredentialsActivity extends BaseActivity<MembershipCreden
         });
 
         // 获取组织关系转接列表
-        mPresenter.callMethodOfGetUserTransList(false);
+//      DataHelper.getIntergerSF(MembershipCredentialsActivity.this, SharepreferenceKey.KEY_USER_ID)
+        mPresenter.callMethodOfGetUserTransList(DataHelper.getIntergerSF(
+                MembershipCredentialsActivity.this, SharepreferenceKey.KEY_USER_ID), false);
     }
 
 
@@ -152,6 +158,10 @@ public class MembershipCredentialsActivity extends BaseActivity<MembershipCreden
 
     @Override
     public void loadData(List<MembershipEntity> membershipList) {
+        if (membershipList.size() > 0) {
+            mTvNoData.setVisibility(View.GONE);
+        }
+
         initAdapter(membershipList);
     }
 

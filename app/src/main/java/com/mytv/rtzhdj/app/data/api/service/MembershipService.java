@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * 组织关系接口
@@ -24,5 +25,5 @@ public interface MembershipService {
      * @return
      */
     @GET("getUserTransList")
-    Observable<BaseJson<List<MembershipEntity>>> getUserTransList();
+    Observable<BaseJson<List<MembershipEntity>>> getUserTransList(@Query("UserID") int userId);
 }

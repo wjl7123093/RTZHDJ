@@ -109,9 +109,9 @@ public class MembershipCredentialsPresenter extends BasePresenter<MembershipCred
     }
 
     @Override
-    public void callMethodOfGetUserTransList(boolean refresh) {
-        mModel.getUserTransList(refresh)
-                .compose(RTZHDJApplication.rxCache.<BaseJson<List<MembershipEntity>>>transformObservable("MembershipEntity",
+    public void callMethodOfGetUserTransList(int userId, boolean update) {
+        mModel.getUserTransList(userId, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<MembershipEntity>>>transformObservable("MembershipEntity" + userId,
                         new TypeToken<BaseJson<List<MembershipEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))
                 .map(new CacheResult.MapFunc<BaseJson<List<MembershipEntity>>>())

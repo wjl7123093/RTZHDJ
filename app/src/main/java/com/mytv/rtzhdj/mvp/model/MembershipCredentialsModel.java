@@ -38,8 +38,8 @@ public class MembershipCredentialsModel extends BaseModel implements MembershipC
     }
 
     @Override
-    public Observable<BaseJson<List<MembershipEntity>>> getUserTransList(boolean update) {
+    public Observable<BaseJson<List<MembershipEntity>>> getUserTransList(int userId, boolean update) {
         return mRepositoryManager.obtainRetrofitService(MembershipService.class)
-                .getUserTransList();
+                .getUserTransList(userId);
     }
 }
