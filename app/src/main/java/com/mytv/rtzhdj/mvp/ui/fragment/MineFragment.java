@@ -21,6 +21,7 @@ import com.mytv.rtzhdj.di.module.MineModule;
 import com.mytv.rtzhdj.mvp.contract.MineContract;
 import com.mytv.rtzhdj.mvp.presenter.MinePresenter;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.SignInActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -43,6 +44,8 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class MineFragment extends BaseFragment<MinePresenter> implements MineContract.View {
 
+    private final int REQUEST_CODE = 0X101;
+
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
     @BindView(R.id.recyclerview)
@@ -50,6 +53,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
 
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
+    private DelegateAdapter delegateAdapter = null;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -141,7 +145,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     @Override
     public void setOnSignClick() {
         // 天天签到
-        ARouter.getInstance().build(ARoutePath.PATH_SIGN_IN).navigation();
+//        ARouter.getInstance().build(ARoutePath.PATH_SIGN_IN)
+//                .navigation(getActivity(), REQUEST_CODE);
+
+        // ARouter 无法触发 onActivityResult
+        startActivityForResult(new Intent(getActivity(), SignInActivity.class), REQUEST_CODE);
     }
 
     @Override
@@ -201,12 +209,10 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     }
 
     private void initRecyclerView() {
-        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
 
         //初始化头部
-        BaseDelegateAdapter headerAdapter = mPresenter.initHeader(
-                "http://imgtu.5011.net/uploads/content/20170220/9520371487578487.jpg",
-                "はたけ·カカシ", "xxxxxx党支部");
+        BaseDelegateAdapter headerAdapter = mPresenter.initHeader();
         mAdapters.add(headerAdapter);
 
         // 我的党支部
@@ -281,5 +287,14 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         });*/
         mRefreshLayout.setEnableRefresh(false);
         mRefreshLayout.setEnableLoadmore(false);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0X101) {
+            // 刷新 Adapter【刷新积分】
+            delegateAdapter.notifyDataSetChanged();
+        }
     }
 }

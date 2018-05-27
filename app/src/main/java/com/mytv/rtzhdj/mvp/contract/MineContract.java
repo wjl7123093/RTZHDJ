@@ -35,7 +35,7 @@ public interface MineContract {
         BaseDelegateAdapter initGvMenu2();
         BaseDelegateAdapter initGvMenu3();
         BaseDelegateAdapter initTitle(int arrayPos, String title, String btnDesc, int scores);
-        BaseDelegateAdapter initHeader(String url, String name, String partyBranch);
+        BaseDelegateAdapter initHeader();
         BaseDelegateAdapter initSingle(float payment, int isPay);
         BaseDelegateAdapter initColumn2(int meetingTimes, int lessonTimes, int activeTimes);
 

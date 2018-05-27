@@ -254,7 +254,7 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
     }
 
     @Override
-    public BaseDelegateAdapter initHeader(String url, String name, String partyBranch) {
+    public BaseDelegateAdapter initHeader() {
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_mine_header,
                 1, Constant.viewType.typeHeader) {
