@@ -15,6 +15,8 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import javax.inject.Inject;
 
@@ -27,6 +29,9 @@ import com.mytv.rtzhdj.mvp.contract.WishDetailContract;
 import com.mytv.rtzhdj.mvp.ui.activity.WishDetailActivity;
 import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
+
+import java.util.List;
+import java.util.Map;
 
 
 @ActivityScope
@@ -85,6 +90,64 @@ public class WishDetailPresenter extends BasePresenter<WishDetailContract.Model,
                         Log.e(TAG, wishDetailEntity.getData().toString());
 
                         mRootView.loadData(wishDetailEntity.getData());
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfPostEditMyWish(Map<String, RequestBody> params, List<MultipartBody.Part> parts) {
+        mModel.postEditMyWish(params, parts)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e(TAG, postResult.toString());
+
+                        if (postResult.isSuccess()) {
+                            mRootView.showMessage("提交成功");
+                            mRootView.dismissDialog();
+                            mRootView.killMyself();
+                        }
+
+                    }
+                });
+    }
+
+    @Override
+    public void callMethodOfPostDeleteMyWish(int wishId) {
+        mModel.postDeleteMyWish(wishId)
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e(TAG, postResult.toString());
+
+                        if (postResult.isSuccess()) {
+                            mRootView.showMessage("删除成功");
+                            mRootView.killMyself();
+                        }
                     }
                 });
     }
