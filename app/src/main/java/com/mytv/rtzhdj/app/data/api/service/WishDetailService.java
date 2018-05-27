@@ -44,7 +44,7 @@ public interface WishDetailService {
      * @return
      */
     @Multipart
-    @POST("postMyWish")
+    @POST("PostEditMyWish")
     Observable<BaseJson> postEditMyWish(@PartMap Map<String, RequestBody> params,
                                         @Part List<MultipartBody.Part> parts);
 
@@ -53,7 +53,7 @@ public interface WishDetailService {
      * @return
      */
     @FormUrlEncoded
-    @POST("postWishDetail")
+    @POST("PostDeleteMyWish")
     Observable<BaseJson> postDeleteMyWish(@Field("WishID") int wishId);
 
 }
