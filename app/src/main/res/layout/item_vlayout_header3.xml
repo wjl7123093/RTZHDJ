@@ -16,8 +16,8 @@
     <RelativeLayout
         android:id="@+id/rl_container1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/len_80"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg_home_header"
         android:padding="@dimen/len_16"
         android:layout_marginBottom="@dimen/len_12">
 
@@ -26,24 +26,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_18"
-            android:textColor="@color/primary_dark"
-            android:text="个人未报到"
+            android:textColor="@color/white"
+            android:text="还未报到社区"
             android:gravity="center"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentLeft="true"/>
         <!-- 立刻报到 -->
         <TextView
             android:id="@+id/tv_report"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
-            android:textColor="@color/green_400"
-            android:text="点击此处立刻报到"
+            android:background="@drawable/sp_bg_join_btn_report"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/white"
+            android:text="点击报到"
             android:gravity="center"
-            android:layout_toRightOf="@id/tv_1"
-            android:layout_alignBottom="@id/tv_1"
-            android:layout_marginLeft="@dimen/len_10"/>
-        <TextView
+            android:layout_alignParentRight="true"/>
+        <!--<TextView
             android:id="@+id/tv_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +52,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"/>
 
-        <!-- 我的报到 -->
+        &lt;!&ndash; 我的报到 &ndash;&gt;
         <ImageView
             android:id="@+id/iv_my_report"
             android:layout_width="@dimen/len_28"
@@ -62,7 +60,7 @@
             android:src="@mipmap/ic_join_my_report"
             android:scaleType="centerCrop"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"/>-->
 
     </RelativeLayout>
 
@@ -70,8 +68,8 @@
     <RelativeLayout
         android:id="@+id/rl_container2"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg_home_header"
         android:padding="@dimen/len_16"
         android:layout_marginBottom="@dimen/len_12">
 
@@ -80,13 +78,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_16"
-            android:textColor="@color/primary_text"
-            android:text="中共XX市xxxx支部委员会"
+            android:textColor="@color/white"
+            android:text="已报到，参与更多精彩活动"
             android:gravity="center"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
-        <!-- 立刻报到 -->
-        <TextView
+            android:layout_alignParentLeft="true"/>
+        <com.mytv.rtzhdj.mvp.ui.widget.IconView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ic_join_activity"
+            android:textSize="@dimen/font_24"
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentRight="true"/>
+        <!-- 立刻报到 ffeb01-->
+        <!--<TextView
             android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,7 +111,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"/>
 
-        <!-- 我的报到 -->
+        &lt;!&ndash; 我的报到 &ndash;&gt;
         <ImageView
             android:id="@+id/iv_my_report2"
             android:layout_width="@dimen/len_28"
@@ -115,7 +119,7 @@
             android:src="@mipmap/ic_join_my_report"
             android:scaleType="centerCrop"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"/>-->
 
     </RelativeLayout>
 </LinearLayout>

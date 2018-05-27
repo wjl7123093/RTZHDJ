@@ -2,10 +2,8 @@ package com.mytv.rtzhdj.mvp.presenter;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -254,13 +252,13 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                     holder.getView(R.id.tv_report).setOnClickListener(view -> {
                         ARouter.getInstance().build(ARoutePath.PATH_DOUBLE_REPORTING).navigation();
                     });
-                    holder.getView(R.id.iv_my_report).setOnClickListener(view -> {
+                    /*holder.getView(R.id.iv_my_report).setOnClickListener(view -> {
                         ARouter.getInstance().build(ARoutePath.PATH_MY_REPORTING).navigation();
-                    });
+                    });*/
                 } else {
                     holder.getView(R.id.rl_container1).setVisibility(View.GONE);
                     holder.getView(R.id.rl_container2).setVisibility(View.VISIBLE);
-                    holder.setText(R.id.tv_name, partyInfoModel.getName());
+                    /*holder.setText(R.id.tv_name, partyInfoModel.getName());
                     holder.setText(R.id.tv_phone, partyInfoModel.getPhone());
                     holder.getView(R.id.tv_phone).setOnClickListener(view -> {
                         // 打电话
@@ -277,7 +275,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                     });
                     holder.getView(R.id.iv_my_report2).setOnClickListener(view -> {
                         ARouter.getInstance().build(ARoutePath.PATH_MY_REPORTING).navigation();
-                    });
+                    });*/
                 }
 
             }

@@ -113,6 +113,7 @@
     <string name="ic_join_my_donation">&#xe66b;</string>
     <string name="ic_join_my_receive">&#xe63a;</string>
     <string name="ic_join_all_receive">&#xe635;</string>
+    <string name="ic_join_activity">&#xe618;</string>
 
     <!-- signin -->
     <string name="sign_rules_desc">\n
