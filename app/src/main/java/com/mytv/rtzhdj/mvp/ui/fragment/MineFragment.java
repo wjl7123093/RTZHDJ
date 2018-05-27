@@ -23,7 +23,6 @@ import com.mytv.rtzhdj.mvp.presenter.MinePresenter;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -274,18 +273,13 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     }
 
     private void initRefreshLayout() {
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+        /*mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-            }
-        });
-        mRefreshLayout.setEnableLoadmore(false);
-        /*mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000*//*,false*//*);//传入false表示加载失败
+                refreshlayout.finishRefresh(2000*//*,false*//*);//传入false表示刷新失败
             }
         });*/
+        mRefreshLayout.setEnableRefresh(false);
+        mRefreshLayout.setEnableLoadmore(false);
     }
 }
