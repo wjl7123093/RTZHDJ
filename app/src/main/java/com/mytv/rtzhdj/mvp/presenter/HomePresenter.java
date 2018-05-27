@@ -440,14 +440,16 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         final List<Object> arrayList1 = new ArrayList<>();
         final List<Object> arrayList2 = new ArrayList<>();
         if (PublicSpiritedBlock_ChildContent.size()>1) {
-            if (PublicSpiritedBlock_ChildContent.get(0).size() > 1) {
-                arrayList1.add(PublicSpiritedBlock_ChildContent.get(0).get(0).getAllImgUrl());
-                arrayList1.add(PublicSpiritedBlock_ChildContent.get(0).get(1).getAllImgUrl());
+            if (PublicSpiritedBlock_ChildContent.get(0).size() > 0) {
+                for (int i = 0; i < PublicSpiritedBlock_ChildContent.get(0).size(); i++) {
+                    arrayList1.add(PublicSpiritedBlock_ChildContent.get(0).get(i).getAllImgUrl());
+                }
             }
 
-            if (PublicSpiritedBlock_ChildContent.get(1).size() > 1) {
-                arrayList2.add(PublicSpiritedBlock_ChildContent.get(1).get(0).getAllImgUrl());
-                arrayList2.add(PublicSpiritedBlock_ChildContent.get(1).get(1).getAllImgUrl());
+            if (PublicSpiritedBlock_ChildContent.get(1).size() > 0) {
+                for (int i = 0; i < PublicSpiritedBlock_ChildContent.get(1).size(); i++) {
+                    arrayList2.add(PublicSpiritedBlock_ChildContent.get(1).get(i).getAllImgUrl());
+                }
             }
         }
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
@@ -489,11 +491,13 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 //                initBannerParams(banner1, arrayList);
 //                initBannerParams(banner2, arrayList);
 
-                if (arrayList1.size() > 0 && arrayList2.size() > 0) {
+                if (arrayList1.size() > 0) {
+                    // 初始化默认显示第一页数据
+                    tvJoinNum1.setText(PublicSpiritedBlock_ChildContent.get(0).get(0).getEnrollCount() + "");
+                    tvTitle1.setText(PublicSpiritedBlock_ChildContent.get(0).get(0).getTitle());
+                    tvStartNum1.setText(PublicSpiritedBlock_ChildContent.get(0).get(0).getDigs() + "");
+
                     initBannerParams(banner1, arrayList1);
-                    initBannerParams(banner2, arrayList2);
-
-
                     banner1.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                         @Override
                         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -535,6 +539,24 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
                         }
                     });
+                    banner1.setOnBannerListener(new OnBannerListener() {
+                        @Override
+                        public void OnBannerClick(int position) {
+                            ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+                                    .withInt("nodeId", PublicSpiritedBlock_ChildContent.get(0).get(position).getNodeId())
+                                    .withInt("id", PublicSpiritedBlock_ChildContent.get(0).get(position).getArticleId())
+                                    .navigation();
+                        }
+                    });
+                }
+
+                if (arrayList2.size() > 0) {
+                    // 初始化默认显示第一页数据
+                    tvJoinNum2.setText(PublicSpiritedBlock_ChildContent.get(1).get(0).getEnrollCount() + "");
+                    tvTitle2.setText(PublicSpiritedBlock_ChildContent.get(1).get(0).getTitle());
+                    tvStartNum2.setText(PublicSpiritedBlock_ChildContent.get(1).get(0).getDigs() + "");
+
+                    initBannerParams(banner2, arrayList2);
                     banner2.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                         @Override
                         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -574,15 +596,6 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                         @Override
                         public void onPageScrollStateChanged(int state) {
 
-                        }
-                    });
-                    banner1.setOnBannerListener(new OnBannerListener() {
-                        @Override
-                        public void OnBannerClick(int position) {
-                            ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
-                                    .withInt("nodeId", PublicSpiritedBlock_ChildContent.get(0).get(position).getNodeId())
-                                    .withInt("id", PublicSpiritedBlock_ChildContent.get(0).get(position).getArticleId())
-                                    .navigation();
                         }
                     });
                     banner2.setOnBannerListener(new OnBannerListener() {
