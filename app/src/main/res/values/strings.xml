@@ -65,6 +65,7 @@
     <string name="title_scores_details">积分明细</string>
     <string name="title_questionaire">问卷调查</string>
     <string name="title_organization">组织活动</string>
+    <string name="title_report_community">报到社区</string>
 
     <!-- main tab -->
     <string name="tab_home">首页</string>

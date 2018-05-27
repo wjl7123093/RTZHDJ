@@ -103,7 +103,8 @@
         <activity
             android:name=".mvp.ui.activity.VolunteerServiceActivity"
             android:label="@string/title_volunteer_service" />
-        <activity android:name=".mvp.ui.activity.ReportCommunityActivity" />
+        <activity android:name=".mvp.ui.activity.ReportCommunityActivity"
+            android:label="@string/title_report_community"/>
         <activity
             android:name=".mvp.ui.activity.SurroundingCommunityActivity"
             android:label="@string/title_surrounding_community" />
