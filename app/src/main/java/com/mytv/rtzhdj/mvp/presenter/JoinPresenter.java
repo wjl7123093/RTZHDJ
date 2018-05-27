@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -18,7 +17,6 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
@@ -37,6 +35,7 @@ import com.mytv.rtzhdj.app.data.entity.MyJoinEntity;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
+import com.mytv.rtzhdj.mvp.ui.widget.IconView;
 import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
 
@@ -321,34 +320,34 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 super.onBindViewHolder(holder, position);
                 View includeWish1 = holder.getView(R.id.include_wish1);
                 View includeWish2 = holder.getView(R.id.include_wish2);
-                View includeWish3 = holder.getView(R.id.include_wish3);
+//                View includeWish3 = holder.getView(R.id.include_wish3);
                 TextView tvTitle1 = includeWish1.findViewById(R.id.tv_title);
                 TextView tvTitle2 = includeWish2.findViewById(R.id.tv_title);
-                TextView tvTitle3 = includeWish3.findViewById(R.id.tv_title);
-                TextView tvDesc1 = includeWish1.findViewById(R.id.tv_desc);
-                TextView tvDesc2 = includeWish2.findViewById(R.id.tv_desc);
-                TextView tvDesc3 = includeWish3.findViewById(R.id.tv_desc);
-                ImageView icon1 = includeWish1.findViewById(R.id.iv_icon);
-                ImageView icon2 = includeWish2.findViewById(R.id.iv_icon);
-                ImageView icon3 = includeWish3.findViewById(R.id.iv_icon);
+//                TextView tvTitle3 = includeWish3.findViewById(R.id.tv_title);
+//                TextView tvDesc1 = includeWish1.findViewById(R.id.tv_desc);
+//                TextView tvDesc2 = includeWish2.findViewById(R.id.tv_desc);
+//                TextView tvDesc3 = includeWish3.findViewById(R.id.tv_desc);
+                IconView icon1 = includeWish1.findViewById(R.id.ic_icon);
+                IconView icon2 = includeWish2.findViewById(R.id.ic_icon);
+//                ImageView icon3 = includeWish3.findViewById(R.id.iv_icon);
 
                 tvTitle1.setText(proTitle[0]);
                 tvTitle2.setText(proTitle[1]);
-                tvTitle3.setText(proTitle[2]);
-                tvDesc1.setText(proDesc[0]);
-                tvDesc2.setText(proDesc[1]);
-                tvDesc3.setText(proDesc[2]);
-                Glide.with(activity).load(images.get(0)).into(icon1);
-                Glide.with(activity).load(images.get(1)).into(icon2);
-                Glide.with(activity).load(images.get(2)).into(icon3);
+//                tvTitle3.setText(proTitle[2]);
+//                tvDesc1.setText(proDesc[0]);
+//                tvDesc2.setText(proDesc[1]);
+//                tvDesc3.setText(proDesc[2]);
+                icon1.setText(activity.getResources().getString(R.string.ic_join_my_wish));
+                icon2.setText(activity.getResources().getString(R.string.ic_join_my_receive_wish));
+//                Glide.with(activity).load(images.get(2)).into(icon3);
 
-                includeWish1.setOnClickListener(view -> {   // 心愿墙
+                holder.getView(R.id.iv_image).setOnClickListener(view -> {   // 心愿墙
                     mRootView.setOnColumnClick(0, 0);
                 });
-                includeWish2.setOnClickListener(view -> {   // 我要捐赠
+                includeWish1.setOnClickListener(view -> {   // 我的心愿
                     mRootView.setOnColumnClick(0, 1);
                 });
-                includeWish3.setOnClickListener(view -> {   // 所有捐赠物品
+                includeWish2.setOnClickListener(view -> {   // 认领的心愿
                     mRootView.setOnColumnClick(0, 2);
                 });
             }
@@ -370,8 +369,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4);
         gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(2);    // 控制子元素之间的水平间距
-        gridLayoutHelper.setWeights(new float[]{22, 28, 22, 28});
-        return new BaseDelegateAdapter(activity, gridLayoutHelper , R.layout.item_vlayout_grid2,
+        return new BaseDelegateAdapter(activity, gridLayoutHelper , R.layout.item_vlayout_grid,
                 4, Constant.viewType.typeColumn) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {

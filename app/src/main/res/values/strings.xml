@@ -106,6 +106,9 @@
     <!-- login edt -->
     <string name="ic_login_acc">&#xe6a2;</string>
     <string name="ic_login_pwd">&#xe616;</string>
+    <!-- Join -->
+    <string name="ic_join_my_wish">&#xe64c;</string>
+    <string name="ic_join_my_receive_wish">&#xe64d;</string>
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

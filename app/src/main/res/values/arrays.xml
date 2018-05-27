@@ -65,12 +65,10 @@
     <integer-array name="join_plus_image">
         <item>@mipmap/ic_join_wishwall</item>
         <item>@mipmap/ic_join_donate</item>
-        <item>@mipmap/ic_join_all_donation</item>
     </integer-array>
     <string-array name="join_plus_title">
-        <item>心愿墙</item>
-        <item>我要捐赠</item>
-        <item>所有捐赠物品</item>
+        <item>我的心愿</item>
+        <item>我认领的心愿</item>
     </string-array>
     <string-array name="join_plus_desc">
         <item>认领心愿，点亮梦想</item>
@@ -81,16 +79,16 @@
 
     <!--参与页我的心愿区域-->
     <integer-array name="join_column_wish_image">
-        <item>@mipmap/ic_join_my_wish</item>
-        <item>@mipmap/ic_join_my_receive_wish</item>
+        <item>@mipmap/ic_join_donate</item>
         <item>@mipmap/ic_join_my_donation</item>
         <item>@mipmap/ic_join_my_receive</item>
+        <item>@mipmap/ic_join_all_receive</item>
     </integer-array>
     <string-array name="join_column_wish_title">
-        <item>我的心愿</item>
-        <item>我认领的心愿</item>
-        <item>我的捐赠</item>
-        <item>我领取的物品</item>
+        <item>我要捐赠</item>
+        <item>我已捐赠</item>
+        <item>我已领取</item>
+        <item>全部物品</item>
     </string-array>
 
 

@@ -179,30 +179,30 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
                         ARouter.getInstance().build(ARoutePath.PATH_WISH_WALL)
                                 .withString("type", "wall").navigation();
                         break;
-                    case 1: // 我要捐赠
-                        ARouter.getInstance().build(ARoutePath.PATH_DONATE).navigation();
+                    case 1: // 我的心愿
+                        ARouter.getInstance().build(ARoutePath.PATH_WISH_WALL)
+                                .withString("type", "mine").navigation();
                         break;
-                    case 2: // 所有捐赠物品
-                        ARouter.getInstance().build(ARoutePath.PATH_MY_DONATION)
-                                .withString("type", "all").navigation();
+                    case 2: // 我认领的心愿
+                        ARouter.getInstance().build(ARoutePath.PATH_MY_RECEIVE_WISH).navigation();
                         break;
                 }
                 break;
             case 1: // 我的心愿区
                 switch (position) {
-                    case 0: // 我的心愿
-                        ARouter.getInstance().build(ARoutePath.PATH_WISH_WALL)
-                                .withString("type", "mine").navigation();
+                    case 0: // 我要捐赠
+                        ARouter.getInstance().build(ARoutePath.PATH_DONATE).navigation();
                         break;
-                    case 1: // 我认领的心愿
-                        ARouter.getInstance().build(ARoutePath.PATH_MY_RECEIVE_WISH).navigation();
-                        break;
-                    case 2: // 我的捐赠
+                    case 1: // 我已捐赠
                         ARouter.getInstance().build(ARoutePath.PATH_MY_DONATION)
                                 .withString("type", "mine").navigation();
                         break;
-                    case 3: // 我领取的物品
+                    case 2: // 我已领取
                         ARouter.getInstance().build(ARoutePath.PATH_MY_RECEIVE).navigation();
+                        break;
+                    case 3: // 我已领取
+                        ARouter.getInstance().build(ARoutePath.PATH_MY_DONATION)
+                                .withString("type", "all").navigation();
                         break;
                 }
                 break;
