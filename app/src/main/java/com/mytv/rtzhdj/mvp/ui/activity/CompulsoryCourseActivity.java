@@ -77,6 +77,10 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
     private String[] titles;
     private String mTitle;      // 标题栏标题
 
+    private int mIntegral = 0;
+    private int mPlanValue = 0;
+    private int mNextValue = 0;
+
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
 
@@ -101,7 +105,10 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
         titles = new String[]{"全部", "未完成", "已完成"};
 
         mTvQueryTask.setOnClickListener(view -> {
-            ARouter.getInstance().build(ARoutePath.PATH_MY_TASK).navigation();
+            ARouter.getInstance().build(ARoutePath.PATH_MY_TASK)
+                    .withInt("Integeral", mIntegral)
+                    .withInt("PlanValue", mPlanValue)
+                    .withInt("NextValue", mNextValue).navigation();
         });
         collapsingToolbar.setTitleEnabled(false);
         initTab();
@@ -208,6 +215,10 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
 
     @Override
     public void loadHeaderData(HeaderIntegralEntity headerIntegralEntity) {
+        mIntegral = headerIntegralEntity.getIntegral();
+        mPlanValue = headerIntegralEntity.getPlanValue();
+        mNextValue = headerIntegralEntity.getNextValue();
+
         mTvScores.setText("本月获得积分: " + headerIntegralEntity.getIntegral());
         mTvPowerNum.setText("您的正能量值: " + headerIntegralEntity.getPlanValue());
         mTvDifferFrom.setText("距下一积分任务还差: " + headerIntegralEntity.getNextValue() + " 请继续加油!");

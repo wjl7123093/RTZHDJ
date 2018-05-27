@@ -9,22 +9,19 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.di.component.DaggerMyTaskComponent;
 import com.mytv.rtzhdj.di.module.MyTaskModule;
 import com.mytv.rtzhdj.mvp.contract.MyTaskContract;
 import com.mytv.rtzhdj.mvp.presenter.MyTaskPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 
 import org.raphets.roundimageview.RoundImageView;
 
@@ -66,6 +63,13 @@ public class MyTaskActivity extends BaseActivity<MyTaskPresenter> implements MyT
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
 
+    @Autowired
+    int Integeral;
+    @Autowired
+    int PlanValue;
+    @Autowired
+    int NextValue;
+
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
 
@@ -81,6 +85,7 @@ public class MyTaskActivity extends BaseActivity<MyTaskPresenter> implements MyT
 
     @Override
     public int initView(Bundle savedInstanceState) {
+        ARouter.getInstance().inject(this);
         return R.layout.activity_my_task; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -90,6 +95,9 @@ public class MyTaskActivity extends BaseActivity<MyTaskPresenter> implements MyT
 
         initRefreshLayout();
 
+        mTvScores.setText("本月获得积分: " + Integeral);
+        mTvPowerNum.setText("您的正能量值: " + PlanValue);
+        mTvDifferFrom.setText("距下一积分任务还差: " + NextValue + " 请继续加油!");
     }
 
 
