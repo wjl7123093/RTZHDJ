@@ -183,19 +183,22 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                             ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                                     .withString("title", "必修课")
                                     .withInt("nodeId", coursewareList.get(position).getNodeId())
-                                    .withInt("articleId", coursewareList.get(position).getArticleId()).navigation();
+                                    .withInt("articleId", coursewareList.get(position).getArticleId())
+                                    .withInt("courseType", 2).navigation();
                             break;
                         case 1: // 选修课
                             ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                                     .withString("title", "选修课")
                                     .withInt("nodeId", coursewareList.get(position).getNodeId())
-                                    .withInt("articleId", coursewareList.get(position).getArticleId()).navigation();
+                                    .withInt("articleId", coursewareList.get(position).getArticleId())
+                                    .withInt("courseType", 2).navigation();
                             break;
                         case 2: // 微党课
                             ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                                     .withString("title", "微党课")
                                     .withInt("nodeId", coursewareList.get(position).getNodeId())
-                                    .withInt("articleId", coursewareList.get(position).getArticleId()).navigation();
+                                    .withInt("articleId", coursewareList.get(position).getArticleId())
+                                    .withInt("courseType", 2).navigation();
                             break;
                     }
                 });

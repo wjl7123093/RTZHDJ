@@ -50,6 +50,7 @@ public class MyJoinEntity {
         private String Picture;
         private String EnrollEndDate;
         private String AllImgUrl;
+        private int IsEnd;
 
         public int getNodeId() {
             return NodeId;
@@ -113,6 +114,14 @@ public class MyJoinEntity {
 
         public void setAllImgUrl(String allImgUrl) {
             AllImgUrl = allImgUrl;
+        }
+
+        public int getIsEnd() {
+            return IsEnd;
+        }
+
+        public void setIsEnd(int isEnd) {
+            IsEnd = isEnd;
         }
     }
 

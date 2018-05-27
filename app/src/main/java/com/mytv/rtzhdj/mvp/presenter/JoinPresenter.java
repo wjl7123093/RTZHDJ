@@ -174,7 +174,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                                 .imageView(holder.getView(R.id.iv_event))
                                 .build());
 
-//                holder.setText(R.id.tv_status, status == 0 ? "进行中" : "已结束");
+                holder.setText(R.id.tv_status, volunteerBlocks.get(position).getIsEnd() == 0 ? "进行中" : "已结束");
 //                holder.setText(R.id.tv_join_num, "参与人数: " + volunteerBlocks.get(position).);
                 holder.setText(R.id.tv_star_num, "" + volunteerBlocks.get(position).getDigs());
                 holder.setText(R.id.tv_comment_num, "" + volunteerBlocks.get(position).getComments());
@@ -186,7 +186,8 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                     public void onClick(View view) {
                         ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
                                 .withInt("nodeId", volunteerBlocks.get(position).getNodeId())
-                                .withInt("id", volunteerBlocks.get(position).getContentId()).navigation();
+                                .withInt("id", volunteerBlocks.get(position).getContentId())
+                                .withString("imageUrl", volunteerBlocks.get(position).getAllImgUrl()).navigation();
                     }
                 });
 

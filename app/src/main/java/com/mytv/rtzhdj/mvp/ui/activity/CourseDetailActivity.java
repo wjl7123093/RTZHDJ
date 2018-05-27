@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,8 +20,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.CoursewareDetailEntity;
 import com.mytv.rtzhdj.app.utils.TimeTools;
@@ -59,6 +62,8 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @BindView(R.id.toolbar_menu)
     RelativeLayout mBtnToolbarMenu;
 
+    @BindView(R.id.ll_time_counter)
+    LinearLayout mLlTimeCounter;
     @BindView(R.id.webView)
     WebView mWebView;
     @BindView(R.id.webProgressBar)
@@ -77,6 +82,8 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     int nodeId;
     @Autowired
     int articleId;
+    @Autowired
+    int courseType; // 1 已学习， 2 未学习
 
     private CountDownTimer mCountDownTimer;
     private static final long MAX_TIME = 62 * 1000;
@@ -115,8 +122,13 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mPresenter.initWebview(mWebView, mWebProgressBar);
         mPresenter.getCourseDetail(Api.APP_COURSE_DOMAIN + "nodeId=" + nodeId + "&id=" + articleId);
 
+        // 判断学习状态
+        if (courseType == 1) {  // 已学习
+            mLlTimeCounter.setVisibility(View.GONE);
+        }
+
         // 获取课件详情数据
-        mPresenter.callMethodOfGetCoursewareDetail(13294, false);
+        mPresenter.callMethodOfGetCoursewareDetail(articleId, false);
 
         mBtnDone.setOnClickListener(view -> {
             if (isFinish)
@@ -166,12 +178,14 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         super.onResume();
         mTvToolbarTitle.setText(title);
 
-        // 继续倒计时
-        if (curTime != 0 && isPause) {
-            //将上次当前剩余时间作为新的时长
-            initCountDownTimer(curTime);
-            mCountDownTimer.start();
-            isPause = false;
+        if (courseType == 2) { // 未学习 计时
+            // 继续倒计时
+            if (curTime != 0 && isPause) {
+                //将上次当前剩余时间作为新的时长
+                initCountDownTimer(curTime);
+                mCountDownTimer.start();
+                isPause = false;
+            }
         }
     }
 
@@ -179,10 +193,12 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     protected void onPause() {
         super.onPause();
 
-        // 暂停倒计时
-        if (!isPause) {
-            isPause = true;
-            mCountDownTimer.cancel();
+        if (courseType == 2) { // 未学习 计时
+            // 暂停倒计时
+            if (!isPause) {
+                isPause = true;
+                mCountDownTimer.cancel();
+            }
         }
     }
 
@@ -208,7 +224,9 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @Override
     public void showData(CoursewareDetailEntity coursewareDetailEntity) {
         mCoursewareDetailEntity = coursewareDetailEntity;
-        initCountDownTimer(coursewareDetailEntity.getStudyTime() * 1000);
+        if (courseType == 2) { // 未学习 计时
+            initCountDownTimer(coursewareDetailEntity.getStudyTime() * 1000);
+        }
         mTvScores.setText(" 可获取" + coursewareDetailEntity.getIntegral() + "积分哦！");
         mCountDownTimer.start();
     }
@@ -221,6 +239,10 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         android.widget.Button mBtnExit = dialogView.findViewById(R.id.btn_exit);
         TextView mTvScores = dialogView.findViewById(R.id.tv_scores);
         mTvScores.setText("+" + mCoursewareDetailEntity.getIntegral());
+
+        // 保存积分
+        DataHelper.setIntergerSF(CourseDetailActivity.this, SharepreferenceKey.KEY_LOGIN_INTEGRAL,
+                DataHelper.getIntergerSF(CourseDetailActivity.this, SharepreferenceKey.KEY_LOGIN_INTEGRAL) + mCoursewareDetailEntity.getIntegral());
 
         mBtnStudy.setOnClickListener(view -> {
             dialog0.dismiss();

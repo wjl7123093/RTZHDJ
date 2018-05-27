@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,18 +19,14 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 import com.mytv.rtzhdj.di.component.DaggerVolunteerServiceComponent;
 import com.mytv.rtzhdj.di.module.VolunteerServiceModule;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceContract;
 import com.mytv.rtzhdj.mvp.presenter.VolunteerServicePresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.fragment.ContentFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.VolunteerServiceFragment;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +88,7 @@ public class VolunteerServiceActivity extends BaseActivity<VolunteerServicePrese
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mIvMenu.setImageResource(R.mipmap.ic_launcher);
+        mBtnToolbarMenu.setVisibility(View.GONE);
         mBtnToolbarMenu.setOnClickListener(view -> {
             // 跳转到搜索页面
             ARouter.getInstance().build(ARoutePath.PATH_SEARCH).navigation();

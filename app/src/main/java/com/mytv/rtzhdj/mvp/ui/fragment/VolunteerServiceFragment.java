@@ -202,7 +202,8 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
 
                 ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
                         .withInt("nodeId", mServiceList.get(position).getNodeId())
-                        .withInt("id", mServiceList.get(position).getId()).navigation();
+                        .withInt("id", mServiceList.get(position).getId())
+                        .withString("imageUrl", mServiceList.get(position).getAllImgUrl()).navigation();
             }
         });
 

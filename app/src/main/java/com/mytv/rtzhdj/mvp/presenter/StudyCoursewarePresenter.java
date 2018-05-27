@@ -172,7 +172,8 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
                     ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                             .withString("title", data.get(position).getCourseTypeName())
                             .withInt("nodeId", 0)
-                            .withInt("articleId", data.get(position).getContentId()).navigation();
+                            .withInt("articleId", data.get(position).getContentId())
+                            .withInt("courseType", 2).navigation();
                 });
 
             }

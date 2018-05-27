@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -221,7 +220,8 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
                 ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                         .withString("title", "必修课")
                         .withInt("nodeId", 9043)
-                        .withInt("articleId", mCourseList.get(position).getContentId()).navigation();
+                        .withInt("articleId", mCourseList.get(position).getContentId())
+                        .withInt("courseType", courseList.get(position).getCourseType()).navigation();
             }
         });
 

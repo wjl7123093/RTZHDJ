@@ -33,6 +33,7 @@ import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.utils.FileUtils;
+import com.mytv.rtzhdj.app.utils.ImageLoader;
 import com.mytv.rtzhdj.app.utils.ImageTools;
 import com.mytv.rtzhdj.app.utils.MultiPartParamsUtils;
 import com.mytv.rtzhdj.di.component.DaggerMyJoinComponent;
@@ -105,6 +106,8 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
     String title;
     @Autowired
     int digs;
+    @Autowired
+    String imageUrl;
 
     // 图片 九宫格适配器
     private GridViewAdapter gvAdapter;
@@ -155,6 +158,7 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
         mTvTitle.setText(title);
         mTvStarNum.setText(digs + "");
         mTvCommentNum.setVisibility(View.GONE);
+        ImageLoader.getInstance().showImage(MyJoinActivity.this, mIvImage, imageUrl);
 
         gvAdapter = new GridViewAdapter(this, lists,list_pic, 0);
         mGvPublish.setAdapter(gvAdapter);

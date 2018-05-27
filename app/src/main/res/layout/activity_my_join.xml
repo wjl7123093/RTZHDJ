@@ -101,7 +101,8 @@
                 android:layout_width="@dimen/len_32"
                 android:layout_height="@dimen/len_32"
                 android:src="@mipmap/ic_launcher"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

@@ -177,7 +177,8 @@ public class ElectiveCourseActivity extends BaseActivity<ElectiveCoursePresenter
                 ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                         .withString("title", title)
                         .withInt("nodeId", nodeId)
-                        .withInt("articleId", courseList.get(position).getContentId()).navigation();
+                        .withInt("articleId", courseList.get(position).getContentId())
+                        .withInt("courseType", courseList.get(position).getCourseType()).navigation();
             }
         });
 

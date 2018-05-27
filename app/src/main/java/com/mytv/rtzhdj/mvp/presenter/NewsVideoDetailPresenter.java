@@ -105,7 +105,7 @@ public class NewsVideoDetailPresenter extends BasePresenter<NewsVideoDetailContr
                 .subscribe(new ErrorHandleSubscriber<BaseJson<PartyLiveEntity>>(mErrorHandler) {
                     @Override
                     public void onNext(@NonNull BaseJson<PartyLiveEntity> partyLiveEntity) {
-                        Log.e(TAG, partyLiveEntity.getData().toString());
+                        Log.e(TAG, partyLiveEntity.toString());
 
                         if (partyLiveEntity.isSuccess() && partyLiveEntity.getData() != null)
                             mRootView.loadData(partyLiveEntity.getData());

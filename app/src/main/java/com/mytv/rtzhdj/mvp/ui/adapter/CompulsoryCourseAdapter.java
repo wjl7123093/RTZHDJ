@@ -5,10 +5,7 @@ import android.content.Context;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.data.DataServer;
-import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
-import com.mytv.rtzhdj.app.utils.ImageLoader;
 
 import java.util.List;
 
@@ -33,11 +30,11 @@ public class CompulsoryCourseAdapter extends BaseQuickAdapter<CoursewareEntity, 
     @Override
     protected void convert(BaseViewHolder helper, CoursewareEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
-//        helper.setText(R.id.tv_status, item.getCourseType() == 0 ? "未学习" : item.getCourseType() == 1 ? "已学习，未完成" : "已完成");
         helper.setText(R.id.tv_status, item.getCourseTypeString());
         helper.setText(R.id.tv_last_time, item.getLastStudyTime());
 
-        helper.setTextColor(R.id.tv_status, item.getCourseType() == 0 ?
+        // 1 已学习，2 未学习
+        helper.setTextColor(R.id.tv_status, item.getCourseType() == 1 ?
                 mContext.getResources().getColor(R.color.colorPrimary) :
                 mContext.getResources().getColor(R.color.green_400));
     }

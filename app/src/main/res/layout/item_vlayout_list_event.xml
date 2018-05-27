@@ -78,7 +78,8 @@
                 android:textColor="@color/white"
                 android:layout_marginRight="@dimen/len_10"
                 android:drawableLeft="@mipmap/ic_join_volunteer_comments"
-                android:drawablePadding="@dimen/len_4"/>
+                android:drawablePadding="@dimen/len_4"
+                android:visibility="gone"/>
         </LinearLayout>
     </RelativeLayout>
 

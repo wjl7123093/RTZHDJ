@@ -15,7 +15,7 @@ public class CoursewareEntity {
 
     private int ContentId;
     private String Title;           // 标题
-    private int CourseType;         // 学习状态（0 未学习，1 已学习未完成，2 已完成）
+    private int CourseType;         // 学习状态（2 未学习，1 已学习）
     private String CourseTypeString;
     private String LastStudyTime;   // 上次学习时间
 //    private int scores;         // 得分

@@ -16,6 +16,7 @@
     <include layout="@layout/include_toolbar"></include>
 
     <LinearLayout
+        android:id="@+id/ll_time_counter"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_40"
         android:orientation="horizontal"

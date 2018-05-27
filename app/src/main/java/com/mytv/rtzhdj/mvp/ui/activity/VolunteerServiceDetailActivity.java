@@ -93,6 +93,8 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
     int nodeId;
     @Autowired
     int id;
+    @Autowired
+    String imageUrl;
 
     private ArrayList<Fragment> mFragments;
     private String[] titles;
@@ -137,7 +139,8 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
                 ARouter.getInstance().build(ARoutePath.PATH_MY_JOIN)
                         .withInt("contentId", id)
                         .withString("title", mVolunteerDetailEntity.getTitle())
-                        .withInt("digs", mVolunteerDetailEntity.getDigs()).navigation();
+                        .withInt("digs", mVolunteerDetailEntity.getDigs())
+                        .withString("imageUrl", imageUrl).navigation();
             } else {
                showMessage("已报名，无需再次报名");
             }});

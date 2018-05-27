@@ -15,21 +15,16 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.DataServer;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsEducationComponent;
 import com.mytv.rtzhdj.di.module.NewsEducationModule;
 import com.mytv.rtzhdj.mvp.contract.NewsEducationContract;
 import com.mytv.rtzhdj.mvp.presenter.NewsEducationPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 
 import java.util.LinkedList;
 import java.util.List;
@@ -136,9 +131,28 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
 
     @Override
     public void setOnGridClick(int position, String title) {
+        int nodeId = 4008;
+        switch (position) {
+            case 0: // 重点培训 9056
+                nodeId = 9056;
+                break;
+            case 1: // 农民夜校 4008
+                nodeId = 4008;
+                break;
+            case 2: // 远程教育 6020
+                nodeId = 6020;
+                break;
+            case 3: // 师资库   9062
+                nodeId = 9062;
+                break;
+            default:
+                break;
+        }
+
         ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
                 .withString("from", "NewsEducationActivity")
-                .withString("title", title).navigation();
+                .withString("title", title)
+                .withInt("nodeId", nodeId).navigation();
     }
 
     @Override
