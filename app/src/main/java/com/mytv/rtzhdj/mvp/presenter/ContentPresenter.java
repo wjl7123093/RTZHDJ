@@ -20,7 +20,6 @@ import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
@@ -100,8 +99,10 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     @Override
     public View initHeaderView(List<PartyNewsEntity> specialBlockList, ViewGroup parent) {
         List<Object> imageUrls = new ArrayList<>();
+        List<String> titles = new ArrayList<>();
         for (int i = 0; i < specialBlockList.size(); i++) {
-            imageUrls.add(Api.APP_IMAGE_DOMAIN + specialBlockList.get(i).getImageUrl().replace("@", ""));
+            imageUrls.add(specialBlockList.get(i).getAllImgUrl());
+            titles.add(specialBlockList.get(i).getTitle());
         }
 
         View view = mActivity.getLayoutInflater().inflate(R.layout.item_vlayout_banner, parent, false);
@@ -110,11 +111,13 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
         // 绑定数据
         Banner mBanner = view.findViewById(R.id.banner);
         //设置banner样式
-        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         //设置图片加载器
         mBanner.setImageLoader(new BannerImageLoader());
         //设置图片集合
         mBanner.setImages(imageUrls);
+        //设置标题集合
+        mBanner.setBannerTitles(titles);
         //设置banner动画效果
         mBanner.setBannerAnimation(Transformer.DepthPage);
         //设置标题集合（当banner样式有显示title时）
