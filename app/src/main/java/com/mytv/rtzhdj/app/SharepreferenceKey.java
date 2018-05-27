@@ -17,6 +17,8 @@ public interface SharepreferenceKey {
     String KEY_LOGIN_USER = "login_user";
     // UserId
     String KEY_USER_ID = "user_id";     // UserId
+    // IsFirstIn
+    String KEY_IS_FIRST_IN = "is_first_in";   // -1 首次进入，1 非首次
     // IsLogin
     String KEY_IS_LOGIN = "is_login";   // 1 登录，0 注销
     // LoginUserDetail

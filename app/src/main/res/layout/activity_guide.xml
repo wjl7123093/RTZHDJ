@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="40dp"
         android:background="@color/colorPrimary"
         android:padding="8dp"
         android:text="进入主界面"

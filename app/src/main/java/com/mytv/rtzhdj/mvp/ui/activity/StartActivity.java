@@ -5,32 +5,20 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
 import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
-import com.mytv.rtzhdj.app.utils.StatusBarUtil;
 import com.mytv.rtzhdj.di.component.DaggerStartComponent;
 import com.mytv.rtzhdj.di.module.StartModule;
 import com.mytv.rtzhdj.mvp.contract.StartContract;
 import com.mytv.rtzhdj.mvp.presenter.StartPresenter;
 
-import com.mytv.rtzhdj.R;
-
-
-import butterknife.BindView;
-import cn.bingoogolapple.bgabanner.BGABanner;
-import cn.bingoogolapple.bgabanner.BGALocalImageSize;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
@@ -70,13 +58,20 @@ public class StartActivity extends BaseActivity<StartPresenter> implements Start
         // 通过设置 AndroidManifest.xml 里设置 theme 来解决 启动白屏 问题
         new Handler().postDelayed(() -> {
 
-            // 1 已登录
-            if (1 == DataHelper.getIntergerSF(StartActivity.this, SharepreferenceKey.KEY_IS_LOGIN)) {
-                ARouter.getInstance().build(ARoutePath.PATH_MAIN).navigation();
+            // 是否首次进入
+            if (-1 == DataHelper.getIntergerSF(StartActivity.this, SharepreferenceKey.KEY_IS_FIRST_IN)) {
+                DataHelper.setIntergerSF(StartActivity.this, SharepreferenceKey.KEY_IS_FIRST_IN, 1);
+                ARouter.getInstance().build(ARoutePath.PATH_GUIDE).navigation();
                 StartActivity.this.finish();
-            } else {    // 0 已注销
-                ARouter.getInstance().build(ARoutePath.PATH_LOGIN).navigation();
-                StartActivity.this.finish();
+            } else {
+                // 1 已登录
+                if (1 == DataHelper.getIntergerSF(StartActivity.this, SharepreferenceKey.KEY_IS_LOGIN)) {
+                    ARouter.getInstance().build(ARoutePath.PATH_MAIN).navigation();
+                    StartActivity.this.finish();
+                } else {    // 0 已注销
+                    ARouter.getInstance().build(ARoutePath.PATH_LOGIN).navigation();
+                    StartActivity.this.finish();
+                }
             }
         }, 1000);
 

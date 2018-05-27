@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -12,16 +11,13 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.utils.StatusBarUtil;
 import com.mytv.rtzhdj.di.component.DaggerGuideComponent;
 import com.mytv.rtzhdj.di.module.GuideModule;
 import com.mytv.rtzhdj.mvp.contract.GuideContract;
 import com.mytv.rtzhdj.mvp.presenter.GuidePresenter;
-
-import com.mytv.rtzhdj.R;
-
 
 import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
@@ -126,7 +122,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
         mBackgroundBanner.setEnterSkipViewIdAndDelegate(R.id.btn_guide_enter, R.id.tv_guide_skip, new BGABanner.GuideDelegate() {
             @Override
             public void onClickEnterOrSkip() {
-                ARouter.getInstance().build(ARoutePath.PATH_MAIN).navigation();
+                ARouter.getInstance().build(ARoutePath.PATH_LOGIN).navigation();
                 finish();
             }
         });
