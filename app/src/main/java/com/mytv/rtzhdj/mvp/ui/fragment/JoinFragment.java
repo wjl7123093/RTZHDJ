@@ -153,6 +153,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
                 ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE).navigation();
                 break;
             case 2: // 报道社区
+                ARouter.getInstance().build(ARoutePath.PATH_REPORT_COMMUNITY).navigation();
                 break;
             case 3: // 周边社区
                 ARouter.getInstance().build(ARoutePath.PATH_SURROUNDING_COMMUNITY).navigation();
