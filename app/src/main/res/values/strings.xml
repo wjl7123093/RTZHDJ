@@ -109,6 +109,10 @@
     <!-- Join -->
     <string name="ic_join_my_wish">&#xe64c;</string>
     <string name="ic_join_my_receive_wish">&#xe64d;</string>
+    <string name="ic_join_donate">&#xe674;</string>
+    <string name="ic_join_my_donation">&#xe66b;</string>
+    <string name="ic_join_my_receive">&#xe63a;</string>
+    <string name="ic_join_all_receive">&#xe635;</string>
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

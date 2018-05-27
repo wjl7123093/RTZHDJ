@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -303,14 +304,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
     @Override
     public BaseDelegateAdapter initOnePlusN2() {
         // 在构造函数设置每行的网格个数
-        final TypedArray proPic = activity.getResources().obtainTypedArray(R.array.join_plus_image);
         final String[] proTitle = activity.getResources().getStringArray(R.array.join_plus_title);
-        final String[] proDesc = activity.getResources().getStringArray(R.array.join_plus_desc);
-        final List<Integer> images = new ArrayList<>();
-        for(int a=0 ; a<proTitle.length ; a++){
-            images.add(proPic.getResourceId(a,R.mipmap.ic_launcher));
-        }
-        proPic.recycle();
 
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_oneplusn2,
@@ -320,26 +314,15 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 super.onBindViewHolder(holder, position);
                 View includeWish1 = holder.getView(R.id.include_wish1);
                 View includeWish2 = holder.getView(R.id.include_wish2);
-//                View includeWish3 = holder.getView(R.id.include_wish3);
                 TextView tvTitle1 = includeWish1.findViewById(R.id.tv_title);
                 TextView tvTitle2 = includeWish2.findViewById(R.id.tv_title);
-//                TextView tvTitle3 = includeWish3.findViewById(R.id.tv_title);
-//                TextView tvDesc1 = includeWish1.findViewById(R.id.tv_desc);
-//                TextView tvDesc2 = includeWish2.findViewById(R.id.tv_desc);
-//                TextView tvDesc3 = includeWish3.findViewById(R.id.tv_desc);
                 IconView icon1 = includeWish1.findViewById(R.id.ic_icon);
                 IconView icon2 = includeWish2.findViewById(R.id.ic_icon);
-//                ImageView icon3 = includeWish3.findViewById(R.id.iv_icon);
 
                 tvTitle1.setText(proTitle[0]);
                 tvTitle2.setText(proTitle[1]);
-//                tvTitle3.setText(proTitle[2]);
-//                tvDesc1.setText(proDesc[0]);
-//                tvDesc2.setText(proDesc[1]);
-//                tvDesc3.setText(proDesc[2]);
                 icon1.setText(activity.getResources().getString(R.string.ic_join_my_wish));
                 icon2.setText(activity.getResources().getString(R.string.ic_join_my_receive_wish));
-//                Glide.with(activity).load(images.get(2)).into(icon3);
 
                 holder.getView(R.id.iv_image).setOnClickListener(view -> {   // 心愿墙
                     mRootView.setOnColumnClick(0, 0);
@@ -357,25 +340,34 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
     @Override
     public BaseDelegateAdapter initColumnWish() {
         // 在构造函数设置每行的网格个数
-        final TypedArray proPic = activity.getResources().obtainTypedArray(R.array.join_column_wish_image);
+        final String[] proPic = activity.getResources().getStringArray(R.array.join_column_wish_image);
         final String[] proName = activity.getResources().getStringArray(R.array.join_column_wish_title);
-        final List<Integer> images = new ArrayList<>();
-        for(int a=0 ; a<proName.length ; a++){
-            images.add(proPic.getResourceId(a,R.mipmap.ic_launcher));
-        }
-        proPic.recycle();
 
 //        ColumnLayoutHelper columnLayoutHelper = new ColumnLayoutHelper();
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4);
         gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(2);    // 控制子元素之间的水平间距
-        return new BaseDelegateAdapter(activity, gridLayoutHelper , R.layout.item_vlayout_grid,
+        return new BaseDelegateAdapter(activity, gridLayoutHelper , R.layout.item_vlayout_mine_grid,
                 4, Constant.viewType.typeColumn) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_name, proName[position]);
-                holder.setImageResource(R.id.iv_icon, images.get(position));
+                holder.setText(R.id.ic_grid, proPic[position]);
+                switch (position) {
+                    case 0:
+                        holder.setTextColor(R.id.ic_grid, Color.parseColor("#f56465"));
+                        break;
+                    case 1:
+                        holder.setTextColor(R.id.ic_grid, Color.parseColor("#37dba4"));
+                        break;
+                    case 2:
+                        holder.setTextColor(R.id.ic_grid, Color.parseColor("#febf58"));
+                        break;
+                    case 3:
+                        holder.setTextColor(R.id.ic_grid, Color.parseColor("#ac7dda"));
+                        break;
+                }
                 holder.getView(R.id.ll_container).setOnClickListener(view -> {
                     mRootView.setOnColumnClick(1, position);
                 });
