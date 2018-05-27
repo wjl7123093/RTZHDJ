@@ -25,10 +25,12 @@ import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
@@ -213,7 +215,9 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 holder.setText(R.id.tv_name, userInfo.getUserName());
                 holder.setText(R.id.tv_study_record, userInfo.getNoStudyNum()
                         + "/" + userInfo.getYesStudyNum());
-                holder.setText(R.id.tv_study_scores, userInfo.getIntegral());
+                DataHelper.setIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL, userInfo.getIntegral());
+                holder.setText(R.id.tv_study_scores,
+                        DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL) + "");
 
                 if (!TextUtils.isEmpty(userInfo.getPhotoUrl())) {
                     mImageLoader.loadImage(activity,

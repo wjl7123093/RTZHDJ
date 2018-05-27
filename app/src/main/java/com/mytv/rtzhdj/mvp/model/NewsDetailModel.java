@@ -3,27 +3,17 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.cache.HomeCache;
-import com.mytv.rtzhdj.app.data.api.cache.NewsDetailCache;
-import com.mytv.rtzhdj.app.data.api.service.HomeService;
 import com.mytv.rtzhdj.app.data.api.service.NewsDetailService;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.NewsDetailContract;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
-import io.rx_cache2.EvictProvider;
 
 
 @ActivityScope
@@ -58,8 +48,8 @@ public class NewsDetailModel extends BaseModel implements NewsDetailContract.Mod
     }
 
     @Override
-    public Observable<BaseJson> postDoDig(int nodeId, int contentId, boolean update) {
+    public Observable<BaseJson> postDoDig(int nodeId, int contentId, int type, boolean update) {
         return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
-                .postDoDig(nodeId, contentId);
+                .postDoDig(nodeId, contentId, type);
     }
 }

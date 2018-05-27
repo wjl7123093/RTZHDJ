@@ -56,7 +56,7 @@ public class MyStudyEntity {
         private String PhotoUrl;
         private int NoStudyNum;
         private int YesStudyNum;
-        private String Integral;
+        private int Integral;
 
         public String getUserName() {
             return UserName;
@@ -90,11 +90,11 @@ public class MyStudyEntity {
             YesStudyNum = yesStudyNum;
         }
 
-        public String getIntegral() {
+        public int getIntegral() {
             return Integral;
         }
 
-        public void setIntegral(String integral) {
+        public void setIntegral(int integral) {
             Integral = integral;
         }
     }

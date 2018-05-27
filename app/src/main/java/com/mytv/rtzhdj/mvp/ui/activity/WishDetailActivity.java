@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,12 +31,13 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
 import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.WishDetailEntity;
 import com.mytv.rtzhdj.app.utils.FileUtils;
+import com.mytv.rtzhdj.app.utils.ImageLoader;
 import com.mytv.rtzhdj.app.utils.ImageTools;
 import com.mytv.rtzhdj.app.utils.MultiPartParamsUtils;
 import com.mytv.rtzhdj.app.utils.RouteSystemUIUtils;
@@ -43,11 +45,8 @@ import com.mytv.rtzhdj.di.component.DaggerWishDetailComponent;
 import com.mytv.rtzhdj.di.module.WishDetailModule;
 import com.mytv.rtzhdj.mvp.contract.WishDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.WishDetailPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.GridViewAdapter;
 import com.mytv.rtzhdj.mvp.ui.widget.BottomDialog;
-
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -99,6 +98,8 @@ public class WishDetailActivity extends BaseActivity<WishDetailPresenter> implem
     SwitchMultiButton mSwitchButton;
     @BindView(R.id.tv_content)
     TextView mTvContent;
+    @BindView(R.id.iv_image)
+    ImageView mIvImage;
 
     @BindView(R.id.ll_bottom_btn)
     LinearLayout mLlBottomBtn;
@@ -250,6 +251,8 @@ public class WishDetailActivity extends BaseActivity<WishDetailPresenter> implem
         mTvMobile.setText("联系电话  " + wishDetailEntity.getPhone());
         mTvContent.setText(mWishDetailEntity.getContent());
 
+        if (!TextUtils.isEmpty(wishDetailEntity.getAllImgUrl()))
+            ImageLoader.getInstance().showImage(WishDetailActivity.this, mIvImage, wishDetailEntity.getAllImgUrl());
     }
 
     @Override

@@ -101,6 +101,10 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
 
     @Autowired
     int contentId;
+    @Autowired
+    String title;
+    @Autowired
+    int digs;
 
     // 图片 九宫格适配器
     private GridViewAdapter gvAdapter;
@@ -147,6 +151,10 @@ public class MyJoinActivity extends BaseActivity<MyJoinPresenter> implements MyJ
         mBottomDialog = new BottomDialog(MyJoinActivity.this, R.layout.dialog_publish,
                 new int[]{R.id.tvCamera, R.id.tvAlbum, R.id.tvCancel});
         initDialog();
+
+        mTvTitle.setText(title);
+        mTvStarNum.setText(digs + "");
+        mTvCommentNum.setVisibility(View.GONE);
 
         gvAdapter = new GridViewAdapter(this, lists,list_pic, 0);
         mGvPublish.setAdapter(gvAdapter);

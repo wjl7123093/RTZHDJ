@@ -86,6 +86,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
+    private int type = 1;   // 1 点赞， -1 取消
 
 
     @Override
@@ -118,7 +119,10 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
         mTvCommentNum.setText(comments + "");
 
         mTvComment.setOnClickListener(view -> showDialog());
-        mTvStarNum.setOnClickListener(view -> mPresenter.callMethodOfPostDoDig(nodeId, articleId, false));
+        mTvStarNum.setOnClickListener(view -> {
+            mPresenter.callMethodOfPostDoDig(nodeId, articleId, type, false);
+            type = type == 1 ? -1 : 1;
+        });
         mTvCommentNum.setOnClickListener(view ->
             ARouter.getInstance().build(ARoutePath.PATH_COMMENT)
                     .withInt("nodeId", nodeId).withInt("contentId", articleId).navigation());
@@ -191,12 +195,21 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
     }
 
     @Override
-    public void changeDigsStatus() {
-        Drawable drawable= getResources().getDrawable(R.mipmap.ic_digs_select);
+    public void changeDigsStatus(int type) {
+        if (1 == type) {
+            Drawable drawable = getResources().getDrawable(R.mipmap.ic_digs_select);
 
-        // 这一步必须要做,否则不会显示.
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-        mTvStarNum.setCompoundDrawables(drawable,null,null,null);
-        mTvStarNum.setText(digs + 1 + "");
+            // 这一步必须要做,否则不会显示.
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            mTvStarNum.setCompoundDrawables(drawable, null, null, null);
+            mTvStarNum.setText(++digs + "");
+        } else {
+            Drawable drawable = getResources().getDrawable(R.mipmap.ic_digs);
+
+            // 这一步必须要做,否则不会显示.
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            mTvStarNum.setCompoundDrawables(drawable, null, null, null);
+            mTvStarNum.setText(--digs + "");
+        }
     }
 }

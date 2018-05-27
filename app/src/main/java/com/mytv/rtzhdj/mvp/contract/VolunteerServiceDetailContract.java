@@ -15,7 +15,7 @@ public interface VolunteerServiceDetailContract {
     interface View extends IView {
         void loadData(VolunteerDetailEntity volunteerDetailEntity);
 
-        void changeDigsStatus();    // 更新点赞状态
+        void changeDigsStatus(int type);    // 更新点赞状态
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
@@ -25,7 +25,7 @@ public interface VolunteerServiceDetailContract {
         Observable<BaseJson<VolunteerDetailEntity>> getVolunteerServiceDetail(int id, int userId, boolean update);
 
         // post 点赞
-        Observable<BaseJson> postDoDig(int nodeId, int contentId, boolean update);
+        Observable<BaseJson> postDoDig(int nodeId, int contentId, int type, boolean update);
 
     }
 
@@ -36,6 +36,6 @@ public interface VolunteerServiceDetailContract {
         // 调用 获取志愿服务详情数据
         void callMethodOfGetVolunteerServiceDetail(int id, int userId, boolean update);
         // 调用 点赞
-        void callMethodOfPostDoDig(int nodeId, int contentId, boolean update);
+        void callMethodOfPostDoDig(int nodeId, int contentId, int type, boolean update);
     }
 }

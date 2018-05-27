@@ -101,6 +101,8 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
+    private int type = 1;   // 1 点赞， -1 取消
+    private VolunteerDetailEntity mVolunteerDetailEntity = null;
 
 
     @Override
@@ -126,11 +128,16 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
         titles = new String[]{"活动详情", "活动回顾"};
         initTab();
 
-        mBtnStar.setOnClickListener(view -> mPresenter.callMethodOfPostDoDig(nodeId, id, false));
+        mBtnStar.setOnClickListener(view -> {
+            mPresenter.callMethodOfPostDoDig(nodeId, id, type, false);
+            type = type == 1 ? -1 : 1;
+        });
         mBtnIsOver.setOnClickListener(view -> {
             if (mBtnIsOver.getText().equals("正在报名")) {
                 ARouter.getInstance().build(ARoutePath.PATH_MY_JOIN)
-                        .withInt("contentId", id).navigation();
+                        .withInt("contentId", id)
+                        .withString("title", mVolunteerDetailEntity.getTitle())
+                        .withInt("digs", mVolunteerDetailEntity.getDigs()).navigation();
             } else {
                showMessage("已报名，无需再次报名");
             }});
@@ -203,6 +210,8 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
 
     @Override
     public void loadData(VolunteerDetailEntity volunteerDetailEntity) {
+        mVolunteerDetailEntity = volunteerDetailEntity;
+
         mTvTitle.setText(volunteerDetailEntity.getTitle());
         mTvEnrollTime.setText(volunteerDetailEntity.getEnrollEndDate().split("T")[0] + "截至");
         mTvEventTime.setText(volunteerDetailEntity.getStartDate().split("T")[0]
@@ -220,7 +229,11 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
     }
 
     @Override
-    public void changeDigsStatus() {
-        mBtnStar.setText("点赞(" + ++mDigs + ")");
+    public void changeDigsStatus(int type) {
+        if (1 == type) {
+            mBtnStar.setText("点赞(" + ++mDigs + ")");
+        } else {
+            mBtnStar.setText("点赞(" + --mDigs + ")");
+        }
     }
 }

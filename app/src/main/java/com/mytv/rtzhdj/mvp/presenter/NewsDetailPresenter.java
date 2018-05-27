@@ -171,8 +171,8 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
     }
 
     @Override
-    public void callMethodOfPostDoDig(int nodeId, int contentId, boolean update) {
-        mModel.postDoDig(nodeId, contentId, update)
+    public void callMethodOfPostDoDig(int nodeId, int contentId, int type, boolean update) {
+        mModel.postDoDig(nodeId, contentId, type, update)
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -191,7 +191,7 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
                         Log.e(TAG, postResult.toString());
 
                         if (postResult.isSuccess())
-                            mRootView.changeDigsStatus();
+                            mRootView.changeDigsStatus(type);
 
                     }
                 });

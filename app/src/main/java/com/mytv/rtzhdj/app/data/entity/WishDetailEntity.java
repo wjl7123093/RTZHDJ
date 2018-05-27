@@ -16,6 +16,9 @@ public class WishDetailEntity {
     private String phone;
     private String wishTime;
 
+    private int CheckState;
+    private String AllImgUrl;
+
     public String getWishPublisher() {
         return wishPublisher;
     }
@@ -46,5 +49,21 @@ public class WishDetailEntity {
 
     public void setWishTime(String wishTime) {
         this.wishTime = wishTime;
+    }
+
+    public int getCheckState() {
+        return CheckState;
+    }
+
+    public void setCheckState(int checkState) {
+        CheckState = checkState;
+    }
+
+    public String getAllImgUrl() {
+        return AllImgUrl;
+    }
+
+    public void setAllImgUrl(String allImgUrl) {
+        AllImgUrl = allImgUrl;
     }
 }

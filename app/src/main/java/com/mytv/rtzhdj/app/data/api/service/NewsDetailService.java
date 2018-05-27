@@ -2,7 +2,6 @@ package com.mytv.rtzhdj.app.data.api.service;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -48,6 +47,7 @@ public interface NewsDetailService {
     @FormUrlEncoded
     @POST("postDoDig")
     Observable<BaseJson> postDoDig(@Field("NodeId") int nodeId,
-                                   @Field("contentID") int contentId);
+                                   @Field("contentID") int contentId,
+                                   @Field("type") int type);
 
 }

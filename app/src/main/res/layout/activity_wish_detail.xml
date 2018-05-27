@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -46,17 +45,20 @@
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:paddingTop="4dp"
-        app:selectedColor="@color/colorAccent"
+        app:selectedColor="@color/orange_500"
         app:selectedTab="0"
         app:strokeRadius="0dp"
         app:strokeWidth="0dp"
         app:switchTabs="@array/switch_tabs_wish_detail"
         app:textsize="@dimen/font_16" />
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -66,7 +68,14 @@
             android:layout_margin="@dimen/space_20dp"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/font_16" />
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/len_10"/>
     </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/ll_bottom_btn"

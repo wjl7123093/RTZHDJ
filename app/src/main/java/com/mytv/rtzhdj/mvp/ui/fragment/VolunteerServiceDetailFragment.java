@@ -109,7 +109,7 @@ public class VolunteerServiceDetailFragment extends BaseFragment<VolunteerServic
     }
 
     @Override
-    public void changeDigsStatus() {
+    public void changeDigsStatus(int type) {
 
     }
 }

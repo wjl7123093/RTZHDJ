@@ -57,6 +57,7 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
 
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
+    private DelegateAdapter delegateAdapter = null;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -141,6 +142,33 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     @Override
     public void killMyself() {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getUserVisibleHint()) {
+            if (delegateAdapter != null)
+                delegateAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        if (isVisibleToUser) {
+            if (delegateAdapter != null)
+                delegateAdapter.notifyDataSetChanged();
+        }
+        super.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            if (delegateAdapter != null)
+                delegateAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -237,7 +265,7 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         List<MyStudyEntity.CoursewareBlock> courseMustBlock = myStudyEntity.getCourseMustBlock();
         List<MyStudyEntity.CoursewareBlock> courseLittleBlock = myStudyEntity.getCourseLittleBlock();
 
-        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
 
         //初始化头部
         BaseDelegateAdapter headerAdapter = mPresenter.initHeader(userInfoBlock);

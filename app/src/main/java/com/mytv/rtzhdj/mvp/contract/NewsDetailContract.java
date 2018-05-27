@@ -1,15 +1,12 @@
 package com.mytv.rtzhdj.mvp.contract;
 
-import android.support.v7.widget.RecyclerView;
 import android.webkit.WebView;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
-import com.mytv.rtzhdj.mvp.ui.activity.CommentActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsDetailActivity;
 import com.mytv.rtzhdj.mvp.ui.widget.WebProgressBar;
 
@@ -23,7 +20,7 @@ public interface NewsDetailContract {
         void setWebviewProgress(int progress);
         void showDialog();
 
-        void changeDigsStatus();    // 更新点赞状态
+        void changeDigsStatus(int type);    // 更新点赞状态
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
@@ -36,7 +33,7 @@ public interface NewsDetailContract {
         Observable<BaseJson> postComment(int userId, int nodeId, int contentId, String commentInfo, boolean update);
 
         // post 点赞
-        Observable<BaseJson> postDoDig(int nodeId, int contentId, boolean update);
+        Observable<BaseJson> postDoDig(int nodeId, int contentId, int type, boolean update);
 
     }
 
@@ -51,7 +48,7 @@ public interface NewsDetailContract {
         // 调用 评论
         void callMethodOfPostComment(int userId, int nodeId, int contentId, String commentInfo, boolean update);
         // 调用 点赞
-        void callMethodOfPostDoDig(int nodeId, int contentId, boolean update);
+        void callMethodOfPostDoDig(int nodeId, int contentId, int type, boolean update);
 
     }
 }
