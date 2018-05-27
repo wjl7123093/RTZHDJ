@@ -215,7 +215,10 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 holder.setText(R.id.tv_name, userInfo.getUserName());
                 holder.setText(R.id.tv_study_record, userInfo.getNoStudyNum()
                         + "/" + userInfo.getYesStudyNum());
-                DataHelper.setIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL, userInfo.getIntegral());
+
+                // 保持积分一致
+                if (userInfo.getIntegral() > DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL))
+                    DataHelper.setIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL, userInfo.getIntegral());
                 holder.setText(R.id.tv_study_scores,
                         DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL) + "");
 

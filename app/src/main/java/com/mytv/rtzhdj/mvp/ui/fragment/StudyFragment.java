@@ -144,24 +144,7 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getUserVisibleHint()) {
-            if (delegateAdapter != null)
-                delegateAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        if (isVisibleToUser) {
-            if (delegateAdapter != null)
-                delegateAdapter.notifyDataSetChanged();
-        }
-        super.setUserVisibleHint(isVisibleToUser);
-    }
-
+    // 显示时刷新，保持积分一致
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
