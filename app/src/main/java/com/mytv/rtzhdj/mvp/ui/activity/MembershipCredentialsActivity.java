@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,8 +21,8 @@ import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
-import com.mytv.rtzhdj.app.data.DataServer;
 import com.mytv.rtzhdj.app.data.entity.MembershipEntity;
+import com.mytv.rtzhdj.app.utils.ImageLoader;
 import com.mytv.rtzhdj.di.component.DaggerMembershipCredentialsComponent;
 import com.mytv.rtzhdj.di.module.MembershipCredentialsModule;
 import com.mytv.rtzhdj.mvp.contract.MembershipCredentialsContract;
@@ -108,8 +109,32 @@ public class MembershipCredentialsActivity extends BaseActivity<MembershipCreden
         mBtnToolbarMenu.setVisibility(View.GONE);
 
         mPresenter.setActivity(MembershipCredentialsActivity.this);
-        mPresenter.initHeader(DataServer.getPartyMemberData(1).get(0), mIvHeader, mTvName,
-                mTvDuty, mTvPartyBranch);
+
+        // 初始化数据
+        mTvName.setText("姓名: " +
+                DataHelper.getStringSF(MembershipCredentialsActivity.this, SharepreferenceKey.KEY_LOGIN_USER_NAME));
+        String duty = "";
+        switch (DataHelper.getIntergerSF(MembershipCredentialsActivity.this, SharepreferenceKey.KEY_LOGIN_USER_TYPE)) {
+            case 1: // 党员
+                duty = "党员";
+                break;
+            case 2: // 预备党员
+                duty = "预备党员";
+                break;
+            case 3: // 入党积极分子
+                duty = "入党积极分子";
+                break;
+            case 4: // 群众
+                duty = "群众";
+                break;
+        }
+        mTvDuty.setText("职务: " + duty);
+        mTvPartyBranch.setText("所属支部: " +
+                DataHelper.getStringSF(MembershipCredentialsActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_NAME));
+        if (!TextUtils.isEmpty(DataHelper.getStringSF(MembershipCredentialsActivity.this, SharepreferenceKey.KEY_LOGIN_HEADER_URL)))
+            ImageLoader.getInstance().showImage(MembershipCredentialsActivity.this, mIvHeader,
+                    DataHelper.getStringSF(MembershipCredentialsActivity.this, SharepreferenceKey.KEY_LOGIN_HEADER_URL));
+
         mPresenter.initRecyclerView(mRecyclerView);
         initRefreshLayout();
 

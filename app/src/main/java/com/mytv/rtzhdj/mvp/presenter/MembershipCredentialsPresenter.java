@@ -4,28 +4,22 @@ import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
-import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MembershipEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.mvp.contract.MembershipCredentialsContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MembershipCredentialsActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
 import com.zchu.rxcache.data.CacheResult;
 import com.zchu.rxcache.stategy.CacheStrategy;
-
-import org.raphets.roundimageview.RoundImageView;
 
 import java.util.List;
 
@@ -72,23 +66,6 @@ public class MembershipCredentialsPresenter extends BasePresenter<MembershipCred
     @Override
     public void setActivity(MembershipCredentialsActivity activity) {
         mActivity = activity;
-    }
-
-    @Override
-    public void initHeader(PartyMemberEntity partyMemberEntity, RoundImageView ivHeader,
-                           TextView tvName, TextView tvDuty, TextView tvPartyBranch) {
-        tvName.setText("姓名: " + partyMemberEntity.getUserName());
-        tvDuty.setText("职务: " + partyMemberEntity.getDuty());
-        tvPartyBranch.setText("所属支部: " + partyMemberEntity.getParty_branch());
-
-        mImageLoader.loadImage(mActivity,
-                ImageConfigImpl
-                        .builder()
-                        .errorPic(R.mipmap.ic_error)
-                        .placeholder(R.mipmap.ic_placeholder)
-                        .url(partyMemberEntity.getPhotourl())
-                        .imageView(ivHeader)
-                        .build());
     }
 
     @Override

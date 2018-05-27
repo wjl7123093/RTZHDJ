@@ -1,17 +1,13 @@
 package com.mytv.rtzhdj.mvp.contract;
 
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MembershipEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MembershipCredentialsActivity;
-
-import org.raphets.roundimageview.RoundImageView;
 
 import java.util.List;
 
@@ -36,8 +32,6 @@ public interface MembershipCredentialsContract {
     //Presenter控制器
     interface Presenter extends IPresenter {
         void setActivity(MembershipCredentialsActivity activity);
-        void initHeader(PartyMemberEntity partyMemberEntity, RoundImageView ivHeader,
-                        TextView tvName, TextView tvDuty, TextView tvPartyBranch);
         //初始化 RecyclerView
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
