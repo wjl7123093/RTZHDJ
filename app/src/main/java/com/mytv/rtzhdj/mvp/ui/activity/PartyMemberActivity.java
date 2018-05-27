@@ -18,7 +18,9 @@ import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.PartyMemberEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyMienEntity;
 import com.mytv.rtzhdj.di.component.DaggerPartyMemberComponent;
@@ -34,6 +36,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -71,6 +74,11 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
 
     private PartyMemberAdapter partyMemberAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<PartyMienEntity> mMemberList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -105,9 +113,12 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
 //        initAdapter();
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         // 获取 党员信息列表数据
 //        mPresenter.callMethodOfGetPartyMmeber(1, false);
-        mPresenter.callMethodOfGetPartymembermien(1, 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetPartymembermien(
+                DataHelper.getIntergerSF(PartyMemberActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                PAGE_INDEX, PAGE_SIZE, false);
 
     }
 
@@ -147,22 +158,58 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                // 获取 党员信息列表数据
+                mPresenter.callMethodOfGetPartymembermien(
+                        DataHelper.getIntergerSF(PartyMemberActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        PAGE_INDEX, PAGE_SIZE, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                // 获取 党员信息列表数据
+                mPresenter.callMethodOfGetPartymembermien(
+                        DataHelper.getIntergerSF(PartyMemberActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        ++PAGE_INDEX, PAGE_SIZE, true);
+
             }
         });
     }
 
-    private void initAdapter(List<PartyMienEntity> memberList) {
-        partyMemberAdapter = new PartyMemberAdapter(PartyMemberActivity.this, memberList);
-        partyMemberAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(partyMemberAdapter);
+    private void initAdapter(List<PartyMienEntity> memberList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                partyMemberAdapter.notifyItemRangeRemoved(0, mMemberList.size());
+                // 2. 再清空
+                mMemberList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        mCurPos = mMemberList.size();
+        if (null == partyMemberAdapter) {
+            mMemberList = memberList;
+            partyMemberAdapter = new PartyMemberAdapter(PartyMemberActivity.this, memberList);
+            partyMemberAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(partyMemberAdapter);
+        } else {
+            mMemberList.addAll(memberList);
+            partyMemberAdapter.notifyItemRangeInserted(mCurPos, memberList.size());
+        }
 
         partyMemberAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -184,7 +231,7 @@ public class PartyMemberActivity extends BaseActivity<PartyMemberPresenter> impl
     }
 
     @Override
-    public void loadDataMine(List<PartyMienEntity> memberList) {
-        initAdapter(memberList);
+    public void loadDataMine(List<PartyMienEntity> memberList, boolean update) {
+        initAdapter(memberList, update);
     }
 }

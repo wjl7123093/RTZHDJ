@@ -71,12 +71,12 @@
         android:id="@+id/tv_star_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/ic_launcher"
         android:textSize="@dimen/font_14"
         android:textColor="@color/secondary_text"
         android:text="0"
         android:gravity="center"
         android:layout_alignTop="@id/iv_header"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

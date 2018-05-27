@@ -99,8 +99,10 @@ public class NewsSimplePresenter extends BasePresenter<NewsSimpleContract.Model,
     @Override
     public View initHeaderView(List<NewsDetailEntity> recommendList, ViewGroup parent) {
         List<Object> imageUrls = new ArrayList<>();
+        List<String> titles = new ArrayList<>();
         for (int i = 0; i < recommendList.size(); i++) {
-            imageUrls.add(Api.APP_IMAGE_DOMAIN + recommendList.get(i).getImgUrl().replace("@", ""));
+            imageUrls.add(recommendList.get(i).getAllImgUrl());
+            titles.add(recommendList.get(i).getTitle());
         }
 
         View view = mActivity.getLayoutInflater().inflate(R.layout.item_vlayout_banner, parent, false);
@@ -109,11 +111,13 @@ public class NewsSimplePresenter extends BasePresenter<NewsSimpleContract.Model,
         // 绑定数据
         Banner mBanner = view.findViewById(R.id.banner);
         //设置banner样式
-        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         //设置图片加载器
         mBanner.setImageLoader(new BannerImageLoader());
         //设置图片集合
         mBanner.setImages(imageUrls);
+        //设置标题集合
+        mBanner.setBannerTitles(titles);
         //设置banner动画效果
         mBanner.setBannerAnimation(Transformer.DepthPage);
         //设置标题集合（当banner样式有显示title时）
@@ -121,7 +125,7 @@ public class NewsSimplePresenter extends BasePresenter<NewsSimpleContract.Model,
         //设置自动轮播，默认为true
         mBanner.isAutoPlay(true);
         //设置轮播时间
-        mBanner.setDelayTime(5000);
+        mBanner.setDelayTime(3000);
         //设置指示器位置（当banner模式中有指示器时）
         mBanner.setIndicatorGravity(BannerConfig.CENTER);
 

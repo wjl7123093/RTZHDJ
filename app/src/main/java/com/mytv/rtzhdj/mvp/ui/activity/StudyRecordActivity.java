@@ -16,7 +16,9 @@ import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.di.component.DaggerStudyRecordComponent;
 import com.mytv.rtzhdj.di.module.StudyRecordModule;
 import com.mytv.rtzhdj.mvp.contract.StudyRecordContract;
@@ -91,7 +93,8 @@ public class StudyRecordActivity extends BaseActivity<StudyRecordPresenter> impl
         initRefreshLayout();
 
         // 获取 学习记录数据
-        mPresenter.callMethodOfGetLearningRecords(0, false);
+        mPresenter.callMethodOfGetLearningRecords(
+                DataHelper.getIntergerSF(StudyRecordActivity.this, SharepreferenceKey.KEY_USER_ID), false);
 
     }
 

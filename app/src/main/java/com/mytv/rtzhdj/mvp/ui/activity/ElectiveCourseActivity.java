@@ -32,6 +32,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -72,6 +73,11 @@ public class ElectiveCourseActivity extends BaseActivity<ElectiveCoursePresenter
 
     private CompulsoryCourseAdapter mAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<CoursewareEntity> mCourseList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -99,6 +105,7 @@ public class ElectiveCourseActivity extends BaseActivity<ElectiveCoursePresenter
 //        initAdapter();
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         // 获取课件列表(必修课)数据
         mPresenter.callMethodOfGetCoursewareList(DataHelper.getIntergerSF(ElectiveCourseActivity.this,
                 SharepreferenceKey.KEY_USER_ID), nodeId, 0, 1, PAGE_SIZE, false);
@@ -143,30 +150,65 @@ public class ElectiveCourseActivity extends BaseActivity<ElectiveCoursePresenter
     }
 
     @Override
-    public void loadData(List<CoursewareEntity> courseList) {
-        initAdapter(courseList);
+    public void loadData(List<CoursewareEntity> courseList, boolean update) {
+        initAdapter(courseList, update);
     }
 
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                // 获取课件列表(必修课)数据
+                mPresenter.callMethodOfGetCoursewareList(DataHelper.getIntergerSF(ElectiveCourseActivity.this,
+                        SharepreferenceKey.KEY_USER_ID), nodeId, 0, PAGE_INDEX, PAGE_SIZE, true);
+
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                // 获取课件列表(必修课)数据
+                mPresenter.callMethodOfGetCoursewareList(DataHelper.getIntergerSF(ElectiveCourseActivity.this,
+                        SharepreferenceKey.KEY_USER_ID), nodeId, 0, ++PAGE_INDEX, PAGE_SIZE, true);
+
             }
         });
     }
 
-    private void initAdapter(List<CoursewareEntity> courseList) {
-        mAdapter = new CompulsoryCourseAdapter(ElectiveCourseActivity.this, courseList);
-        mAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(mAdapter);
+    private void initAdapter(List<CoursewareEntity> courseList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                mAdapter.notifyItemRangeRemoved(0, mCourseList.size());
+                // 2. 再清空
+                mCourseList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        mCurPos = mCourseList.size();
+        if (null == mAdapter) {
+            mCourseList = courseList;
+            mAdapter = new CompulsoryCourseAdapter(ElectiveCourseActivity.this, courseList);
+            mAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(mAdapter);
+        } else {
+            mCourseList.addAll(courseList);
+            mAdapter.notifyItemRangeInserted(mCurPos, courseList.size());
+        }
 
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override

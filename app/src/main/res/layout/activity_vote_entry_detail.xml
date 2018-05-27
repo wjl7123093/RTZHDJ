@@ -33,8 +33,7 @@
                 android:layout_height="200dp"
                 android:background="@color/white"
                 android:padding="@dimen/len_10"
-                android:src="@mipmap/ic_launcher"
-                android:scaleType="fitCenter"/>
+                android:scaleType="centerInside"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,8 +51,7 @@
                     android:textSize="@dimen/font_16"
                     android:textColor="@color/primary_text"
                     android:gravity="center"
-                    android:background="@color/white"
-                    android:text="《无题》 作者: 佚名"/>
+                    android:background="@color/white"/>
                 <TextView
                     android:id="@+id/tv_rank"
                     android:layout_width="0dp"
@@ -63,7 +61,6 @@
                     android:textColor="@color/colorPrimary"
                     android:gravity="center"
                     android:background="@color/white"
-                    android:text="第2名"
                     android:layout_marginLeft="@dimen/len_4"/>
                 <TextView
                     android:id="@+id/tv_votes"
@@ -74,7 +71,6 @@
                     android:textColor="@color/colorAccent"
                     android:gravity="center"
                     android:background="@color/white"
-                    android:text="40票"
                     android:layout_marginLeft="@dimen/len_4"/>
 
             </LinearLayout>
@@ -85,8 +81,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:padding="@dimen/len_10"
-                android:src="@mipmap/ic_launcher"
-                android:scaleType="fitCenter"/>
+                android:scaleType="centerCrop"/>
 
         </LinearLayout>
     </ScrollView>

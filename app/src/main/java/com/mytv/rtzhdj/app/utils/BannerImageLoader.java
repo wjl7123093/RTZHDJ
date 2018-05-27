@@ -1,6 +1,7 @@
 package com.mytv.rtzhdj.app.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -33,12 +34,15 @@ public class BannerImageLoader extends ImageLoader {
         Uri uri = Uri.parse((String) path);
         imageView.setImageURI(uri);*/
 
-        ArmsUtils.obtainAppComponentFromContext(context).imageLoader().loadImage(context,
+        /*ArmsUtils.obtainAppComponentFromContext(context).imageLoader().loadImage(context,
                 ImageConfigImpl
                         .builder()
                         .url((String) path)
                         .imageView(imageView)
-                        .build());
+                        .build());*/
+
+        if (!TextUtils.isEmpty((String) path))
+            com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(context, imageView, (String) path);
 
     }
 

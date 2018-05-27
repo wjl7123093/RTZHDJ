@@ -141,7 +141,7 @@ public class PartyMemberPresenter extends BasePresenter<PartyMemberContract.Mode
                         Log.e(TAG, memberList.toString());
 
                         if (memberList.isSuccess())
-                            mRootView.loadDataMine(memberList.getData());
+                            mRootView.loadDataMine(memberList.getData(), update);
                     }
                 });
     }

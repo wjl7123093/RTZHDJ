@@ -108,7 +108,7 @@ public class ElectiveCoursePresenter extends BasePresenter<ElectiveCourseContrac
                         Log.e(TAG, courseList.getData().toString());
 
                         if (courseList.isSuccess() && courseList.getData() != null)
-                            mRootView.loadData(courseList.getData());
+                            mRootView.loadData(courseList.getData(), update);
                     }
                 });
     }
