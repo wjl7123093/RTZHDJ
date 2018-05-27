@@ -21,7 +21,9 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsCommonComponent;
 import com.mytv.rtzhdj.di.module.NewsCommonModule;
 import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
@@ -35,6 +37,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -77,6 +80,11 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 
     private NewsSimpleAdapter newsAdapter;
     private static final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<NewsDetailEntity> mNewsList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -107,8 +115,9 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 //        initAdapter();
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         // 获取二级通用列表数据
-        mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, false);
     }
 
 
@@ -153,7 +162,13 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                // 获取二级通用列表数据
+                mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
@@ -161,14 +176,41 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                // 获取二级通用列表数据
+                mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
+
             }
         });
     }
 
-    public void initAdapter(List<NewsDetailEntity> newsDetailList) {
-        newsAdapter = new NewsSimpleAdapter(NewsCommonActivity.this, newsDetailList);
-        newsAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(newsAdapter);
+    public void initAdapter(List<NewsDetailEntity> newsDetailList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                newsAdapter.notifyItemRangeRemoved(0, mNewsList.size());
+                // 2. 再清空
+                mNewsList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            } else {    // 上拉加载
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
+        mCurPos = mNewsList.size();
+        if (null == newsAdapter) {
+            mNewsList = newsDetailList;
+            newsAdapter = new NewsSimpleAdapter(NewsCommonActivity.this, newsDetailList);
+            newsAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(newsAdapter);
+        } else {
+            mNewsList.addAll(newsDetailList);
+            newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+        }
 
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -188,7 +230,7 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     }
 
     @Override
-    public void loadListData(List<NewsDetailEntity> newsList) {
-        initAdapter(newsList);
+    public void loadListData(List<NewsDetailEntity> newsList, boolean update) {
+        initAdapter(newsList, update);
     }
 }
