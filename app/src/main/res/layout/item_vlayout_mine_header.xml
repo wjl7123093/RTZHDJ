@@ -29,7 +29,6 @@
         app:rightTop_corner_radius="0dp"
         app:type="circle"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/tv_settings"
         android:layout_marginTop="@dimen/len_10"/>
     <!-- 名称 -->
     <TextView

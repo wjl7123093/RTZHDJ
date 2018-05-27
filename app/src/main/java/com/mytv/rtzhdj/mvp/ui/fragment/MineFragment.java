@@ -163,18 +163,25 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                         break;
                 }
                 break;
-            case 2: // 我的积分
+            case 2: // 组织生活
                 switch (position) {
-                    case 0: // 积分明细
-                        ARouter.getInstance().build(ARoutePath.PATH_SCORES_DETAILS).navigation();
+                    case 0: // 参会次数
                         break;
-                    case 1: // 积分商城
+                    case 1: // 学习次数
                         break;
-                    case 2: // 积分兑换
+                    case 2: // 活动次数
                         break;
                 }
                 break;
             case 3: // 生活助手
+                switch (position) {
+                    case 0: // 天气预报
+                        break;
+                    case 1: // 火车机票
+                        break;
+                    case 2: // 生活缴费
+                        break;
+                }
                 break;
         }
     }
@@ -210,13 +217,17 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         columnAdapter = mPresenter.initColumn(2, "组织生活");
         mAdapters.add(columnAdapter);
 
-        // 我的党支部
+        // 积分明细
         BaseDelegateAdapter scoresAdapter = mPresenter.initScores();
         mAdapters.add(scoresAdapter);
 
-        // 我的党支部
+        // 党费
         BaseDelegateAdapter cashAdapter = mPresenter.initCash();
         mAdapters.add(cashAdapter);
+
+        // 生活助手
+        BaseDelegateAdapter helperAdapter = mPresenter.initHelper();
+        mAdapters.add(helperAdapter);
 
         /*//初始化 格栏布局 - 积分
         BaseDelegateAdapter columnAdapter = mPresenter.initColumn1(17, 10, 19797);
@@ -251,12 +262,12 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu2();
         mAdapters.add(menuAdapter);*/
 
-        //初始化标题 - 生活助手
+        /*//初始化标题 - 生活助手
         BaseDelegateAdapter titleAdapter = mPresenter.initTitle(5, "生活助手", "", -1);
         mAdapters.add(titleAdapter);
         //初始化网格
         BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu3();
-        mAdapters.add(menuAdapter);
+        mAdapters.add(menuAdapter);*/
 
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);

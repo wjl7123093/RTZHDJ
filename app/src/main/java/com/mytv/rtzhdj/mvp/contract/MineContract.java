@@ -37,7 +37,6 @@ public interface MineContract {
         BaseDelegateAdapter initTitle(int arrayPos, String title, String btnDesc, int scores);
         BaseDelegateAdapter initHeader(String url, String name, String partyBranch);
         BaseDelegateAdapter initSingle(float payment, int isPay);
-        BaseDelegateAdapter initColumn1(int scores, int power, int rank);
         BaseDelegateAdapter initColumn2(int meetingTimes, int lessonTimes, int activeTimes);
 
         // 通栏[itemPos = 1 我的党支部，= 2 组织生活]
@@ -46,5 +45,7 @@ public interface MineContract {
         BaseDelegateAdapter initScores();
         // 缴费栏
         BaseDelegateAdapter initCash();
+        // 生活助手栏
+        BaseDelegateAdapter initHelper();
     }
 }

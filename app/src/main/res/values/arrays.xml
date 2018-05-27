@@ -120,11 +120,13 @@
 
     <!--我的页Grid - 生活助手-->
     <integer-array name="mine_gv_assistant_images">
-        <item>@mipmap/ic_mine_grid_healthy_living</item>
-        <item>@mipmap/ic_mine_grid_living_payment</item>
+        <item>@mipmap/ic_mine_weather</item>
+        <item>@mipmap/ic_mine_airplane</item>
+        <item>@mipmap/ic_mine_payment</item>
     </integer-array>
     <string-array name="mine_gv_assistant_title">
-        <item>健康生活</item>
+        <item>天气预报</item>
+        <item>火车机票</item>
         <item>生活缴费</item>
     </string-array>
 
@@ -136,9 +138,9 @@
         <item>0</item>
     </string-array>
     <string-array name="mine_gv_organization_title">
-        <item>积分明细</item>
-        <item>积分商城</item>
-        <item>积分兑换</item>
+        <item>参会次数</item>
+        <item>学习次数</item>
+        <item>活动次数</item>
     </string-array>
 
     <!--/////////////////////////////////////党员教育///////////////////////////////////-->

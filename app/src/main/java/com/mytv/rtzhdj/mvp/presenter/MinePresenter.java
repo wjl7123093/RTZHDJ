@@ -8,11 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.SimpleAdapter;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -54,7 +54,7 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
     private MainActivity activity;
 
     private String[] from = { "image", "title" };
-    private int[] to = { R.id.ic_grid, R.id.tv_name };
+    private int[] to = { R.id.iv_icon, R.id.tv_name };
 
     @Inject
     public MinePresenter(MineContract.Model model, MineContract.View rootView
@@ -317,42 +317,6 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
     }
 
     @Override
-    public BaseDelegateAdapter initColumn1(int scores, int power, int rank) {
-        ColumnLayoutHelper columnLayoutHelper = new ColumnLayoutHelper();
-        return new BaseDelegateAdapter(activity, columnLayoutHelper , R.layout.item_vlayout_grid5,
-                3, Constant.viewType.typeColumn) {
-            @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-
-                switch (position) {
-                    case 0:
-                        holder.setText(R.id.tv_scores, scores + "");
-                        holder.setText(R.id.tv_title, "累计积分");
-                        holder.setGone(R.id.tv_desc, false);
-                        holder.setGone(R.id.iv_desc, true);
-                        holder.setImageResource(R.id.iv_desc, R.mipmap.ic_mine_scores_total);
-                        break;
-                    case 1:
-                        holder.setText(R.id.tv_scores, power + "");
-                        holder.setText(R.id.tv_title, "正能量值");
-                        holder.setText(R.id.tv_desc, "完成任务，获取正能量值");
-                        holder.setGone(R.id.tv_desc, true);
-                        holder.setGone(R.id.iv_desc, false);
-                        break;
-                    case 2:
-                        holder.setText(R.id.tv_scores, rank + "");
-                        holder.setText(R.id.tv_title, "全市排名");
-                        holder.setGone(R.id.tv_desc, false);
-                        holder.setGone(R.id.iv_desc, true);
-                        holder.setImageResource(R.id.iv_desc, R.mipmap.ic_mine_scores_rank);
-                        break;
-                }
-            }
-        };
-    }
-
-    @Override
     public BaseDelegateAdapter initColumn2(int meetingTimes, int lessonTimes, int activeTimes) {
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(3);
         gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
@@ -430,6 +394,7 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                         }
 
                         break;
+
                 }
 
                 MineGridAdapter adapter = new MineGridAdapter(activity, list);
@@ -471,6 +436,52 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
 
+            }
+        };
+    }
+
+    @Override
+    public BaseDelegateAdapter initHelper() {
+
+        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        return new BaseDelegateAdapter(activity, singleLayoutHelper , R.layout.item_vlayout_mine_column,
+                1, Constant.viewType.typeTopHeader) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_title, "生活助手");
+
+                List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                MyGridView gridView = (MyGridView) holder.getView(R.id.gv_mine_column);
+
+                gridView.setNumColumns(3);
+                // GridView。。。
+                // 在构造函数设置每行的网格个数
+                final TypedArray proPic3 = activity.getResources().obtainTypedArray(R.array.mine_gv_assistant_images);
+                final String[] proName3 = activity.getResources().getStringArray(R.array.mine_gv_assistant_title);
+                final List<Integer> images3 = new ArrayList<>();
+                for(int a=0 ; a<proName3.length ; a++){
+                    images3.add(proPic3.getResourceId(a,R.mipmap.ic_launcher));
+                }
+                proPic3.recycle();
+
+                Map<String, Object> map3 = null;
+                for (int i = 0; i < images3.size(); i++) {
+                    map3 = new HashMap<String, Object>();
+                    map3.put("image", images3.get(i));
+                    map3.put("title", proName3[i]);
+                    list.add(map3);
+                }
+
+                SimpleAdapter pictureAdapter = new SimpleAdapter(activity, list,
+                        R.layout.item_vlayout_grid3, from, to);
+                gridView.setAdapter(pictureAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        mRootView.setOnGridClick(3, position);
+                    }
+                });
             }
         };
     }
