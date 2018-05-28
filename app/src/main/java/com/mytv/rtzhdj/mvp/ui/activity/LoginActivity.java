@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -75,7 +76,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         StatusBarCompat.translucentStatusBar(LoginActivity.this, true);
         mPresenter.setActivity(LoginActivity.this);
 
-        mBtnLogin.setOnClickListener(view -> mPresenter.callMethodOfDoLogin("15181738275", "w123456"));
+        mBtnLogin.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(mEdtAcc.getText().toString().trim())
+                    || TextUtils.isEmpty(mEdtPwd.getText().toString().trim())) {
+                showMessage("账号或密码不能为空");
+                return;
+            }
+            // 登录
+            mPresenter.callMethodOfDoLogin(mEdtAcc.getText().toString().trim(),
+                    mEdtPwd.getText().toString().trim());
+        });
         mTvRegister.setOnClickListener(view -> goRegisterActivity());
         mTvForgetPwd.setOnClickListener(view -> goForgetPwdActivity());
 

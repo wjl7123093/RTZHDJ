@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SimpleAdapter;
@@ -16,6 +17,7 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
@@ -23,15 +25,21 @@ import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.DataHelper;
+import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.MineEntity;
 import com.mytv.rtzhdj.mvp.contract.MineContract;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.mytv.rtzhdj.mvp.ui.adapter.MineGridAdapter;
 import com.mytv.rtzhdj.mvp.ui.widget.MyGridView;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +48,12 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
@@ -381,14 +394,20 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                         gridView.setNumColumns(3);
                         // GridView。。。
                         // 在构造函数设置每行的网格个数
-                        final String[] proPic2 = activity.getResources().getStringArray(R.array.mine_gv_organization_times);
+//                        final String[] proPic2 = activity.getResources().getStringArray(R.array.mine_gv_organization_times);
                         final String[] proName2 = activity.getResources().getStringArray(R.array.mine_gv_organization_title);
-
+                        List<String> proPic2 = new ArrayList<>();
+                        proPic2.add(0, (DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_PARTIN_TIMES) < 0
+                                ? 0 : DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_PARTIN_TIMES)) + "");
+                        proPic2.add(1, (DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_STUDY_TIMES) < 0
+                                ? 0 : DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_STUDY_TIMES)) + "");
+                        proPic2.add(2, (DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_ACTIVITY_TIMES) < 0
+                                ? 0 : DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_ACTIVITY_TIMES)) + "");
 
                         Map<String, Object> map2 = null;
-                        for (int i = 0; i < proPic2.length; i++) {
+                        for (int i = 0; i < proPic2.size(); i++) {
                             map2 = new HashMap<String, Object>();
-                            map2.put("image", proPic2[i]);
+                            map2.put("image", proPic2.get(i));
                             map2.put("title", proName2[i]);
                             list.add(map2);
                         }
@@ -484,5 +503,36 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                 });
             }
         };
+    }
+
+    @Override
+    public void callMethodOfGetUserPartMessage(int userId, boolean update) {
+        mModel.getUserPartMessage(userId, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<MineEntity>>transformObservable("getUserPartMessage" + userId,
+                        new TypeToken<BaseJson<MineEntity>>() { }.getType(),
+                        CacheStrategy.firstRemote()))
+                .map(new CacheResult.MapFunc<BaseJson<MineEntity>>())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .doFinally(() -> {
+                    mRootView.hideLoading();
+                })
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson<MineEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson<MineEntity> mineEntity) {
+                        Log.e(TAG, mineEntity.toString());
+
+                        if (mineEntity.isSuccess() && mineEntity.getData() != null)
+                            mRootView.loadData(mineEntity.getData());
+
+                    }
+                });
     }
 }

@@ -7,10 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -19,23 +17,17 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.entity.EffectEvaluationEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsCommonComponent;
 import com.mytv.rtzhdj.di.module.NewsCommonModule;
 import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
 import com.mytv.rtzhdj.mvp.presenter.NewsCommonPresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
 import com.mytv.rtzhdj.mvp.ui.adapter.NewsSimpleAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -215,7 +207,7 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(NewsCommonActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(NewsCommonActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
                 // 新闻详情页
 //                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();

@@ -14,8 +14,11 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
+import com.mytv.rtzhdj.app.data.entity.MineEntity;
 import com.mytv.rtzhdj.di.component.DaggerMineComponent;
 import com.mytv.rtzhdj.di.module.MineModule;
 import com.mytv.rtzhdj.mvp.contract.MineContract;
@@ -85,6 +88,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         mPresenter.setActivity((MainActivity)getActivity());
         initRecyclerView();
         initRefreshLayout();
+
+        // 动态获取积分等数据
+        mPresenter.callMethodOfGetUserPartMessage(DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID), false);
     }
 
     /**
@@ -206,6 +212,19 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     @Override
     public void setOnColumnClick(int arrayPos, int position) {
 
+    }
+
+    @Override
+    public void loadData(MineEntity mineEntity) {
+        DataHelper.setIntergerSF(getActivity(), SharepreferenceKey.KEY_LOGIN_USER_PARTIN_TIMES, mineEntity.getParticipantsNum());
+        DataHelper.setIntergerSF(getActivity(), SharepreferenceKey.KEY_LOGIN_USER_STUDY_TIMES, mineEntity.getStudyNum());
+        DataHelper.setIntergerSF(getActivity(), SharepreferenceKey.KEY_LOGIN_USER_ACTIVITY_TIMES, mineEntity.getActivityNum());
+        DataHelper.setIntergerSF(getActivity(), SharepreferenceKey.KEY_POSITIVE_ENERGY_VALUE, mineEntity.getUserEnergyValue());
+        DataHelper.setIntergerSF(getActivity(), SharepreferenceKey.KEY_LOGIN_INTEGRAL, mineEntity.getUserScores());
+
+        // 刷新积分数据
+        if (null != delegateAdapter)
+            delegateAdapter.notifyDataSetChanged();
     }
 
     private void initRecyclerView() {

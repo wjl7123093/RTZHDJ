@@ -42,5 +42,11 @@ public interface SharepreferenceKey {
     String KEY_LOGIN_USER_TYPE = "login_user_type"; // 用户类型
     // Ranking
     String KEY_LOGIN_USER_RANK = "login_user_rank"; // 用户排名
+    // ParticipantsNum
+    String KEY_LOGIN_USER_PARTIN_TIMES = "login_user_partin_times"; // 参会次数
+    // StudyNum
+    String KEY_LOGIN_USER_STUDY_TIMES = "login_user_study_times"; // 学习次数
+    // ActivityNum
+    String KEY_LOGIN_USER_ACTIVITY_TIMES = "login_user_activity_times"; // 活动次数
 
 }

@@ -3,11 +3,20 @@ package com.mytv.rtzhdj.mvp.presenter;
 import android.app.Application;
 import android.util.Log;
 
-import com.google.gson.reflect.TypeToken;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.data.BaseJson;
+import com.mytv.rtzhdj.app.data.entity.WishDetailEntity;
+import com.mytv.rtzhdj.mvp.contract.WishDetailContract;
+import com.mytv.rtzhdj.mvp.ui.activity.WishDetailActivity;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -17,21 +26,6 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-
-import javax.inject.Inject;
-
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
-import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
-import com.mytv.rtzhdj.app.data.entity.WishDetailEntity;
-import com.mytv.rtzhdj.mvp.contract.WishDetailContract;
-import com.mytv.rtzhdj.mvp.ui.activity.WishDetailActivity;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
-
-import java.util.List;
-import java.util.Map;
 
 
 @ActivityScope
@@ -87,9 +81,10 @@ public class WishDetailPresenter extends BasePresenter<WishDetailContract.Model,
                 .subscribe(new ErrorHandleSubscriber<BaseJson<WishDetailEntity>>(mErrorHandler) {
                     @Override
                     public void onNext(@NonNull BaseJson<WishDetailEntity> wishDetailEntity) {
-                        Log.e(TAG, wishDetailEntity.getData().toString());
+                        Log.e(TAG, wishDetailEntity.toString());
 
-                        mRootView.loadData(wishDetailEntity.getData());
+                        if (wishDetailEntity.isSuccess() && wishDetailEntity.getData() != null)
+                            mRootView.loadData(wishDetailEntity.getData());
                     }
                 });
     }
