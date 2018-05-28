@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_vlayout_study_course_best.xml vlayout 精品课件
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-5-28
+ * @update
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/orange_500"
+    android:padding="@dimen/len_12"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <com.mytv.rtzhdj.mvp.ui.widget.IconView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ic_study_course_best"
+        android:textSize="@dimen/font_24"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="精品课件展播"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/white"
+        android:layout_marginLeft="@dimen/len_10"/>
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text=">>"
+        android:textSize="@dimen/font_20"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

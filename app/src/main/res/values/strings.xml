@@ -115,6 +115,8 @@
     <string name="ic_join_my_receive">&#xe63a;</string>
     <string name="ic_join_all_receive">&#xe635;</string>
     <string name="ic_join_activity">&#xe618;</string>
+    <!-- study course -->
+    <string name="ic_study_course_best">&#xe6f4;</string><!-- 精品课件 -->
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

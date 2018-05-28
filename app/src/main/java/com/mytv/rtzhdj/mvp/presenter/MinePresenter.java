@@ -438,6 +438,14 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_scores, DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL) + "");
 
+                holder.getView(R.id.ll_scores).setOnClickListener(view -> {
+                    // 积分说明
+                    ARouter.getInstance().build(ARoutePath.PATH_MY_TASK)
+                            .withInt("Integeral", -100)
+                            .withInt("PlanValue", -100)
+                            .withInt("NextValue", -100).navigation();
+                });
+
                 holder.getView(R.id.ll_scores_detail).setOnClickListener(view -> {
                     // 积分明细
                     ARouter.getInstance().build(ARoutePath.PATH_SCORES_DETAILS).navigation();

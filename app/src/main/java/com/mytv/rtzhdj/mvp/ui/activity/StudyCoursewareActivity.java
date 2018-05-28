@@ -29,6 +29,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -49,8 +50,6 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 @Route(path = ARoutePath.PATH_STUDY_COURSEWARE)
 public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresenter> implements StudyCoursewareContract.View {
 
-    private final int PAGE_SIZE = 10;
-
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.toolbar_title)
@@ -64,6 +63,13 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
     RefreshLayout mRefreshLayout;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
+
+    private final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<StudyCoursewareEntity> mCourseList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
@@ -95,9 +101,10 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
         initRecyclerView();
         initRefreshLayout();
 
+        PAGE_INDEX = 1;
         // 获取 学习课件数据
         mPresenter.callMethodOfGetNewCoursewareList(DataHelper.getIntergerSF(StudyCoursewareActivity.this,
-                SharepreferenceKey.KEY_USER_ID), 1, PAGE_SIZE, false);
+                SharepreferenceKey.KEY_USER_ID), PAGE_INDEX, PAGE_SIZE, false);
     }
 
 
@@ -141,8 +148,9 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
                 break;
             case 1: // 选修课 nodeId = 9044
             case 2: // 微党课 nodeId = 9045
+            case 3: // 精品课件 nodeId = 9046
                 ARouter.getInstance().build(ARoutePath.PATH_ELECTIVE_COURSE)
-                        .withInt("nodeId", position == 1 ? 9044 : 9045)
+                        .withInt("nodeId", position == 1 ? 9044 : (position == 2 ? 9045 : 9046))
                         .withString("title", title).navigation();
                 break;
 
@@ -155,15 +163,35 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
     }
 
     @Override
-    public void loadData(List<StudyCoursewareEntity> courseList) {
+    public void loadData(List<StudyCoursewareEntity> courseList, boolean update) {
+
+        if (update) {
+            if (mIsRefresh) {
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+                mAdapters.clear();
+
+                initRecyclerView();
+            } else {
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
+
         //初始化list
         BaseDelegateAdapter listAdapter = mPresenter.initList(courseList);
         mAdapters.add(listAdapter);
         delegateAdapter.setAdapters(mAdapters);
+        delegateAdapter.notifyDataSetChanged();
     }
 
     private void initRecyclerView() {
-        delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        if (null == delegateAdapter)
+            delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+
+        //初始化 - 精品课件
+        BaseDelegateAdapter bestAdapter = mPresenter.initBest();
+        mAdapters.add(bestAdapter);
 
         //初始化九宫格
         BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
@@ -181,18 +209,27 @@ public class StudyCoursewareActivity extends BaseActivity<StudyCoursewarePresent
     }
 
     private void initRefreshLayout() {
-//        mRefreshLayout.setEnableRefresh(false);
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                // 获取 学习课件数据
+                mPresenter.callMethodOfGetNewCoursewareList(DataHelper.getIntergerSF(StudyCoursewareActivity.this,
+                        SharepreferenceKey.KEY_USER_ID), PAGE_INDEX, PAGE_SIZE, true);
             }
         });
-//        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                // 获取 学习课件数据
+                mPresenter.callMethodOfGetNewCoursewareList(DataHelper.getIntergerSF(StudyCoursewareActivity.this,
+                        SharepreferenceKey.KEY_USER_ID), ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }

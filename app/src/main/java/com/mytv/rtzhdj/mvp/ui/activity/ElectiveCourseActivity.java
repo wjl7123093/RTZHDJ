@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -218,7 +217,7 @@ public class ElectiveCourseActivity extends BaseActivity<ElectiveCoursePresenter
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(ElectiveCourseActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(ElectiveCourseActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
                 // 跳转到 课件详情
                 ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)

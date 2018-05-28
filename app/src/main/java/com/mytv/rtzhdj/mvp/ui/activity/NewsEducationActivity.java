@@ -17,6 +17,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsEducationComponent;
 import com.mytv.rtzhdj.di.module.NewsEducationModule;
@@ -25,7 +26,9 @@ import com.mytv.rtzhdj.mvp.presenter.NewsEducationPresenter;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -61,6 +64,11 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
     RecyclerView mRecyclerView;
 
     private final int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<NewsDetailEntity> mNewsList = new ArrayList<>();
+    private boolean mIsLoadMore = false;
+    private boolean mIsRefresh = false;
 
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
@@ -93,7 +101,7 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
         initRefreshLayout();
 
         // 获取 带"推荐"通用二级页面
-        mPresenter.callMethodOfGetTwoLevelList(6020, 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetTwoLevelList(6020, PAGE_INDEX, PAGE_SIZE, false);
     }
 
 
@@ -173,16 +181,31 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
     }
 
     @Override
-    public void loadData(NewsSimpleEntity newsSimpleEntity) {
+    public void loadData(NewsSimpleEntity newsSimpleEntity, boolean update) {
+
+        if (update) {
+            if (mIsRefresh) {
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+                mAdapters.clear();
+
+                initRecyclerView();
+            } else {
+                mRefreshLayout.finishLoadmore(true);
+                mIsLoadMore = false;
+            }
+        }
 
         //初始化list
         BaseDelegateAdapter listAdapter = mPresenter.initList(newsSimpleEntity.getList_listBlock());
         mAdapters.add(listAdapter);
         delegateAdapter.setAdapters(mAdapters);
+        delegateAdapter.notifyDataSetChanged();
     }
 
     private void initRecyclerView() {
-        delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        if (null == delegateAdapter)
+            delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
 
         //初始化九宫格
         BaseDelegateAdapter menuAdapter = mPresenter.initGvMenu();
@@ -200,18 +223,25 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
     }
 
     private void initRefreshLayout() {
-        mRefreshLayout.setEnableRefresh(false);
-//        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-//            @Override
-//            public void onRefresh(RefreshLayout refreshlayout) {
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
 //                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-//            }
-//        });
-//        mRefreshLayout.setEnableLoadmore(false);
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                // 获取 带"推荐"通用二级页面
+                mPresenter.callMethodOfGetTwoLevelList(6020, PAGE_INDEX, PAGE_SIZE, true);
+            }
+        });
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                // 获取 带"推荐"通用二级页面
+                mPresenter.callMethodOfGetTwoLevelList(6020, ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }

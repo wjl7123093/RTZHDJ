@@ -3,14 +3,12 @@ package com.mytv.rtzhdj.mvp.contract;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.NewsEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
-import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsEducationActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 
@@ -25,7 +23,7 @@ public interface NewsEducationContract {
         void setOnGridClick(int position, String title);
         void setOnListClick(int position);
 
-        void loadData(NewsSimpleEntity newsSimpleEntity);
+        void loadData(NewsSimpleEntity newsSimpleEntity, boolean update);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存

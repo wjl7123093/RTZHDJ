@@ -101,6 +101,21 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
     }
 
     @Override
+    public BaseDelegateAdapter initBest() {
+        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        return new BaseDelegateAdapter(mActivity, singleLayoutHelper , R.layout.item_vlayout_study_course_best,
+                1, Constant.viewType.typeTitle) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.getView(R.id.ll_container).setOnClickListener(view -> {
+                    mRootView.setOnGridClick(3, "精品课件展播");
+                });
+            }
+        };
+    }
+
+    @Override
     public BaseDelegateAdapter initGvMenu() {
         // 在构造函数设置每行的网格个数
         final TypedArray proPic = mActivity.getResources().obtainTypedArray(R.array.courseware_gv_images);
@@ -205,7 +220,7 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
                         Log.e(TAG, courseList.toString());
 
                         if (courseList.isSuccess() && courseList.getData() != null)
-                            mRootView.loadData(courseList.getData());
+                            mRootView.loadData(courseList.getData(), update);
                     }
                 });
     }

@@ -209,7 +209,7 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
                         Log.e("TAG", newsSimpleEntity.toString());
 
                         if (newsSimpleEntity.isSuccess() && newsSimpleEntity.getData() != null)
-                            mRootView.loadData(newsSimpleEntity.getData());
+                            mRootView.loadData(newsSimpleEntity.getData(), update);
 
                     }
                 });
