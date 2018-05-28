@@ -22,7 +22,7 @@ public class EffectEvaluationEntity {
     private String EndTime;             // 评测结束时间
     private String LastStudyTime;       // 最近测试时间
 
-    private int examinationTime;        // 测评时间
+    private int ExaminationTime;        // 测评时间
     private int IfOver;                 // 评测是否结束 0 没有，1 结束
 
     public int getId() {
@@ -90,11 +90,11 @@ public class EffectEvaluationEntity {
     }
 
     public int getExaminationTime() {
-        return examinationTime;
+        return ExaminationTime;
     }
 
     public void setExaminationTime(int examinationTime) {
-        this.examinationTime = examinationTime;
+        this.ExaminationTime = examinationTime;
     }
 
     public int getIfOver() {

@@ -226,9 +226,9 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mCoursewareDetailEntity = coursewareDetailEntity;
         if (courseType == 2) { // 未学习 计时
             initCountDownTimer(coursewareDetailEntity.getStudyTime() * 1000);
+            mCountDownTimer.start();
         }
         mTvScores.setText(" 可获取" + coursewareDetailEntity.getIntegral() + "积分哦！");
-        mCountDownTimer.start();
     }
 
     @Override

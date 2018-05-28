@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
@@ -34,6 +35,7 @@ import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.AnswerEntity;
 import com.mytv.rtzhdj.app.data.entity.QuestionEntity;
+import com.mytv.rtzhdj.app.utils.TimeTools;
 import com.mytv.rtzhdj.di.component.DaggerQuestionnaireComponent;
 import com.mytv.rtzhdj.di.module.QuestionnaireModule;
 import com.mytv.rtzhdj.mvp.contract.QuestionnaireContract;
@@ -78,8 +80,13 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
     @BindView(R.id.btnSubmit)
     Button mBtnSubmit;
 
+    @BindView(R.id.tv_time)
+    TextView mTvTime;
+
     @Autowired
     int examinationId;
+    @Autowired
+    int examinationTime;    // 测评时间
 
     /** 加载进度条 */
     private CenterDialog centerDialog;
@@ -106,6 +113,13 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
+
+    /** 倒计时 */
+    private CountDownTimer mCountDownTimer;
+    private static final long MAX_TIME = 62 * 1000;
+    private long curTime = 0;
+    private boolean isPause = false;    // 是否暂停
+    private boolean isFinish = false;   // 是否结束
 
 
     @Override
@@ -174,12 +188,50 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
         finish();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // 继续倒计时
+        if (curTime != 0 && isPause) {
+            //将上次当前剩余时间作为新的时长
+            initCountDownTimer(curTime);
+            mCountDownTimer.start();
+            isPause = false;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // 暂停倒计时
+        if (!isPause) {
+            isPause = true;
+            mCountDownTimer.cancel();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 取消
+        isPause = false;
+        mCountDownTimer.cancel();
+    }
+
 
     @Override
     public void loadData(List<QuestionEntity> questionList) {
+
         mQuestionList = questionList;
         bindDataToUI(mQuestionList);
         displayQuestionnaireResult(mQuestionList);
+
+        // 开始倒计时
+        initCountDownTimer(examinationTime * 1000);
+        mCountDownTimer.start();
     }
 
 
@@ -462,5 +514,23 @@ public class QuestionnaireActivity extends BaseActivity<QuestionnairePresenter> 
 
 
         }
+    }
+
+    public void initCountDownTimer(long millisInFuture) {
+        mCountDownTimer = new CountDownTimer(millisInFuture, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                curTime = millisUntilFinished;
+                mTvTime.setText(TimeTools.getCountTimeByLong(millisUntilFinished));
+                isPause = false;
+            }
+
+            public void onFinish() {
+                mTvTime.setText("00:00:00");
+                isFinish = true;
+                // 退出界面
+                killMyself();
+            }
+        };
     }
 }

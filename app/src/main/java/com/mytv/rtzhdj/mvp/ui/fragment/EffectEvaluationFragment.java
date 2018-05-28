@@ -218,10 +218,11 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
-                if (effectList.get(position).getIfOver() == 0) {
+                if (mEffectList.get(position).getIfOver() == 0) {
                     // 跳转到 问卷调查页面
                     ARouter.getInstance().build(ARoutePath.PATH_QUESTIONAIRE)
-                            .withInt("examinationId", mEffectList.get(position).getId()).navigation();
+                            .withInt("examinationId", mEffectList.get(position).getId())
+                            .withInt("examinationTime", mEffectList.get(position).getExaminationTime()).navigation();
                 } else {
                     showMessage("该次评测已经结束");
                 }
