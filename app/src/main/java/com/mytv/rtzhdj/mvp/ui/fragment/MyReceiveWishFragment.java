@@ -143,10 +143,11 @@ public class MyReceiveWishFragment extends BaseFragment<MyReceiveWishPresenter> 
 
     @Override
     public void loadData(List<MyWishEntity> myWishList) {
-        if (myWishList.size() == 0) {
+        // 下面代码会导致 无数据页面上下滑动异常
+        /*if (myWishList.size() == 0) {
 //            showMessage("暂无数据");
             return;
-        }
+        }*/
 
         initAdapter(myWishList);
     }
@@ -162,13 +163,13 @@ public class MyReceiveWishFragment extends BaseFragment<MyReceiveWishPresenter> 
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+                refreshlayout.finishRefresh(2000, true);//传入false表示刷新失败
             }
         });
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+                refreshlayout.finishLoadmore(2000, true);//传入false表示加载失败
             }
         });
     }
