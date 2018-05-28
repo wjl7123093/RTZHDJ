@@ -24,7 +24,7 @@ public interface JoinContract {
         void setOnFooterClick();
         void setOnColumnClick(int arrayPos, int position);
 
-        void loadData(MyJoinEntity myJoinEntity);
+        void loadData(MyJoinEntity myJoinEntity, boolean update);
     }
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存

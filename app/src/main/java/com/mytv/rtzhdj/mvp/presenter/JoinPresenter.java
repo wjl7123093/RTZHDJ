@@ -418,7 +418,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                         Log.e(TAG, myJoinEntity.toString());
 
                         if (myJoinEntity.isSuccess() && myJoinEntity.getData() != null)
-                            mRootView.loadData(myJoinEntity.getData());
+                            mRootView.loadData(myJoinEntity.getData(), update);
 
                     }
                 });

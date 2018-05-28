@@ -49,6 +49,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinContract.View {
 
     private final static int PAGE_SIZE = 10;
+    private int PAGE_INDEX = 1;
 
     @BindView(R.id.refreshLayout)
     RefreshLayout mRefreshLayout;
@@ -57,6 +58,8 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
+    private DelegateAdapter delegateAdapter = null;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -91,7 +94,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 
         // 获取 我要参与数据
         mPresenter.callMethodOfGetMyPartIn(DataHelper.getIntergerSF(getActivity(),
-                SharepreferenceKey.KEY_USER_ID), 1, PAGE_SIZE, false);
+                SharepreferenceKey.KEY_USER_ID), PAGE_INDEX, PAGE_SIZE, false);
     }
 
     /**
@@ -221,16 +224,25 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
     }
 
     @Override
-    public void loadData(MyJoinEntity myJoinEntity) {
-        initRecyclerView(myJoinEntity);
+    public void loadData(MyJoinEntity myJoinEntity, boolean update) {
+        initRecyclerView(myJoinEntity, update);
     }
 
-    private void initRecyclerView(MyJoinEntity myJoinEntity) {
+    private void initRecyclerView(MyJoinEntity myJoinEntity, boolean update) {
+        if (update && mIsRefresh) {
+            mRefreshLayout.finishRefresh(true);
+            mIsRefresh = false;
+        }
+
         List<MyJoinEntity.VolunteerBlock> volunteerBlocks = myJoinEntity.getVolunteerBlock();
         List<MyJoinEntity.CommunityBlock> communityBlocks = myJoinEntity.getCommunityBlock();
         MyJoinEntity.PartyInfoModel partyInfoModel = myJoinEntity.getPartyInfoModel();
 
-        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        if (null == delegateAdapter)
+            delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        else
+            mAdapters.clear();
+
 
         //初始化头部
         BaseDelegateAdapter headerAdapter = mPresenter.initHeader(partyInfoModel);
@@ -271,17 +283,24 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
         mAdapters.add(listAdapter2);
 
         //设置适配器
-        delegateAdapter.setAdapters(mAdapters);
+        if (update)
+            delegateAdapter.notifyDataSetChanged();
+        else
+            delegateAdapter.setAdapters(mAdapters);
     }
 
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                // 刷新
+                mPresenter.callMethodOfGetMyPartIn(DataHelper.getIntergerSF(getActivity(),
+                        SharepreferenceKey.KEY_USER_ID), PAGE_INDEX, PAGE_SIZE, true);
             }
         });
-//        mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {

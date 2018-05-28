@@ -277,8 +277,10 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     }
 
     private void initRecyclerView(MyStudyEntity myStudyEntity, boolean update) {
-        if (update && mIsRefresh)
+        if (update && mIsRefresh) {
             mRefreshLayout.finishRefresh(true);
+            mIsRefresh = false;
+        }
 
         MyStudyEntity.UserInfoBlock userInfoBlock = myStudyEntity.getUserInfoBlock();
         List<MyStudyEntity.CoursewareBlock> courseChooseBlock = myStudyEntity.getCourseChooseBlock();

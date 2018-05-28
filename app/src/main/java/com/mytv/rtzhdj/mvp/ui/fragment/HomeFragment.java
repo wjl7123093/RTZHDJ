@@ -234,8 +234,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     }
 
     private void initRecyclerView(HomeEntity homeData, boolean update) {
-        if (update && mIsRefresh)
+        if (update && mIsRefresh) {
             mRefreshLayout.finishRefresh(true);
+            mIsRefresh = false;
+        }
 
         List<HomeEntity.SpecialBlock> SpecialBlock = homeData.getSpecialBlock();
         List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent = homeData.getNoticeBlock_ChildContent();
