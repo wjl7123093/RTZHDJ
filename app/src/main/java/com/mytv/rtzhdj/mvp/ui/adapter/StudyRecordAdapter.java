@@ -30,7 +30,7 @@ public class StudyRecordAdapter extends BaseQuickAdapter<StudyRecordEntity, Base
     @Override
     protected void convert(BaseViewHolder helper, StudyRecordEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
-        helper.setText(R.id.tv_datetime, "学习时间: " + item.getLastStudyTime());
+        helper.setText(R.id.tv_datetime, "学习时间: " + item.getLastStudyTime().replace("T", " "));
         helper.setText(R.id.tv_type, item.getTypeString());
         helper.setText(R.id.tv_scores, "积分数量: +" + item.getScore());
     }

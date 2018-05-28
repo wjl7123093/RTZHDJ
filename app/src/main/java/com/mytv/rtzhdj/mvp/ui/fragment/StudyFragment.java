@@ -23,7 +23,11 @@ import com.mytv.rtzhdj.di.component.DaggerStudyComponent;
 import com.mytv.rtzhdj.di.module.StudyModule;
 import com.mytv.rtzhdj.mvp.contract.StudyContract;
 import com.mytv.rtzhdj.mvp.presenter.StudyPresenter;
+import com.mytv.rtzhdj.mvp.ui.activity.CompulsoryCourseActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.CourseDetailActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.ElectiveCourseActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.StudyCoursewareActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -157,8 +161,11 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     @Override
     public void setOnGridClick(int position, String title) {
         switch (position) {
-            case 0: // 学习课件
-                ARouter.getInstance().build(ARoutePath.PATH_STUDY_COURSEWARE).navigation();
+            case 0: // 学习课件 [ForResult]
+//                ARouter.getInstance().build(ARoutePath.PATH_STUDY_COURSEWARE).navigation();
+                Intent intent = new Intent(getActivity(), StudyCoursewareActivity.class);
+                startActivityForResult(intent, 100);
+//                CommonFuncUtil.goNextActivityWithNoArgsForResult(getActivity(), StudyCoursewareActivity.class, 100);
                 break;
             case 1: // 党内法规
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
@@ -191,40 +198,66 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     }
 
     @Override
-    public void setOnListClick(int arrayPos, int position) {
-        switch (arrayPos) {
+    public void setOnListClick(int position, MyStudyEntity.CoursewareBlock coursewareBlock) {
+        String title = "";
+        switch (position) {
             case 0: // 必修课
-                ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
-                        .withString("title", "必修课").navigation();
-//                ARouter.getInstance().build(ARoutePath.PATH_COURSE_VIDEO_DETAIL)
-//                        .withString("title", "必修课").navigation();
+                title = "必修课";
+                /*ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
+                        .withString("title", "必修课")
+                        .withInt("nodeId", coursewareBlock.getNodeId())
+                        .withInt("articleId", coursewareBlock.getArticleId())
+                        .withInt("courseType", 2).navigation();*/
                 break;
             case 1: // 选修课
-                ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
-                        .withString("title", "选修课").navigation();
+                title = "选修课";
+                /*ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
+                        .withString("title", "选修课")
+                        .withInt("nodeId", coursewareBlock.getNodeId())
+                        .withInt("articleId", coursewareBlock.getArticleId())
+                        .withInt("courseType", 2).navigation();*/
                 break;
             case 2: // 微党课
-                ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
-                        .withString("title", "微党课").navigation();
+                title = "微党课";
+                /*ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
+                        .withString("title", "微党课")
+                        .withInt("nodeId", coursewareBlock.getNodeId())
+                        .withInt("articleId", coursewareBlock.getArticleId())
+                        .withInt("courseType", 2).navigation();*/
                 break;
         }
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        bundle.putInt("nodeId", coursewareBlock.getNodeId());
+        bundle.putInt("articleId", coursewareBlock.getArticleId());
+        bundle.putInt("courseType", 2);
+        Intent intent = new Intent(getActivity(), CourseDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, 100);
+//        CommonFuncUtil.goNextActivityWithArgsForResult(getActivity(), CourseDetailActivity.class, bundle, 100);
     }
 
     @Override
     public void setOnMoreClick(int arrayPos, String title) {
         switch (arrayPos) {
-            case 0: // 必修课
-                ARouter.getInstance().build(ARoutePath.PATH_COMPULSORY_COURSE).navigation();
+            case 0: // 必修课[ForResult]
+//                ARouter.getInstance().build(ARoutePath.PATH_COMPULSORY_COURSE).navigation();
+                Intent intent1 = new Intent(getActivity(), CompulsoryCourseActivity.class);
+                startActivityForResult(intent1, 100);
+//                CommonFuncUtil.goNextActivityWithNoArgsForResult(getActivity(), CompulsoryCourseActivity.class, 100);
                 break;
-            case 1: // 选修课
-            case 2: // 微党课
-//                ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
-//                        .withString("from", "StudyCoursewareActivity")
+            case 1: // 选修课[ForResult]
+            case 2: // 微党课[ForResult]
+//                ARouter.getInstance().build(ARoutePath.PATH_ELECTIVE_COURSE)
+//                        .withInt("nodeId", arrayPos == 1 ? 9044 : 9045)
 //                        .withString("title", title).navigation();
-
-                ARouter.getInstance().build(ARoutePath.PATH_ELECTIVE_COURSE)
-                        .withInt("nodeId", arrayPos == 1 ? 9044 : 9045)
-                        .withString("title", title).navigation();
+                Bundle bundle = new Bundle();
+                bundle.putInt("nodeId", arrayPos == 1 ? 9044 : 9045);
+                bundle.putString("title", title);
+                Intent intent2 = new Intent(getActivity(), ElectiveCourseActivity.class);
+                intent2.putExtras(bundle);
+                startActivityForResult(intent2, 100);
+//                CommonFuncUtil.goNextActivityWithArgsForResult(getActivity(), ElectiveCourseActivity.class, bundle, 100);
                 break;
         }
     }
@@ -248,7 +281,11 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         List<MyStudyEntity.CoursewareBlock> courseMustBlock = myStudyEntity.getCourseMustBlock();
         List<MyStudyEntity.CoursewareBlock> courseLittleBlock = myStudyEntity.getCourseLittleBlock();
 
-        delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        if (null == delegateAdapter)
+            delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        else
+            mAdapters.clear();
+
 
         //初始化头部
         BaseDelegateAdapter headerAdapter = mPresenter.initHeader(userInfoBlock);
@@ -287,6 +324,7 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
 
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);
+        delegateAdapter.notifyDataSetChanged();
     }
 
     private void initRefreshLayout() {
@@ -303,5 +341,15 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
 //                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
 //            }
 //        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            // 刷新
+            mPresenter.callMethodOfGetMyStudy(
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID), false);
+        }
     }
 }

@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SimpleAdapter;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.arouter.utils.TextUtils;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -28,7 +27,6 @@ import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.DataHelper;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
@@ -176,9 +174,9 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 holder.setText(R.id.tv_datetime, coursewareList.get(position).getLastStudyTime());
 
                 holder.getView(R.id.ll_container).setOnClickListener(view -> {
-//                    mRootView.setOnListClick(arrayPos, position);
+                    mRootView.setOnListClick(position, coursewareList.get(position));
 
-                    switch (arrayPos) {
+                    /*switch (arrayPos) {
                         case 0: // 必修课
                             ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                                     .withString("title", "必修课")
@@ -200,7 +198,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                                     .withInt("articleId", coursewareList.get(position).getArticleId())
                                     .withInt("courseType", 2).navigation();
                             break;
-                    }
+                    }*/
                 });
 
             }

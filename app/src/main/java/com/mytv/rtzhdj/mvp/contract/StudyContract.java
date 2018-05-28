@@ -3,12 +3,11 @@ package com.mytv.rtzhdj.mvp.contract;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.MyStudyEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 
@@ -21,7 +20,7 @@ public interface StudyContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
         void setOnGridClick(int position, String title);
-        void setOnListClick(int arrayPos, int position);
+        void setOnListClick(int position, MyStudyEntity.CoursewareBlock coursewareBlock);
         void setOnMoreClick(int arrayPos, String title);
         void setOnStudyRecordClick();
 
