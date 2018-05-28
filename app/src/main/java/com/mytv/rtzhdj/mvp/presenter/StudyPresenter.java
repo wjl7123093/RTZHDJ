@@ -174,7 +174,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 holder.setText(R.id.tv_datetime, coursewareList.get(position).getLastStudyTime());
 
                 holder.getView(R.id.ll_container).setOnClickListener(view -> {
-                    mRootView.setOnListClick(position, coursewareList.get(position));
+                    mRootView.setOnListClick(arrayPos, coursewareList.get(position));
 
                     /*switch (arrayPos) {
                         case 0: // 必修课
@@ -296,7 +296,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                         Log.e(TAG, myStudyData.toString());
 
                         if (myStudyData.isSuccess() && myStudyData.getData() != null)
-                            mRootView.showStudyData(myStudyData.getData());
+                            mRootView.showStudyData(myStudyData.getData(), update);
 
                     }
                 });

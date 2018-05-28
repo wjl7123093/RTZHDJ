@@ -62,6 +62,7 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
     private DelegateAdapter delegateAdapter = null;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -198,9 +199,9 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     }
 
     @Override
-    public void setOnListClick(int position, MyStudyEntity.CoursewareBlock coursewareBlock) {
+    public void setOnListClick(int arrayPos, MyStudyEntity.CoursewareBlock coursewareBlock) {
         String title = "";
-        switch (position) {
+        switch (arrayPos) {
             case 0: // 必修课
                 title = "必修课";
                 /*ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
@@ -271,11 +272,14 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
     }
 
     @Override
-    public void showStudyData(MyStudyEntity myStudyEntity) {
-        initRecyclerView(myStudyEntity);
+    public void showStudyData(MyStudyEntity myStudyEntity, boolean update) {
+        initRecyclerView(myStudyEntity, update);
     }
 
-    private void initRecyclerView(MyStudyEntity myStudyEntity) {
+    private void initRecyclerView(MyStudyEntity myStudyEntity, boolean update) {
+        if (update && mIsRefresh)
+            mRefreshLayout.finishRefresh(true);
+
         MyStudyEntity.UserInfoBlock userInfoBlock = myStudyEntity.getUserInfoBlock();
         List<MyStudyEntity.CoursewareBlock> courseChooseBlock = myStudyEntity.getCourseChooseBlock();
         List<MyStudyEntity.CoursewareBlock> courseMustBlock = myStudyEntity.getCourseMustBlock();
@@ -323,24 +327,25 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         }
 
         //设置适配器
-        delegateAdapter.setAdapters(mAdapters);
-        delegateAdapter.notifyDataSetChanged();
+        if (update)
+            delegateAdapter.notifyDataSetChanged();
+        else
+            delegateAdapter.setAdapters(mAdapters);
     }
 
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                // 刷新
+                mPresenter.callMethodOfGetMyStudy(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID), true);
             }
         });
         mRefreshLayout.setEnableLoadmore(false);
-//        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-//            @Override
-//            public void onLoadmore(RefreshLayout refreshlayout) {
-//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
-//            }
-//        });
     }
 
     @Override
@@ -349,7 +354,7 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         if (requestCode == 100) {
             // 刷新
             mPresenter.callMethodOfGetMyStudy(
-                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID), false);
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID), true);
         }
     }
 }
