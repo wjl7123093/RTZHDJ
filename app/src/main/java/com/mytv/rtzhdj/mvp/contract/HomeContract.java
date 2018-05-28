@@ -33,7 +33,7 @@ public interface HomeContract {
 
         void showImage(ImageView iv, String url);
 
-        void showData(BaseJson<HomeEntity> homeData);
+        void showData(HomeEntity homeData, boolean update);
 //        void setOnBannerClick(int position);
     }
 

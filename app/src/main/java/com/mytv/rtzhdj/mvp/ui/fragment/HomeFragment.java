@@ -17,7 +17,6 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.utils.ImageLoader;
 import com.mytv.rtzhdj.di.component.DaggerHomeComponent;
@@ -59,6 +58,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
+    private DelegateAdapter delegateAdapter = null;
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -228,23 +229,27 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     }
 
     @Override
-    public void showData(BaseJson<HomeEntity> homeData) {
-        initRecyclerView(homeData);
+    public void showData(HomeEntity homeData, boolean update) {
+        initRecyclerView(homeData, update);
     }
 
-    private void initRecyclerView(BaseJson<HomeEntity> homeData) {
-        if (homeData.getData() == null)
-            return;
+    private void initRecyclerView(HomeEntity homeData, boolean update) {
+        if (update && mIsRefresh)
+            mRefreshLayout.finishRefresh(true);
 
-        List<HomeEntity.SpecialBlock> SpecialBlock = homeData.getData().getSpecialBlock();
-        List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent = homeData.getData().getNoticeBlock_ChildContent();
-        List<HomeEntity.FocusNewsBlock> FocusNewsBlock_ChildContent = homeData.getData().getFocusNewsBlock_ChildContent();
-        List<HomeEntity.AdBlock> AdBlock = homeData.getData().getAdBlock();
-        List<List<HomeEntity.PublicSpiritedBlock>> PublicSpiritedBlock_ChildContent = homeData.getData().getPublicSpiritedBlock_ChildContent();
-        int myPositiveValue = homeData.getData().getMyPositiveValue();
+        List<HomeEntity.SpecialBlock> SpecialBlock = homeData.getSpecialBlock();
+        List<HomeEntity.NoticeBlock> NoticeBlock_ChildContent = homeData.getNoticeBlock_ChildContent();
+        List<HomeEntity.FocusNewsBlock> FocusNewsBlock_ChildContent = homeData.getFocusNewsBlock_ChildContent();
+        List<HomeEntity.AdBlock> AdBlock = homeData.getAdBlock();
+        List<List<HomeEntity.PublicSpiritedBlock>> PublicSpiritedBlock_ChildContent = homeData.getPublicSpiritedBlock_ChildContent();
+        int myPositiveValue = homeData.getMyPositiveValue();
+
+        if (null == delegateAdapter)
+            delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
+        else
+            mAdapters.clear();
 
 
-        DelegateAdapter delegateAdapter = mPresenter.initRecyclerView(mRecyclerView);
         //初始化顶部头部
         BaseDelegateAdapter topHeaderAdapter = mPresenter.initTopHeader();
         mAdapters.add(topHeaderAdapter);
@@ -288,23 +293,25 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         mAdapters.add(footerAdapter);
 
         //设置适配器
-        delegateAdapter.setAdapters(mAdapters);
+        if (update)
+            delegateAdapter.notifyDataSetChanged();
+        else
+            delegateAdapter.setAdapters(mAdapters);
     }
 
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                // 刷新
+                mPresenter.callMethodOfGetHomeData(true);
+
             }
         });
         mRefreshLayout.setEnableLoadmore(false);
-//        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-//            @Override
-//            public void onLoadmore(RefreshLayout refreshlayout) {
-//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
-//            }
-//        });
     }
 
 }

@@ -636,7 +636,8 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                     public void onNext(@NonNull BaseJson<HomeEntity> homeData) {
                         Log.e("TAG", homeData.toString());
 
-                        mRootView.showData(homeData);
+                        if (homeData.isSuccess() && homeData.getData() != null)
+                            mRootView.showData(homeData.getData(), update);
                     }
                 });
     }
