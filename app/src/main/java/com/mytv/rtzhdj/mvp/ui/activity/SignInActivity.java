@@ -169,7 +169,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
             mTvSignStatus.setText("尚未签到");
         } else {
             mTvSignStatus.setText("已签到");
-            mTvSignBig.setText("+" + DataHelper.getIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_LOGIN_ADD_INTEGRAL));
+            mTvSignBig.setText("+" + (DataHelper.getIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_LOGIN_ADD_INTEGRAL) < 0
+                    ? 1 : DataHelper.getIntergerSF(SignInActivity.this, SharepreferenceKey.KEY_LOGIN_ADD_INTEGRAL)));
         }
         mTvSignDays.setText("连续签到" + signEntity.getDays() + "天");
 
