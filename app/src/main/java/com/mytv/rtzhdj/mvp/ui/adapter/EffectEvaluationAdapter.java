@@ -33,7 +33,8 @@ public class EffectEvaluationAdapter extends BaseQuickAdapter<EffectEvaluationEn
     protected void convert(BaseViewHolder helper, EffectEvaluationEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
         helper.setText(R.id.tv_scores, "分数:" + item.getScore() + "　　剩余:" +
-                item.getExaminationCount() + "/" + item.getTestAlready());
+                (item.getTestAlready() - item.getExaminationCount() < 0
+                        ? 0 : item.getTestAlready() - item.getExaminationCount()) + "/" + item.getTestAlready());
         helper.setText(R.id.tv_test_time, item.getStartTime().split("T")[0] + " 至 "
                 + item.getEndTime().split("T")[0]);
         helper.setText(R.id.tv_last_time, "最近测试时间: " + item.getLastStudyTime());

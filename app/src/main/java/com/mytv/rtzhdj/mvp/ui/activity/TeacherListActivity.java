@@ -19,12 +19,12 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.di.component.DaggerNewsCommonComponent;
-import com.mytv.rtzhdj.di.module.NewsCommonModule;
-import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
-import com.mytv.rtzhdj.mvp.presenter.NewsCommonPresenter;
-import com.mytv.rtzhdj.mvp.ui.adapter.NewsSimpleAdapter;
+import com.mytv.rtzhdj.app.data.entity.TeacherEntity;
+import com.mytv.rtzhdj.di.component.DaggerTeacherListComponent;
+import com.mytv.rtzhdj.di.module.TeacherListModule;
+import com.mytv.rtzhdj.mvp.contract.TeacherListContract;
+import com.mytv.rtzhdj.mvp.presenter.TeacherListPresenter;
+import com.mytv.rtzhdj.mvp.ui.adapter.TeacherListAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -38,16 +38,16 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * 通用新闻列表界面
+ * 党员教育[师资库]界面
  *
  * @author Fred_W
  * @version v1.0.0(1)
  *
- * @crdate 2018-2-6
+ * @crdate 2018-5-28
  * @update
  */
-@Route(path = ARoutePath.PATH_NEWS_COMMON)
-public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implements NewsCommonContract.View {
+@Route(path = ARoutePath.PATH_TEACHER_LIST)
+public class TeacherListActivity extends BaseActivity<TeacherListPresenter> implements TeacherListContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -64,17 +64,13 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     RecyclerView mRecyclerView;
 
     @Autowired
-    String from;
-    @Autowired
-    String title;
-    @Autowired
     int nodeId;
 
-    private NewsSimpleAdapter newsAdapter;
+    private TeacherListAdapter teacherAdapter;
     private static final int PAGE_SIZE = 10;
     private int PAGE_INDEX = 1;
     private int mCurPos = 0;    // 当前列表末节点位置
-    private List<NewsDetailEntity> mNewsList = new ArrayList<>();
+    private List<TeacherEntity> mTeacherList = new ArrayList<>();
     private boolean mIsLoadMore = false;
     private boolean mIsRefresh = false;
 
@@ -84,10 +80,10 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
-        DaggerNewsCommonComponent //如找不到该类,请编译一下项目
+        DaggerTeacherListComponent //如找不到该类,请编译一下项目
                 .builder()
                 .appComponent(appComponent)
-                .newsCommonModule(new NewsCommonModule(this))
+                .teacherListModule(new TeacherListModule(this))
                 .build()
                 .inject(this);
     }
@@ -95,21 +91,22 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     @Override
     public int initView(Bundle savedInstanceState) {
         ARouter.getInstance().inject(this);
-        return R.layout.activity_news_common; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_teacher_list; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
 
-        mPresenter.setActivity(NewsCommonActivity.this);
-        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView, from);
+        mPresenter.setActivity(TeacherListActivity.this);
+        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
 //        initAdapter();
         initRefreshLayout();
 
         PAGE_INDEX = 1;
         // 获取二级通用列表数据
-        mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetTeacherList(nodeId, PAGE_INDEX, PAGE_SIZE, false);
+
     }
 
 
@@ -144,12 +141,6 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
         finish();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mTvToolbarTitle.setText(title);
-    }
-
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -159,7 +150,7 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
                 mIsRefresh = true;
                 PAGE_INDEX = 1;
                 // 获取二级通用列表数据
-                mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetTeacherList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
 
             }
         });
@@ -171,19 +162,19 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 
                 mIsLoadMore = true;
                 // 获取二级通用列表数据
-                mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetTeacherList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
 
             }
         });
     }
 
-    public void initAdapter(List<NewsDetailEntity> newsDetailList, boolean update) {
+    public void initAdapter(List<TeacherEntity> teacherList, boolean update) {
         if (update) {
             if (mIsRefresh) {  // 下拉刷新
                 // 1. 先移除
-                newsAdapter.notifyItemRangeRemoved(0, mNewsList.size());
+                teacherAdapter.notifyItemRangeRemoved(0, mTeacherList.size());
                 // 2. 再清空
-                mNewsList.clear();
+                mTeacherList.clear();
 
                 mRefreshLayout.finishRefresh(true);
                 mIsRefresh = false;
@@ -193,36 +184,36 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
             }
         }
 
-        mCurPos = mNewsList.size();
-        if (null == newsAdapter) {
-            mNewsList = newsDetailList;
-            newsAdapter = new NewsSimpleAdapter(NewsCommonActivity.this, newsDetailList);
-            newsAdapter.openLoadAnimation();
-            mRecyclerView.setAdapter(newsAdapter);
+        mCurPos = mTeacherList.size();
+        if (null == teacherAdapter) {
+            mTeacherList = teacherList;
+            teacherAdapter = new TeacherListAdapter(TeacherListActivity.this, teacherList);
+            teacherAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(teacherAdapter);
         } else {
-            mNewsList.addAll(newsDetailList);
-            newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+            mTeacherList.addAll(teacherList);
+            teacherAdapter.notifyItemRangeInserted(mCurPos, teacherList.size());
         }
 
-        newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        teacherAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                Toast.makeText(NewsCommonActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
-                // 新闻详情页
-//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                         .withInt("articleId", newsDetailList.get(position).getId())
                         .withInt("nodeId", newsDetailList.get(position).getNodeId())
                         .withInt("digs", newsDetailList.get(position).getDigs())
                         .withInt("comments", newsDetailList.get(position).getComments())
-                        .navigation();
+                        .navigation();*/
             }
         });
     }
 
     @Override
-    public void loadListData(List<NewsDetailEntity> newsList, boolean update) {
-        initAdapter(newsList, update);
+    public void loadListData(List<TeacherEntity> teacherList, boolean update) {
+        initAdapter(teacherList, update);
     }
+
+
 }

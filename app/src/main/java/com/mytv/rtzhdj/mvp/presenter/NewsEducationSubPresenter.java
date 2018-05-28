@@ -1,23 +1,25 @@
 package com.mytv.rtzhdj.mvp.presenter;
 
+import android.app.Activity;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.StudyRecordEntity;
-import com.mytv.rtzhdj.mvp.contract.StudyRecordContract;
-import com.mytv.rtzhdj.mvp.ui.activity.StudyRecordActivity;
+import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
+import com.mytv.rtzhdj.mvp.contract.NewsEducationSubContract;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
-
-import java.util.List;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import javax.inject.Inject;
 
@@ -30,17 +32,17 @@ import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
-public class StudyRecordPresenter extends BasePresenter<StudyRecordContract.Model, StudyRecordContract.View>
-    implements StudyRecordContract.Presenter {
+public class NewsEducationSubPresenter extends BasePresenter<NewsEducationSubContract.Model, NewsEducationSubContract.View>
+    implements NewsEducationSubContract.Presenter {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
 
-    private StudyRecordActivity mActivity;
+    private Activity mActivity;
 
     @Inject
-    public StudyRecordPresenter(StudyRecordContract.Model model, StudyRecordContract.View rootView
+    public NewsEducationSubPresenter(NewsEducationSubContract.Model model, NewsEducationSubContract.View rootView
             , RxErrorHandler handler, Application application
             , ImageLoader imageLoader, AppManager appManager) {
         super(model, rootView);
@@ -60,7 +62,7 @@ public class StudyRecordPresenter extends BasePresenter<StudyRecordContract.Mode
     }
 
     @Override
-    public void setActivity(StudyRecordActivity activity) {
+    public void setActivity(Activity activity) {
         mActivity = activity;
     }
 
@@ -68,25 +70,24 @@ public class StudyRecordPresenter extends BasePresenter<StudyRecordContract.Mode
     public RecyclerView initRecyclerView(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         recyclerView.setHasFixedSize(true);
-
+        //设置item间距，1dp
+        recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
+                LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 1)));
         //设置回收复用池大小，（如果一屏内相同类型的 View 个数比较多，需要设置一个合适的大小，防止来回滚动时重新创建 View）
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
         recyclerView.setRecycledViewPool(viewPool);
         viewPool.setMaxRecycledViews(0, 20);
 
-        //设置item间距
-            recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
-                    LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 10)));
-
-//            recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
-//                    LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 1)));
-
         return recyclerView;
     }
 
     @Override
-    public void callMethodOfGetLearningRecords(int userId, boolean update) {
-        mModel.getLearningRecords(userId, update)
+    public void callMethodOfGetPartySubList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartySubList(nodeId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<PartySubNewsEntity>>transformObservable("getPartySubList" + nodeId + pageIndex,
+                        new TypeToken<BaseJson<PartySubNewsEntity>>() { }.getType(),
+                        CacheStrategy.firstRemote()))    // 60s以内用缓存
+                .map(new CacheResult.MapFunc<BaseJson<PartySubNewsEntity>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -99,14 +100,13 @@ public class StudyRecordPresenter extends BasePresenter<StudyRecordContract.Mode
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseJson<List<StudyRecordEntity>>>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<PartySubNewsEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(@NonNull BaseJson<List<StudyRecordEntity>> studyRecordList) {
-                        Log.e(TAG, studyRecordList.toString());
+                    public void onNext(@NonNull BaseJson<PartySubNewsEntity> partySubListData) {
+                        Log.e(TAG, partySubListData.getData().toString());
 
-                        if (studyRecordList.isSuccess() && studyRecordList.getData() != null)
-                            mRootView.loadData(studyRecordList.getData());
-
+                        if (partySubListData.isSuccess() && partySubListData.getData() != null)
+                            mRootView.showSubListData(partySubListData.getData(), update);
                     }
                 });
     }

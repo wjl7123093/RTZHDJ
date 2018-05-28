@@ -5,17 +5,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.StudyRecordEntity;
-import com.mytv.rtzhdj.mvp.contract.StudyRecordContract;
-import com.mytv.rtzhdj.mvp.ui.activity.StudyRecordActivity;
+import com.mytv.rtzhdj.app.data.entity.TeacherEntity;
+import com.mytv.rtzhdj.mvp.contract.TeacherListContract;
+import com.mytv.rtzhdj.mvp.ui.activity.TeacherListActivity;
 import com.mytv.rtzhdj.mvp.ui.decoration.DividerItemDecoration;
+import com.zchu.rxcache.data.CacheResult;
+import com.zchu.rxcache.stategy.CacheStrategy;
 
 import java.util.List;
 
@@ -30,17 +34,17 @@ import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 
 @ActivityScope
-public class StudyRecordPresenter extends BasePresenter<StudyRecordContract.Model, StudyRecordContract.View>
-    implements StudyRecordContract.Presenter {
+public class TeacherListPresenter extends BasePresenter<TeacherListContract.Model, TeacherListContract.View>
+    implements TeacherListContract.Presenter {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
 
-    private StudyRecordActivity mActivity;
+    private TeacherListActivity mActivity;
 
     @Inject
-    public StudyRecordPresenter(StudyRecordContract.Model model, StudyRecordContract.View rootView
+    public TeacherListPresenter(TeacherListContract.Model model, TeacherListContract.View rootView
             , RxErrorHandler handler, Application application
             , ImageLoader imageLoader, AppManager appManager) {
         super(model, rootView);
@@ -60,7 +64,7 @@ public class StudyRecordPresenter extends BasePresenter<StudyRecordContract.Mode
     }
 
     @Override
-    public void setActivity(StudyRecordActivity activity) {
+    public void setActivity(TeacherListActivity activity) {
         mActivity = activity;
     }
 
@@ -75,18 +79,19 @@ public class StudyRecordPresenter extends BasePresenter<StudyRecordContract.Mode
         viewPool.setMaxRecycledViews(0, 20);
 
         //设置item间距
-            recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
-                    LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 10)));
-
-//            recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
-//                    LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 1)));
+        recyclerView.addItemDecoration(new DividerItemDecoration(mActivity,
+                LinearLayoutManager.VERTICAL, ArmsUtils.dip2px(mActivity, 1)));
 
         return recyclerView;
     }
 
     @Override
-    public void callMethodOfGetLearningRecords(int userId, boolean update) {
-        mModel.getLearningRecords(userId, update)
+    public void callMethodOfGetTeacherList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getTeacherList(nodeId, pageIndex, pageSize, update)
+                .compose(RTZHDJApplication.rxCache.<BaseJson<List<TeacherEntity>>>transformObservable("GetTeacherList" + nodeId + pageIndex,
+                        new TypeToken<BaseJson<List<TeacherEntity>>>() { }.getType(),
+                        CacheStrategy.firstRemote()))
+                .map(new CacheResult.MapFunc<BaseJson<List<TeacherEntity>>>())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -99,14 +104,13 @@ public class StudyRecordPresenter extends BasePresenter<StudyRecordContract.Mode
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseJson<List<StudyRecordEntity>>>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseJson<List<TeacherEntity>>>(mErrorHandler) {
                     @Override
-                    public void onNext(@NonNull BaseJson<List<StudyRecordEntity>> studyRecordList) {
-                        Log.e(TAG, studyRecordList.toString());
+                    public void onNext(@NonNull BaseJson<List<TeacherEntity>> teacherList) {
+                        Log.e(TAG, teacherList.toString());
 
-                        if (studyRecordList.isSuccess() && studyRecordList.getData() != null)
-                            mRootView.loadData(studyRecordList.getData());
-
+                        if (teacherList.isSuccess() && teacherList.getData() != null)
+                            mRootView.loadListData(teacherList.getData(), update);
                     }
                 });
     }

@@ -29,6 +29,9 @@ public interface CourseDetailContract {
         // 获取 课件详情
         Observable<BaseJson<CoursewareDetailEntity>> getCoursewareDetail(int id, boolean update);
 
+        // 获取 课件详情
+        Observable<BaseJson> postStudyClass(int userId, int nodeId, int contentId, boolean update);
+
     }
 
     //Presenter控制器
@@ -39,5 +42,7 @@ public interface CourseDetailContract {
 
         // 调用 获取课件详情
         void callMethodOfGetCoursewareDetail(int id, boolean update);
+        // 调用 上传学习结果
+        void callMethodOfPostStudyClass(int userId, int nodeId, int contentId, boolean update);
     }
 }

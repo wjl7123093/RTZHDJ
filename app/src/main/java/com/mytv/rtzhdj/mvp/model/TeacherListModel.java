@@ -7,9 +7,9 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.service.StudyRecordService;
-import com.mytv.rtzhdj.app.data.entity.StudyRecordEntity;
-import com.mytv.rtzhdj.mvp.contract.StudyRecordContract;
+import com.mytv.rtzhdj.app.data.api.service.TeacherListService;
+import com.mytv.rtzhdj.app.data.entity.TeacherEntity;
+import com.mytv.rtzhdj.mvp.contract.TeacherListContract;
 
 import java.util.List;
 
@@ -19,12 +19,12 @@ import io.reactivex.Observable;
 
 
 @ActivityScope
-public class StudyRecordModel extends BaseModel implements StudyRecordContract.Model {
+public class TeacherListModel extends BaseModel implements TeacherListContract.Model {
     private Gson mGson;
     private Application mApplication;
 
     @Inject
-    public StudyRecordModel(IRepositoryManager repositoryManager, Gson gson, Application application) {
+    public TeacherListModel(IRepositoryManager repositoryManager, Gson gson, Application application) {
         super(repositoryManager);
         this.mGson = gson;
         this.mApplication = application;
@@ -38,9 +38,8 @@ public class StudyRecordModel extends BaseModel implements StudyRecordContract.M
     }
 
     @Override
-    public Observable<BaseJson<List<StudyRecordEntity>>> getLearningRecords(int userId, boolean update) {
-        return mRepositoryManager
-                .obtainRetrofitService(StudyRecordService.class)
-                .getLearningRecords(userId);
+    public Observable<BaseJson<List<TeacherEntity>>> getTeacherList(int nodeId, int pageIndex, int pageSize, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(TeacherListService.class)
+                .getTeacherList(nodeId, pageIndex, pageSize);
     }
 }

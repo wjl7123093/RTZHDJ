@@ -182,5 +182,9 @@ public interface ARoutePath {
     String PATH_QUESTIONAIRE = "/rtdzdj/questionaire";
     // QuestionaireSurvey 在线问卷调查页面
     String PATH_QUESTIONAIRE_SURVEY = "/rtdzdj/questionaire_survey";
+    // NewsEducationSub
+    String PATH_NEWS_EDUCATION_SUB = "/rtdzdj/news_education_sub";
+    // TeacherList
+    String PATH_TEACHER_LIST = "/rtdzdj/teacher_list";
 
 }

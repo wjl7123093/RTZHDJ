@@ -11,33 +11,33 @@ package com.mytv.rtzhdj.app.data.entity;
  */
 public class StudyRecordEntity {
 
-    private String title;               // 标题
-    private int score;                  // 分数
-    private String lastStudyTime;       // 上次学习时间
+    private String Title;               // 标题
+    private int Score;                  // 分数
+    private String LastStudyTime;       // 上次学习时间
     private String typeString;          // 课件类型
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        Title = title;
     }
 
     public int getScore() {
-        return score;
+        return Score;
     }
 
     public void setScore(int score) {
-        this.score = score;
+        Score = score;
     }
 
     public String getLastStudyTime() {
-        return lastStudyTime;
+        return LastStudyTime;
     }
 
     public void setLastStudyTime(String lastStudyTime) {
-        this.lastStudyTime = lastStudyTime;
+        LastStudyTime = lastStudyTime;
     }
 
     public String getTypeString() {

@@ -218,7 +218,8 @@ public class EffectEvaluationFragment extends BaseFragment<EffectEvaluationPrese
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 //                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
-                if (mEffectList.get(position).getIfOver() == 0) {
+                if (mEffectList.get(position).getIfOver() == 0
+                        && (mEffectList.get(position).getTestAlready() - mEffectList.get(position).getExaminationCount() > 0)) {
                     // 跳转到 问卷调查页面
                     ARouter.getInstance().build(ARoutePath.PATH_QUESTIONAIRE)
                             .withInt("examinationId", mEffectList.get(position).getId())

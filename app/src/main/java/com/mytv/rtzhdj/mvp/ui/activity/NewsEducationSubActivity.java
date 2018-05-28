@@ -19,12 +19,13 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.di.component.DaggerNewsCommonComponent;
-import com.mytv.rtzhdj.di.module.NewsCommonModule;
-import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
-import com.mytv.rtzhdj.mvp.presenter.NewsCommonPresenter;
-import com.mytv.rtzhdj.mvp.ui.adapter.NewsSimpleAdapter;
+import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
+import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
+import com.mytv.rtzhdj.di.component.DaggerNewsEducationSubComponent;
+import com.mytv.rtzhdj.di.module.NewsEducationSubModule;
+import com.mytv.rtzhdj.mvp.contract.NewsEducationSubContract;
+import com.mytv.rtzhdj.mvp.presenter.NewsEducationSubPresenter;
+import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -38,16 +39,16 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * 通用新闻列表界面
+ * 党员教育[重点培训，远程教育]界面
  *
  * @author Fred_W
  * @version v1.0.0(1)
  *
- * @crdate 2018-2-6
+ * @crdate 2018-5-27
  * @update
  */
-@Route(path = ARoutePath.PATH_NEWS_COMMON)
-public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implements NewsCommonContract.View {
+@Route(path = ARoutePath.PATH_NEWS_EDUCATION_SUB)
+public class NewsEducationSubActivity extends BaseActivity<NewsEducationSubPresenter> implements NewsEducationSubContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -64,17 +65,15 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     RecyclerView mRecyclerView;
 
     @Autowired
-    String from;
-    @Autowired
     String title;
     @Autowired
     int nodeId;
 
-    private NewsSimpleAdapter newsAdapter;
+    private NewsAdapter newsAdapter;
     private static final int PAGE_SIZE = 10;
     private int PAGE_INDEX = 1;
     private int mCurPos = 0;    // 当前列表末节点位置
-    private List<NewsDetailEntity> mNewsList = new ArrayList<>();
+    private List<PartyNewsEntity> mNewsList = new ArrayList<>();
     private boolean mIsLoadMore = false;
     private boolean mIsRefresh = false;
 
@@ -84,10 +83,10 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
-        DaggerNewsCommonComponent //如找不到该类,请编译一下项目
+        DaggerNewsEducationSubComponent //如找不到该类,请编译一下项目
                 .builder()
                 .appComponent(appComponent)
-                .newsCommonModule(new NewsCommonModule(this))
+                .newsEducationSubModule(new NewsEducationSubModule(this))
                 .build()
                 .inject(this);
     }
@@ -95,21 +94,26 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     @Override
     public int initView(Bundle savedInstanceState) {
         ARouter.getInstance().inject(this);
-        return R.layout.activity_news_common; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_news_education_sub; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mBtnToolbarMenu.setVisibility(View.GONE);
-
-        mPresenter.setActivity(NewsCommonActivity.this);
-        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView, from);
+        mPresenter.setActivity(NewsEducationSubActivity.this);
+        mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
 //        initAdapter();
+
+//        View headerView = mPresenter.initHeaderView(imgUrls, (ViewGroup) mRecyclerView.getParent());
+//        if (0 == getArguments().getInt("position"))
+//            newsAdapter.addHeaderView(headerView);
+//        else
+//            newsAdapter.removeAllHeaderView();
+
         initRefreshLayout();
 
         PAGE_INDEX = 1;
-        // 获取二级通用列表数据
-        mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, false);
+        // 获取党建新闻二级列表(除推荐)数据
+        mPresenter.callMethodOfGetPartySubList(nodeId, PAGE_INDEX, PAGE_SIZE, false);
     }
 
 
@@ -150,34 +154,16 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
         mTvToolbarTitle.setText(title);
     }
 
-    private void initRefreshLayout() {
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
 
-                mIsRefresh = true;
-                PAGE_INDEX = 1;
-                // 获取二级通用列表数据
-                mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+    @Override
+    public void showSubListData(PartySubNewsEntity subNewsEntity, boolean update) {
+        List<PartyNewsEntity> channelNewsBlock = subNewsEntity.getChannelNewsBlock();
 
-            }
-        });
-//        mRefreshLayout.setEnableLoadmore(false);
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
-
-                mIsLoadMore = true;
-                // 获取二级通用列表数据
-                mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
-
-            }
-        });
+        initAdapter(channelNewsBlock, update);
     }
 
-    public void initAdapter(List<NewsDetailEntity> newsDetailList, boolean update) {
+    @Override
+    public void initAdapter(List<PartyNewsEntity> importandBlockList, boolean update) {
         if (update) {
             if (mIsRefresh) {  // 下拉刷新
                 // 1. 先移除
@@ -195,34 +181,55 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 
         mCurPos = mNewsList.size();
         if (null == newsAdapter) {
-            mNewsList = newsDetailList;
-            newsAdapter = new NewsSimpleAdapter(NewsCommonActivity.this, newsDetailList);
+            mNewsList = importandBlockList;
+            newsAdapter = new NewsAdapter(NewsEducationSubActivity.this, importandBlockList);
             newsAdapter.openLoadAnimation();
             mRecyclerView.setAdapter(newsAdapter);
         } else {
-            mNewsList.addAll(newsDetailList);
-            newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+            mNewsList.addAll(importandBlockList);
+            newsAdapter.notifyItemRangeInserted(mCurPos, importandBlockList.size());
         }
 
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                Toast.makeText(NewsCommonActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
                 // 新闻详情页
 //                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                        .withInt("articleId", newsDetailList.get(position).getId())
-                        .withInt("nodeId", newsDetailList.get(position).getNodeId())
-                        .withInt("digs", newsDetailList.get(position).getDigs())
-                        .withInt("comments", newsDetailList.get(position).getComments())
+                        .withInt("articleId", mNewsList.get(position).getArticleId())
+                        .withInt("nodeId", mNewsList.get(position).getNodeid())
+                        .withInt("digs", mNewsList.get(position).getDigs())
+                        .withInt("comments", mNewsList.get(position).getComments())
                         .navigation();
             }
         });
     }
 
-    @Override
-    public void loadListData(List<NewsDetailEntity> newsList, boolean update) {
-        initAdapter(newsList, update);
+    private void initRefreshLayout() {
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                PAGE_INDEX = 1;
+                    // 获取党建新闻二级列表(除推荐)数据
+                    mPresenter.callMethodOfGetPartySubList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+            }
+        });
+//        mRefreshLayout.setEnableLoadmore(false);
+        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+//                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+
+                mIsLoadMore = true;
+                    // 获取党建新闻二级列表(除推荐)数据
+                    mPresenter.callMethodOfGetPartySubList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
+            }
+        });
     }
+
 }

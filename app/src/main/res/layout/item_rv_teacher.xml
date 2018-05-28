@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * item_rv_teacher.xml recyclerview 师资库列表项
+ *
+ * @author Fred_W
+ * @version v1.0.0(1)
+ *
+ * @crdate 2018-5-28
+ * @update
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/len_16">
+
+    <ImageView
+        android:id="@+id/iv_header"
+        android:layout_width="@dimen/len_60"
+        android:layout_height="@dimen/len_80"
+        android:src="@mipmap/ic_logo"
+        android:layout_alignParentLeft="true"
+        android:scaleType="centerCrop"/>
+
+    <!-- 名称 -->
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_18"
+        android:textColor="@color/primary_text"
+        android:text=""
+        android:gravity="center"
+        android:layout_alignTop="@id/iv_header"
+        android:layout_toRightOf="@id/iv_header"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_marginTop="@dimen/len_6"/>
+    <!-- 手机 -->
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/secondary_text"
+        android:text=""
+        android:gravity="center"
+        android:layout_toRightOf="@id/iv_header"
+        android:layout_marginLeft="@dimen/len_10"
+        android:layout_alignBottom="@id/iv_header"
+        android:layout_marginBottom="@dimen/len_4"/>
+
+</RelativeLayout>

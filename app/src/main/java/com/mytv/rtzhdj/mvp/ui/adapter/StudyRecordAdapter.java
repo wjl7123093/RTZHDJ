@@ -5,10 +5,9 @@ import android.content.Context;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.data.DataServer;
-import com.mytv.rtzhdj.app.data.entity.CoursewareEntity;
-import com.mytv.rtzhdj.app.data.entity.NewsEntity;
-import com.mytv.rtzhdj.app.utils.ImageLoader;
+import com.mytv.rtzhdj.app.data.entity.StudyRecordEntity;
+
+import java.util.List;
 
 /**
  * StudyRecordAdapter 学习记录列表Adapter
@@ -19,22 +18,21 @@ import com.mytv.rtzhdj.app.utils.ImageLoader;
  * @crdate 2018-2-7
  * @update
  */
-public class StudyRecordAdapter extends BaseQuickAdapter<CoursewareEntity, BaseViewHolder> {
+public class StudyRecordAdapter extends BaseQuickAdapter<StudyRecordEntity, BaseViewHolder> {
 
     private Context mContext;
 
-    public StudyRecordAdapter(Context context, int dataSize) {
-        super(R.layout.item_rv_study_record, DataServer.getCoursewareData(dataSize));
+    public StudyRecordAdapter(Context context, List<StudyRecordEntity> studyRecordList) {
+        super(R.layout.item_rv_study_record, studyRecordList);
         mContext = context;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, CoursewareEntity item) {
+    protected void convert(BaseViewHolder helper, StudyRecordEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
-        helper.setText(R.id.tv_datetime, item.getLastStudyTime());
-//        helper.setText(R.id.tv_type, item.getType() == 1 ? "必修课"
-//                : item.getType() == 2 ? "选修课" : "微党课");
-//        helper.setText(R.id.tv_scores, item.getScores() + "");
+        helper.setText(R.id.tv_datetime, "学习时间: " + item.getLastStudyTime());
+        helper.setText(R.id.tv_type, item.getTypeString());
+        helper.setText(R.id.tv_scores, "积分数量: +" + item.getScore());
     }
 
 

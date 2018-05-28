@@ -125,6 +125,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         // 判断学习状态
         if (courseType == 1) {  // 已学习
             mLlTimeCounter.setVisibility(View.GONE);
+            mBtnDone.setVisibility(View.GONE);
         }
 
         // 获取课件详情数据
@@ -206,9 +207,11 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     protected void onDestroy() {
         super.onDestroy();
 
-        // 取消
-        isPause = false;
-        mCountDownTimer.cancel();
+        if (null != mCountDownTimer) {
+            // 取消
+            isPause = false;
+            mCountDownTimer.cancel();
+        }
     }
 
     @Override
@@ -268,6 +271,10 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
             public void onFinish() {
                 mTvTime.setText("00:00:00");
                 isFinish = true;
+                // 上传学习结果
+                mPresenter.callMethodOfPostStudyClass(
+                        DataHelper.getIntergerSF(CourseDetailActivity.this, SharepreferenceKey.KEY_USER_ID),
+                        nodeId, articleId, false);
                 showDialog();
             }
         };

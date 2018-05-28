@@ -1,7 +1,9 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
+import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.StudyRecordEntity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -23,6 +25,6 @@ public interface StudyRecordService {
      * @return
      */
     @GET("getLearningRecords")
-    Observable<StudyRecordEntity> getLearningRecords(@Query("userId") int curUserId);
+    Observable<BaseJson<List<StudyRecordEntity>>> getLearningRecords(@Query("userId") int curUserId);
 
 }

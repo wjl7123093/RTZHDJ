@@ -15,21 +15,21 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
 import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
+import com.mytv.rtzhdj.app.data.entity.StudyRecordEntity;
 import com.mytv.rtzhdj.di.component.DaggerStudyRecordComponent;
 import com.mytv.rtzhdj.di.module.StudyRecordModule;
 import com.mytv.rtzhdj.mvp.contract.StudyRecordContract;
 import com.mytv.rtzhdj.mvp.presenter.StudyRecordPresenter;
-
-import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
+import com.mytv.rtzhdj.mvp.ui.adapter.StudyRecordAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.List;
 
 import butterknife.BindView;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -43,7 +43,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * @version v1.0.0(1)
  *
  * @crdate 2018-1-20
- * @update
+ * @update 2018-5-28 udpate UI
  */
 @Route(path = ARoutePath.PATH_STUDY_RECORD)
 public class StudyRecordActivity extends BaseActivity<StudyRecordPresenter> implements StudyRecordContract.View {
@@ -62,7 +62,7 @@ public class StudyRecordActivity extends BaseActivity<StudyRecordPresenter> impl
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
-    private NewsAdapter newsAdapter;
+    private StudyRecordAdapter newsAdapter;
     private static final int PAGE_SIZE = 10;
 
     /** 加载进度条 */
@@ -89,7 +89,7 @@ public class StudyRecordActivity extends BaseActivity<StudyRecordPresenter> impl
 
         mPresenter.setActivity(StudyRecordActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
-        initAdapter();
+//        initAdapter();
         initRefreshLayout();
 
         // 获取 学习记录数据
@@ -130,6 +130,11 @@ public class StudyRecordActivity extends BaseActivity<StudyRecordPresenter> impl
         finish();
     }
 
+    @Override
+    public void loadData(List<StudyRecordEntity> recordList) {
+        initAdapter(recordList);
+    }
+
     private void initRefreshLayout() {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -146,8 +151,8 @@ public class StudyRecordActivity extends BaseActivity<StudyRecordPresenter> impl
         });
     }
 
-    private void initAdapter() {
-        /*newsAdapter = new NewsAdapter(StudyRecordActivity.this, PAGE_SIZE);
+    private void initAdapter(List<StudyRecordEntity> studyRecordList) {
+        newsAdapter = new StudyRecordAdapter(StudyRecordActivity.this, studyRecordList);
         newsAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(newsAdapter);
 
@@ -156,7 +161,7 @@ public class StudyRecordActivity extends BaseActivity<StudyRecordPresenter> impl
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 showMessage("" + Integer.toString(position));
             }
-        });*/
+        });
 
     }
 

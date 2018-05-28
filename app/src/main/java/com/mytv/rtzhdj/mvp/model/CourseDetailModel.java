@@ -41,4 +41,10 @@ public class CourseDetailModel extends BaseModel implements CourseDetailContract
                 .obtainRetrofitService(CourseDetailService.class)
                 .getCoursewareDetail(id);
     }
+
+    @Override
+    public Observable<BaseJson> postStudyClass(int userId, int nodeId, int contentId, boolean update) {
+        return mRepositoryManager.obtainRetrofitService(CourseDetailService.class)
+                .postStudyClass(userId, nodeId, contentId);
+    }
 }

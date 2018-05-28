@@ -4,7 +4,10 @@ import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.CoursewareDetailEntity;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -24,5 +27,15 @@ public interface CourseDetailService {
      */
     @GET("getCoursewareDetail")
     Observable<BaseJson<CoursewareDetailEntity>> getCoursewareDetail(@Query("id") int id);
+
+    /**
+     * 获取课件详情数据
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("PostStudyClass")
+    Observable<BaseJson> postStudyClass(@Field("UserID") int userId,
+                                        @Field("NodeID") int nodeId,
+                                        @Field("ContentID") int contentId);
 
 }

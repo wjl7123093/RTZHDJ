@@ -137,4 +137,31 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Mo
                     }
                 });
     }
+
+    @Override
+    public void callMethodOfPostStudyClass(int userId, int nodeId, int contentId, boolean update) {
+        mModel.postStudyClass(userId, nodeId, contentId, update)
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .doOnSubscribe(disposable -> {
+                    mRootView.showLoading();
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> {
+                    // Action onFinally
+                    mRootView.hideLoading();
+                })
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson postResult) {
+                        Log.e("TAG", postResult.toString());
+
+//                        if (postResult.isSuccess())
+//                            mRootView.showMessage("提交成功");
+
+                    }
+                });
+    }
 }

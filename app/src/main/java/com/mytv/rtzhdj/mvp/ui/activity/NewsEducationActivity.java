@@ -135,24 +135,36 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
         switch (position) {
             case 0: // 重点培训 9056
                 nodeId = 9056;
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_EDUCATION_SUB)
+                        .withInt("nodeId", 9056)
+                        .withString("title", "重点培训").navigation();
                 break;
             case 1: // 农民夜校 4008
                 nodeId = 4008;
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
+                        .withInt("nodeId", 4008)
+                        .withString("title", "农民夜校").navigation();
                 break;
-            case 2: // 远程教育 6020
-                nodeId = 6020;
+            case 2: // 远程教育 9057
+                nodeId = 9057;
+                ARouter.getInstance().build(ARoutePath.PATH_NEWS_EDUCATION_SUB)
+                        .withInt("nodeId", 9057)
+                        .withString("title", "远程教育").navigation();
                 break;
             case 3: // 师资库   9062
                 nodeId = 9062;
+                ARouter.getInstance().build(ARoutePath.PATH_TEACHER_LIST)
+                        .withInt("nodeId", 9062)
+                        .withString("title", "师资库").navigation();
                 break;
             default:
                 break;
         }
 
-        ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
-                .withString("from", "NewsEducationActivity")
-                .withString("title", title)
-                .withInt("nodeId", nodeId).navigation();
+//        ARouter.getInstance().build(ARoutePath.PATH_NEWS_COMMON)
+//                .withString("from", "NewsEducationActivity")
+//                .withString("title", title)
+//                .withInt("nodeId", nodeId).navigation();
     }
 
     @Override
