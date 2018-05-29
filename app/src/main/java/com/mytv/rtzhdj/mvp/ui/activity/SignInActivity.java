@@ -148,7 +148,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @Override
     public void changeStatus(SignScoresEntity signScoresEntity) {
         mSignEntity.setIfSign(1);
-        changeUI(mSignEntity.getDays() + mSignEntity.getIfSign());
+        changeUI(mSignEntity.getDays());
 
         mTvSignBig.setText("+" + signScoresEntity.getIntegral());
         mTvSignStatus.setText("今日已签到");
@@ -174,7 +174,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         }
         mTvSignDays.setText("连续签到" + signEntity.getDays() + "天");
 
-        changeUI(signEntity.getDays() + signEntity.getIfSign());
+        changeUI(signEntity.getDays());
     }
 
     private void changeUI(int days) {

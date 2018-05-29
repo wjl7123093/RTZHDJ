@@ -32,7 +32,7 @@
         android:id="@+id/tv_scores_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="你还差 1 天签到获 2 积分"
+        android:text="你还差 1 天签到获 1 积分"
         android:textSize="@dimen/font_14"
         android:textColor="@color/primary_text"
         android:gravity="center"

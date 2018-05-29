@@ -137,7 +137,7 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
                 .subscribe(new ErrorHandleSubscriber<BaseJson<NewsDetailEntity>>(mErrorHandler) {
                     @Override
                     public void onNext(@NonNull BaseJson<NewsDetailEntity> newsDetailEntity) {
-                        Log.e(TAG, newsDetailEntity.getData().toString());
+                        Log.e(TAG, newsDetailEntity.toString());
 
                         if (newsDetailEntity.isSuccess() && newsDetailEntity.getData() != null)
                             mRootView.loadData(newsDetailEntity.getData());
@@ -165,7 +165,7 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
                     public void onNext(@NonNull BaseJson postResult) {
                         Log.e(TAG, postResult.toString());
 
-                        if (postResult.getStatus() == 200)
+                        if (postResult.isSuccess())
                             mRootView.showMessage("评论成功，审核中...");
 
                     }
