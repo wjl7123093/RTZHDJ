@@ -104,6 +104,7 @@ public class MyStudyEntity {
         private int ArticleId;
         private String Title;
         private String LastStudyTime;
+        private int IsStudy;    // 1 已学习，2 未学习
 
         private int CourseType;
         private String CourseTypeString;
@@ -138,6 +139,14 @@ public class MyStudyEntity {
 
         public void setLastStudyTime(String lastStudyTime) {
             LastStudyTime = lastStudyTime;
+        }
+
+        public int getIsStudy() {
+            return IsStudy;
+        }
+
+        public void setIsStudy(int isStudy) {
+            IsStudy = isStudy;
         }
     }
 

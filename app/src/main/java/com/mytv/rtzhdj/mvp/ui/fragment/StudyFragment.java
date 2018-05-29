@@ -231,7 +231,7 @@ public class StudyFragment extends BaseFragment<StudyPresenter> implements Study
         bundle.putString("title", title);
         bundle.putInt("nodeId", coursewareBlock.getNodeId());
         bundle.putInt("articleId", coursewareBlock.getArticleId());
-        bundle.putInt("courseType", 2);
+        bundle.putInt("courseType", coursewareBlock.getIsStudy());
         Intent intent = new Intent(getActivity(), CourseDetailActivity.class);
         intent.putExtras(bundle);
         startActivityForResult(intent, 100);

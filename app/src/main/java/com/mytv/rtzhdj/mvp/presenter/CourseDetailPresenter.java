@@ -11,7 +11,9 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.DataHelper;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.CoursewareDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.CourseDetailContract;
@@ -158,8 +160,11 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Mo
                     public void onNext(@NonNull BaseJson postResult) {
                         Log.e("TAG", postResult.toString());
 
-//                        if (postResult.isSuccess())
-//                            mRootView.showMessage("提交成功");
+                        if (postResult.isSuccess()) {
+                            // 记录学习次数 + 1
+                            DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_LOGIN_USER_STUDY_TIMES,
+                                    DataHelper.getIntergerSF(mActivity, SharepreferenceKey.KEY_LOGIN_USER_STUDY_TIMES) + 1);
+                        }
 
                     }
                 });

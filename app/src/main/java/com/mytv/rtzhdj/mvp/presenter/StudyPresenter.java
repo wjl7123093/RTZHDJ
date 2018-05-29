@@ -217,8 +217,6 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 holder.setText(R.id.tv_study_record, userInfo.getNoStudyNum()
                         + "/" + userInfo.getYesStudyNum());
 
-                // 记录学习次数
-                DataHelper.setIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_STUDY_TIMES, userInfo.getNoStudyNum());
                 // 保持积分一致
                 if (userInfo.getIntegral() > DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL))
                     DataHelper.setIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL, userInfo.getIntegral());
