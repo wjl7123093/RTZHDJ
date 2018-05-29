@@ -203,7 +203,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
         if (courseType == 2) { // 未学习 计时
             // 暂停倒计时
-            if (!isPause) {
+            if (!isPause && null != mCountDownTimer) {
                 isPause = true;
                 mCountDownTimer.cancel();
             }

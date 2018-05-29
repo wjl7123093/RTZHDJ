@@ -173,7 +173,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void setGridClick(int position) {
-        ArmsUtils.snackbarText("Grid点击了" + position);
+//        ArmsUtils.snackbarText("Grid点击了" + position);
         switch (position) {
             case 0: // 时政新闻
 //                ARouter.getInstance().build(ARoutePath.PATH_NEWS).navigation();
