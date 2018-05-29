@@ -136,7 +136,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
             mPresenter.callMethodOfDoRegister(
                 mEdtMobilePhone.getText().toString().trim(),
-                mEdtCommunity.getText().toString().trim(),
+                mPublishmentSystemId,
                 mEdtPassword.getText().toString().trim(),
                 mEdtPassword2.getText().toString().trim());
         });

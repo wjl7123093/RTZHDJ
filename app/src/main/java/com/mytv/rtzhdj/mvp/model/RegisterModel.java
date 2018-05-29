@@ -3,15 +3,10 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.cache.RegisterCache;
 import com.mytv.rtzhdj.app.data.api.service.RegisterService;
 import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
@@ -21,12 +16,9 @@ import com.mytv.rtzhdj.mvp.contract.RegisterContract;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
-import io.rx_cache2.DynamicKey;
-import io.rx_cache2.EvictProvider;
 
 
 @ActivityScope
@@ -88,7 +80,7 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
     }
 
     @Override
-    public Observable<BaseJson<UserRegisterEntity>> getUserRegister(String moblie, String publishmentSystemId, String password) {
+    public Observable<BaseJson<UserRegisterEntity>> getUserRegister(String moblie, int publishmentSystemId, String password) {
         return mRepositoryManager.obtainRetrofitService(RegisterService.class)
                 .getRegister(moblie, publishmentSystemId, password);
     }

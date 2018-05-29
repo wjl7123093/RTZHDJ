@@ -172,7 +172,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
      */
     @Override
     public void callMethodOfDoRegister(@NonNull String mobile,
-                                       @NonNull String publishmentSystemId,
+                                       @NonNull int publishmentSystemId,
                                        @NonNull String pwd,
                                        @NonNull String pwd2) {
         if (!pwd.equals(pwd2)) {

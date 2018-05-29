@@ -2,9 +2,9 @@ package com.mytv.rtzhdj.mvp.contract;
 
 import android.support.annotation.NonNull;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.StationEntity;
 import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
@@ -38,7 +38,7 @@ public interface RegisterContract {
         Observable<BaseJson<VerifyCodeEntity>> getVerifyCode(String telNumber);
 
         // 注册
-        Observable<BaseJson<UserRegisterEntity>> getUserRegister(String mobile, String publishmentSystemId,
+        Observable<BaseJson<UserRegisterEntity>> getUserRegister(String mobile, int publishmentSystemId,
                                                        String password);
     }
 
@@ -53,7 +53,7 @@ public interface RegisterContract {
         void callMethodOfGetCode(@NonNull String telNumber);
         // 调用 注册接口
         void callMethodOfDoRegister(@NonNull String mobile,
-                                    @NonNull String publishmentSystemId,
+                                    @NonNull int publishmentSystemId,
                                     @NonNull String pwd,
                                     @NonNull String pwd2);
     }

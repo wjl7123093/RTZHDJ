@@ -12,7 +12,6 @@ import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -57,7 +56,7 @@ public interface RegisterService {
     @FormUrlEncoded
     @POST("postUserRegister")
     Observable<BaseJson<UserRegisterEntity>> getRegister(@Field("Mobile") String mobile,
-                                                         @Field("PublishmentSystemId") String publishmentSystemId,
+                                                         @Field("PublishmentSystemId") int publishmentSystemId,
                                                          @Field("Password") String password);
 
 }
