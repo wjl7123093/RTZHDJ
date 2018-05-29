@@ -1,13 +1,13 @@
 package com.mytv.rtzhdj.mvp.ui.widget;
 
-import java.util.Random;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+
+import java.util.Random;
 
 /**
  * 自定义验证码
@@ -46,7 +46,7 @@ public class CodeView extends View {
 	/**
 	 * 验证码每个字符X轴之间的间距
 	 */
-	private final int PADDING_X = 20;
+	private final int PADDING_X = 30;
 
 	/**
 	 * 验证码每个字符Y轴之间的间距
@@ -56,12 +56,12 @@ public class CodeView extends View {
 	/**
 	 * 每次随机生成验证码时X轴最大值
 	 */
-	private final int RANDOM_MAX_X = 40;
+	private final int RANDOM_MAX_X = 10;
 
 	/**
 	 * 每次随机生成验证码时Y轴最大值
 	 */
-	private final int RANDOM_MAX_Y = 60;
+	private final int RANDOM_MAX_Y = 10;
 
 	/**
 	 * 如果State为True,则随机生成验证码 如果State为False,则生成用户输入框输入的验证码
