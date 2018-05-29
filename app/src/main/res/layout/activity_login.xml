@@ -8,7 +8,7 @@
  * @crdate 2018-1-20
  * @update 2018-3-16    填充UI布局
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -18,11 +18,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="160dp">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="@dimen/len_40"
         android:background="@drawable/sp_bg_login_edt"
         android:padding="@dimen/len_10"
-        android:orientation="horizontal"
-        android:layout_marginTop="270dp">
+        android:orientation="horizontal">
         <com.mytv.rtzhdj.mvp.ui.widget.IconView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,8 +108,7 @@
             android:layout_alignParentLeft="true"/>
 
     </RelativeLayout>
+    </LinearLayout>
 
 
-
-
-</LinearLayout>
+</RelativeLayout>

@@ -9,7 +9,6 @@
  * @update 2018-3-21    修改UI（填充布局）
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -21,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/space_16dp">
+        android:padding="@dimen/space_16dp"
+        android:background="@color/white">
         <TextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -51,7 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/space_16dp">
+        android:padding="@dimen/space_16dp"
+        android:background="@color/white">
         <TextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -81,7 +82,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/space_16dp">
+        android:padding="@dimen/space_16dp"
+        android:background="@color/white">
         <TextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -112,7 +114,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/space_16dp">
+        android:padding="@dimen/space_16dp"
+        android:background="@color/white">
         <TextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -143,7 +146,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/space_16dp">
+        android:padding="@dimen/space_16dp"
+        android:background="@color/white">
         <TextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -166,13 +170,13 @@
 
         <Button
             android:id="@+id/btn_get_code"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="30dp"
             android:text="获取验证码"
             android:textColor="@color/white"
             android:textSize="@dimen/font_16"
             android:background="@color/colorPrimary"
-            android:padding="@dimen/len_6"/>
+            android:gravity="center"/>
     </LinearLayout>
 
     <View
@@ -205,10 +209,10 @@
             android:textSize="@dimen/font_16" />
     </LinearLayout>
 
-    <net.qiujuer.genius.ui.widget.Button
+    <Button
         android:id="@+id/btn_register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="注册"
         android:textSize="@dimen/font_16"
         android:textColor="@color/white"

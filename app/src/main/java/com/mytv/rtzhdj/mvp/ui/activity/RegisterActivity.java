@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -83,7 +84,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     @BindView(R.id.tv_link)
     TextView mTvLink;
     @BindView(R.id.btn_register)
-    net.qiujuer.genius.ui.widget.Button mBtnRegister;
+    Button mBtnRegister;
 
     private int mPublishmentSystemId = 0;   // 站点ID
 
@@ -117,11 +118,22 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         });
         mBtnGetVertifyCode.setOnClickListener(view -> mPresenter.callMethodOfGetCode(
                 mEdtMobilePhone.getText().toString().trim()));
-        mBtnRegister.setOnClickListener(view -> mPresenter.callMethodOfDoRegister(
+        mBtnRegister.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(mEdtMobilePhone.getText().toString().trim())
+                || TextUtils.isEmpty(mEdtCommunity.getText().toString().trim())
+                || TextUtils.isEmpty(mEdtPassword.getText().toString().trim())
+                || TextUtils.isEmpty(mEdtPassword2.getText().toString().trim())
+                || TextUtils.isEmpty(mEdtVertifyCode.getText().toString().trim())) {
+                showMessage("注册信息不能为空");
+                return;
+            }
+
+            mPresenter.callMethodOfDoRegister(
                 mEdtMobilePhone.getText().toString().trim(),
                 mEdtCommunity.getText().toString().trim(),
                 mEdtPassword.getText().toString().trim(),
-                mEdtPassword2.getText().toString().trim()));
+                mEdtPassword2.getText().toString().trim());
+        });
         mChkAgree.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) ->
             setBtnRegisterBg(b));
 
