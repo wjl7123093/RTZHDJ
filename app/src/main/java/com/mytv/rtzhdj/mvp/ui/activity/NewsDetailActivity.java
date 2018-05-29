@@ -27,6 +27,7 @@ import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.api.Api;
+import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsDetailComponent;
 import com.mytv.rtzhdj.di.module.NewsDetailModule;
 import com.mytv.rtzhdj.mvp.contract.NewsDetailContract;
@@ -122,10 +123,12 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
         mPresenter.initWebview(mWebView, mWebProgressBar);
         mPresenter.getNewsDetail(Api.APP_ARTICLE_DOMAIN + "nodeId=" + nodeId + "&id=" + articleId);
 
+        mTvStarNum.setText((digs < 0 ? 0 : digs) + "");
+        mTvCommentNum.setText((comments < 0 ? 0 : comments) + "");
         // 获取新闻详情
-//        mPresenter.callMethodOfGetContent(articleId, nodeId, false);
-        mTvStarNum.setText(digs + "");
-        mTvCommentNum.setText(comments + "");
+        if (digs == -100) {
+            mPresenter.callMethodOfGetContent(articleId, nodeId, false);
+        }
 
         mTvComment.setOnClickListener(view -> showDialog());
         mTvStarNum.setOnClickListener(view -> {
@@ -220,5 +223,12 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
             mTvStarNum.setCompoundDrawables(drawable, null, null, null);
             mTvStarNum.setText(--digs + "");
         }
+    }
+
+    @Override
+    public void loadData(NewsDetailEntity newsDetailEntity) {
+//        showMessage("成功！！");
+        mTvStarNum.setText(newsDetailEntity.getDigs() + "");
+        mTvCommentNum.setText(newsDetailEntity.getComments() + "");
     }
 }

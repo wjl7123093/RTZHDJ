@@ -139,6 +139,8 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
                     public void onNext(@NonNull BaseJson<NewsDetailEntity> newsDetailEntity) {
                         Log.e(TAG, newsDetailEntity.getData().toString());
 
+                        if (newsDetailEntity.isSuccess() && newsDetailEntity.getData() != null)
+                            mRootView.loadData(newsDetailEntity.getData());
                     }
                 });
     }
