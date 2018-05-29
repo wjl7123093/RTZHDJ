@@ -250,7 +250,7 @@ public class MyDonationFragment extends BaseFragment<MyDonationPresenter> implem
         wishAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showMessage("" + Integer.toString(position));
+//                showMessage("" + Integer.toString(position));
 //                ARouter.getInstance().build(ARoutePath.PATH_WISH_DETAIL)
 //                        .withInt("wishId", donationList.get(position).getID()).navigation();
             }

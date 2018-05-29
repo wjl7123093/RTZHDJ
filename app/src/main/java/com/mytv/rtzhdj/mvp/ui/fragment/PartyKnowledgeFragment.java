@@ -8,20 +8,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerPartyKnowledgeComponent;
 import com.mytv.rtzhdj.di.module.PartyKnowledgeModule;
 import com.mytv.rtzhdj.mvp.contract.PartyKnowledgeContract;
 import com.mytv.rtzhdj.mvp.presenter.PartyKnowledgePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.PartyKnowledgeActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -178,7 +175,7 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
             }
         });
 

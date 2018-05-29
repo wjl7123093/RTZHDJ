@@ -199,10 +199,10 @@ public class NewsAllFragment extends BaseFragment<NewsAllPresenter> implements N
                 // 新闻详情页
 //                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                        .withInt("articleId", newsDetailList.get(position).getId())
-                        .withInt("nodeId", newsDetailList.get(position).getNodeId())
-                        .withInt("digs", newsDetailList.get(position).getDigs())
-                        .withInt("comments", newsDetailList.get(position).getComments())
+                        .withInt("articleId", mNewsList.get(position).getId())
+                        .withInt("nodeId", mNewsList.get(position).getNodeId())
+                        .withInt("digs", mNewsList.get(position).getDigs())
+                        .withInt("comments", mNewsList.get(position).getComments())
                         .navigation();
             }
         });

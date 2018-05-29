@@ -221,7 +221,7 @@ public class CompulsoryCourseFragment extends BaseFragment<CompulsoryCoursePrese
                         .withString("title", "必修课")
                         .withInt("nodeId", 9043)
                         .withInt("articleId", mCourseList.get(position).getContentId())
-                        .withInt("courseType", courseList.get(position).getCourseType()).navigation();
+                        .withInt("courseType", mCourseList.get(position).getCourseType()).navigation();
             }
         });
 

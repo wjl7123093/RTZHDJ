@@ -215,10 +215,10 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
 //                showMessage("" + Integer.toString(position));
 
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                        .withInt("nodeId", newsList.get(position).getNodeId())
-                        .withInt("articleId", newsList.get(position).getId())
-                        .withInt("digs", newsList.get(position).getDigs())
-                        .withInt("comments", newsList.get(position).getComments())
+                        .withInt("nodeId", mNewsList.get(position).getNodeId())
+                        .withInt("articleId", mNewsList.get(position).getId())
+                        .withInt("digs", mNewsList.get(position).getDigs())
+                        .withInt("comments", mNewsList.get(position).getComments())
                         .navigation();
 
             }
