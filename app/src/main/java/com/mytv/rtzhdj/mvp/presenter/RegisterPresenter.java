@@ -157,7 +157,8 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                     public void onNext(@NonNull BaseJson<VerifyCodeEntity> verifyCode) {
                         Log.e("TAG", verifyCode.toString());
 
-
+                        if (verifyCode.isSuccess() && verifyCode.getData() != null)
+                            mRootView.showMessage(verifyCode.getData().getVerificationCode() + "");
                     }
                 });
     }

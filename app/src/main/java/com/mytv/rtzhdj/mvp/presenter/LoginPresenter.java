@@ -4,7 +4,6 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.integration.AppManager;
@@ -12,13 +11,10 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.DataHelper;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.app.SharepreferenceKey;
-import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.LoginEntity;
 import com.mytv.rtzhdj.mvp.contract.LoginContract;
 import com.mytv.rtzhdj.mvp.ui.activity.LoginActivity;
-import com.zchu.rxcache.data.CacheResult;
-import com.zchu.rxcache.stategy.CacheStrategy;
 
 import javax.inject.Inject;
 
@@ -72,10 +68,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
         checkNotNull(pwd);
 
         mModel.postUserLogin(acc, pwd)
-                .compose(RTZHDJApplication.rxCache.<BaseJson<LoginEntity>>transformObservable("postUserLogin",
-                        new TypeToken<BaseJson<LoginEntity>>() { }.getType(),
-                        CacheStrategy.firstRemote()))
-                .map(new CacheResult.MapFunc<BaseJson<LoginEntity>>())
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .doOnSubscribe(disposable -> {
