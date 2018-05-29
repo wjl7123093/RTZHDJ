@@ -2,6 +2,7 @@ package com.mytv.rtzhdj.mvp.presenter;
 
 import android.app.Application;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -104,14 +105,16 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                mImageLoader.loadImage(mActivity,
-                        ImageConfigImpl
-                                .builder()
-                                .errorPic(R.mipmap.ic_error)
-                                .placeholder(R.mipmap.ic_placeholder)
-                                .url(url)
-                                .imageView(holder.getView(R.id.iv_header))
-                                .build());
+
+                if (!TextUtils.isEmpty(DataHelper.getStringSF(mActivity, SharepreferenceKey.KEY_LOGIN_HEADER_URL)))
+                    mImageLoader.loadImage(mActivity,
+                            ImageConfigImpl
+                                    .builder()
+                                    .errorPic(R.mipmap.ic_error)
+                                    .placeholder(R.mipmap.ic_placeholder)
+                                    .url(DataHelper.getStringSF(mActivity, SharepreferenceKey.KEY_LOGIN_HEADER_URL))
+                                    .imageView(holder.getView(R.id.iv_header))
+                                    .build());
             }
         };
     }
@@ -124,14 +127,16 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                mImageLoader.loadImage(mActivity,
-                        ImageConfigImpl
-                                .builder()
-                                .errorPic(R.mipmap.ic_error)
-                                .placeholder(R.mipmap.ic_placeholder)
-                                .url(url)
-                                .imageView(holder.getView(R.id.iv_header))
-                                .build());
+
+                if (!TextUtils.isEmpty(DataHelper.getStringSF(mActivity, SharepreferenceKey.KEY_LOGIN_HEADER_URL)))
+                    mImageLoader.loadImage(mActivity,
+                            ImageConfigImpl
+                                    .builder()
+                                    .errorPic(R.mipmap.ic_error)
+                                    .placeholder(R.mipmap.ic_placeholder)
+                                    .url(DataHelper.getStringSF(mActivity, SharepreferenceKey.KEY_LOGIN_HEADER_URL))
+                                    .imageView(holder.getView(R.id.iv_header))
+                                    .build());
             }
         };
     }
