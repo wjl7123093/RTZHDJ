@@ -72,6 +72,8 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
     int contentId;
     @Autowired
     int id;
+    @Autowired
+    int state;  // 1 进行中，2 已结束
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -97,13 +99,18 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
     public void initData(Bundle savedInstanceState) {
         mBtnToolbarMenu.setVisibility(View.GONE);
 
+        if (1 != state) {   // 已结束
+            mBtnVote.setVisibility(View.GONE);
+        }
+
         // 获取 投票作品详情
         mPresenter.callMethodOfPostOnlineVoteDetails(id, false);
 
         // post 在线投票
-        mBtnVote.setOnClickListener(view ->
+        mBtnVote.setOnClickListener(view -> {
             mPresenter.callMethodOfPostVoteSubmit(contentId, id,
-                    DataHelper.getIntergerSF(VoteEntryDetailActivity.this, SharepreferenceKey.KEY_USER_ID)));
+                    DataHelper.getIntergerSF(VoteEntryDetailActivity.this, SharepreferenceKey.KEY_USER_ID));
+        });
     }
 
 

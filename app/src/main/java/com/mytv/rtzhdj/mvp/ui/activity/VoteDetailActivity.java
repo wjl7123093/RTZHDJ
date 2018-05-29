@@ -75,6 +75,8 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
     int id;
     @Autowired
     String title;
+    @Autowired
+    int state;  // 1 进行中，2 已结束
 
     private VoteDetailAdapter mAdapter;
     private static final int PAGE_SIZE = 10;
@@ -185,7 +187,8 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
 //                showMessage("" + Integer.toString(position));
                 ARouter.getInstance().build(ARoutePath.PATH_VOTE_ENTRY_DETAIL)
                         .withInt("contentId", voteDetailList.get(position).getContentId())
-                        .withInt("id", voteDetailList.get(position).getId()).navigation();
+                        .withInt("id", voteDetailList.get(position).getId())
+                        .withInt("state", state).navigation();
             }
         });
 

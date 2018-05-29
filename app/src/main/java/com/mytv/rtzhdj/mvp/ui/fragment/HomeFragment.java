@@ -305,9 +305,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             mAdapters.clear();
 
 
-        //初始化顶部头部
+        /*//初始化顶部头部
         BaseDelegateAdapter topHeaderAdapter = mPresenter.initTopHeader();
-        mAdapters.add(topHeaderAdapter);
+        mAdapters.add(topHeaderAdapter);*/
 
         //把轮播器添加到集合
         BaseDelegateAdapter bannerAdapter = mPresenter.initBannerAdapter(SpecialBlock, NoticeBlock_ChildContent);

@@ -69,7 +69,7 @@
 
     <!-- main tab -->
     <string name="tab_home">首页</string>
-    <string name="tab_news">新闻</string>
+    <string name="tab_news">党建新闻</string>
     <string name="tab_study">我要学习</string>
     <string name="tab_join">我要参与</string>
     <string name="tab_mine">我的</string>

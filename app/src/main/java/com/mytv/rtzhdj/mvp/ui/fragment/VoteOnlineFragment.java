@@ -14,17 +14,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.VoteListEntity;
 import com.mytv.rtzhdj.di.component.DaggerVoteOnlineComponent;
 import com.mytv.rtzhdj.di.module.VoteOnlineModule;
 import com.mytv.rtzhdj.mvp.contract.VoteOnlineContract;
 import com.mytv.rtzhdj.mvp.presenter.VoteOnlinePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.activity.VoteOnlineActivity;
-import com.mytv.rtzhdj.mvp.ui.adapter.QuestionAdapter;
 import com.mytv.rtzhdj.mvp.ui.adapter.VoteOnlineAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -206,7 +203,8 @@ public class VoteOnlineFragment extends BaseFragment<VoteOnlinePresenter> implem
 //                showMessage("" + Integer.toString(position));
                 ARouter.getInstance().build(ARoutePath.PATH_VOTE_DETAIL)
                         .withInt("id", mVoteList.get(position).getId())
-                        .withString("title", "投票活动名称").navigation();
+                        .withString("title", mVoteList.get(position).getTitle())
+                        .withInt("state", mVoteList.get(position).getState()).navigation();
             }
         });
 
