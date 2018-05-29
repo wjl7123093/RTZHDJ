@@ -3,39 +3,26 @@ package com.mytv.rtzhdj.mvp.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
-import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.utils.FragmentUtils;
-import com.mytv.rtzhdj.app.utils.StatusBarUtil;
 import com.mytv.rtzhdj.di.component.DaggerMainComponent;
 import com.mytv.rtzhdj.di.module.MainModule;
 import com.mytv.rtzhdj.mvp.contract.MainContract;
 import com.mytv.rtzhdj.mvp.presenter.MainPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.fragment.HomeFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.JoinFragment;
 import com.mytv.rtzhdj.mvp.ui.fragment.MineFragment;
@@ -159,7 +146,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     public void initData(Bundle savedInstanceState) {
 
         // 默认页面
-        HomeFragment f1 = new HomeFragment();
+        HomeFragment f1 = HomeFragment.newInstance();
         changeFragment(f1, TAB_1);
         mLastTab = TAB_1;
         setTabStyle(mIcon1, mTv1, 1);
@@ -355,7 +342,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 mLastTab = TAB_1;
                 setTabStyle(mIcon1, mTv1, 1);
                 if (null == homeFragment)
-                    homeFragment = new HomeFragment();
+                    homeFragment = HomeFragment.newInstance();
                 changeFragment(homeFragment, TAB_1);
                 break;
 
@@ -363,7 +350,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 mLastTab = TAB_2;
                 setTabStyle(mIcon2, mTv2, 2);
                 if (null == newsFragment)
-                    newsFragment = new NewsFragment();
+                    newsFragment = NewsFragment.newInstance();
                 changeFragment(newsFragment, TAB_2);
                 break;
 
@@ -371,7 +358,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 mLastTab = TAB_3;
                 setTabStyle(mIcon3, mTv3, 3);
                 if (null == studyFragment)
-                    studyFragment = new StudyFragment();
+                    studyFragment = StudyFragment.newInstance();
                 changeFragment(studyFragment, TAB_3);
                 break;
 
@@ -379,7 +366,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 mLastTab = TAB_4;
                 setTabStyle(mIcon4, mTv4, 4);
                 if (null == joinFragment)
-                    joinFragment = new JoinFragment();
+                    joinFragment = JoinFragment.newInstance();
                 changeFragment(joinFragment, TAB_4);
                 break;
 
@@ -387,7 +374,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 mLastTab = TAB_5;
                 setTabStyle(mIcon5, mTv5, 5);
                 if (null == mineFragment)
-                    mineFragment = new MineFragment();
+                    mineFragment = MineFragment.newInstance();
                 changeFragment(mineFragment, TAB_5);
                 break;
             default:

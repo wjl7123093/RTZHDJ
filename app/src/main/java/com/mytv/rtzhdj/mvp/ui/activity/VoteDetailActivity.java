@@ -28,11 +28,11 @@ import com.mytv.rtzhdj.mvp.contract.VoteDetailContract;
 import com.mytv.rtzhdj.mvp.presenter.VoteDetailPresenter;
 import com.mytv.rtzhdj.mvp.ui.adapter.VoteDetailAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import net.qiujuer.genius.ui.widget.Button;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -80,6 +80,9 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
 
     private VoteDetailAdapter mAdapter;
     private static final int PAGE_SIZE = 10;
+    private int mCurPos = 0;    // 当前列表末节点位置
+    private List<VoteDetailEntity> mVoteList = new ArrayList<>();
+    private boolean mIsRefresh = false;
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -165,21 +168,45 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+
+                mIsRefresh = true;
+                // 获取 我要投票列表数据
+                mPresenter.callMethodOfGetVoteOptionsList(id, DataHelper.getIntergerSF(VoteDetailActivity.this,
+                        SharepreferenceKey.KEY_USER_ID), true);
             }
         });
-        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+        mRefreshLayout.setEnableLoadmore(false);
+        /*mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
+                refreshlayout.finishLoadmore(2000*//*,false*//*);//传入false表示加载失败
             }
-        });
+        });*/
     }
 
-    private void initAdapter(List<VoteDetailEntity> voteDetailList) {
-        mAdapter = new VoteDetailAdapter(VoteDetailActivity.this, voteDetailList);
-        mAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(mAdapter);
+    private void initAdapter(List<VoteDetailEntity> voteDetailList, boolean update) {
+        if (update) {
+            if (mIsRefresh) {  // 下拉刷新
+                // 1. 先移除
+                mAdapter.notifyItemRangeRemoved(0, mVoteList.size());
+                // 2. 再清空
+                mVoteList.clear();
+
+                mRefreshLayout.finishRefresh(true);
+                mIsRefresh = false;
+            }
+        }
+
+        if (null == mAdapter) {
+            mVoteList = voteDetailList;
+            mAdapter = new VoteDetailAdapter(VoteDetailActivity.this, voteDetailList);
+            mAdapter.openLoadAnimation();
+            mRecyclerView.setAdapter(mAdapter);
+        } else {
+            mVoteList.addAll(voteDetailList);
+            mAdapter.notifyItemRangeInserted(mCurPos, voteDetailList.size());
+        }
 
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -188,14 +215,28 @@ public class VoteDetailActivity extends BaseActivity<VoteDetailPresenter> implem
                 ARouter.getInstance().build(ARoutePath.PATH_VOTE_ENTRY_DETAIL)
                         .withInt("contentId", voteDetailList.get(position).getContentId())
                         .withInt("id", voteDetailList.get(position).getId())
-                        .withInt("state", state).navigation();
+                        .withInt("state", state).navigation(VoteDetailActivity.this, 100);
             }
         });
 
     }
 
     @Override
-    public void loadData(List<VoteDetailEntity> voteDetailList) {
-        initAdapter(voteDetailList);
+    public void loadData(List<VoteDetailEntity> voteDetailList, boolean update) {
+        initAdapter(voteDetailList, update);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (100 == requestCode) {
+            if (1 == state) {   // 进行中，刷新
+
+                mIsRefresh = true;
+                // 获取 我要投票列表数据
+                mPresenter.callMethodOfGetVoteOptionsList(id, DataHelper.getIntergerSF(VoteDetailActivity.this,
+                        SharepreferenceKey.KEY_USER_ID), true);
+            }
+        }
     }
 }

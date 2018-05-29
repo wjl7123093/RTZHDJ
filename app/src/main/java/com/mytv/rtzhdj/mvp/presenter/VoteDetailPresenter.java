@@ -111,7 +111,7 @@ public class VoteDetailPresenter extends BasePresenter<VoteDetailContract.Model,
                         Log.e(TAG, voteDetailList.toString());
 
                         if (voteDetailList.isSuccess() && null != voteDetailList.getData())
-                            mRootView.loadData(voteDetailList.getData());
+                            mRootView.loadData(voteDetailList.getData(), update);
                     }
                 });
     }

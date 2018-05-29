@@ -255,20 +255,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     public void setImageClick(HomeEntity.AdBlock adBlock) {
 
-        /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                .withInt("articleId", 0)
+        ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL)
                 .withInt("nodeId", adBlock.getNodeId())
-                .withInt("digs", -100)
-                .withInt("comments", -100).navigation();*/
-
-        Bundle bundle = new Bundle();
-        bundle.putInt("articleId", 0);
-        bundle.putInt("nodeId", adBlock.getNodeId());
-        bundle.putInt("digs", -100);
-        bundle.putInt("comments", -100);
-        Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, 100);
+                .navigation();
     }
 
     @Override
@@ -336,7 +325,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         BaseDelegateAdapter imageAdapter = mPresenter.initImage(AdBlock);
         mAdapters.add(imageAdapter);
 
-        //初始化头部
+        /*//初始化头部
         BaseDelegateAdapter headerAdapter = mPresenter.initHeader("推荐活动", "公益，让爱和美丽在你我之间传递");
         mAdapters.add(headerAdapter);
 
@@ -345,7 +334,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         mAdapters.add(oneplusnAdapter);
 
         footerAdapter = mPresenter.initMoreData("更多公益活动");
-        mAdapters.add(footerAdapter);
+        mAdapters.add(footerAdapter);*/
 
         delegateAdapter.setAdapters(mAdapters);
         delegateAdapter.notifyDataSetChanged();
