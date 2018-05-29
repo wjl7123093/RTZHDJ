@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
@@ -17,7 +16,6 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
@@ -135,13 +133,13 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-//                mRootView.onBannerClick(position);
+                mRootView.onBannerClick(specialBlockList.get(position));
 
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                         .withInt("articleId", specialBlockList.get(position).getArticleId())
                         .withInt("nodeId", specialBlockList.get(position).getNodeId())
                         .withInt("digs", 0)
-                        .withInt("comments", 0).navigation();
+                        .withInt("comments", 0).navigation();*/
             }
         });
 

@@ -9,13 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
@@ -23,6 +21,7 @@ import com.mytv.rtzhdj.di.component.DaggerContentComponent;
 import com.mytv.rtzhdj.di.module.ContentModule;
 import com.mytv.rtzhdj.mvp.contract.ContentContract;
 import com.mytv.rtzhdj.mvp.presenter.ContentPresenter;
+import com.mytv.rtzhdj.mvp.ui.activity.NewsDetailActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.NewsAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -166,7 +165,21 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
     }
 
     @Override
-    public void onBannerClick(int position) {
+    public void onBannerClick(PartyNewsEntity newsEntity) {
+        /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                .withInt("articleId", newsEntity.getArticleId())
+                .withInt("nodeId", newsEntity.getNodeId())
+                .withInt("digs", -100)
+                .withInt("comments", -100).navigation();*/
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("articleId", newsEntity.getArticleId());
+        bundle.putInt("nodeId", newsEntity.getNodeId());
+        bundle.putInt("digs", -100);
+        bundle.putInt("comments", -100);
+        Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, 100);
 
     }
 
@@ -245,13 +258,21 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 //                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
                 // 新闻详情页
-//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                         .withInt("articleId", mNewsList.get(position).getArticleId())
                         .withInt("nodeId", mNewsList.get(position).getNodeid())
                         .withInt("digs", mNewsList.get(position).getDigs())
                         .withInt("comments", mNewsList.get(position).getComments())
-                        .navigation();
+                        .navigation();*/
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("articleId", mNewsList.get(position).getArticleId());
+                bundle.putInt("nodeId", mNewsList.get(position).getNodeId());
+                bundle.putInt("digs", mNewsList.get(position).getDigs());
+                bundle.putInt("comments", mNewsList.get(position).getComments());
+                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 100);
             }
         });
     }
@@ -289,6 +310,23 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (100 == requestCode) {
+
+            mIsRefresh = true;
+            PAGE_INDEX = 1;
+            if (0 == getArguments().getInt("nodeId")) {
+                // 获取党建新闻推荐列表数据
+                mPresenter.callMethodOfGetPartyRecommend(PAGE_INDEX, PAGE_SIZE, true);
+            } else {
+                // 获取党建新闻二级列表(除推荐)数据
+                mPresenter.callMethodOfGetPartySubList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, true);
+            }
+        }
     }
 
 }
