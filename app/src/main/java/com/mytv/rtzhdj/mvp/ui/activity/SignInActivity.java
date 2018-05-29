@@ -148,7 +148,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @Override
     public void changeStatus(SignScoresEntity signScoresEntity) {
         mSignEntity.setIfSign(1);
-        changeUI(mSignEntity.getDays());
+        changeUI(mSignEntity.getDays() + 1);
 
         mTvSignBig.setText("+" + signScoresEntity.getIntegral());
         mTvSignStatus.setText("今日已签到");
