@@ -116,8 +116,14 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
             KeyboardUtils.hideKeyboard(view);
             mPresenter.callMethodOfPostAllPublishmentSystem(false);
         });
-        mBtnGetVertifyCode.setOnClickListener(view -> mPresenter.callMethodOfGetCode(
-                mEdtMobilePhone.getText().toString().trim()));
+        mBtnGetVertifyCode.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(mEdtMobilePhone.getText().toString().trim())) {
+                showMessage("手机号不能为空");
+                return;
+            }
+
+            mPresenter.callMethodOfGetCode(mEdtMobilePhone.getText().toString().trim());
+        });
         mBtnRegister.setOnClickListener(view -> {
             if (TextUtils.isEmpty(mEdtMobilePhone.getText().toString().trim())
                 || TextUtils.isEmpty(mEdtCommunity.getText().toString().trim())
@@ -219,6 +225,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         });
         mFlowLayout.getAdapter().setSelectedList(1);  // 设置预选项
         builder.setView(dialogView);
+        builder.setCancelable(false);
         builder.create();
         AlertDialog dialog0 = builder.show();
         mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()
@@ -232,6 +239,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(RegisterActivity.this);
                         builder1.setTitle("提示");
                         builder1.setMessage(getResources().getString(R.string.register_usercategory_info));
+                        builder1.setCancelable(false);
                         builder1.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

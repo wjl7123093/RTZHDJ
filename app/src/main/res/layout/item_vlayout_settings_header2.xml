@@ -19,7 +19,6 @@
         android:id="@id/iv_header"
         android:layout_width="120dp"
         android:layout_height="160dp"
-        android:src="@mipmap/ic_launcher"
         android:scaleType="centerCrop"
         android:layout_marginTop="@dimen/len_10"/>
 
