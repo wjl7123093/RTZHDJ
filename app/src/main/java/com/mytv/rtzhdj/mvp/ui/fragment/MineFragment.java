@@ -316,4 +316,14 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             delegateAdapter.notifyDataSetChanged();
         }
     }
+
+    // 显示时刷新，保持积分一致
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            if (delegateAdapter != null)
+                delegateAdapter.notifyDataSetChanged();
+        }
+    }
 }

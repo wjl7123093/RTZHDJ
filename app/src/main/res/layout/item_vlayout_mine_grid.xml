@@ -14,7 +14,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:paddingTop="@dimen/len_10"
+    android:paddingBottom="@dimen/len_10">
 
     <com.mytv.rtzhdj.mvp.ui.widget.IconView
         android:id="@+id/ic_grid"
