@@ -138,12 +138,13 @@ public class VoteEntryDetailActivity extends BaseActivity<VoteEntryDetailPresent
         finish();
     }
 
-
+//    http://fd.topitme.com/d/a8/1d/11315383988791da8do.jpg
     @Override
     public void loadData(VoteEntrylEntity voteEntrylEntity) {
         mTvTitle.setText(voteEntrylEntity.getTitle());
         mTvRank.setText("第" + voteEntrylEntity.getRanking() + "名");
         mTvVotes.setText(voteEntrylEntity.getVoteNum() + "票");
+//        ImageLoader.getInstance().showImage(VoteEntryDetailActivity.this, mIvImage1, "http://fd.topitme.com/d/a8/1d/11315383988791da8do.jpg");
         ImageLoader.getInstance().showImage(VoteEntryDetailActivity.this, mIvImage1, voteEntrylEntity.getAllImgUrl());
         ImageLoader.getInstance().showImage(VoteEntryDetailActivity.this, mIvImage2, voteEntrylEntity.getAllImgUrl());
     }

@@ -29,8 +29,7 @@
             android:layout_height="@dimen/len_80"
             android:scaleType="centerCrop"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:background="@mipmap/ic_launcher"/>
+            android:layout_alignParentTop="true"/>
         <!-- 标题 -->
         <TextView
             android:id="@+id/tv_title"
@@ -43,7 +42,7 @@
             android:layout_alignTop="@id/iv_image"
             android:layout_toRightOf="@id/iv_image"
             android:layout_marginLeft="@dimen/len_10"
-            android:text="文章标题。。。。。。。。"/>
+            android:text=""/>
         <!-- 点赞数 -->
         <TextView
             android:id="@+id/tv_star_num"
@@ -67,7 +66,7 @@
             android:layout_alignBottom="@id/iv_image"
             android:layout_toRightOf="@id/tv_star_num"
             android:layout_marginLeft="@dimen/len_6"
-            android:text="111"/>
+            android:text=""/>
 
     </RelativeLayout>
 
@@ -100,7 +99,6 @@
                 android:id="@+id/iv_loc"
                 android:layout_width="@dimen/len_32"
                 android:layout_height="@dimen/len_32"
-                android:src="@mipmap/ic_launcher"
                 android:scaleType="centerCrop"
                 android:visibility="gone"/>
 
@@ -112,7 +110,7 @@
             android:layout_height="150dp"
             android:textSize="@dimen/font_16"
             android:textColor="@color/secondary_text"
-            android:hint="请输入你的xx"
+            android:hint="请输入参与信息"
             android:textColorHint="@color/grey_400"
             android:background="@drawable/sp_bg_vlayout_footer"
             android:layout_marginTop="@dimen/dp_10"

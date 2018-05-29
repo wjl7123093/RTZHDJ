@@ -218,10 +218,16 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                             if (NoticeBlock_ChildContent.size() == 1) {
                                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                                         .withInt("nodeId", NoticeBlock_ChildContent.get(0).getNodeId())
+                                        .withInt("articleId", NoticeBlock_ChildContent.get(0).getID())
+                                        .withInt("digs", 0)
+                                        .withInt("comments", 0)
                                         .navigation();
                             } else {
                                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                                         .withInt("nodeId", NoticeBlock_ChildContent.get(position).getNodeId())
+                                        .withInt("articleId", NoticeBlock_ChildContent.get(position).getID())
+                                        .withInt("digs", 0)
+                                        .withInt("comments", 0)
                                         .navigation();
                             }
                         }
