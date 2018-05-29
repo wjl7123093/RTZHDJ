@@ -282,11 +282,14 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
         BaseDelegateAdapter listAdapter2 = mPresenter.initListCommunity(communityBlocks);
         mAdapters.add(listAdapter2);
 
-        //设置适配器
+        delegateAdapter.setAdapters(mAdapters);
+        delegateAdapter.notifyDataSetChanged();
+
+        /*//设置适配器
         if (update)
             delegateAdapter.notifyDataSetChanged();
         else
-            delegateAdapter.setAdapters(mAdapters);
+            delegateAdapter.setAdapters(mAdapters);*/
     }
 
     private void initRefreshLayout() {

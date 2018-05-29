@@ -118,10 +118,12 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     public void initData(Bundle savedInstanceState) {
         // [ForResult]
         Bundle bundle = getIntent().getExtras();
-        title = bundle.getString("title");
-        nodeId = bundle.getInt("nodeId");
-        articleId = bundle.getInt("articleId");
-        courseType = bundle.getInt("courseType");
+        if (null != bundle) {
+            title = bundle.getString("title");
+            nodeId = bundle.getInt("nodeId");
+            articleId = bundle.getInt("articleId");
+            courseType = bundle.getInt("courseType");
+        }
 
         mBtnToolbarMenu.setVisibility(View.GONE);
 

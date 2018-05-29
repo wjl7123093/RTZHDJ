@@ -101,8 +101,10 @@ public class ElectiveCourseActivity extends BaseActivity<ElectiveCoursePresenter
     public void initData(Bundle savedInstanceState) {
         // [ForResult]
         Bundle bundle = getIntent().getExtras();
-        title = bundle.getString("title");
-        nodeId = bundle.getInt("nodeId");
+        if (null != bundle) {
+            title = bundle.getString("title");
+            nodeId = bundle.getInt("nodeId");
+        }
 
         mPresenter.setActivity(ElectiveCourseActivity.this);
         mRecyclerView = mPresenter.initRecyclerView(mRecyclerView);
