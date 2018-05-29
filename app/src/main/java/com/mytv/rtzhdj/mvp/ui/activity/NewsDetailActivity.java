@@ -107,6 +107,15 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        // [ForResult]
+        Bundle bundle = getIntent().getExtras();
+        if (null != bundle) {
+            articleId = bundle.getInt("articleId");
+            nodeId = bundle.getInt("nodeId");
+            digs = bundle.getInt("digs");
+            comments = bundle.getInt("comments");
+        }
+
         mBtnToolbarMenu.setVisibility(View.GONE);
 
         mPresenter.setActivity(NewsDetailActivity.this);

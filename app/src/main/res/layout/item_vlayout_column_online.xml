@@ -22,8 +22,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/white"
-        android:paddingLeft="@dimen/len_16"
-        android:paddingRight="@dimen/len_16"
+        android:paddingLeft="@dimen/len_10"
         android:paddingTop="@dimen/len_10"
         android:paddingBottom="@dimen/len_10">
         <TextView
@@ -43,7 +42,8 @@
             android:textColor="@color/secondary_text"
             android:text="在线化，智能化的调查方法"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:ellipsize="end"/>
     </RelativeLayout>
 
     <!-- 在线投票 -->
@@ -53,8 +53,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/white"
-        android:paddingLeft="@dimen/len_16"
-        android:paddingRight="@dimen/len_16"
+        android:paddingLeft="@dimen/len_10"
         android:paddingTop="@dimen/len_10"
         android:paddingBottom="@dimen/len_10"
         android:layout_marginLeft="@dimen/len_2">
@@ -75,7 +74,8 @@
             android:textColor="@color/secondary_text"
             android:text="珍惜民主权利，投好庄严一票"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:ellipsize="end"/>
     </RelativeLayout>
 </LinearLayout>
 

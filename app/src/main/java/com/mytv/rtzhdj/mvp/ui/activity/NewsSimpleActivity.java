@@ -97,6 +97,13 @@ public class NewsSimpleActivity extends BaseActivity<NewsSimplePresenter> implem
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        // [ForResult]
+        Bundle bundle = getIntent().getExtras();
+        if (null != bundle) {
+            nodeId = bundle.getInt("nodeId");
+            title = bundle.getString("title");
+        }
+
         mBtnToolbarBack.setOnClickListener(view -> this.finish());
         mIvMenu.setImageResource(R.mipmap.ic_search);
         mBtnToolbarMenu.setOnClickListener(view -> {

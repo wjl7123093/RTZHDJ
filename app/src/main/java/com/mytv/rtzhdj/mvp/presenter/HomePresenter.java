@@ -219,15 +219,15 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                                         .withInt("nodeId", NoticeBlock_ChildContent.get(0).getNodeId())
                                         .withInt("articleId", NoticeBlock_ChildContent.get(0).getID())
-                                        .withInt("digs", 0)
-                                        .withInt("comments", 0)
+                                        .withInt("digs", -100)
+                                        .withInt("comments", -100)
                                         .navigation();
                             } else {
                                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                                         .withInt("nodeId", NoticeBlock_ChildContent.get(position).getNodeId())
                                         .withInt("articleId", NoticeBlock_ChildContent.get(position).getID())
-                                        .withInt("digs", 0)
-                                        .withInt("comments", 0)
+                                        .withInt("digs", -100)
+                                        .withInt("comments", -100)
                                         .navigation();
                             }
                         }
@@ -361,13 +361,14 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
 
                 holder.getView(R.id.rl_container).setOnClickListener(view -> {
                     // 新闻详情页
-//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
-                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                    /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                             .withInt("articleId", FocusNewsBlock_ChildContent.get(position).getID())
                             .withInt("nodeId", FocusNewsBlock_ChildContent.get(position).getNodeId())
                             .withInt("digs", FocusNewsBlock_ChildContent.get(position).getDigs())
                             .withInt("comments", FocusNewsBlock_ChildContent.get(position).getComments())
-                            .navigation();
+                            .navigation();*/
+
+                    mRootView.setNewsListClick(FocusNewsBlock_ChildContent.get(position));
                 });
 
             }
@@ -414,9 +415,10 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                                 .build());
 
                 holder.getView(R.id.iv_image).setOnClickListener(view -> {
-//                    mRootView.setOnclick();
-                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                            .withInt("nodeId", AdBlock.get(position).getNodeId()).navigation();
+                    /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                            .withInt("nodeId", AdBlock.get(position).getNodeId()).navigation();*/
+
+                    mRootView.setImageClick(AdBlock.get(position));
                 });
 
             }
@@ -551,6 +553,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                             ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
                                     .withInt("nodeId", PublicSpiritedBlock_ChildContent.get(0).get(position).getNodeId())
                                     .withInt("id", PublicSpiritedBlock_ChildContent.get(0).get(position).getArticleId())
+                                    .withString("imageUrl", PublicSpiritedBlock_ChildContent.get(0).get(position).getAllImgUrl())
                                     .navigation();
                         }
                     });
@@ -610,6 +613,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                             ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
                                     .withInt("nodeId", PublicSpiritedBlock_ChildContent.get(1).get(position).getNodeId())
                                     .withInt("id", PublicSpiritedBlock_ChildContent.get(1).get(position).getArticleId())
+                                    .withString("imageUrl", PublicSpiritedBlock_ChildContent.get(1).get(position).getAllImgUrl())
                                     .navigation();
                         }
                     });

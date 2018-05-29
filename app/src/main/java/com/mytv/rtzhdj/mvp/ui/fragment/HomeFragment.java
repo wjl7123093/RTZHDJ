@@ -24,6 +24,9 @@ import com.mytv.rtzhdj.di.module.HomeModule;
 import com.mytv.rtzhdj.mvp.contract.HomeContract;
 import com.mytv.rtzhdj.mvp.presenter.HomePresenter;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.NewsDetailActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.NewsEducationActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.NewsSimpleActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -174,27 +177,48 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     public void setGridClick(int position) {
 //        ArmsUtils.snackbarText("Grid点击了" + position);
+        Bundle bundle = new Bundle();
+        Intent intent = null;
         switch (position) {
             case 0: // 时政新闻
-//                ARouter.getInstance().build(ARoutePath.PATH_NEWS).navigation();
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
+                /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
                         .withInt("nodeId", 1002)
-                        .withString("title", getResources().getString(R.string.title_news)).navigation();
+                        .withString("title", getResources().getString(R.string.title_news)).navigation();*/
+
+
+                bundle.putInt("nodeId", 1002);
+                bundle.putString("title", getResources().getString(R.string.title_news));
+                intent = new Intent(getActivity(), NewsSimpleActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 100);
                 break;
             case 1: // 党员教育
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_EDUCATION).navigation();
+//                ARouter.getInstance().build(ARoutePath.PATH_NEWS_EDUCATION).navigation();
+
+                intent = new Intent(getActivity(), NewsEducationActivity.class);
+                startActivityForResult(intent, 100);
                 break;
             case 2: // 党风廉政
-//                ARouter.getInstance().build(ARoutePath.PATH_NEWS_CLEAN).navigation();
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
+                /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
                         .withInt("nodeId", 3005)
-                        .withString("title", getResources().getString(R.string.title_news_clean)).navigation();
+                        .withString("title", getResources().getString(R.string.title_news_clean)).navigation();*/
+
+                bundle.putInt("nodeId", 3005);
+                bundle.putString("title", getResources().getString(R.string.title_news_clean));
+                intent = new Intent(getActivity(), NewsSimpleActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 100);
                 break;
             case 3: // 脱贫攻坚
-//                ARouter.getInstance().build(ARoutePath.PATH_NEWS_POVERTY).navigation();
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
+                /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_SIMPLE)
                         .withInt("nodeId", 3006)
-                        .withString("title", getResources().getString(R.string.title_news_poverty)).navigation();
+                        .withString("title", getResources().getString(R.string.title_news_poverty)).navigation();*/
+
+                bundle.putInt("nodeId", 3006);
+                bundle.putString("title", getResources().getString(R.string.title_news_poverty));
+                intent = new Intent(getActivity(), NewsSimpleActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 100);
                 break;
             case 4: // 党建直播
                 ARouter.getInstance().build(ARoutePath.PATH_NEWS_VIDEO_DETAIL).navigation();
@@ -209,13 +233,42 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     }
 
     @Override
-    public void setNewsListClick(int position, String url) {
+    public void setNewsListClick(HomeEntity.FocusNewsBlock newsBlock) {
 
+        /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                .withInt("articleId", newsBlock.getID())
+                .withInt("nodeId", newsBlock.getNodeId())
+                .withInt("digs", newsBlock.getDigs())
+                .withInt("comments", newsBlock.getComments())
+                .navigation();*/
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("articleId", newsBlock.getID());
+        bundle.putInt("nodeId", newsBlock.getNodeId());
+        bundle.putInt("digs", newsBlock.getDigs());
+        bundle.putInt("comments", newsBlock.getComments());
+        Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, 100);
     }
 
     @Override
-    public void setImageClick() {
+    public void setImageClick(HomeEntity.AdBlock adBlock) {
 
+        /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                .withInt("articleId", 0)
+                .withInt("nodeId", adBlock.getNodeId())
+                .withInt("digs", -100)
+                .withInt("comments", -100).navigation();*/
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("articleId", 0);
+        bundle.putInt("nodeId", adBlock.getNodeId());
+        bundle.putInt("digs", -100);
+        bundle.putInt("comments", -100);
+        Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, 100);
     }
 
     @Override
@@ -319,4 +372,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         mRefreshLayout.setEnableLoadmore(false);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (100 == requestCode) {
+            mIsRefresh = true;
+            // 刷新
+            mPresenter.callMethodOfGetHomeData(true);
+        }
+    }
 }

@@ -27,8 +27,8 @@ public interface HomeContract {
         void setOnclick();
         void setMarqueeClick(int position);
         void setGridClick(int position);    // GridView Click
-        void setNewsListClick(int position, String url);
-        void setImageClick();
+        void setNewsListClick(HomeEntity.FocusNewsBlock newsBlock);
+        void setImageClick(HomeEntity.AdBlock adBlock);
         void setOnePlusNClick();
 
         void showImage(ImageView iv, String url);
