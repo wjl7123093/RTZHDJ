@@ -171,7 +171,7 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, coursewareList.get(position).getTitle());
-                holder.setText(R.id.tv_datetime, coursewareList.get(position).getLastStudyTime());
+                holder.setText(R.id.tv_datetime, "上次学习: " + coursewareList.get(position).getLastStudyTime());
 
                 holder.getView(R.id.ll_container).setOnClickListener(view -> {
                     mRootView.setOnListClick(arrayPos, coursewareList.get(position));
@@ -217,6 +217,8 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                 holder.setText(R.id.tv_study_record, userInfo.getNoStudyNum()
                         + "/" + userInfo.getYesStudyNum());
 
+                // 记录学习次数
+                DataHelper.setIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_STUDY_TIMES, userInfo.getNoStudyNum());
                 // 保持积分一致
                 if (userInfo.getIntegral() > DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL))
                     DataHelper.setIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL, userInfo.getIntegral());
