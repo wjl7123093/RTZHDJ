@@ -49,4 +49,18 @@ public class NewsSimpleAdapter extends BaseQuickAdapter<NewsDetailEntity, BaseVi
         }
 
     }
+
+    @Override
+    public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
+//        super.onBindViewHolder(holder, position, payloads);
+
+        if (payloads.isEmpty()) {
+            convert(holder, getItem(position));
+        } else {
+
+            // 局部刷新（只刷新列表项数据（点赞数），不刷新图片）
+            holder.setText(R.id.tv_star_num, getItem(position).getDigs() + 1 + "");
+        }
+
+    }
 }

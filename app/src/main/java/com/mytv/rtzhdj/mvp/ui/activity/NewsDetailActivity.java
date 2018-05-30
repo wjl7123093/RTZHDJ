@@ -118,6 +118,12 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
         }
 
         mBtnToolbarMenu.setVisibility(View.GONE);
+        mBtnToolbarBack.setOnClickListener(view -> {
+            // 返回点赞状态
+            Intent data = new Intent();
+            data.putExtra("type", type = type == 1 ? -1 : 1);
+            setResult(200, data);
+        });
 
         mPresenter.setActivity(NewsDetailActivity.this);
         mPresenter.initWebview(mWebView, mWebProgressBar);
@@ -230,5 +236,15 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
 //        showMessage("成功！！");
         mTvStarNum.setText(newsDetailEntity.getDigs() + "");
         mTvCommentNum.setText(newsDetailEntity.getComments() + "");
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent data = new Intent();
+        data.putExtra("type", type = type == 1 ? -1 : 1);
+        setResult(200, data);
+        finish();
+
     }
 }

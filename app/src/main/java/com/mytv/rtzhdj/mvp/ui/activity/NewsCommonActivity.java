@@ -180,14 +180,14 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     public void initAdapter(List<NewsDetailEntity> newsDetailList, boolean update) {
         if (update) {
             if (mIsRefresh) {  // 下拉刷新
-                // 1. 先移除
+                /*// 1. 先移除
                 newsAdapter.notifyItemRangeRemoved(0, mNewsList.size());
                 // 2. 再清空
-                mNewsList.clear();
+                mNewsList.clear();*/
 
                 mRefreshLayout.finishRefresh(true);
 //                mIsRefresh = false;
-            } else {    // 上拉加载
+            } else if (mIsLoadMore) {    // 上拉加载
                 mRefreshLayout.finishLoadmore(true);
 //                mIsLoadMore = false;
             }
@@ -196,17 +196,19 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
         mCurPos = mNewsList.size();
         if (null == newsAdapter) {
             mNewsList = newsDetailList;
-            newsAdapter = new NewsSimpleAdapter(NewsCommonActivity.this, newsDetailList);
+            newsAdapter = new NewsSimpleAdapter(NewsCommonActivity.this, mNewsList);
             newsAdapter.openLoadAnimation();
             mRecyclerView.setAdapter(newsAdapter);
         } else {
-            mNewsList.addAll(newsDetailList);
+//            mNewsList.addAll(newsDetailList);
 //            newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
             if (mIsRefresh) {
-                newsAdapter.notifyDataSetChanged();
+//                newsAdapter.notifyDataSetChanged();
+                newsAdapter.replaceData(newsDetailList);
                 mIsRefresh = false;
             } else if (mIsLoadMore) {
-                newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+//                newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+                newsAdapter.addData(mCurPos, newsDetailList);
                 mIsLoadMore = false;
             }
         }
@@ -217,13 +219,23 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 //                Toast.makeText(NewsCommonActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
                 // 新闻详情页
-//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                        .withInt("articleId", newsDetailList.get(position).getId())
-                        .withInt("nodeId", newsDetailList.get(position).getNodeId())
-                        .withInt("digs", newsDetailList.get(position).getDigs())
-                        .withInt("comments", newsDetailList.get(position).getComments())
-                        .navigation(NewsCommonActivity.this, 100);
+                /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                        .withInt("articleId", mNewsList.get(position).getId())
+                        .withInt("nodeId", mNewsList.get(position).getNodeId())
+                        .withInt("digs", mNewsList.get(position).getDigs())
+                        .withInt("comments", mNewsList.get(position).getComments())
+                        .navigation(NewsCommonActivity.this, 100);*/
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("articleId", mNewsList.get(position).getId());
+                bundle.putInt("nodeId", mNewsList.get(position).getNodeId());
+                bundle.putInt("digs", mNewsList.get(position).getDigs());
+                bundle.putInt("comments", mNewsList.get(position).getComments());
+                Intent intent = new Intent(NewsCommonActivity.this, NewsDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 100);
+
+                mCurPos = position;
             }
         });
     }
@@ -236,10 +248,11 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            mIsRefresh = true;
-            // 获取二级通用列表数据
-            mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+        if (requestCode == 100 && resultCode == 200) {
+
+            // 刷新点赞数
+            if (data.getIntExtra("type", 0) == 1)
+                newsAdapter.notifyItemChanged(mCurPos, "xxxxxxx");
         }
     }
 }
