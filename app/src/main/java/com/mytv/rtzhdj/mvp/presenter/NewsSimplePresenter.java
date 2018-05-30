@@ -19,7 +19,6 @@ import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.Api;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.app.utils.BannerImageLoader;
@@ -192,13 +191,15 @@ public class NewsSimplePresenter extends BasePresenter<NewsSimpleContract.Model,
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .doOnSubscribe(disposable -> {
-                    mRootView.showLoading();
+                    if (!update)
+                        mRootView.showLoading();
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(() -> {
                     // Action onFinally
-                    mRootView.hideLoading();
+                    if (!update)
+                        mRootView.hideLoading();
                 })
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseJson<List<NewsDetailEntity>>>(mErrorHandler) {
