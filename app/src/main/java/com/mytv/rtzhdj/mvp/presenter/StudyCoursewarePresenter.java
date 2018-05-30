@@ -188,7 +188,7 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
                             .withString("title", data.get(position).getCourseTypeName())
                             .withInt("nodeId", 0)
                             .withInt("articleId", data.get(position).getContentId())
-                            .withInt("courseType", 2).navigation();
+                            .withInt("courseType", data.get(position).getCourseType()).navigation();
                 });
 
             }
