@@ -197,21 +197,22 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
         if (update) {   // 刷新
             if (mIsRefresh) {  // 下拉刷新
+                mIsRefresh = false;
                 // 1. 先移除
                 newsAdapter.removeAllHeaderView();
 
                 if (0 == getArguments().getInt("nodeId"))
-                    newsAdapter.addHeaderView(headerView);
+                    newsAdapter.addHeaderView(headerView, 0);
                 else
                     newsAdapter.removeAllHeaderView();
 
             } else {    // 上拉加载
-
+                mIsLoadMore = false;
             }
         } else {    // 不刷新
 
             if (0 == getArguments().getInt("nodeId"))
-                newsAdapter.addHeaderView(headerView);
+                newsAdapter.addHeaderView(headerView, 0);
             else
                 newsAdapter.removeAllHeaderView();
         }
@@ -234,14 +235,19 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
                 mNewsList.clear();
 
                 mRefreshLayout.finishRefresh(true);
-                mIsRefresh = false;
+//                mIsRefresh = false;
             } else {    // 上拉加载
                 mRefreshLayout.finishLoadmore(true);
-                mIsLoadMore = false;
+//                mIsLoadMore = false;
             }
         }
 
-        mCurPos = mNewsList.size();
+        // mCurPos 只在 上拉加载时 使用
+        if (0 == getArguments().getInt("nodeId"))   // 有头部，所以当前末节点索引要 +1
+            mCurPos = mNewsList.size() + 1;
+        else    // 无头部，则不加
+            mCurPos = mNewsList.size();
+
         if (null == newsAdapter) {
             mNewsList = importandBlockList;
             newsAdapter = new NewsAdapter(getContext(), importandBlockList);
@@ -249,7 +255,11 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
             mRecyclerView.setAdapter(newsAdapter);
         } else {
             mNewsList.addAll(importandBlockList);
-            newsAdapter.notifyItemRangeInserted(mCurPos, importandBlockList.size());
+            if (mIsRefresh) {
+                newsAdapter.notifyDataSetChanged();
+            } else if (mIsLoadMore) {
+                newsAdapter.notifyItemRangeInserted(mCurPos, importandBlockList.size());
+            }
         }
 
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

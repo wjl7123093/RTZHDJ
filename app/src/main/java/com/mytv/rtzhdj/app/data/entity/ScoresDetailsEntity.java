@@ -55,7 +55,7 @@ public class ScoresDetailsEntity {
 
     public class DetailScore {
         private int IntegralValue;
-        private int GetType;
+        private String GetType;
         private String GetTime;
 
         public int getIntegralValue() {
@@ -66,11 +66,11 @@ public class ScoresDetailsEntity {
             IntegralValue = integralValue;
         }
 
-        public int getGetType() {
+        public String getGetType() {
             return GetType;
         }
 
-        public void setGetType(int getType) {
+        public void setGetType(String getType) {
             GetType = getType;
         }
 
