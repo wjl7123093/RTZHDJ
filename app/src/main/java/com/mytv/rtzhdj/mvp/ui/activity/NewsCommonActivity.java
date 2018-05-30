@@ -238,7 +238,6 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
             mIsRefresh = true;
-            PAGE_INDEX = 1;
             // 获取二级通用列表数据
             mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
         }
