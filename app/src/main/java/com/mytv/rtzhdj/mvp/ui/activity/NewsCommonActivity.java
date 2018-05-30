@@ -223,7 +223,7 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
                         .withInt("nodeId", newsDetailList.get(position).getNodeId())
                         .withInt("digs", newsDetailList.get(position).getDigs())
                         .withInt("comments", newsDetailList.get(position).getComments())
-                        .navigation();
+                        .navigation(NewsCommonActivity.this, 100);
             }
         });
     }
@@ -231,5 +231,16 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
     @Override
     public void loadListData(List<NewsDetailEntity> newsList, boolean update) {
         initAdapter(newsList, update);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            mIsRefresh = true;
+            PAGE_INDEX = 1;
+            // 获取二级通用列表数据
+            mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+        }
     }
 }
