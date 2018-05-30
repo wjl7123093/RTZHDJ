@@ -125,13 +125,15 @@ public class NewsAllPresenter extends BasePresenter<NewsAllContract.Model, NewsA
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .doOnSubscribe(disposable -> {
-                    mRootView.showLoading();
+                    if (!update)
+                        mRootView.showLoading();
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(() -> {
                     // Action onFinally
-                    mRootView.hideLoading();
+                    if (!update)
+                        mRootView.hideLoading();
                 })
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseJson<List<NewsDetailEntity>>>(mErrorHandler) {

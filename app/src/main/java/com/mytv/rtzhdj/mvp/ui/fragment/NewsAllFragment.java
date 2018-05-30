@@ -173,10 +173,10 @@ public class NewsAllFragment extends BaseFragment<NewsAllPresenter> implements N
                 mNewsList.clear();
 
                 mRefreshLayout.finishRefresh(true);
-                mIsRefresh = false;
+//                mIsRefresh = false;
             } else {    // 上拉加载
                 mRefreshLayout.finishLoadmore(true);
-                mIsLoadMore = false;
+//                mIsLoadMore = false;
             }
         }
 
@@ -188,7 +188,14 @@ public class NewsAllFragment extends BaseFragment<NewsAllPresenter> implements N
             mRecyclerView.setAdapter(newsAdapter);
         } else {
             mNewsList.addAll(newsDetailList);
-            newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+//            newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+            if (mIsRefresh) {
+                newsAdapter.notifyDataSetChanged();
+                mIsRefresh = false;
+            } else if (mIsLoadMore) {
+                newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+                mIsLoadMore = false;
+            }
         }
 
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
