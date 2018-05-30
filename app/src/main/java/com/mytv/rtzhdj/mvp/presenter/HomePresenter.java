@@ -337,6 +337,27 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 1));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_image,
                 FocusNewsBlock_ChildContent.size(), Constant.viewType.typeList) {
+
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
+//                super.onBindViewHolder(holder, position, payloads);
+
+                if (payloads.isEmpty()) {
+                    onBindViewHolder(holder, position);
+                } else {
+
+                    // 局部刷新（至刷新列表项数据，不刷新图片）
+//                    mRootView.showMessage("SSSSSSS");
+                    holder.setText(R.id.tv_comment_num, FocusNewsBlock_ChildContent.get(position).getComments() + "");
+                    holder.setText(R.id.tv_star_num, FocusNewsBlock_ChildContent.get(position).getDigs() + "");
+
+                    holder.getView(R.id.rl_container).setOnClickListener(view -> {
+                        // 新闻详情页
+                        mRootView.setNewsListClick(FocusNewsBlock_ChildContent.get(position), position);
+                    });
+                }
+            }
+
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -368,7 +389,7 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                             .withInt("comments", FocusNewsBlock_ChildContent.get(position).getComments())
                             .navigation();*/
 
-                    mRootView.setNewsListClick(FocusNewsBlock_ChildContent.get(position));
+                    mRootView.setNewsListClick(FocusNewsBlock_ChildContent.get(position), position);
                 });
 
             }

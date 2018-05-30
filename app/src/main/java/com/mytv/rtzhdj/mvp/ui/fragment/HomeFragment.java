@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     private List<DelegateAdapter.Adapter> mAdapters;
     private DelegateAdapter delegateAdapter = null;
     private boolean mIsRefresh = false;
+    private int mCurClickPos = -1;       // 当前点击位置
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -153,6 +155,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         banner.setOnBannerListener(new OnBannerListener() {
                 @Override
                 public void OnBannerClick(int position) {
+
+                    mCurClickPos = -1;  // 恢复初始值
                     ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL).navigation();
                 }
             });
@@ -160,23 +164,30 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void setOnTopicClick() {
+
+        mCurClickPos = -1;  // 恢复初始值
         ARouter.getInstance().build(ARoutePath.PATH_TOPIC).navigation();
     }
 
     @Override
     public void setOnclick() {
+
+        mCurClickPos = -1;  // 恢复初始值
         // 更多要闻 点击
         ((MainActivity) getActivity()).doClick(1, null);
     }
 
     @Override
     public void setMarqueeClick(int position) {
-        ArmsUtils.snackbarText("MarqueeClick点击了" + position);
+//        ArmsUtils.snackbarText("MarqueeClick点击了" + position);
     }
 
     @Override
     public void setGridClick(int position) {
 //        ArmsUtils.snackbarText("Grid点击了" + position);
+
+        mCurClickPos = -1;  // 恢复初始值
+
         Bundle bundle = new Bundle();
         Intent intent = null;
         switch (position) {
@@ -233,7 +244,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     }
 
     @Override
-    public void setNewsListClick(HomeEntity.FocusNewsBlock newsBlock) {
+    public void setNewsListClick(HomeEntity.FocusNewsBlock newsBlock, int position) {
 
         /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                 .withInt("articleId", newsBlock.getID())
@@ -241,6 +252,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
                 .withInt("digs", newsBlock.getDigs())
                 .withInt("comments", newsBlock.getComments())
                 .navigation();*/
+
+        // 10 -> listAdapter 上面的所有 Adapters 的项总数
+        // [banner(1) + grid(8) + title(1) == 10]
+        mCurClickPos = 10 + position;
 
         Bundle bundle = new Bundle();
         bundle.putInt("articleId", newsBlock.getID());
@@ -254,6 +269,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void setImageClick(HomeEntity.AdBlock adBlock) {
+
+        mCurClickPos = -1;  // 恢复初始值
 
         ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL)
                 .withInt("nodeId", adBlock.getNodeId())
@@ -276,6 +293,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     }
 
     private void initRecyclerView(HomeEntity homeData, boolean update) {
+
+        ((SimpleItemAnimator)mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         if (update && mIsRefresh) {
             mRefreshLayout.finishRefresh(true);
             mIsRefresh = false;
@@ -336,8 +355,23 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         footerAdapter = mPresenter.initMoreData("更多公益活动");
         mAdapters.add(footerAdapter);*/
 
-        delegateAdapter.setAdapters(mAdapters);
-        delegateAdapter.notifyDataSetChanged();
+        if (update) {
+//            delegateAdapter.notifyItemRangeChanged(10, 19, "xxxxxxxx");
+            if (mIsRefresh) {   // 下拉刷新
+                delegateAdapter.setAdapters(mAdapters);
+                delegateAdapter.notifyDataSetChanged();
+            } else {
+                if (-1 < mCurClickPos) {    // 局部刷新（从新闻列表点击进去，返回主页后，刷新新闻列表项）
+                    delegateAdapter.setAdapters(mAdapters);
+                    delegateAdapter.notifyItemChanged(mCurClickPos, "xxxxxxxx");
+                } else {    // 全部刷新（从其他点击进去，返回主页后，进行全部刷新）
+                    delegateAdapter.setAdapters(mAdapters);
+                    delegateAdapter.notifyDataSetChanged();
+                }
+            }
+        } else {
+            delegateAdapter.setAdapters(mAdapters);
+        }
 
         /*//设置适配器
         if (update)
@@ -365,7 +399,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (100 == requestCode) {
-            mIsRefresh = true;
+//            mIsRefresh = true;
             // 刷新
             mPresenter.callMethodOfGetHomeData(true);
         }
