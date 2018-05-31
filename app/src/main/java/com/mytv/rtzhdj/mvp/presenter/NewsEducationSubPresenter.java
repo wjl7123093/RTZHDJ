@@ -92,10 +92,12 @@ public class NewsEducationSubPresenter extends BasePresenter<NewsEducationSubCon
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
-                    mRootView.showLoading();
+                    if (!update)
+                        mRootView.showLoading();
                 })
                 .doFinally(() -> {
-                    mRootView.hideLoading();
+                    if (!update)
+                        mRootView.hideLoading();
                 })
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

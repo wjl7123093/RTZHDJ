@@ -166,28 +166,36 @@ public class NewsEducationSubActivity extends BaseActivity<NewsEducationSubPrese
     public void initAdapter(List<PartyNewsEntity> importandBlockList, boolean update) {
         if (update) {
             if (mIsRefresh) {  // 下拉刷新
-                // 1. 先移除
+                /*// 1. 先移除
                 newsAdapter.notifyItemRangeRemoved(0, mNewsList.size());
                 // 2. 再清空
-                mNewsList.clear();
+                mNewsList.clear();*/
 
                 mRefreshLayout.finishRefresh(true);
-                mIsRefresh = false;
+//                mIsRefresh = false;
             } else {    // 上拉加载
                 mRefreshLayout.finishLoadmore(true);
-                mIsLoadMore = false;
+//                mIsLoadMore = false;
             }
         }
 
         mCurPos = mNewsList.size();
         if (null == newsAdapter) {
             mNewsList = importandBlockList;
-            newsAdapter = new NewsAdapter(NewsEducationSubActivity.this, importandBlockList);
+            newsAdapter = new NewsAdapter(NewsEducationSubActivity.this, importandBlockList, false);
             newsAdapter.openLoadAnimation();
             mRecyclerView.setAdapter(newsAdapter);
         } else {
             mNewsList.addAll(importandBlockList);
-            newsAdapter.notifyItemRangeInserted(mCurPos, importandBlockList.size());
+            if (mIsRefresh) {
+//                newsAdapter.notifyDataSetChanged();
+                newsAdapter.replaceData(importandBlockList);
+                mIsRefresh = false;
+            } else if (mIsLoadMore) {
+//                newsAdapter.notifyItemRangeInserted(mCurPos, importandBlockList.size());
+                newsAdapter.addData(mCurPos, importandBlockList);
+                mIsLoadMore = false;
+            }
         }
 
         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -196,13 +204,23 @@ public class NewsEducationSubActivity extends BaseActivity<NewsEducationSubPrese
 //                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
                 // 新闻详情页
-//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                         .withInt("articleId", mNewsList.get(position).getArticleId())
                         .withInt("nodeId", mNewsList.get(position).getNodeid())
                         .withInt("digs", mNewsList.get(position).getDigs())
                         .withInt("comments", mNewsList.get(position).getComments())
-                        .navigation();
+                        .navigation();*/
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("articleId", mNewsList.get(position).getArticleId());
+                bundle.putInt("nodeId", mNewsList.get(position).getNodeId());
+                bundle.putInt("digs", mNewsList.get(position).getDigs());
+                bundle.putInt("comments", mNewsList.get(position).getComments());
+                Intent intent = new Intent(NewsEducationSubActivity.this, NewsDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 100);
+
+                mCurPos = position;
             }
         });
     }
@@ -215,8 +233,8 @@ public class NewsEducationSubActivity extends BaseActivity<NewsEducationSubPrese
 
                 mIsRefresh = true;
                 PAGE_INDEX = 1;
-                    // 获取党建新闻二级列表(除推荐)数据
-                    mPresenter.callMethodOfGetPartySubList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+                // 获取党建新闻二级列表(除推荐)数据
+                mPresenter.callMethodOfGetPartySubList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
@@ -226,10 +244,22 @@ public class NewsEducationSubActivity extends BaseActivity<NewsEducationSubPrese
 //                refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
 
                 mIsLoadMore = true;
-                    // 获取党建新闻二级列表(除推荐)数据
-                    mPresenter.callMethodOfGetPartySubList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
+                // 获取党建新闻二级列表(除推荐)数据
+                mPresenter.callMethodOfGetPartySubList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100 && resultCode == 200) {
+
+            // 刷新点赞数
+            if (data.getIntExtra("type", 0) == 1)
+                newsAdapter.notifyItemChanged(mCurPos, "xxxxxxx");
+        }
     }
 
 }
