@@ -97,7 +97,8 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
             public void onProgressChanged(WebView view, int newProgress) {
                 // TODO Auto-generated method stub
                 super.onProgressChanged(view, newProgress);
-                mRootView.setWebviewProgress(newProgress);
+                if (null != mRootView)
+                    mRootView.setWebviewProgress(newProgress);
             }
         });
         /**

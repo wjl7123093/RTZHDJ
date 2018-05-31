@@ -18,10 +18,12 @@ import java.util.List;
 public class NewsAdapter extends BaseQuickAdapter<PartyNewsEntity, BaseViewHolder> {
 
     private Context mContext;
+    private boolean mIsHeader = false;
 
-    public NewsAdapter(Context context, List<PartyNewsEntity> newsList) {
+    public NewsAdapter(Context context, List<PartyNewsEntity> newsList, boolean isHeader) {
         super(R.layout.item_vlayout_list_image, newsList);
         mContext = context;
+        mIsHeader = isHeader;
     }
 
 
@@ -40,6 +42,27 @@ public class NewsAdapter extends BaseQuickAdapter<PartyNewsEntity, BaseViewHolde
             helper.getView(R.id.iv_image).setVisibility(View.VISIBLE);
         } else {
             helper.getView(R.id.iv_image).setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
+//        super.onBindViewHolder(holder, position, payloads);
+
+        if (mIsHeader) {
+            if (0 == position)
+                return;
+            else
+                position = position - 1;
+        }
+
+        if (payloads.isEmpty()) {
+            convert(holder, getItem(position));
+        } else {
+            getItem(position).setDigs(getItem(position).getDigs() + 1);
+            // 局部刷新（只刷新列表项数据（点赞数），不刷新图片）
+            holder.setText(R.id.tv_star_num, getItem(position).getDigs() + "");
         }
 
     }

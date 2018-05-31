@@ -58,6 +58,7 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
     private List<PartyNewsEntity> mNewsList = new ArrayList<>();
     private boolean mIsLoadMore = false;
     private boolean mIsRefresh = false;
+    private boolean mIsHeader = false;      // 是否含有头部banner
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -229,10 +230,10 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
     public void initAdapter(List<PartyNewsEntity> importandBlockList, boolean update) {
         if (update) {
             if (mIsRefresh) {  // 下拉刷新
-                // 1. 先移除
+                /*// 1. 先移除
                 newsAdapter.notifyItemRangeRemoved(0, mNewsList.size());
                 // 2. 再清空
-                mNewsList.clear();
+                mNewsList.clear();*/
 
                 mRefreshLayout.finishRefresh(true);
 //                mIsRefresh = false;
@@ -250,15 +251,28 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
         if (null == newsAdapter) {
             mNewsList = importandBlockList;
-            newsAdapter = new NewsAdapter(getContext(), importandBlockList);
+            if (0 == getArguments().getInt("nodeId")) { // 推荐 -> 有头部
+                mIsHeader = true;
+            } else {
+                mIsHeader = false;
+            }
+            newsAdapter = new NewsAdapter(getContext(), mNewsList, mIsHeader);
             newsAdapter.openLoadAnimation();
             mRecyclerView.setAdapter(newsAdapter);
         } else {
             mNewsList.addAll(importandBlockList);
             if (mIsRefresh) {
-                newsAdapter.notifyDataSetChanged();
+//                newsAdapter.notifyDataSetChanged();
+                newsAdapter.replaceData(importandBlockList);
+                if (0 != getArguments().getInt("nodeId")) { // 普通列表，不含头部
+                    mIsRefresh = false;
+                }
             } else if (mIsLoadMore) {
-                newsAdapter.notifyItemRangeInserted(mCurPos, importandBlockList.size());
+//                newsAdapter.notifyItemRangeInserted(mCurPos, importandBlockList.size());
+                newsAdapter.addData(mCurPos, importandBlockList);
+                if (0 != getArguments().getInt("nodeId")) { // 普通列表，不含头部
+                    mIsLoadMore = false;
+                }
             }
         }
 
@@ -283,6 +297,11 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
                 Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 100);
+
+                if (mIsHeader)
+                    mCurPos = position + 1;
+                else
+                    mCurPos = position;
             }
         });
     }
@@ -325,7 +344,7 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (100 == requestCode) {
+        /*if (100 == requestCode) {
 
             mIsRefresh = true;
             PAGE_INDEX = 1;
@@ -336,6 +355,13 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
                 // 获取党建新闻二级列表(除推荐)数据
                 mPresenter.callMethodOfGetPartySubList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, true);
             }
+        }*/
+
+        if (requestCode == 100 && resultCode == 200) {
+
+            // 刷新点赞数
+            if (data.getIntExtra("type", 0) == 1)
+                newsAdapter.notifyItemChanged(mCurPos, "xxxxxxx");
         }
     }
 
