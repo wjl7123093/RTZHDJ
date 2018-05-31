@@ -57,9 +57,9 @@ public class NewsSimpleAdapter extends BaseQuickAdapter<NewsDetailEntity, BaseVi
         if (payloads.isEmpty()) {
             convert(holder, getItem(position));
         } else {
-
+            getItem(position).setDigs(getItem(position).getDigs() + 1);
             // 局部刷新（只刷新列表项数据（点赞数），不刷新图片）
-            holder.setText(R.id.tv_star_num, getItem(position).getDigs() + 1 + "");
+            holder.setText(R.id.tv_star_num, getItem(position).getDigs() + "");
         }
 
     }
