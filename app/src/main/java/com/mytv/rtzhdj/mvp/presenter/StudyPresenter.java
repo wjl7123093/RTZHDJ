@@ -20,7 +20,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.google.gson.reflect.TypeToken;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
-import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
@@ -224,12 +223,8 @@ public class StudyPresenter extends BasePresenter<StudyContract.Model, StudyCont
                         DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL) + "");
 
                 if (!TextUtils.isEmpty(userInfo.getPhotoUrl())) {
-                    mImageLoader.loadImage(activity,
-                            ImageConfigImpl
-                                    .builder()
-                                    .url(userInfo.getPhotoUrl())
-                                    .imageView(holder.getView(R.id.iv_header))
-                                    .build());
+                    com.mytv.rtzhdj.app.utils.ImageLoader.getInstance().showImage(activity,
+                            holder.getView(R.id.iv_header), userInfo.getPhotoUrl());
                 }
 
                 holder.getView(R.id.rl_study_record).setOnClickListener(view -> {
