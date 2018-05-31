@@ -234,7 +234,8 @@
             android:name=".mvp.ui.activity.QuestionaireSurveyActivity"
             android:label="@string/title_questionaire" />
         <activity android:name=".mvp.ui.activity.NewsEducationSubActivity" />
-        <activity android:name=".mvp.ui.activity.TeacherListActivity"></activity>
+        <activity android:name=".mvp.ui.activity.TeacherListActivity"
+            android:label="@string/title_teacher_list"></activity>
     </application>
 
 </manifest>
