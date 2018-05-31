@@ -196,7 +196,7 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
         mCurPos = mNewsList.size();
         if (null == newsAdapter) {
             mNewsList = newsDetailList;
-            newsAdapter = new NewsSimpleAdapter(NewsCommonActivity.this, mNewsList);
+            newsAdapter = new NewsSimpleAdapter(NewsCommonActivity.this, mNewsList, false);
             newsAdapter.openLoadAnimation();
             mRecyclerView.setAdapter(newsAdapter);
         } else {

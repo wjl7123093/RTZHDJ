@@ -201,7 +201,7 @@ public class SpecialSubDetailFragment extends BaseFragment<SpecialSubDetailPrese
         mCurPos = mNewsList.size();
         if (null == newsAdapter) {
             mNewsList = newsList;
-            newsAdapter = new NewsSimpleAdapter(getActivity(), newsList);
+            newsAdapter = new NewsSimpleAdapter(getActivity(), newsList, false);
             newsAdapter.openLoadAnimation();
             mRecyclerView.setAdapter(newsAdapter);
         } else {

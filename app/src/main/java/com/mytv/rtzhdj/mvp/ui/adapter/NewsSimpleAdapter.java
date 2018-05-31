@@ -24,10 +24,12 @@ import java.util.List;
 public class NewsSimpleAdapter extends BaseQuickAdapter<NewsDetailEntity, BaseViewHolder> {
 
     private Context mContext;
+    private boolean mIsHeader = false;
 
-    public NewsSimpleAdapter(Context context, List<NewsDetailEntity> newsList) {
+    public NewsSimpleAdapter(Context context, List<NewsDetailEntity> newsList, boolean isHeader) {
         super(R.layout.item_vlayout_list_image, newsList);
         mContext = context;
+        mIsHeader = isHeader;
     }
 
 
@@ -53,6 +55,13 @@ public class NewsSimpleAdapter extends BaseQuickAdapter<NewsDetailEntity, BaseVi
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
 //        super.onBindViewHolder(holder, position, payloads);
+
+        if (mIsHeader) {
+            if (0 == position)
+                return;
+            else
+                position = position - 1;
+        }
 
         if (payloads.isEmpty()) {
             convert(holder, getItem(position));

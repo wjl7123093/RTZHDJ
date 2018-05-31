@@ -183,7 +183,7 @@ public class NewsAllFragment extends BaseFragment<NewsAllPresenter> implements N
         mCurPos = mNewsList.size();
         if (null == newsAdapter) {
             mNewsList = newsDetailList;
-            newsAdapter = new NewsSimpleAdapter(getContext(), newsDetailList);
+            newsAdapter = new NewsSimpleAdapter(getContext(), newsDetailList, false);
             newsAdapter.openLoadAnimation();
             mRecyclerView.setAdapter(newsAdapter);
         } else {

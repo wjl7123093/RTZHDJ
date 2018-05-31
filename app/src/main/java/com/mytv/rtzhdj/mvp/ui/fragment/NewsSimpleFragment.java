@@ -9,19 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsSimpleComponent;
 import com.mytv.rtzhdj.di.module.NewsSimpleModule;
 import com.mytv.rtzhdj.mvp.contract.NewsSimpleContract;
 import com.mytv.rtzhdj.mvp.presenter.NewsSimplePresenter;
+import com.mytv.rtzhdj.mvp.ui.activity.NewsDetailActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsSimpleActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.NewsSimpleAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -51,6 +50,7 @@ public class NewsSimpleFragment extends BaseFragment<NewsSimplePresenter> implem
     private List<NewsDetailEntity> mNewsList = new ArrayList<>();
     private boolean mIsLoadMore = false;
     private boolean mIsRefresh = false;
+    private boolean mIsHeader = false;      // 是否含有头部banner
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -172,10 +172,10 @@ public class NewsSimpleFragment extends BaseFragment<NewsSimplePresenter> implem
     public void initAdapter(List<NewsDetailEntity> newsDetailList, boolean update) {
         if (update) {
             if (mIsRefresh) {  // 下拉刷新
-                // 1. 先移除
+                /*// 1. 先移除
                 newsAdapter.notifyItemRangeRemoved(0, mNewsList.size());
                 // 2. 再清空
-                mNewsList.clear();
+                mNewsList.clear();*/
 
                 mRefreshLayout.finishRefresh(true);
 //                mIsRefresh = false;
@@ -188,17 +188,24 @@ public class NewsSimpleFragment extends BaseFragment<NewsSimplePresenter> implem
         mCurPos = mNewsList.size();
         if (null == newsAdapter) {
             mNewsList = newsDetailList;
-            newsAdapter = new NewsSimpleAdapter(getContext(), newsDetailList);
+            if (0 == getArguments().getInt("nodeId")) { // 推荐 -> 有头部
+                mIsHeader = true;
+            } else {
+                mIsHeader = false;
+            }
+            newsAdapter = new NewsSimpleAdapter(getContext(), mNewsList, mIsHeader);
             newsAdapter.openLoadAnimation();
             mRecyclerView.setAdapter(newsAdapter);
         } else {
-            mNewsList.addAll(newsDetailList);
+//            mNewsList.addAll(newsDetailList);
 //            newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
             if (mIsRefresh) {
-                newsAdapter.notifyDataSetChanged();
+//                newsAdapter.notifyDataSetChanged();
+                newsAdapter.replaceData(newsDetailList);
                 mIsRefresh = false;
             } else if (mIsLoadMore) {
-                newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+//                newsAdapter.notifyItemRangeInserted(mCurPos, newsDetailList.size());
+                newsAdapter.addData(mCurPos, newsDetailList);
                 mIsLoadMore = false;
             }
         }
@@ -209,13 +216,26 @@ public class NewsSimpleFragment extends BaseFragment<NewsSimplePresenter> implem
 //                Toast.makeText(getContext(), "" + Integer.toString(position), Toast.LENGTH_LONG).show();
 
                 // 新闻详情页
-//                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL).navigation();
-                ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                         .withInt("articleId", mNewsList.get(position).getId())
                         .withInt("nodeId", mNewsList.get(position).getNodeId())
                         .withInt("digs", mNewsList.get(position).getDigs())
                         .withInt("comments", mNewsList.get(position).getComments())
-                        .navigation();
+                        .navigation();*/
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("articleId", mNewsList.get(position).getId());
+                bundle.putInt("nodeId", mNewsList.get(position).getNodeId());
+                bundle.putInt("digs", mNewsList.get(position).getDigs());
+                bundle.putInt("comments", mNewsList.get(position).getComments());
+                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 100);
+
+                if (mIsHeader)
+                    mCurPos = position + 1;
+                else
+                    mCurPos = position;
             }
         });
     }
@@ -251,5 +271,16 @@ public class NewsSimpleFragment extends BaseFragment<NewsSimplePresenter> implem
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 200) {
+
+            // 刷新点赞数
+            if (data.getIntExtra("type", 0) == 1)
+                newsAdapter.notifyItemChanged(mCurPos, "xxxxxxx");
+        }
     }
 }
