@@ -96,10 +96,12 @@ public class TeacherListPresenter extends BasePresenter<TeacherListContract.Mode
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
-                    mRootView.showLoading();
+                    if (!update)
+                        mRootView.showLoading();
                 })
                 .doFinally(() -> {
-                    mRootView.hideLoading();
+                    if (!update)
+                        mRootView.hideLoading();
                 })
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

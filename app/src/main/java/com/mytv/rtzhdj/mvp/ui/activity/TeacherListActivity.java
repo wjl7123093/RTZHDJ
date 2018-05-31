@@ -171,28 +171,36 @@ public class TeacherListActivity extends BaseActivity<TeacherListPresenter> impl
     public void initAdapter(List<TeacherEntity> teacherList, boolean update) {
         if (update) {
             if (mIsRefresh) {  // 下拉刷新
-                // 1. 先移除
+                /*// 1. 先移除
                 teacherAdapter.notifyItemRangeRemoved(0, mTeacherList.size());
                 // 2. 再清空
-                mTeacherList.clear();
+                mTeacherList.clear();*/
 
                 mRefreshLayout.finishRefresh(true);
-                mIsRefresh = false;
+//                mIsRefresh = false;
             } else {    // 上拉加载
                 mRefreshLayout.finishLoadmore(true);
-                mIsLoadMore = false;
+//                mIsLoadMore = false;
             }
         }
 
         mCurPos = mTeacherList.size();
         if (null == teacherAdapter) {
             mTeacherList = teacherList;
-            teacherAdapter = new TeacherListAdapter(TeacherListActivity.this, teacherList);
+            teacherAdapter = new TeacherListAdapter(TeacherListActivity.this, mTeacherList);
             teacherAdapter.openLoadAnimation();
             mRecyclerView.setAdapter(teacherAdapter);
         } else {
             mTeacherList.addAll(teacherList);
-            teacherAdapter.notifyItemRangeInserted(mCurPos, teacherList.size());
+            if (mIsRefresh) {
+//                newsAdapter.notifyDataSetChanged();
+                teacherAdapter.replaceData(teacherList);
+                mIsRefresh = false;
+            } else if (mIsLoadMore) {
+//                newsAdapter.notifyItemRangeInserted(mCurPos, importandBlockList.size());
+                teacherAdapter.addData(mCurPos, teacherList);
+                mIsLoadMore = false;
+            }
         }
 
         teacherAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
