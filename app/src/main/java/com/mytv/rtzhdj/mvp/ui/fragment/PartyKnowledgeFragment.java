@@ -168,7 +168,7 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
 
     @Override
     public void initAdapter(List<PartyNewsEntity> newsList) {
-        newsAdapter = new NewsAdapter(getContext(), newsList);
+        newsAdapter = new NewsAdapter(getContext(), newsList, false);
         newsAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(newsAdapter);
 
