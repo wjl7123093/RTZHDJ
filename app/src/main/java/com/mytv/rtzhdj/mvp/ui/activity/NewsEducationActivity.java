@@ -176,8 +176,18 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
     }
 
     @Override
-    public void setOnListClick(int position) {
+    public void setOnListClick(NewsDetailEntity newsDetailEntity, int position) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("articleId", newsDetailEntity.getId());
+        bundle.putInt("nodeId", newsDetailEntity.getNodeId());
+        bundle.putInt("digs", newsDetailEntity.getDigs());
+        bundle.putInt("comments", newsDetailEntity.getComments());
+        Intent intent = new Intent(NewsEducationActivity.this, NewsDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, 100);
 
+        // 当前点击位置 所在的列表绝对位置（5 == grid(4) + title(1)）
+        mCurPos = position;
     }
 
     @Override
@@ -244,5 +254,16 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
                 mPresenter.callMethodOfGetTwoLevelList(6020, ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 200) {
+
+            // 刷新点赞数
+            if (data.getIntExtra("type", 0) == 1)
+                delegateAdapter.notifyItemChanged(mCurPos, "xxxxxxx");
+        }
     }
 }

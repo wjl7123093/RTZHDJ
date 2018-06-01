@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -23,7 +22,6 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.mytv.rtzhdj.R;
-import com.mytv.rtzhdj.app.ARoutePath;
 import com.mytv.rtzhdj.app.Constant;
 import com.mytv.rtzhdj.app.base.RTZHDJApplication;
 import com.mytv.rtzhdj.app.data.BaseJson;
@@ -154,6 +152,43 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(mActivity, 1));
         return new BaseDelegateAdapter(mActivity, linearLayoutHelper , R.layout.item_vlayout_list_image,
                 data.size(), Constant.viewType.typeList) {
+
+            @Override
+            protected void onBindViewHolderWithOffset(BaseViewHolder holder, int position, int offsetTotal, List<Object> payloads) {
+                super.onBindViewHolderWithOffset(holder, position, offsetTotal, payloads);
+
+                if (payloads.isEmpty()) {
+                    onBindViewHolder(holder, position);
+                } else {    // notifyItemChanged 只更新单项点赞数
+                    data.get(position).setDigs(data.get(position).getDigs() + 1);
+                    holder.setText(R.id.tv_star_num, data.get(position).getDigs() + "");
+                }
+
+                holder.getView(R.id.rl_container).setOnClickListener(view -> {
+                    // 新闻详情页
+                    /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                            .withInt("articleId", data.get(position).getId())
+                            .withInt("nodeId", data.get(position).getNodeId())
+                            .withInt("digs", data.get(position).getDigs())
+                            .withInt("comments", data.get(position).getComments())
+                            .navigation();
+*/
+                    mRootView.setOnListClick(data.get(position), offsetTotal);
+                });
+            }
+
+            /*@Override
+            public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
+//                super.onBindViewHolder(holder, position, payloads);
+
+                if (payloads.isEmpty()) {
+                    onBindViewHolder(holder, position);
+                } else {
+                    data.get(position).setDigs(data.get(position).getDigs() + 1);
+                    holder.setText(R.id.tv_star_num, data.get(position).getDigs() + "");
+                }
+            }*/
+
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -172,12 +207,14 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
 
                 holder.getView(R.id.rl_container).setOnClickListener(view -> {
                     // 新闻详情页
-                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                    /*ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
                             .withInt("articleId", data.get(position).getId())
                             .withInt("nodeId", data.get(position).getNodeId())
                             .withInt("digs", data.get(position).getDigs())
                             .withInt("comments", data.get(position).getComments())
                             .navigation();
+*/
+                    mRootView.setOnListClick(data.get(position), position);
                 });
 
             }
@@ -194,13 +231,15 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))
                 .doOnSubscribe(disposable -> {
-                    mRootView.showLoading();
+                    if (!update)
+                        mRootView.showLoading();
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(() -> {
                     // Action onFinally
-                    mRootView.hideLoading();
+                    if (!update)
+                        mRootView.hideLoading();
                 })
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseJson<NewsSimpleEntity>>(mErrorHandler) {
