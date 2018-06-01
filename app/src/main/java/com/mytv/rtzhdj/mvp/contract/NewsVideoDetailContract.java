@@ -22,7 +22,7 @@ public interface NewsVideoDetailContract {
     interface Model extends IModel {
 
         // 获取 党建直播
-        Observable<BaseJson<PartyLiveEntity>> getContent(boolean update);
+        Observable<BaseJson<PartyLiveEntity>> getPartyLiveInfo(boolean update);
 
     }
 
@@ -32,8 +32,8 @@ public interface NewsVideoDetailContract {
         //初始化 RecyclerView
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
-        // 调用 获取新闻详情
-        void callMethodOfGetContent(boolean update);
+        // 调用 获取党建直播
+        void callMethodOfGetPartyLiveInfo(boolean update);
 
     }
 }

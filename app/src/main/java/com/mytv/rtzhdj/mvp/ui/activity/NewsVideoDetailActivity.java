@@ -46,7 +46,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 /**
- * 新闻视频详情界面
+ * 党建直播详情界面
  *
  * @author Fred_W
  * @version v1.0.0(1)
@@ -115,7 +115,7 @@ public class NewsVideoDetailActivity extends BaseActivity<NewsVideoDetailPresent
         mPresenter.setActivity(NewsVideoDetailActivity.this);
         mPresenter.initRecyclerView(mRecyclerView);
         // 获取 党建直播data
-        mPresenter.callMethodOfGetContent(false);
+        mPresenter.callMethodOfGetPartyLiveInfo(false);
 
         String url =  "http://video.7k.cn/app_video/20171202/6c8cf3ea/v.m3u8.mp4";
 //        String url =  "http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8";
@@ -186,12 +186,19 @@ public class NewsVideoDetailActivity extends BaseActivity<NewsVideoDetailPresent
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        // 添加此代码是为了修复 视频全屏切换回来再退出后，在MainActivity界面来回切换 tab 导致程序异常退出的 bug
+        // [com.shuyu.gsyvideoplayer.listener.GSYMediaPlayerListener.onBufferingUpdate(int) on a null object reference.]
+        GSYVideoManager.instance().setListener(null);
+
         if (isPlay && null != getCurPlay()) {
             getCurPlay().release();
         }
-        //GSYPreViewManager.instance().releaseMediaPlayer();
-        if (orientationUtils != null)
+//        GSYPreViewManager.instance().releaseMediaPlayer();
+        if (orientationUtils != null) {
+//            orientationUtils = null;
             orientationUtils.releaseListener();
+        }
     }
 
 

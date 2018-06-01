@@ -84,8 +84,8 @@ public class NewsVideoDetailPresenter extends BasePresenter<NewsVideoDetailContr
     }
 
     @Override
-    public void callMethodOfGetContent(boolean update) {
-        mModel.getContent(update)
+    public void callMethodOfGetPartyLiveInfo(boolean update) {
+        mModel.getPartyLiveInfo(update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<PartyLiveEntity>>transformObservable("GetPartyLiveInfo",
                         new TypeToken<BaseJson<PartyLiveEntity>>() { }.getType(),
                         CacheStrategy.firstRemote()))

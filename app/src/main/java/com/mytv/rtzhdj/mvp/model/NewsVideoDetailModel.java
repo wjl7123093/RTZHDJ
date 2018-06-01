@@ -3,17 +3,15 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.NewsVideoDetailService;
 import com.mytv.rtzhdj.app.data.entity.PartyLiveEntity;
 import com.mytv.rtzhdj.mvp.contract.NewsVideoDetailContract;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
@@ -38,7 +36,7 @@ public class NewsVideoDetailModel extends BaseModel implements NewsVideoDetailCo
     }
 
     @Override
-    public Observable<BaseJson<PartyLiveEntity>> getContent(boolean update) {
+    public Observable<BaseJson<PartyLiveEntity>> getPartyLiveInfo(boolean update) {
         return mRepositoryManager.obtainRetrofitService(NewsVideoDetailService.class)
                 .GetPartyLiveInfo();
     }
