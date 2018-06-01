@@ -133,6 +133,8 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
         mTvCommentNum.setText((comments < 0 ? 0 : comments) + "");
         // 获取新闻详情
         if (digs == -100) {
+            digs = 0;
+            comments = 0;
             mPresenter.callMethodOfGetContent(articleId, nodeId, false);
         }
 
