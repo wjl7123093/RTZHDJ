@@ -186,7 +186,7 @@ public class StudyCoursewarePresenter extends BasePresenter<StudyCoursewareContr
                 holder.getView(R.id.ll_container).setOnClickListener(view -> {
                     ARouter.getInstance().build(ARoutePath.PATH_COURSE_DETAIL)
                             .withString("title", data.get(position).getCourseTypeName())
-                            .withInt("nodeId", 0)
+                            .withInt("nodeId", data.get(position).getNodeId())
                             .withInt("articleId", data.get(position).getContentId())
                             .withInt("courseType", data.get(position).getCourseType()).navigation();
                 });

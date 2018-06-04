@@ -19,6 +19,7 @@ public class StudyCoursewareEntity {
 
     private int CourseType;             // 是否学习     1 已学习  2 未学习
     private String CourseTypeString;       // 是否学习描述
+    private int NodeId;
 
     public int getContentId() {
         return ContentId;
@@ -66,5 +67,13 @@ public class StudyCoursewareEntity {
 
     public void setCourseTypeString(String courseTypeString) {
         CourseTypeString = courseTypeString;
+    }
+
+    public int getNodeId() {
+        return NodeId;
+    }
+
+    public void setNodeId(int nodeId) {
+        NodeId = nodeId;
     }
 }
