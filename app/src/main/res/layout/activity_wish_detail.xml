@@ -14,7 +14,7 @@
         android:layout_margin="@dimen/space_20dp"
         android:text="XX的心愿"
         android:textColor="@color/primary_text"
-        android:textSize="@dimen/font_20" />
+        android:textSize="@dimen/len_20" />
 
     <TextView
         android:id="@+id/tv_datetime"
@@ -23,7 +23,7 @@
         android:layout_marginLeft="@dimen/space_20dp"
         android:text="许愿时间  2018-04-27"
         android:textColor="@color/secondary_text"
-        android:textSize="@dimen/font_16" />
+        android:textSize="@dimen/len_16" />
 
     <TextView
         android:id="@+id/tv_mobile_phone"
@@ -34,7 +34,7 @@
         android:drawableRight="@mipmap/ic_call"
         android:text="联系电话  15322228888"
         android:textColor="@color/secondary_text"
-        android:textSize="@dimen/font_16" />
+        android:textSize="@dimen/len_16" />
 
     <lib.kingja.switchbutton.SwitchMultiButton
         android:id="@+id/switchmultibutton"
@@ -50,7 +50,7 @@
         app:strokeRadius="0dp"
         app:strokeWidth="0dp"
         app:switchTabs="@array/switch_tabs_wish_detail"
-        app:textsize="@dimen/font_16" />
+        app:textsize="@dimen/len_16" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_20dp"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/font_16" />
+            android:textSize="@dimen/len_16" />
 
         <ImageView
             android:id="@+id/iv_image"
@@ -92,7 +92,7 @@
             android:background="@color/white"
             android:text="编辑"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/font_16" />
+            android:textSize="@dimen/len_16" />
 
         <net.qiujuer.genius.ui.widget.Button
             android:id="@+id/btn_delete"
@@ -102,7 +102,7 @@
             android:background="@color/colorPrimary"
             android:text="删除"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_16" />
+            android:textSize="@dimen/len_16" />
     </LinearLayout>
 
 </LinearLayout>

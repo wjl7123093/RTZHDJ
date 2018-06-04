@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:text="我要许"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_14"/>
+                android:textSize="@dimen/len_14"/>
 
         </LinearLayout>
 

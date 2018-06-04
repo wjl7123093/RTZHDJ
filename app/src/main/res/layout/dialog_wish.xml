@@ -24,7 +24,7 @@
             android:id="@+id/edt_wish_content"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:padding="@dimen/len_16"
             android:hint="请输入正文"
@@ -60,7 +60,7 @@
         android:background="@color/accent"
         android:text="我许好了"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:layout_marginTop="@dimen/len_16"/>
 
 </LinearLayout>

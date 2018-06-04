@@ -27,7 +27,7 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/secondary_text"
         android:text="我的心愿"
         android:layout_marginLeft="@dimen/len_4"/>

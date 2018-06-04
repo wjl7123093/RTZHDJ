@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="1"
-                android:textSize="@dimen/font_14"
+                android:textSize="@dimen/len_14"
                 android:textColor="@color/primary_dark"
                 android:gravity="center"/>
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="诸葛xx"
-                android:textSize="@dimen/font_14"
+                android:textSize="@dimen/len_14"
                 android:textColor="@color/primary_text"
                 android:gravity="center"/>
             <TextView
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="100"
-                android:textSize="@dimen/font_14"
+                android:textSize="@dimen/len_14"
                 android:textColor="@color/green_500"
                 android:gravity="center"/>
         </LinearLayout>
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="中共xx市xxxxxxxxxxxxxx党支部"
-            android:textSize="@dimen/font_12"
+            android:textSize="@dimen/len_12"
             android:textColor="@color/secondary_text"
             android:layout_marginTop="@dimen/len_10"/>
 
@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="时间: 2017-11-23 09:32"
-            android:textSize="@dimen/font_12"
+            android:textSize="@dimen/len_12"
             android:textColor="@color/secondary_text"
             android:layout_marginTop="@dimen/len_6"/>
 

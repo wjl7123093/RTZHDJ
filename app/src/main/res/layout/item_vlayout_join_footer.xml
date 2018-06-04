@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="更多新闻"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/secondary_text"
         android:background="@drawable/sp_bg_vlayout_footer"/>
 

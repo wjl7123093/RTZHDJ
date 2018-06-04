@@ -49,7 +49,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/len_8"/>
@@ -71,7 +71,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/white"
                 android:text="学习记录"
                 android:layout_alignParentRight="true"/>
@@ -79,7 +79,7 @@
                 android:id="@+id/tv_study_record"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_24"
+                android:textSize="@dimen/len_24"
                 android:textColor="@color/colorAccent"
                 android:text="17／0"
                 android:gravity="center"
@@ -102,7 +102,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/white"
                 android:text="学习积分"
                 android:layout_alignParentRight="true"/>
@@ -110,7 +110,7 @@
                 android:id="@+id/tv_study_scores"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_24"
+                android:textSize="@dimen/len_24"
                 android:textColor="@color/colorAccent"
                 android:text="123"
                 android:gravity="center"

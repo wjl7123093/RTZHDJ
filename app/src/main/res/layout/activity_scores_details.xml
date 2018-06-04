@@ -9,7 +9,6 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -28,14 +27,14 @@
             android:layout_height="wrap_content"
             android:text="可用积分: "
             android:textColor="@color/white"
-            android:textSize="@dimen/font_16"/>
+            android:textSize="@dimen/len_16"/>
         <TextView
             android:id="@id/tv_scores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="25"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/font_22"
+            android:textSize="22dp"
             android:drawableRight="@mipmap/ic_study_money"
             android:drawablePadding="@dimen/len_4"/>
         <TextView
@@ -44,7 +43,7 @@
             android:layout_weight="1"
             android:text="已累计获得积分: "
             android:textColor="@color/white"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:gravity="right"/>
         <TextView
             android:id="@id/tv_scores_total"
@@ -52,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="25"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/font_18"/>
+            android:textSize="@dimen/space_18dp"/>
     </LinearLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout

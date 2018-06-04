@@ -52,45 +52,83 @@
         <!-- <activity android:name=".mvp.ui.activity.StartActivity" /> -->
         <activity
             android:name=".mvp.ui.activity.MainActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".mvp.ui.activity.LoginActivity" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale"/>
+        <activity android:name=".mvp.ui.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.RegisterActivity"
-            android:label="@string/title_register" />
+            android:label="@string/title_register"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.SettingsActivity"
-            android:label="@string/title_settings" />
+            android:label="@string/title_settings"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.NewsActivity"
-            android:label="@string/title_news" />
+            android:label="@string/title_news"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.NewsEducationActivity"
-            android:label="@string/title_news_education" />
+            android:label="@string/title_news_education"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.NewsPovertyActivity"
-            android:label="@string/title_news_poverty" />
+            android:label="@string/title_news_poverty"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.NewsDetailActivity"
-            android:label="@string/title_news_detail" />
-        <activity android:name=".mvp.ui.activity.NewsLiveActivity" />
+            android:label="@string/title_news_detail"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.NewsLiveActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.TopicActivity"
-            android:label="@string/title_topic" />
-        <activity android:name=".mvp.ui.activity.TopicDetailActivity" />
-        <activity android:name=".mvp.ui.activity.SearchActivity" />
+            android:label="@string/title_topic"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.TopicDetailActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.SearchActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.StudyRecordActivity"
-            android:label="@string/title_study_record" />
+            android:label="@string/title_study_record"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.StudyCoursewareActivity"
-            android:label="@string/title_study_courseware" />
-        <activity android:name=".mvp.ui.activity.NewsSimpleActivity" />
-        <activity android:name=".mvp.ui.activity.EffectEvaluationActivity" />
+            android:label="@string/title_study_courseware"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.NewsSimpleActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.EffectEvaluationActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.CompulsoryCourseActivity"
-            android:label="@string/title_compulsory_course" />
-        <activity android:name=".mvp.ui.activity.ElectiveCourseActivity" />
-        <activity android:name=".mvp.ui.activity.CourseDetailActivity" />
+            android:label="@string/title_compulsory_course"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.ElectiveCourseActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.CourseDetailActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.MyTaskActivity"
             android:label="@string/title_my_task" />
@@ -122,61 +160,97 @@
         <activity
             android:name=".mvp.ui.activity.VoteOnlineActivity"
             android:label="@string/title_online_vote" />
-        <activity android:name=".mvp.ui.activity.EventDetailsActivity" />
+        <activity android:name=".mvp.ui.activity.EventDetailsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.SignInActivity"
-            android:label="@string/title_signin" />
+            android:label="@string/title_signin"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.NewsCleanActivity"
-            android:label="@string/title_news_clean" />
+            android:label="@string/title_news_clean"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.NewsCommonActivity"
-            android:label="@string/title_news_common" />
+            android:label="@string/title_news_common"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.PartyKnowledgeActivity"
-            android:label="@string/title_party_knowledge" />
+            android:label="@string/title_party_knowledge"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.PartyHistoryActivity"
-            android:label="@string/title_party_history" />
+            android:label="@string/title_party_history"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.MyReceiveActivity"
-            android:label="@string/title_my_receive" />
+            android:label="@string/title_my_receive"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.MyReceiveWishActivity"
-            android:label="@string/title_my_receive_wish" />
+            android:label="@string/title_my_receive_wish"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.PartyMemberActivity"
-            android:label="@string/title_party_member" />
+            android:label="@string/title_party_member"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.MembershipCredentialsActivity"
-            android:label="@string/title_membership_credentials" />
+            android:label="@string/title_membership_credentials"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.ConnectionTransferActivity"
-            android:label="@string/title_connection_transfer" />
+            android:label="@string/title_connection_transfer"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.CommentActivity"
-            android:label="@string/title_comment" />
+            android:label="@string/title_comment"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.UpdatePwdActivity"
-            android:label="@string/title_update_pwd" />
+            android:label="@string/title_update_pwd"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.UpdateInfoActivity"
-            android:label="@string/title_update_info" />
+            android:label="@string/title_update_info"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.WebviewActivity"
-            android:label="@string/title_webview" />
+            android:label="@string/title_webview"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.FeedbackActivity"
-            android:label="@string/title_feedback" />
+            android:label="@string/title_feedback"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.BindingMobileActivity"
-            android:label="@string/title_binding_mobile" />
+            android:label="@string/title_binding_mobile"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.GradeRankActivity"
-            android:label="@string/title_grade_rank" />
+            android:label="@string/title_grade_rank"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.NewsVideoDetailActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:configChanges="orientation|keyboardHidden|screenSize|fontScale"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mvp.ui.activity.CourseVideoDetailActivity"
@@ -184,58 +258,100 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".mvp.ui.activity.FindPwdActivity"
-            android:label="@string/title_find_pwd" />
+            android:label="@string/title_find_pwd"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.GetVertifyCodeActivity"
-            android:label="@string/title_get_vertify_code" />
+            android:label="@string/title_get_vertify_code"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.SetPwdActivity"
-            android:label="@string/title_set_pwd" />
-        <activity android:name=".mvp.ui.activity.GuideActivity" />
+            android:label="@string/title_set_pwd"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.GuideActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.SendMsgActivity"
-            android:label="@string/title_send_msg" />
+            android:label="@string/title_send_msg"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.MyMsgActivity"
-            android:label="@string/title_my_msg" />
+            android:label="@string/title_my_msg"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.PartyMemberDetailActivity"
-            android:label="@string/title_party_member_detail" />
-        <activity android:name=".mvp.ui.activity.VoteDetailActivity" />
+            android:label="@string/title_party_member_detail"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.VoteDetailActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.VoteBriefActivity"
-            android:label="@string/title_vote_brief" />
+            android:label="@string/title_vote_brief"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.VoteResultActivity"
-            android:label="@string/title_vote_result" />
+            android:label="@string/title_vote_result"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.VoteEntryDetailActivity"
-            android:label="@string/title_vote_entry_detail" />
+            android:label="@string/title_vote_entry_detail"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.VolunteerServiceDetailActivity"
-            android:label="@string/title_volunteer_service_detail" />
+            android:label="@string/title_volunteer_service_detail"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.WishDetailActivity"
-            android:label="@string/title_wish_detail" />
+            android:label="@string/title_wish_detail"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.MyJoinActivity"
-            android:label="@string/title_my_join" />
-        <activity android:name=".mvp.ui.activity.NewsAllActivity" />
+            android:label="@string/title_my_join"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.NewsAllActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.ScoresDetailsActivity"
-            android:label="@string/title_scores_details" />
+            android:label="@string/title_scores_details"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.QuestionnaireActivity"
-            android:label="@string/title_questionaire" />
+            android:label="@string/title_questionaire"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.OrganizationActivity"
-            android:label="@string/title_organization" />
+            android:label="@string/title_organization"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity
             android:name=".mvp.ui.activity.QuestionaireSurveyActivity"
-            android:label="@string/title_questionaire" />
-        <activity android:name=".mvp.ui.activity.NewsEducationSubActivity" />
+            android:label="@string/title_questionaire"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
+        <activity android:name=".mvp.ui.activity.NewsEducationSubActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale" />
         <activity android:name=".mvp.ui.activity.TeacherListActivity"
-            android:label="@string/title_teacher_list"></activity>
+            android:label="@string/title_teacher_list"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden|fontScale"></activity>
     </application>
 
 </manifest>

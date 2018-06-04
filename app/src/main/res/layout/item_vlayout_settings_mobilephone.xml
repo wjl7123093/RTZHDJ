@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="绑定的手机号  189****8888"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/primary_text"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"/>
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="更换绑定的手机"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/light_blue_500"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"/>
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="手机号是否公开"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/primary_text"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/view_divider"

@@ -9,10 +9,8 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/include_toolbar"></include>
@@ -21,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="请设置新的登录密码"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/primary_text"
         android:layout_margin="@dimen/len_16"/>
 
@@ -31,7 +29,7 @@
         android:layout_height="wrap_content"
         android:hint="6-12位，不能与旧密码相同"
         android:inputType="textPassword"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/primary_text"
         android:layout_marginLeft="@dimen/len_16"
         android:layout_marginRight="@dimen/len_16"/>
@@ -42,7 +40,7 @@
         android:layout_height="wrap_content"
         android:hint="再次输入，6-12位，不能与旧密码相同"
         android:inputType="textPassword"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/primary_text"
         android:layout_marginLeft="@dimen/len_16"
         android:layout_marginRight="@dimen/len_16"
@@ -52,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="请将密码设置为 6-12 位，并且由数字和符号两种以上组合，不能与旧密码相同"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/secondary_text"
         android:layout_margin="@dimen/len_16"/>
 
@@ -61,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="完成"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/white"
         android:background="@color/grey_500"
         android:layout_margin="@dimen/len_16"/>

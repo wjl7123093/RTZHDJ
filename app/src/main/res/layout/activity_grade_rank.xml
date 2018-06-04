@@ -9,7 +9,6 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -51,7 +50,7 @@
             android:id="@+id/tv_scores_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/white"
             android:text="分"
             android:layout_alignBaseline="@id/tv_scores"
@@ -61,7 +60,7 @@
             android:id="@+id/tv_scores_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/white"
             android:text="总分: 100"
             android:layout_alignBaseline="@id/tv_scores"
@@ -91,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/primary_text"
                 android:text="我的排名"/>
 
@@ -100,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/secondary_text"
                 android:text="0/20860"
                 android:layout_marginTop="@dimen/len_6"/>
@@ -126,7 +125,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/primary_text"
                 android:text="每次成绩"/>
 
@@ -135,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/secondary_text"
                 android:text="0/0/0"
                 android:layout_marginTop="@dimen/len_6"/>
@@ -162,7 +161,7 @@
                 android:id="@+id/tv_title3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/primary_text"
                 android:text="剩余次数 3/3"/>
 
@@ -171,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/secondary_text"
                 android:text="测评结束"
                 android:layout_marginTop="@dimen/len_6"/>
@@ -195,7 +194,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/primary_text"
             android:text=""
             android:gravity="center"/>
@@ -203,7 +202,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/primary_text"
             android:text="名次"
             android:gravity="center"/>
@@ -211,7 +210,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/primary_text"
             android:text="姓名"
             android:gravity="center"/>
@@ -219,7 +218,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/primary_text"
             android:text="成绩"
             android:gravity="center"/>

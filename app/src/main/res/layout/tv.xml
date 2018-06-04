@@ -5,7 +5,7 @@
     android:layout_margin="5dp"
     android:background="@drawable/sl_bg_flow"
     android:text="群众"
-    android:textSize="@dimen/font_16"
+    android:textSize="@dimen/len_16"
     android:textColor="@drawable/sl_bg_flow">
 
 </TextView>

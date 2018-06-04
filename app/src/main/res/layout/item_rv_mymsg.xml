@@ -18,7 +18,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/primary_text"
         android:text="农民夜校教学内容需求调查"/>
 
@@ -26,7 +26,7 @@
         android:id="@+id/tv_datetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/secondary_text"
         android:text="活动时间: 2017-8-21至2017-10-31"
         android:layout_alignParentLeft="true"

@@ -9,7 +9,6 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -28,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:text="收件人: "
             android:gravity="center_vertical"/>
@@ -37,7 +36,7 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:gravity="left|top"/>
 
@@ -59,7 +58,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:text="主题: "
             android:gravity="center_vertical"/>
@@ -68,7 +67,7 @@
             android:id="@+id/edt_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:hint="请输入主题"
             android:gravity="left|top"
@@ -87,7 +86,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:singleLine="false"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/secondary_text"
         android:hint="请输入你的私信征文"
         android:gravity="left|top"
@@ -99,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="立即发送"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/white"
         android:background="@color/grey_500"
         android:layout_margin="@dimen/len_16"/>

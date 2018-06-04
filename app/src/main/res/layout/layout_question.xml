@@ -18,7 +18,7 @@
         android:id="@+id/txt_question_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="#3e3a39"
         android:textStyle="bold"
         android:layout_marginLeft="20dp" />

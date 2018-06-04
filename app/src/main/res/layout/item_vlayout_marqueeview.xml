@@ -30,7 +30,7 @@
         android:layout_height="@dimen/len_40"
         android:gravity="center"
         android:background="@color/red_800"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/white"
         android:text="通知"
         android:drawableLeft="@mipmap/ic_home_notice"
@@ -50,7 +50,7 @@
         app:mvInterval="3000"
         app:mvSingleLine="true"
         app:mvTextColor="@color/secondary_text"
-        app:mvTextSize="@dimen/font_14"
+        app:mvTextSize="@dimen/len_14"
         android:paddingLeft="@dimen/len_6"/>
 
     <com.sunfusheng.marqueeview.MarqueeView
@@ -62,7 +62,7 @@
         app:mvInterval="3000"
         app:mvSingleLine="true"
         app:mvTextColor="@color/secondary_text"
-        app:mvTextSize="@dimen/font_14"
+        app:mvTextSize="@dimen/len_14"
         android:paddingLeft="@dimen/len_6"
         android:paddingRight="@dimen/len_6"/>
 

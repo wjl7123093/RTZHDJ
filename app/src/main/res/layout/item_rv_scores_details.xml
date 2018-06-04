@@ -19,14 +19,14 @@
         android:id="@+id/tv_scores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/primary_text"/>
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/secondary_text"
         android:layout_marginTop="@dimen/dp_10"/>
 

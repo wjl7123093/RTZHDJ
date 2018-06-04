@@ -8,7 +8,6 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -63,7 +62,7 @@
                         android:gravity="center"
                         android:text="本月获得积分: 2"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/font_16" />
+                        android:textSize="@dimen/len_16" />
                     <!-- 正能量值 -->
                     <TextView
                         android:id="@+id/tv_power_num"
@@ -76,7 +75,7 @@
                         android:gravity="center"
                         android:text="您的正能量值: 10"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/font_14" />
+                        android:textSize="@dimen/len_14" />
                     <!-- 距离下一积分任务差 -->
                     <TextView
                         android:id="@+id/tv_differ_from"
@@ -88,7 +87,7 @@
                         android:gravity="center"
                         android:text="距下一积分分任务还差: 8 请继续加油!"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/font_14" />
+                        android:textSize="@dimen/len_14" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -118,7 +117,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/font_12" />
+                                android:textSize="@dimen/len_12" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -127,7 +126,7 @@
                                 android:gravity="center"
                                 android:text="开始"
                                 android:textColor="@color/colorAccent"
-                                android:textSize="@dimen/font_12" />
+                                android:textSize="@dimen/len_12" />
 
                         </LinearLayout>
 
@@ -145,7 +144,7 @@
                                 android:gravity="center"
                                 android:text="10"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/font_12" />
+                                android:textSize="@dimen/len_12" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -154,7 +153,7 @@
                                 android:gravity="center"
                                 android:text="任务一"
                                 android:textColor="@color/colorAccent"
-                                android:textSize="@dimen/font_12" />
+                                android:textSize="@dimen/len_12" />
 
                         </LinearLayout>
 
@@ -172,7 +171,7 @@
                                 android:gravity="center"
                                 android:text="30"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/font_12" />
+                                android:textSize="@dimen/len_12" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -181,7 +180,7 @@
                                 android:gravity="center"
                                 android:text="任务二"
                                 android:textColor="@color/colorAccent"
-                                android:textSize="@dimen/font_12" />
+                                android:textSize="@dimen/len_12" />
 
                         </LinearLayout>
 
@@ -199,7 +198,7 @@
                                 android:gravity="center"
                                 android:text="50"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/font_12" />
+                                android:textSize="@dimen/len_12" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -208,7 +207,7 @@
                                 android:gravity="center"
                                 android:text="任务三"
                                 android:textColor="@color/colorAccent"
-                                android:textSize="@dimen/font_12" />
+                                android:textSize="@dimen/len_12" />
 
                         </LinearLayout>
 
@@ -225,7 +224,7 @@
                     android:lineSpacingMultiplier="1.5"
                     android:text="任务1: 获得 10 正能量值\n任务2: 获得 30 正能量值\n任务3: 获得 50 正能量值"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/font_14" />
+                    android:textSize="@dimen/len_14" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -283,7 +282,7 @@
                     android:paddingTop="@dimen/len_6"
                     android:text="@string/my_task_rules_desc"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/font_14" />
+                    android:textSize="@dimen/len_14" />
 
             </LinearLayout>
         </ScrollView>

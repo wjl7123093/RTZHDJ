@@ -18,7 +18,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/primary_text"
         android:text="报到社区: "/>
 
@@ -26,7 +26,7 @@
         android:id="@+id/tv_mobile_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/secondary_text"
         android:text="联系电话："
         android:layout_alignParentLeft="true"

@@ -13,11 +13,10 @@
     android:layout_height="100dp">
 
     <com.youth.banner.Banner
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/grey_800"/>
+        android:background="@color/grey_800" />
 
     <LinearLayout
         android:layout_width="@dimen/len_60"
@@ -30,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/white"
             android:text="参与人数"
             android:layout_marginTop="@dimen/len_10"/>
@@ -43,7 +42,7 @@
             android:id="@+id/tv_join_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/len_2"/>
     </LinearLayout>
@@ -60,13 +59,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/white"/>
         <TextView
             android:id="@+id/tv_star_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/white"
             android:layout_marginRight="@dimen/len_10"/>
     </LinearLayout>

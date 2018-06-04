@@ -9,7 +9,6 @@
  * @update 2018-3-2     修改UI（填充布局）
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -28,13 +27,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="捐赠主题: "
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"/>
         <EditText
             android:id="@+id/edt_donate_theme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:hint="请输入捐赠主题"
             android:background="@color/white"/>
@@ -57,13 +56,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="联系电话: "
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"/>
         <EditText
             android:id="@+id/edt_phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:hint="请输入联系电话"
             android:background="@color/white"/>
@@ -78,7 +77,7 @@
         android:id="@+id/edt_donate_content"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/secondary_text"
         android:padding="@dimen/len_16"
         android:hint="请输入正文"
@@ -112,7 +111,7 @@
         android:layout_height="@dimen/len_48"
         android:text="立即捐赠"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:background="@color/colorPrimary"/>
 
 </LinearLayout>

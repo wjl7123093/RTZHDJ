@@ -18,7 +18,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="40dp"
 	        android:text="拍照"
-	        android:textSize="@dimen/font_16"
+	        android:textSize="@dimen/len_16"
 	        android:textColor="@color/secondary_text"
 	        android:gravity="center"/>
 	    <View 
@@ -30,7 +30,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="40dp"
 	        android:text="从相册中选择"
-	        android:textSize="@dimen/font_16"
+	        android:textSize="@dimen/len_16"
 	        android:textColor="@color/secondary_text"
 	        android:gravity="center"/>
 	    <!--<View
@@ -43,7 +43,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="40dp"
 	        android:text="从视频库中选择"
-	        android:textSize="@dimen/font_16"
+	        android:textSize="@dimen/len_16"
 	        android:textColor="@color/secondary_text"
 	        android:gravity="center"/>-->
     </LinearLayout>
@@ -55,7 +55,7 @@
         android:background="@drawable/sp_bg_publish_dialog"
         android:text="取消"
         android:textColor="@color/secondary_text"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:gravity="center"
         android:layout_margin="10dp"/>
     

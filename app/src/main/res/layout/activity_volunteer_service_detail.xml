@@ -23,7 +23,7 @@
         android:layout_height="@dimen/len_40"
         android:background="@color/white"
         android:text="XXXXX志愿服务名称"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/primary_text"
         android:textStyle="bold"
         android:paddingLeft="@dimen/len_16"
@@ -42,7 +42,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="报名日期"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:gravity="center_vertical|right"/>
         <TextView
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="2018-02-03 截止"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="center_vertical|left"
             android:layout_marginLeft="@dimen/len_16"/>
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="参与可获"
-                android:textSize="@dimen/font_10"
+                android:textSize="@dimen/len_10"
                 android:textColor="@color/white"/>
             <View
                 android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                 android:id="@+id/tv_scores"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_12"
+                android:textSize="@dimen/len_12"
                 android:textColor="@color/white"
                 android:text="4"
                 android:drawableRight="@mipmap/ic_study_money"
@@ -100,7 +100,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="活动日期"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:gravity="center_vertical|right"/>
         <TextView
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="2018-02-04 至 2018-03-01"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="center_vertical|left"
             android:layout_marginLeft="@dimen/len_16"/>
@@ -127,7 +127,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="活动地点"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:gravity="center_vertical|right"/>
         <TextView
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="XX市五一大厦一楼XX体育文化中心第二活动室"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="center_vertical|left"
             android:layout_marginLeft="@dimen/len_16"
@@ -155,7 +155,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="报名人数"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:gravity="center_vertical|right"/>
         <TextView
@@ -164,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="12/30"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="center_vertical|left"
             android:layout_marginLeft="@dimen/len_16"/>
@@ -182,7 +182,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="评分"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:gravity="center_vertical|right"/>
         <RatingBar
@@ -202,7 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="5.0分"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="center_vertical|left"
             android:layout_marginLeft="@dimen/len_8"/>
@@ -241,7 +241,7 @@
             android:layout_weight="1"
             android:text="点赞"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:background="@color/white"/>
         <net.qiujuer.genius.ui.widget.Button
             android:id="@+id/btn_is_over"
@@ -250,7 +250,7 @@
             android:layout_weight="1"
             android:text="已结束"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:background="@color/colorPrimary"/>
     </LinearLayout>
 

@@ -38,7 +38,7 @@
                 android:gravity="center"
                 android:text="如何获取积分？"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_14"
+                android:textSize="@dimen/len_14"
                 android:layout_marginTop="@dimen/len_6"/>
 
             <TextView
@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:text="124"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_24"
+                android:textSize="@dimen/len_24"
                 android:textStyle="bold"/>
 
             <LinearLayout
@@ -68,7 +68,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_14"
+                    android:textSize="@dimen/len_14"
                     android:textColor="@color/colorAccent"
                     android:text="我的积分"
                     />
@@ -94,7 +94,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_14"
+                android:textSize="@dimen/len_14"
                 android:textColor="@color/secondary_text"
                 android:layout_marginTop="@dimen/len_4"
                 android:text="积分明细"/>
@@ -118,7 +118,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_14"
+                android:textSize="@dimen/len_14"
                 android:textColor="@color/secondary_text"
                 android:layout_marginTop="@dimen/len_4"
                 android:text="积分兑换"/>

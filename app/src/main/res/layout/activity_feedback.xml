@@ -9,7 +9,6 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:singleLine="false"
-        android:textSize="@dimen/font_14"
+        android:textSize="@dimen/len_14"
         android:textColor="@color/secondary_text"
         android:hint="请留下您的宝贵意见"
         android:gravity="left|top"
@@ -39,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="是否匿名"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/primary_text"
             android:layout_marginTop="@dimen/len_10"/>
 
@@ -62,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="立即反馈"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/white"
         android:background="@color/grey_500"
         android:layout_margin="@dimen/len_16"/>

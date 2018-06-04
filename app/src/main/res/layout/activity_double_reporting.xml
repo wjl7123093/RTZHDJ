@@ -9,7 +9,6 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -37,13 +36,13 @@
             android:gravity="center"
             android:text="请输入要报到的社区"
             android:textColor="@color/primary_text"
-            android:textSize="@dimen/font_16" />
+            android:textSize="@dimen/len_16" />
 
         <EditText
             android:id="@+id/edt_community"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:hint="请输入社区名称"
             android:layout_margin="@dimen/len_16"/>
@@ -55,7 +54,7 @@
             android:gravity="center_vertical|right"
             android:text="选择社区"
             android:textColor="@color/orange_500"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:layout_marginRight="@dimen/len_16"/>
 
         <net.qiujuer.genius.ui.widget.Button
@@ -64,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="确定"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:background="@color/colorPrimary"
             android:layout_marginTop="@dimen/len_44"
             android:layout_marginLeft="@dimen/len_16"

@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ic_home"
-                android:textSize="@dimen/font_24"
+                android:textSize="@dimen/len_24"
                 android:textColor="@color/colorPrimary"/>
 
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_height="14dp"
                 android:text="@string/tab_home"
                 android:textColor="@color/secondary_text"
-                android:textSize="@dimen/font_12"
+                android:textSize="@dimen/len_12"
                 android:gravity="center" >
             </TextView>
         </LinearLayout>
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ic_news"
-                android:textSize="@dimen/font_24"
+                android:textSize="@dimen/len_24"
                 android:textColor="@color/colorPrimary"/>
 
             <TextView
@@ -85,7 +85,7 @@
                 android:layout_height="14dp"
                 android:text="@string/tab_news"
                 android:textColor="@color/secondary_text"
-                android:textSize="@dimen/font_12"
+                android:textSize="@dimen/len_12"
                 android:gravity="center" >
             </TextView>
         </LinearLayout>
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ic_study"
-                android:textSize="@dimen/font_24"
+                android:textSize="@dimen/len_24"
                 android:textColor="@color/colorPrimary"/>
 
             <TextView
@@ -113,7 +113,7 @@
                 android:layout_height="14dp"
                 android:text="@string/tab_study"
                 android:textColor="@color/secondary_text"
-                android:textSize="@dimen/font_12"
+                android:textSize="@dimen/len_12"
                 android:gravity="center" >
             </TextView>
         </LinearLayout>
@@ -132,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ic_join"
-                android:textSize="@dimen/font_24"
+                android:textSize="@dimen/len_24"
                 android:textColor="@color/colorPrimary"/>
 
             <TextView
@@ -141,7 +141,7 @@
                 android:layout_height="14dp"
                 android:text="@string/tab_join"
                 android:textColor="@color/secondary_text"
-                android:textSize="@dimen/font_12"
+                android:textSize="@dimen/len_12"
                 android:gravity="center" >
             </TextView>
         </LinearLayout>
@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ic_mine"
-                android:textSize="@dimen/font_24"
+                android:textSize="@dimen/len_24"
                 android:textColor="@color/colorPrimary"/>
 
             <TextView
@@ -169,7 +169,7 @@
                 android:layout_height="14dp"
                 android:text="@string/tab_mine"
                 android:textColor="@color/secondary_text"
-                android:textSize="@dimen/font_12"
+                android:textSize="@dimen/len_12"
                 android:gravity="center" >
             </TextView>
         </LinearLayout>

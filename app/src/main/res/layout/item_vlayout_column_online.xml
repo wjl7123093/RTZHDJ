@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/yellow_800"
             android:text="在线问卷"
             android:drawableLeft="@mipmap/ic_join_question_online"
@@ -38,7 +38,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_10"
+            android:textSize="@dimen/len_10"
             android:textColor="@color/secondary_text"
             android:text="在线化，智能化的调查方法"
             android:layout_alignParentLeft="true"
@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/pink_600"
             android:text="在线投票"
             android:drawableLeft="@mipmap/ic_join_vote_online"
@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_10"
+            android:textSize="@dimen/len_10"
             android:textColor="@color/secondary_text"
             android:text="珍惜民主权利，投好庄严一票"
             android:layout_alignParentLeft="true"

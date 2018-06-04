@@ -25,14 +25,14 @@
         android:background="@drawable/sp_bg_comment_bar_text"
         android:text="说说你的看法"
         android:textColor="@color/secondary_text"
-        android:textSize="@dimen/font_16"/>
+        android:textSize="@dimen/len_16"/>
 
     <TextView
         android:id="@+id/tv_comment_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="33"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/secondary_text"
         android:drawableLeft="@mipmap/ic_comment"
         android:drawablePadding="@dimen/len_4"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="33"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/secondary_text"
         android:drawableLeft="@mipmap/ic_digs"
         android:drawablePadding="@dimen/len_4"

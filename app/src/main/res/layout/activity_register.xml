@@ -26,7 +26,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="手机号"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="left|center_vertical"/>
 
@@ -37,7 +37,7 @@
             android:hint="手机号"
             android:background="@color/white"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:gravity="left|center_vertical"/>
     </LinearLayout>
 
@@ -57,7 +57,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="所属社区"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="left|center_vertical"/>
 
@@ -68,7 +68,7 @@
             android:hint="请选择社区"
             android:background="@color/white"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:gravity="left|center_vertical"/>
     </LinearLayout>
 
@@ -88,7 +88,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="密码"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="left|center_vertical"/>
 
@@ -99,7 +99,7 @@
             android:hint="6-20位数字与字母组合"
             android:background="@color/white"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:gravity="left|center_vertical"
             android:inputType="textPassword"/>
     </LinearLayout>
@@ -120,7 +120,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="确认密码"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="left|center_vertical"/>
 
@@ -131,7 +131,7 @@
             android:hint="6-20位数字与字母组合"
             android:background="@color/white"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:gravity="left|center_vertical"
             android:inputType="textPassword"/>
     </LinearLayout>
@@ -152,7 +152,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="验证码"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/primary_text"
             android:gravity="left|center_vertical"/>
 
@@ -164,7 +164,7 @@
             android:hint="收到的验证码"
             android:background="@color/white"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:gravity="left|center_vertical"
             android:inputType="number"/>
 
@@ -174,7 +174,7 @@
             android:layout_height="30dp"
             android:text="获取验证码"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:background="@color/colorPrimary"
             android:gravity="center"/>
     </LinearLayout>
@@ -198,7 +198,7 @@
             android:button="@drawable/sl_bg_register_rdobtn"
             android:text="我已阅读并同意"
             android:textColor="@color/primary_text"
-            android:textSize="@dimen/font_16" />
+            android:textSize="@dimen/len_16" />
 
         <TextView
             android:id="@+id/tv_link"
@@ -206,7 +206,7 @@
             android:layout_height="wrap_content"
             android:text="《智慧党建用户注册协议》"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/font_16" />
+            android:textSize="@dimen/len_16" />
     </LinearLayout>
 
     <Button
@@ -214,7 +214,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="注册"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/white"
         android:background="@color/grey_500"
         android:layout_margin="@dimen/len_16"/>

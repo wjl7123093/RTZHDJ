@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:ellipsize="end"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/primary_text"
             android:layout_alignTop="@id/iv_image"
             android:layout_toRightOf="@id/iv_image"
@@ -48,7 +48,7 @@
             android:id="@+id/tv_star_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/primary_text"
             android:layout_alignBottom="@id/iv_image"
             android:layout_toRightOf="@id/iv_image"
@@ -61,7 +61,7 @@
             android:id="@+id/tv_comment_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/primary_text"
             android:layout_alignBottom="@id/iv_image"
             android:layout_toRightOf="@id/tv_star_num"
@@ -91,7 +91,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="@dimen/font_16"
+                android:textSize="@dimen/len_16"
                 android:textColor="@color/secondary_text"
                 android:hint="请输入地址"/>
 
@@ -108,7 +108,7 @@
             android:id="@+id/edt_content"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/len_16"
             android:textColor="@color/secondary_text"
             android:hint="请输入参与信息"
             android:textColorHint="@color/grey_400"
@@ -140,7 +140,7 @@
         android:layout_height="40dp"
         android:text="提交"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:background="@color/colorPrimary"
         android:layout_margin="@dimen/dp_10"/>
 

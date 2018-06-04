@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/secondary_text"
             android:text="亲，学习 "/>
         <TextView
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/sp_bg_course_time"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/white"
             android:text="00:00:01"
             android:padding="@dimen/len_4"/>
@@ -43,7 +43,7 @@
             android:id="@+id/tv_scores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/secondary_text"
             android:text=" 可获取2积分哦！"/>
     </LinearLayout>
@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/white"
         android:text="完成学习"/>
 

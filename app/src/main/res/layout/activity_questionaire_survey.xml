@@ -42,7 +42,7 @@
                     android:background="@drawable/sp_bg_wish_btn"
                     android:layout_margin="20dp"
                     android:text="提交"
-                    android:textSize="@dimen/font_16"
+                    android:textSize="@dimen/len_16"
                     android:textColor="@android:color/white"
                     android:layout_gravity="center"
                     android:gravity="center"/>

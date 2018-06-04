@@ -9,7 +9,6 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -27,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/secondary_text"
             android:text="亲，学习 "/>
         <TextView
@@ -35,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/sp_bg_course_time"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/secondary_text"
             android:text="00:54"
             android:padding="@dimen/len_4"/>
@@ -43,7 +42,7 @@
             android:id="@+id/tv_scores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="@color/secondary_text"
             android:text=" 可获取2积分哦！"/>
     </LinearLayout>
@@ -82,14 +81,14 @@
                         android:id="@+id/tv_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/font_18"
+                        android:textSize="@dimen/space_18dp"
                         android:textColor="@color/primary_text"
                         android:text="《微视频》"/>
                     <TextView
                         android:id="@+id/tv_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/font_12"
+                        android:textSize="@dimen/len_12"
                         android:textColor="@color/secondary_text"
                         android:text="编辑: 小绵2号 | 转载: 新华社 | 2018-02-26"
                         android:layout_marginTop="@dimen/len_4"/>
@@ -119,7 +118,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:textSize="@dimen/font_16"
+        android:textSize="@dimen/len_16"
         android:textColor="@color/white"
         android:text="完成学习"/>
 

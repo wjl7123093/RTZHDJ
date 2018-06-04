@@ -28,7 +28,7 @@
             android:id="@+id/txt_answer_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_14"
+            android:textSize="@dimen/len_14"
             android:textColor="#595757"
             android:layout_gravity="center_vertical"
             />

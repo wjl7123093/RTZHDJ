@@ -35,7 +35,7 @@
             android:maxLines="2"
             android:text="年关将至，习近平总书记这20句反“四风”硬话要牢记"
             android:textColor="@color/primary_text"
-            android:textSize="@dimen/font_16" />
+            android:textSize="@dimen/len_16" />
 
         <TextView
             android:id="@+id/tv_datetime"
@@ -44,7 +44,7 @@
             android:layout_marginTop="10dp"
             android:text="上次学习: 2018-01-26 08:49:01"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/font_14" />
+            android:textSize="@dimen/len_14" />
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

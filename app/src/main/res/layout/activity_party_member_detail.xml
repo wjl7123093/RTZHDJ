@@ -9,7 +9,6 @@
  * @update
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_bg_grey"
@@ -63,7 +62,7 @@
                     android:gravity="center"
                     android:text="张三"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
                 <!--  -->
                 <TextView
                     android:layout_width="wrap_content"
@@ -75,7 +74,7 @@
                     android:gravity="center"
                     android:text="无"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
             </RelativeLayout>
 
@@ -95,7 +94,7 @@
                     android:gravity="left|center_vertical"
                     android:text="所属支部"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
                 <TextView
                     android:id="@+id/tv_party_branch"
@@ -105,7 +104,7 @@
                     android:gravity="left|center_vertical"
                     android:text="xxxxxxx第二党支部"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
             </LinearLayout>
 
@@ -125,7 +124,7 @@
                     android:gravity="left|center_vertical"
                     android:text="联系方式"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
                 <TextView
                     android:id="@+id/tv_contacts"
@@ -135,7 +134,7 @@
                     android:gravity="left|center_vertical"
                     android:text="手机: 15833336666\n\n座机: 无\n\n紧急联系方式: 无"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
             </LinearLayout>
 
@@ -154,7 +153,7 @@
                     android:gravity="left|center_vertical"
                     android:text="其他联系方式"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
                 <TextView
                     android:id="@+id/tv_other_contacts"
@@ -164,7 +163,7 @@
                     android:gravity="left|center_vertical"
                     android:text="无"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
             </LinearLayout>
 
@@ -184,7 +183,7 @@
                     android:gravity="left|center_vertical"
                     android:text="通讯地址"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
                 <TextView
                     android:id="@+id/tv_address"
@@ -194,7 +193,7 @@
                     android:gravity="left|center_vertical"
                     android:text="无"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
             </LinearLayout>
 
@@ -214,7 +213,7 @@
                     android:gravity="left|center_vertical"
                     android:text="QQ"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
                 <TextView
                     android:id="@+id/tv_qq"
@@ -224,7 +223,7 @@
                     android:gravity="left|center_vertical"
                     android:text="无"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
             </LinearLayout>
 
@@ -244,7 +243,7 @@
                     android:gravity="left|center_vertical"
                     android:text="邮箱"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
                 <TextView
                     android:id="@+id/tv_email"
@@ -254,7 +253,7 @@
                     android:gravity="left|center_vertical"
                     android:text="无"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/len_16" />
 
             </LinearLayout>
         </LinearLayout>
