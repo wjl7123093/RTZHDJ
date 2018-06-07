@@ -50,14 +50,14 @@
         <item>@mipmap/ic_join_activity</item>
         <item>@mipmap/ic_join_volunteer_service</item>
         <item>@mipmap/ic_join_report_community</item>
-        <item>@mipmap/ic_join_surround_community</item>
+        <!--<item>@mipmap/ic_join_surround_community</item>-->
     </integer-array>
     <!--参与页图片对应的位子-->
     <string-array name="join_gv_title">
         <item>组织活动</item>
         <item>志愿服务</item>
         <item>报到社区</item>
-        <item>周边社区</item>
+        <!--<item>周边社区</item>-->
     </string-array>
 
 

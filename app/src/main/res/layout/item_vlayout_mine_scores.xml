@@ -80,7 +80,7 @@
             android:id="@+id/ll_scores_detail"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="vertical"
             android:gravity="center"
             android:background="@color/trans"
@@ -108,7 +108,8 @@
             android:orientation="vertical"
             android:gravity="center"
             android:background="@color/trans"
-            android:padding="@dimen/len_6">
+            android:padding="@dimen/len_6"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/len_40"

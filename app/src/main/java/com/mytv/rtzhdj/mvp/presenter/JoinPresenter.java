@@ -115,13 +115,13 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
             images.add(proPic.getResourceId(a,R.mipmap.ic_launcher));
         }
         proPic.recycle();
-        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4);
+        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(3);
 //        gridLayoutHelper.setPadding(0, 16, 0, 16);
         gridLayoutHelper.setVGap(2);   // 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(2);    // 控制子元素之间的水平间距
 //        gridLayoutHelper.setBgColor(Color.WHITE);
 //        gridLayoutHelper.setMarginBottom(ArmsUtils.dip2px(activity, 12));
-        return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vlayout_grid, 4, Constant.viewType.typeGv) {
+        return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vlayout_grid, 3, Constant.viewType.typeGv) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
