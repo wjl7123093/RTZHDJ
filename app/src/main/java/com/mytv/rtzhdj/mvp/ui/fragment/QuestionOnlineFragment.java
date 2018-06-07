@@ -26,8 +26,6 @@ import com.mytv.rtzhdj.mvp.presenter.QuestionOnlinePresenter;
 import com.mytv.rtzhdj.mvp.ui.activity.QuestionOnlineActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.QuestionAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
@@ -160,10 +158,14 @@ public class QuestionOnlineFragment extends BaseFragment<QuestionOnlinePresenter
         questionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                showMessage("" + questionList.get(position).getID());
+//                showMessage("" + questionList.get(position).getID());
 
-                ARouter.getInstance().build(ARoutePath.PATH_QUESTIONAIRE_SURVEY)
-                        .withInt("onlineSurveyId", questionList.get(position).getID()).navigation();
+                if (questionList.get(position).getStat() == 1) {    // 进行中
+                    ARouter.getInstance().build(ARoutePath.PATH_QUESTIONAIRE_SURVEY)
+                            .withInt("onlineSurveyId", questionList.get(position).getID()).navigation();
+                } else {
+                    showMessage("问卷调查已经结束");
+                }
             }
         });
 
