@@ -201,6 +201,26 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 1));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_image,
                 communityBlocks.size(), Constant.viewType.typeNews) {
+
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
+//                super.onBindViewHolder(holder, position, payloads);
+
+                if (payloads.isEmpty()) {
+                    onBindViewHolder(holder, position);
+                } else {
+
+                    // 局部刷新（至刷新列表项数据，不刷新图片）
+//                    mRootView.showMessage("SSSSSSS");
+                    holder.setText(R.id.tv_comment_num, communityBlocks.get(position).getComments() + "");
+                    holder.setText(R.id.tv_star_num, communityBlocks.get(position).getDigs() + "");
+
+                    holder.getView(R.id.rl_container).setOnClickListener(view -> {
+                        // 新闻详情页
+                        mRootView.setOnListClick(communityBlocks.get(position), position);
+                    });
+                }
+            }
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -226,12 +246,7 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
 
                 holder.getView(R.id.rl_container).setOnClickListener(view -> {
                     // 新闻详情页
-                    ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                            .withInt("articleId", communityBlocks.get(position).getContentId())
-                            .withInt("nodeId", 0)
-                            .withInt("digs", communityBlocks.get(position).getDigs())
-                            .withInt("comments", communityBlocks.get(position).getComments())
-                            .navigation();
+                    mRootView.setOnListClick(communityBlocks.get(position), position);
                 });
 
             }

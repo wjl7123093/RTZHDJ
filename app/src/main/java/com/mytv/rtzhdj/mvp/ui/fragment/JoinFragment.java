@@ -24,6 +24,7 @@ import com.mytv.rtzhdj.di.module.JoinModule;
 import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.presenter.JoinPresenter;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.NewsDetailActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -60,6 +61,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
     private List<DelegateAdapter.Adapter> mAdapters;
     private DelegateAdapter delegateAdapter = null;
     private boolean mIsRefresh = false;
+    private int mCurClickPos = -1;       // 当前点击位置
 
     /** 加载进度条 */
     private SweetAlertDialog pDialog;
@@ -148,6 +150,7 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 
     @Override
     public void setOnGridClick(int position) {
+        mCurClickPos = -1;  // 恢复初始值
         switch (position) {
             case 0: // 组织活动
                 ARouter.getInstance().build(ARoutePath.PATH_ORGANIZATIONAL).navigation();
@@ -165,17 +168,28 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
     }
 
     @Override
-    public void setOnListClick(int arrayPos, int position) {
+    public void setOnListClick(MyJoinEntity.CommunityBlock communityBlock, int position) {
+        mCurClickPos = 15 + position;
 
+        Bundle bundle = new Bundle();
+        bundle.putInt("articleId", communityBlock.getContentId());
+        bundle.putInt("nodeId", 0);
+        bundle.putInt("digs", communityBlock.getDigs());
+        bundle.putInt("comments", communityBlock.getComments());
+        Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, 100);
     }
 
     @Override
     public void setOnFooterClick() {
+        mCurClickPos = -1;  // 恢复初始值
         ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE).navigation();
     }
 
     @Override
     public void setOnColumnClick(int arrayPos, int position) {
+        mCurClickPos = -1;  // 恢复初始值
         switch (arrayPos) {
             case 0: // 心愿墙区
                 switch (position) {
@@ -282,8 +296,23 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
         BaseDelegateAdapter listAdapter2 = mPresenter.initListCommunity(communityBlocks);
         mAdapters.add(listAdapter2);
 
-        delegateAdapter.setAdapters(mAdapters);
-        delegateAdapter.notifyDataSetChanged();
+        if (update) {
+//            delegateAdapter.notifyItemRangeChanged(10, 19, "xxxxxxxx");
+            if (mIsRefresh) {   // 下拉刷新
+                delegateAdapter.setAdapters(mAdapters);
+                delegateAdapter.notifyDataSetChanged();
+            } else {
+                if (-1 < mCurClickPos) {    // 局部刷新（从新闻列表点击进去，返回主页后，刷新新闻列表项）
+                    delegateAdapter.setAdapters(mAdapters);
+                    delegateAdapter.notifyItemChanged(mCurClickPos, "xxxxxxxx");
+                } else {    // 全部刷新（从其他点击进去，返回主页后，进行全部刷新）
+                    delegateAdapter.setAdapters(mAdapters);
+                    delegateAdapter.notifyDataSetChanged();
+                }
+            }
+        } else {
+            delegateAdapter.setAdapters(mAdapters);
+        }
 
         /*//设置适配器
         if (update)
@@ -310,5 +339,16 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
                 refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (100 == requestCode) {
+//            mIsRefresh = true;
+            // 刷新
+            mPresenter.callMethodOfGetMyPartIn(DataHelper.getIntergerSF(getActivity(),
+                    SharepreferenceKey.KEY_USER_ID), PAGE_INDEX, PAGE_SIZE, true);
+        }
     }
 }
