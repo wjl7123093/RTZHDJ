@@ -1,7 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 
 import java.util.List;
@@ -26,7 +25,8 @@ public interface VolunteerService {
      * @return
      */
     @GET("getVoluntaryserviceList")
-    Observable<BaseJson<List<VoluteerServiceEntity>>> getVoluntaryserviceList(@Query("TypeId") int typeId,
+    Observable<BaseJson<List<VoluteerServiceEntity>>> getVoluntaryserviceList(@Query("CurrentSystemID") int currentSystemId,
+                                                                              @Query("TypeId") int typeId,
                                                                               @Query("PageIndex") int pageIndex,
                                                                               @Query("PageSize") int pageSize);
 

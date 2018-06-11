@@ -85,8 +85,8 @@ public class NewsAllPresenter extends BasePresenter<NewsAllContract.Model, NewsA
     }
 
     @Override
-    public void callMethodOfGetTwoLevelAllList(int nodeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getTwoLevelAllList(nodeId, pageIndex, pageSize, update)
+    public void callMethodOfGetTwoLevelAllList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getTwoLevelAllList(currentSystemId, nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<NewsAllEntity>>transformObservable("getTwoLevelAllList" + nodeId,
                         new TypeToken<BaseJson<NewsAllEntity>>() { }.getType(),
                         CacheStrategy.firstRemote()))
@@ -116,8 +116,8 @@ public class NewsAllPresenter extends BasePresenter<NewsAllContract.Model, NewsA
     }
 
     @Override
-    public void callMethodOfGetTwoLevelInfoList(int nodeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getTwoLevelInfoList(nodeId, pageIndex, pageSize, update)
+    public void callMethodOfGetTwoLevelInfoList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getTwoLevelInfoList(currentSystemId, nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<NewsDetailEntity>>>transformObservable("getTwoLevelInfoList" + nodeId,
                         new TypeToken<BaseJson<List<NewsDetailEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

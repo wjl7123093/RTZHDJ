@@ -17,8 +17,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.TeacherEntity;
 import com.mytv.rtzhdj.di.component.DaggerTeacherListComponent;
 import com.mytv.rtzhdj.di.module.TeacherListModule;
@@ -105,7 +107,9 @@ public class TeacherListActivity extends BaseActivity<TeacherListPresenter> impl
 
         PAGE_INDEX = 1;
         // 获取二级通用列表数据
-        mPresenter.callMethodOfGetTeacherList(nodeId, PAGE_INDEX, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetTeacherList(
+                DataHelper.getIntergerSF(TeacherListActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                nodeId, PAGE_INDEX, PAGE_SIZE, false);
 
     }
 
@@ -150,7 +154,9 @@ public class TeacherListActivity extends BaseActivity<TeacherListPresenter> impl
                 mIsRefresh = true;
                 PAGE_INDEX = 1;
                 // 获取二级通用列表数据
-                mPresenter.callMethodOfGetTeacherList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetTeacherList(
+                        DataHelper.getIntergerSF(TeacherListActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        nodeId, PAGE_INDEX, PAGE_SIZE, true);
 
             }
         });
@@ -162,7 +168,9 @@ public class TeacherListActivity extends BaseActivity<TeacherListPresenter> impl
 
                 mIsLoadMore = true;
                 // 获取二级通用列表数据
-                mPresenter.callMethodOfGetTeacherList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetTeacherList(
+                        DataHelper.getIntergerSF(TeacherListActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
 
             }
         });

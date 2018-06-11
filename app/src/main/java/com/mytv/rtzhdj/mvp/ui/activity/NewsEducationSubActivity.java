@@ -17,8 +17,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsEducationSubComponent;
@@ -113,7 +115,9 @@ public class NewsEducationSubActivity extends BaseActivity<NewsEducationSubPrese
 
         PAGE_INDEX = 1;
         // 获取党建新闻二级列表(除推荐)数据
-        mPresenter.callMethodOfGetPartySubList(nodeId, PAGE_INDEX, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetPartySubList(
+                DataHelper.getIntergerSF(NewsEducationSubActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                nodeId, PAGE_INDEX, PAGE_SIZE, false);
     }
 
 
@@ -234,7 +238,9 @@ public class NewsEducationSubActivity extends BaseActivity<NewsEducationSubPrese
                 mIsRefresh = true;
                 PAGE_INDEX = 1;
                 // 获取党建新闻二级列表(除推荐)数据
-                mPresenter.callMethodOfGetPartySubList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetPartySubList(
+                        DataHelper.getIntergerSF(NewsEducationSubActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        nodeId, PAGE_INDEX, PAGE_SIZE, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
@@ -245,7 +251,9 @@ public class NewsEducationSubActivity extends BaseActivity<NewsEducationSubPrese
 
                 mIsLoadMore = true;
                 // 获取党建新闻二级列表(除推荐)数据
-                mPresenter.callMethodOfGetPartySubList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetPartySubList(
+                        DataHelper.getIntergerSF(NewsEducationSubActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }

@@ -19,21 +19,18 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.NewsAllEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsAllComponent;
 import com.mytv.rtzhdj.di.module.NewsAllModule;
 import com.mytv.rtzhdj.mvp.contract.NewsAllContract;
 import com.mytv.rtzhdj.mvp.presenter.NewsAllPresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.fragment.NewsAllFragment;
-import com.mytv.rtzhdj.mvp.ui.fragment.NewsSimpleFragment;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +107,9 @@ public class NewsAllActivity extends BaseActivity<NewsAllPresenter> implements N
         });
 
         // 获取 带"全部"通用二级页面
-        mPresenter.callMethodOfGetTwoLevelAllList(nodeId, 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetTwoLevelAllList(
+                DataHelper.getIntergerSF(NewsAllActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                nodeId, 1, PAGE_SIZE, false);
     }
 
 

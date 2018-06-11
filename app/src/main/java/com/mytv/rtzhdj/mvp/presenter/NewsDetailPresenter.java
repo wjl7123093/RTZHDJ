@@ -117,8 +117,8 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
     }
 
     @Override
-    public void callMethodOfGetContent(int id, int nodeId, boolean update) {
-        mModel.getContent(id, nodeId, update)
+    public void callMethodOfGetContent(int currentSystemId, int id, int nodeId, boolean update) {
+        mModel.getContent(currentSystemId, id, nodeId, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<NewsDetailEntity>>transformObservable("getContent" + id,
                         new TypeToken<BaseJson<NewsDetailEntity>>() { }.getType(),
                         CacheStrategy.firstRemote()))
@@ -174,8 +174,8 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailContract.Model,
     }
 
     @Override
-    public void callMethodOfPostDoDig(int nodeId, int contentId, int type, boolean update) {
-        mModel.postDoDig(nodeId, contentId, type, update)
+    public void callMethodOfPostDoDig(int currentSystemId, int nodeId, int contentId, int type, boolean update) {
+        mModel.postDoDig(currentSystemId, nodeId, contentId, type, update)
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

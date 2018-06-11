@@ -3,18 +3,11 @@ package com.mytv.rtzhdj.app.data.api.service;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
-import com.mytv.rtzhdj.app.data.entity.StationEntity;
-import com.mytv.rtzhdj.app.data.entity.UserCategoryEntity;
-import com.mytv.rtzhdj.app.data.entity.UserRegisterEntity;
-import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -33,7 +26,8 @@ public interface NewsSimpleService {
      * @return
      */
     @GET("getTwoLevelList")
-    Observable<BaseJson<NewsSimpleEntity>> getTwoLevelList(@Query("NodeId") int nodeId,
+    Observable<BaseJson<NewsSimpleEntity>> getTwoLevelList(@Query("CurrentSystemID") int currentSystemId,
+                                                           @Query("NodeId") int nodeId,
                                                            @Query("PageIndex") int pageIndex,
                                                            @Query("PageSize") int pageSize);
 
@@ -42,7 +36,8 @@ public interface NewsSimpleService {
      * @return
      */
     @GET("getTwoLevelInfoList")
-    Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(@Query("NodeId") int nodeId,
+    Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(@Query("CurrentSystemID") int currentSystemId,
+                                                                     @Query("NodeId") int nodeId,
                                                                      @Query("PageIndex") int pageIndex,
                                                                      @Query("PageSize") int pageSize);
 

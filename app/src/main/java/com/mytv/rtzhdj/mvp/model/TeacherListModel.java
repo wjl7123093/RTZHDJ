@@ -38,8 +38,9 @@ public class TeacherListModel extends BaseModel implements TeacherListContract.M
     }
 
     @Override
-    public Observable<BaseJson<List<TeacherEntity>>> getTeacherList(int nodeId, int pageIndex, int pageSize, boolean update) {
+    public Observable<BaseJson<List<TeacherEntity>>> getTeacherList(int currentSystemId,
+                                                                    int nodeId, int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(TeacherListService.class)
-                .getTeacherList(nodeId, pageIndex, pageSize);
+                .getTeacherList(currentSystemId, nodeId, pageIndex, pageSize);
     }
 }

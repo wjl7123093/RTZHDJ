@@ -13,7 +13,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
@@ -109,10 +111,14 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
         PAGE_INDEX = 1;
         if (0 == getArguments().getInt("nodeId")) {
             // 获取党建新闻推荐列表数据
-            mPresenter.callMethodOfGetPartyRecommend(PAGE_INDEX, PAGE_SIZE, false);
+            mPresenter.callMethodOfGetPartyRecommend(
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                    PAGE_INDEX, PAGE_SIZE, false);
         } else {
             // 获取党建新闻二级列表(除推荐)数据
-            mPresenter.callMethodOfGetPartySubList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, false);
+            mPresenter.callMethodOfGetPartySubList(
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                    getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, false);
         }
     }
 
@@ -316,10 +322,14 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
                 PAGE_INDEX = 1;
                 if (0 == getArguments().getInt("nodeId")) {
                     // 获取党建新闻推荐列表数据
-                    mPresenter.callMethodOfGetPartyRecommend(PAGE_INDEX, PAGE_SIZE, true);
+                    mPresenter.callMethodOfGetPartyRecommend(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                            PAGE_INDEX, PAGE_SIZE, true);
                 } else {
                     // 获取党建新闻二级列表(除推荐)数据
-                    mPresenter.callMethodOfGetPartySubList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, true);
+                    mPresenter.callMethodOfGetPartySubList(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                            getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, true);
                 }
             }
         });
@@ -332,10 +342,14 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
                 mIsLoadMore = true;
                 if (0 == getArguments().getInt("nodeId")) {
                     // 获取党建新闻推荐列表数据
-                    mPresenter.callMethodOfGetPartyRecommend(++PAGE_INDEX, PAGE_SIZE, true);
+                    mPresenter.callMethodOfGetPartyRecommend(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                            ++PAGE_INDEX, PAGE_SIZE, true);
                 } else {
                     // 获取党建新闻二级列表(除推荐)数据
-                    mPresenter.callMethodOfGetPartySubList(getArguments().getInt("nodeId"), ++PAGE_INDEX, PAGE_SIZE, true);
+                    mPresenter.callMethodOfGetPartySubList(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                            getArguments().getInt("nodeId"), ++PAGE_INDEX, PAGE_SIZE, true);
                 }
             }
         });

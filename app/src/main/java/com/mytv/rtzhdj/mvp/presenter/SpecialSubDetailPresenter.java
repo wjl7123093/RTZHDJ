@@ -86,8 +86,8 @@ public class SpecialSubDetailPresenter extends BasePresenter<SpecialSubDetailCon
     }
 
     @Override
-    public void callMethodOfGetPartySpecialList(int nodeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getPartySpecialList(nodeId, pageIndex, pageSize, update)
+    public void callMethodOfGetPartySpecialList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartySpecialList(currentSystemId, nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<NewsDetailEntity>>>transformObservable("getCommentList" + nodeId,
                         new TypeToken<BaseJson<List<NewsDetailEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

@@ -222,8 +222,8 @@ public class NewsEducationPresenter extends BasePresenter<NewsEducationContract.
     }
 
     @Override
-    public void callMethodOfGetTwoLevelList(int nodeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getTwoLevelList(nodeId, pageIndex, pageSize, update)
+    public void callMethodOfGetTwoLevelList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getTwoLevelList(currentSystemId, nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<NewsSimpleEntity>>transformObservable("getTwoLevelList" + nodeId,
                         new TypeToken<BaseJson<NewsSimpleEntity>>() { }.getType(),
                         CacheStrategy.firstRemote()))

@@ -1,8 +1,6 @@
 package com.mytv.rtzhdj.app.data.api.service;
 
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
-import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyRecommendEntity;
 import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
 
@@ -26,7 +24,8 @@ public interface ContentService {
      * @return
      */
     @GET("getPartyRecommend")
-    Observable<BaseJson<PartyRecommendEntity>> getPartyRecommend(@Query("PageIndex") int pageIndex,
+    Observable<BaseJson<PartyRecommendEntity>> getPartyRecommend(@Query("CurrentSystemID") int currentSystemId,
+                                                                 @Query("PageIndex") int pageIndex,
                                                                  @Query("PageSize") int pageSize);
 
     /**
@@ -34,8 +33,9 @@ public interface ContentService {
      * @return
      */
     @GET("getPartySubList")
-    Observable<BaseJson<PartySubNewsEntity>> getPartySubList(@Query("NodeId") int nodeId,
-                                                   @Query("PageIndex") int pageIndex,
-                                                   @Query("PageSize") int pageSize);
+    Observable<BaseJson<PartySubNewsEntity>> getPartySubList(@Query("CurrentSystemID") int currentSystemId,
+                                                             @Query("NodeId") int nodeId,
+                                                             @Query("PageIndex") int pageIndex,
+                                                             @Query("PageSize") int pageSize);
 
 }

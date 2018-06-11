@@ -112,7 +112,9 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
         mBtnComment.setOnClickListener(view -> showDialog());
 
         // 获取 评论列表
-        mPresenter.callMethodOfGetCommentList(nodeId, contentId, false);
+        mPresenter.callMethodOfGetCommentList(
+                DataHelper.getIntergerSF(CommentActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                nodeId, contentId, false);
     }
 
 

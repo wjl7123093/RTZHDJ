@@ -3,21 +3,17 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.service.ContentService;
 import com.mytv.rtzhdj.app.data.api.service.NewsSimpleService;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.PartySubNewsEntity;
 import com.mytv.rtzhdj.mvp.contract.NewsCommonContract;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
@@ -42,8 +38,8 @@ public class NewsCommonModel extends BaseModel implements NewsCommonContract.Mod
     }
 
     @Override
-    public Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(int nodeId, int pageIndex, int pageSize, boolean update) {
+    public Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(NewsSimpleService.class)
-                .getTwoLevelInfoList(nodeId, pageIndex, pageSize);
+                .getTwoLevelInfoList(currentSystemId, nodeId, pageIndex, pageSize);
     }
 }

@@ -30,7 +30,7 @@ public interface NewsEducationContract {
     interface Model extends IModel {
 
         // 获取 带“推荐”通用二级页面
-        Observable<BaseJson<NewsSimpleEntity>> getTwoLevelList(int nodeId, int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<NewsSimpleEntity>> getTwoLevelList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -44,6 +44,6 @@ public interface NewsEducationContract {
         BaseDelegateAdapter initList(List<NewsDetailEntity> data);
 
         // 调用 获取带“推荐”通用二级页面 api
-        void callMethodOfGetTwoLevelList(int nodeId, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetTwoLevelList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
     }
 }

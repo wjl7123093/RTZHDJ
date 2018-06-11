@@ -86,8 +86,8 @@ public class VoteOnlinePresenter extends BasePresenter<VoteOnlineContract.Model,
     }
 
     @Override
-    public void callMethodOfGetVoteList(int typeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getVoteList(typeId, pageIndex, pageSize, update)
+    public void callMethodOfGetVoteList(int currentSystemId, int typeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getVoteList(currentSystemId, typeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<VoteListEntity>>>transformObservable("postVoteList" + typeId,
                         new TypeToken<BaseJson<List<VoteListEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

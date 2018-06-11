@@ -1,17 +1,14 @@
 package com.mytv.rtzhdj.mvp.contract;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.NewsAllEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsAllActivity;
-import com.mytv.rtzhdj.mvp.ui.activity.NewsSimpleActivity;
 
 import java.util.List;
 
@@ -29,10 +26,10 @@ public interface NewsAllContract {
     interface Model extends IModel {
 
         // 获取 带“全部”通用二级页面
-        Observable<BaseJson<NewsAllEntity>> getTwoLevelAllList(int nodeId, int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<NewsAllEntity>> getTwoLevelAllList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
 
         // 获取 二级通用列表
-        Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(int nodeId, int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -43,9 +40,9 @@ public interface NewsAllContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取带“全部”通用二级页面 api
-        void callMethodOfGetTwoLevelAllList(int nodeId, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetTwoLevelAllList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
 
         // 调用 获取二级通用列表 api
-        void callMethodOfGetTwoLevelInfoList(int nodeId, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetTwoLevelInfoList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
     }
 }

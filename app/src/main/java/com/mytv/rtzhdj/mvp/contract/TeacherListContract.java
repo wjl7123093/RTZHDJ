@@ -25,7 +25,7 @@ public interface TeacherListContract {
     interface Model extends IModel {
 
         // 获取 二级通用列表
-        Observable<BaseJson<List<TeacherEntity>>> getTeacherList(int nodeId, int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<List<TeacherEntity>>> getTeacherList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -36,6 +36,6 @@ public interface TeacherListContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取二级通用列表 api
-        void callMethodOfGetTeacherList(int nodeId, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetTeacherList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
     }
 }

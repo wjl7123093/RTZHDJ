@@ -32,7 +32,7 @@ public interface WishWallContract {
         Observable<BaseJson<List<MyWishEntity>>> postMyWishList(int userId, int type, boolean update);
 
         // 获取 心愿墙数据
-        Observable<BaseJson<List<MyWishEntity>>> getWishList(int userId, int type,
+        Observable<BaseJson<List<MyWishEntity>>> getWishList(int currentSystemId, int userId, int type,
                                                              int pageIndex, int pageSize, boolean update);
 
         // 上传 我要许愿 数据
@@ -51,7 +51,7 @@ public interface WishWallContract {
         void callMethodOfPostMyWishList(int userId, int type, boolean update);
 
         // 调用 获取心愿墙API
-        void callMethodOfGetWishList(int userId, int type, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetWishList(int currentSystemId, int userId, int type, int pageIndex, int pageSize, boolean update);
 
         // 调用 上传我要许愿数据
         void callMethodOfPostMyWish(Map<String, RequestBody> params,

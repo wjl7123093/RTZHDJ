@@ -86,8 +86,8 @@ public class CommentPresenter extends BasePresenter<CommentContract.Model, Comme
     }
 
     @Override
-    public void callMethodOfGetCommentList(int nodeId, int contentId, boolean refresh) {
-        mModel.getCommentList(nodeId, contentId, refresh)
+    public void callMethodOfGetCommentList(int currentSystemId, int nodeId, int contentId, boolean refresh) {
+        mModel.getCommentList(currentSystemId, nodeId, contentId, refresh)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<CommentEntity>>>transformObservable("getCommentList" + nodeId + contentId,
                         new TypeToken<BaseJson<List<CommentEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

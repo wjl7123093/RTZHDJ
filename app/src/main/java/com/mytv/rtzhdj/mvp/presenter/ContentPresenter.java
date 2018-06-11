@@ -147,8 +147,8 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     }
 
     @Override
-    public void callMethodOfGetPartyRecommend(int pageIndex, int pageSize, boolean update) {
-        mModel.getPartyRecommend(pageIndex, pageSize, update)
+    public void callMethodOfGetPartyRecommend(int currentSystemId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartyRecommend(currentSystemId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<PartyRecommendEntity>>transformObservable("getPartyRecommend",
                         new TypeToken<BaseJson<PartyRecommendEntity>>() { }.getType(),
                         CacheStrategy.firstRemote()))    // 60s以内用缓存
@@ -179,8 +179,8 @@ public class ContentPresenter extends BasePresenter<ContentContract.Model, Conte
     }
 
     @Override
-    public void callMethodOfGetPartySubList(int nodeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getPartySubList(nodeId, pageIndex, pageSize, update)
+    public void callMethodOfGetPartySubList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartySubList(currentSystemId, nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<PartySubNewsEntity>>transformObservable("getPartySubList" + nodeId + pageIndex,
                         new TypeToken<BaseJson<PartySubNewsEntity>>() { }.getType(),
                         CacheStrategy.firstRemote()))    // 60s以内用缓存

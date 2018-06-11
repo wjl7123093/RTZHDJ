@@ -2,9 +2,9 @@ package com.mytv.rtzhdj.mvp.contract;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
@@ -26,7 +26,7 @@ public interface PartyKnowledgeContract {
     interface Model extends IModel {
 
         // 获取 党建只是列表数据
-        Observable<BaseJson<List<PartyNewsEntity>>> getPartyKnowledgeList(int nodeId, int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<List<PartyNewsEntity>>> getPartyKnowledgeList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
 
     }
     //Presenter控制器
@@ -37,6 +37,6 @@ public interface PartyKnowledgeContract {
         List<PartyColumnsEntity> initColums();
 
         // 调用 获取党建只是列表数据
-        void callMethodOfGetPartyKnowledgeList(int nodeId, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetPartyKnowledgeList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
     }
 }

@@ -27,7 +27,7 @@ public interface NewsEducationSubContract {
     interface Model extends IModel {
 
         // 获取 党建新闻二级列表数据
-        Observable<BaseJson<PartySubNewsEntity>> getPartySubList(int nodeId, int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<PartySubNewsEntity>> getPartySubList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -38,6 +38,6 @@ public interface NewsEducationSubContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取党建新闻二级列表(除推荐)数据
-        void callMethodOfGetPartySubList(int nodeId, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetPartySubList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
     }
 }

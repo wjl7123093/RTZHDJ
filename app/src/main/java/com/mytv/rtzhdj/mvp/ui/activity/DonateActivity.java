@@ -23,9 +23,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
-
+import com.jess.arms.utils.DataHelper;
+import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
-import com.mytv.rtzhdj.app.data.api.Api;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.utils.FileUtils;
 import com.mytv.rtzhdj.app.utils.ImageTools;
 import com.mytv.rtzhdj.app.utils.RouteSystemUIUtils;
@@ -33,11 +34,8 @@ import com.mytv.rtzhdj.di.component.DaggerDonateComponent;
 import com.mytv.rtzhdj.di.module.DonateModule;
 import com.mytv.rtzhdj.mvp.contract.DonateContract;
 import com.mytv.rtzhdj.mvp.presenter.DonatePresenter;
-
-import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.mvp.ui.adapter.GridViewAdapter;
 import com.mytv.rtzhdj.mvp.ui.widget.BottomDialog;
-
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -155,7 +153,8 @@ public class DonateActivity extends BaseActivity<DonatePresenter> implements Don
 
         // 我要捐赠
         mBtnDonate.setOnClickListener(view -> {
-            params.put("UserId", RequestBody.create(MediaType.parse("text/plain"), "8"));
+            params.put("UserId", RequestBody.create(MediaType.parse("text/plain"), DataHelper.getIntergerSF(DonateActivity.this,
+                    SharepreferenceKey.KEY_USER_ID) + ""));
             params.put("Topic", RequestBody.create(MediaType.parse("text/plain"), mEdtDonateTheme.getText().toString().trim()));
             params.put("TelePhone", RequestBody.create(MediaType.parse("text/plain"), mEdtPhone.getText().toString().trim()));
             params.put("Content", RequestBody.create(MediaType.parse("text/plain"), mEdtDonateContent.getText().toString().trim()));

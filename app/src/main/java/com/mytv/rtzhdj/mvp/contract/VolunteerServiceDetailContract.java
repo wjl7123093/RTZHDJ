@@ -25,7 +25,7 @@ public interface VolunteerServiceDetailContract {
         Observable<BaseJson<VolunteerDetailEntity>> getVolunteerServiceDetail(int id, int userId, boolean update);
 
         // post 点赞
-        Observable<BaseJson> postDoDig(int nodeId, int contentId, int type, boolean update);
+        Observable<BaseJson> postDoDig(int currentSystemId, int nodeId, int contentId, int type, boolean update);
 
     }
 
@@ -36,6 +36,6 @@ public interface VolunteerServiceDetailContract {
         // 调用 获取志愿服务详情数据
         void callMethodOfGetVolunteerServiceDetail(int id, int userId, boolean update);
         // 调用 点赞
-        void callMethodOfPostDoDig(int nodeId, int contentId, int type, boolean update);
+        void callMethodOfPostDoDig(int currentSystemId, int nodeId, int contentId, int type, boolean update);
     }
 }

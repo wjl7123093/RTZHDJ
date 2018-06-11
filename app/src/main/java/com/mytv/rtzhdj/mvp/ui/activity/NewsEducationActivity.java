@@ -15,8 +15,10 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsEducationComponent;
@@ -101,7 +103,9 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
         initRefreshLayout();
 
         // 获取 带"推荐"通用二级页面
-        mPresenter.callMethodOfGetTwoLevelList(6020, PAGE_INDEX, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetTwoLevelList(
+                DataHelper.getIntergerSF(NewsEducationActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                6020, PAGE_INDEX, PAGE_SIZE, false);
     }
 
 
@@ -241,7 +245,9 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
                 mIsRefresh = true;
                 PAGE_INDEX = 1;
                 // 获取 带"推荐"通用二级页面
-                mPresenter.callMethodOfGetTwoLevelList(6020, PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetTwoLevelList(
+                        DataHelper.getIntergerSF(NewsEducationActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        6020, PAGE_INDEX, PAGE_SIZE, true);
             }
         });
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
@@ -251,7 +257,9 @@ public class NewsEducationActivity extends BaseActivity<NewsEducationPresenter> 
 
                 mIsLoadMore = true;
                 // 获取 带"推荐"通用二级页面
-                mPresenter.callMethodOfGetTwoLevelList(6020, ++PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetTwoLevelList(
+                        DataHelper.getIntergerSF(NewsEducationActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        6020, ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }

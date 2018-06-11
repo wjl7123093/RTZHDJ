@@ -86,8 +86,8 @@ public class VolunteerServicePresenter extends BasePresenter<VolunteerServiceCon
     }
 
     @Override
-    public void callMethodOfGetVoluntaryserviceList(int typeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getVoluntaryserviceList(typeId, pageIndex, pageSize, update)
+    public void callMethodOfGetVoluntaryserviceList(int currentSystemId, int typeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getVoluntaryserviceList(currentSystemId, typeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<VoluteerServiceEntity>>>transformObservable("getVoluntaryserviceList" + typeId + pageIndex,
                         new TypeToken<BaseJson<List<VoluteerServiceEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

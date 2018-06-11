@@ -97,6 +97,7 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
         if (getArguments().getString("pageType").equals("wall")) {
             // 心愿墙  有分页
             mPresenter.callMethodOfGetWishList(
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
                     DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
                     getArguments().getInt("type"), PAGE_INDEX, PAGE_SIZE, false);
         } else {
@@ -182,6 +183,7 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
                     PAGE_INDEX = 1;
                     // 心愿墙  有分页
                     mPresenter.callMethodOfGetWishList(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
                             DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
                             getArguments().getInt("type"), PAGE_INDEX, PAGE_SIZE, true);
 
@@ -195,6 +197,7 @@ public class WishWallFragment extends BaseFragment<WishWallPresenter> implements
                     mIsLoadMore = true;
                     // 心愿墙  有分页
                     mPresenter.callMethodOfGetWishList(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
                             DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_USER_ID),
                             getArguments().getInt("type"), ++PAGE_INDEX, PAGE_SIZE, true);
                 }

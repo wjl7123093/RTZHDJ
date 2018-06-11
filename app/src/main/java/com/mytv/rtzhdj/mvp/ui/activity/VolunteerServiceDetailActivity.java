@@ -131,7 +131,9 @@ public class VolunteerServiceDetailActivity extends BaseActivity<VolunteerServic
         initTab();
 
         mBtnStar.setOnClickListener(view -> {
-            mPresenter.callMethodOfPostDoDig(nodeId, id, type, false);
+            mPresenter.callMethodOfPostDoDig(
+                    DataHelper.getIntergerSF(VolunteerServiceDetailActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                    nodeId, id, type, false);
             type = type == 1 ? -1 : 1;
         });
         mBtnIsOver.setOnClickListener(view -> {

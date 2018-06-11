@@ -28,13 +28,13 @@ public interface NewsDetailContract {
     interface Model extends IModel {
 
         // 获取 新闻详情
-        Observable<BaseJson<NewsDetailEntity>> getContent(int id, int nodeId, boolean update);
+        Observable<BaseJson<NewsDetailEntity>> getContent(int currentSystemId, int id, int nodeId, boolean update);
 
         // post 评论数据
         Observable<BaseJson> postComment(int userId, int nodeId, int contentId, String commentInfo, boolean update);
 
         // post 点赞
-        Observable<BaseJson> postDoDig(int nodeId, int contentId, int type, boolean update);
+        Observable<BaseJson> postDoDig(int currentSystemId, int nodeId, int contentId, int type, boolean update);
 
     }
 
@@ -45,11 +45,11 @@ public interface NewsDetailContract {
         void initWebview(WebView mWebView, WebProgressBar mWebProgressBar);
 
         // 调用 获取新闻详情
-        void callMethodOfGetContent(int id, int nodeId, boolean update);
+        void callMethodOfGetContent(int currentSystemId, int id, int nodeId, boolean update);
         // 调用 评论
         void callMethodOfPostComment(int userId, int nodeId, int contentId, String commentInfo, boolean update);
         // 调用 点赞
-        void callMethodOfPostDoDig(int nodeId, int contentId, int type, boolean update);
+        void callMethodOfPostDoDig(int currentSystemId, int nodeId, int contentId, int type, boolean update);
 
     }
 }

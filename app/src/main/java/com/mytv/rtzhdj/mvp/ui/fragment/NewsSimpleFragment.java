@@ -13,7 +13,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsSimpleComponent;
@@ -98,7 +100,9 @@ public class NewsSimpleFragment extends BaseFragment<NewsSimplePresenter> implem
             loadData(getArguments().getParcelable("entity"));
         } else {
             // 获取二级通用列表数据
-            mPresenter.callMethodOfGetTwoLevelInfoList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, false);
+            mPresenter.callMethodOfGetTwoLevelInfoList(
+                    DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                    getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, false);
         }
     }
 
@@ -252,7 +256,9 @@ public class NewsSimpleFragment extends BaseFragment<NewsSimplePresenter> implem
                     mIsRefresh = true;
                     PAGE_INDEX = 1;
                     // 获取二级通用列表数据
-                    mPresenter.callMethodOfGetTwoLevelInfoList(getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, true);
+                    mPresenter.callMethodOfGetTwoLevelInfoList(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                            getArguments().getInt("nodeId"), PAGE_INDEX, PAGE_SIZE, true);
                 }
             }
         });
@@ -267,7 +273,9 @@ public class NewsSimpleFragment extends BaseFragment<NewsSimplePresenter> implem
                 } else {    // 其他页
                     mIsLoadMore = true;
                     // 获取二级通用列表数据
-                    mPresenter.callMethodOfGetTwoLevelInfoList(getArguments().getInt("nodeId"), ++PAGE_INDEX, PAGE_SIZE, true);
+                    mPresenter.callMethodOfGetTwoLevelInfoList(
+                            DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                            getArguments().getInt("nodeId"), ++PAGE_INDEX, PAGE_SIZE, true);
                 }
             }
         });

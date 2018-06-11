@@ -26,7 +26,8 @@ public interface NewsDetailService {
      * @return
      */
     @GET("getContent")
-    Observable<BaseJson<NewsDetailEntity>> getContent(@Query("Id") int id,
+    Observable<BaseJson<NewsDetailEntity>> getContent(@Query("CurrentSystemID") int currentSystemId,
+                                                      @Query("Id") int id,
                                                       @Query("NodeId") int nodeId);
 
     /**
@@ -46,7 +47,8 @@ public interface NewsDetailService {
      */
     @FormUrlEncoded
     @POST("postDoDig")
-    Observable<BaseJson> postDoDig(@Field("NodeId") int nodeId,
+    Observable<BaseJson> postDoDig(@Field("CurrentSystemID") int currentSystemId,
+                                   @Field("NodeId") int nodeId,
                                    @Field("contentID") int contentId,
                                    @Field("type") int type);
 

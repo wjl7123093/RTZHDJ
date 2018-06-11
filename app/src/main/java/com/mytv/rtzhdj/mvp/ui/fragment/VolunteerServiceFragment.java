@@ -14,8 +14,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 import com.mytv.rtzhdj.di.component.DaggerVolunteerServiceComponent;
 import com.mytv.rtzhdj.di.module.VolunteerServiceModule;
@@ -91,7 +93,9 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
 
         PAGE_INDEX = 1;
         // 获取志愿服务列表
-        mPresenter.callMethodOfGetVoluntaryserviceList(getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetVoluntaryserviceList(
+                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, false);
     }
 
     /**
@@ -152,7 +156,9 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
                 mIsRefresh = true;
                 PAGE_INDEX = 1;
                 // 获取志愿服务列表
-                mPresenter.callMethodOfGetVoluntaryserviceList(getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetVoluntaryserviceList(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
@@ -163,7 +169,9 @@ public class VolunteerServiceFragment extends BaseFragment<VolunteerServicePrese
 
                 mIsLoadMore = true;
                 // 获取志愿服务列表
-                mPresenter.callMethodOfGetVoluntaryserviceList(getArguments().getInt("typeId"), ++PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetVoluntaryserviceList(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        getArguments().getInt("typeId"), ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }

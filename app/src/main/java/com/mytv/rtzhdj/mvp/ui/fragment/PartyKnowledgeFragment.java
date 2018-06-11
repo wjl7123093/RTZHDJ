@@ -13,7 +13,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.di.component.DaggerPartyKnowledgeComponent;
 import com.mytv.rtzhdj.di.module.PartyKnowledgeModule;
@@ -97,7 +99,9 @@ public class PartyKnowledgeFragment extends BaseFragment<PartyKnowledgePresenter
         initRefreshLayout();
 
         // 获取 党建知识列表数据
-        mPresenter.callMethodOfGetPartyKnowledgeList(getArguments().getInt("nodeId"), 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetPartyKnowledgeList(
+                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                getArguments().getInt("nodeId"), 1, PAGE_SIZE, false);
 
     }
 

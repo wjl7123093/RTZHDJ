@@ -13,6 +13,7 @@ public interface Api {
 
     // 服务端地址
     String APP_DOMAIN = "http://61.157.136.102:8903/api/";
+//    String APP_DOMAIN = "http://192.168.13.66:8088/api/";
     // 图片地址
     String APP_IMAGE_DOMAIN = "http://192.168.13.93";
     // 文章详情地址

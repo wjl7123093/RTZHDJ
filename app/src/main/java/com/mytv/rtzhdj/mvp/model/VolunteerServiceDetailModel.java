@@ -43,8 +43,8 @@ public class VolunteerServiceDetailModel extends BaseModel implements VolunteerS
     }
 
     @Override
-    public Observable<BaseJson> postDoDig(int nodeId, int contentId, int type, boolean update) {
+    public Observable<BaseJson> postDoDig(int currentSystemId, int nodeId, int contentId, int type, boolean update) {
         return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
-                .postDoDig(nodeId, contentId, type);
+                .postDoDig(currentSystemId, nodeId, contentId, type);
     }
 }

@@ -36,9 +36,9 @@ public class NewsDetailModel extends BaseModel implements NewsDetailContract.Mod
     }
 
     @Override
-    public Observable<BaseJson<NewsDetailEntity>> getContent(int id, int nodeId, boolean update) {
+    public Observable<BaseJson<NewsDetailEntity>> getContent(int currentSystemId, int id, int nodeId, boolean update) {
         return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
-                .getContent(id, nodeId);
+                .getContent(currentSystemId, id, nodeId);
     }
 
     @Override
@@ -48,8 +48,8 @@ public class NewsDetailModel extends BaseModel implements NewsDetailContract.Mod
     }
 
     @Override
-    public Observable<BaseJson> postDoDig(int nodeId, int contentId, int type, boolean update) {
+    public Observable<BaseJson> postDoDig(int currentSystemId, int nodeId, int contentId, int type, boolean update) {
         return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
-                .postDoDig(nodeId, contentId, type);
+                .postDoDig(currentSystemId, nodeId, contentId, type);
     }
 }

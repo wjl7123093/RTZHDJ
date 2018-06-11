@@ -2,11 +2,10 @@ package com.mytv.rtzhdj.mvp.contract;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.VoluteerServiceEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceActivity;
 
@@ -25,7 +24,8 @@ public interface VolunteerServiceContract {
     interface Model extends IModel {
 
         // 获取 志愿服务列表
-        Observable<BaseJson<List<VoluteerServiceEntity>>> getVoluntaryserviceList(int typeId, int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<List<VoluteerServiceEntity>>> getVoluntaryserviceList(int currentSystemId,
+                                                                                  int typeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -36,6 +36,6 @@ public interface VolunteerServiceContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取志愿服务列表数据
-        void callMethodOfGetVoluntaryserviceList(int typeId, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetVoluntaryserviceList(int currentSystemId, int typeId, int pageIndex, int pageSize, boolean update);
     }
 }

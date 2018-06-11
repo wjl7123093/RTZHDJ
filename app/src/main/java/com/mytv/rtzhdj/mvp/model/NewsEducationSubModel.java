@@ -36,8 +36,8 @@ public class NewsEducationSubModel extends BaseModel implements NewsEducationSub
     }
 
     @Override
-    public Observable<BaseJson<PartySubNewsEntity>> getPartySubList(int nodeId, int pageIndex, int pageSize, boolean update) {
+    public Observable<BaseJson<PartySubNewsEntity>> getPartySubList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(ContentService.class)
-                .getPartySubList(nodeId, pageIndex, pageSize);
+                .getPartySubList(currentSystemId, nodeId, pageIndex, pageSize);
     }
 }

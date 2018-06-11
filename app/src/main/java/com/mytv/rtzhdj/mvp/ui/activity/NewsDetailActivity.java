@@ -135,12 +135,16 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailPresenter> implem
         if (digs == -100) {
             digs = 0;
             comments = 0;
-            mPresenter.callMethodOfGetContent(articleId, nodeId, false);
+            mPresenter.callMethodOfGetContent(
+                    DataHelper.getIntergerSF(NewsDetailActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                    articleId, nodeId, false);
         }
 
         mTvComment.setOnClickListener(view -> showDialog());
         mTvStarNum.setOnClickListener(view -> {
-            mPresenter.callMethodOfPostDoDig(nodeId, articleId, type, false);
+            mPresenter.callMethodOfPostDoDig(
+                    DataHelper.getIntergerSF(NewsDetailActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                    nodeId, articleId, type, false);
             type = type == 1 ? -1 : 1;
         });
         mTvCommentNum.setOnClickListener(view ->

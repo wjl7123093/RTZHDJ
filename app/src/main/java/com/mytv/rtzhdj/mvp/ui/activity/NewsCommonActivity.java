@@ -17,8 +17,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.di.component.DaggerNewsCommonComponent;
 import com.mytv.rtzhdj.di.module.NewsCommonModule;
@@ -109,7 +111,9 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 
         PAGE_INDEX = 1;
         // 获取二级通用列表数据
-        mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetTwoLevelInfoList(
+                DataHelper.getIntergerSF(NewsCommonActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                nodeId, PAGE_INDEX, PAGE_SIZE, false);
     }
 
 
@@ -159,7 +163,9 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
                 mIsRefresh = true;
                 PAGE_INDEX = 1;
                 // 获取二级通用列表数据
-                mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetTwoLevelInfoList(
+                        DataHelper.getIntergerSF(NewsCommonActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        nodeId, PAGE_INDEX, PAGE_SIZE, true);
 
             }
         });
@@ -171,7 +177,9 @@ public class NewsCommonActivity extends BaseActivity<NewsCommonPresenter> implem
 
                 mIsLoadMore = true;
                 // 获取二级通用列表数据
-                mPresenter.callMethodOfGetTwoLevelInfoList(nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetTwoLevelInfoList(
+                        DataHelper.getIntergerSF(NewsCommonActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        nodeId, ++PAGE_INDEX, PAGE_SIZE, true);
 
             }
         });

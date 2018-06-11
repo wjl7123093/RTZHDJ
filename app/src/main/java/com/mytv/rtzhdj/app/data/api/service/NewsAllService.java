@@ -3,7 +3,6 @@ package com.mytv.rtzhdj.app.data.api.service;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.NewsAllEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
-import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 
 import java.util.List;
 
@@ -27,7 +26,8 @@ public interface NewsAllService {
      * @return
      */
     @GET("getTwoLevelAllList")
-    Observable<BaseJson<NewsAllEntity>> getTwoLevelAllList(@Query("NodeId") int nodeId,
+    Observable<BaseJson<NewsAllEntity>> getTwoLevelAllList(@Query("CurrentSystemID") int currentSystemId,
+                                                           @Query("NodeId") int nodeId,
                                                            @Query("PageIndex") int pageIndex,
                                                            @Query("PageSize") int pageSize);
 
@@ -36,7 +36,8 @@ public interface NewsAllService {
      * @return
      */
     @GET("getTwoLevelInfoList")
-    Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(@Query("NodeId") int nodeId,
+    Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(@Query("CurrentSystemID") int currentSystemId,
+                                                                     @Query("NodeId") int nodeId,
                                                                      @Query("PageIndex") int pageIndex,
                                                                      @Query("PageSize") int pageSize);
 

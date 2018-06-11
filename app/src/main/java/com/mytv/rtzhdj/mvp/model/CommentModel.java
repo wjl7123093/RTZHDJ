@@ -3,13 +3,9 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.CommentService;
 import com.mytv.rtzhdj.app.data.api.service.NewsDetailService;
@@ -17,6 +13,8 @@ import com.mytv.rtzhdj.app.data.entity.CommentEntity;
 import com.mytv.rtzhdj.mvp.contract.CommentContract;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
@@ -41,9 +39,9 @@ public class CommentModel extends BaseModel implements CommentContract.Model {
     }
 
     @Override
-    public Observable<BaseJson<List<CommentEntity>>> getCommentList(int nodeId, int contentId, boolean update) {
+    public Observable<BaseJson<List<CommentEntity>>> getCommentList(int currentSystemId, int nodeId, int contentId, boolean update) {
         return mRepositoryManager.obtainRetrofitService(CommentService.class)
-                .getCommentList(nodeId, contentId);
+                .getCommentList(currentSystemId, nodeId, contentId);
     }
 
     @Override

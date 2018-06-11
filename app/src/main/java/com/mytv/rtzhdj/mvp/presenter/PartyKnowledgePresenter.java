@@ -104,8 +104,8 @@ public class PartyKnowledgePresenter extends BasePresenter<PartyKnowledgeContrac
     }
 
     @Override
-    public void callMethodOfGetPartyKnowledgeList(int nodeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getPartyKnowledgeList(nodeId, pageIndex, pageSize, update)
+    public void callMethodOfGetPartyKnowledgeList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartyKnowledgeList(currentSystemId, nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<PartyNewsEntity>>>transformObservable("getPartyKnowledgeList" + nodeId,
                         new TypeToken<BaseJson<List<PartyNewsEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

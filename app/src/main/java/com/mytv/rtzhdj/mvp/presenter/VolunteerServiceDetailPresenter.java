@@ -93,8 +93,8 @@ public class VolunteerServiceDetailPresenter extends BasePresenter<VolunteerServ
     }
 
     @Override
-    public void callMethodOfPostDoDig(int nodeId, int contentId, int type, boolean update) {
-        mModel.postDoDig(nodeId, contentId, type, update)
+    public void callMethodOfPostDoDig(int currentSystemId, int nodeId, int contentId, int type, boolean update) {
+        mModel.postDoDig(currentSystemId, nodeId, contentId, type, update)
                 .retryWhen(new RetryWithDelay(3, 2))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

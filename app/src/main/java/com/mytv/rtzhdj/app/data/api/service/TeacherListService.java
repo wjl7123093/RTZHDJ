@@ -24,9 +24,10 @@ public interface TeacherListService {
      * 获取师资库列表数据
      * @return
      */
-    @GET("GetTeacherList ")
-    Observable<BaseJson<List<TeacherEntity>>> getTeacherList (@Query("NodeId") int nodeId,
-                                                              @Query("PageIndex") int pageIndex,
-                                                              @Query("PageSize") int pageSize);
+    @GET("GetTeacherList")
+    Observable<BaseJson<List<TeacherEntity>>> getTeacherList(@Query("CurrentSystemID") int currentSystemId,
+                                                             @Query("NodeId") int nodeId,
+                                                             @Query("PageIndex") int pageIndex,
+                                                             @Query("PageSize") int pageSize);
 
 }

@@ -82,8 +82,8 @@ public class NewsEducationSubPresenter extends BasePresenter<NewsEducationSubCon
     }
 
     @Override
-    public void callMethodOfGetPartySubList(int nodeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getPartySubList(nodeId, pageIndex, pageSize, update)
+    public void callMethodOfGetPartySubList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getPartySubList(currentSystemId, nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<PartySubNewsEntity>>transformObservable("getPartySubList" + nodeId + pageIndex,
                         new TypeToken<BaseJson<PartySubNewsEntity>>() { }.getType(),
                         CacheStrategy.firstRemote()))    // 60s以内用缓存

@@ -86,8 +86,8 @@ public class TeacherListPresenter extends BasePresenter<TeacherListContract.Mode
     }
 
     @Override
-    public void callMethodOfGetTeacherList(int nodeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getTeacherList(nodeId, pageIndex, pageSize, update)
+    public void callMethodOfGetTeacherList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getTeacherList(currentSystemId, nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<TeacherEntity>>>transformObservable("GetTeacherList" + nodeId + pageIndex,
                         new TypeToken<BaseJson<List<TeacherEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

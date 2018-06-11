@@ -3,13 +3,9 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.NewsAllService;
 import com.mytv.rtzhdj.app.data.entity.NewsAllEntity;
@@ -17,6 +13,8 @@ import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.NewsAllContract;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
@@ -41,14 +39,14 @@ public class NewsAllModel extends BaseModel implements NewsAllContract.Model {
     }
 
     @Override
-    public Observable<BaseJson<NewsAllEntity>> getTwoLevelAllList(int nodeId, int pageIndex, int pageSize, boolean update) {
+    public Observable<BaseJson<NewsAllEntity>> getTwoLevelAllList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(NewsAllService.class)
-                .getTwoLevelAllList(nodeId, pageIndex, pageSize);
+                .getTwoLevelAllList(currentSystemId, nodeId, pageIndex, pageSize);
     }
 
     @Override
-    public Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(int nodeId, int pageIndex, int pageSize, boolean update) {
+    public Observable<BaseJson<List<NewsDetailEntity>>> getTwoLevelInfoList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(NewsAllService.class)
-                .getTwoLevelInfoList(nodeId, pageIndex, pageSize);
+                .getTwoLevelInfoList(currentSystemId, nodeId, pageIndex, pageSize);
     }
 }

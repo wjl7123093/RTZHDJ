@@ -2,11 +2,10 @@ package com.mytv.rtzhdj.mvp.contract;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.VoteListEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.VoteOnlineActivity;
 
@@ -25,7 +24,8 @@ public interface VoteOnlineContract {
     interface Model extends IModel {
 
         // 获取 投票列表
-        Observable<BaseJson<List<VoteListEntity>>> getVoteList(int typeId, int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<List<VoteListEntity>>> getVoteList(int currentSystemId,
+                                                               int typeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -36,6 +36,6 @@ public interface VoteOnlineContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取投票列表数据
-        void callMethodOfGetVoteList(int typeId, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetVoteList(int currentSystemId, int typeId, int pageIndex, int pageSize, boolean update);
     }
 }

@@ -32,10 +32,10 @@ public interface ContentContract {
     interface Model extends IModel {
 
         // 获取 党建推荐新闻数据
-        Observable<BaseJson<PartyRecommendEntity>> getPartyRecommend(int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<PartyRecommendEntity>> getPartyRecommend(int currentSystemId, int pageIndex, int pageSize, boolean update);
 
         // 获取 党建新闻二级列表数据
-        Observable<BaseJson<PartySubNewsEntity>> getPartySubList(int nodeId, int pageIndex, int pageSize, boolean update);
+        Observable<BaseJson<PartySubNewsEntity>> getPartySubList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
 
     }
 
@@ -48,9 +48,9 @@ public interface ContentContract {
         android.view.View initHeaderView(List<PartyNewsEntity> specialBlockList, ViewGroup parent);
 
         // 调用 获取党建新闻推荐数据
-        void callMethodOfGetPartyRecommend(int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetPartyRecommend(int currentSystemId, int pageIndex, int pageSize, boolean update);
 
         // 调用 获取党建新闻二级列表(除推荐)数据
-        void callMethodOfGetPartySubList(int nodeId, int pageIndex, int pageSize, boolean update);
+        void callMethodOfGetPartySubList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update);
     }
 }

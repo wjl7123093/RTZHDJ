@@ -14,8 +14,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.VoteListEntity;
 import com.mytv.rtzhdj.di.component.DaggerVoteOnlineComponent;
 import com.mytv.rtzhdj.di.module.VoteOnlineModule;
@@ -93,7 +95,9 @@ public class VoteOnlineFragment extends BaseFragment<VoteOnlinePresenter> implem
 
         PAGE_INDEX = 1;
         // 获取 投票列表数据
-        mPresenter.callMethodOfGetVoteList(getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetVoteList(
+                DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, false);
     }
 
     /**
@@ -154,7 +158,9 @@ public class VoteOnlineFragment extends BaseFragment<VoteOnlinePresenter> implem
                 mIsRefresh = true;
                 PAGE_INDEX = 1;
                 // 获取 投票列表数据
-                mPresenter.callMethodOfGetVoteList(getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetVoteList(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        getArguments().getInt("typeId"), PAGE_INDEX, PAGE_SIZE, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
@@ -165,7 +171,9 @@ public class VoteOnlineFragment extends BaseFragment<VoteOnlinePresenter> implem
 
                 mIsLoadMore = true;
                 // 获取 投票列表数据
-                mPresenter.callMethodOfGetVoteList(getArguments().getInt("typeId"), ++PAGE_INDEX, PAGE_SIZE, true);
+                mPresenter.callMethodOfGetVoteList(
+                        DataHelper.getIntergerSF(getActivity(), SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        getArguments().getInt("typeId"), ++PAGE_INDEX, PAGE_SIZE, true);
             }
         });
     }

@@ -19,8 +19,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.DataHelper;
 import com.mytv.rtzhdj.R;
 import com.mytv.rtzhdj.app.ARoutePath;
+import com.mytv.rtzhdj.app.SharepreferenceKey;
 import com.mytv.rtzhdj.app.data.entity.NewsDetailEntity;
 import com.mytv.rtzhdj.app.data.entity.NewsSimpleEntity;
 import com.mytv.rtzhdj.app.data.entity.PartyColumnsEntity;
@@ -112,7 +114,9 @@ public class NewsSimpleActivity extends BaseActivity<NewsSimplePresenter> implem
         });
 
         // 获取 带"推荐"通用二级页面
-        mPresenter.callMethodOfGetTwoLevelList(nodeId, 1, PAGE_SIZE, false);
+        mPresenter.callMethodOfGetTwoLevelList(
+                DataHelper.getIntergerSF(NewsSimpleActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                nodeId, 1, PAGE_SIZE, false);
 
     }
 

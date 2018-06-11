@@ -117,8 +117,8 @@ public class WishWallPresenter extends BasePresenter<WishWallContract.Model, Wis
     }
 
     @Override
-    public void callMethodOfGetWishList(int userId, int type, int pageIndex, int pageSize, boolean update) {
-        mModel.getWishList(userId, type, pageIndex, pageSize, update)
+    public void callMethodOfGetWishList(int currentSystemId, int userId, int type, int pageIndex, int pageSize, boolean update) {
+        mModel.getWishList(currentSystemId, userId, type, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<MyWishEntity>>>transformObservable("getWishList" + userId + type + pageIndex,
                         new TypeToken<BaseJson<List<MyWishEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

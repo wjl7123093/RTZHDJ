@@ -2,12 +2,11 @@ package com.mytv.rtzhdj.mvp.contract;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.CommentEntity;
-import com.mytv.rtzhdj.app.data.entity.VerifyCodeEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.CommentActivity;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public interface CommentContract {
     interface Model extends IModel {
 
         // 获取评论列表
-        Observable<BaseJson<List<CommentEntity>>> getCommentList(int nodeId, int contentId, boolean update);
+        Observable<BaseJson<List<CommentEntity>>> getCommentList(int currentSystemId, int nodeId, int contentId, boolean update);
 
         // post 评论数据
         Observable<BaseJson> postComment(int userId, int nodeId, int contentId, String commentInfo, boolean update);
@@ -40,7 +39,7 @@ public interface CommentContract {
         RecyclerView initRecyclerView(RecyclerView recyclerView);
 
         // 调用 获取评论列表
-        void callMethodOfGetCommentList(int nodeId, int contentId, boolean refresh);
+        void callMethodOfGetCommentList(int currentSystemId, int nodeId, int contentId, boolean refresh);
 
         // 调用 评论
         void callMethodOfPostComment(int userId, int nodeId, int contentId, String commentInfo, boolean update);

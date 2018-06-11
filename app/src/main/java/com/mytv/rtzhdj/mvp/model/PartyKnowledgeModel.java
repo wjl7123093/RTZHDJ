@@ -3,19 +3,17 @@ package com.mytv.rtzhdj.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
-
-import javax.inject.Inject;
-
 import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.api.service.PartyKnowledgeService;
 import com.mytv.rtzhdj.app.data.entity.PartyNewsEntity;
 import com.mytv.rtzhdj.mvp.contract.PartyKnowledgeContract;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
@@ -41,8 +39,8 @@ public class PartyKnowledgeModel extends BaseModel implements PartyKnowledgeCont
 
     @Override
     public Observable<BaseJson<List<PartyNewsEntity>>> getPartyKnowledgeList(
-            int nodeId, int pageIndex, int pageSize, boolean update) {
+            int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
         return mRepositoryManager.obtainRetrofitService(PartyKnowledgeService.class)
-                .getPartyKnowledgeList(nodeId, pageIndex, pageSize);
+                .getPartyKnowledgeList(currentSystemId, nodeId, pageIndex, pageSize);
     }
 }

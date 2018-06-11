@@ -91,8 +91,8 @@ public class NewsCommonPresenter extends BasePresenter<NewsCommonContract.Model,
     }
 
     @Override
-    public void callMethodOfGetTwoLevelInfoList(int nodeId, int pageIndex, int pageSize, boolean update) {
-        mModel.getTwoLevelInfoList(nodeId, pageIndex, pageSize, update)
+    public void callMethodOfGetTwoLevelInfoList(int currentSystemId, int nodeId, int pageIndex, int pageSize, boolean update) {
+        mModel.getTwoLevelInfoList(currentSystemId, nodeId, pageIndex, pageSize, update)
                 .compose(RTZHDJApplication.rxCache.<BaseJson<List<NewsDetailEntity>>>transformObservable("getTwoLevelInfoList" + nodeId,
                         new TypeToken<BaseJson<List<NewsDetailEntity>>>() { }.getType(),
                         CacheStrategy.firstRemote()))

@@ -25,7 +25,8 @@ public interface PartyKnowledgeService {
      * @return
      */
     @GET("getPartyKnowledgeList")
-    Observable<BaseJson<List<PartyNewsEntity>>> getPartyKnowledgeList(@Query("NodeId") int nodeId,
+    Observable<BaseJson<List<PartyNewsEntity>>> getPartyKnowledgeList(@Query("CurrentSystemID") int currentSystemId,
+                                                                      @Query("NodeId") int nodeId,
                                                                       @Query("PageIndex") int pageIndex,
                                                                       @Query("PageSize") int pageSize);
 
