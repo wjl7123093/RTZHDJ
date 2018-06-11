@@ -6,9 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
-
-import com.mytv.rtzhdj.mvp.ui.activity.MyJoinActivity;
 
 import java.io.File;
 
@@ -24,14 +23,24 @@ public class RouteSystemUIUtils {
      * @param path 照片存放的路径
      */
     public static void captureImage(Activity activity, int requestCode) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             doTakePhotoIn7(new File(Environment.getExternalStorageDirectory(), "image.jpg").getAbsolutePath(),
                     activity, requestCode);
         } else {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "image.jpg")));
             activity.startActivityForResult(intent, requestCode);
+        }*/
+
+        //取消严格模式  FileProvider 【解决 7.0 以上拍照崩溃的 bug】
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
         }
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "image.jpg")));
+        activity.startActivityForResult(intent, requestCode);
     }
 
     /**
