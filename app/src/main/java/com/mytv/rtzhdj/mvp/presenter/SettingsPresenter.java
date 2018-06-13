@@ -191,6 +191,30 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.Model, Set
     }
 
     @Override
+    public BaseDelegateAdapter initInfo3(String title, String content) {
+        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        return new BaseDelegateAdapter(mActivity, singleLayoutHelper , R.layout.item_vlayout_settings_info1,
+                1, Constant.viewTypeSettings.typeInfo4) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_info, title + content);
+                holder.setBackgroundColor(R.id.ll_container, mActivity.getResources().getColor(R.color.colorPrimary));
+                holder.setTextColor(R.id.tv_info, mActivity.getResources().getColor(R.color.white));
+                holder.setVisible(R.id.view_divider, false);
+
+                holder.getView(R.id.ll_container).setOnClickListener(view -> {
+                    if (title.contains("退出")) {
+                        ArmsUtils.exitApp();
+                        ARouter.getInstance().build(ARoutePath.PATH_LOGIN).navigation();
+                        DataHelper.setIntergerSF(mActivity, SharepreferenceKey.KEY_IS_LOGIN, 0);    // 退出登录
+                    }
+                });
+            }
+        };
+    }
+
+    @Override
     public BaseDelegateAdapter initMobilePhone(String mobile, boolean isOpen) {
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         return new BaseDelegateAdapter(mActivity, singleLayoutHelper , R.layout.item_vlayout_settings_mobilephone,

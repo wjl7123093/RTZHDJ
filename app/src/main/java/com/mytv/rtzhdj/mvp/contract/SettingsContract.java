@@ -3,11 +3,10 @@ package com.mytv.rtzhdj.mvp.contract;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
-import com.jess.arms.mvp.IModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.entity.HomeEntity;
 import com.mytv.rtzhdj.app.data.entity.UserDetailEntity;
 import com.mytv.rtzhdj.mvp.ui.activity.SettingsActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
@@ -38,6 +37,7 @@ public interface SettingsContract {
         BaseDelegateAdapter initHeader2(String url);
         BaseDelegateAdapter initInfo1(String title, String content);
         BaseDelegateAdapter initInfo2(String type, String title, String content, String hint);
+        BaseDelegateAdapter initInfo3(String title, String content);
         BaseDelegateAdapter initMobilePhone(String mobile, boolean isOpen);
         BaseDelegateAdapter initOtherContacts(String title, String content, String hint);
 //        BaseDelegateAdapter initTitle(int arrayPos, String title, String btnDesc, int scores);

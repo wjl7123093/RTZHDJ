@@ -312,7 +312,7 @@ public class SettingsFragment extends BaseFragment<SettingsPresenter> implements
         mAdapters.add(infoAdapter2);
         infoAdapter2 = mPresenter.initInfo2("feedback", "意见反馈", "", "");
         mAdapters.add(infoAdapter2);
-        infoAdapter = mPresenter.initInfo1("退出当前账户", "");
+        infoAdapter = mPresenter.initInfo3("退出当前账户", "");
         mAdapters.add(infoAdapter);
 
         //设置适配器
