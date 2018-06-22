@@ -154,7 +154,11 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+                // 获取 评论列表
+                mPresenter.callMethodOfGetCommentList(
+                        DataHelper.getIntergerSF(CommentActivity.this, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_ID),
+                        nodeId, contentId, true);
             }
         });
 //        mRefreshLayout.setEnableLoadmore(false);
@@ -181,7 +185,10 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
     }
 
     @Override
-    public void loadData(List<CommentEntity> commentList) {
+    public void loadData(List<CommentEntity> commentList, boolean update) {
+        if (update)
+            mRefreshLayout.finishRefresh(true);
+
         initAdapter(commentList);
     }
 

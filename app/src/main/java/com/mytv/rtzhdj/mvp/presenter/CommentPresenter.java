@@ -111,7 +111,7 @@ public class CommentPresenter extends BasePresenter<CommentContract.Model, Comme
 
 //                        mRootView.showPickerView(stationList.getData());
                         if (commentList.isSuccess() && commentList.getData() != null)
-                            mRootView.loadData(commentList.getData());
+                            mRootView.loadData(commentList.getData(), refresh);
                     }
                 });
     }
