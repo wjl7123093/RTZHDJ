@@ -297,7 +297,11 @@ public class ContentFragment extends BaseFragment<ContentPresenter> implements C
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("articleId", mNewsList.get(position).getArticleId());
-                bundle.putInt("nodeId", mNewsList.get(position).getNodeId());
+                if (0 == getArguments().getInt("nodeId")) {
+                    bundle.putInt("nodeId", mNewsList.get(position).getNodeid());
+                } else {
+                    bundle.putInt("nodeId", getArguments().getInt("nodeId"));
+                }
                 bundle.putInt("digs", mNewsList.get(position).getDigs());
                 bundle.putInt("comments", mNewsList.get(position).getComments());
                 Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
