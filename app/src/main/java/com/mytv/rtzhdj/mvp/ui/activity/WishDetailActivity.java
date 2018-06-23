@@ -110,6 +110,8 @@ public class WishDetailActivity extends BaseActivity<WishDetailPresenter> implem
 
     @Autowired
     int wishId;
+    @Autowired
+    boolean isAuditStatus;
 
     private WishDetailEntity mWishDetailEntity;
 
@@ -182,9 +184,9 @@ public class WishDetailActivity extends BaseActivity<WishDetailPresenter> implem
                     case 0:	// TA的心愿
                         mTvContent.setText(mWishDetailEntity.getContent());
                         break;
-                    case 1:	// 谁实现了
-                        mTvContent.setText("");
-                        break;
+//                    case 1:	// 谁实现了
+//                        mTvContent.setText("");
+//                        break;
                 }
 
 //				Toast.makeText(PunishListActivity.this, tabText, Toast.LENGTH_SHORT).show();
@@ -205,6 +207,10 @@ public class WishDetailActivity extends BaseActivity<WishDetailPresenter> implem
         });
         // 删除
         mBtnDelte.setOnClickListener(view -> {
+            if (isAuditStatus) {
+                showMessage("该心愿已审核完成，无法删除");
+                return;
+            }
             mPresenter.callMethodOfPostDeleteMyWish(wishId);
         });
 
