@@ -162,6 +162,34 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
         linearLayoutHelper.setDividerHeight(ArmsUtils.dip2px(activity, 1));
         return new BaseDelegateAdapter(activity, linearLayoutHelper , R.layout.item_vlayout_list_event,
                 2, Constant.viewType.typeList) {
+
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
+//                super.onBindViewHolder(holder, position, payloads);
+
+                if (payloads.isEmpty()) {
+                    onBindViewHolder(holder, position);
+                } else {
+
+                    // 局部刷新（至刷新列表项数据，不刷新图片）
+//                    mRootView.showMessage("SSSSSSS");
+                    holder.setText(R.id.tv_star_num, "" + volunteerBlocks.get(position).getDigs());
+                    holder.setText(R.id.tv_comment_num, "" + volunteerBlocks.get(position).getComments());
+
+                    holder.getView(R.id.ll_container).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                            ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+//                                    .withInt("nodeId", volunteerBlocks.get(position).getNodeId())
+//                                    .withInt("id", volunteerBlocks.get(position).getContentId())
+//                                    .withString("imageUrl", volunteerBlocks.get(position).getAllImgUrl()).navigation();
+
+                            mRootView.setOnVolunteerClick(volunteerBlocks.get(position), position);
+                        }
+                    });
+                }
+            }
+
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -184,10 +212,12 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                 holder.getView(R.id.ll_container).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
-                                .withInt("nodeId", volunteerBlocks.get(position).getNodeId())
-                                .withInt("id", volunteerBlocks.get(position).getContentId())
-                                .withString("imageUrl", volunteerBlocks.get(position).getAllImgUrl()).navigation();
+//                        ARouter.getInstance().build(ARoutePath.PATH_VOLUNTEER_SERVICE_DETAIL)
+//                                .withInt("nodeId", volunteerBlocks.get(position).getNodeId())
+//                                .withInt("id", volunteerBlocks.get(position).getContentId())
+//                                .withString("imageUrl", volunteerBlocks.get(position).getAllImgUrl()).navigation();
+
+                        mRootView.setOnVolunteerClick(volunteerBlocks.get(position), position);
                     }
                 });
 

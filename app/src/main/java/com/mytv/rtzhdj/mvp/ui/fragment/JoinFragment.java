@@ -25,6 +25,7 @@ import com.mytv.rtzhdj.mvp.contract.JoinContract;
 import com.mytv.rtzhdj.mvp.presenter.JoinPresenter;
 import com.mytv.rtzhdj.mvp.ui.activity.MainActivity;
 import com.mytv.rtzhdj.mvp.ui.activity.NewsDetailActivity;
+import com.mytv.rtzhdj.mvp.ui.activity.VolunteerServiceDetailActivity;
 import com.mytv.rtzhdj.mvp.ui.adapter.BaseDelegateAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -165,6 +166,19 @@ public class JoinFragment extends BaseFragment<JoinPresenter> implements JoinCon
 //                ARouter.getInstance().build(ARoutePath.PATH_SURROUNDING_COMMUNITY).navigation();
                 break;
         }
+    }
+
+    @Override
+    public void setOnVolunteerClick(MyJoinEntity.VolunteerBlock volunteerBlocks, int position) {
+        mCurClickPos = 11 + position;
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("nodeId", volunteerBlocks.getNodeId());
+        bundle.putInt("id", volunteerBlocks.getContentId());
+        bundle.putString("imageUrl", volunteerBlocks.getAllImgUrl());
+        Intent intent = new Intent(getActivity(), VolunteerServiceDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, 100);
     }
 
     @Override
