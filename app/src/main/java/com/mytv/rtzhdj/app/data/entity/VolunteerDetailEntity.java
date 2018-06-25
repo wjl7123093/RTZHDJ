@@ -25,7 +25,7 @@ public class VolunteerDetailEntity {
 //    private List<Comment> commentObjs;      // 评论
 //    private List<SubColumn> subObjs;        // 子栏目
 
-    private int digs;                       // 点赞数
+    private int Digs;                       // 点赞数
     private int IfJoin;                     // 是否结束 0 正在报名 1 已报名
     private int JoinScore;                  // 参与可获得分数
 
@@ -111,11 +111,11 @@ public class VolunteerDetailEntity {
     }
 
     public int getDigs() {
-        return digs;
+        return Digs;
     }
 
     public void setDigs(int digs) {
-        this.digs = digs;
+        this.Digs = digs;
     }
 
     public int getIfJoin() {

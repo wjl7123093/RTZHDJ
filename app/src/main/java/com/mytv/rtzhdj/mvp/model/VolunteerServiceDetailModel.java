@@ -7,7 +7,6 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.mytv.rtzhdj.app.data.BaseJson;
-import com.mytv.rtzhdj.app.data.api.service.NewsDetailService;
 import com.mytv.rtzhdj.app.data.api.service.VolunteerServiceDetailService;
 import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 import com.mytv.rtzhdj.mvp.contract.VolunteerServiceDetailContract;
@@ -44,7 +43,7 @@ public class VolunteerServiceDetailModel extends BaseModel implements VolunteerS
 
     @Override
     public Observable<BaseJson> postDoDig(int currentSystemId, int nodeId, int contentId, int type, boolean update) {
-        return mRepositoryManager.obtainRetrofitService(NewsDetailService.class)
-                .postDoDig(currentSystemId, nodeId, contentId, type);
+        return mRepositoryManager.obtainRetrofitService(VolunteerServiceDetailService.class)
+                .postDoDigForVolunteer(currentSystemId, nodeId, contentId, type);
     }
 }

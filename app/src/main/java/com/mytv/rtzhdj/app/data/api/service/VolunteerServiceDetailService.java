@@ -4,7 +4,10 @@ import com.mytv.rtzhdj.app.data.BaseJson;
 import com.mytv.rtzhdj.app.data.entity.VolunteerDetailEntity;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -25,5 +28,16 @@ public interface VolunteerServiceDetailService {
     @GET("getVolunteerServiceDetail")
     Observable<BaseJson<VolunteerDetailEntity>> getVolunteerServiceDetail(@Query("Id") int id,
                                                                           @Query("UserId") int userId);
+
+    /**
+     * 点赞
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("PostDoDigForVolunteer")
+    Observable<BaseJson> postDoDigForVolunteer(@Field("CurrentSystemID") int currentSystemId,
+                                               @Field("NodeId") int nodeId,
+                                               @Field("contentID") int contentId,
+                                               @Field("type") int type);
 
 }
