@@ -219,8 +219,8 @@ public class CompulsoryCourseActivity extends BaseActivity<CompulsoryCoursePrese
         mPlanValue = headerIntegralEntity.getPlanValue();
         mNextValue = headerIntegralEntity.getNextValue();
 
-        mTvScores.setText("本月获得积分: " + headerIntegralEntity.getIntegral());
-        mTvPowerNum.setText("您的正能量值: " + headerIntegralEntity.getPlanValue());
-        mTvDifferFrom.setText("距下一积分任务还差: " + headerIntegralEntity.getNextValue() + " 请继续加油!");
+        mTvScores.setText("本月获得正能量值: " + headerIntegralEntity.getIntegral());
+//        mTvPowerNum.setText("您的正能量值: " + headerIntegralEntity.getPlanValue());
+        mTvDifferFrom.setText("距下一任务还差: " + headerIntegralEntity.getNextValue() + " 请继续加油!");
     }
 }

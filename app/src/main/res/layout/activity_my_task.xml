@@ -75,7 +75,8 @@
                         android:gravity="center"
                         android:text="您的正能量值: 10"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/len_14" />
+                        android:textSize="@dimen/len_14"
+                        android:visibility="invisible"/>
                     <!-- 距离下一积分任务差 -->
                     <TextView
                         android:id="@+id/tv_differ_from"
@@ -252,7 +253,7 @@
                         android:layout_marginLeft="@dimen/len_2"
                         android:layout_toRightOf="@id/tv_1"
                         android:gravity="center"
-                        android:text="如何获取积分"
+                        android:text="如何获取正能量值"
                         android:textColor="@color/primary_text"
                         android:textSize="@dimen/len_16" />
 
@@ -264,7 +265,8 @@
                         android:gravity="center"
                         android:text="(每10积分自动兑换10正能量值)"
                         android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/len_12" />
+                        android:textSize="@dimen/len_12"
+                        android:visibility="invisible"/>
 
                 </RelativeLayout>
 

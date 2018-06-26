@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/len_16"
                     android:textColor="@color/white"
-                    android:text="本月获得积分: 2"
+                    android:text="本月获得正能量值: 2"
                     android:gravity="center"
                     android:layout_alignTop="@id/iv_header"
                     android:layout_toRightOf="@id/iv_header"
@@ -87,7 +87,8 @@
                     android:gravity="center"
                     android:layout_toRightOf="@id/iv_header"
                     android:layout_marginLeft="@dimen/len_10"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible"/>
                 <!-- 距离下一积分任务差 -->
                 <TextView
                     android:id="@+id/tv_differ_from"
@@ -95,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/len_14"
                     android:textColor="@color/white"
-                    android:text="距下一积分任务还差: 8 请继续加油!"
+                    android:text="距下一任务还差: 8 请继续加油!"
                     android:gravity="center"
                     android:layout_alignBottom="@id/iv_header"
                     android:layout_toRightOf="@id/iv_header"

@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="如何获取积分？"
+                android:text="如何获取正能量？"
                 android:textColor="@color/white"
                 android:textSize="@dimen/len_14"
                 android:layout_marginTop="@dimen/len_6"/>
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/len_14"
                     android:textColor="@color/colorAccent"
-                    android:text="我的积分"
+                    android:text="我的正能量"
                     />
             </LinearLayout>
 
@@ -97,7 +97,7 @@
                 android:textSize="@dimen/len_14"
                 android:textColor="@color/secondary_text"
                 android:layout_marginTop="@dimen/len_4"
-                android:text="积分明细"/>
+                android:text="正能量值明细"/>
         </LinearLayout>
 
         <LinearLayout

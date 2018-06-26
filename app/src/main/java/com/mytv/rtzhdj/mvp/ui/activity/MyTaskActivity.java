@@ -104,9 +104,9 @@ public class MyTaskActivity extends BaseActivity<MyTaskPresenter> implements MyT
                     SharepreferenceKey.KEY_USER_ID), false);
         } else {
 
-            mTvScores.setText("本月获得积分: " + Integeral);
-            mTvPowerNum.setText("您的正能量值: " + PlanValue);
-            mTvDifferFrom.setText("距下一积分任务还差: " + NextValue + " 请继续加油!");
+            mTvScores.setText("本月获得正能量值: " + Integeral);
+//            mTvPowerNum.setText("您的正能量值: " + PlanValue);
+            mTvDifferFrom.setText("距下一任务还差: " + NextValue + " 请继续加油!");
         }
     }
 
@@ -152,9 +152,9 @@ public class MyTaskActivity extends BaseActivity<MyTaskPresenter> implements MyT
     @Override
     public void loadHeaderData(HeaderIntegralEntity headerIntegralEntity) {
 
-        mTvScores.setText("本月获得积分: " + headerIntegralEntity.getIntegral());
-        mTvPowerNum.setText("您的正能量值: " + headerIntegralEntity.getPlanValue());
-        mTvDifferFrom.setText("距下一积分任务还差: " + headerIntegralEntity.getNextValue() + " 请继续加油!");
+        mTvScores.setText("本月获得正能量值: " + headerIntegralEntity.getIntegral());
+//        mTvPowerNum.setText("您的正能量值: " + headerIntegralEntity.getPlanValue());
+        mTvDifferFrom.setText("距下一任务还差: " + headerIntegralEntity.getNextValue() + " 请继续加油!");
 
     }
 }

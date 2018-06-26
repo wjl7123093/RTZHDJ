@@ -280,8 +280,10 @@ public class MinePresenter extends BasePresenter<MineContract.Model, MineContrac
                         DataHelper.getStringSF(activity, SharepreferenceKey.KEY_PUBLISHMENT_SYSTEM_NAME));
                 holder.setText(R.id.tv_study_scores,
                         DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL) + "");
+//                holder.setText(R.id.tv_power_num,
+//                        DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_POSITIVE_ENERGY_VALUE) + "");
                 holder.setText(R.id.tv_power_num,
-                        DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_POSITIVE_ENERGY_VALUE) + "");
+                        DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_INTEGRAL) + "");
                 holder.setText(R.id.tv_grade_rank,
                         DataHelper.getIntergerSF(activity, SharepreferenceKey.KEY_LOGIN_USER_RANK) + "");
 
