@@ -62,7 +62,8 @@
                         android:gravity="center"
                         android:text="本月获得积分: 2"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/len_16" />
+                        android:textSize="@dimen/len_16"
+                        android:layout_marginTop="@dimen/len_10"/>
                     <!-- 正能量值 -->
                     <TextView
                         android:id="@+id/tv_power_num"
@@ -88,7 +89,8 @@
                         android:gravity="center"
                         android:text="距下一积分分任务还差: 8 请继续加油!"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/len_14" />
+                        android:textSize="@dimen/len_14"
+                        android:layout_marginBottom="@dimen/len_10"/>
 
                     <FrameLayout
                         android:layout_width="match_parent"
