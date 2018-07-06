@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -174,8 +175,9 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     public void initBackground(SpecialColumnsEntity specialColumnsEntity) {
 //        ImageLoader.getInstance().showImage(TopicDetailActivity.this, mIvBackground,
 //                Api.APP_IMAGE_DOMAIN + specialColumnsEntity.getImageUrl().replace("@", ""));
-        ImageLoader.getInstance().showImage(TopicDetailActivity.this, mIvBackground,
-                specialColumnsEntity.getAllImgUrl());
+        if (!TextUtils.isEmpty(specialColumnsEntity.getAllImgUrl()))
+            ImageLoader.getInstance().showImage(TopicDetailActivity.this, mIvBackground,
+                    specialColumnsEntity.getAllImgUrl());
     }
 
     @Override

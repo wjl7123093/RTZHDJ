@@ -77,6 +77,8 @@ public class HomeEntity implements Serializable {
         private String ImageUrl;
         private String AllImgUrl;
 
+        private int ContentId;      // >0 跳转新闻详情
+
         public int getNodeId() {
             return NodeId;
         }
@@ -99,6 +101,14 @@ public class HomeEntity implements Serializable {
 
         public void setAllImgUrl(String allImgUrl) {
             AllImgUrl = allImgUrl;
+        }
+
+        public int getContentId() {
+            return ContentId;
+        }
+
+        public void setContentId(int contentId) {
+            ContentId = contentId;
         }
     }
 
