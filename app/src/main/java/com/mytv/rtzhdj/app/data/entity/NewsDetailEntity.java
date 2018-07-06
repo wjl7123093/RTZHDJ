@@ -27,6 +27,8 @@ public class NewsDetailEntity implements Parcelable {
     private String ImgUrl;      // 图片地址
     private String AllImgUrl;
 
+    private int IsVideo;        // 是否视频
+
     public NewsDetailEntity() {}
 
     protected NewsDetailEntity(Parcel in) {
@@ -40,6 +42,7 @@ public class NewsDetailEntity implements Parcelable {
         AddDate = in.readString();
         ImgUrl = in.readString();
         AllImgUrl = in.readString();
+        IsVideo = in.readInt();
     }
 
     public static final Creator<NewsDetailEntity> CREATOR = new Creator<NewsDetailEntity>() {
@@ -134,6 +137,14 @@ public class NewsDetailEntity implements Parcelable {
         AllImgUrl = allImgUrl;
     }
 
+    public int getIsVideo() {
+        return IsVideo;
+    }
+
+    public void setIsVideo(int isVideo) {
+        IsVideo = isVideo;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -151,5 +162,6 @@ public class NewsDetailEntity implements Parcelable {
         parcel.writeString(AddDate);
         parcel.writeString(ImgUrl);
         parcel.writeString(AllImgUrl);
+        parcel.writeInt(IsVideo);
     }
 }

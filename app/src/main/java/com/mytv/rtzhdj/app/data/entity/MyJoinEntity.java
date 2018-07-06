@@ -134,6 +134,8 @@ public class MyJoinEntity {
         private String AddDate;
         private String AllImgUrl;
 
+        private int IsVideo;        // 是否视频
+
         public int getContentId() {
             return ContentId;
         }
@@ -188,6 +190,14 @@ public class MyJoinEntity {
 
         public void setAllImgUrl(String allImgUrl) {
             AllImgUrl = allImgUrl;
+        }
+
+        public int getIsVideo() {
+            return IsVideo;
+        }
+
+        public void setIsVideo(int isVideo) {
+            IsVideo = isVideo;
         }
     }
 

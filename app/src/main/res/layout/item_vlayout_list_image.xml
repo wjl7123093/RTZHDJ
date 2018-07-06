@@ -43,6 +43,16 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:text="2018-1-20"/>
+        <com.mytv.rtzhdj.mvp.ui.widget.IconView
+            android:id="@+id/ic_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ic_news_video"
+            android:layout_toRightOf="@id/tv_datetime"
+            android:layout_alignTop="@id/tv_datetime"
+            android:layout_marginLeft="@dimen/len_4"
+            android:layout_marginTop="@dimen/len_2"
+            android:visibility="gone"/>
         <TextView
             android:id="@+id/tv_comment_num"
             android:layout_width="wrap_content"

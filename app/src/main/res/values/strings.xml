@@ -120,6 +120,8 @@
     <string name="ic_study_course_best">&#xe6f4;</string><!-- 精品课件 -->
     <!-- mine btn -->
     <string name="ic_mine_sign_btn">&#xe8bb;</string>
+    <!-- news_list video -->
+    <string name="ic_news_video">&#xe793;</string>
 
     <!-- signin -->
     <string name="sign_rules_desc">\n

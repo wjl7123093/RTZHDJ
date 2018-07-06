@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="恭喜您在本次学习中获得积分"
+        android:text="恭喜您在本次学习中获得\n正能量值"
         android:textSize="@dimen/len_20"
         android:textColor="@color/colorAccent"
         android:gravity="center"/>

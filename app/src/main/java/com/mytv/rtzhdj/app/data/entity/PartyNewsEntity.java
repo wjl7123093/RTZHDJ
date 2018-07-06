@@ -37,6 +37,8 @@ public class PartyNewsEntity {
     private String AddDate;     // 时间
     private String AllImgUrl;
 
+    private int IsVideo;
+
     public int getArticleId() {
         return ArticleId;
     }
@@ -91,5 +93,13 @@ public class PartyNewsEntity {
 
     public void setAllImgUrl(String allImgUrl) {
         AllImgUrl = allImgUrl;
+    }
+
+    public int getIsVideo() {
+        return IsVideo;
+    }
+
+    public void setIsVideo(int isVideo) {
+        IsVideo = isVideo;
     }
 }

@@ -269,6 +269,13 @@ public class JoinPresenter extends BasePresenter<JoinContract.Model, JoinContrac
                     holder.getView(R.id.iv_image).setVisibility(View.GONE);
                 }
 
+                // 判断是否为 视频类型
+                if (communityBlocks.get(position).getIsVideo() == 1) {
+                    holder.setGone(R.id.ic_video, true);
+                } else {
+                    holder.setGone(R.id.ic_video, false);
+                }
+
                 holder.setText(R.id.tv_star_num, "" + communityBlocks.get(position).getDigs());
                 holder.setText(R.id.tv_comment_num, "" + communityBlocks.get(position).getComments());
                 holder.setText(R.id.tv_title, communityBlocks.get(position).getTitle());

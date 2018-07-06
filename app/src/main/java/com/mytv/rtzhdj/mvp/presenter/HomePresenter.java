@@ -366,6 +366,15 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 holder.setText(R.id.tv_comment_num, FocusNewsBlock_ChildContent.get(position).getComments() + "");
                 holder.setText(R.id.tv_star_num, FocusNewsBlock_ChildContent.get(position).getDigs() + "");
 
+                // 判断是否为 视频类型
+                if (FocusNewsBlock_ChildContent.get(position).getIsVideo() == 1) {
+                    holder.setGone(R.id.ic_video, true);
+//                    holder.getView(R.id.ic_video).setVisibility(View.VISIBLE);
+                } else {
+                    holder.setGone(R.id.ic_video, false);
+//                    holder.getView(R.id.ic_video).setVisibility(View.GONE);
+                }
+
                 if (!TextUtils.isEmpty(FocusNewsBlock_ChildContent.get(position).getImageUrl())) {
                     mImageLoader.loadImage(getContext(),
                             ImageConfigImpl

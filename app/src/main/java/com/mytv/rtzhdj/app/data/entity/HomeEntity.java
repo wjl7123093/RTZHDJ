@@ -157,6 +157,8 @@ public class HomeEntity implements Serializable {
         private String ImageUrl;
         private String AllImgUrl;
 
+        private int IsVideo;            // 是否视频
+
         public int getNodeId() {
             return NodeId;
         }
@@ -219,6 +221,14 @@ public class HomeEntity implements Serializable {
 
         public void setAllImgUrl(String allImgUrl) {
             AllImgUrl = allImgUrl;
+        }
+
+        public int getIsVideo() {
+            return IsVideo;
+        }
+
+        public void setIsVideo(int isVideo) {
+            IsVideo = isVideo;
         }
     }
 

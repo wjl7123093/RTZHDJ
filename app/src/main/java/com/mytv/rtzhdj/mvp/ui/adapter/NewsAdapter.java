@@ -44,6 +44,13 @@ public class NewsAdapter extends BaseQuickAdapter<PartyNewsEntity, BaseViewHolde
             helper.getView(R.id.iv_image).setVisibility(View.GONE);
         }
 
+        // 判断是否为 视频类型
+        if (item.getIsVideo() == 1) {
+            helper.setGone(R.id.ic_video, true);
+        } else {
+            helper.setGone(R.id.ic_video, false);
+        }
+
     }
 
     @Override
