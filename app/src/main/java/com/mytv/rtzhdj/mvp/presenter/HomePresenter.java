@@ -179,26 +179,24 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
                 mBanner.setOnBannerListener(new OnBannerListener() {
                     @Override
                     public void OnBannerClick(int position) {
-                        ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL)
-                                .withInt("nodeId", SpecialBlock.get(position).getNodeId())
-                                .navigation();
+                        if (SpecialBlock.get(position).getContentId() > 0) {    // 新闻详情页
+                            ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
+                                    .withInt("nodeId", SpecialBlock.get(position).getNodeId())
+                                    .withInt("articleId", SpecialBlock.get(position).getContentId())
+                                    .withInt("digs", -100)
+                                    .withInt("comments", -100)
+                                    .navigation();
+                        } else {    // 专题详情页
+                            ARouter.getInstance().build(ARoutePath.PATH_TOPIC_DETAIL)
+                                    .withInt("nodeId", SpecialBlock.get(position).getNodeId())
+                                    .navigation();
+                        }
                     }
                 });
 
 //                mRootView.setBanner(mBanner);
                 holder.getView(R.id.iv_topic).setOnClickListener(view -> {
 //                    mRootView.setOnTopicClick();
-
-                    if (SpecialBlock.get(position).getContentId() > 0) {    // 新闻详情页
-                        ARouter.getInstance().build(ARoutePath.PATH_NEWS_DETAIL)
-                                .withInt("nodeId", SpecialBlock.get(position).getNodeId())
-                                .withInt("articleId", SpecialBlock.get(position).getContentId())
-                                .withInt("digs", -100)
-                                .withInt("comments", -100)
-                                .navigation();
-                    } else {    // 专题详情页
-                        mRootView.setOnTopicClick();
-                    }
                 });
 
                 // 跑马灯。。。
